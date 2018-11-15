@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5705EFDB219D8D7F005EF724 /* ParallaxFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5705EFD9219D8D7F005EF724 /* ParallaxFlowLayout.swift */; };
+		5705EFDC219D8D7F005EF724 /* SnappingFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5705EFDA219D8D7F005EF724 /* SnappingFlowLayout.swift */; };
+		5705EFDF219D92AB005EF724 /* LastCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5705EFDD219D92AA005EF724 /* LastCollectionViewCell.xib */; };
+		5705EFE0219D92AB005EF724 /* LastCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5705EFDE219D92AA005EF724 /* LastCollectionViewCell.swift */; };
+		5705EFE3219DDF90005EF724 /* DefaultMainCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5705EFE1219DDF90005EF724 /* DefaultMainCollectionViewCell.swift */; };
+		5705EFE4219DDF90005EF724 /* DefaultMainCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5705EFE2219DDF90005EF724 /* DefaultMainCollectionViewCell.xib */; };
+		5705EFEF219DE7D6005EF724 /* SoundsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5705EFED219DE7D6005EF724 /* SoundsCollectionViewCell.swift */; };
+		5705EFF0219DE7D6005EF724 /* SoundsCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5705EFEE219DE7D6005EF724 /* SoundsCollectionViewCell.xib */; };
 		57075EC7219C490C003F2D4F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57075EC6219C490C003F2D4F /* AppDelegate.swift */; };
 		57075EC9219C490C003F2D4F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57075EC8219C490C003F2D4F /* ViewController.swift */; };
 		57075ECC219C490C003F2D4F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 57075ECA219C490C003F2D4F /* Main.storyboard */; };
@@ -35,6 +43,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5705EFD9219D8D7F005EF724 /* ParallaxFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ParallaxFlowLayout.swift; path = "../../Sound Engineer/Sound Engineer/vanhat/Layouts/FlowLayouts/ParallaxFlowLayout.swift"; sourceTree = "<group>"; };
+		5705EFDA219D8D7F005EF724 /* SnappingFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SnappingFlowLayout.swift; path = "../../Sound Engineer/Sound Engineer/vanhat/Layouts/FlowLayouts/SnappingFlowLayout.swift"; sourceTree = "<group>"; };
+		5705EFDD219D92AA005EF724 /* LastCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LastCollectionViewCell.xib; path = "../../Sound Engineer/Sound Engineer/vanhat/Layouts/EffectCells/in/LastCollectionViewCell.xib"; sourceTree = "<group>"; };
+		5705EFDE219D92AA005EF724 /* LastCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LastCollectionViewCell.swift; path = "../../Sound Engineer/Sound Engineer/vanhat/Layouts/EffectCells/in/LastCollectionViewCell.swift"; sourceTree = "<group>"; };
+		5705EFE1219DDF90005EF724 /* DefaultMainCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultMainCollectionViewCell.swift; sourceTree = "<group>"; };
+		5705EFE2219DDF90005EF724 /* DefaultMainCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DefaultMainCollectionViewCell.xib; sourceTree = "<group>"; };
+		5705EFED219DE7D6005EF724 /* SoundsCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoundsCollectionViewCell.swift; sourceTree = "<group>"; };
+		5705EFEE219DE7D6005EF724 /* SoundsCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SoundsCollectionViewCell.xib; sourceTree = "<group>"; };
 		57075EC3219C490C003F2D4F /* SoundEngine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SoundEngine.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		57075EC6219C490C003F2D4F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		57075EC8219C490C003F2D4F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -100,8 +116,16 @@
 			isa = PBXGroup;
 			children = (
 				57075EC6219C490C003F2D4F /* AppDelegate.swift */,
+				5705EFD9219D8D7F005EF724 /* ParallaxFlowLayout.swift */,
+				5705EFDA219D8D7F005EF724 /* SnappingFlowLayout.swift */,
+				5705EFE1219DDF90005EF724 /* DefaultMainCollectionViewCell.swift */,
+				5705EFE2219DDF90005EF724 /* DefaultMainCollectionViewCell.xib */,
 				57075EC8219C490C003F2D4F /* ViewController.swift */,
 				57075ECA219C490C003F2D4F /* Main.storyboard */,
+				5705EFED219DE7D6005EF724 /* SoundsCollectionViewCell.swift */,
+				5705EFEE219DE7D6005EF724 /* SoundsCollectionViewCell.xib */,
+				5705EFDE219D92AA005EF724 /* LastCollectionViewCell.swift */,
+				5705EFDD219D92AA005EF724 /* LastCollectionViewCell.xib */,
 				57075ED0219C4911003F2D4F /* Assets.xcassets */,
 				57075ED2219C4911003F2D4F /* LaunchScreen.storyboard */,
 				57075ED5219C4911003F2D4F /* Info.plist */,
@@ -234,7 +258,10 @@
 			files = (
 				57075ED4219C4911003F2D4F /* LaunchScreen.storyboard in Resources */,
 				57075ED1219C4911003F2D4F /* Assets.xcassets in Resources */,
+				5705EFDF219D92AB005EF724 /* LastCollectionViewCell.xib in Resources */,
 				57075ECC219C490C003F2D4F /* Main.storyboard in Resources */,
+				5705EFF0219DE7D6005EF724 /* SoundsCollectionViewCell.xib in Resources */,
+				5705EFE4219DDF90005EF724 /* DefaultMainCollectionViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -260,8 +287,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				57075EC9219C490C003F2D4F /* ViewController.swift in Sources */,
+				5705EFE3219DDF90005EF724 /* DefaultMainCollectionViewCell.swift in Sources */,
 				57075ECF219C490C003F2D4F /* SoundEngine.xcdatamodeld in Sources */,
+				5705EFE0219D92AB005EF724 /* LastCollectionViewCell.swift in Sources */,
+				5705EFEF219DE7D6005EF724 /* SoundsCollectionViewCell.swift in Sources */,
+				5705EFDB219D8D7F005EF724 /* ParallaxFlowLayout.swift in Sources */,
 				57075EC7219C490C003F2D4F /* AppDelegate.swift in Sources */,
+				5705EFDC219D8D7F005EF724 /* SnappingFlowLayout.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
