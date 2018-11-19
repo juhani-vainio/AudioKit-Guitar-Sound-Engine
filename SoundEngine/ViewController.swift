@@ -6,13 +6,32 @@
 //  Copyright © 2018 JuhaniVainio. All rights reserved.
 //
 
+
+struct cellData {
+    var opened = Bool()
+    var title = String()
+    var sectionData = [String]()
+}
+
+struct unitData {
+    var opened = Bool()
+    var title = String()
+    var data = [String]()
+    var isOn = Bool()
+    var height = CGFloat()
+}
+
+
 import UIKit
 
 fileprivate var preCollectionLongPressGesture: UILongPressGestureRecognizer!
 fileprivate var postCollectionLongPressGesture: UILongPressGestureRecognizer!
 
-class ViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout  {
+class ViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UITableViewDelegate, UITableViewDataSource  {
     
+    var tableViewData = [cellData]()        // VÄLIAIKAINEN MALLI
+    var selectedUnitsData = [unitData]()    // VÄLIAIKAINEN MALLI
+  
     
 
     
@@ -20,6 +39,9 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     private let postSnappingLayout = PostSnappingFlowLayout()
     private let preSnappingLayout = PreSnappingFlowLayout()
 
+    @IBOutlet weak var availableUnits: UITableView!
+    @IBOutlet weak var unitsAfter: UITableView!
+    
     @IBOutlet weak var preCollection: UICollectionView!
     @IBOutlet weak var mainCollection: UICollectionView!
     @IBOutlet weak var postCollection: UICollectionView!
@@ -27,14 +49,135 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         createCollectionViews()
+        createTableViews()
+        
+        // VÄLIAIKAINEN MALLI
+        tableViewData = [
+                cellData(opened: false, title: "eka", sectionData: ["d", "ee"]),
+                cellData(opened: false, title: "toinen", sectionData: ["d", "ee","ooo"]),
+                cellData(opened: false, title: "kolmas", sectionData: ["d"]),
+                cellData(opened: false, title: "neljäs", sectionData: ["d", "ee","rrr", "iiiii"]),
+                cellData(opened: false, title: "viides", sectionData: ["d", "ee"])
+                    ]
+        
+      // VÄLIAIKAINEN MALLI
+        selectedUnitsData = [
+            unitData(opened: false, title: "Delay", data: ["time 0.2, feedback 1.2, isOn true"], isOn: false, height: 90),
+                unitData(opened: false, title: "Drive", data: ["value 0.2, gain 2, isOn false"], isOn: true, height: 30)
+        
+        ]
+        
     }
 
 
     
+     // MARK: TABLEVIEWS
+    func createTableViews() {
+        availableUnits.delegate = self
+        availableUnits.dataSource = self
+        unitsAfter.delegate = self
+        unitsAfter.dataSource = self
+        
+        registerTableViewCells()
+    }
+    
+    func registerTableViewCells() {
+        
+        let nib = UINib(nibName: "TableViewCell", bundle: nil)
+        unitsAfter.register(nib, forCellReuseIdentifier: "TableViewCell")
+        
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+         if tableView == availableUnits {
+        return tableViewData.count
+         } else {
+            // unitsAfter List
+            return 1
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+         if tableView == availableUnits {
+            if tableViewData[section].opened == true {
+                return tableViewData[section].sectionData.count + 1
+            } else {
+                return 1
+            }
+        
+         } else {
+            // unitsAfter List
+            return selectedUnitsData.count
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+         if tableView == availableUnits {
+            let dataIndex = indexPath.row - 1
+            if indexPath.row == 0 {
+                guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell") else {return UITableViewCell()}
+                cell.textLabel?.text = tableViewData[indexPath.section].title
+                return cell
+            }
+            else {
+                guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell") else {return UITableViewCell()}
+                cell.textLabel?.text = tableViewData[indexPath.section].sectionData[dataIndex]
+                return cell
+            }
+      
+         } else {
+            // unitsAfter List
+            let cell = tableView.dequeueReusableCell(withIdentifier: "TableViewCell", for: indexPath) as! TableViewCell
+            cell.title.text = selectedUnitsData[indexPath.row].title
+            if selectedUnitsData[indexPath.row].opened == true {
+                cell.controllerHeight.constant = selectedUnitsData[indexPath.row].height
+            } else {
+                cell.controllerHeight.constant = 0
+            }
+            if selectedUnitsData[indexPath.row].isOn == true {
+                cell.onOffButton.setTitle("OFF", for: .normal)
+            } else {
+                 cell.onOffButton.setTitle("ON", for: .normal)
+            }
+            
+            
+            return cell
+        }
+        
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if tableView == availableUnits {
+            if indexPath.row == 0 {
+                if tableViewData[indexPath.section].opened == true {
+                    tableViewData[indexPath.section].opened = false
+                    let sections = IndexSet.init(integer: indexPath.section)
+                    tableView.reloadSections(sections, with: .none)
+                } else {
+                    tableViewData[indexPath.section].opened = true
+                    let sections = IndexSet.init(integer: indexPath.section)
+                    tableView.reloadSections(sections, with: .none)
+                }
+            }
+        
+        }
+        else {
+            // unitsAfter List
+            if selectedUnitsData[indexPath.row].opened == true {
+                selectedUnitsData[indexPath.row].opened = false
+                let row = IndexPath(item: indexPath.row, section: 0)
+                tableView.reloadRows(at: [row], with: .none)
+            }
+            else {
+                selectedUnitsData[indexPath.row].opened = true
+                let row = IndexPath(item: indexPath.row, section: 0)
+                tableView.reloadRows(at: [row], with: .none)
+            }
+        }
+    }
     
     
-    
-    
+
     
     // MARK: COLLECTION VIEWS
     
