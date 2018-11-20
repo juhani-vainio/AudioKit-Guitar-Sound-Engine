@@ -165,20 +165,6 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if tableView == availableUnits {
-            // remove and insert data between arrays
-            let tempData = availableUnitsData[indexPath.row]
-            if self.activateBefore {
-                self.selectedUnitsBeforeData.append(tempData)
-                self.unitsBefore.reloadData()
-            } else {
-                self.selectedUnitsAfterData.append(tempData)
-                self.unitsAfter.reloadData()
-                
-            }
-            
-            self.availableUnitsData.remove(at: indexPath.row)
-            let row = IndexPath(item: indexPath.row, section: 0)
-            self.availableUnits.deleteRows(at: [row], with: .none)
             
         }
         else if tableView == unitsAfter {
@@ -210,12 +196,9 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     }
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        if tableView == availableUnits {
-            return false
-        } else {
-            return true
-        }
-        
+       
+        return true
+
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
@@ -247,9 +230,67 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
             
         }
         
+        
     }
     
+    func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        if tableView == availableUnits {
+            let swipeAction = self.leadingSwipeAction(forRowAtIndexPath: indexPath)
+            let action = UISwipeActionsConfiguration(actions: [swipeAction])
+            return action
+        } else {
+            return nil
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        if tableView == availableUnits {
+            let swipeAction = self.trailingSwipeAction(forRowAtIndexPath: indexPath)
+            let action = UISwipeActionsConfiguration(actions: [swipeAction])
+            return action
+        } else {
+            return nil
+        }
+        
+    }
 
+    func leadingSwipeAction(forRowAtIndexPath indexPath: IndexPath) -> UIContextualAction {
+        // swiping RIGHT
+        // insert to AFTER Units
+        let tempData = self.availableUnitsData[indexPath.row]
+        
+        let action = UIContextualAction(style: .normal, title: "INSERT AFTER") { (contextAction: UIContextualAction, sourceView: UIView, completionHandler: (Bool) -> Void) in
+            
+            self.selectedUnitsAfterData.append(tempData)
+            self.unitsAfter.reloadData()
+            self.availableUnitsData.remove(at: indexPath.row)
+            let row = IndexPath(item: indexPath.row, section: 0)
+            self.availableUnits.deleteRows(at: [row], with: .none)
+    
+            completionHandler(true)
+        }
+        
+        return action
+    }
+    
+    func trailingSwipeAction(forRowAtIndexPath indexPath: IndexPath) -> UIContextualAction {
+        // swiping LEFT
+        // insert to BEFORE Units
+        let tempData = self.availableUnitsData[indexPath.row]
+        
+        let action = UIContextualAction(style: .normal, title: "INSERT BEFORE") { (contextAction: UIContextualAction, sourceView: UIView, completionHandler: (Bool) -> Void) in
+            
+            self.selectedUnitsBeforeData.append(tempData)
+            self.unitsBefore.reloadData()
+            self.availableUnitsData.remove(at: indexPath.row)
+            let row = IndexPath(item: indexPath.row, section: 0)
+            self.availableUnits.deleteRows(at: [row], with: .none)
+            
+            completionHandler(true)
+        }
+        return action
+        
+    }
     
     // MARK: COLLECTION VIEWS
     

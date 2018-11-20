@@ -190,7 +190,7 @@
                                 <rect key="frame" x="284" y="110" width="456" height="30"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SOUND ENGINE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="htM-aT-coS">
-                                        <rect key="frame" x="176" y="6.5" width="104.5" height="17"/>
+                                        <rect key="frame" x="175.5" y="6.5" width="105" height="17"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <color key="textColor" cocoaTouchSystemColor="lightTextColor"/>
                                         <nil key="highlightedColor"/>
