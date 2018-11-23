@@ -11,9 +11,9 @@
 struct unitData {
     var opened = Bool()
     var title = String()
-    var data = [String]()
+    var sliders = [String]()
     var isOn = Bool()
-    var height = CGFloat()
+
 }
 
 
@@ -28,42 +28,65 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     var selectedUnitsAfterData = [unitData]()    // VÄLIAIKAINEN MALLI
     var selectedUnitsBeforeData = [unitData]()    // VÄLIAIKAINEN MALLI
     
-
     
     private let parallaxLayout = ParallaxFlowLayout()
     private let postSnappingLayout = PostSnappingFlowLayout()
     private let preSnappingLayout = PreSnappingFlowLayout()
-
+    
+    @IBOutlet weak var mainViewBackground: UIView!
+    @IBOutlet weak var checkButton: UIButton!
+    @IBOutlet weak var addButton: UIButton!
+    
+    @IBOutlet weak var lineInView: UIView!
+    @IBOutlet weak var inputTitle: UILabel!
+    @IBOutlet weak var lineInHeader: UIView!
+    @IBOutlet weak var inputInfoLabel: UILabel!
+    @IBOutlet weak var inputSlider: UISlider!
+    
+    @IBOutlet weak var outputView: UIView!
+    @IBOutlet weak var outputTitle: UILabel!
+    @IBOutlet weak var outputHeader: UIView!
+    @IBOutlet weak var outputInfoLabel: UILabel!
+    @IBOutlet weak var outputSlider: UISlider!
+    
     @IBOutlet weak var availableUnits: UITableView!
     @IBOutlet weak var unitsAfter: UITableView!
     @IBOutlet weak var unitsBefore: UITableView!
     
-
     @IBOutlet weak var mainCollection: UICollectionView!
-  
+    
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-       
+        
+        // get user preferences from userdefaults
+        
+        // Set up Interface
+        Colors.palette.setInterfaceColorScheme(name: "spotify")
+        colorScheme = "spotify"
+        colorSwitchButton.setTitle("spotify", for: .normal)
+        interfaceSetup()
         
         // VÄLIAIKAINEN MALLI
         availableUnitsData = [
-                unitData(opened: false, title: "Variable Delay", data: ["time 0.2, feedback 1.2, isOn true"], isOn: false, height: 90),
-                unitData(opened: false, title: "OverDrive", data: ["value 0.2, gain 2, isOn false"], isOn: true, height: 30),
-                unitData(opened: false, title: "Tanh Distortion", data: ["time 0.2, feedback 1.2, isOn true"], isOn: false, height: 120),
-                unitData(opened: false, title: "Compressor", data: ["value 0.2, gain 2, isOn false"], isOn: true, height: 60)]
+                unitData(opened: false, title: "Variable Delay", sliders: ["time 0.2", "feedback 1.2", "isOn true"], isOn: false),
+                unitData(opened: false, title: "OverDrive", sliders: ["value 0.2", "gain 2", "isOn false"], isOn: true),
+                unitData(opened: false, title: "Tanh Distortion", sliders: ["time 0.2", "feedback 1.2", "isOn true"], isOn: false),
+                unitData(opened: false, title: "Compressor", sliders: ["value 0.2", "gain 2", "isOn false"], isOn: true)
+        ]
         
       // VÄLIAIKAINEN MALLI
         selectedUnitsAfterData = [
-            unitData(opened: false, title: "Delay", data: ["time 0.2, feedback 1.2, isOn true"], isOn: false, height: 90),
-                unitData(opened: false, title: "Drive", data: ["value 0.2, gain 2, isOn false"], isOn: true, height: 30)
+            unitData(opened: false, title: "Delay", sliders: ["time 0.2", "feedback 1.2", "cutoff 0.2", "mix 0.4"], isOn: false),
+                unitData(opened: false, title: "Drive", sliders: ["value 0.2", "gain 2"], isOn: true)
         
         ]
         // VÄLIAIKAINEN MALLI
         selectedUnitsBeforeData = [
-            unitData(opened: false, title: "Clipper", data: ["time 0.2, feedback 1.2, isOn true"], isOn: false, height: 90),
-            unitData(opened: false, title: "Wah Wah!", data: ["time 0.2, feedback 1.2, isOn true"], isOn: false, height: 90),
-            unitData(opened: false, title: "Decimator", data: ["value 0.2, gain 2, isOn false"], isOn: false, height: 120)
+            unitData(opened: false, title: "Clipper", sliders: ["clip 0.2"], isOn: false),
+            unitData(opened: false, title: "Wah Wah!", sliders: ["time 0.2", "feedback 1.2", "mix 0.4"], isOn: false),
+            unitData(opened: false, title: "Decimator", sliders: ["value 0.2", "gain 2"], isOn: false)
             
         ]
         
@@ -119,9 +142,15 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let backgroundView = UIView()
+        backgroundView.backgroundColor = UIColor.clear
+        
          if tableView == availableUnits {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell") else {return UITableViewCell()}
                 cell.textLabel?.text = availableUnitsData[indexPath.row].title
+                cell.textLabel?.textColor = interface.text
+                cell.backgroundColor = interface.tableBackground
+                cell.selectedBackgroundView = backgroundView
             return cell
             
       
@@ -129,34 +158,44 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
             // unitsAfter List
             let cell = tableView.dequeueReusableCell(withIdentifier: "TableViewCell", for: indexPath) as! TableViewCell
             cell.title.text = selectedUnitsAfterData[indexPath.row].title
+            cell.sliders = selectedUnitsAfterData[indexPath.row].sliders
+            
             if selectedUnitsAfterData[indexPath.row].opened == true {
-                cell.controllerHeight.constant = selectedUnitsAfterData[indexPath.row].height
+                let heigth = selectedUnitsAfterData[indexPath.row].sliders.count * 44
+                cell.controllerHeight.constant = CGFloat(heigth)
             } else {
                 cell.controllerHeight.constant = 0
             }
             if selectedUnitsAfterData[indexPath.row].isOn == true {
                 cell.onOffButton.setTitle("OFF", for: .normal)
+                cell.onOffButton.setTitleColor(interface.textIdle, for: .normal)
             } else {
                 cell.onOffButton.setTitle("ON", for: .normal)
+                cell.onOffButton.setTitleColor(interface.text, for: .normal)
             }
+            cell.selectedBackgroundView = backgroundView
             return cell
             
          } else {
             // unitsBefore List
             let cell = tableView.dequeueReusableCell(withIdentifier: "TableViewCell", for: indexPath) as! TableViewCell
             cell.title.text = selectedUnitsBeforeData[indexPath.row].title
+            cell.sliders = selectedUnitsBeforeData[indexPath.row].sliders
             if selectedUnitsBeforeData[indexPath.row].opened == true {
-                cell.controllerHeight.constant = selectedUnitsBeforeData[indexPath.row].height
+                let heigth = selectedUnitsBeforeData[indexPath.row].sliders.count * 44
+                cell.controllerHeight.constant = CGFloat(heigth)
             } else {
                 cell.controllerHeight.constant = 0
             }
             if selectedUnitsBeforeData[indexPath.row].isOn == true {
                 cell.onOffButton.setTitle("OFF", for: .normal)
+                 cell.onOffButton.setTitleColor(interface.textIdle, for: .normal)
             } else {
                 cell.onOffButton.setTitle("ON", for: .normal)
+                cell.onOffButton.setTitleColor(interface.text, for: .normal)
             }
             
-            
+            cell.selectedBackgroundView = backgroundView
             return cell
         
         }
@@ -184,12 +223,12 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
             if selectedUnitsBeforeData[indexPath.row].opened == true {
                 selectedUnitsBeforeData[indexPath.row].opened = false
                 let row = IndexPath(item: indexPath.row, section: 0)
-                tableView.reloadRows(at: [row], with: .none)
+                tableView.reloadRows(at: [row], with: .fade)
             }
             else {
                 selectedUnitsBeforeData[indexPath.row].opened = true
                 let row = IndexPath(item: indexPath.row, section: 0)
-                tableView.reloadRows(at: [row], with: .none)
+                tableView.reloadRows(at: [row], with: .fade)
             }
         
         }
@@ -426,25 +465,121 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     }
     
     
-    
-    @IBAction func addToUnitsBefore(_ sender: Any) {
-        self.availableUnits.isHidden = false
-        self.activateBefore = true
+    @IBAction func addButtonTapped(_ sender: Any) {
+        if self.availableUnits.isHidden {
+            self.availableUnits.isHidden = false
+        } else {
+            self.availableUnits.isHidden = true
+        }
+        
     }
     
-    
-    @IBAction func addToUnitsAfter(_ sender: Any) {
-        self.availableUnits.isHidden = false
-        self.activateBefore = false
+    @IBAction func tapColorSwitch(_ sender: Any) {
+        let index = Colors.palette.options.firstIndex(of: colorScheme)
+        if index! < Colors.palette.options.count - 1{
+            let nextScheme = Colors.palette.options[index! + 1]
+            colorSwitchButton.setTitle(nextScheme, for: .normal)
+            Colors.palette.setInterfaceColorScheme(name: nextScheme)
+            colorScheme = nextScheme
+            
+        } else {
+            
+            let nextScheme = Colors.palette.options[0]
+            colorSwitchButton.setTitle(nextScheme, for: .normal)
+            Colors.palette.setInterfaceColorScheme(name: nextScheme)
+            colorScheme = nextScheme
+        }
+        interfaceSetup()
+
     }
     
+    @IBOutlet weak var colorSwitchButton: UIButton!
     
     @IBAction func checkButton(_ sender: Any) {
+        
+        
+            
+        
+        
         print("AVAILABLE")
         print(self.availableUnitsData)
         print("SELECTED")
         print(self.selectedUnitsAfterData)
     }
-    var activateBefore = Bool()
+   
+    var colorScheme = ""
+    
+    func interfaceSetup() {
+        // set interface color scheme
+        
+        
+        checkButton.backgroundColor = interface.buttonBackground
+        checkButton.setTitleColor(interface.text, for: .normal)
+        addButton.backgroundColor = interface.buttonBackground
+        addButton.setTitleColor(interface.highlight, for: .normal)
+        
+        lineInView.backgroundColor = interface.tableAltBackground
+        inputTitle.textColor = interface.text
+        lineInHeader.backgroundColor = interface.heading
+        inputInfoLabel.textColor = interface.text
+        inputSlider.minimumTrackTintColor = interface.highlight
+        inputSlider.maximumTrackTintColor = interface.mainBackground
+        inputSlider.thumbTintColor = interface.text
+        
+        outputView.backgroundColor = interface.tableAltBackground
+        outputTitle.textColor = interface.text
+        outputHeader.backgroundColor = interface.heading
+        outputInfoLabel.textColor = interface.text
+        outputSlider.minimumTrackTintColor = interface.highlight
+        outputSlider.maximumTrackTintColor = interface.mainBackground
+        outputSlider.thumbTintColor = interface.text
+        
+        appnameButton.setTitleColor(interface.text, for: .normal)
+        
+        availableUnits.backgroundColor = UIColor.clear
+        unitsAfter.backgroundColor = UIColor.clear
+        unitsBefore.backgroundColor = UIColor.clear
+        
+        mainCollection.backgroundColor = UIColor.clear
+        mainViewBackground.backgroundColor = interface.mainBackground
+        
+        mainCollection.backgroundColor = UIColor.clear
+        mainControls.backgroundColor = UIColor.clear
+        
+        beforeHeading.backgroundColor = interface.heading
+        mainHeading.backgroundColor = interface.heading
+        afterHeading.backgroundColor = interface.heading
+        
+        // colors test view
+        colorSchemeTestView.backgroundColor = interface.mainBackground
+        ct1.backgroundColor = interface.buttonBackground
+        ct2.backgroundColor = interface.tableBackground
+        ct3.backgroundColor = interface.tableAltBackground
+        ct4.backgroundColor = interface.heading
+        ct5.backgroundColor = interface.text
+        ct6.backgroundColor = interface.textIdle
+        ct7.backgroundColor = interface.positive
+        ct8.backgroundColor = interface.negative
+        ct9.backgroundColor = interface.highlight
+        
+    }
+    
+    @IBOutlet weak var appnameButton: UIButton!
+    @IBOutlet weak var beforeHeading: UIView!
+    @IBOutlet weak var mainHeading: UIView!
+    @IBOutlet weak var afterHeading: UIView!
+    @IBOutlet weak var mainControls: UIView!
+    @IBOutlet weak var colorSchemeTestView: UIView!
+    
+    @IBOutlet weak var ct1: UIView!
+    @IBOutlet weak var ct2: UIView!
+    @IBOutlet weak var ct3: UIView!
+    @IBOutlet weak var ct4: UIView!
+    @IBOutlet weak var ct5: UIView!
+    @IBOutlet weak var ct6: UIView!
+    @IBOutlet weak var ct7: UIView!
+    @IBOutlet weak var ct8: UIView!
+    @IBOutlet weak var ct9: UIView!
+    
 }
 

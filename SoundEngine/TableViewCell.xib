@@ -21,6 +21,7 @@
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x48-BM-UuO">
                         <rect key="frame" x="12" y="7" width="252" height="30"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="30" id="7El-qE-Ny7"/>
                         </constraints>
@@ -30,8 +31,20 @@
                     </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I2A-5h-cPJ">
                         <rect key="frame" x="12" y="44" width="296" height="100"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" style="plain" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="D5t-yU-rlj">
+                                <rect key="frame" x="0.0" y="0.0" width="296" height="100"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="separatorColor" red="0.1248634983" green="0.8492149028" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="D5t-yU-rlj" firstAttribute="top" secondItem="I2A-5h-cPJ" secondAttribute="top" id="2LA-ht-m6u"/>
+                            <constraint firstItem="D5t-yU-rlj" firstAttribute="leading" secondItem="I2A-5h-cPJ" secondAttribute="leading" id="YRb-Ma-vzH"/>
+                            <constraint firstAttribute="trailing" secondItem="D5t-yU-rlj" secondAttribute="trailing" id="jel-ox-exQ"/>
+                            <constraint firstAttribute="bottom" secondItem="D5t-yU-rlj" secondAttribute="bottom" id="moC-69-dv5"/>
                             <constraint firstAttribute="height" constant="100" id="neE-xx-d7k"/>
                         </constraints>
                     </view>
@@ -43,6 +56,7 @@
                         <state key="normal" title="OFF"/>
                     </button>
                 </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
                     <constraint firstItem="V1t-cz-Zjl" firstAttribute="centerY" secondItem="x48-BM-UuO" secondAttribute="centerY" id="CzR-Gw-4vM"/>
                     <constraint firstItem="I2A-5h-cPJ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="12" id="DaK-hK-t8i"/>
@@ -55,10 +69,13 @@
                     <constraint firstItem="I2A-5h-cPJ" firstAttribute="top" secondItem="x48-BM-UuO" secondAttribute="bottom" constant="7" id="xAy-4c-4x4"/>
                 </constraints>
             </tableViewCellContentView>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="controllerHeight" destination="neE-xx-d7k" id="dnw-7e-C1R"/>
+                <outlet property="controllersView" destination="I2A-5h-cPJ" id="O5r-Rk-XVT"/>
                 <outlet property="onOffButton" destination="V1t-cz-Zjl" id="oAe-9N-GP1"/>
+                <outlet property="slidersTableView" destination="D5t-yU-rlj" id="U8R-QX-NJN"/>
                 <outlet property="title" destination="x48-BM-UuO" id="ts0-fe-kNg"/>
             </connections>
             <point key="canvasLocation" x="132.80000000000001" y="231.18440779610197"/>

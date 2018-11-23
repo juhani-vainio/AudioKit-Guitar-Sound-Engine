@@ -23,8 +23,11 @@
 		57075ED4219C4911003F2D4F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 57075ED2219C4911003F2D4F /* LaunchScreen.storyboard */; };
 		57075EDF219C4911003F2D4F /* SoundEngineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57075EDE219C4911003F2D4F /* SoundEngineTests.swift */; };
 		57075EEA219C4911003F2D4F /* SoundEngineUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57075EE9219C4911003F2D4F /* SoundEngineUITests.swift */; };
+		578F421521A5708A003076EC /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 578F421421A5708A003076EC /* Colors.swift */; };
 		579368D2219EF91400227AF8 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 579368D0219EF91400227AF8 /* TableViewCell.swift */; };
 		579368D3219EF91400227AF8 /* TableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 579368D1219EF91400227AF8 /* TableViewCell.xib */; };
+		57A631E621A815E6000069FA /* UnitTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A631E421A815E5000069FA /* UnitTableViewCell.swift */; };
+		57A631E721A815E6000069FA /* UnitTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 57A631E521A815E5000069FA /* UnitTableViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,8 +70,11 @@
 		57075EE5219C4911003F2D4F /* SoundEngineUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SoundEngineUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		57075EE9219C4911003F2D4F /* SoundEngineUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundEngineUITests.swift; sourceTree = "<group>"; };
 		57075EEB219C4911003F2D4F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		578F421421A5708A003076EC /* Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		579368D0219EF91400227AF8 /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 		579368D1219EF91400227AF8 /* TableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TableViewCell.xib; sourceTree = "<group>"; };
+		57A631E421A815E5000069FA /* UnitTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitTableViewCell.swift; sourceTree = "<group>"; };
+		57A631E521A815E5000069FA /* UnitTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UnitTableViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,19 +125,22 @@
 		57075EC5219C490C003F2D4F /* SoundEngine */ = {
 			isa = PBXGroup;
 			children = (
-				57075EC6219C490C003F2D4F /* AppDelegate.swift */,
-				5705EFD9219D8D7F005EF724 /* ParallaxFlowLayout.swift */,
-				5705EFDA219D8D7F005EF724 /* SnappingFlowLayout.swift */,
-				5705EFE1219DDF90005EF724 /* DefaultMainCollectionViewCell.swift */,
-				5705EFE2219DDF90005EF724 /* DefaultMainCollectionViewCell.xib */,
 				57075EC8219C490C003F2D4F /* ViewController.swift */,
 				57075ECA219C490C003F2D4F /* Main.storyboard */,
+				5705EFE1219DDF90005EF724 /* DefaultMainCollectionViewCell.swift */,
+				5705EFE2219DDF90005EF724 /* DefaultMainCollectionViewCell.xib */,
 				579368D0219EF91400227AF8 /* TableViewCell.swift */,
 				579368D1219EF91400227AF8 /* TableViewCell.xib */,
+				57A631E421A815E5000069FA /* UnitTableViewCell.swift */,
+				57A631E521A815E5000069FA /* UnitTableViewCell.xib */,
 				5705EFED219DE7D6005EF724 /* SoundsCollectionViewCell.swift */,
 				5705EFEE219DE7D6005EF724 /* SoundsCollectionViewCell.xib */,
+				5705EFD9219D8D7F005EF724 /* ParallaxFlowLayout.swift */,
+				5705EFDA219D8D7F005EF724 /* SnappingFlowLayout.swift */,
 				5705EFDE219D92AA005EF724 /* LastCollectionViewCell.swift */,
 				5705EFDD219D92AA005EF724 /* LastCollectionViewCell.xib */,
+				578F421421A5708A003076EC /* Colors.swift */,
+				57075EC6219C490C003F2D4F /* AppDelegate.swift */,
 				57075ED0219C4911003F2D4F /* Assets.xcassets */,
 				57075ED2219C4911003F2D4F /* LaunchScreen.storyboard */,
 				57075ED5219C4911003F2D4F /* Info.plist */,
@@ -263,6 +272,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				57075ED4219C4911003F2D4F /* LaunchScreen.storyboard in Resources */,
+				57A631E721A815E6000069FA /* UnitTableViewCell.xib in Resources */,
 				57075ED1219C4911003F2D4F /* Assets.xcassets in Resources */,
 				5705EFDF219D92AB005EF724 /* LastCollectionViewCell.xib in Resources */,
 				57075ECC219C490C003F2D4F /* Main.storyboard in Resources */,
@@ -294,10 +304,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				57075EC9219C490C003F2D4F /* ViewController.swift in Sources */,
+				578F421521A5708A003076EC /* Colors.swift in Sources */,
 				5705EFE3219DDF90005EF724 /* DefaultMainCollectionViewCell.swift in Sources */,
 				57075ECF219C490C003F2D4F /* SoundEngine.xcdatamodeld in Sources */,
 				5705EFE0219D92AB005EF724 /* LastCollectionViewCell.swift in Sources */,
 				5705EFEF219DE7D6005EF724 /* SoundsCollectionViewCell.swift in Sources */,
+				57A631E621A815E6000069FA /* UnitTableViewCell.swift in Sources */,
 				5705EFDB219D8D7F005EF724 /* ParallaxFlowLayout.swift in Sources */,
 				57075EC7219C490C003F2D4F /* AppDelegate.swift in Sources */,
 				5705EFDC219D8D7F005EF724 /* SnappingFlowLayout.swift in Sources */,

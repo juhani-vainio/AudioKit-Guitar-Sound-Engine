@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="UnitTableViewCell" id="KGk-i7-Jjw" customClass="UnitTableViewCell" customModule="SoundEngine" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fIT-JI-fnQ">
+                        <rect key="frame" x="0.0" y="10" width="60" height="16"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="60" id="bEr-DI-nmX"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cBg-bA-SwK">
+                        <rect key="frame" x="0.0" y="26" width="29" height="14"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="Dp4-t4-CMe">
+                        <rect key="frame" x="62" y="2" width="260" height="41"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="40" id="H2v-xP-bt9"/>
+                        </constraints>
+                    </slider>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                <constraints>
+                    <constraint firstItem="fIT-JI-fnQ" firstAttribute="bottom" secondItem="Dp4-t4-CMe" secondAttribute="centerY" constant="4" id="8kx-dj-ZyB"/>
+                    <constraint firstAttribute="trailing" secondItem="Dp4-t4-CMe" secondAttribute="trailing" id="G7X-Pj-JN1"/>
+                    <constraint firstItem="Dp4-t4-CMe" firstAttribute="leading" secondItem="fIT-JI-fnQ" secondAttribute="trailing" constant="4" id="RlG-a6-wU0"/>
+                    <constraint firstItem="fIT-JI-fnQ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="aEA-FP-ua9"/>
+                    <constraint firstItem="cBg-bA-SwK" firstAttribute="leading" secondItem="fIT-JI-fnQ" secondAttribute="leading" id="nsR-MB-Dtv"/>
+                    <constraint firstItem="cBg-bA-SwK" firstAttribute="top" secondItem="fIT-JI-fnQ" secondAttribute="bottom" id="s0x-E8-uoa"/>
+                </constraints>
+            </tableViewCellContentView>
+            <constraints>
+                <constraint firstItem="Dp4-t4-CMe" firstAttribute="centerY" secondItem="njF-e1-oar" secondAttribute="centerY" id="elW-hd-wkh"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="slider" destination="Dp4-t4-CMe" id="1eK-M6-jpo"/>
+                <outlet property="title" destination="fIT-JI-fnQ" id="rx7-o6-Uq6"/>
+                <outlet property="value" destination="cBg-bA-SwK" id="7qi-Zk-tGH"/>
+            </connections>
+        </tableViewCell>
+    </objects>
+</document>

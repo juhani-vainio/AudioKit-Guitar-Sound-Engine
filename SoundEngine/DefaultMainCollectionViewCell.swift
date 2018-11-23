@@ -10,9 +10,12 @@ import UIKit
 
 class DefaultMainCollectionViewCell: UICollectionViewCell {
 
+    @IBOutlet weak var title: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        self.backgroundColor = interface.tableBackground
+        title.textColor = interface.text
     }
 
 }
