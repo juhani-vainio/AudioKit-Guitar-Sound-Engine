@@ -13,6 +13,7 @@ struct unitData {
     var title = String()
     var sliders = [String]()
     var isOn = Bool()
+    var type = String()
 
 }
 
@@ -70,23 +71,23 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         
         // VÄLIAIKAINEN MALLI
         availableUnitsData = [
-                unitData(opened: false, title: "Variable Delay", sliders: ["time 0.2", "feedback 1.2", "isOn true"], isOn: false),
-                unitData(opened: false, title: "OverDrive", sliders: ["value 0.2", "gain 2", "isOn false"], isOn: true),
-                unitData(opened: false, title: "Tanh Distortion", sliders: ["time 0.2", "feedback 1.2", "isOn true"], isOn: false),
-                unitData(opened: false, title: "Compressor", sliders: ["value 0.2", "gain 2", "isOn false"], isOn: true)
+            unitData(opened: false, title: "Variable Delay", sliders: ["VD time 0.2", "VD feedback 1.2", "isOn true"], isOn: false, type: "triple"),
+                unitData(opened: false, title: "OverDrive", sliders: ["OD value 0.2", "OD gain 2", "isOn false"], isOn: true, type: "triple"),
+                unitData(opened: false, title: "Tanh Distortion", sliders: ["TD time 0.2", "TD feedback 1.2", "isOn true"], isOn: false, type: "triple"),
+                unitData(opened: false, title: "Compressor", sliders: ["C value 0.2", "C gain 2", "isOn false"], isOn: true, type: "triple")
         ]
         
       // VÄLIAIKAINEN MALLI
         selectedUnitsAfterData = [
-            unitData(opened: false, title: "Delay", sliders: ["time 0.2", "feedback 1.2", "cutoff 0.2", "mix 0.4"], isOn: false),
-                unitData(opened: false, title: "Drive", sliders: ["value 0.2", "gain 2"], isOn: true)
+            unitData(opened: false, title: "Delay", sliders: ["D time 0.2", "D feedback 1.2", "D cutoff 0.2", "mix 0.4"], isOn: false, type: "quatro"),
+                unitData(opened: false, title: "Drive", sliders: ["Drive 0.2", "gain 10"], isOn: true, type: "double")
         
         ]
         // VÄLIAIKAINEN MALLI
         selectedUnitsBeforeData = [
-            unitData(opened: false, title: "Clipper", sliders: ["clip 0.2"], isOn: false),
-            unitData(opened: false, title: "Wah Wah!", sliders: ["time 0.2", "feedback 1.2", "mix 0.4"], isOn: false),
-            unitData(opened: false, title: "Decimator", sliders: ["value 0.2", "gain 2"], isOn: false)
+            unitData(opened: false, title: "Clipper", sliders: ["clip 0.2"], isOn: false, type: "single"),
+            unitData(opened: false, title: "Wah Wah!", sliders: ["Wah 0.2", "Wah feedback 1.2", "Wah mix 0.4"], isOn: false, type: "triple"),
+            unitData(opened: false, title: "Decimator", sliders: ["Decimate 0.2", "gain 0.6"], isOn: false, type: "double")
             
         ]
         
@@ -112,14 +113,27 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         unitsBefore.delegate = self
         unitsBefore.dataSource = self
         
+        
+        unitsAfter.roundedAllCorner()
+        unitsBefore.roundedAllCorner()
+        
         registerTableViewCells()
     }
     
     func registerTableViewCells() {
         
         let nib = UINib(nibName: "TableViewCell", bundle: nil)
+        let doubleNib = UINib(nibName: "DoubleTableViewCell", bundle: nil)
+        let tripleNib = UINib(nibName: "TripleTableViewCell", bundle: nil)
+        let quatroNib = UINib(nibName: "QuatroTableViewCell", bundle: nil)
         unitsAfter.register(nib, forCellReuseIdentifier: "TableViewCell")
         unitsBefore.register(nib, forCellReuseIdentifier: "TableViewCell")
+        unitsAfter.register(doubleNib, forCellReuseIdentifier: "DoubleTableViewCell")
+        unitsBefore.register(doubleNib, forCellReuseIdentifier: "DoubleTableViewCell")
+        unitsAfter.register(tripleNib, forCellReuseIdentifier: "TripleTableViewCell")
+        unitsBefore.register(tripleNib, forCellReuseIdentifier: "TripleTableViewCell")
+        unitsAfter.register(quatroNib, forCellReuseIdentifier: "QuatroTableViewCell")
+        unitsBefore.register(quatroNib, forCellReuseIdentifier: "QuatroTableViewCell")
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -145,61 +159,131 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         let backgroundView = UIView()
         backgroundView.backgroundColor = UIColor.clear
         
-         if tableView == availableUnits {
+        var returnCell = UITableViewCell()
+        var cellOpened = Bool()
+        var cellTitle = String()
+        var cellSliders = [String]()
+        var cellIsOn = Bool()
+        var cellType = String()
+        var cellIsLast = Bool()
+        
+        if tableView == unitsBefore {
+            cellOpened = selectedUnitsBeforeData[indexPath.row].opened
+            cellTitle = selectedUnitsBeforeData[indexPath.row].title
+            cellSliders = selectedUnitsBeforeData[indexPath.row].sliders
+            cellIsOn = selectedUnitsBeforeData[indexPath.row].isOn
+            cellType = selectedUnitsBeforeData[indexPath.row].type
+            cellIsLast = selectedUnitsBeforeData.endIndex - 1 == indexPath.row
+   
+        }
+        else if tableView == unitsAfter {
+            cellOpened = selectedUnitsAfterData[indexPath.row].opened
+            cellTitle = selectedUnitsAfterData[indexPath.row].title
+            cellSliders = selectedUnitsAfterData[indexPath.row].sliders
+            cellIsOn = selectedUnitsAfterData[indexPath.row].isOn
+            cellType = selectedUnitsAfterData[indexPath.row].type
+            cellIsLast = selectedUnitsAfterData.endIndex - 1 == indexPath.row
+        }
+        
+        if tableView == availableUnits {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell") else {return UITableViewCell()}
                 cell.textLabel?.text = availableUnitsData[indexPath.row].title
                 cell.textLabel?.textColor = interface.text
                 cell.backgroundColor = interface.tableBackground
                 cell.selectedBackgroundView = backgroundView
-            return cell
             
-      
-         } else if tableView == unitsAfter {
+            returnCell = cell
+            
+         }
+        else {
             // unitsAfter List
-            let cell = tableView.dequeueReusableCell(withIdentifier: "TableViewCell", for: indexPath) as! TableViewCell
-            cell.title.text = selectedUnitsAfterData[indexPath.row].title
-            cell.sliders = selectedUnitsAfterData[indexPath.row].sliders
-            
-            if selectedUnitsAfterData[indexPath.row].opened == true {
-                let heigth = selectedUnitsAfterData[indexPath.row].sliders.count * 44
-                cell.controllerHeight.constant = CGFloat(heigth)
-            } else {
-                cell.controllerHeight.constant = 0
+           
+            switch cellType {
+            case "double":
+                // Has two sliders
+                let cell = tableView.dequeueReusableCell(withIdentifier: "DoubleTableViewCell", for: indexPath) as! DoubleTableViewCell
+                cell.title.text = cellTitle
+                if cellOpened == true {
+                    if cellIsLast {
+                        cell.bottomConstraint.constant = 8
+                    } else {
+                        cell.bottomConstraint.constant = 0
+                    }
+                    cell.controllerHeight.constant = CGFloat(50 * 2)
+                    cell.controllersView.isHidden = false
+                    cell.slider2Title.text = cellSliders[1]
+                    cell.slider1Title.text = cellSliders[0]
+                } else {
+                    cell.controllerHeight.constant = CGFloat(0)
+                    cell.controllersView.isHidden = true
+                }
+                cell.selectedBackgroundView = backgroundView
+                returnCell = cell
+            case "triple":
+                // Has two sliders
+                let cell = tableView.dequeueReusableCell(withIdentifier: "TripleTableViewCell", for: indexPath) as! TripleTableViewCell
+                cell.title.text = cellTitle
+                if cellOpened == true {
+                    if cellIsLast {
+                        cell.bottomConstraint.constant = 8
+                    } else {
+                        cell.bottomConstraint.constant = 0
+                    }
+                    cell.controllerHeight.constant = CGFloat(50 * 3)
+                    cell.controllersView.isHidden = false
+                    cell.slider3Title.text = cellSliders[2]
+                    cell.slider2Title.text = cellSliders[1]
+                    cell.slider1Title.text = cellSliders[0]
+                } else {
+                    cell.controllerHeight.constant = CGFloat(0)
+                    cell.controllersView.isHidden = true
+                }
+                cell.selectedBackgroundView = backgroundView
+                returnCell = cell
+            case "quatro":
+                // Has two sliders
+                let cell = tableView.dequeueReusableCell(withIdentifier: "QuatroTableViewCell", for: indexPath) as! QuatroTableViewCell
+                cell.title.text = cellTitle
+                if cellOpened == true {
+                    if cellIsLast {
+                        cell.bottomConstraint.constant = 8
+                    } else {
+                        cell.bottomConstraint.constant = 0
+                    }
+                    cell.controllerHeight.constant = CGFloat(50 * 4)
+                    cell.controllersView.isHidden = false
+                    cell.slider4Title.text = cellSliders[3]
+                    cell.slider3Title.text = cellSliders[2]
+                    cell.slider2Title.text = cellSliders[1]
+                    cell.slider1Title.text = cellSliders[0]
+                } else {
+                    cell.controllerHeight.constant = CGFloat(0)
+                    cell.controllersView.isHidden = true
+                }
+                cell.selectedBackgroundView = backgroundView
+                returnCell = cell
+            default:
+                // One slider
+                let cell = tableView.dequeueReusableCell(withIdentifier: "TableViewCell", for: indexPath) as! TableViewCell
+                cell.title.text = cellTitle
+                if cellOpened == true {
+                    if cellIsLast {
+                        cell.bottomConstraint.constant = 8
+                    } else {
+                        cell.bottomConstraint.constant = 0
+                    }
+                    cell.controllerHeight.constant = CGFloat(50)
+                    cell.controllersView.isHidden = false
+                } else {
+                    cell.controllerHeight.constant = CGFloat(0)
+                    cell.controllersView.isHidden = true
+                }
+                cell.selectedBackgroundView = backgroundView
+                returnCell = cell
             }
-            if selectedUnitsAfterData[indexPath.row].isOn == true {
-                cell.onOffButton.setTitle("OFF", for: .normal)
-                cell.onOffButton.setTitleColor(interface.textIdle, for: .normal)
-            } else {
-                cell.onOffButton.setTitle("ON", for: .normal)
-                cell.onOffButton.setTitleColor(interface.text, for: .normal)
-            }
-            cell.selectedBackgroundView = backgroundView
-            return cell
-            
-         } else {
-            // unitsBefore List
-            let cell = tableView.dequeueReusableCell(withIdentifier: "TableViewCell", for: indexPath) as! TableViewCell
-            cell.title.text = selectedUnitsBeforeData[indexPath.row].title
-            cell.sliders = selectedUnitsBeforeData[indexPath.row].sliders
-            if selectedUnitsBeforeData[indexPath.row].opened == true {
-                let heigth = selectedUnitsBeforeData[indexPath.row].sliders.count * 44
-                cell.controllerHeight.constant = CGFloat(heigth)
-            } else {
-                cell.controllerHeight.constant = 0
-            }
-            if selectedUnitsBeforeData[indexPath.row].isOn == true {
-                cell.onOffButton.setTitle("OFF", for: .normal)
-                 cell.onOffButton.setTitleColor(interface.textIdle, for: .normal)
-            } else {
-                cell.onOffButton.setTitle("ON", for: .normal)
-                cell.onOffButton.setTitleColor(interface.text, for: .normal)
-            }
-            
-            cell.selectedBackgroundView = backgroundView
-            return cell
-        
         }
         
+        return returnCell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -211,13 +295,14 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
             if selectedUnitsAfterData[indexPath.row].opened == true {
                 selectedUnitsAfterData[indexPath.row].opened = false
                 let row = IndexPath(item: indexPath.row, section: 0)
-                tableView.reloadRows(at: [row], with: .none)
+                tableView.reloadRows(at: [row], with: .fade)
             }
             else {
                 selectedUnitsAfterData[indexPath.row].opened = true
                 let row = IndexPath(item: indexPath.row, section: 0)
-                tableView.reloadRows(at: [row], with: .none)
+                tableView.reloadRows(at: [row], with: .fade)
             }
+            //tableView.reloadData()
         } else {
             // unitsBefore List
             if selectedUnitsBeforeData[indexPath.row].opened == true {
@@ -230,14 +315,33 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
                 let row = IndexPath(item: indexPath.row, section: 0)
                 tableView.reloadRows(at: [row], with: .fade)
             }
-        
+            //tableView.reloadData()
         }
     }
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
        
-        return true
-
+        if tableView == unitsBefore {
+            if selectedUnitsBeforeData[indexPath.row].opened {
+                return false
+            }
+            else {
+                return true
+            }
+        }
+        
+       else if tableView == unitsAfter {
+            if selectedUnitsAfterData[indexPath.row].opened {
+                return false
+            }
+            else {
+                return true
+            }
+        }
+        
+        else {
+            return true
+        }
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
@@ -583,3 +687,87 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     
 }
 
+extension UIView{
+    func roundedTopLeft(){
+        let maskPath1 = UIBezierPath(roundedRect: bounds,
+                                     byRoundingCorners: [.topLeft],
+                                     cornerRadii: CGSize(width: 15, height: 15))
+        let maskLayer1 = CAShapeLayer()
+        maskLayer1.frame = bounds
+        maskLayer1.path = maskPath1.cgPath
+        layer.mask = maskLayer1
+    }
+    
+    func roundedTopRight(){
+        let maskPath1 = UIBezierPath(roundedRect: bounds,
+                                     byRoundingCorners: [.topRight],
+                                     cornerRadii: CGSize(width: 15, height: 15))
+        let maskLayer1 = CAShapeLayer()
+        maskLayer1.frame = bounds
+        maskLayer1.path = maskPath1.cgPath
+        layer.mask = maskLayer1
+    }
+    func roundedBottomLeft(){
+        let maskPath1 = UIBezierPath(roundedRect: bounds,
+                                     byRoundingCorners: [.bottomLeft],
+                                     cornerRadii: CGSize(width: 15, height: 15))
+        let maskLayer1 = CAShapeLayer()
+        maskLayer1.frame = bounds
+        maskLayer1.path = maskPath1.cgPath
+        layer.mask = maskLayer1
+    }
+    func roundedBottomRight(){
+        let maskPath1 = UIBezierPath(roundedRect: bounds,
+                                     byRoundingCorners: [.bottomRight],
+                                     cornerRadii: CGSize(width: 15, height: 15))
+        let maskLayer1 = CAShapeLayer()
+        maskLayer1.frame = bounds
+        maskLayer1.path = maskPath1.cgPath
+        layer.mask = maskLayer1
+    }
+    func roundedBottom(){
+        let maskPath1 = UIBezierPath(roundedRect: bounds,
+                                     byRoundingCorners: [.bottomRight , .bottomLeft],
+                                     cornerRadii: CGSize(width: 15, height: 15))
+        let maskLayer1 = CAShapeLayer()
+        maskLayer1.frame = bounds
+        maskLayer1.path = maskPath1.cgPath
+        layer.mask = maskLayer1
+    }
+    func roundedTop(){
+        let maskPath1 = UIBezierPath(roundedRect: bounds,
+                                     byRoundingCorners: [.topRight , .topLeft],
+                                     cornerRadii: CGSize(width: 15, height: 15))
+        let maskLayer1 = CAShapeLayer()
+        maskLayer1.frame = bounds
+        maskLayer1.path = maskPath1.cgPath
+        layer.mask = maskLayer1
+    }
+    func roundedLeft(){
+        let maskPath1 = UIBezierPath(roundedRect: bounds,
+                                     byRoundingCorners: [.topLeft , .bottomLeft],
+                                     cornerRadii: CGSize(width: 15, height: 15))
+        let maskLayer1 = CAShapeLayer()
+        maskLayer1.frame = bounds
+        maskLayer1.path = maskPath1.cgPath
+        layer.mask = maskLayer1
+    }
+    func roundedRight(){
+        let maskPath1 = UIBezierPath(roundedRect: bounds,
+                                     byRoundingCorners: [.topRight , .bottomRight],
+                                     cornerRadii: CGSize(width: 15, height: 15))
+        let maskLayer1 = CAShapeLayer()
+        maskLayer1.frame = bounds
+        maskLayer1.path = maskPath1.cgPath
+        layer.mask = maskLayer1
+    }
+    func roundedAllCorner(){
+        let maskPath1 = UIBezierPath(roundedRect: bounds,
+                                     byRoundingCorners: [.topRight , .bottomRight , .topLeft , .bottomLeft],
+                                     cornerRadii: CGSize(width: 15, height: 15))
+        let maskLayer1 = CAShapeLayer()
+        maskLayer1.frame = bounds
+        maskLayer1.path = maskPath1.cgPath
+        layer.mask = maskLayer1
+    }
+}

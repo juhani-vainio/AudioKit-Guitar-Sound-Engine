@@ -22,11 +22,17 @@ class UnitTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
         self.contentView.backgroundColor = UIColor.clear
         self.backgroundColor = UIColor.clear
-        title.textColor = interface.textIdle
-        value.textColor = interface.text
-        slider.minimumTrackTintColor = interface.highlight
-        slider.maximumTrackTintColor = interface.mainBackground
+        self.title.textColor = interface.textIdle
+        self.value.textColor = interface.text
+        self.slider.minimumTrackTintColor = interface.highlight
+        self.slider.maximumTrackTintColor = interface.mainBackground
         // Configure the view for the selected state
+    }
+    
+    override func prepareForReuse() {
+        self.title.text = nil
+        self.slider = nil
+        self.value = nil
     }
     
 }
