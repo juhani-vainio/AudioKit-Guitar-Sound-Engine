@@ -36,19 +36,18 @@ class DoubleTableViewCell: UITableViewCell {
         controllersView.layer.cornerRadius = 8
         self.onOffButton.backgroundColor = UIColor.clear
         
-        
-        // get values from Audiokit variables
-        slider1.setValue(0.2, animated: true)
-        slider1Value.text = "0.2"
-        
-        slider2.setValue(0.2, animated: true)
-        slider2Value.text = "0.2"
-        
+        slider1.addTarget(self, action: #selector(valueChanged), for: .valueChanged)
+        slider2.addTarget(self, action: #selector(valueChanged), for: .valueChanged)
     }
     
     
-    @objc func changeValue(slider : UISlider) {
-        
+    @objc func valueChanged(slider: UISlider) {
+        switch slider {
+        case slider1: slider1Value.text = audio.effect.changeValues(id:slider.tag, slider: 1, value: Double(slider.value))
+        case slider2: slider2Value.text = audio.effect.changeValues(id:slider.tag, slider: 2, value: Double(slider.value))
+        default: break
+        }
+
     }
     
     

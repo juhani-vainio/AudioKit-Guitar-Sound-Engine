@@ -47,27 +47,22 @@ class QuatroTableViewCell: UITableViewCell {
         self.onOffButton.backgroundColor = UIColor.clear
         
         
-        // get values from Audiokit variables
-        slider1.setValue(0.2, animated: true)
-        slider1Value.text = "0.2"
-        
-        slider2.setValue(0.5, animated: true)
-        slider2Value.text = "0.5"
-        
-        slider3.setValue(0.7, animated: true)
-        slider3Value.text = "0.7"
-        
-        slider4.setValue(0.7, animated: true)
-        slider4Value.text = "0.7"
-        
+        slider1.addTarget(self, action: #selector(valueChanged), for: .valueChanged)
+        slider2.addTarget(self, action: #selector(valueChanged), for: .valueChanged)
+        slider3.addTarget(self, action: #selector(valueChanged), for: .valueChanged)
+        slider4.addTarget(self, action: #selector(valueChanged), for: .valueChanged)
     }
     
-    
-    @objc func changeValue(slider : UISlider) {
+    @objc func valueChanged(slider: UISlider) {
+        switch slider {
+        case slider1: slider1Value.text = audio.effect.changeValues(id:slider.tag, slider: 1, value: Double(slider.value))
+        case slider2: slider2Value.text = audio.effect.changeValues(id:slider.tag, slider: 2, value: Double(slider.value))
+        case slider3: slider3Value.text = audio.effect.changeValues(id:slider.tag, slider: 3, value: Double(slider.value))
+        case slider4: slider4Value.text = audio.effect.changeValues(id:slider.tag, slider: 4, value: Double(slider.value))
+        default: break
+        }
         
     }
-    
-    
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)

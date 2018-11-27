@@ -8,16 +8,7 @@
 
 
 
-struct unitData {
-    var opened = Bool()
-    var title = String()
-    var sliders = [String]()
-    var isOn = Bool()
-    var type = String()
-
-}
-
-
+import AudioKit
 import UIKit
 
 fileprivate var preCollectionLongPressGesture: UILongPressGestureRecognizer!
@@ -25,9 +16,9 @@ fileprivate var postCollectionLongPressGesture: UILongPressGestureRecognizer!
 
 class ViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UITableViewDelegate, UITableViewDataSource  {
     
-    var availableUnitsData = [unitData]()        // VÄLIAIKAINEN MALLI
-    var selectedUnitsAfterData = [unitData]()    // VÄLIAIKAINEN MALLI
-    var selectedUnitsBeforeData = [unitData]()    // VÄLIAIKAINEN MALLI
+
+    var selectedUnitsAfterData = [effectData]()    // VÄLIAIKAINEN MALLI
+    var selectedUnitsBeforeData = [effectData]()    // VÄLIAIKAINEN MALLI
     
     
     private let parallaxLayout = ParallaxFlowLayout()
@@ -69,26 +60,19 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         colorSwitchButton.setTitle("spotify", for: .normal)
         interfaceSetup()
         
-        // VÄLIAIKAINEN MALLI
-        availableUnitsData = [
-            unitData(opened: false, title: "Variable Delay", sliders: ["VD time 0.2", "VD feedback 1.2", "isOn true"], isOn: false, type: "triple"),
-                unitData(opened: false, title: "OverDrive", sliders: ["OD value 0.2", "OD gain 2", "isOn false"], isOn: true, type: "triple"),
-                unitData(opened: false, title: "Tanh Distortion", sliders: ["TD time 0.2", "TD feedback 1.2", "isOn true"], isOn: false, type: "triple"),
-                unitData(opened: false, title: "Compressor", sliders: ["C value 0.2", "C gain 2", "isOn false"], isOn: true, type: "triple")
-        ]
+
         
       // VÄLIAIKAINEN MALLI
         selectedUnitsAfterData = [
-            unitData(opened: false, title: "Delay", sliders: ["D time 0.2", "D feedback 1.2", "D cutoff 0.2", "mix 0.4"], isOn: false, type: "quatro"),
-                unitData(opened: false, title: "Drive", sliders: ["Drive 0.2", "gain 10"], isOn: true, type: "double")
-        
+            effectData(id: 5, opened: false, title: "Delay", interface: "triple"),
+            effectData(id: 8, opened: false, title: "Ring Modulator", interface: "quatro")
         ]
+        
         // VÄLIAIKAINEN MALLI
         selectedUnitsBeforeData = [
-            unitData(opened: false, title: "Clipper", sliders: ["clip 0.2"], isOn: false, type: "single"),
-            unitData(opened: false, title: "Wah Wah!", sliders: ["Wah 0.2", "Wah feedback 1.2", "Wah mix 0.4"], isOn: false, type: "triple"),
-            unitData(opened: false, title: "Decimator", sliders: ["Decimate 0.2", "gain 0.6"], isOn: false, type: "double")
-            
+            effectData(id: 7,opened: false, title: "Clipper", interface: "single"),
+            effectData(id: 4 , opened: false, title: "Wah Wah!", interface: "triple"),
+            effectData(id: 6 ,opened: false, title: "Decimator", interface: "triple")
         ]
         
         
@@ -104,7 +88,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
      // MARK: TABLEVIEWS
     func createTableViews() {
         // Arrange available units list aplhabetically
-        self.availableUnitsData = self.availableUnitsData.sorted{ $0.title < $1.title }
+        audio.availableUnitsData = audio.availableUnitsData.sorted{ $0.title < $1.title }
         
         availableUnits.delegate = self
         availableUnits.dataSource = self
@@ -112,10 +96,6 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         unitsAfter.dataSource = self
         unitsBefore.delegate = self
         unitsBefore.dataSource = self
-        
-        
-        unitsAfter.roundedAllCorner()
-        unitsBefore.roundedAllCorner()
         
         registerTableViewCells()
     }
@@ -144,7 +124,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
          if tableView == availableUnits {
-            return availableUnitsData.count
+            return audio.availableUnitsData.count
             
          } else if tableView == unitsAfter {
             // unitsAfter List
@@ -162,32 +142,32 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         var returnCell = UITableViewCell()
         var cellOpened = Bool()
         var cellTitle = String()
-        var cellSliders = [String]()
-        var cellIsOn = Bool()
         var cellType = String()
         var cellIsLast = Bool()
+        var cellId = Int()
         
         if tableView == unitsBefore {
             cellOpened = selectedUnitsBeforeData[indexPath.row].opened
             cellTitle = selectedUnitsBeforeData[indexPath.row].title
-            cellSliders = selectedUnitsBeforeData[indexPath.row].sliders
-            cellIsOn = selectedUnitsBeforeData[indexPath.row].isOn
-            cellType = selectedUnitsBeforeData[indexPath.row].type
+            cellType = selectedUnitsBeforeData[indexPath.row].interface
             cellIsLast = selectedUnitsBeforeData.endIndex - 1 == indexPath.row
+            cellId = selectedUnitsBeforeData[indexPath.row].id
    
         }
         else if tableView == unitsAfter {
             cellOpened = selectedUnitsAfterData[indexPath.row].opened
             cellTitle = selectedUnitsAfterData[indexPath.row].title
-            cellSliders = selectedUnitsAfterData[indexPath.row].sliders
-            cellIsOn = selectedUnitsAfterData[indexPath.row].isOn
-            cellType = selectedUnitsAfterData[indexPath.row].type
+            cellType = selectedUnitsAfterData[indexPath.row].interface
             cellIsLast = selectedUnitsAfterData.endIndex - 1 == indexPath.row
+            cellId = selectedUnitsAfterData[indexPath.row].id
         }
-        
+        else {
+            cellTitle = audio.availableUnitsData[indexPath.row].title
+   
+        }
         if tableView == availableUnits {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell") else {return UITableViewCell()}
-                cell.textLabel?.text = availableUnitsData[indexPath.row].title
+                cell.textLabel?.text = cellTitle
                 cell.textLabel?.textColor = interface.text
                 cell.backgroundColor = interface.tableBackground
                 cell.selectedBackgroundView = backgroundView
@@ -196,76 +176,178 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
             
          }
         else {
-            // unitsAfter List
-           
+            
             switch cellType {
+                
             case "double":
                 // Has two sliders
                 let cell = tableView.dequeueReusableCell(withIdentifier: "DoubleTableViewCell", for: indexPath) as! DoubleTableViewCell
+                
+                let slider1 = audio.effect.getValues(id: cellId, slider: 1)
+                cell.slider1Title.text = slider1.name
+                cell.slider1Value.text = slider1.value
+                cell.slider1.minimumValue = slider1.min
+                cell.slider1.maximumValue = slider1.max
+                cell.slider1.value = slider1.valueForSlider
+                cell.slider1.tag = cellId
+                
+                let slider2 = audio.effect.getValues(id: cellId, slider: 2)
+                cell.slider2Title.text = slider2.name
+                cell.slider2Value.text = slider2.value
+                cell.slider2.minimumValue = slider2.min
+                cell.slider2.maximumValue = slider2.max
+                cell.slider2.value = slider2.valueForSlider
+                cell.slider2.tag = cellId
+                
                 cell.title.text = cellTitle
+                cell.selectedBackgroundView = backgroundView
+                
+                if slider1.isOn {
+                    cell.onOffButton.setTitle("On", for: .normal)
+                } else {
+                    cell.onOffButton.setTitle("Off", for: .normal)
+                }
                 if cellOpened == true {
                     if cellIsLast {
                         cell.bottomConstraint.constant = 8
                     } else {
                         cell.bottomConstraint.constant = 0
                     }
-                    cell.controllerHeight.constant = CGFloat(50 * 2)
+                    cell.controllerHeight.constant = CGFloat(2 * 50)
                     cell.controllersView.isHidden = false
-                    cell.slider2Title.text = cellSliders[1]
-                    cell.slider1Title.text = cellSliders[0]
                 } else {
                     cell.controllerHeight.constant = CGFloat(0)
                     cell.controllersView.isHidden = true
                 }
-                cell.selectedBackgroundView = backgroundView
                 returnCell = cell
+                
             case "triple":
                 // Has two sliders
                 let cell = tableView.dequeueReusableCell(withIdentifier: "TripleTableViewCell", for: indexPath) as! TripleTableViewCell
+                let slider1 = audio.effect.getValues(id: cellId, slider: 1)
+                cell.slider1Title.text = slider1.name
+                cell.slider1Value.text = slider1.value
+                cell.slider1.minimumValue = slider1.min
+                cell.slider1.maximumValue = slider1.max
+                cell.slider1.value = slider1.valueForSlider
+                cell.slider1.tag = cellId
+                
+                let slider2 = audio.effect.getValues(id: cellId, slider: 2)
+                cell.slider2Title.text = slider2.name
+                cell.slider2Value.text = slider2.value
+                cell.slider2.minimumValue = slider2.min
+                cell.slider2.maximumValue = slider2.max
+                cell.slider2.value = slider2.valueForSlider
+                cell.slider2.tag = cellId
+                
+                let slider3 = audio.effect.getValues(id: cellId, slider: 3)
+                cell.slider3Title.text = slider3.name
+                cell.slider3Value.text = slider3.value
+                cell.slider3.minimumValue = slider3.min
+                cell.slider3.maximumValue = slider3.max
+                cell.slider3.value = slider3.valueForSlider
+                cell.slider3.tag = cellId
+                
                 cell.title.text = cellTitle
+                cell.selectedBackgroundView = backgroundView
+                
+                if slider1.isOn {
+                    cell.onOffButton.setTitle("On", for: .normal)
+                } else {
+                    cell.onOffButton.setTitle("Off", for: .normal)
+                }
                 if cellOpened == true {
                     if cellIsLast {
                         cell.bottomConstraint.constant = 8
                     } else {
                         cell.bottomConstraint.constant = 0
                     }
-                    cell.controllerHeight.constant = CGFloat(50 * 3)
+                    cell.controllerHeight.constant = CGFloat(3 * 50)
                     cell.controllersView.isHidden = false
-                    cell.slider3Title.text = cellSliders[2]
-                    cell.slider2Title.text = cellSliders[1]
-                    cell.slider1Title.text = cellSliders[0]
                 } else {
                     cell.controllerHeight.constant = CGFloat(0)
                     cell.controllersView.isHidden = true
                 }
-                cell.selectedBackgroundView = backgroundView
                 returnCell = cell
+                
             case "quatro":
                 // Has two sliders
                 let cell = tableView.dequeueReusableCell(withIdentifier: "QuatroTableViewCell", for: indexPath) as! QuatroTableViewCell
+               
+                let slider1 = audio.effect.getValues(id: cellId, slider: 1)
+                cell.slider1Title.text = slider1.name
+                cell.slider1Value.text = slider1.value
+                cell.slider1.minimumValue = slider1.min
+                cell.slider1.maximumValue = slider1.max
+                cell.slider1.value = slider1.valueForSlider
+                cell.slider1.tag = cellId
+                
+                let slider2 = audio.effect.getValues(id: cellId, slider: 2)
+                cell.slider2Title.text = slider2.name
+                cell.slider2Value.text = slider2.value
+                cell.slider2.minimumValue = slider2.min
+                cell.slider2.maximumValue = slider2.max
+                cell.slider2.value = slider2.valueForSlider
+                cell.slider2.tag = cellId
+                
+                let slider3 = audio.effect.getValues(id: cellId, slider: 3)
+                cell.slider3Title.text = slider3.name
+                cell.slider3Value.text = slider3.value
+                cell.slider3.minimumValue = slider3.min
+                cell.slider3.maximumValue = slider3.max
+                cell.slider3.value = slider3.valueForSlider
+                cell.slider3.tag = cellId
+                
+                let slider4 = audio.effect.getValues(id: cellId, slider: 4)
+                cell.slider4Title.text = slider4.name
+                cell.slider4Value.text = slider4.value
+                cell.slider4.minimumValue = slider4.min
+                cell.slider4.maximumValue = slider4.max
+                cell.slider4.value = slider4.valueForSlider
+                cell.slider4.tag = cellId
+                
                 cell.title.text = cellTitle
+                cell.selectedBackgroundView = backgroundView
+                
+                if slider1.isOn {
+                    cell.onOffButton.setTitle("On", for: .normal)
+                } else {
+                    cell.onOffButton.setTitle("Off", for: .normal)
+                }
                 if cellOpened == true {
                     if cellIsLast {
                         cell.bottomConstraint.constant = 8
                     } else {
                         cell.bottomConstraint.constant = 0
                     }
-                    cell.controllerHeight.constant = CGFloat(50 * 4)
+                    cell.controllerHeight.constant = CGFloat(4 * 50)
                     cell.controllersView.isHidden = false
-                    cell.slider4Title.text = cellSliders[3]
-                    cell.slider3Title.text = cellSliders[2]
-                    cell.slider2Title.text = cellSliders[1]
-                    cell.slider1Title.text = cellSliders[0]
                 } else {
                     cell.controllerHeight.constant = CGFloat(0)
                     cell.controllersView.isHidden = true
                 }
-                cell.selectedBackgroundView = backgroundView
                 returnCell = cell
+                
             default:
                 // One slider
                 let cell = tableView.dequeueReusableCell(withIdentifier: "TableViewCell", for: indexPath) as! TableViewCell
+                
+                let slider = audio.effect.getValues(id: cellId, slider: 1)
+                cell.sliderTitle.text = slider.name
+                cell.sliderValue.text = slider.value
+                cell.slider.minimumValue = slider.min
+                cell.slider.maximumValue = slider.max
+                cell.slider.value = slider.valueForSlider
+                cell.slider.tag = cellId
+                
                 cell.title.text = cellTitle
+                cell.selectedBackgroundView = backgroundView
+                
+                if slider.isOn {
+                    cell.onOffButton.setTitle("On", for: .normal)
+                } else {
+                    cell.onOffButton.setTitle("Off", for: .normal)
+                }
                 if cellOpened == true {
                     if cellIsLast {
                         cell.bottomConstraint.constant = 8
@@ -278,13 +360,14 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
                     cell.controllerHeight.constant = CGFloat(0)
                     cell.controllersView.isHidden = true
                 }
-                cell.selectedBackgroundView = backgroundView
+                
                 returnCell = cell
             }
         }
         
         return returnCell
     }
+    
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if tableView == availableUnits {
@@ -350,9 +433,9 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
             if tableView == unitsAfter {
                 // remove and insert data between arrays
                 let tempData = selectedUnitsAfterData[indexPath.row]
-                self.availableUnitsData.append(tempData)
+                audio.availableUnitsData.append(tempData)
                  // Arrange available units list aplhabetically
-                self.availableUnitsData = self.availableUnitsData.sorted{ $0.title < $1.title }
+                audio.availableUnitsData = audio.availableUnitsData.sorted{ $0.title < $1.title }
                 self.availableUnits.reloadData()
                 self.selectedUnitsAfterData.remove(at: indexPath.row)
                 let row = IndexPath(item: indexPath.row, section: 0)
@@ -361,9 +444,9 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
             else if tableView == unitsBefore {
                 // remove and insert data between arrays
                 let tempData = selectedUnitsBeforeData[indexPath.row]
-                self.availableUnitsData.append(tempData)
+                audio.availableUnitsData.append(tempData)
                 // Arrange available units list aplhabetically
-                self.availableUnitsData = self.availableUnitsData.sorted{ $0.title < $1.title }
+                audio.availableUnitsData = audio.availableUnitsData.sorted{ $0.title < $1.title }
                 self.availableUnits.reloadData()
                 self.selectedUnitsBeforeData.remove(at: indexPath.row)
                 let row = IndexPath(item: indexPath.row, section: 0)
@@ -400,13 +483,13 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     func leadingSwipeAction(forRowAtIndexPath indexPath: IndexPath) -> UIContextualAction {
         // swiping RIGHT
         // insert to AFTER Units
-        let tempData = self.availableUnitsData[indexPath.row]
+        let tempData = audio.availableUnitsData[indexPath.row]
         
         let action = UIContextualAction(style: .normal, title: "INSERT AFTER") { (contextAction: UIContextualAction, sourceView: UIView, completionHandler: (Bool) -> Void) in
             
             self.selectedUnitsAfterData.append(tempData)
             self.unitsAfter.reloadData()
-            self.availableUnitsData.remove(at: indexPath.row)
+            audio.availableUnitsData.remove(at: indexPath.row)
             let row = IndexPath(item: indexPath.row, section: 0)
             self.availableUnits.deleteRows(at: [row], with: .none)
     
@@ -419,13 +502,13 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     func trailingSwipeAction(forRowAtIndexPath indexPath: IndexPath) -> UIContextualAction {
         // swiping LEFT
         // insert to BEFORE Units
-        let tempData = self.availableUnitsData[indexPath.row]
+        let tempData = audio.availableUnitsData[indexPath.row]
         
         let action = UIContextualAction(style: .normal, title: "INSERT BEFORE") { (contextAction: UIContextualAction, sourceView: UIView, completionHandler: (Bool) -> Void) in
             
             self.selectedUnitsBeforeData.append(tempData)
             self.unitsBefore.reloadData()
-            self.availableUnitsData.remove(at: indexPath.row)
+            audio.availableUnitsData.remove(at: indexPath.row)
             let row = IndexPath(item: indexPath.row, section: 0)
             self.availableUnits.deleteRows(at: [row], with: .none)
             
@@ -606,7 +689,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         
         
         print("AVAILABLE")
-        print(self.availableUnitsData)
+        print(audio.availableUnitsData)
         print("SELECTED")
         print(self.selectedUnitsAfterData)
     }
@@ -685,89 +768,4 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     @IBOutlet weak var ct8: UIView!
     @IBOutlet weak var ct9: UIView!
     
-}
-
-extension UIView{
-    func roundedTopLeft(){
-        let maskPath1 = UIBezierPath(roundedRect: bounds,
-                                     byRoundingCorners: [.topLeft],
-                                     cornerRadii: CGSize(width: 15, height: 15))
-        let maskLayer1 = CAShapeLayer()
-        maskLayer1.frame = bounds
-        maskLayer1.path = maskPath1.cgPath
-        layer.mask = maskLayer1
-    }
-    
-    func roundedTopRight(){
-        let maskPath1 = UIBezierPath(roundedRect: bounds,
-                                     byRoundingCorners: [.topRight],
-                                     cornerRadii: CGSize(width: 15, height: 15))
-        let maskLayer1 = CAShapeLayer()
-        maskLayer1.frame = bounds
-        maskLayer1.path = maskPath1.cgPath
-        layer.mask = maskLayer1
-    }
-    func roundedBottomLeft(){
-        let maskPath1 = UIBezierPath(roundedRect: bounds,
-                                     byRoundingCorners: [.bottomLeft],
-                                     cornerRadii: CGSize(width: 15, height: 15))
-        let maskLayer1 = CAShapeLayer()
-        maskLayer1.frame = bounds
-        maskLayer1.path = maskPath1.cgPath
-        layer.mask = maskLayer1
-    }
-    func roundedBottomRight(){
-        let maskPath1 = UIBezierPath(roundedRect: bounds,
-                                     byRoundingCorners: [.bottomRight],
-                                     cornerRadii: CGSize(width: 15, height: 15))
-        let maskLayer1 = CAShapeLayer()
-        maskLayer1.frame = bounds
-        maskLayer1.path = maskPath1.cgPath
-        layer.mask = maskLayer1
-    }
-    func roundedBottom(){
-        let maskPath1 = UIBezierPath(roundedRect: bounds,
-                                     byRoundingCorners: [.bottomRight , .bottomLeft],
-                                     cornerRadii: CGSize(width: 15, height: 15))
-        let maskLayer1 = CAShapeLayer()
-        maskLayer1.frame = bounds
-        maskLayer1.path = maskPath1.cgPath
-        layer.mask = maskLayer1
-    }
-    func roundedTop(){
-        let maskPath1 = UIBezierPath(roundedRect: bounds,
-                                     byRoundingCorners: [.topRight , .topLeft],
-                                     cornerRadii: CGSize(width: 15, height: 15))
-        let maskLayer1 = CAShapeLayer()
-        maskLayer1.frame = bounds
-        maskLayer1.path = maskPath1.cgPath
-        layer.mask = maskLayer1
-    }
-    func roundedLeft(){
-        let maskPath1 = UIBezierPath(roundedRect: bounds,
-                                     byRoundingCorners: [.topLeft , .bottomLeft],
-                                     cornerRadii: CGSize(width: 15, height: 15))
-        let maskLayer1 = CAShapeLayer()
-        maskLayer1.frame = bounds
-        maskLayer1.path = maskPath1.cgPath
-        layer.mask = maskLayer1
-    }
-    func roundedRight(){
-        let maskPath1 = UIBezierPath(roundedRect: bounds,
-                                     byRoundingCorners: [.topRight , .bottomRight],
-                                     cornerRadii: CGSize(width: 15, height: 15))
-        let maskLayer1 = CAShapeLayer()
-        maskLayer1.frame = bounds
-        maskLayer1.path = maskPath1.cgPath
-        layer.mask = maskLayer1
-    }
-    func roundedAllCorner(){
-        let maskPath1 = UIBezierPath(roundedRect: bounds,
-                                     byRoundingCorners: [.topRight , .bottomRight , .topLeft , .bottomLeft],
-                                     cornerRadii: CGSize(width: 15, height: 15))
-        let maskLayer1 = CAShapeLayer()
-        maskLayer1.frame = bounds
-        maskLayer1.path = maskPath1.cgPath
-        layer.mask = maskLayer1
-    }
 }
