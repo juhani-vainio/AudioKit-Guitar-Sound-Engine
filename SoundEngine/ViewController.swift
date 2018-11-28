@@ -83,7 +83,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         
         
         
-        
+        audio.effect.start()
     
         
         

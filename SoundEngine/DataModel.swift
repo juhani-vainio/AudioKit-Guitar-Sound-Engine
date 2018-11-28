@@ -587,5 +587,298 @@ class audio {
     var effect = [AKInput]()
     var effectCellName = [String]()
 
+    func start() {
+        createEffects()
+        audioKitSettings()
+       // checkUserDefaults()
+        createEffectList()
+      //  setEffectValues(initial: true)
+      //  newList()
+        connectMic()
+        connectEffects()
+    }
+    
+    func createEffects() {
+        
+        defaultAmp = AKNode()
+        
+        // UTILITIES
+        mic = AKMicrophone()
+        amplitudeTracker = AKAmplitudeTracker()
+        tracker = AKFrequencyTracker()
+        
+        // MIXERS
+        inputMixer = AKMixer()
+        filterMixer = AKMixer()
+        effectsMixer = AKMixer()
+        masterMixer = AKMixer()
+        
+        masterMixer?.start()
+        inputMixer?.start()
+        effectsMixer?.start()
+        filterMixer?.start()
+        
+        
+        // EFFECTS
+        delay = AKDelay()
+        bitCrusher =  AKBitCrusher()
+        clipper =  AKClipper()
+        dynaRageCompressor =  AKDynaRageCompressor()
+        autoWah =  AKAutoWah()
+        tanhDistortion = AKTanhDistortion()
+        decimator = AKDecimator()
+        ringModulator = AKRingModulator()
+    
+        
+        // FILTERS
+        
+        equalizerFilter1 = AKEqualizerFilter()
+        equalizerFilter1?.bandwidth = 44.7
+        equalizerFilter1?.centerFrequency = 32
+        equalizerFilter1?.gain = Filters.equalizerFilter.filterBand1Gain
+        
+        equalizerFilter2 = AKEqualizerFilter()
+        equalizerFilter2?.bandwidth = 70.8
+        equalizerFilter2?.centerFrequency = 64
+        equalizerFilter2?.gain = Filters.equalizerFilter.filterBand2Gain
+        
+        equalizerFilter3 = AKEqualizerFilter()
+        equalizerFilter3?.bandwidth = 141
+        equalizerFilter3?.centerFrequency = 125
+        equalizerFilter3?.gain = Filters.equalizerFilter.filterBand3Gain
+        
+        equalizerFilter4 = AKEqualizerFilter()
+        equalizerFilter4?.bandwidth = 282
+        equalizerFilter4?.centerFrequency = 250
+        equalizerFilter4?.gain = Filters.equalizerFilter.filterBand4Gain
+        
+        equalizerFilter5 = AKEqualizerFilter()
+        equalizerFilter5?.bandwidth = 562
+        equalizerFilter5?.centerFrequency = 500
+        equalizerFilter5?.gain = Filters.equalizerFilter.filterBand5Gain
+        
+        equalizerFilter6 = AKEqualizerFilter()
+        equalizerFilter6?.bandwidth = 1112
+        equalizerFilter6?.centerFrequency = 1000
+        equalizerFilter6?.gain = Filters.equalizerFilter.filterBand6Gain
+        
+        equalizerFilter7 = AKEqualizerFilter()
+        equalizerFilter7?.bandwidth = 2222
+        equalizerFilter7?.centerFrequency = 2000
+        equalizerFilter7?.gain = Filters.equalizerFilter.filterBand7Gain
+        
+        equalizerFilter8 = AKEqualizerFilter()
+        equalizerFilter8?.bandwidth = 4444
+        equalizerFilter8?.centerFrequency = 4000
+        equalizerFilter8?.gain = Filters.equalizerFilter.filterBand8Gain
+        
+        equalizerFilter9 = AKEqualizerFilter()
+        equalizerFilter9?.bandwidth = 8888
+        equalizerFilter9?.centerFrequency = 8000
+        equalizerFilter9?.gain = Filters.equalizerFilter.filterBand9Gain
+        
+        equalizerFilter10 = AKEqualizerFilter()
+        equalizerFilter10?.bandwidth = 17000
+        equalizerFilter10?.centerFrequency = 16000
+        equalizerFilter10?.gain = Filters.equalizerFilter.filterBand10Gain
+        
+       
+        highPassFilter = AKHighPassFilter()
+        lowPassFilter = AKLowPassFilter()
+        
+        toneFilter = AKToneFilter()
+        toneFilter?.start()
+        
+        masterBooster = AKBooster()
+        masterBooster?.start()
+    
+    }
+
+    func audioKitSettings() {
+        
+        AKSettings.audioInputEnabled = true
+        AKSettings.defaultToSpeaker = false
+        // AKSettings.allowAirPlay = true
+        
+    }
+    
+    func createEffectList() {
+        print("createEffectList")
+        //Assign effects to the list
+        for effect in 0..<audio.availableUnitsData.count {
+            let id = audio.availableUnitsData[effect].id
+            switch id {
+            case "bitCrusher" : self.effect.append(bitCrusher!)
+            case "clipper":  self.effect.append(clipper!)
+            case "dynaRageCompressor":  self.effect.append(dynaRageCompressor!)
+            case "autoWah":  self.effect.append(autoWah!)
+            case "delay":  self.effect.append(delay!)
+            case "decimator": self.effect.append(decimator!)
+            case "tanhDistortion": self.effect.append(tanhDistortion!)
+            case "ringModulator": self.effect.append(ringModulator!)
+            default : print("NOTHING to do over HERE")
+                
+            }
+        }
+    }
+    
+    func connectMic() {
+        
+        defaultAmp = Amp.model.defaultAmpModel(input: mic!)
+        defaultAmp?.connect(to: inputMixer!)
+    }
+    
+    func connectFilters() {
+        
+        
+    }
+    
+    func connectEffects() {
+        print("connectEffects")
+        // let trackedAmplitude = AKAmplitudeTracker(mic)
+        for pedal in 0..<effect.count {
+            
+            if pedal == 0 {
+                inputMixer?.connect(to: effect[0])
+                
+            }
+            else {
+                effect[pedal-1].connect(to: effect[pedal])
+            }
+        }
+        
+        // TESTING EQ
+        // CONNECT EQ AFTER EFFECTS
+        if effect .isEmpty {
+            inputMixer!.connect(to: effectsMixer!)
+        } else {
+            effect.last?.connect(to: effectsMixer!)
+        }
+        
+        effectsMixer?.connect(to: masterBooster!)
+        masterBooster?.connect(to: toneFilter!)
+        toneFilter?.connect(to: equalizerFilter1!)
+        equalizerFilter1?.connect(to: equalizerFilter2!)
+        equalizerFilter2?.connect(to: equalizerFilter3!)
+        equalizerFilter3?.connect(to: equalizerFilter4!)
+        equalizerFilter4?.connect(to: equalizerFilter5!)
+        equalizerFilter5?.connect(to: equalizerFilter6!)
+        
+        // TESTING HIGLOW PASS FILTERS
+        
+        equalizerFilter6?.connect(to: highPassFilter!)
+        highPassFilter?.connect(to: lowPassFilter!)
+        
+        lowPassFilter?.connect(to: filterMixer!)
+        
+        
+        filterMixer?.connect(to: masterMixer!)
+        
+        // LAST TO OUTPUT
+        AudioKit.output = masterMixer
+        if AudioKit.output == nil {
+            AudioKit.output = inputMixer
+        }
+        // createPlotViews(sound: effect.last as! AKNode)
+        
+        // START AUDIOKIT
+        do {
+            try AudioKit.start()
+            print("START AUDIOKIT")
+        } catch {
+            print("Could not start AudioKit")
+        }
+        
+    }
+    
+    func unplugEffects() {
+        print("-------------------------    DISCONNECTING")
+        print(AudioKit.printConnections())
+        do {
+            try AudioKit.stop()
+        } catch {
+            print("Could not stop AudioKit")
+        }
+        
+        for pedal in 0..<effect.count {
+            effect[pedal].disconnectOutput()
+            effect[pedal].disconnectInput()
+            print("DISONNECT \(effect[pedal])")
+        }
+        inputMixer?.disconnectOutput()
+        print("DISONNECT \(inputMixer)")
+        // TESTING FILTERS
+        // TESTING EQ
+        // CONNECT EQ AFTER EFFECTS
+        equalizerFilter1?.disconnectInput()
+        equalizerFilter1?.disconnectOutput()
+        
+        equalizerFilter2?.disconnectInput()
+        equalizerFilter2?.disconnectOutput()
+        
+        equalizerFilter3?.disconnectInput()
+        equalizerFilter3?.disconnectOutput()
+        
+        equalizerFilter4?.disconnectInput()
+        equalizerFilter4?.disconnectOutput()
+        
+        equalizerFilter5?.disconnectInput()
+        equalizerFilter5?.disconnectOutput()
+        
+        equalizerFilter6?.disconnectInput()
+        equalizerFilter6?.disconnectOutput()
+        print("DISONNECT \(equalizerFilter6)")
+        
+        highPassFilter?.disconnectInput()
+        highPassFilter?.disconnectOutput()
+        print("DISONNECT \(highPassFilter)")
+        
+        lowPassFilter?.disconnectInput()
+        lowPassFilter?.disconnectOutput()
+        print("DISONNECT \(lowPassFilter)")
+        
+        toneFilter?.disconnectInput()
+        toneFilter?.disconnectOutput()
+        
+        effectsMixer?.disconnectInput()
+        effectsMixer?.disconnectOutput()
+        filterMixer?.disconnectInput()
+        filterMixer?.disconnectOutput()
+        
+        masterBooster?.disconnectInput()
+        masterBooster?.disconnectOutput()
+        
+        print("\n-------------------------DISCONNECT READY")
+        print(AudioKit.printConnections())
+        
+        /*
+         bitCrusher?.detach()
+         decimator?.detach()
+         clipper?.detach()
+         dynaRageCompressor?.detach()
+         autoWah?.detach()
+         tanhDistortion?.detach()
+         distortion?.detach()
+         delay?.detach()
+         */
+    }
+    
+    func resetEffectChain() {
+        unplugEffects()
+        connectEffects()
+        print(effect)
+        UserDefaults.standard.set(Effects.selectedEffects, forKey: "effectChain")
+    }
+
+
+    
 }
 
+/*
+ Sub-Bass (16 Hz to 60 Hz). ...
+ Bass (60 Hz to 250 Hz). ...
+ Low Mids (250 Hz to 2 kHz). ...
+ High Mids (2 kHz to 4 kHz). ...
+ Presence (4 kHz to 6 kHz). ...
+ Brilliance (6 kHz to 16 kHz).
+ */
