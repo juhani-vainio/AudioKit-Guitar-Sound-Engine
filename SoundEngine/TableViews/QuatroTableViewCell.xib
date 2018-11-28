@@ -174,8 +174,8 @@
                             <constraint firstAttribute="trailing" secondItem="Xfl-4M-kF9" secondAttribute="trailing" constant="12" id="pJR-bi-eUk"/>
                         </constraints>
                     </view>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Ia-0f-ZsU">
-                        <rect key="frame" x="269" y="8" width="40" height="30"/>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Ia-0f-ZsU">
+                        <rect key="frame" x="269" y="6" width="40" height="34"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="40" id="vc6-88-iSK"/>
                         </constraints>

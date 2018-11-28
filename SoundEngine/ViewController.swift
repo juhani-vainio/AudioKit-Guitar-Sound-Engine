@@ -208,9 +208,11 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
                 cell.selectedBackgroundView = backgroundView
                 
                 if slider1.isOn {
-                    cell.onOffButton.setTitle("On", for: .normal)
+                    cell.onOffButton.setTitle("ON", for: .normal)
+                    cell.onOffButton.setTitleColor(interface.text, for: .normal)
                 } else {
-                    cell.onOffButton.setTitle("Off", for: .normal)
+                    cell.onOffButton.setTitle("OFF", for: .normal)
+                    cell.onOffButton.setTitleColor(interface.textIdle, for: .normal)
                 }
                 if cellOpened == true {
                     if cellIsLast {
@@ -257,9 +259,11 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
                 cell.selectedBackgroundView = backgroundView
                 
                 if slider1.isOn {
-                    cell.onOffButton.setTitle("On", for: .normal)
+                    cell.onOffButton.setTitle("ON", for: .normal)
+                    cell.onOffButton.setTitleColor(interface.text, for: .normal)
                 } else {
-                    cell.onOffButton.setTitle("Off", for: .normal)
+                    cell.onOffButton.setTitle("OFF", for: .normal)
+                    cell.onOffButton.setTitleColor(interface.textIdle, for: .normal)
                 }
                 if cellOpened == true {
                     if cellIsLast {
@@ -312,9 +316,11 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
                 cell.selectedBackgroundView = backgroundView
                 
                 if slider1.isOn {
-                    cell.onOffButton.setTitle("On", for: .normal)
+                    cell.onOffButton.setTitle("ON", for: .normal)
+                    cell.onOffButton.setTitleColor(interface.text, for: .normal)
                 } else {
-                    cell.onOffButton.setTitle("Off", for: .normal)
+                    cell.onOffButton.setTitle("OFF", for: .normal)
+                    cell.onOffButton.setTitleColor(interface.textIdle, for: .normal)
                 }
                 if cellOpened == true {
                     if cellIsLast {
@@ -346,9 +352,11 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
                 cell.selectedBackgroundView = backgroundView
                 
                 if slider.isOn {
-                    cell.onOffButton.setTitle("On", for: .normal)
+                    cell.onOffButton.setTitle("ON", for: .normal)
+                    cell.onOffButton.setTitleColor(interface.text, for: .normal)
                 } else {
-                    cell.onOffButton.setTitle("Off", for: .normal)
+                    cell.onOffButton.setTitle("OFF", for: .normal)
+                    cell.onOffButton.setTitleColor(interface.textIdle, for: .normal)
                 }
                 if cellOpened == true {
                     if cellIsLast {

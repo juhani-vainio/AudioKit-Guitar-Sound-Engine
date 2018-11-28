@@ -33,6 +33,16 @@ class audio {
         switch id {
         case "bitCrusher" :
             switch slider {
+            case 0:
+                if  Effects.bitCrusher.isStarted == true {
+                    Effects.bitCrusher.isStarted = false
+                    bitCrusher?.stop()
+                    newValue = "OFF"
+                } else {
+                    Effects.bitCrusher.isStarted = true
+                    bitCrusher?.start()
+                    newValue = "ON"
+                }
             case 1:
                 bitCrusher?.bitDepth = value
                 Effects.bitCrusher.bitDepth = value
@@ -50,6 +60,16 @@ class audio {
             
         case "tanhDistortion" :
             switch slider {
+            case 0:
+                if  Effects.tanhDistortion.isStarted == true {
+                    Effects.tanhDistortion.isStarted = false
+                    tanhDistortion?.stop()
+                    newValue = "OFF"
+                } else {
+                    Effects.tanhDistortion.isStarted = true
+                    tanhDistortion?.start()
+                    newValue = "ON"
+                }
             case 1:
                 tanhDistortion?.pregain = value
                 Effects.tanhDistortion.pregain = value
@@ -76,6 +96,16 @@ class audio {
             
         case "dynaRageCompressor" :
             switch slider {
+            case 0:
+                if  Effects.dynaRageCompressor.isStarted == true {
+                    Effects.dynaRageCompressor.isStarted = false
+                    dynaRageCompressor?.stop()
+                    newValue = "OFF"
+                } else {
+                    Effects.dynaRageCompressor.isStarted = true
+                    dynaRageCompressor?.start()
+                    newValue = "ON"
+                }
             case 1:
                 dynaRageCompressor?.ratio = value
                 Effects.dynaRageCompressor.ratio = value
@@ -102,6 +132,16 @@ class audio {
             
         case "autoWah" :
             switch slider {
+            case 0:
+                if  Effects.autoWah.isStarted == true {
+                    Effects.autoWah.isStarted = false
+                    autoWah?.stop()
+                    newValue = "OFF"
+                } else {
+                    Effects.autoWah.isStarted = true
+                    autoWah?.start()
+                    newValue = "ON"
+                }
             case 1:
                 autoWah?.wah = value
                 Effects.autoWah.wah = value
@@ -124,6 +164,16 @@ class audio {
             
         case "delay" :
             switch slider {
+            case 0:
+                if  Effects.delay.isStarted == true {
+                    Effects.delay.isStarted = false
+                    delay?.stop()
+                    newValue = "OFF"
+                } else {
+                    Effects.delay.isStarted = true
+                    delay?.start()
+                    newValue = "ON"
+                }
             case 1:
                 delay?.time = value
                 Effects.delay.time = value
@@ -146,6 +196,16 @@ class audio {
             
         case "decimator" :
             switch slider {
+            case 0:
+                if  Effects.decimator.isStarted == true {
+                    Effects.decimator.isStarted = false
+                    decimator?.stop()
+                    newValue = "OFF"
+                } else {
+                    Effects.decimator.isStarted = true
+                    decimator?.start()
+                    newValue = "ON"
+                }
             case 1:
                 decimator?.decimation = value
                 Effects.decimator.decimation = value
@@ -168,6 +228,16 @@ class audio {
             
         case "clipper" :
             switch slider {
+            case 0:
+                if  Effects.clipper.isStarted == true {
+                    Effects.clipper.isStarted = false
+                    clipper?.stop()
+                    newValue = "OFF"
+                } else {
+                    Effects.clipper.isStarted = true
+                    clipper?.start()
+                    newValue = "ON"
+                }
             case 1:
             clipper?.limit = value
             Effects.clipper.limit = value
@@ -178,6 +248,16 @@ class audio {
             }
         case "ringModulator" :
             switch slider {
+            case 0:
+                if  Effects.ringModulator.isStarted == true {
+                    Effects.ringModulator.isStarted = false
+                    ringModulator?.stop()
+                    newValue = "OFF"
+                } else {
+                    Effects.ringModulator.isStarted = true
+                    ringModulator?.start()
+                    newValue = "ON"
+                }
             case 1:
                 ringModulator?.frequency1 = value
                 Effects.ringModulator.frequency1 = value

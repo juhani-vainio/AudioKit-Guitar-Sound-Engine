@@ -142,8 +142,8 @@
                             <constraint firstAttribute="height" constant="150" id="uVf-sH-dzW"/>
                         </constraints>
                     </view>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZRa-aC-o9e">
-                        <rect key="frame" x="264" y="8" width="40" height="30"/>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZRa-aC-o9e">
+                        <rect key="frame" x="264" y="6" width="40" height="34"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="40" id="jmx-eh-3k4"/>
                         </constraints>

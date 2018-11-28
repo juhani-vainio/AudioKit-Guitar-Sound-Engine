@@ -35,6 +35,24 @@ class TableViewCell: UITableViewCell {
         controllersView.layer.cornerRadius = 8
         onOffButton.backgroundColor = UIColor.clear
         slider.addTarget(self, action: #selector(valueChanged), for: .valueChanged)
+        onOffButton.addTarget(self, action: #selector(toggleOnOff), for: .touchDown)
+        
+    }
+    
+    func setOnOffColor() {
+        if onOffButton.titleLabel?.text == "ON" {
+            onOffButton.setTitleColor(interface.text, for: .normal)
+        } else {
+            onOffButton.setTitleColor(interface.textIdle, for: .normal)
+        }
+        
+    }
+    
+    @objc func toggleOnOff() {
+        let text = audio.effect.changeValues(id:self.id, slider: 0, value: 0)
+        print(text)
+        onOffButton.setTitle(text, for: .normal)
+        setOnOffColor()
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {

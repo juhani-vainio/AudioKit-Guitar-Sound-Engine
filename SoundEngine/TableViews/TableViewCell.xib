@@ -73,8 +73,8 @@
                             <constraint firstItem="0gX-0P-Wjw" firstAttribute="top" secondItem="I2A-5h-cPJ" secondAttribute="top" id="zTI-pI-kaA"/>
                         </constraints>
                     </view>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V1t-cz-Zjl">
-                        <rect key="frame" x="264" y="8" width="40" height="30"/>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V1t-cz-Zjl">
+                        <rect key="frame" x="264" y="6" width="40" height="34"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="40" id="Lhs-U8-1NX"/>
                         </constraints>
