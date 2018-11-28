@@ -10,6 +10,8 @@ import UIKit
 
 class TableViewCell: UITableViewCell {
   
+    var id = String()
+    
     var sliders = [String]()
 
   
@@ -41,7 +43,7 @@ class TableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     @objc func valueChanged() {
-        sliderValue.text = audio.effect.changeValues(id:slider.tag, slider: 1, value: Double(slider.value))
+        sliderValue.text = audio.effect.changeValues(id:self.id, slider: 1, value: Double(slider.value))
 
     }
 }

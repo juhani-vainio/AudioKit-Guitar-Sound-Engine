@@ -11,27 +11,27 @@ import AudioKit
 
 
 struct effectData {
-    var id = Int()              // effect ID
-    var opened = Bool()         // for epanding tableviewcells
+    var id = String()           // effect ID
+    var opened = Bool()         // for expanding tableviewcells
     var title = String()        // name of effect for users
     var interface = String()    // type of interface for cell
 }
 
-
 class audio {
     static let effect = audio()
-    //var availableUnitsData = [effectData]()        // VÄLIAIKAINEN MALLI
+    
     
     static var availableUnitsData = [
-        effectData(id: 1, opened: false, title: "Bit Crusher", interface: "double"),
-        effectData(id: 2, opened: false, title: "Tanh Distortion", interface: "quatro"),
-        effectData(id: 3, opened: false, title: "Compressor", interface: "quatro")
+        effectData(id: "bitCrusher", opened: false, title: "Bit Crusher", interface: "double"),
+        effectData(id: "tanhDistortion", opened: false, title: "Tanh Distortion", interface: "quatro"),
+        effectData(id: "dynaRageCompressor", opened: false, title: "Compressor", interface: "quatro")
         ]
     
-    func changeValues(id: Int, slider: Int, value: Double) -> String {
+    
+    func changeValues(id: String, slider: Int, value: Double) -> String {
         var newValue = String()
         switch id {
-        case 1 :
+        case "bitCrusher" :
             switch slider {
             case 1:
                 bitCrusher?.bitDepth = value
@@ -48,7 +48,7 @@ class audio {
                 
             }
             
-        case 2 :
+        case "tanhDistortion" :
             switch slider {
             case 1:
                 tanhDistortion?.pregain = value
@@ -74,7 +74,7 @@ class audio {
                 
             }
             
-        case 3 :
+        case "dynaRageCompressor" :
             switch slider {
             case 1:
                 dynaRageCompressor?.ratio = value
@@ -100,7 +100,7 @@ class audio {
                 
             }
             
-        case 4 :
+        case "autoWah" :
             switch slider {
             case 1:
                 autoWah?.wah = value
@@ -122,7 +122,7 @@ class audio {
                 
             }
             
-        case 5 :
+        case "delay" :
             switch slider {
             case 1:
                 delay?.time = value
@@ -144,7 +144,7 @@ class audio {
                 
             }
             
-        case 6 :
+        case "decimator" :
             switch slider {
             case 1:
                 decimator?.decimation = value
@@ -166,7 +166,7 @@ class audio {
                 
             }
             
-        case 7 :
+        case "clipper" :
             switch slider {
             case 1:
             clipper?.limit = value
@@ -176,7 +176,7 @@ class audio {
             default: break
                 
             }
-        case 8 :
+        case "ringModulator" :
             switch slider {
             case 1:
                 ringModulator?.frequency1 = value
@@ -206,7 +206,7 @@ class audio {
         return newValue
     }
     
-    func getValues(id: Int, slider: Int) -> (min: Float, max: Float, valueForSlider: Float, value: String, name : String, isOn: Bool) {
+    func getValues(id: String, slider: Int) -> (min: Float, max: Float, valueForSlider: Float, value: String, name : String, isOn: Bool) {
         var min = Float(0.0)
         var max = Float(1.0)
         var valueForSlider = Float(0.69)
@@ -214,7 +214,7 @@ class audio {
         var value = ""
         var isOn = Bool()
         switch id {
-        case 1 :
+        case "bitCrusher" :
             // BITCRUSHER
             switch slider {
             case 1:
@@ -236,7 +236,7 @@ class audio {
             default: break
             }
             
-        case 2 :
+        case "tanhDistortion" :
             // TANH DISTORTION
             switch slider {
             case 1:
@@ -274,7 +274,7 @@ class audio {
             default: break
             }
           
-        case 3 :
+        case "dynaRageCompressor" :
             // COMPRESSOR
             switch slider {
             case 1:
@@ -312,7 +312,7 @@ class audio {
             default: break
             }
            
-        case 4 :
+        case "autoWah" :
             // AUTO WAH
             switch slider {
             case 1:
@@ -342,7 +342,7 @@ class audio {
             default: break
             }
             
-        case 5 :
+        case "delay" :
             // DELAY
             switch slider {
             case 1:
@@ -373,7 +373,7 @@ class audio {
             default: break
             }
           
-        case 6 :
+        case "decimator" :
             // DECIMATOR
             switch slider {
             case 1:
@@ -403,7 +403,7 @@ class audio {
             default: break
             }
           
-        case 7 :
+        case "clipper" :
             // CLIPPER
             switch slider {
             case 1:
@@ -417,7 +417,7 @@ class audio {
             default: break
             }
          
-        case 8 :
+        case "ringModulator" :
             // RING MODULATOR
             switch slider {
             case 1:
@@ -454,7 +454,6 @@ class audio {
                 isOn = Effects.ringModulator.isStarted
             default: break
             }
-        
         default: break
         }
         return (min, max, valueForSlider, value, name, isOn)
@@ -475,16 +474,14 @@ class audio {
     
     // EFFECTS
     var bitCrusher: AKBitCrusher?                   // 1
-    var decimator: AKDecimator?                     // 2
-    var delay: AKDelay?                             // 3
-    
-    var dynaRageCompressor: AKDynaRageCompressor?   // 4
-    var autoWah: AKAutoWah?                         // 5
-    var tanhDistortion: AKTanhDistortion?           // 6
+    var tanhDistortion: AKTanhDistortion?           // 2
+    var dynaRageCompressor: AKDynaRageCompressor?   // 3
+    var autoWah: AKAutoWah?                         // 4
+    var delay: AKDelay?                             // 5
+    var decimator: AKDecimator?                     // 6
     var clipper: AKClipper?                         // 7
+    var ringModulator: AKRingModulator?             // 8
     
-    var ringModulator: AKRingModulator?
-    var distortion: AKDistortion?
     
     // FILTERS
     var equalizerFilter1: AKEqualizerFilter?
@@ -493,6 +490,12 @@ class audio {
     var equalizerFilter4: AKEqualizerFilter?
     var equalizerFilter5: AKEqualizerFilter?
     var equalizerFilter6: AKEqualizerFilter?
+    var equalizerFilter7: AKEqualizerFilter?
+    var equalizerFilter8: AKEqualizerFilter?
+    var equalizerFilter9: AKEqualizerFilter?
+    var equalizerFilter10: AKEqualizerFilter?
+    var equalizerFilter11: AKEqualizerFilter?
+    var equalizerFilter12: AKEqualizerFilter?
     
     var highPassFilter : AKHighPassFilter?
     var lowPassFilter: AKLowPassFilter?

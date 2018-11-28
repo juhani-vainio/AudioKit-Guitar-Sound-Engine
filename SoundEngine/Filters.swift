@@ -111,6 +111,51 @@ class Filters: Codable {
                 UserDefaults.standard.set(filterBand8Gain, forKey: "filterBand8Gain")
             }
         }
+        static var  filterBand9Gain = Double(1.3) // [centerFrequency: 4_000, bandwidth: 4500, gain: 1.0]
+        {
+            didSet {
+                UserDefaults.standard.set(filterBand9Gain, forKey: "filterBand9Gain")
+            }
+        }
+        static var  filterBand10Gain = Double(1.3) // [centerFrequency: 4_000, bandwidth: 4500, gain: 1.0]
+        {
+            didSet {
+                UserDefaults.standard.set(filterBand10Gain, forKey: "filterBand10Gain")
+            }
+        }
+        static var  filterBand11Gain = Double(1.3) // [centerFrequency: 4_000, bandwidth: 4500, gain: 1.0]
+        {
+            didSet {
+                UserDefaults.standard.set(filterBand11Gain, forKey: "filterBand11Gain")
+            }
+        }
+        static var  filterBand12Gain = Double(1.3) // [centerFrequency: 4_000, bandwidth: 4500, gain: 1.0]
+        {
+            didSet {
+                UserDefaults.standard.set(filterBand12Gain, forKey: "filterBand12Gain")
+            }
+        }
+        
+        
+        
+        
+        
+        
+        
+        
+        static var filterBand1centerFrequency = Double(4000)
+        {
+            didSet {
+                UserDefaults.standard.set(filterBand1centerFrequency, forKey: "filterBand1centerFrequency")
+            }
+        }
+        
+        static var filterBand1bandwidth = Double(4500)
+        {
+            didSet {
+                UserDefaults.standard.set(filterBand1bandwidth, forKey: "filterBand1bandwidth")
+            }
+        }
     }
     
     

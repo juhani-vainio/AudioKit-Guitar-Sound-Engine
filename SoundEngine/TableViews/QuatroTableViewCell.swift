@@ -10,6 +10,8 @@ import UIKit
 
 class QuatroTableViewCell: UITableViewCell {
     
+    var id = String()
+    
     @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
     var sliders = [String]()
     @IBOutlet weak var slider4Value: UILabel!
@@ -55,10 +57,10 @@ class QuatroTableViewCell: UITableViewCell {
     
     @objc func valueChanged(slider: UISlider) {
         switch slider {
-        case slider1: slider1Value.text = audio.effect.changeValues(id:slider.tag, slider: 1, value: Double(slider.value))
-        case slider2: slider2Value.text = audio.effect.changeValues(id:slider.tag, slider: 2, value: Double(slider.value))
-        case slider3: slider3Value.text = audio.effect.changeValues(id:slider.tag, slider: 3, value: Double(slider.value))
-        case slider4: slider4Value.text = audio.effect.changeValues(id:slider.tag, slider: 4, value: Double(slider.value))
+        case slider1: slider1Value.text = audio.effect.changeValues(id:self.id, slider: 1, value: Double(slider.value))
+        case slider2: slider2Value.text = audio.effect.changeValues(id:self.id, slider: 2, value: Double(slider.value))
+        case slider3: slider3Value.text = audio.effect.changeValues(id:self.id, slider: 3, value: Double(slider.value))
+        case slider4: slider4Value.text = audio.effect.changeValues(id:self.id, slider: 4, value: Double(slider.value))
         default: break
         }
         

@@ -64,15 +64,15 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         
       // VÄLIAIKAINEN MALLI
         selectedUnitsAfterData = [
-            effectData(id: 5, opened: false, title: "Delay", interface: "triple"),
-            effectData(id: 8, opened: false, title: "Ring Modulator", interface: "quatro")
+            effectData(id: "delay", opened: false, title: "Delay", interface: "triple"),
+            effectData(id: "ringModulator", opened: false, title: "Ring Modulator", interface: "quatro")
         ]
         
         // VÄLIAIKAINEN MALLI
         selectedUnitsBeforeData = [
-            effectData(id: 7,opened: false, title: "Clipper", interface: "single"),
-            effectData(id: 4 , opened: false, title: "Wah Wah!", interface: "triple"),
-            effectData(id: 6 ,opened: false, title: "Decimator", interface: "triple")
+            effectData(id: "clipper",opened: false, title: "Clipper", interface: "single"),
+            effectData(id: "autoWah" , opened: false, title: "Wah Wah!", interface: "triple"),
+            effectData(id: "decimator" ,opened: false, title: "Decimator", interface: "triple")
         ]
         
         
@@ -80,6 +80,12 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         
         createCollectionViews()
         createTableViews()
+        
+        
+        
+        
+    
+        
         
     }
 
@@ -144,7 +150,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         var cellTitle = String()
         var cellType = String()
         var cellIsLast = Bool()
-        var cellId = Int()
+        var cellId = String()
         
         if tableView == unitsBefore {
             cellOpened = selectedUnitsBeforeData[indexPath.row].opened
@@ -189,7 +195,6 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
                 cell.slider1.minimumValue = slider1.min
                 cell.slider1.maximumValue = slider1.max
                 cell.slider1.value = slider1.valueForSlider
-                cell.slider1.tag = cellId
                 
                 let slider2 = audio.effect.getValues(id: cellId, slider: 2)
                 cell.slider2Title.text = slider2.name
@@ -197,8 +202,8 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
                 cell.slider2.minimumValue = slider2.min
                 cell.slider2.maximumValue = slider2.max
                 cell.slider2.value = slider2.valueForSlider
-                cell.slider2.tag = cellId
                 
+                cell.id = cellId
                 cell.title.text = cellTitle
                 cell.selectedBackgroundView = backgroundView
                 
@@ -230,7 +235,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
                 cell.slider1.minimumValue = slider1.min
                 cell.slider1.maximumValue = slider1.max
                 cell.slider1.value = slider1.valueForSlider
-                cell.slider1.tag = cellId
+                
                 
                 let slider2 = audio.effect.getValues(id: cellId, slider: 2)
                 cell.slider2Title.text = slider2.name
@@ -238,7 +243,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
                 cell.slider2.minimumValue = slider2.min
                 cell.slider2.maximumValue = slider2.max
                 cell.slider2.value = slider2.valueForSlider
-                cell.slider2.tag = cellId
+            
                 
                 let slider3 = audio.effect.getValues(id: cellId, slider: 3)
                 cell.slider3Title.text = slider3.name
@@ -246,8 +251,8 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
                 cell.slider3.minimumValue = slider3.min
                 cell.slider3.maximumValue = slider3.max
                 cell.slider3.value = slider3.valueForSlider
-                cell.slider3.tag = cellId
                 
+                cell.id = cellId
                 cell.title.text = cellTitle
                 cell.selectedBackgroundView = backgroundView
                 
@@ -280,7 +285,6 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
                 cell.slider1.minimumValue = slider1.min
                 cell.slider1.maximumValue = slider1.max
                 cell.slider1.value = slider1.valueForSlider
-                cell.slider1.tag = cellId
                 
                 let slider2 = audio.effect.getValues(id: cellId, slider: 2)
                 cell.slider2Title.text = slider2.name
@@ -288,7 +292,6 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
                 cell.slider2.minimumValue = slider2.min
                 cell.slider2.maximumValue = slider2.max
                 cell.slider2.value = slider2.valueForSlider
-                cell.slider2.tag = cellId
                 
                 let slider3 = audio.effect.getValues(id: cellId, slider: 3)
                 cell.slider3Title.text = slider3.name
@@ -296,7 +299,6 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
                 cell.slider3.minimumValue = slider3.min
                 cell.slider3.maximumValue = slider3.max
                 cell.slider3.value = slider3.valueForSlider
-                cell.slider3.tag = cellId
                 
                 let slider4 = audio.effect.getValues(id: cellId, slider: 4)
                 cell.slider4Title.text = slider4.name
@@ -304,8 +306,8 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
                 cell.slider4.minimumValue = slider4.min
                 cell.slider4.maximumValue = slider4.max
                 cell.slider4.value = slider4.valueForSlider
-                cell.slider4.tag = cellId
                 
+                cell.id = cellId
                 cell.title.text = cellTitle
                 cell.selectedBackgroundView = backgroundView
                 
@@ -338,8 +340,8 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
                 cell.slider.minimumValue = slider.min
                 cell.slider.maximumValue = slider.max
                 cell.slider.value = slider.valueForSlider
-                cell.slider.tag = cellId
                 
+                cell.id = cellId
                 cell.title.text = cellTitle
                 cell.selectedBackgroundView = backgroundView
                 
@@ -696,9 +698,22 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
    
     var colorScheme = ""
     
+    func resizeImage(image: UIImage, newWidth: CGFloat) -> UIImage? {
+        
+        let scale = newWidth / image.size.width
+        let newHeight = image.size.height * scale
+        UIGraphicsBeginImageContext(CGSize(width: newWidth, height: newHeight))
+        image.draw(in: CGRect(x: 0, y: 0, width: newWidth, height: newHeight))
+        
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return newImage
+    }
+    
     func interfaceSetup() {
         // set interface color scheme
-        
+       
         
         checkButton.backgroundColor = interface.buttonBackground
         checkButton.setTitleColor(interface.text, for: .normal)
@@ -712,6 +727,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         inputSlider.minimumTrackTintColor = interface.highlight
         inputSlider.maximumTrackTintColor = interface.mainBackground
         inputSlider.thumbTintColor = interface.text
+        
         
         outputView.backgroundColor = interface.tableAltBackground
         outputTitle.textColor = interface.text
@@ -767,5 +783,10 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     @IBOutlet weak var ct7: UIView!
     @IBOutlet weak var ct8: UIView!
     @IBOutlet weak var ct9: UIView!
+
+    
+    
+    
     
 }
+
