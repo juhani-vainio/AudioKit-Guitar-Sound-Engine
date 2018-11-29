@@ -27,7 +27,16 @@ class audio {
         effectData(id: "dynaRageCompressor", opened: false, title: "Compressor", interface: "quatro")
         ]
     
-    
+     // VÄLIAIKAINEN MALLI
+    static var selectedUnitsAfterData = [effectData(id: "delay", opened: false, title: "Delay", interface: "triple"),
+                                         effectData(id: "ringModulator", opened: false, title: "Ring Modulator", interface: "quatro")
+    ]
+     // VÄLIAIKAINEN MALLI
+    static var selectedUnitsBeforeData = [effectData(id: "clipper",opened: false, title: "Clipper", interface: "single"),
+                                          effectData(id: "autoWah" , opened: false, title: "Wah Wah!", interface: "triple"),
+                                          effectData(id: "decimator" ,opened: false, title: "Decimator", interface: "triple")
+    ]
+ 
     func changeValues(id: String, slider: Int, value: Double) -> String {
         var newValue = String()
         switch id {
@@ -539,17 +548,347 @@ class audio {
         return (min, max, valueForSlider, value, name, isOn)
     }
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+ 
+    
+    func start() {
+        createEffects()
+        audioKitSettings()
+       // checkUserDefaults()
+        createEffectList()
+      //  setEffectValues(initial: true)
+      //  newList()
+        connectMic()
+        connectEffects()
+    }
+    
+   
+    func audioKitSettings() {
+        
+        AKSettings.bufferLength = .shortest
+        
+        AKSettings.audioInputEnabled = true
+        
+        AKSettings.playbackWhileMuted = true
+        print("audioFormat")
+        print(AKSettings.audioFormat.sampleRate) // channels, sample rate, bit depth, interleaved
+        
+        AKSettings.defaultToSpeaker = true      // Whether to output to the speaker (rather than receiver) when audio input is enabled
+        
+        AKSettings.useBluetooth = true          // Whether to use bluetooth when audio input is enabled
+        
+        AKSettings.bluetoothOptions = .mixWithOthers
+        
+        AKSettings.allowAirPlay = true
+        
+        AKSettings.notificationsEnabled = false
+        
+        AKSettings.recordingBufferLength = .veryLong
+   
+        print("headPhonesPlugged")
+        print(AKSettings.headPhonesPlugged)
+      
+     
+        
+    }
+    
+    func createEffectList() {
+        
+        // initial preps 'n filters
+        
+        
+        // before amp
+        for effect in 0..<audio.selectedUnitsBeforeData.count {
+            let id = audio.selectedUnitsBeforeData[effect].id
+            switch id {
+            case "bitCrusher" : self.soundEffectsBefore.append(bitCrusher!)
+            case "clipper":  self.soundEffectsBefore.append(clipper!)
+            case "dynaRageCompressor":  self.soundEffectsBefore.append(dynaRageCompressor!)
+            case "autoWah":  self.soundEffectsBefore.append(autoWah!)
+            case "delay":  self.soundEffectsBefore.append(delay!)
+            case "decimator": self.soundEffectsBefore.append(decimator!)
+            case "tanhDistortion": self.soundEffectsBefore.append(tanhDistortion!)
+            case "ringModulator": self.soundEffectsBefore.append(ringModulator!)
+            default : print("NOTHING to do over HERE")
+                
+            }
+        }
+        // amp
+        
+        
+        // after amp
+        for effect in 0..<audio.selectedUnitsAfterData.count {
+            let id = audio.selectedUnitsAfterData[effect].id
+            switch id {
+            case "bitCrusher" : self.soundEffectsAfter.append(bitCrusher!)
+            case "clipper":  self.soundEffectsAfter.append(clipper!)
+            case "dynaRageCompressor":  self.soundEffectsAfter.append(dynaRageCompressor!)
+            case "autoWah":  self.soundEffectsAfter.append(autoWah!)
+            case "delay":  self.soundEffectsAfter.append(delay!)
+            case "decimator": self.soundEffectsAfter.append(decimator!)
+            case "tanhDistortion": self.soundEffectsAfter.append(tanhDistortion!)
+            case "ringModulator": self.soundEffectsAfter.append(ringModulator!)
+            default : print("NOTHING to do over HERE EITHER")
+                
+            }
+        }
+        
+        // finishing filters
+        
+    }
+    
+    func connectMic() {
+        
+        // mieti tää
+        defaultAmp = Amp.model.defaultAmpModel(input: mic!)
+        defaultAmp?.connect(to: inputMixer!)
+    }
+    
+    func connectFilters() {
+        
+        
+    }
+    
+    func connectEffects() {
+       
+        // CONNECT to input: If there are effects before main unit
+        for pedal in 0..<soundEffectsBefore.count {
+            
+            if pedal == 0 {
+                inputMixer?.connect(to: soundEffectsBefore[0])
+                
+            }
+            else {
+                soundEffectsBefore[pedal-1].connect(to: soundEffectsBefore[pedal])
+            }
+        }
+        
+        if soundEffectsBefore .isEmpty {
+            inputMixer!.connect(to: effectsBeforeMixer!)
+        } else {
+            soundEffectsBefore.last?.connect(to: effectsBeforeMixer!)
+        }
+        
+        
+        
+        // CONNECT to soundEffectsBefore: If there are units in the main unit
+        for pedal in 0..<mainUnits.count {
+            
+            if pedal == 0 {
+                effectsBeforeMixer?.connect(to: mainUnits[0])
+                
+            }
+            else {
+                mainUnits[pedal-1].connect(to: mainUnits[pedal])
+            }
+        }
+        
+        if mainUnits .isEmpty {
+            effectsBeforeMixer!.connect(to: masterMixer!)
+        } else {
+            mainUnits.last?.connect(to: masterMixer!)
+        }
+        
+        
+        
+        
+        
+        
+        // CONNECT to mainUnits: If there are units in the soundEffectsAfter
+        for pedal in 0..<soundEffectsAfter.count {
+            
+            if pedal == 0 {
+                masterMixer?.connect(to: soundEffectsAfter[0])
+                
+            }
+            else {
+                soundEffectsAfter[pedal-1].connect(to: soundEffectsAfter[pedal])
+            }
+        }
+        
+        if soundEffectsAfter .isEmpty {
+            masterMixer!.connect(to: effectsAfterMixer!)
+        } else {
+            soundEffectsAfter.last?.connect(to: effectsAfterMixer!)
+        }
+        
+        
+        
+        // CONNECT to soundEffectsAfter: If there are units in the finishers
+        for pedal in 0..<finishers.count {
+            
+            if pedal == 0 {
+                effectsAfterMixer?.connect(to: finishers[0])
+                
+            }
+            else {
+                finishers[pedal-1].connect(to: finishers[pedal])
+            }
+        }
+        
+        if finishers .isEmpty {
+            effectsAfterMixer!.connect(to: outputMixer!)
+        } else {
+            finishers.last?.connect(to: outputMixer!)
+        }
+        
+        /*
+         // TESTING FILTERS
+        masterMixer?.connect(to: masterBooster!)
+        masterBooster?.connect(to: toneFilter!)
+        toneFilter?.connect(to: equalizerFilter1!)
+        equalizerFilter1?.connect(to: equalizerFilter2!)
+        equalizerFilter2?.connect(to: equalizerFilter3!)
+        equalizerFilter3?.connect(to: equalizerFilter4!)
+        equalizerFilter4?.connect(to: equalizerFilter5!)
+        equalizerFilter5?.connect(to: equalizerFilter6!)
+        equalizerFilter6?.connect(to: highPassFilter!)
+        highPassFilter?.connect(to: lowPassFilter!)
+        lowPassFilter?.connect(to: filterMixer!)
+        filterMixer?.connect(to: masterMixer!)
+        */
+        
+        
+        
+        
+        // LAST TO OUTPUT
+        AudioKit.output = outputMixer
+        if AudioKit.output == nil {
+            AudioKit.output = inputMixer
+        }
+   
+        // START AUDIOKIT
+        do {
+            try AudioKit.start()
+            print("START AUDIOKIT")
+        } catch {
+            print("Could not start AudioKit")
+        }
+        
+    }
+    
+    func unplugEffects() {
+        print("-------------------------    DISCONNECTING")
+        print(AudioKit.printConnections())
+        do {
+            try AudioKit.stop()
+        } catch {
+            print("Could not stop AudioKit")
+        }
+        
+        for pedal in 0..<soundEffectsBefore.count {
+            soundEffectsBefore[pedal].disconnectOutput()
+            soundEffectsBefore[pedal].disconnectInput()
+            print("DISONNECT \(soundEffectsBefore[pedal])")
+        }
+        inputMixer?.disconnectOutput()
+        print("DISONNECT \(inputMixer)")
+        // TESTING FILTERS
+        // TESTING EQ
+        // CONNECT EQ AFTER EFFECTS
+        equalizerFilter1?.disconnectInput()
+        equalizerFilter1?.disconnectOutput()
+        
+        equalizerFilter2?.disconnectInput()
+        equalizerFilter2?.disconnectOutput()
+        
+        equalizerFilter3?.disconnectInput()
+        equalizerFilter3?.disconnectOutput()
+        
+        equalizerFilter4?.disconnectInput()
+        equalizerFilter4?.disconnectOutput()
+        
+        equalizerFilter5?.disconnectInput()
+        equalizerFilter5?.disconnectOutput()
+        
+        equalizerFilter6?.disconnectInput()
+        equalizerFilter6?.disconnectOutput()
+        print("DISONNECT \(equalizerFilter6)")
+        
+        highPassFilter?.disconnectInput()
+        highPassFilter?.disconnectOutput()
+        print("DISONNECT \(highPassFilter)")
+        
+        lowPassFilter?.disconnectInput()
+        lowPassFilter?.disconnectOutput()
+        print("DISONNECT \(lowPassFilter)")
+        
+        toneFilter?.disconnectInput()
+        toneFilter?.disconnectOutput()
+        
+        effectsBeforeMixer?.disconnectInput()
+        effectsBeforeMixer?.disconnectOutput()
+        filterMixer?.disconnectInput()
+        filterMixer?.disconnectOutput()
+        
+        masterBooster?.disconnectInput()
+        masterBooster?.disconnectOutput()
+        
+        print("\n-------------------------DISCONNECT READY")
+        print(AudioKit.printConnections())
+        
+        /*
+         bitCrusher?.detach()
+         decimator?.detach()
+         clipper?.detach()
+         dynaRageCompressor?.detach()
+         autoWah?.detach()
+         tanhDistortion?.detach()
+         distortion?.detach()
+         delay?.detach()
+         */
+    }
+    
+    func resetEffectChain() {
+        unplugEffects()
+        connectEffects()
+        print(soundEffectsBefore)
+        UserDefaults.standard.set(Effects.selectedEffects, forKey: "effectChain")
+    }
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
     var defaultAmp: AKNode?
     
-    var masterMixer: AKMixer?
+    
     var inputMixer: AKMixer?
-    var effectsMixer: AKMixer?
+    var effectsBeforeMixer: AKMixer?
+    var masterMixer: AKMixer?
+    var effectsAfterMixer: AKMixer?
+    var outputMixer: AKMixer?
+    
+    
+    
     var filterMixer: AKMixer?
     
-    // TRACKERS
     var mic: AKMicrophone?
-    var tracker: AKFrequencyTracker!
-    var amplitudeTracker: AKAmplitudeTracker!
     
     
     // EFFECTS
@@ -579,24 +918,19 @@ class audio {
     
     var highPassFilter : AKHighPassFilter?
     var lowPassFilter: AKLowPassFilter?
-    
     var toneFilter: AKToneFilter?
+    
+    
     var masterBooster: AKBooster?
     
-    // EFFECT ARRAYS
-    var effect = [AKInput]()
-    var effectCellName = [String]()
-
-    func start() {
-        createEffects()
-        audioKitSettings()
-       // checkUserDefaults()
-        createEffectList()
-      //  setEffectValues(initial: true)
-      //  newList()
-        connectMic()
-        connectEffects()
-    }
+    // ARRAYS FOR CONSTRUCTING THE SOUND
+    var soundEffectsBefore = [AKInput]()
+    var soundEffectsAfter = [AKInput]()
+    var preparations = [AKInput]()
+    var finishers = [AKInput]()
+    var mainUnits = [AKInput]()
+    
+    
     
     func createEffects() {
         
@@ -604,20 +938,21 @@ class audio {
         
         // UTILITIES
         mic = AKMicrophone()
-        amplitudeTracker = AKAmplitudeTracker()
-        tracker = AKFrequencyTracker()
         
         // MIXERS
         inputMixer = AKMixer()
         filterMixer = AKMixer()
-        effectsMixer = AKMixer()
+        effectsBeforeMixer = AKMixer()
         masterMixer = AKMixer()
+        effectsAfterMixer = AKMixer()
+        outputMixer = AKMixer()
         
         masterMixer?.start()
         inputMixer?.start()
-        effectsMixer?.start()
+        effectsBeforeMixer?.start()
+        effectsAfterMixer?.start()
         filterMixer?.start()
-        
+        outputMixer?.start()
         
         // EFFECTS
         delay = AKDelay()
@@ -628,7 +963,7 @@ class audio {
         tanhDistortion = AKTanhDistortion()
         decimator = AKDecimator()
         ringModulator = AKRingModulator()
-    
+        
         
         // FILTERS
         
@@ -682,7 +1017,7 @@ class audio {
         equalizerFilter10?.centerFrequency = 16000
         equalizerFilter10?.gain = Filters.equalizerFilter.filterBand10Gain
         
-       
+        
         highPassFilter = AKHighPassFilter()
         lowPassFilter = AKLowPassFilter()
         
@@ -691,187 +1026,9 @@ class audio {
         
         masterBooster = AKBooster()
         masterBooster?.start()
-    
+        
     }
 
-    func audioKitSettings() {
-        
-        AKSettings.audioInputEnabled = true
-        AKSettings.defaultToSpeaker = false
-        // AKSettings.allowAirPlay = true
-        
-    }
-    
-    func createEffectList() {
-        print("createEffectList")
-        //Assign effects to the list
-        for effect in 0..<audio.availableUnitsData.count {
-            let id = audio.availableUnitsData[effect].id
-            switch id {
-            case "bitCrusher" : self.effect.append(bitCrusher!)
-            case "clipper":  self.effect.append(clipper!)
-            case "dynaRageCompressor":  self.effect.append(dynaRageCompressor!)
-            case "autoWah":  self.effect.append(autoWah!)
-            case "delay":  self.effect.append(delay!)
-            case "decimator": self.effect.append(decimator!)
-            case "tanhDistortion": self.effect.append(tanhDistortion!)
-            case "ringModulator": self.effect.append(ringModulator!)
-            default : print("NOTHING to do over HERE")
-                
-            }
-        }
-    }
-    
-    func connectMic() {
-        
-        defaultAmp = Amp.model.defaultAmpModel(input: mic!)
-        defaultAmp?.connect(to: inputMixer!)
-    }
-    
-    func connectFilters() {
-        
-        
-    }
-    
-    func connectEffects() {
-        print("connectEffects")
-        // let trackedAmplitude = AKAmplitudeTracker(mic)
-        for pedal in 0..<effect.count {
-            
-            if pedal == 0 {
-                inputMixer?.connect(to: effect[0])
-                
-            }
-            else {
-                effect[pedal-1].connect(to: effect[pedal])
-            }
-        }
-        
-        // TESTING EQ
-        // CONNECT EQ AFTER EFFECTS
-        if effect .isEmpty {
-            inputMixer!.connect(to: effectsMixer!)
-        } else {
-            effect.last?.connect(to: effectsMixer!)
-        }
-        
-        effectsMixer?.connect(to: masterBooster!)
-        masterBooster?.connect(to: toneFilter!)
-        toneFilter?.connect(to: equalizerFilter1!)
-        equalizerFilter1?.connect(to: equalizerFilter2!)
-        equalizerFilter2?.connect(to: equalizerFilter3!)
-        equalizerFilter3?.connect(to: equalizerFilter4!)
-        equalizerFilter4?.connect(to: equalizerFilter5!)
-        equalizerFilter5?.connect(to: equalizerFilter6!)
-        
-        // TESTING HIGLOW PASS FILTERS
-        
-        equalizerFilter6?.connect(to: highPassFilter!)
-        highPassFilter?.connect(to: lowPassFilter!)
-        
-        lowPassFilter?.connect(to: filterMixer!)
-        
-        
-        filterMixer?.connect(to: masterMixer!)
-        
-        // LAST TO OUTPUT
-        AudioKit.output = masterMixer
-        if AudioKit.output == nil {
-            AudioKit.output = inputMixer
-        }
-        // createPlotViews(sound: effect.last as! AKNode)
-        
-        // START AUDIOKIT
-        do {
-            try AudioKit.start()
-            print("START AUDIOKIT")
-        } catch {
-            print("Could not start AudioKit")
-        }
-        
-    }
-    
-    func unplugEffects() {
-        print("-------------------------    DISCONNECTING")
-        print(AudioKit.printConnections())
-        do {
-            try AudioKit.stop()
-        } catch {
-            print("Could not stop AudioKit")
-        }
-        
-        for pedal in 0..<effect.count {
-            effect[pedal].disconnectOutput()
-            effect[pedal].disconnectInput()
-            print("DISONNECT \(effect[pedal])")
-        }
-        inputMixer?.disconnectOutput()
-        print("DISONNECT \(inputMixer)")
-        // TESTING FILTERS
-        // TESTING EQ
-        // CONNECT EQ AFTER EFFECTS
-        equalizerFilter1?.disconnectInput()
-        equalizerFilter1?.disconnectOutput()
-        
-        equalizerFilter2?.disconnectInput()
-        equalizerFilter2?.disconnectOutput()
-        
-        equalizerFilter3?.disconnectInput()
-        equalizerFilter3?.disconnectOutput()
-        
-        equalizerFilter4?.disconnectInput()
-        equalizerFilter4?.disconnectOutput()
-        
-        equalizerFilter5?.disconnectInput()
-        equalizerFilter5?.disconnectOutput()
-        
-        equalizerFilter6?.disconnectInput()
-        equalizerFilter6?.disconnectOutput()
-        print("DISONNECT \(equalizerFilter6)")
-        
-        highPassFilter?.disconnectInput()
-        highPassFilter?.disconnectOutput()
-        print("DISONNECT \(highPassFilter)")
-        
-        lowPassFilter?.disconnectInput()
-        lowPassFilter?.disconnectOutput()
-        print("DISONNECT \(lowPassFilter)")
-        
-        toneFilter?.disconnectInput()
-        toneFilter?.disconnectOutput()
-        
-        effectsMixer?.disconnectInput()
-        effectsMixer?.disconnectOutput()
-        filterMixer?.disconnectInput()
-        filterMixer?.disconnectOutput()
-        
-        masterBooster?.disconnectInput()
-        masterBooster?.disconnectOutput()
-        
-        print("\n-------------------------DISCONNECT READY")
-        print(AudioKit.printConnections())
-        
-        /*
-         bitCrusher?.detach()
-         decimator?.detach()
-         clipper?.detach()
-         dynaRageCompressor?.detach()
-         autoWah?.detach()
-         tanhDistortion?.detach()
-         distortion?.detach()
-         delay?.detach()
-         */
-    }
-    
-    func resetEffectChain() {
-        unplugEffects()
-        connectEffects()
-        print(effect)
-        UserDefaults.standard.set(Effects.selectedEffects, forKey: "effectChain")
-    }
-
-
-    
 }
 
 /*

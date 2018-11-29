@@ -39,11 +39,17 @@ class TableViewCell: UITableViewCell {
         
     }
     
-    func setOnOffColor() {
+    func setOnOff() {
         if onOffButton.titleLabel?.text == "ON" {
             onOffButton.setTitleColor(interface.text, for: .normal)
+            slider.isEnabled = true
+   
         } else {
             onOffButton.setTitleColor(interface.textIdle, for: .normal)
+            if (sliderTitle.text?.contains("ix"))! {
+                slider.isEnabled = false
+            }
+
         }
         
     }
@@ -52,7 +58,7 @@ class TableViewCell: UITableViewCell {
         let text = audio.effect.changeValues(id:self.id, slider: 0, value: 0)
         print(text)
         onOffButton.setTitle(text, for: .normal)
-        setOnOffColor()
+        setOnOff()
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {

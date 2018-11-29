@@ -45,11 +45,21 @@ class DoubleTableViewCell: UITableViewCell {
      
     }
     
-    func setOnOffColor() {
+    func setOnOff() {
         if onOffButton.titleLabel?.text == "ON" {
             onOffButton.setTitleColor(interface.text, for: .normal)
+            slider1.isEnabled = true
+            slider2.isEnabled = true
+
         } else {
             onOffButton.setTitleColor(interface.textIdle, for: .normal)
+            if (slider1Title.text?.contains("ix"))! {
+                slider1.isEnabled = false
+            }
+            if (slider2Title.text?.contains("ix"))! {
+                slider2.isEnabled = false
+            }
+
         }
         
     }
@@ -58,7 +68,7 @@ class DoubleTableViewCell: UITableViewCell {
         let text = audio.effect.changeValues(id:self.id, slider: 0, value: 0)
         print(text)
         onOffButton.setTitle(text, for: .normal)
-        setOnOffColor()
+        setOnOff()
     }
     
     

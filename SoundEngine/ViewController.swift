@@ -16,10 +16,6 @@ fileprivate var postCollectionLongPressGesture: UILongPressGestureRecognizer!
 
 class ViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UITableViewDelegate, UITableViewDataSource  {
     
-
-    var selectedUnitsAfterData = [effectData]()    // VÄLIAIKAINEN MALLI
-    var selectedUnitsBeforeData = [effectData]()    // VÄLIAIKAINEN MALLI
-    
     
     private let parallaxLayout = ParallaxFlowLayout()
     private let postSnappingLayout = PostSnappingFlowLayout()
@@ -59,23 +55,6 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         colorScheme = "spotify"
         colorSwitchButton.setTitle("spotify", for: .normal)
         interfaceSetup()
-        
-
-        
-      // VÄLIAIKAINEN MALLI
-        selectedUnitsAfterData = [
-            effectData(id: "delay", opened: false, title: "Delay", interface: "triple"),
-            effectData(id: "ringModulator", opened: false, title: "Ring Modulator", interface: "quatro")
-        ]
-        
-        // VÄLIAIKAINEN MALLI
-        selectedUnitsBeforeData = [
-            effectData(id: "clipper",opened: false, title: "Clipper", interface: "single"),
-            effectData(id: "autoWah" , opened: false, title: "Wah Wah!", interface: "triple"),
-            effectData(id: "decimator" ,opened: false, title: "Decimator", interface: "triple")
-        ]
-        
-        
         
         
         createCollectionViews()
@@ -134,10 +113,10 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
             
          } else if tableView == unitsAfter {
             // unitsAfter List
-            return selectedUnitsAfterData.count
+            return audio.selectedUnitsAfterData.count
         }
          else {
-            return selectedUnitsBeforeData.count
+            return audio.selectedUnitsBeforeData.count
         }
     }
     
@@ -153,19 +132,19 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         var cellId = String()
         
         if tableView == unitsBefore {
-            cellOpened = selectedUnitsBeforeData[indexPath.row].opened
-            cellTitle = selectedUnitsBeforeData[indexPath.row].title
-            cellType = selectedUnitsBeforeData[indexPath.row].interface
-            cellIsLast = selectedUnitsBeforeData.endIndex - 1 == indexPath.row
-            cellId = selectedUnitsBeforeData[indexPath.row].id
+            cellOpened = audio.selectedUnitsBeforeData[indexPath.row].opened
+            cellTitle = audio.selectedUnitsBeforeData[indexPath.row].title
+            cellType = audio.selectedUnitsBeforeData[indexPath.row].interface
+            cellIsLast = audio.selectedUnitsBeforeData.endIndex - 1 == indexPath.row
+            cellId = audio.selectedUnitsBeforeData[indexPath.row].id
    
         }
         else if tableView == unitsAfter {
-            cellOpened = selectedUnitsAfterData[indexPath.row].opened
-            cellTitle = selectedUnitsAfterData[indexPath.row].title
-            cellType = selectedUnitsAfterData[indexPath.row].interface
-            cellIsLast = selectedUnitsAfterData.endIndex - 1 == indexPath.row
-            cellId = selectedUnitsAfterData[indexPath.row].id
+            cellOpened = audio.selectedUnitsAfterData[indexPath.row].opened
+            cellTitle = audio.selectedUnitsAfterData[indexPath.row].title
+            cellType = audio.selectedUnitsAfterData[indexPath.row].interface
+            cellIsLast = audio.selectedUnitsAfterData.endIndex - 1 == indexPath.row
+            cellId = audio.selectedUnitsAfterData[indexPath.row].id
         }
         else {
             cellTitle = audio.availableUnitsData[indexPath.row].title
@@ -213,6 +192,13 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
                 } else {
                     cell.onOffButton.setTitle("OFF", for: .normal)
                     cell.onOffButton.setTitleColor(interface.textIdle, for: .normal)
+                    if slider1.name.contains("ix") {
+                        cell.slider1.isEnabled = false
+                    }
+                    if slider2.name.contains("ix") {
+                        cell.slider2.isEnabled = false
+                    }
+                
                 }
                 if cellOpened == true {
                     if cellIsLast {
@@ -264,6 +250,16 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
                 } else {
                     cell.onOffButton.setTitle("OFF", for: .normal)
                     cell.onOffButton.setTitleColor(interface.textIdle, for: .normal)
+                    if slider1.name.contains("ix") {
+                        cell.slider1.isEnabled = false
+                    }
+                    if slider2.name.contains("ix") {
+                        cell.slider2.isEnabled = false
+                    }
+                    if slider3.name.contains("ix") {
+                        cell.slider3.isEnabled = false
+                    }
+                    
                 }
                 if cellOpened == true {
                     if cellIsLast {
@@ -321,6 +317,19 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
                 } else {
                     cell.onOffButton.setTitle("OFF", for: .normal)
                     cell.onOffButton.setTitleColor(interface.textIdle, for: .normal)
+                    if slider1.name.contains("ix") {
+                        cell.slider1.isEnabled = false
+                    }
+                    if slider2.name.contains("ix") {
+                        cell.slider2.isEnabled = false
+                    }
+                    if slider3.name.contains("ix") {
+                        cell.slider3.isEnabled = false
+                    }
+                    if slider4.name.contains("ix") {
+                        cell.slider4.isEnabled = false
+                    }
+                    
                 }
                 if cellOpened == true {
                     if cellIsLast {
@@ -357,6 +366,10 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
                 } else {
                     cell.onOffButton.setTitle("OFF", for: .normal)
                     cell.onOffButton.setTitleColor(interface.textIdle, for: .normal)
+                    if slider.name.contains("ix") {
+                        cell.slider.isEnabled = false
+                    }
+                    
                 }
                 if cellOpened == true {
                     if cellIsLast {
@@ -385,26 +398,26 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         }
         else if tableView == unitsAfter {
             // unitsAfter List
-            if selectedUnitsAfterData[indexPath.row].opened == true {
-                selectedUnitsAfterData[indexPath.row].opened = false
+            if audio.selectedUnitsAfterData[indexPath.row].opened == true {
+                audio.selectedUnitsAfterData[indexPath.row].opened = false
                 let row = IndexPath(item: indexPath.row, section: 0)
                 tableView.reloadRows(at: [row], with: .fade)
             }
             else {
-                selectedUnitsAfterData[indexPath.row].opened = true
+                audio.selectedUnitsAfterData[indexPath.row].opened = true
                 let row = IndexPath(item: indexPath.row, section: 0)
                 tableView.reloadRows(at: [row], with: .fade)
             }
             //tableView.reloadData()
         } else {
             // unitsBefore List
-            if selectedUnitsBeforeData[indexPath.row].opened == true {
-                selectedUnitsBeforeData[indexPath.row].opened = false
+            if audio.selectedUnitsBeforeData[indexPath.row].opened == true {
+                audio.selectedUnitsBeforeData[indexPath.row].opened = false
                 let row = IndexPath(item: indexPath.row, section: 0)
                 tableView.reloadRows(at: [row], with: .fade)
             }
             else {
-                selectedUnitsBeforeData[indexPath.row].opened = true
+                audio.selectedUnitsBeforeData[indexPath.row].opened = true
                 let row = IndexPath(item: indexPath.row, section: 0)
                 tableView.reloadRows(at: [row], with: .fade)
             }
@@ -415,7 +428,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
        
         if tableView == unitsBefore {
-            if selectedUnitsBeforeData[indexPath.row].opened {
+            if audio.selectedUnitsBeforeData[indexPath.row].opened {
                 return false
             }
             else {
@@ -424,7 +437,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         }
         
        else if tableView == unitsAfter {
-            if selectedUnitsAfterData[indexPath.row].opened {
+            if audio.selectedUnitsAfterData[indexPath.row].opened {
                 return false
             }
             else {
@@ -442,23 +455,23 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
             // handle delete (by removing the data from your array and updating the tableview)
             if tableView == unitsAfter {
                 // remove and insert data between arrays
-                let tempData = selectedUnitsAfterData[indexPath.row]
+                let tempData = audio.selectedUnitsAfterData[indexPath.row]
                 audio.availableUnitsData.append(tempData)
                  // Arrange available units list aplhabetically
                 audio.availableUnitsData = audio.availableUnitsData.sorted{ $0.title < $1.title }
                 self.availableUnits.reloadData()
-                self.selectedUnitsAfterData.remove(at: indexPath.row)
+                audio.selectedUnitsAfterData.remove(at: indexPath.row)
                 let row = IndexPath(item: indexPath.row, section: 0)
                 self.unitsAfter.deleteRows(at: [row], with: .none)
             }
             else if tableView == unitsBefore {
                 // remove and insert data between arrays
-                let tempData = selectedUnitsBeforeData[indexPath.row]
+                let tempData = audio.selectedUnitsBeforeData[indexPath.row]
                 audio.availableUnitsData.append(tempData)
                 // Arrange available units list aplhabetically
                 audio.availableUnitsData = audio.availableUnitsData.sorted{ $0.title < $1.title }
                 self.availableUnits.reloadData()
-                self.selectedUnitsBeforeData.remove(at: indexPath.row)
+                audio.selectedUnitsBeforeData.remove(at: indexPath.row)
                 let row = IndexPath(item: indexPath.row, section: 0)
                 self.unitsBefore.deleteRows(at: [row], with: .none)
             }
@@ -497,7 +510,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         
         let action = UIContextualAction(style: .normal, title: "INSERT AFTER") { (contextAction: UIContextualAction, sourceView: UIView, completionHandler: (Bool) -> Void) in
             
-            self.selectedUnitsAfterData.append(tempData)
+            audio.selectedUnitsAfterData.append(tempData)
             self.unitsAfter.reloadData()
             audio.availableUnitsData.remove(at: indexPath.row)
             let row = IndexPath(item: indexPath.row, section: 0)
@@ -516,7 +529,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         
         let action = UIContextualAction(style: .normal, title: "INSERT BEFORE") { (contextAction: UIContextualAction, sourceView: UIView, completionHandler: (Bool) -> Void) in
             
-            self.selectedUnitsBeforeData.append(tempData)
+            audio.selectedUnitsBeforeData.append(tempData)
             self.unitsBefore.reloadData()
             audio.availableUnitsData.remove(at: indexPath.row)
             let row = IndexPath(item: indexPath.row, section: 0)
@@ -700,8 +713,10 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         
         print("AVAILABLE")
         print(audio.availableUnitsData)
-        print("SELECTED")
-        print(self.selectedUnitsAfterData)
+        print("SELECTED BEFORE")
+        print(audio.selectedUnitsBeforeData)
+        print("SELECTED AFTER")
+        print(audio.selectedUnitsAfterData)
     }
    
     var colorScheme = ""
