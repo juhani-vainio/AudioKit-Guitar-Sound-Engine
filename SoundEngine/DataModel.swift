@@ -18,7 +18,37 @@ struct effectData {
 }
 
 class audio {
-    static let effect = audio()
+    static let shared = audio()
+    
+   static let allPossibleEffectsData = [
+    effectData(id: "bitCrusher", opened: false, title: "Bit Crusher", interface: "double"),
+    effectData(id: "tanhDistortion", opened: false, title: "Tanh Distortion", interface: "quatro"),
+    effectData(id: "dynaRageCompressor", opened: false, title: "Compressor", interface: "quatro"),
+    effectData(id: "delay", opened: false, title: "Delay", interface: "triple"),
+    effectData(id: "ringModulator", opened: false, title: "Ring Modulator", interface: "quatro"),
+    effectData(id: "clipper",opened: false, title: "Clipper", interface: "single"),
+    effectData(id: "autoWah" , opened: false, title: "Wah Wah!", interface: "triple"),
+    effectData(id: "decimator" ,opened: false, title: "Decimator", interface: "triple")
+    ]
+    
+    
+    static let finalFiltersData = [effectData(id: "masterBooster", opened: false, title: "Booster", interface: ""),
+                                   effectData(id: "toneFilter", opened: false, title: "Tone", interface: ""),
+                                   effectData(id: "equalizerFilter1", opened: false, title: "", interface: ""),
+                                   effectData(id: "equalizerFilter2", opened: false, title: "", interface: ""),
+                                   effectData(id: "equalizerFilter3", opened: false, title: "", interface: ""),
+                                   effectData(id: "equalizerFilter4", opened: false, title: "", interface: ""),
+                                   effectData(id: "equalizerFilter5", opened: false, title: "", interface: ""),
+                                   effectData(id: "equalizerFilter6", opened: false, title: "", interface: ""),
+                                   effectData(id: "equalizerFilter7", opened: false, title: "", interface: ""),
+                                   effectData(id: "equalizerFilter8", opened: false, title: "", interface: ""),
+                                   effectData(id: "equalizerFilter9", opened: false, title: "", interface: ""),
+                                   effectData(id: "equalizerFilter10", opened: false, title: "", interface: ""),
+                                   effectData(id: "equalizerFilter11", opened: false, title: "", interface: ""),
+                                   effectData(id: "equalizerFilter12", opened: false, title: "", interface: ""),
+                                   effectData(id: "highPassFilter", opened: false, title: "High Pass", interface: ""),
+                                   effectData(id: "lowPassFilter", opened: false, title: "Low Pass", interface: "")
+    ]
     
     
     static var availableUnitsData = [
@@ -43,23 +73,19 @@ class audio {
         case "bitCrusher" :
             switch slider {
             case 0:
-                if  Effects.bitCrusher.isStarted == true {
-                    Effects.bitCrusher.isStarted = false
-                    bitCrusher?.stop()
+                if  audio.bitCrusher!.isStarted == true {
+                    audio.bitCrusher?.stop()
                     newValue = "OFF"
                 } else {
-                    Effects.bitCrusher.isStarted = true
-                    bitCrusher?.start()
+                    audio.bitCrusher?.start()
                     newValue = "ON"
                 }
             case 1:
-                bitCrusher?.bitDepth = value
-                Effects.bitCrusher.bitDepth = value
+                audio.bitCrusher?.bitDepth = value
                 let text = String(value)
                 newValue = String(text.prefix(3))
             case 2:
-                bitCrusher?.sampleRate = value
-                Effects.bitCrusher.sampleRate = value
+                audio.bitCrusher?.sampleRate = value
                 let text = String(value)
                 newValue = String(text.prefix(3))
             
@@ -70,33 +96,27 @@ class audio {
         case "tanhDistortion" :
             switch slider {
             case 0:
-                if  Effects.tanhDistortion.isStarted == true {
-                    Effects.tanhDistortion.isStarted = false
-                    tanhDistortion?.stop()
+                if  audio.tanhDistortion!.isStarted == true {
+                    audio.tanhDistortion?.stop()
                     newValue = "OFF"
                 } else {
-                    Effects.tanhDistortion.isStarted = true
-                    tanhDistortion?.start()
+                    audio.tanhDistortion?.start()
                     newValue = "ON"
                 }
             case 1:
-                tanhDistortion?.pregain = value
-                Effects.tanhDistortion.pregain = value
+                audio.tanhDistortion?.pregain = value
                 let text = String(value)
                 newValue = String(text.prefix(3))
             case 2:
-                tanhDistortion?.postgain = value
-                Effects.tanhDistortion.postgain = value
+                audio.tanhDistortion?.postgain = value
                 let text = String(value)
                 newValue = String(text.prefix(3))
             case 3:
-                tanhDistortion?.positiveShapeParameter = value
-                Effects.tanhDistortion.positiveShapeParameter = value
+                audio.tanhDistortion?.positiveShapeParameter = value
                 let text = String(value)
                 newValue = String(text.prefix(3))
             case 4:
-                tanhDistortion?.negativeShapeParameter = value
-                Effects.tanhDistortion.negativeShapeParameter = value
+                audio.tanhDistortion?.negativeShapeParameter = value
                 let text = String(value)
                 newValue = String(text.prefix(3))
             default: break
@@ -106,33 +126,27 @@ class audio {
         case "dynaRageCompressor" :
             switch slider {
             case 0:
-                if  Effects.dynaRageCompressor.isStarted == true {
-                    Effects.dynaRageCompressor.isStarted = false
-                    dynaRageCompressor?.stop()
+                if  audio.dynaRageCompressor!.isStarted == true {
+                    audio.dynaRageCompressor?.stop()
                     newValue = "OFF"
                 } else {
-                    Effects.dynaRageCompressor.isStarted = true
-                    dynaRageCompressor?.start()
+                    audio.dynaRageCompressor?.start()
                     newValue = "ON"
                 }
             case 1:
-                dynaRageCompressor?.ratio = value
-                Effects.dynaRageCompressor.ratio = value
+                audio.dynaRageCompressor?.ratio = value
                 let text = String(value)
                 newValue = String(text.prefix(3))
             case 2:
-                dynaRageCompressor?.threshold = value
-                Effects.dynaRageCompressor.threshold = value
+                audio.dynaRageCompressor?.threshold = value
                 let text = String(value)
                 newValue = String(text.prefix(3))
             case 3:
-                dynaRageCompressor?.attackDuration = value
-                Effects.dynaRageCompressor.attackDuration = value
+                audio.dynaRageCompressor?.attackDuration = value
                 let text = String(value)
                 newValue = String(text.prefix(3))
             case 4:
-                dynaRageCompressor?.releaseDuration = value
-                Effects.dynaRageCompressor.releaseDuration = value
+                audio.dynaRageCompressor?.releaseDuration = value
                 let text = String(value)
                 newValue = String(text.prefix(3))
             default: break
@@ -142,28 +156,23 @@ class audio {
         case "autoWah" :
             switch slider {
             case 0:
-                if  Effects.autoWah.isStarted == true {
-                    Effects.autoWah.isStarted = false
-                    autoWah?.stop()
+                if  audio.autoWah!.isStarted == true {
+                    audio.autoWah?.stop()
                     newValue = "OFF"
                 } else {
-                    Effects.autoWah.isStarted = true
-                    autoWah?.start()
+                    audio.autoWah?.start()
                     newValue = "ON"
                 }
             case 1:
-                autoWah?.wah = value
-                Effects.autoWah.wah = value
+                audio.autoWah?.wah = value
                 let text = String(value)
                 newValue = String(text.prefix(3))
             case 2:
-                autoWah?.amplitude = value
-                Effects.autoWah.amplitude = value
+                audio.autoWah?.amplitude = value
                 let text = String(value)
                 newValue = String(text.prefix(3))
             case 3:
-                autoWah?.mix = value
-                Effects.autoWah.mix = value
+                audio.autoWah?.mix = value
                 let text = String(value)
                 newValue = String(text.prefix(3))
             
@@ -174,28 +183,23 @@ class audio {
         case "delay" :
             switch slider {
             case 0:
-                if  Effects.delay.isStarted == true {
-                    Effects.delay.isStarted = false
-                    delay?.stop()
+                if  audio.delay!.isStarted == true {
+                    audio.delay?.stop()
                     newValue = "OFF"
                 } else {
-                    Effects.delay.isStarted = true
-                    delay?.start()
+                    audio.delay?.start()
                     newValue = "ON"
                 }
             case 1:
-                delay?.time = value
-                Effects.delay.time = value
+                audio.delay?.time = value
                 let text = String(value)
                 newValue = String(text.prefix(3))
             case 2:
-                delay?.feedback = value
-                Effects.delay.feedback = value
+                audio.delay?.feedback = value
                 let text = String(value)
                 newValue = String(text.prefix(3))
             case 3:
-                delay?.dryWetMix = value
-                Effects.delay.dryWetMix = value
+                audio.delay?.dryWetMix = value
                 let text = String(value)
                 newValue = String(text.prefix(3))
                 
@@ -206,28 +210,23 @@ class audio {
         case "decimator" :
             switch slider {
             case 0:
-                if  Effects.decimator.isStarted == true {
-                    Effects.decimator.isStarted = false
-                    decimator?.stop()
+                if  audio.decimator?.isStarted == true {
+                    audio.decimator?.stop()
                     newValue = "OFF"
                 } else {
-                    Effects.decimator.isStarted = true
-                    decimator?.start()
+                    audio.decimator?.start()
                     newValue = "ON"
                 }
             case 1:
-                decimator?.decimation = value
-                Effects.decimator.decimation = value
+                audio.decimator?.decimation = value
                 let text = String(value)
                 newValue = String(text.prefix(3))
             case 2:
-                decimator?.rounding = value
-                Effects.decimator.rounding = value
+                audio.decimator?.rounding = value
                 let text = String(value)
                 newValue = String(text.prefix(3))
             case 3:
-                decimator?.mix = value
-                Effects.decimator.mix = value
+                audio.decimator?.mix = value
                 let text = String(value)
                 newValue = String(text.prefix(3))
                 
@@ -238,18 +237,15 @@ class audio {
         case "clipper" :
             switch slider {
             case 0:
-                if  Effects.clipper.isStarted == true {
-                    Effects.clipper.isStarted = false
-                    clipper?.stop()
+                if  audio.clipper!.isStarted == true {
+                    audio.clipper?.stop()
                     newValue = "OFF"
                 } else {
-                    Effects.clipper.isStarted = true
-                    clipper?.start()
+                    audio.clipper?.start()
                     newValue = "ON"
                 }
             case 1:
-            clipper?.limit = value
-            Effects.clipper.limit = value
+            audio.clipper?.limit = value
             let text = String(value)
             newValue = String(text.prefix(3))
             default: break
@@ -258,33 +254,27 @@ class audio {
         case "ringModulator" :
             switch slider {
             case 0:
-                if  Effects.ringModulator.isStarted == true {
-                    Effects.ringModulator.isStarted = false
-                    ringModulator?.stop()
+                if  audio.ringModulator!.isStarted == true {
+                    audio.ringModulator?.stop()
                     newValue = "OFF"
                 } else {
-                    Effects.ringModulator.isStarted = true
-                    ringModulator?.start()
+                    audio.ringModulator?.start()
                     newValue = "ON"
                 }
             case 1:
-                ringModulator?.frequency1 = value
-                Effects.ringModulator.frequency1 = value
+                audio.ringModulator?.frequency1 = value
                 let text = String(value)
                 newValue = String(text.prefix(3))
             case 2:
-                ringModulator?.frequency2 = value
-                Effects.ringModulator.frequency2 = value
+                audio.ringModulator?.frequency2 = value
                 let text = String(value)
                 newValue = String(text.prefix(3))
             case 3:
-                ringModulator?.balance = value
-                Effects.ringModulator.balance = value
+                audio.ringModulator?.balance = value
                 let text = String(value)
                 newValue = String(text.prefix(3))
             case 4:
-                ringModulator?.mix = value
-                Effects.ringModulator.mix = value
+                audio.ringModulator?.mix = value
                 let text = String(value)
                 newValue = String(text.prefix(3))
             default: break
@@ -309,19 +299,19 @@ class audio {
             case 1:
                 min = Float(Effects.bitCrusher.bitDepthRange.lowerBound)
                 max = Float(Effects.bitCrusher.bitDepthRange.upperBound)
-                valueForSlider = Float(Effects.bitCrusher.bitDepth)
+                valueForSlider = Float(audio.bitCrusher!.bitDepth)
                 name = "Bit Depth"
-                value = String(Effects.bitCrusher.bitDepth)
+                value = String(audio.bitCrusher!.bitDepth)
                 value = String(value.prefix(3))
-                isOn = Effects.bitCrusher.isStarted
+                isOn = audio.bitCrusher!.isStarted
             case 2:
                 min = Float(Effects.bitCrusher.sampleRateRange.lowerBound)
                 max = Float(Effects.bitCrusher.sampleRateRange.upperBound)
-                valueForSlider = Float(Effects.bitCrusher.sampleRate)
+                valueForSlider = Float(audio.bitCrusher!.sampleRate)
                 name = "Sample Rate"
-                value = String(Effects.bitCrusher.sampleRate)
+                value = String(audio.bitCrusher!.sampleRate)
                 value = String(value.prefix(3))
-                isOn = Effects.bitCrusher.isStarted
+                isOn = audio.bitCrusher!.isStarted
             default: break
             }
             
@@ -331,35 +321,35 @@ class audio {
             case 1:
                 min = Float(Effects.tanhDistortion.pregainRange.lowerBound)
                 max = Float(Effects.tanhDistortion.pregainRange.upperBound)
-                valueForSlider = Float(Effects.tanhDistortion.pregain)
+                valueForSlider = Float(audio.tanhDistortion!.pregain)
                 name = "Pregain"
-                value = String(Effects.tanhDistortion.pregain)
+                value = String(audio.tanhDistortion!.pregain)
                 value = String(value.prefix(3))
-                isOn = Effects.tanhDistortion.isStarted
+                isOn = audio.tanhDistortion!.isStarted
             case 2:
                 min = Float(Effects.tanhDistortion.postgainRange.lowerBound)
                 max = Float(Effects.tanhDistortion.postgainRange.upperBound)
-                valueForSlider = Float(Effects.tanhDistortion.postgain)
+                valueForSlider = Float(audio.tanhDistortion!.postgain)
                 name = "Postgain"
-                value = String(Effects.tanhDistortion.postgain)
+                value = String(audio.tanhDistortion!.postgain)
                 value = String(value.prefix(3))
-                isOn = Effects.tanhDistortion.isStarted
+                isOn = audio.tanhDistortion!.isStarted
             case 3:
                 min = Float(Effects.tanhDistortion.positiveShapeParameterRange.lowerBound)
                 max = Float(Effects.tanhDistortion.positiveShapeParameterRange.upperBound)
-                valueForSlider = Float(Effects.tanhDistortion.positiveShapeParameter)
+                valueForSlider = Float(audio.tanhDistortion!.positiveShapeParameter)
                 name = "+"
-                value = String(Effects.tanhDistortion.positiveShapeParameter)
+                value = String(audio.tanhDistortion!.positiveShapeParameter)
                 value = String(value.prefix(3))
-                isOn = Effects.tanhDistortion.isStarted
+                isOn = audio.tanhDistortion!.isStarted
             case 4:
                 min = Float(Effects.tanhDistortion.negativeShapeParameterRange.lowerBound)
                 max = Float(Effects.tanhDistortion.negativeShapeParameterRange.upperBound)
-                valueForSlider = Float(Effects.tanhDistortion.negativeShapeParameter)
+                valueForSlider = Float(audio.tanhDistortion!.negativeShapeParameter)
                 name = "-"
-                value = String(Effects.tanhDistortion.negativeShapeParameter)
+                value = String(audio.tanhDistortion!.negativeShapeParameter)
                 value = String(value.prefix(3))
-                isOn = Effects.tanhDistortion.isStarted
+                isOn = audio.tanhDistortion!.isStarted
             default: break
             }
           
@@ -369,35 +359,35 @@ class audio {
             case 1:
                 min = Float(Effects.dynaRageCompressor.ratioRange.lowerBound)
                 max = Float(Effects.dynaRageCompressor.ratioRange.upperBound)
-                valueForSlider = Float(Effects.dynaRageCompressor.ratio)
+                valueForSlider = Float(audio.dynaRageCompressor!.ratio)
                 name = "Ratio"
-                value = String(Effects.dynaRageCompressor.ratio)
+                value = String(audio.dynaRageCompressor!.ratio)
                 value = String(value.prefix(3))
-                isOn = Effects.dynaRageCompressor.isStarted
+                isOn = audio.dynaRageCompressor!.isStarted
             case 2:
                 min = Float(Effects.dynaRageCompressor.thresholdRange.lowerBound)
                 max = Float(Effects.dynaRageCompressor.thresholdRange.upperBound)
-                valueForSlider = Float(Effects.dynaRageCompressor.threshold)
+                valueForSlider = Float(audio.dynaRageCompressor!.threshold)
                 name = "Threshold"
-                value = String(Effects.dynaRageCompressor.threshold)
+                value = String(audio.dynaRageCompressor!.threshold)
                 value = String(value.prefix(3))
-                isOn = Effects.dynaRageCompressor.isStarted
+                isOn = audio.dynaRageCompressor!.isStarted
             case 3:
                 min = Float(Effects.dynaRageCompressor.attackDurationRange.lowerBound)
                 max = Float(Effects.dynaRageCompressor.attackDurationRange.upperBound)
-                valueForSlider = Float(Effects.dynaRageCompressor.attackDuration)
+                valueForSlider = Float(audio.dynaRageCompressor!.attackDuration)
                 name = "Attack"
-                value = String(Effects.dynaRageCompressor.attackDuration)
+                value = String(audio.dynaRageCompressor!.attackDuration)
                 value = String(value.prefix(3))
-                isOn = Effects.dynaRageCompressor.isStarted
+                isOn = audio.dynaRageCompressor!.isStarted
             case 4:
                 min = Float(Effects.dynaRageCompressor.releaseDurationRange.lowerBound)
                 max = Float(Effects.dynaRageCompressor.releaseDurationRange.upperBound)
-                valueForSlider = Float(Effects.dynaRageCompressor.releaseDuration)
+                valueForSlider = Float(audio.dynaRageCompressor!.releaseDuration)
                 name = "Release"
-                value = String(Effects.dynaRageCompressor.releaseDuration)
+                value = String(audio.dynaRageCompressor!.releaseDuration)
                 value = String(value.prefix(3))
-                isOn = Effects.dynaRageCompressor.isStarted
+                isOn = audio.dynaRageCompressor!.isStarted
             default: break
             }
            
@@ -407,27 +397,27 @@ class audio {
             case 1:
                 min = Float(Effects.autoWah.wahRange.lowerBound)
                 max = Float(Effects.autoWah.wahRange.upperBound)
-                valueForSlider = Float(Effects.autoWah.wah)
+                valueForSlider = Float(audio.autoWah!.wah)
                 name = "Wah"
-                value = String(Effects.autoWah.wah)
+                value = String(audio.autoWah!.wah)
                 value = String(value.prefix(3))
-                isOn = Effects.autoWah.isStarted
+                isOn = audio.autoWah!.isStarted
             case 2:
                 min = Float(Effects.autoWah.amplitudeRange.lowerBound)
                 max = Float(Effects.autoWah.amplitudeRange.upperBound)
-                valueForSlider = Float(Effects.autoWah.amplitude)
+                valueForSlider = Float(audio.autoWah!.amplitude)
                 name = "Amplitude"
-                value = String(Effects.autoWah.amplitude)
+                value = String(audio.autoWah!.amplitude)
                 value = String(value.prefix(3))
-                isOn = Effects.autoWah.isStarted
+                isOn = audio.autoWah!.isStarted
             case 3:
                 min = Float(Effects.autoWah.mixRange.lowerBound)
                 max = Float(Effects.autoWah.mixRange.upperBound)
-                valueForSlider = Float(Effects.autoWah.mix)
+                valueForSlider = Float(audio.autoWah!.mix)
                 name = "Mix"
-                value = String(Effects.autoWah.mix)
+                value = String(audio.autoWah!.mix)
                 value = String(value.prefix(3))
-                isOn = Effects.autoWah.isStarted
+                isOn = audio.autoWah!.isStarted
             default: break
             }
             
@@ -437,27 +427,27 @@ class audio {
             case 1:
                 min = Float(Effects.delay.timeRange.lowerBound)
                 max = Float(Effects.delay.timeRange.upperBound)
-                valueForSlider = Float(Effects.delay.time)
+                valueForSlider = Float(audio.delay!.time)
                 name = "Time"
-                value = String(Effects.delay.time)
+                value = String(audio.delay!.time)
                 value = String(value.prefix(3))
-                isOn = Effects.delay.isStarted
+                isOn = audio.delay!.isStarted
             case 2:
                 min = Float(Effects.delay.feedbackRange.lowerBound)
                 max = Float(Effects.delay.feedbackRange.upperBound)
-                valueForSlider = Float(Effects.delay.feedback)
+                valueForSlider = Float(audio.delay!.feedback)
                 name = "Feedback"
-                value = String(Effects.delay.feedback)
+                value = String(audio.delay!.feedback)
                 value = String(value.prefix(3))
-                isOn = Effects.delay.isStarted
+                isOn = audio.delay!.isStarted
             case 3:
                 min = Float(Effects.delay.dryWetMixRange.lowerBound)
                 max = Float(Effects.delay.dryWetMixRange.upperBound)
-                valueForSlider = Float(Effects.delay.dryWetMix)
+                valueForSlider = Float(audio.delay!.dryWetMix)
                 name = "Mix"
-                value = String(Effects.delay.dryWetMix)
+                value = String(audio.delay!.dryWetMix)
                 value = String(value.prefix(3))
-                isOn = Effects.delay.isStarted
+                isOn = audio.delay!.isStarted
            
             default: break
             }
@@ -468,27 +458,27 @@ class audio {
             case 1:
                 min = Float(Effects.decimator.decimationRange.lowerBound)
                 max = Float(Effects.decimator.decimationRange.upperBound)
-                valueForSlider = Float(Effects.decimator.decimation)
+                valueForSlider = Float(audio.decimator!.decimation)
                 name = "Decimation"
-                value = String(Effects.decimator.decimation)
+                value = String(audio.decimator!.decimation)
                 value = String(value.prefix(3))
-                isOn = Effects.decimator.isStarted
+                isOn = audio.decimator!.isStarted
             case 2:
                 min = Float(Effects.decimator.roundingRange.lowerBound)
                 max = Float(Effects.decimator.roundingRange.upperBound)
-                valueForSlider = Float(Effects.decimator.rounding)
+                valueForSlider = Float(audio.decimator!.rounding)
                 name = "Rounding"
-                value = String(Effects.decimator.rounding)
+                value = String(audio.decimator!.rounding)
                 value = String(value.prefix(3))
-                isOn = Effects.decimator.isStarted
+                isOn = audio.decimator!.isStarted
             case 3:
                 min = Float(Effects.decimator.mixRange.lowerBound)
                 max = Float(Effects.decimator.mixRange.upperBound)
-                valueForSlider = Float(Effects.decimator.mix)
+                valueForSlider = Float(audio.decimator!.mix)
                 name = "Mix"
-                value = String(Effects.decimator.mix)
+                value = String(audio.decimator!.mix)
                 value = String(value.prefix(3))
-                isOn = Effects.decimator.isStarted
+                isOn = audio.decimator!.isStarted
             default: break
             }
           
@@ -498,11 +488,11 @@ class audio {
             case 1:
                 min = Float(Effects.clipper.limitRange.lowerBound)
                 max = Float(Effects.clipper.limitRange.upperBound)
-                valueForSlider = Float(Effects.clipper.limit)
+                valueForSlider = Float(audio.clipper!.limit)
                 name = "Limit"
-                value = String(Effects.clipper.limit)
+                value = String(audio.clipper!.limit)
                 value = String(value.prefix(3))
-                isOn = Effects.clipper.isStarted
+                isOn = audio.clipper!.isStarted
             default: break
             }
          
@@ -512,35 +502,35 @@ class audio {
             case 1:
                 min = Float(Effects.ringModulator.frequencyRange.lowerBound)
                 max = Float(Effects.ringModulator.frequencyRange.upperBound)
-                valueForSlider = Float(Effects.ringModulator.frequency1)
+                valueForSlider = Float(audio.ringModulator!.frequency1)
                 name = "Freq 1"
-                value = String(Effects.ringModulator.frequency1)
+                value = String(audio.ringModulator!.frequency1)
                 value = String(value.prefix(3))
-                isOn = Effects.ringModulator.isStarted
+                isOn = audio.ringModulator!.isStarted
             case 2:
                 min = Float(Effects.ringModulator.frequencyRange.lowerBound)
                 max = Float(Effects.ringModulator.frequencyRange.upperBound)
-                valueForSlider = Float(Effects.ringModulator.frequency2)
+                valueForSlider = Float(audio.ringModulator!.frequency2)
                 name = "Freq 2"
-                value = String(Effects.ringModulator.frequency2)
+                value = String(audio.ringModulator!.frequency2)
                 value = String(value.prefix(3))
-                isOn = Effects.ringModulator.isStarted
+                isOn = audio.ringModulator!.isStarted
             case 3:
                 min = Float(Effects.ringModulator.balanceRange.lowerBound)
                 max = Float(Effects.ringModulator.balanceRange.upperBound)
-                valueForSlider = Float(Effects.ringModulator.balance)
+                valueForSlider = Float(audio.ringModulator!.balance)
                 name = "Balance"
-                value = String(Effects.ringModulator.balance)
+                value = String(audio.ringModulator!.balance)
                 value = String(value.prefix(3))
-                isOn = Effects.ringModulator.isStarted
+                isOn = audio.ringModulator!.isStarted
             case 4:
                 min = Float(Effects.ringModulator.mixRange.lowerBound)
                 max = Float(Effects.ringModulator.mixRange.upperBound)
-                valueForSlider = Float(Effects.ringModulator.mix)
+                valueForSlider = Float(audio.ringModulator!.mix)
                 name = "Mix"
-                value = String(Effects.ringModulator.mix)
+                value = String(audio.ringModulator!.mix)
                 value = String(value.prefix(3))
-                isOn = Effects.ringModulator.isStarted
+                isOn = audio.ringModulator!.isStarted
             default: break
             }
         default: break
@@ -570,14 +560,15 @@ class audio {
  
     
     func start() {
-        createEffects()
+        
         audioKitSettings()
-       // checkUserDefaults()
-        createEffectList()
+        createInputListForSound()
+       // createEffectList()
       //  setEffectValues(initial: true)
       //  newList()
         connectMic()
-        connectEffects()
+        connectAudioInputs()
+        //connectEffects()
     }
     
    
@@ -609,51 +600,102 @@ class audio {
      
         
     }
-    
+   /*
     func createEffectList() {
         
-        // initial preps 'n filters
         
         
-        // before amp
+       
         for effect in 0..<audio.selectedUnitsBeforeData.count {
             let id = audio.selectedUnitsBeforeData[effect].id
             switch id {
-            case "bitCrusher" : self.soundEffectsBefore.append(bitCrusher!)
-            case "clipper":  self.soundEffectsBefore.append(clipper!)
-            case "dynaRageCompressor":  self.soundEffectsBefore.append(dynaRageCompressor!)
-            case "autoWah":  self.soundEffectsBefore.append(autoWah!)
-            case "delay":  self.soundEffectsBefore.append(delay!)
-            case "decimator": self.soundEffectsBefore.append(decimator!)
-            case "tanhDistortion": self.soundEffectsBefore.append(tanhDistortion!)
-            case "ringModulator": self.soundEffectsBefore.append(ringModulator!)
+            case "bitCrusher" : self.firstList.append(audio.bitCrusher!)
+            case "clipper":  self.firstList.append(clipper!)
+            case "dynaRageCompressor":  self.firstList.append(dynaRageCompressor!)
+            case "autoWah":  self.firstList.append(autoWah!)
+            case "delay":  self.firstList.append(delay!)
+            case "decimator": self.firstList.append(decimator!)
+            case "tanhDistortion": self.firstList.append(tanhDistortion!)
+            case "ringModulator": self.firstList.append(ringModulator!)
             default : print("NOTHING to do over HERE")
                 
             }
         }
-        // amp
-        
-        
-        // after amp
+     
+     
         for effect in 0..<audio.selectedUnitsAfterData.count {
             let id = audio.selectedUnitsAfterData[effect].id
             switch id {
-            case "bitCrusher" : self.soundEffectsAfter.append(bitCrusher!)
-            case "clipper":  self.soundEffectsAfter.append(clipper!)
-            case "dynaRageCompressor":  self.soundEffectsAfter.append(dynaRageCompressor!)
-            case "autoWah":  self.soundEffectsAfter.append(autoWah!)
-            case "delay":  self.soundEffectsAfter.append(delay!)
-            case "decimator": self.soundEffectsAfter.append(decimator!)
-            case "tanhDistortion": self.soundEffectsAfter.append(tanhDistortion!)
-            case "ringModulator": self.soundEffectsAfter.append(ringModulator!)
+            case "bitCrusher" : self.thirdList.append(audio.bitCrusher!)
+            case "clipper":  self.thirdList.append(clipper!)
+            case "dynaRageCompressor":  self.thirdList.append(dynaRageCompressor!)
+            case "autoWah":  self.thirdList.append(autoWah!)
+            case "delay":  self.thirdList.append(delay!)
+            case "decimator": self.thirdList.append(decimator!)
+            case "tanhDistortion": self.thirdList.append(tanhDistortion!)
+            case "ringModulator": self.thirdList.append(ringModulator!)
             default : print("NOTHING to do over HERE EITHER")
                 
             }
         }
         
-        // finishing filters
+        for effect in 0..<audio.finalFiltersData.count {
+            let id = audio.finalFiltersData[effect].id
+            switch id {
+            case "toneFilter" : self.audioOut.append(audio.toneFilter!)
+            
+            default : print("NOTHING to do over HERE EITHER neither here")
+                
+            }
+        }
+        
+  
+        // Make one big list for the whole sound
+        
         
     }
+  
+    */
+    
+    func addToselectedEffects(id : String) {
+        switch id {
+            //effects
+        case "bitCrusher" : audio.selectedEffects.append(audio.bitCrusher!)
+        case "clipper":  audio.selectedEffects.append(audio.clipper!)
+        case "dynaRageCompressor":  audio.selectedEffects.append(audio.dynaRageCompressor!)
+        case "autoWah":  audio.selectedEffects.append(audio.autoWah!)
+        case "delay":  audio.selectedEffects.append(audio.delay!)
+        case "decimator": audio.selectedEffects.append(audio.decimator!)
+        case "tanhDistortion": audio.selectedEffects.append(audio.tanhDistortion!)
+        case "ringModulator": audio.selectedEffects.append(audio.ringModulator!)
+        
+        // Filters
+            
+            
+        default : print("NOTHING to do over HERE")
+            
+        }
+    }
+    
+    func createInputListForSound() {
+        
+        for effect in 0..<audio.selectedUnitsBeforeData.count {
+            let id = audio.selectedUnitsBeforeData[effect].id
+            addToselectedEffects(id:id)
+            }
+        
+        for effect in 0..<audio.selectedUnitsAfterData.count {
+            let id = audio.selectedUnitsAfterData[effect].id
+            addToselectedEffects(id:id)
+        }
+        /*
+        for effect in 0..<audio.finalFiltersData.count {
+            let id = audio.finalFiltersData[effect].id
+            addToselectedEffects(id:id)
+        }
+         */
+    }
+    
     
     func connectMic() {
         
@@ -667,44 +709,84 @@ class audio {
         
     }
     
-    func connectEffects() {
-       
-        // CONNECT to input: If there are effects before main unit
-        for pedal in 0..<soundEffectsBefore.count {
+    func connectAudioInputs() {
+        
+        for input in 0..<audio.selectedEffects.count {
             
-            if pedal == 0 {
-                inputMixer?.connect(to: soundEffectsBefore[0])
+            if input == 0 {
+                inputMixer?.connect(to: audio.selectedEffects[0])
                 
             }
             else {
-                soundEffectsBefore[pedal-1].connect(to: soundEffectsBefore[pedal])
+                audio.selectedEffects[input-1].connect(to: audio.selectedEffects[input])
             }
         }
         
-        if soundEffectsBefore .isEmpty {
-            inputMixer!.connect(to: effectsBeforeMixer!)
+        if audio.selectedEffects.isEmpty {
+            inputMixer!.connect(to: outputMixer!)
         } else {
-            soundEffectsBefore.last?.connect(to: effectsBeforeMixer!)
+            audio.selectedEffects.last?.connect(to: outputMixer!)
+        }
+        
+        // LAST TO OUTPUT
+        AudioKit.output = outputMixer
+        if AudioKit.output == nil {
+            AudioKit.output = inputMixer
+        }
+        
+        // START AUDIOKIT
+        do {
+            try AudioKit.start()
+            print("START AUDIOKIT")
+        } catch {
+            print("Could not start AudioKit")
+        }
+        
+    }
+    
+    func connectEffects() {
+        
+        
+        // TODO:
+        // Kokeile DryWeMixeriä joka väliin???
+        // Splittaa ensin
+       
+        // CONNECT to input: If there are effects before main unit
+        for pedal in 0..<firstList.count {
+            
+            if pedal == 0 {
+                inputMixer?.connect(to: firstList[0])
+                
+            }
+            else {
+                firstList[pedal-1].connect(to: firstList[pedal])
+            }
+        }
+        
+        if firstList .isEmpty {
+            inputMixer!.connect(to: mixerForFirstList!)
+        } else {
+            firstList.last?.connect(to: mixerForFirstList!)
         }
         
         
         
         // CONNECT to soundEffectsBefore: If there are units in the main unit
-        for pedal in 0..<mainUnits.count {
+        for pedal in 0..<secondList.count {
             
             if pedal == 0 {
-                effectsBeforeMixer?.connect(to: mainUnits[0])
+                mixerForFirstList?.connect(to: secondList[0])
                 
             }
             else {
-                mainUnits[pedal-1].connect(to: mainUnits[pedal])
+                secondList[pedal-1].connect(to: secondList[pedal])
             }
         }
         
-        if mainUnits .isEmpty {
-            effectsBeforeMixer!.connect(to: masterMixer!)
+        if secondList .isEmpty {
+            mixerForFirstList!.connect(to: mixerForSecondList!)
         } else {
-            mainUnits.last?.connect(to: masterMixer!)
+            secondList.last?.connect(to: mixerForSecondList!)
         }
         
         
@@ -713,64 +795,64 @@ class audio {
         
         
         // CONNECT to mainUnits: If there are units in the soundEffectsAfter
-        for pedal in 0..<soundEffectsAfter.count {
+        for pedal in 0..<thirdList.count {
             
             if pedal == 0 {
-                masterMixer?.connect(to: soundEffectsAfter[0])
+                mixerForSecondList?.connect(to: thirdList[0])
                 
             }
             else {
-                soundEffectsAfter[pedal-1].connect(to: soundEffectsAfter[pedal])
+                thirdList[pedal-1].connect(to: thirdList[pedal])
             }
         }
         
-        if soundEffectsAfter .isEmpty {
-            masterMixer!.connect(to: effectsAfterMixer!)
+        if thirdList .isEmpty {
+            mixerForSecondList!.connect(to: mixerForThirdList!)
         } else {
-            soundEffectsAfter.last?.connect(to: effectsAfterMixer!)
+            thirdList.last?.connect(to: mixerForThirdList!)
         }
         
         
         
         // CONNECT to soundEffectsAfter: If there are units in the finishers
-        for pedal in 0..<finishers.count {
+        for pedal in 0..<audioOut.count {
             
             if pedal == 0 {
-                effectsAfterMixer?.connect(to: finishers[0])
+                mixerForThirdList?.connect(to: audioOut[0])
                 
             }
             else {
-                finishers[pedal-1].connect(to: finishers[pedal])
+                audioOut[pedal-1].connect(to: audioOut[pedal])
             }
         }
         
-        if finishers .isEmpty {
-            effectsAfterMixer!.connect(to: outputMixer!)
+        if audioOut .isEmpty {
+            mixerForThirdList!.connect(to: outputMixer!)
         } else {
-            finishers.last?.connect(to: outputMixer!)
+            audioOut.last?.connect(to: outputMixer!)
         }
         
-        /*
-         // TESTING FILTERS
-        masterMixer?.connect(to: masterBooster!)
-        masterBooster?.connect(to: toneFilter!)
-        toneFilter?.connect(to: equalizerFilter1!)
-        equalizerFilter1?.connect(to: equalizerFilter2!)
-        equalizerFilter2?.connect(to: equalizerFilter3!)
-        equalizerFilter3?.connect(to: equalizerFilter4!)
-        equalizerFilter4?.connect(to: equalizerFilter5!)
-        equalizerFilter5?.connect(to: equalizerFilter6!)
-        equalizerFilter6?.connect(to: highPassFilter!)
-        highPassFilter?.connect(to: lowPassFilter!)
-        lowPassFilter?.connect(to: filterMixer!)
-        filterMixer?.connect(to: masterMixer!)
-        */
         
+        // CONNECT last  efefcts to the finalFilters
+        for pedal in 0..<finalFilters.count {
+            
+            if pedal == 0 {
+                outputMixer?.connect(to: finalFilters[0])
+                
+            }
+            else {
+                finalFilters[pedal-1].connect(to: finalFilters[pedal])
+            }
+        }
         
-        
+        if finalFilters .isEmpty {
+            outputMixer!.connect(to: filterMixer!)
+        } else {
+            finalFilters.last?.connect(to: filterMixer!)
+        }
         
         // LAST TO OUTPUT
-        AudioKit.output = outputMixer
+        AudioKit.output = filterMixer
         if AudioKit.output == nil {
             AudioKit.output = inputMixer
         }
@@ -785,86 +867,7 @@ class audio {
         
     }
     
-    func unplugEffects() {
-        print("-------------------------    DISCONNECTING")
-        print(AudioKit.printConnections())
-        do {
-            try AudioKit.stop()
-        } catch {
-            print("Could not stop AudioKit")
-        }
-        
-        for pedal in 0..<soundEffectsBefore.count {
-            soundEffectsBefore[pedal].disconnectOutput()
-            soundEffectsBefore[pedal].disconnectInput()
-            print("DISONNECT \(soundEffectsBefore[pedal])")
-        }
-        inputMixer?.disconnectOutput()
-        print("DISONNECT \(inputMixer)")
-        // TESTING FILTERS
-        // TESTING EQ
-        // CONNECT EQ AFTER EFFECTS
-        equalizerFilter1?.disconnectInput()
-        equalizerFilter1?.disconnectOutput()
-        
-        equalizerFilter2?.disconnectInput()
-        equalizerFilter2?.disconnectOutput()
-        
-        equalizerFilter3?.disconnectInput()
-        equalizerFilter3?.disconnectOutput()
-        
-        equalizerFilter4?.disconnectInput()
-        equalizerFilter4?.disconnectOutput()
-        
-        equalizerFilter5?.disconnectInput()
-        equalizerFilter5?.disconnectOutput()
-        
-        equalizerFilter6?.disconnectInput()
-        equalizerFilter6?.disconnectOutput()
-        print("DISONNECT \(equalizerFilter6)")
-        
-        highPassFilter?.disconnectInput()
-        highPassFilter?.disconnectOutput()
-        print("DISONNECT \(highPassFilter)")
-        
-        lowPassFilter?.disconnectInput()
-        lowPassFilter?.disconnectOutput()
-        print("DISONNECT \(lowPassFilter)")
-        
-        toneFilter?.disconnectInput()
-        toneFilter?.disconnectOutput()
-        
-        effectsBeforeMixer?.disconnectInput()
-        effectsBeforeMixer?.disconnectOutput()
-        filterMixer?.disconnectInput()
-        filterMixer?.disconnectOutput()
-        
-        masterBooster?.disconnectInput()
-        masterBooster?.disconnectOutput()
-        
-        print("\n-------------------------DISCONNECT READY")
-        print(AudioKit.printConnections())
-        
-        /*
-         bitCrusher?.detach()
-         decimator?.detach()
-         clipper?.detach()
-         dynaRageCompressor?.detach()
-         autoWah?.detach()
-         tanhDistortion?.detach()
-         distortion?.detach()
-         delay?.detach()
-         */
-    }
-    
-    func resetEffectChain() {
-        unplugEffects()
-        connectEffects()
-        print(soundEffectsBefore)
-        UserDefaults.standard.set(Effects.selectedEffects, forKey: "effectChain")
-    }
-
-    
+  
     
     
     
@@ -879,9 +882,9 @@ class audio {
     
     
     var inputMixer: AKMixer?
-    var effectsBeforeMixer: AKMixer?
-    var masterMixer: AKMixer?
-    var effectsAfterMixer: AKMixer?
+    var mixerForFirstList: AKMixer?
+    var mixerForSecondList: AKMixer?
+    var mixerForThirdList: AKMixer?
     var outputMixer: AKMixer?
     
     
@@ -892,44 +895,79 @@ class audio {
     
     
     // EFFECTS
-    var bitCrusher: AKBitCrusher?                   // 1
-    var tanhDistortion: AKTanhDistortion?           // 2
-    var dynaRageCompressor: AKDynaRageCompressor?   // 3
-    var autoWah: AKAutoWah?                         // 4
-    var delay: AKDelay?                             // 5
-    var decimator: AKDecimator?                     // 6
-    var clipper: AKClipper?                         // 7
-    var ringModulator: AKRingModulator?             // 8
+    static var bitCrusher: AKBitCrusher?                   // 1
+    static var tanhDistortion: AKTanhDistortion?           // 2
+    static var dynaRageCompressor: AKDynaRageCompressor?   // 3
+    static var autoWah: AKAutoWah?                         // 4
+    static var delay: AKDelay?                             // 5
+    static var decimator: AKDecimator?                     // 6
+    static var clipper: AKClipper?                         // 7
+    static var ringModulator: AKRingModulator?             // 8
     
     
     // FILTERS
-    var equalizerFilter1: AKEqualizerFilter?
-    var equalizerFilter2: AKEqualizerFilter?
-    var equalizerFilter3: AKEqualizerFilter?
-    var equalizerFilter4: AKEqualizerFilter?
-    var equalizerFilter5: AKEqualizerFilter?
-    var equalizerFilter6: AKEqualizerFilter?
-    var equalizerFilter7: AKEqualizerFilter?
-    var equalizerFilter8: AKEqualizerFilter?
-    var equalizerFilter9: AKEqualizerFilter?
-    var equalizerFilter10: AKEqualizerFilter?
-    var equalizerFilter11: AKEqualizerFilter?
-    var equalizerFilter12: AKEqualizerFilter?
+    static var equalizerFilter1: AKEqualizerFilter?
+    static var equalizerFilter2: AKEqualizerFilter?
+    static var equalizerFilter3: AKEqualizerFilter?
+    static var equalizerFilter4: AKEqualizerFilter?
+    static var equalizerFilter5: AKEqualizerFilter?
+    static var equalizerFilter6: AKEqualizerFilter?
+    static var equalizerFilter7: AKEqualizerFilter?
+    static var equalizerFilter8: AKEqualizerFilter?
+    static var equalizerFilter9: AKEqualizerFilter?
+    static var equalizerFilter10: AKEqualizerFilter?
+    static var equalizerFilter11: AKEqualizerFilter?
+    static var equalizerFilter12: AKEqualizerFilter?
     
-    var highPassFilter : AKHighPassFilter?
-    var lowPassFilter: AKLowPassFilter?
-    var toneFilter: AKToneFilter?
+    static var highPassFilter : AKHighPassFilter?
+    static var lowPassFilter: AKLowPassFilter?
+    
+    static var toneFilter: AKToneFilter?
+    
+
+    static var toneComplementFilter : AKToneComplementFilter?
+    
+    static var highShelfFilter : AKHighShelfFilter?
+    static var lowShelfFilter: AKLowShelfFilter?
+    
+    static var bandPassButterworthFilter : AKBandPassButterworthFilter?
+    static var bandRejectButterworthFilter : AKBandRejectButterworthFilter?
+    static var lowPassButterworthFilter: AKLowPassButterworthFilter?
+    static var highPassButterworthFilter: AKHighPassButterworthFilter?
     
     
-    var masterBooster: AKBooster?
+    static var modalResonanceFilter : AKModalResonanceFilter?
+    static var resonantFilter : AKResonantFilter?
+    static var lowShelfParametricEqualizerFilter: AKLowShelfParametricEqualizerFilter?
+    var highShelfParametricEqualizerFilter: AKHighShelfParametricEqualizerFilter?
+    static var peakingParametricEqualizerFilter : AKPeakingParametricEqualizerFilter?
+    
+    static var formantFilter : AKFormantFilter?
+    static var rolandTB303Filter : AKRolandTB303Filter?
+    static var korgLowPassFilter : AKKorgLowPassFilter?
+    static var threePoleLowpassFilter: AKThreePoleLowpassFilter?
+    
+    static var moogLadder: AKMoogLadder?
+    
+    static var combFilterReverb: AKCombFilterReverb?
+    
+    static var dcBlock: AKDCBlock?
+    
+    static var stringResonator : AKStringResonator?
+    
+    static var masterBooster: AKBooster?
     
     // ARRAYS FOR CONSTRUCTING THE SOUND
-    var soundEffectsBefore = [AKInput]()
-    var soundEffectsAfter = [AKInput]()
-    var preparations = [AKInput]()
-    var finishers = [AKInput]()
-    var mainUnits = [AKInput]()
     
+    static var selectedEffects = [AKInput]()
+    
+    var audioIn = [AKInput]()
+    var firstList = [AKInput]()
+    var secondList = [AKInput]()
+    var thirdList = [AKInput]()
+    var audioOut = [AKInput]()
+    
+    var finalFilters = [AKInput]()
     
     
     func createEffects() {
@@ -942,90 +980,123 @@ class audio {
         // MIXERS
         inputMixer = AKMixer()
         filterMixer = AKMixer()
-        effectsBeforeMixer = AKMixer()
-        masterMixer = AKMixer()
-        effectsAfterMixer = AKMixer()
+        mixerForFirstList = AKMixer()
+        mixerForSecondList = AKMixer()
+        mixerForThirdList = AKMixer()
         outputMixer = AKMixer()
         
-        masterMixer?.start()
+        mixerForSecondList?.start()
         inputMixer?.start()
-        effectsBeforeMixer?.start()
-        effectsAfterMixer?.start()
+        mixerForFirstList?.start()
+        mixerForThirdList?.start()
         filterMixer?.start()
         outputMixer?.start()
         
         // EFFECTS
-        delay = AKDelay()
-        bitCrusher =  AKBitCrusher()
-        clipper =  AKClipper()
-        dynaRageCompressor =  AKDynaRageCompressor()
-        autoWah =  AKAutoWah()
-        tanhDistortion = AKTanhDistortion()
-        decimator = AKDecimator()
-        ringModulator = AKRingModulator()
+        audio.delay = AKDelay()
+        audio.bitCrusher =  AKBitCrusher()
+        audio.clipper =  AKClipper()
+        audio.dynaRageCompressor =  AKDynaRageCompressor()
+        audio.autoWah =  AKAutoWah()
+        audio.tanhDistortion = AKTanhDistortion()
+        audio.decimator = AKDecimator()
+        audio.ringModulator = AKRingModulator()
         
         
         // FILTERS
         
-        equalizerFilter1 = AKEqualizerFilter()
-        equalizerFilter1?.bandwidth = 44.7
-        equalizerFilter1?.centerFrequency = 32
-        equalizerFilter1?.gain = Filters.equalizerFilter.filterBand1Gain
+        audio.equalizerFilter1 = AKEqualizerFilter()
+        audio.equalizerFilter1?.bandwidth = 44.7
+        audio.equalizerFilter1?.centerFrequency = 32
+        audio.equalizerFilter1?.gain = Filters.equalizerFilter.filterBand1Gain
         
-        equalizerFilter2 = AKEqualizerFilter()
-        equalizerFilter2?.bandwidth = 70.8
-        equalizerFilter2?.centerFrequency = 64
-        equalizerFilter2?.gain = Filters.equalizerFilter.filterBand2Gain
+        audio.equalizerFilter2 = AKEqualizerFilter()
+        audio.equalizerFilter2?.bandwidth = 70.8
+        audio.equalizerFilter2?.centerFrequency = 64
+        audio.equalizerFilter2?.gain = Filters.equalizerFilter.filterBand2Gain
         
-        equalizerFilter3 = AKEqualizerFilter()
-        equalizerFilter3?.bandwidth = 141
-        equalizerFilter3?.centerFrequency = 125
-        equalizerFilter3?.gain = Filters.equalizerFilter.filterBand3Gain
+        audio.equalizerFilter3 = AKEqualizerFilter()
+        audio.equalizerFilter3?.bandwidth = 141
+        audio.equalizerFilter3?.centerFrequency = 125
+        audio.equalizerFilter3?.gain = Filters.equalizerFilter.filterBand3Gain
         
-        equalizerFilter4 = AKEqualizerFilter()
-        equalizerFilter4?.bandwidth = 282
-        equalizerFilter4?.centerFrequency = 250
-        equalizerFilter4?.gain = Filters.equalizerFilter.filterBand4Gain
+        audio.equalizerFilter4 = AKEqualizerFilter()
+        audio.equalizerFilter4?.bandwidth = 282
+        audio.equalizerFilter4?.centerFrequency = 250
+        audio.equalizerFilter4?.gain = Filters.equalizerFilter.filterBand4Gain
         
-        equalizerFilter5 = AKEqualizerFilter()
-        equalizerFilter5?.bandwidth = 562
-        equalizerFilter5?.centerFrequency = 500
-        equalizerFilter5?.gain = Filters.equalizerFilter.filterBand5Gain
+        audio.equalizerFilter5 = AKEqualizerFilter()
+        audio.equalizerFilter5?.bandwidth = 562
+        audio.equalizerFilter5?.centerFrequency = 500
+        audio.equalizerFilter5?.gain = Filters.equalizerFilter.filterBand5Gain
         
-        equalizerFilter6 = AKEqualizerFilter()
-        equalizerFilter6?.bandwidth = 1112
-        equalizerFilter6?.centerFrequency = 1000
-        equalizerFilter6?.gain = Filters.equalizerFilter.filterBand6Gain
+        audio.equalizerFilter6 = AKEqualizerFilter()
+        audio.equalizerFilter6?.bandwidth = 1112
+        audio.equalizerFilter6?.centerFrequency = 1000
+        audio.equalizerFilter6?.gain = Filters.equalizerFilter.filterBand6Gain
         
-        equalizerFilter7 = AKEqualizerFilter()
-        equalizerFilter7?.bandwidth = 2222
-        equalizerFilter7?.centerFrequency = 2000
-        equalizerFilter7?.gain = Filters.equalizerFilter.filterBand7Gain
+        audio.equalizerFilter7 = AKEqualizerFilter()
+        audio.equalizerFilter7?.bandwidth = 2222
+        audio.equalizerFilter7?.centerFrequency = 2000
+        audio.equalizerFilter7?.gain = Filters.equalizerFilter.filterBand7Gain
         
-        equalizerFilter8 = AKEqualizerFilter()
-        equalizerFilter8?.bandwidth = 4444
-        equalizerFilter8?.centerFrequency = 4000
-        equalizerFilter8?.gain = Filters.equalizerFilter.filterBand8Gain
+        audio.equalizerFilter8 = AKEqualizerFilter()
+        audio.equalizerFilter8?.bandwidth = 4444
+        audio.equalizerFilter8?.centerFrequency = 4000
+        audio.equalizerFilter8?.gain = Filters.equalizerFilter.filterBand8Gain
         
-        equalizerFilter9 = AKEqualizerFilter()
-        equalizerFilter9?.bandwidth = 8888
-        equalizerFilter9?.centerFrequency = 8000
-        equalizerFilter9?.gain = Filters.equalizerFilter.filterBand9Gain
+        audio.equalizerFilter9 = AKEqualizerFilter()
+        audio.equalizerFilter9?.bandwidth = 8888
+        audio.equalizerFilter9?.centerFrequency = 8000
+        audio.equalizerFilter9?.gain = Filters.equalizerFilter.filterBand9Gain
         
-        equalizerFilter10 = AKEqualizerFilter()
-        equalizerFilter10?.bandwidth = 17000
-        equalizerFilter10?.centerFrequency = 16000
-        equalizerFilter10?.gain = Filters.equalizerFilter.filterBand10Gain
+        audio.equalizerFilter10 = AKEqualizerFilter()
+        audio.equalizerFilter10?.bandwidth = 17000
+        audio.equalizerFilter10?.centerFrequency = 16000
+        audio.equalizerFilter10?.gain = Filters.equalizerFilter.filterBand10Gain
+        
+    
         
         
-        highPassFilter = AKHighPassFilter()
-        lowPassFilter = AKLowPassFilter()
+        audio.highPassFilter = AKHighPassFilter()
+        audio.lowPassFilter = AKLowPassFilter()
         
-        toneFilter = AKToneFilter()
-        toneFilter?.start()
+        audio.toneFilter = AKToneFilter()
+        audio.toneFilter?.start()
         
-        masterBooster = AKBooster()
-        masterBooster?.start()
+        audio.masterBooster = AKBooster()
+        audio.masterBooster?.start()
+        
+        
+        
+        
+        audio.toneComplementFilter = AKToneComplementFilter()
+        
+        audio.highShelfFilter = AKHighShelfFilter()
+        audio.lowShelfFilter = AKLowShelfFilter()
+        
+        audio.bandPassButterworthFilter = AKBandPassButterworthFilter()
+        audio.bandRejectButterworthFilter = AKBandRejectButterworthFilter()
+        audio.lowPassButterworthFilter = AKLowPassButterworthFilter()
+        audio.highPassButterworthFilter = AKHighPassButterworthFilter()
+        
+        audio.modalResonanceFilter = AKModalResonanceFilter()
+        audio.resonantFilter = AKResonantFilter()
+        audio.peakingParametricEqualizerFilter = AKPeakingParametricEqualizerFilter()
+        audio.lowShelfParametricEqualizerFilter = AKLowShelfParametricEqualizerFilter()
+        highShelfParametricEqualizerFilter = AKHighShelfParametricEqualizerFilter()
+        
+        audio.formantFilter = AKFormantFilter()
+        audio.rolandTB303Filter = AKRolandTB303Filter()
+        audio.korgLowPassFilter = AKKorgLowPassFilter()
+        audio.threePoleLowpassFilter = AKThreePoleLowpassFilter()
+        
+        audio.moogLadder = AKMoogLadder()
+        
+        
+        audio.dcBlock = AKDCBlock()
+        audio.stringResonator = AKStringResonator()
+        audio.combFilterReverb = AKCombFilterReverb()
         
     }
 

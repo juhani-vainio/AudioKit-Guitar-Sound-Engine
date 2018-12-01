@@ -16,6 +16,7 @@ fileprivate var postCollectionLongPressGesture: UILongPressGestureRecognizer!
 
 class ViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UITableViewDelegate, UITableViewDataSource  {
     
+    var nameCheck = Bool()
     
     private let parallaxLayout = ParallaxFlowLayout()
     private let postSnappingLayout = PostSnappingFlowLayout()
@@ -57,17 +58,110 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         interfaceSetup()
         
         
+        
+        
+        
+        audio.shared.createEffects()
+        
+        
+        
+        helper.shared.checkUserDefaults()
+        
         createCollectionViews()
         createTableViews()
         
         
         
-        audio.effect.start()
+        audio.shared.start()
     
         
         
     }
 
+    
+    
+    func goToSleep() {
+        helper.shared.saveCurrentSettings()
+    }
+    
+    
+    // MARK: DIALOGUES
+    
+    func popUpDialogueForNewSound() {
+        let alert = UIAlertController(title: "Name of your new sound?", message: nil, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        
+        // Create an OK Button
+        let okAction = UIAlertAction(title: "OK", style: .default, handler: { action in
+            
+            if let name = alert.textFields?.first?.text {
+                print("Your new sound is: \(name)")
+                if self.nameCheck {
+                    helper.shared.saveEffectChain(name: name)
+                    
+                    // TODO: tableview for saved sounds
+                    /*
+                    self.savedSoundsView.reloadData()
+                    self.savedSoundsView.setNeedsLayout()
+                    self.savedSoundsView.layoutIfNeeded()
+                     */
+                }
+                
+            }
+        })
+        
+        // Add the OK Button to the Alert Controller
+        alert.addAction(okAction)
+        self.nameCheck = false
+        okAction.isEnabled = false
+        // Add a text field to the alert controller
+        alert.addTextField { (textField) in
+            textField.enablesReturnKeyAutomatically = true
+            textField.placeholder = "Input name here..."
+            // Observe the UITextFieldTextDidChange notification to be notified in the below block when text is changed
+            NotificationCenter.default.addObserver(forName: UITextField.textDidChangeNotification, object:textField , queue: OperationQueue.main, using: {_ in
+                // Being in this block means that something fired the UITextFieldTextDidChange notification.
+                
+                // Access the textField object from alertController.addTextField(configurationHandler:) above and get the character count of its non whitespace characters
+                let text = textField.text
+                if Collections.savedSounds.contains(text!)  {
+                    // If the text contains non whitespace characters, enable the OK Button
+                    okAction.isEnabled = false
+                    self.nameCheck = false
+                }
+                else {
+                    let textCount = textField.text?.trimmingCharacters(in: .whitespacesAndNewlines).characters.count ?? 0
+                    let textIsNotEmpty = textCount > 0
+                    self.nameCheck = textIsNotEmpty
+                    okAction.isEnabled = textIsNotEmpty
+                }
+            })
+        }
+        
+        self.present(alert, animated: true)
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
     
      // MARK: TABLEVIEWS
@@ -168,14 +262,14 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
                 // Has two sliders
                 let cell = tableView.dequeueReusableCell(withIdentifier: "DoubleTableViewCell", for: indexPath) as! DoubleTableViewCell
                 
-                let slider1 = audio.effect.getValues(id: cellId, slider: 1)
+                let slider1 = audio.shared.getValues(id: cellId, slider: 1)
                 cell.slider1Title.text = slider1.name
                 cell.slider1Value.text = slider1.value
                 cell.slider1.minimumValue = slider1.min
                 cell.slider1.maximumValue = slider1.max
                 cell.slider1.value = slider1.valueForSlider
                 
-                let slider2 = audio.effect.getValues(id: cellId, slider: 2)
+                let slider2 = audio.shared.getValues(id: cellId, slider: 2)
                 cell.slider2Title.text = slider2.name
                 cell.slider2Value.text = slider2.value
                 cell.slider2.minimumValue = slider2.min
@@ -217,7 +311,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
             case "triple":
                 // Has two sliders
                 let cell = tableView.dequeueReusableCell(withIdentifier: "TripleTableViewCell", for: indexPath) as! TripleTableViewCell
-                let slider1 = audio.effect.getValues(id: cellId, slider: 1)
+                let slider1 = audio.shared.getValues(id: cellId, slider: 1)
                 cell.slider1Title.text = slider1.name
                 cell.slider1Value.text = slider1.value
                 cell.slider1.minimumValue = slider1.min
@@ -225,7 +319,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
                 cell.slider1.value = slider1.valueForSlider
                 
                 
-                let slider2 = audio.effect.getValues(id: cellId, slider: 2)
+                let slider2 = audio.shared.getValues(id: cellId, slider: 2)
                 cell.slider2Title.text = slider2.name
                 cell.slider2Value.text = slider2.value
                 cell.slider2.minimumValue = slider2.min
@@ -233,7 +327,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
                 cell.slider2.value = slider2.valueForSlider
             
                 
-                let slider3 = audio.effect.getValues(id: cellId, slider: 3)
+                let slider3 = audio.shared.getValues(id: cellId, slider: 3)
                 cell.slider3Title.text = slider3.name
                 cell.slider3Value.text = slider3.value
                 cell.slider3.minimumValue = slider3.min
@@ -279,28 +373,28 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
                 // Has two sliders
                 let cell = tableView.dequeueReusableCell(withIdentifier: "QuatroTableViewCell", for: indexPath) as! QuatroTableViewCell
                
-                let slider1 = audio.effect.getValues(id: cellId, slider: 1)
+                let slider1 = audio.shared.getValues(id: cellId, slider: 1)
                 cell.slider1Title.text = slider1.name
                 cell.slider1Value.text = slider1.value
                 cell.slider1.minimumValue = slider1.min
                 cell.slider1.maximumValue = slider1.max
                 cell.slider1.value = slider1.valueForSlider
                 
-                let slider2 = audio.effect.getValues(id: cellId, slider: 2)
+                let slider2 = audio.shared.getValues(id: cellId, slider: 2)
                 cell.slider2Title.text = slider2.name
                 cell.slider2Value.text = slider2.value
                 cell.slider2.minimumValue = slider2.min
                 cell.slider2.maximumValue = slider2.max
                 cell.slider2.value = slider2.valueForSlider
                 
-                let slider3 = audio.effect.getValues(id: cellId, slider: 3)
+                let slider3 = audio.shared.getValues(id: cellId, slider: 3)
                 cell.slider3Title.text = slider3.name
                 cell.slider3Value.text = slider3.value
                 cell.slider3.minimumValue = slider3.min
                 cell.slider3.maximumValue = slider3.max
                 cell.slider3.value = slider3.valueForSlider
                 
-                let slider4 = audio.effect.getValues(id: cellId, slider: 4)
+                let slider4 = audio.shared.getValues(id: cellId, slider: 4)
                 cell.slider4Title.text = slider4.name
                 cell.slider4Value.text = slider4.value
                 cell.slider4.minimumValue = slider4.min
@@ -349,7 +443,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
                 // One slider
                 let cell = tableView.dequeueReusableCell(withIdentifier: "TableViewCell", for: indexPath) as! TableViewCell
                 
-                let slider = audio.effect.getValues(id: cellId, slider: 1)
+                let slider = audio.shared.getValues(id: cellId, slider: 1)
                 cell.sliderTitle.text = slider.name
                 cell.sliderValue.text = slider.value
                 cell.slider.minimumValue = slider.min
@@ -562,28 +656,8 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     
     func registerCollectionViewCells() {
         
-        /*
-        for pedal in 0..<Effects.selectedEffects.count {
-            
-            let typeName = Effects.selectedEffects[pedal]
-            
-            let nib = UINib(nibName: typeName + "CollectionViewCell", bundle: nil)
-            audioSignalView.register(nib, forCellWithReuseIdentifier: typeName)
-            
-        }
-        for pedal in 0..<Effects.listOfEffects.count {
-            
-            let typeName = Effects.listOfEffects[pedal]
-            
-            let nib = UINib(nibName: typeName + "CollectionViewCell", bundle: nil)
-            audioSignalView.register(nib, forCellWithReuseIdentifier: typeName)
-        }
-        */
-       
-        
         let mainNib = UINib(nibName: "DefaultMainCollectionViewCell", bundle: nil)
         mainCollection.register(mainNib, forCellWithReuseIdentifier: "DefaultMainCollectionViewCell")
-        
         
     }
     

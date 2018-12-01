@@ -55,7 +55,7 @@ class TableViewCell: UITableViewCell {
     }
     
     @objc func toggleOnOff() {
-        let text = audio.effect.changeValues(id:self.id, slider: 0, value: 0)
+        let text = audio.shared.changeValues(id:self.id, slider: 0, value: 0)
         print(text)
         onOffButton.setTitle(text, for: .normal)
         setOnOff()
@@ -67,7 +67,7 @@ class TableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     @objc func valueChanged() {
-        sliderValue.text = audio.effect.changeValues(id:self.id, slider: 1, value: Double(slider.value))
+        sliderValue.text = audio.shared.changeValues(id:self.id, slider: 1, value: Double(slider.value))
 
     }
 }

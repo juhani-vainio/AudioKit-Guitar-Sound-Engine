@@ -8,6 +8,8 @@
 
 import UIKit
 
+
+
 struct interface {
     // tables & collections
     // order from bottom
@@ -26,6 +28,28 @@ struct interface {
 class Colors {
     
     static let palette = Colors()
+    
+    func colorForEffect(name: String) -> UIColor {
+        var color = UIColor()
+        switch name {
+        case "AKBitCrusher" : color = UIColor.magenta
+        case "AKTanhDistortion" : color = UIColor.brown
+        case "AKClipper" : color = UIColor.blue
+        case "AKDynaRageCompressor" : color = UIColor.white
+        case "AKAutoWah" : color = UIColor.black
+        case "AKDelay" : color = UIColor.yellow
+        case "AKDecimator" : color = UIColor.cyan
+        case "AKRingModulator" : color = UIColor.purple
+        default : color = UIColor.black
+        }
+        return color
+    }
+    
+    
+    
+    
+    
+    
     
     let options = ["spotify", "bluePinkGreen", "finder", "joku", "defaultti"]
 

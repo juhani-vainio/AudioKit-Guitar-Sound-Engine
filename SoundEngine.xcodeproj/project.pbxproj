@@ -22,6 +22,8 @@
 		573AE53721AEECE700452624 /* Amp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 573AE53621AEECE700452624 /* Amp.swift */; };
 		573AE53921AEEE9800452624 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 573AE53821AEEE9800452624 /* AudioToolbox.framework */; };
 		5752059F21AD547F0005889E /* Filters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5752059E21AD547E0005889E /* Filters.swift */; };
+		57612AE121B172A1001A7231 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57612AE021B172A0001A7231 /* Helper.swift */; };
+		57612AE321B17396001A7231 /* Collections.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57612AE221B17396001A7231 /* Collections.swift */; };
 		578F421521A5708A003076EC /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 578F421421A5708A003076EC /* Colors.swift */; };
 		579368D2219EF91400227AF8 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 579368D0219EF91400227AF8 /* TableViewCell.swift */; };
 		579368D3219EF91400227AF8 /* TableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 579368D1219EF91400227AF8 /* TableViewCell.xib */; };
@@ -85,6 +87,8 @@
 		573AE53821AEEE9800452624 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		573AE53A21AEEE9800452624 /* SoundEngine.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SoundEngine.entitlements; sourceTree = "<group>"; };
 		5752059E21AD547E0005889E /* Filters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filters.swift; sourceTree = "<group>"; };
+		57612AE021B172A0001A7231 /* Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
+		57612AE221B17396001A7231 /* Collections.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Collections.swift; sourceTree = "<group>"; };
 		578F421421A5708A003076EC /* Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		579368D0219EF91400227AF8 /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 		579368D1219EF91400227AF8 /* TableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TableViewCell.xib; sourceTree = "<group>"; };
@@ -181,11 +185,13 @@
 				573AE53A21AEEE9800452624 /* SoundEngine.entitlements */,
 				57075EC8219C490C003F2D4F /* ViewController.swift */,
 				57E397BD21AC1E5300F2871A /* DataModel.swift */,
+				57612AE021B172A0001A7231 /* Helper.swift */,
 				573AE53621AEECE700452624 /* Amp.swift */,
 				57E397BF21AC3B8C00F2871A /* Effects.swift */,
 				5752059E21AD547E0005889E /* Filters.swift */,
 				57075ECA219C490C003F2D4F /* Main.storyboard */,
 				578F421421A5708A003076EC /* Colors.swift */,
+				57612AE221B17396001A7231 /* Collections.swift */,
 				57E397AF21AC155600F2871A /* Extensions.swift */,
 				57E397AE21AC12B200F2871A /* TableViews */,
 				57E397B121AC15BA00F2871A /* CollectionViews */,
@@ -476,6 +482,7 @@
 				5705EFEF219DE7D6005EF724 /* SoundsCollectionViewCell.swift in Sources */,
 				57E397BE21AC1E5300F2871A /* DataModel.swift in Sources */,
 				57A631EA21A965B5000069FA /* DoubleTableViewCell.swift in Sources */,
+				57612AE121B172A1001A7231 /* Helper.swift in Sources */,
 				57075EC7219C490C003F2D4F /* AppDelegate.swift in Sources */,
 				57E397C021AC3B8C00F2871A /* Effects.swift in Sources */,
 				57E397BC21AC15D200F2871A /* SnappingFlowLayout.swift in Sources */,
@@ -486,6 +493,7 @@
 				57E397AC21A96FCF00F2871A /* QuatroTableViewCell.swift in Sources */,
 				57E397BB21AC15D200F2871A /* ParallaxFlowLayout.swift in Sources */,
 				57E397B021AC155600F2871A /* Extensions.swift in Sources */,
+				57612AE321B17396001A7231 /* Collections.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

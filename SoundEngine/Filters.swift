@@ -11,151 +11,184 @@ import AudioKit
 
 class Filters: Codable {
  
+    struct toneComplementFilter: Codable {
+        static var halfPowerPoint = Double()
+        static var halfPowerPointRange = 20...20000
+        static var isStarted = Bool(false)
+    }
+    
+    struct highShelfFilter: Codable {
+        static var cutOffFrequency = Double()
+        static var gain = Double()
+        static var isStarted = Bool(false)
+    }
+    
+    struct lowShelfFilter: Codable {
+        static var cutOffFrequency = Double()
+        static var gain = Double()
+        static var isStarted = Bool(false)
+    }
+    
+    struct bandPassButterworthFilter: Codable {
+        static var centerFrequency = Double()
+        static var bandwidth = Double()
+        static var isStarted = Bool(false)
+    }
+
+    struct bandRejectButterworthFilter: Codable {
+        static var centerFrequency = Double()
+        static var bandwidth = Double()
+        static var isStarted = Bool(false)
+    }
+    
+    struct lowPassButterworthFilter: Codable {
+        static var cutoffFrequency = Double()
+        static var isStarted = Bool(false)
+    }
+    
+    struct highPassButterworthFilter: Codable {
+        static var cutoffFrequency = Double()
+        static var isStarted = Bool(false)
+    }
+    
+    struct modalResonanceFilter: Codable {
+        static var frequency = Double()
+        static var qualityFactor = Double()
+        static var isStarted = Bool(false)
+    }
+    struct resonantFilter: Codable {
+        static var frequency = Double()
+        static var bandwidth = Double()
+        static var isStarted = Bool(false)
+    }
+    
+    struct peakingParametricEqualizerFilter: Codable {
+        static var centerFrequency = Double()
+        static var q = Double()
+        static var gain = Double()
+        static var isStarted = Bool(false)
+    }
+  
+    struct lowShelfParametricEqualizerFilter: Codable {
+        static var cornerFrequency = Double()
+        static var q = Double()
+        static var gain = Double()
+        static var isStarted = Bool(false)
+    }
+    struct highShelfParametricEqualizerFilter: Codable {
+        static var centerFrequency = Double()
+        static var q = Double()
+        static var gain = Double()
+        static var isStarted = Bool(false)
+    }
+    
+    struct formantFilter: Codable {
+        static var centerFrequency = Double()
+        static var attackDuration = Double()
+        static var decayDuration = Double()
+        static var isStarted = Bool(false)
+    }
+    
+    struct rolandTB303Filter: Codable {
+        static var cutoffFrequency = Double()
+        static var resonance = Double()
+        static var distortion = Double()
+        static var resonanceAsymmetry = Double()
+        static var isStarted = Bool(false)
+    }
+  
+    struct korgLowPassFilter: Codable {
+        static var cutoffFrequency = Double()
+        static var resonance = Double()
+        static var saturation = Double()
+        static var isStarted = Bool(false)
+    }
+    
+    struct threePoleLowpassFilter: Codable {
+        static var cutoffFrequency = Double()
+        static var resonance = Double()
+        static var distortion = Double()
+        static var isStarted = Bool(false)
+    }
+
+    struct moogLadder: Codable {
+        static var cutoffFrequency = Double()
+        static var resonance = Double()
+        static var isStarted = Bool(false)
+    }
+    
+    struct dcBlock: Codable {
+        static var isStarted = Bool(false)
+    }
+    
+    struct stringResonator: Codable {
+        static var fundamentalFrequency = Double()
+        static var feedback = Double()
+        static var isStarted = Bool(false)
+    }
+   
+    struct combFilterReverb: Codable {
+        static var reverbDuration = Double()
+        static var loopDuration = Double()
+        static var isStarted = Bool(false)
+    }
+   
+
+    
+    
+    
+    
+    
     struct masterMixer: Codable {
-        static var volume = Double(1.0) {
-            didSet {
-                UserDefaults.standard.set(volume, forKey: "masterMixerVolume")
-            }
-            
-        }
-        
+        static var volume = Double(1.0)
     }
     
     // AKBooster
     struct masterBooster: Codable {
         
-        static var gain = Double(1.0) {
-            didSet {
-                UserDefaults.standard.set(gain, forKey: "masterBoosterGain")
-            }
-            
-        }
-        static var isStarted = Bool(false) {
-            didSet {
-                UserDefaults.standard.set(isStarted, forKey: "masterBoosterIsStarted")
-            }
-        }
-        
+        static var gain = Double(1.0)
+        static var isStarted = Bool(false)
     }
     
     // AKToneFilter
     struct toneFilter: Codable {
         
-        static var halfPowerPoint = Double(1.0) {
-            didSet {
-                UserDefaults.standard.set(halfPowerPoint, forKey: "toneFilterHalfPowerPoint")
-            }
-        }
-        
-        static var isStarted = Bool(false) {
-            didSet {
-                UserDefaults.standard.set(isStarted, forKey: "toneFilterIsStarted")
-            }
-        }
+        static var halfPowerPoint = Double(1.0)
+        static var halfPowerPointRange = 20...20000
+        static var isStarted = Bool(false)
+           
     }
     
     // AKEqualizerFilter
     struct equalizerFilter: Codable {
         
-        static var isStarted = Bool(false) {
-            didSet {
-                UserDefaults.standard.set(isStarted, forKey: "equalizerFilterIsStarted")
-            }
-        }
+        static var isStarted = Bool(false)
         
-        static var filterBand1Gain = Double(1.5) // [centerFrequency: 32, bandwidth: 44.7, gain: 1.0]
-        {
-            didSet {
-                UserDefaults.standard.set(filterBand1Gain, forKey: "filterBand1Gain")
-            }
-        }
-        static var  filterBand2Gain = Double(1.4) // [centerFrequency: 64, bandwidth: 70.8, gain: 1.0]
-        {
-            didSet {
-                UserDefaults.standard.set(filterBand2Gain, forKey: "filterBand2Gain")
-            }
-        }
-        static var  filterBand3Gain = Double(0.8) // [centerFrequency: 125, bandwidth: 141, gain: 1.0]
-        {
-            didSet {
-                UserDefaults.standard.set(filterBand3Gain, forKey: "filterBand3Gain")
-            }
-        }
-        static var  filterBand4Gain = Double(0.8) // [centerFrequency: 250, bandwidth: 282, gain: 1.0]
-        {
-            didSet {
-                UserDefaults.standard.set(filterBand4Gain, forKey: "filterBand4Gain")
-            }
-        }
-        static var  filterBand5Gain = Double(1.2) // [centerFrequency: 500, bandwidth: 562, gain: 1.0]
-        {
-            didSet {
-                UserDefaults.standard.set(filterBand5Gain, forKey: "filterBand5Gain")
-            }
-        }
-        static var  filterBand6Gain = Double(1.3) // [centerFrequency: 1_000, bandwidth: 1_112, gain: 1.0]
-        {
-            didSet {
-                UserDefaults.standard.set(filterBand6Gain, forKey: "filterBand6Gain")
-            }
-        }
-        static var  filterBand7Gain = Double(1.3) // [centerFrequency: 2_000, bandwidth: 2_222, gain: 1.0]
-        {
-            didSet {
-                UserDefaults.standard.set(filterBand7Gain, forKey: "filterBand7Gain")
-            }
-        }
-        static var  filterBand8Gain = Double(1.3) // [centerFrequency: 4_000, bandwidth: 4500, gain: 1.0]
-        {
-            didSet {
-                UserDefaults.standard.set(filterBand8Gain, forKey: "filterBand8Gain")
-            }
-        }
-        static var  filterBand9Gain = Double(1.3) // [centerFrequency: 4_000, bandwidth: 4500, gain: 1.0]
-        {
-            didSet {
-                UserDefaults.standard.set(filterBand9Gain, forKey: "filterBand9Gain")
-            }
-        }
-        static var  filterBand10Gain = Double(1.3) // [centerFrequency: 4_000, bandwidth: 4500, gain: 1.0]
-        {
-            didSet {
-                UserDefaults.standard.set(filterBand10Gain, forKey: "filterBand10Gain")
-            }
-        }
-        static var  filterBand11Gain = Double(1.3) // [centerFrequency: 4_000, bandwidth: 4500, gain: 1.0]
-        {
-            didSet {
-                UserDefaults.standard.set(filterBand11Gain, forKey: "filterBand11Gain")
-            }
-        }
-        static var  filterBand12Gain = Double(1.3) // [centerFrequency: 4_000, bandwidth: 4500, gain: 1.0]
-        {
-            didSet {
-                UserDefaults.standard.set(filterBand12Gain, forKey: "filterBand12Gain")
-            }
-        }
+        static var filterBand1Gain = Double()
         
+        static var  filterBand2Gain = Double(1.4)
+       
+        static var  filterBand3Gain = Double(0.8)
+       
+        static var  filterBand4Gain = Double(0.8)
         
+        static var  filterBand5Gain = Double(1.2)
         
+        static var  filterBand6Gain = Double(1.3)
         
+        static var  filterBand7Gain = Double(1.3)
+       
+        static var  filterBand8Gain = Double(1.3)
         
+        static var  filterBand9Gain = Double(1.3)
+       
+        static var  filterBand10Gain = Double(1.3)
         
+        static var  filterBand11Gain = Double(1.3)
         
+        static var  filterBand12Gain = Double(1.3)
         
-        static var filterBand1centerFrequency = Double(4000)
-        {
-            didSet {
-                UserDefaults.standard.set(filterBand1centerFrequency, forKey: "filterBand1centerFrequency")
-            }
-        }
-        
-        static var filterBand1bandwidth = Double(4500)
-        {
-            didSet {
-                UserDefaults.standard.set(filterBand1bandwidth, forKey: "filterBand1bandwidth")
-            }
-        }
+
     }
     
     

@@ -84,7 +84,7 @@ class QuatroTableViewCell: UITableViewCell {
     }
     
     @objc func toggleOnOff() {
-        let text = audio.effect.changeValues(id:self.id, slider: 0, value: 0)
+        let text = audio.shared.changeValues(id:self.id, slider: 0, value: 0)
         print(text)
         onOffButton.setTitle(text, for: .normal)
         setOnOff()
@@ -92,10 +92,10 @@ class QuatroTableViewCell: UITableViewCell {
     
     @objc func valueChanged(slider: UISlider) {
         switch slider {
-        case slider1: slider1Value.text = audio.effect.changeValues(id:self.id, slider: 1, value: Double(slider.value))
-        case slider2: slider2Value.text = audio.effect.changeValues(id:self.id, slider: 2, value: Double(slider.value))
-        case slider3: slider3Value.text = audio.effect.changeValues(id:self.id, slider: 3, value: Double(slider.value))
-        case slider4: slider4Value.text = audio.effect.changeValues(id:self.id, slider: 4, value: Double(slider.value))
+        case slider1: slider1Value.text = audio.shared.changeValues(id:self.id, slider: 1, value: Double(slider.value))
+        case slider2: slider2Value.text = audio.shared.changeValues(id:self.id, slider: 2, value: Double(slider.value))
+        case slider3: slider3Value.text = audio.shared.changeValues(id:self.id, slider: 3, value: Double(slider.value))
+        case slider4: slider4Value.text = audio.shared.changeValues(id:self.id, slider: 4, value: Double(slider.value))
         default: break
         }
         
