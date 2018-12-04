@@ -72,7 +72,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         
         
         
-        audio.shared.start()
+        audio.shared.startAudio()
     
         
         
@@ -228,7 +228,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         if tableView == unitsBefore {
             cellOpened = audio.selectedUnitsBeforeData[indexPath.row].opened
             cellTitle = audio.selectedUnitsBeforeData[indexPath.row].title
-            cellType = audio.selectedUnitsBeforeData[indexPath.row].interface
+            cellType = audio.selectedUnitsBeforeData[indexPath.row].sliderRowsForTable
             cellIsLast = audio.selectedUnitsBeforeData.endIndex - 1 == indexPath.row
             cellId = audio.selectedUnitsBeforeData[indexPath.row].id
    
@@ -236,7 +236,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         else if tableView == unitsAfter {
             cellOpened = audio.selectedUnitsAfterData[indexPath.row].opened
             cellTitle = audio.selectedUnitsAfterData[indexPath.row].title
-            cellType = audio.selectedUnitsAfterData[indexPath.row].interface
+            cellType = audio.selectedUnitsAfterData[indexPath.row].sliderRowsForTable
             cellIsLast = audio.selectedUnitsAfterData.endIndex - 1 == indexPath.row
             cellId = audio.selectedUnitsAfterData[indexPath.row].id
         }
@@ -658,6 +658,15 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         
         let mainNib = UINib(nibName: "DefaultMainCollectionViewCell", bundle: nil)
         mainCollection.register(mainNib, forCellWithReuseIdentifier: "DefaultMainCollectionViewCell")
+        
+        let compressNib = UINib(nibName: "CompressionCollectionViewCell", bundle: nil)
+        mainCollection.register(compressNib, forCellWithReuseIdentifier: "CompressionCollectionViewCell")
+        
+        let balanceNib = UINib(nibName: "BalanceCollectionViewCell", bundle: nil)
+        mainCollection.register(balanceNib, forCellWithReuseIdentifier: "BalanceCollectionViewCell")
+        
+        let expandNib = UINib(nibName: "ExpandCollectionViewCell", bundle: nil)
+        mainCollection.register(expandNib, forCellWithReuseIdentifier: "ExpandCollectionViewCell")
         
     }
     

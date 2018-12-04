@@ -14,40 +14,24 @@ class Effects:Codable {
 // Tag = 1
 struct bitCrusher:Codable {
 
+    let bitCrusherInfo = "A Bitcrusher is a lo-fi (low fidelity) digital audio effect, which produces a distortion by the reduction of the resolution or bandwidth of digital audio data. The resulting quantization noise may produce a “warmer” sound impression, or a harsh one, depending on the amount of reduction."
+    // https://en.wikipedia.org/wiki/Bitcrusher
     
     // controls needed : 2
     // bitDepth
     // sampleRate
- 
-    
-    static var isStarted = true {
-        didSet {
-            UserDefaults.standard.set(isStarted, forKey: "bitCrusherIsStarted")
-        }
-    }
     
     static var bitDepthRange = 1.0 ... 24.0
     static var sampleRateRange = 0.0 ... 20_000.0
-    static var defaultBitDepth:Double = 8.0
-    static var defaultSampleRate:Double = 10_000.0
-
-    static var bitDepth = Double(8.0) {
-        didSet {
-            UserDefaults.standard.set(bitDepth, forKey: "bitCrusherBitDepth")
-        }
-    }
-
-    static var sampleRate:Double = 10_000.0 {
-        didSet {
-            UserDefaults.standard.set(sampleRate, forKey: "bitCrusherSampleRate")
-        }
-    }
 
 }
     
     // TANH DISTORTION AKTanhDistortion
     // Tag = 2
     struct tanhDistortion:Codable {
+        
+        let tanhInfo = "This distortion technique involves using a mathematical function to directly modify the values of the audio signal. The tanh() function can give a rounded SOFT CLIPPING kind of distortion, and the distortion amount is proportional to the input gain. "
+        // http://folk.ntnu.no/oyvinbra/gdsp/Lesson4tanh.html
         
         // controls needed : 4
         // pregain
@@ -61,91 +45,11 @@ struct bitCrusher:Codable {
         static var negativeShapeParameterRange = 0...1
         
         
-        static var pregain: Double = 1.0 {
-            didSet {
-                UserDefaults.standard.set(pregain, forKey: "tanhDistortionPregain")
-            }
-        }
-        static var postgain: Double = 1.0 {
-            didSet {
-                UserDefaults.standard.set(postgain, forKey: "tanhDistortionPostgain")
-            }
-        }
-        static var positiveShapeParameter: Double = 0.0 {
-            didSet {
-                UserDefaults.standard.set(positiveShapeParameter, forKey: "tanhDistortionPositiveShapeParameter")
-            }
-        }
-        static var negativeShapeParameter: Double = 0.0 {
-            didSet {
-                UserDefaults.standard.set(negativeShapeParameter, forKey: "tanhDistortionNegativeShapeParameter")
-            }
-        }
-        static var isStarted = Bool(true) {
-            didSet {
-                UserDefaults.standard.set(isStarted, forKey: "tanhDistortionIsStarted")
-            }
-        }
-        
     }
     
  
     
-// COMPRESSOR    AKDynaRageCompressor
-// Tag = 3
- struct dynaRageCompressor:Codable {
- 
-    // controls needed : 4 + 1 + switch
-    // ratio
-    // threshold
-    // attackDuration
-    // releaseDuration
-    
-    // + rage
-    // + rageIsOn
-    
-    static var ratioRange = 1...30
-    static var thresholdRange = 0...40
-    static var attackDurationRange = 0.0001...0.2   // 0,1 ms
-    static var releaseDurationRange = 0.01...3
-    
-    static var ratio = Double(1) {
-        didSet {
-            UserDefaults.standard.set(ratio, forKey: "dynaRageCompressorRatio")
-        }
-    }
-    static var threshold = Double(0){
-        didSet {
-            UserDefaults.standard.set(threshold, forKey: "dynaRageCompressorThreshold")
-        }
-    }
-    static var attackDuration = Double(0.001){
-        didSet {
-            UserDefaults.standard.set(attackDuration, forKey: "dynaRageCompressorAttackDuration")
-        }
-    }
-    static var releaseDuration = Double(0.05){
-        didSet {
-            UserDefaults.standard.set(releaseDuration, forKey: "dynaRageCompressorReleaseDuration")
-        }
-    }
-    static var rage = Double(0.7){
-        didSet {
-            UserDefaults.standard.set(rage, forKey: "dynaRageCompressorRage")
-        }
-    }
-    static var rageIsOn = Bool(false) {
-        didSet {
-            UserDefaults.standard.set(rageIsOn, forKey: "dynaRageCompressorRageIsOn")
-        }
-    }
-    static var isStarted = Bool(true) {
-        didSet {
-            UserDefaults.standard.set(isStarted, forKey: "dynaRageCompressorIsStarted")
-        }
-    }
- 
-    }
+
  
 // AUTO WAH AKAutoWah
 // Tag = 4
@@ -160,38 +64,18 @@ struct autoWah:Codable {
     static var wahRange = 0...1
     static var mixRange = 0...1
     static var amplitudeRange = 0...2
-    
-    static var defaultWah = Double(0.5)
-    static var defaultMix = Double(0.5)
-    static var defaultAmplitude = Double(0.5)
-
-    static var wah = Double(0.3){
-        didSet {
-            UserDefaults.standard.set(wah, forKey: "autoWahWah")
-        }
-    }
-    static var mix = Double(0.3){
-        didSet {
-            UserDefaults.standard.set(mix, forKey: "autoWahMix")
-        }
-    }
-    static var amplitude = Double(1.0){
-        didSet {
-            UserDefaults.standard.set(amplitude, forKey: "autoWahAmplitude")
-        }
-    }
-    static var isStarted = Bool(true) {
-        didSet {
-            UserDefaults.standard.set(isStarted, forKey: "autoWahIsStarted")
-        }
-    }
-   
+  
     }
 
     
 // DELAY    AKDelay
 // Tag = 5
 struct delay:Codable {
+    
+    let delayInfo = "delay or echo - To simulate the effect of reverberation in a large hall or cavern, one or several delayed signals are added to the original signal. To be perceived as echo, the delay has to be of order 35 milliseconds or above. Short of actually playing a sound in the desired environment, the effect of echo can be implemented using either digital or analog methods. Analog echo effects are implemented using tape delays or bucket-brigade devices. When large numbers of delayed signals are mixed a reverberation effect is produced; The resulting sound has the effect of being presented in a large room."
+    // https://en.wikipedia.org/wiki/Audio_signal_processing
+    
+    
 
     // controls needed : 4 + 3-way switch for presets
     // time
@@ -210,31 +94,7 @@ struct delay:Codable {
     static var feedbackRange = 0...1
      static var dryWetMixRange = 0...1
     static var lowPassCutOffRange = 1000...4000
-        static var time = TimeInterval(1){
-            didSet {
-                UserDefaults.standard.set(time, forKey: "delayTime")
-            }
-        }
-        static var feedback = Double(0.5){
-            didSet {
-                UserDefaults.standard.set(feedback, forKey: "delayFeedback")
-            }
-        }
-        static var lowPassCutOff = Double(3000){
-            didSet {
-                UserDefaults.standard.set(lowPassCutOff, forKey: "delayLowPassCutOff")
-            }
-        }
-        static var dryWetMix = Double(0.6){
-            didSet {
-                UserDefaults.standard.set(dryWetMix, forKey: "delayDryWetMix")
-            }
-        }
-        static var isStarted = Bool(true) {
-            didSet {
-                UserDefaults.standard.set(isStarted, forKey: "delayIsStarted")
-            }
-        }
+  
 
     }
     
@@ -242,6 +102,10 @@ struct delay:Codable {
 // DECIMATOR  AKDecimator
 // Tag = 6
 struct decimator:Codable {
+    
+    let decimatorInfo = "Loosely speaking, “decimation” is the process of reducing the sampling rate. In practice, this usually implies lowpass-filtering a signal, then throwing away some of its samples. Downsampling is a more specific term which refers to just the process of throwing away samples, without the lowpass filtering operation. Throughout this FAQ, though, we’ll just use the term “decimation” loosely, sometimes to mean “downsampling”."
+    // https://dspguru.com/dsp/faqs/multirate/decimation/
+    
   
          // controls needed : 3
         // decimation
@@ -251,31 +115,7 @@ struct decimator:Codable {
         static var decimationRange = 0.0 ... 1.0
         static var roundingRange = 0.0 ... 1.0
         static var mixRange = 0.0 ... 1.0
-        
-        static var decimation: Double = 0.5 {
-            didSet {
-                UserDefaults.standard.set(decimation, forKey: "decimatorDecimation")
-            }
-        }
 
-        static var rounding: Double = 0.5 {
-            didSet {
-                UserDefaults.standard.set(rounding, forKey: "decimatorRounding")
-            }
-        }
-
-        static var mix: Double = 0.5 {
-            didSet {
-                UserDefaults.standard.set(mix, forKey: "decimatorMix")
-            }
-        }
-
-        static var isStarted = Bool(true) {
-            didSet {
-                UserDefaults.standard.set(isStarted, forKey: "decimatorIsStarted")
-            }
-        }
-    
 
         
     }
@@ -284,23 +124,13 @@ struct decimator:Codable {
     // Tag 7
     struct clipper:Codable {
         
+        let clipperInfo = "Clips a signal to a predefined limit, in a soft manner, using one of three methods"
+        // AUDIOKIT docs
+        
         // controls needed : 1
         // limit
-        
-        static var isStarted = Bool(true){
-            didSet {
-                UserDefaults.standard.set(isStarted, forKey: "clipperIsStarted")
-            }
-        }
-        
+    
         static var limitRange = 0.0001 ... 1.0
-        static var defaultLimit = 1.0
-        
-        static var limit = Double(0.4) {
-            didSet {
-                UserDefaults.standard.set(limit, forKey: "clipperLimit")
-            }
-        }
         
     }
     
@@ -308,6 +138,9 @@ struct decimator:Codable {
     // RING MODULATOR  AKRingModulator
     // Tag= 8
     struct ringModulator:Codable {
+        
+        let modulatorInfo = "modulation - to change the frequency or amplitude of a carrier signal in relation to a predefined signal. Ring modulation, also known as amplitude modulation, is an effect made famous by Doctor Who's Daleks and commonly used throughout sci-fi."
+        // https://en.wikipedia.org/wiki/Audio_signal_processing
         
             // controls needed : 4
         // frequency1
@@ -318,34 +151,171 @@ struct decimator:Codable {
         static var frequencyRange = 80...1200
         static var balanceRange = 0...1
         static var mixRange = 0...1
-        static var frequency1: Double = 100 {
-            didSet {
-            UserDefaults.standard.set(frequency1, forKey: "ringModulatorFrequency1")
-            }
+        
         }
-        static var frequency2: Double = 100 {
-            didSet {
-            UserDefaults.standard.set(frequency2, forKey: "ringModulatorFrequency2")
-            }
+        
+        // FLANGER  AKFlanger
+        // Tag= 9
+        struct flanger:Codable {
+            //  is a modulation effect
+            let flangerInfo = "flanger - to create an unusual sound, a delayed signal is added to the original signal with a continuously variable delay (usually smaller than 10 ms). This effect is now done electronically using DSP, but originally the effect was created by playing the same recording on two synchronized tape players, and then mixing the signals together. As long as the machines were synchronized, the mix would sound more-or-less normal, but if the operator placed his finger on the flange of one of the players (hence flanger), that machine would slow down and its signal would fall out-of-phase with its partner, producing a phasing effect. Once the operator took his finger off, the player would speed up until its tachometer was back in phase with the master, and as this happened, the phasing effect would appear to slide up the frequency spectrum. This phasing up-and-down the register can be performed rhythmically."
+            // https://en.wikipedia.org/wiki/Audio_signal_processing
+            
+            
+            // controls needed : 4
+            // frequency
+            // depth
+            // feedback
+            // dryWetMix
+            
+            static var frequencyRange = 80...1200
+            static var depthRange = 0...1
+            static var feedbackRange = 0...1
+            static var dryWetMixRange = 0...1
+            
         }
-        static var balance: Double = 0.5 {
-            didSet {
-                UserDefaults.standard.set(balance, forKey: "ringModulatorBalance")
-            }
-        }
-        static var  mix: Double = 1 {
-            didSet {
-                UserDefaults.standard.set(mix, forKey: "ringModulatorMix")
-            }
-        }
-        static var isStarted = Bool(true) {
-            didSet {
-                UserDefaults.standard.set(isStarted, forKey: "ringModulatorIsStarted")
-            }
+        
+        // PHASER  AKPhaser
+        // Tag= 10
+        struct phaser:Codable {
+            //  is a modulation effect
+            let phaserInfo = "phaser - another way of creating an unusual sound; the signal is split, a portion is filtered with an all-pass filter to produce a phase-shift, and then the unfiltered and filtered signals are mixed. The phaser effect was originally a simpler implementation of the flanger effect since delays were difficult to implement with analog equipment. Phasers are often used to give a synthesized or electronic effect to natural sounds, such as human speech. The voice of C-3PO from Star Wars was created by taking the actor's voice and treating it with a phaser."
+            // https://en.wikipedia.org/wiki/Audio_signal_processing
+            
+            // controls needed : 9
+            // notchMinimumFrequency
+            // notchMaximumFrequency
+            // notchWidth
+            // notchFrequency
+            // vibratoMode        // Direct or Vibrato (default)
+            // depth
+            // feedback
+            // inverted
+            // lfoBPM
+         
+    
+            static var notchWidthRange = 10...5000
+            static var notchFrequencyRange = 1.1...4
+            static var depthRange = 0...1
+            static var feedbackRange = 0...1
+            static var lfoBPMRange = 24...360
+            
         }
         
         
-    }
+        // CHORUS  AKChorus
+        // Tag= 11
+        struct chorus:Codable {
+            //  is a modulation effect
+            let chorusInfo = "chorus - a delayed signal is added to the original signal with a constant delay. The delay has to be short in order not to be perceived as echo, but above 5 ms to be audible. If the delay is too short, it will destructively interfere with the un-delayed signal and create a flanging effect. Often, the delayed signals will be slightly pitch shifted to more realistically convey the effect of multiple voices."
+            // https://en.wikipedia.org/wiki/Audio_signal_processing
+         
+            // controls needed : 4
+            // frequency
+            // depth
+            // feedback
+            // dryWetMix
+            
+            static var frequencyRange = 80...1200
+            static var depthRange = 0...1
+            static var feedbackRange = 0...1
+            static var dryWetMixRange = 0...1
+            
+        }
+        
+        // COMPRESSOR  AKCompressor
+        // Tag= 11
+        struct compressor:Codable {
+            //  is a dynamics
+            
+            // controls needed : 6
+            // threshold
+            // headRoom
+            // attackDuration
+            // releaseDuration
+            // masterGain
+            // dryWetMix
+            
+            static var thresholdRange = -40...20 // dB default -20
+            static var headRoomRange = 0.1...40 // dB default 5
+            static var attackDurationRange = 0.0001...0.2 // Default: 0.001
+            static var releaseDurationRange = 0.01...3 // Default: 0.05
+            static var masterGainRange = -40...40 //  dB Default: 0
+            static var dryWetMix = 0...1
+        }
+     
+        // DYNAMICS PROCESSOR AKDynamicsProcessor
+        // AudioKit version of Apple’s DynamicsProcessor Audio Unit
+        struct dynamicsProcessor:Codable {
+            //  is a dynamics
+            
+            // controls needed : 10
+            // threshold: Double = -20,
+            // headRoom: Double = 5,
+            // expansionRatio: Double = 2,
+            // expansionThreshold: Double = 2,
+            // attackDuration: Double = 0.001,
+            // releaseDuration: Double = 0.05,
+            // masterGain: Double = 0,
+            // compressionAmount: Double = 0,
+            // inputAmplitude: Double = 0,
+            // outputAmplitude: Double = 0)
+
+        
+            static var thresholdRange = -40...20 // dB default -20
+            static var headRoomRange = 0.1...40 // dB default 5
+            static var expansionRatioRange = 1...50  // default 2
+            static var expansionThresholdRange = 1...50 // default 2
+            static var attackDurationRange = 0.0001...0.2 // Default: 0.001
+            static var releaseDurationRange = 0.01...3 // Default: 0.05
+            static var masterGainRange = -40...40 //  dB Default: 0
+            static var compressionAmountRange = -40...40 //  dB Default: 0
+            static var inputAmplitudeRange = -40...40 //  dB Default: 0
+            static var outputAmplitudeRange = -40...40 //  dB Default: 0
+            static var dryWetMix = 0...1
+        }
+    
+        // DYNAMIC RANGE PROCESSOR AKDynamicRangeCompressor
+        // Dynamic range compressor from Faust
+        
+        struct dynamicRangeProcessor:Codable {
+            //  is a dynamics
+            
+            // controls needed : 4
+            // ratio
+            // threshold
+            // attackDuration: Double = 0.001,
+            // releaseDuration: Double = 0.05,
+            
+            static var ratioRange = 1...30
+            static var thresholdRange = 0...40
+            static var attackDurationRange = 0.0001...0.2 // Default: 0.001
+            static var releaseDurationRange = 0.01...3 // Default: 0.05
+            
+        }
+        
+        // COMPRESSOR    AKDynaRageCompressor
+        // Tag = 3
+        struct dynaRageCompressor:Codable {
+            
+            let compressionInfo = "compression - the reduction of the dynamic range of a sound to avoid unintentional fluctuation in the dynamics."
+            
+            // controls needed : 4 + 1 + switch
+            // ratio
+            // threshold
+            // attackDuration
+            // releaseDuration
+            
+            // + rage
+            
+            static var ratioRange = 1...30
+            static var thresholdRange = 0...40
+            static var attackDurationRange = 0.0001...0.2   // 0,1 ms
+            static var releaseDurationRange = 0.01...3
+            
+            
+        }
+        
     
     static var selectedEffects = [String]()
     
@@ -358,7 +328,11 @@ struct decimator:Codable {
                             "AKAutoWah",
                             "AKTanhDistortion",
                             "AKDecimator",
-                            "AKRingModulator"
+                            "AKRingModulator",
+                            "AKFlanger",
+                            "AKPhaser",
+                            "AKChorus",
+                            "AKCompressor"
                             ]
     
     static let effectList = [
@@ -369,37 +343,13 @@ struct decimator:Codable {
         "AKAutoWah",
         "AKTanhDistortion",
         "AKDecimator",
-        "AKRingModulator"
+        "AKRingModulator",
+        "AKFlanger",
+        "AKPhaser",
+        "AKChorus",
+        "AKCompressor"
     ]
     
-
-    
-    struct distortion:Codable {
-        // DISTORTION  AKDistortion
-        // Tags in xib file =
-        
-        static var delay: Double = 0.1
-        static var decay: Double = 1.0
-        static var delayMix: Double = 0.5
-        static var decimation: Double = 0.5
-        static var rounding: Double = 0.0
-        static var decimationMix: Double = 0.5
-        static var linearTerm: Double = 0.5
-        static var squaredTerm: Double = 0.5
-        static var cubicTerm: Double = 0.5
-        static var polynomialMix: Double = 0.5
-        static var ringModFreq1: Double = 100
-        static var ringModFreq2: Double = 100
-        static var ringModBalance: Double = 0.5
-        static var ringModMix: Double = 0.0
-        static var softClipGain: Double = -6
-        static var finalMix: Double = 0.5
-        static var isStarted = Bool(false) {
-            didSet {
-                UserDefaults.standard.set(isStarted, forKey: "distortionIsStarted")
-            }
-        }
-    }
 
 }
 

@@ -14,57 +14,57 @@ struct effectData {
     var id = String()           // effect ID
     var opened = Bool()         // for expanding tableviewcells
     var title = String()        // name of effect for users
-    var interface = String()    // type of interface for cell
+    var sliderRowsForTable = String()    // type of interface for cell
 }
 
 class audio {
     static let shared = audio()
     
    static let allPossibleEffectsData = [
-    effectData(id: "bitCrusher", opened: false, title: "Bit Crusher", interface: "double"),
-    effectData(id: "tanhDistortion", opened: false, title: "Tanh Distortion", interface: "quatro"),
-    effectData(id: "dynaRageCompressor", opened: false, title: "Compressor", interface: "quatro"),
-    effectData(id: "delay", opened: false, title: "Delay", interface: "triple"),
-    effectData(id: "ringModulator", opened: false, title: "Ring Modulator", interface: "quatro"),
-    effectData(id: "clipper",opened: false, title: "Clipper", interface: "single"),
-    effectData(id: "autoWah" , opened: false, title: "Wah Wah!", interface: "triple"),
-    effectData(id: "decimator" ,opened: false, title: "Decimator", interface: "triple")
+    effectData(id: "bitCrusher", opened: false, title: "Bit Crusher", sliderRowsForTable: "double"),
+    effectData(id: "tanhDistortion", opened: false, title: "Tanh Distortion", sliderRowsForTable: "quatro"),
+    effectData(id: "dynaRageCompressor", opened: false, title: "Compressor", sliderRowsForTable: "quatro"),
+    effectData(id: "delay", opened: false, title: "Delay", sliderRowsForTable: "triple"),
+    effectData(id: "ringModulator", opened: false, title: "Ring Modulator", sliderRowsForTable: "quatro"),
+    effectData(id: "clipper",opened: false, title: "Clipper", sliderRowsForTable: "single"),
+    effectData(id: "autoWah" , opened: false, title: "Wah Wah!", sliderRowsForTable: "triple"),
+    effectData(id: "decimator" ,opened: false, title: "Decimator", sliderRowsForTable: "triple")
     ]
     
     
-    static let finalFiltersData = [effectData(id: "masterBooster", opened: false, title: "Booster", interface: ""),
-                                   effectData(id: "toneFilter", opened: false, title: "Tone", interface: ""),
-                                   effectData(id: "equalizerFilter1", opened: false, title: "", interface: ""),
-                                   effectData(id: "equalizerFilter2", opened: false, title: "", interface: ""),
-                                   effectData(id: "equalizerFilter3", opened: false, title: "", interface: ""),
-                                   effectData(id: "equalizerFilter4", opened: false, title: "", interface: ""),
-                                   effectData(id: "equalizerFilter5", opened: false, title: "", interface: ""),
-                                   effectData(id: "equalizerFilter6", opened: false, title: "", interface: ""),
-                                   effectData(id: "equalizerFilter7", opened: false, title: "", interface: ""),
-                                   effectData(id: "equalizerFilter8", opened: false, title: "", interface: ""),
-                                   effectData(id: "equalizerFilter9", opened: false, title: "", interface: ""),
-                                   effectData(id: "equalizerFilter10", opened: false, title: "", interface: ""),
-                                   effectData(id: "equalizerFilter11", opened: false, title: "", interface: ""),
-                                   effectData(id: "equalizerFilter12", opened: false, title: "", interface: ""),
-                                   effectData(id: "highPassFilter", opened: false, title: "High Pass", interface: ""),
-                                   effectData(id: "lowPassFilter", opened: false, title: "Low Pass", interface: "")
+    static let finalFiltersData = [effectData(id: "masterBooster", opened: false, title: "Booster", sliderRowsForTable: ""),
+                                   effectData(id: "toneFilter", opened: false, title: "Tone", sliderRowsForTable: ""),
+                                   effectData(id: "equalizerFilter1", opened: false, title: "", sliderRowsForTable: ""),
+                                   effectData(id: "equalizerFilter2", opened: false, title: "", sliderRowsForTable: ""),
+                                   effectData(id: "equalizerFilter3", opened: false, title: "", sliderRowsForTable: ""),
+                                   effectData(id: "equalizerFilter4", opened: false, title: "", sliderRowsForTable: ""),
+                                   effectData(id: "equalizerFilter5", opened: false, title: "", sliderRowsForTable: ""),
+                                   effectData(id: "equalizerFilter6", opened: false, title: "", sliderRowsForTable: ""),
+                                   effectData(id: "equalizerFilter7", opened: false, title: "", sliderRowsForTable: ""),
+                                   effectData(id: "equalizerFilter8", opened: false, title: "", sliderRowsForTable: ""),
+                                   effectData(id: "equalizerFilter9", opened: false, title: "", sliderRowsForTable: ""),
+                                   effectData(id: "equalizerFilter10", opened: false, title: "", sliderRowsForTable: ""),
+                                   effectData(id: "equalizerFilter11", opened: false, title: "", sliderRowsForTable: ""),
+                                   effectData(id: "equalizerFilter12", opened: false, title: "", sliderRowsForTable: ""),
+                                   effectData(id: "highPassFilter", opened: false, title: "High Pass", sliderRowsForTable: ""),
+                                   effectData(id: "lowPassFilter", opened: false, title: "Low Pass", sliderRowsForTable: "")
     ]
     
     
     static var availableUnitsData = [
-        effectData(id: "bitCrusher", opened: false, title: "Bit Crusher", interface: "double"),
-        effectData(id: "tanhDistortion", opened: false, title: "Tanh Distortion", interface: "quatro"),
-        effectData(id: "dynaRageCompressor", opened: false, title: "Compressor", interface: "quatro")
+        effectData(id: "bitCrusher", opened: false, title: "Bit Crusher", sliderRowsForTable: "double"),
+        effectData(id: "tanhDistortion", opened: false, title: "Tanh Distortion", sliderRowsForTable: "quatro"),
+        effectData(id: "dynaRageCompressor", opened: false, title: "Compressor", sliderRowsForTable: "quatro")
         ]
     
      // VÄLIAIKAINEN MALLI
-    static var selectedUnitsAfterData = [effectData(id: "delay", opened: false, title: "Delay", interface: "triple"),
-                                         effectData(id: "ringModulator", opened: false, title: "Ring Modulator", interface: "quatro")
+    static var selectedUnitsAfterData = [effectData(id: "delay", opened: false, title: "Delay", sliderRowsForTable: "triple"),
+                                         effectData(id: "ringModulator", opened: false, title: "Ring Modulator", sliderRowsForTable: "quatro")
     ]
      // VÄLIAIKAINEN MALLI
-    static var selectedUnitsBeforeData = [effectData(id: "clipper",opened: false, title: "Clipper", interface: "single"),
-                                          effectData(id: "autoWah" , opened: false, title: "Wah Wah!", interface: "triple"),
-                                          effectData(id: "decimator" ,opened: false, title: "Decimator", interface: "triple")
+    static var selectedUnitsBeforeData = [effectData(id: "clipper",opened: false, title: "Clipper", sliderRowsForTable: "single"),
+                                          effectData(id: "autoWah" , opened: false, title: "Wah Wah!", sliderRowsForTable: "triple"),
+                                          effectData(id: "decimator" ,opened: false, title: "Decimator", sliderRowsForTable: "triple")
     ]
  
     func changeValues(id: String, slider: Int, value: Double) -> String {
@@ -559,7 +559,7 @@ class audio {
     
  
     
-    func start() {
+    func startAudio() {
         
         audioKitSettings()
         createInputListForSound()
@@ -569,6 +569,7 @@ class audio {
         connectMic()
         connectAudioInputs()
         //connectEffects()
+     
     }
     
    
@@ -895,17 +896,33 @@ class audio {
     
     
     // EFFECTS
-    static var bitCrusher: AKBitCrusher?                   // 1
-    static var tanhDistortion: AKTanhDistortion?           // 2
-    static var dynaRageCompressor: AKDynaRageCompressor?   // 3
-    static var autoWah: AKAutoWah?                         // 4
-    static var delay: AKDelay?                             // 5
-    static var decimator: AKDecimator?                     // 6
-    static var clipper: AKClipper?                         // 7
-    static var ringModulator: AKRingModulator?             // 8
+   
+    // Dynamics
+    static var compressor: AKCompressor?
+    static var dynaRageCompressor: AKDynaRageCompressor?
+    static var dynamicsProcessor: AKDynamicsProcessor?
+    static var dynamicRangeCompressor: AKDynamicRangeCompressor?
+    
+    // Delay
+    static var delay: AKDelay?
+    
+    // Distorion effects
+    static var decimator: AKDecimator?
+    static var clipper: AKClipper?
+    static var ringModulator: AKRingModulator?
+    static var bitCrusher: AKBitCrusher?
+    static var tanhDistortion: AKTanhDistortion?
+    
+    // Modulation effects
+    static var flanger: AKFlanger?
+    static var phaser: AKPhaser?
+    static var chorus: AKChorus?
     
     
     // FILTERS
+     static var autoWah: AKAutoWah?
+    
+    
     static var equalizerFilter1: AKEqualizerFilter?
     static var equalizerFilter2: AKEqualizerFilter?
     static var equalizerFilter3: AKEqualizerFilter?
@@ -993,17 +1010,30 @@ class audio {
         outputMixer?.start()
         
         // EFFECTS
+        // Delay
         audio.delay = AKDelay()
+        
+        // Dynamics
+        audio.dynaRageCompressor =  AKDynaRageCompressor()
+        audio.compressor = AKCompressor()
+        audio.dynamicsProcessor = AKDynamicsProcessor()
+        audio.dynamicRangeCompressor = AKDynamicRangeCompressor()
+        
+        // Distorion effects
         audio.bitCrusher =  AKBitCrusher()
         audio.clipper =  AKClipper()
-        audio.dynaRageCompressor =  AKDynaRageCompressor()
-        audio.autoWah =  AKAutoWah()
         audio.tanhDistortion = AKTanhDistortion()
         audio.decimator = AKDecimator()
         audio.ringModulator = AKRingModulator()
         
+        // Modulation effects
+        audio.flanger = AKFlanger()
+        audio.phaser = AKPhaser()
+        audio.chorus = AKChorus()
         
         // FILTERS
+        audio.autoWah =  AKAutoWah()
+        
         
         audio.equalizerFilter1 = AKEqualizerFilter()
         audio.equalizerFilter1?.bandwidth = 44.7
