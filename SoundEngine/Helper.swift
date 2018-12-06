@@ -25,19 +25,20 @@ class helper {
     
         var dictionary = [[String:String]]()
         
-        for effect in audio.selectedUnitsBeforeData {
-            let array = createEffectDataArray(effect: effect, location: "selectedUnitsBeforeData")
+        for effect in audio.selectedEffectsData {
+            let array = createEffectDataArray(effect: effect, location: "selectedEffectsData")
             if array.isNotEmpty {
                 dictionary.append(array)
             }
         }
+        /*
         for effect in audio.selectedUnitsAfterData {
             let array = createEffectDataArray(effect: effect, location: "selectedUnitsAfterData")
             if array.isNotEmpty {
                 dictionary.append(array)
             }
         }
-        /*
+        
         for effect in audio.finalFiltersData {
             let array = createEffectDataArray(effect: effect, location: "finalFiltersData")
             dictionary.append(array)
@@ -166,10 +167,10 @@ class helper {
             if let thisEffectData = audio.allPossibleEffectsData.first(where: {$0.id == name}) {
                 print("this effects \(thisEffectData)")
                 switch location {
-                    case "selectedUnitsBeforeData" : audio.selectedUnitsBeforeData.append(thisEffectData)
-                    case "selectedUnitsAfterData" : audio.selectedUnitsAfterData.append(thisEffectData)
+                    case "selectedEffectsData" : audio.selectedEffectsData.append(thisEffectData)
+                    //case "selectedUnitsAfterData" : audio.selectedUnitsAfterData.append(thisEffectData)
                     //TODO add filters
-                    default : break
+                    default :  audio.selectedEffectsData.append(thisEffectData)
                 }
             }
             else {
@@ -183,13 +184,15 @@ class helper {
         
         // add unused effects to the list of available effects
         for effect in audio.allPossibleEffectsData {
-            if audio.selectedUnitsBeforeData.contains(where: {$0.id == effect.id})   {
-                
-            } else if audio.selectedUnitsAfterData.contains(where: {$0.id == effect.id})   {
+            if audio.selectedEffectsData.contains(where: {$0.id == effect.id})   {
                 
             }
+            /*else if audio.selectedUnitsAfterData.contains(where: {$0.id == effect.id})   {
+                
+            }
+ */
             else {
-                audio.availableUnitsData.append(effect)
+                audio.availableEffectsData.append(effect)
             }
         }
     }
@@ -199,9 +202,9 @@ class helper {
     func setValuesForReceivedChain(valuesForChain: [Any]) {
         print("setValuesForReceivedChain")
         print(valuesForChain)
-        audio.selectedUnitsBeforeData.removeAll()
-        audio.selectedUnitsAfterData.removeAll()
-        audio.availableUnitsData.removeAll()
+        audio.selectedEffectsData.removeAll()
+       // audio.selectedUnitsAfterData.removeAll()
+        audio.availableEffectsData.removeAll()
         for effect in valuesForChain {
             let name:String = (effect as AnyObject).value(forKey: "name") as! String
             let location:String = (effect as AnyObject).value(forKey: "location") as! String
@@ -446,20 +449,21 @@ class helper {
         
         var dictionary = [[String:String]]()
         
-        for effect in audio.selectedUnitsBeforeData {
-            let array = createEffectDataArray(effect: effect, location: "selectedUnitsBeforeData")
+        for effect in audio.selectedEffectsData {
+            let array = createEffectDataArray(effect: effect, location: "selectedEffectsData")
             if array.isNotEmpty{
                 dictionary.append(array)
             }
             
         }
+        /*
         for effect in audio.selectedUnitsAfterData {
             let array = createEffectDataArray(effect: effect, location: "selectedUnitsAfterData")
             if array.isNotEmpty{
                 dictionary.append(array)
             }
         }
-        /*
+        
          for effect in audio.finalFiltersData {
          let array = createEffectDataArray(effect: effect, location: "finalFiltersData")
          dictionary.append(array)

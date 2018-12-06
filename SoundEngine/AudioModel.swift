@@ -51,18 +51,23 @@ class audio {
     ]
     
     
-    static var availableUnitsData = [
+    static var availableEffectsData = [
         effectData(id: "bitCrusher", opened: false, title: "Bit Crusher", sliderRowsForTable: "double"),
         effectData(id: "tanhDistortion", opened: false, title: "Tanh Distortion", sliderRowsForTable: "quatro"),
-        effectData(id: "dynaRageCompressor", opened: false, title: "Compressor", sliderRowsForTable: "quatro")
+        effectData(id: "dynaRageCompressor", opened: false, title: "Compressor", sliderRowsForTable: "quatro"),
+        effectData(id: "delay", opened: false, title: "Delay", sliderRowsForTable: "triple"),
+        effectData(id: "ringModulator", opened: false, title: "Ring Modulator", sliderRowsForTable: "quatro")
         ]
     
      // VÄLIAIKAINEN MALLI
+    /*
     static var selectedUnitsAfterData = [effectData(id: "delay", opened: false, title: "Delay", sliderRowsForTable: "triple"),
                                          effectData(id: "ringModulator", opened: false, title: "Ring Modulator", sliderRowsForTable: "quatro")
     ]
+     
+     */
      // VÄLIAIKAINEN MALLI
-    static var selectedUnitsBeforeData = [effectData(id: "clipper",opened: false, title: "Clipper", sliderRowsForTable: "single"),
+    static var selectedEffectsData = [effectData(id: "clipper",opened: false, title: "Clipper", sliderRowsForTable: "single"),
                                           effectData(id: "autoWah" , opened: false, title: "Wah Wah!", sliderRowsForTable: "triple"),
                                           effectData(id: "decimator" ,opened: false, title: "Decimator", sliderRowsForTable: "triple")
     ]
@@ -680,16 +685,16 @@ class audio {
     
     func createInputListForSound() {
         
-        for effect in 0..<audio.selectedUnitsBeforeData.count {
-            let id = audio.selectedUnitsBeforeData[effect].id
+        for effect in 0..<audio.selectedEffectsData.count {
+            let id = audio.selectedEffectsData[effect].id
             addToselectedEffects(id:id)
             }
-        
+         /*
         for effect in 0..<audio.selectedUnitsAfterData.count {
             let id = audio.selectedUnitsAfterData[effect].id
             addToselectedEffects(id:id)
         }
-        /*
+       
         for effect in 0..<audio.finalFiltersData.count {
             let id = audio.finalFiltersData[effect].id
             addToselectedEffects(id:id)
@@ -905,6 +910,7 @@ class audio {
     
     // Delay
     static var delay: AKDelay?
+    static var variableDelay: AKVariableDelay?
     
     // Distorion effects
     static var decimator: AKDecimator?
@@ -917,6 +923,20 @@ class audio {
     static var flanger: AKFlanger?
     static var phaser: AKPhaser?
     static var chorus: AKChorus?
+    
+    // Reverb
+    static var chowningReverb: AKChowningReverb?
+    static var costelloReverb : AKCostelloReverb?
+    static var flatFrequencyResponseReverb: AKFlatFrequencyResponseReverb?
+    static var reverb: AKReverb?
+    static var reverb2: AKReverb2?
+   
+  
+    // Simulators
+    static var rhinoGuitarProcessor: AKRhinoGuitarProcessor?
+    
+    // tremolo
+    static var tremolo: AKTremolo?
     
     
     // FILTERS
@@ -1012,6 +1032,7 @@ class audio {
         // EFFECTS
         // Delay
         audio.delay = AKDelay()
+        audio.variableDelay = AKVariableDelay()
         
         // Dynamics
         audio.dynaRageCompressor =  AKDynaRageCompressor()
@@ -1030,6 +1051,20 @@ class audio {
         audio.flanger = AKFlanger()
         audio.phaser = AKPhaser()
         audio.chorus = AKChorus()
+        
+        
+        // Reverb
+        audio.chowningReverb = AKChowningReverb()
+        audio.costelloReverb = AKCostelloReverb()
+        audio.flatFrequencyResponseReverb = AKFlatFrequencyResponseReverb()
+        audio.reverb = AKReverb()
+        audio.reverb2 = AKReverb2()
+        
+        // Simulators
+        audio.rhinoGuitarProcessor = AKRhinoGuitarProcessor()
+        
+        // tremolo
+        audio.tremolo = AKTremolo()
         
         // FILTERS
         audio.autoWah =  AKAutoWah()

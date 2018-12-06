@@ -92,11 +92,27 @@ struct delay:Codable {
         
     static var timeRange = 0.0001...3
     static var feedbackRange = 0...1
-     static var dryWetMixRange = 0...1
-    static var lowPassCutOffRange = 1000...4000
+    static var dryWetMixRange = 0...1
+    static var lowPassCutOffRange = 1000...20000
   
 
     }
+    
+    // VARIABLE DELAY    AKVariableDelay
+    // Tag = 5
+    struct variableDelay:Codable {
+        
+        // controls needed : 3
+        // time
+        // feedback
+        // maximumDelayTime
+  
+        static var timeRange = 0.0001...3   // This value must not exceed the maximum delay time.
+        static var feedbackRange = 0...1
+        static var maximumDelayTimeRange = 0.0001...3
+
+    }
+    
     
     
 // DECIMATOR  AKDecimator
@@ -191,7 +207,7 @@ struct decimator:Codable {
             // depth
             // feedback
             // inverted
-            // lfoBPM
+            // lfoBPM           // Low-frequency oscillation (LFO)   Beats Per Minute (BPM)
          
     
             static var notchWidthRange = 10...5000
@@ -241,7 +257,7 @@ struct decimator:Codable {
             static var attackDurationRange = 0.0001...0.2 // Default: 0.001
             static var releaseDurationRange = 0.01...3 // Default: 0.05
             static var masterGainRange = -40...40 //  dB Default: 0
-            static var dryWetMix = 0...1
+            static var dryWetMixRange = 0...1
         }
      
         // DYNAMICS PROCESSOR AKDynamicsProcessor
@@ -272,7 +288,7 @@ struct decimator:Codable {
             static var compressionAmountRange = -40...40 //  dB Default: 0
             static var inputAmplitudeRange = -40...40 //  dB Default: 0
             static var outputAmplitudeRange = -40...40 //  dB Default: 0
-            static var dryWetMix = 0...1
+            static var dryWetMixRange = 0...1
         }
     
         // DYNAMIC RANGE PROCESSOR AKDynamicRangeCompressor
@@ -315,42 +331,91 @@ struct decimator:Codable {
             
             
         }
+    
+    // reverb    AKReverb
+   
+    struct reverb:Codable {
         
+      static var dryWetMix = 0...1
+        
+    }
     
-    static var selectedEffects = [String]()
-    
-    static var listOfEffects =
-                            [
-                            "AKDelay",
-                            "AKBitCrusher",
-                            "AKClipper",
-                            "AKDynaRageCompressor",
-                            "AKAutoWah",
-                            "AKTanhDistortion",
-                            "AKDecimator",
-                            "AKRingModulator",
-                            "AKFlanger",
-                            "AKPhaser",
-                            "AKChorus",
-                            "AKCompressor"
-                            ]
-    
-    static let effectList = [
-        "AKDelay",
-        "AKBitCrusher",
-        "AKClipper",
-        "AKDynaRageCompressor",
-        "AKAutoWah",
-        "AKTanhDistortion",
-        "AKDecimator",
-        "AKRingModulator",
-        "AKFlanger",
-        "AKPhaser",
-        "AKChorus",
-        "AKCompressor"
-    ]
-    
+    // reverb2    AKReverb2
 
+    struct reverb2:Codable {
+        
+        // controls :
+       
+        static var gainRange = -20...20 //  dB Default: 0
+        static var minDelayTimeRange = 0.0001...1.0 // (Default: 0.008)
+        static var maxDelayTimeRange = 0.0001...1.0 // (Default: 0.050)
+        static var decayTimeAt0HzRange = 0.001...20.0 // (Default: 1.0)
+        static var decayTimeAtNyquistRange = 0.001...20.0 // (Default: 0.5)
+        static var randomizeReflectionsRange = 1...1000 //(Default: 1)
+        static var dryWetMixRange = 0...1
+        
+    }
+    
+    // chowningReverb    AKChowningReverb
+    
+    struct chowningReverb:Codable {
+        
+        
+    }
+    
+    // costelloReverb    AKCostelloReverb
+    
+    struct costelloReverb:Codable {
+        
+        // controls :
+        
+        static var cutOffRange = 1000...20000
+        static var feedbackRange = 0...1 //
+     
+        // 0.6 gives a good small ‘live’ room sound, 0.8 a small hall, and 0.9 a large hall. A setting of exactly 1 means infinite length, while higher values will make the opcode unstable.
+        
+    }
+    //flatFrequencyResponseReverb AKFlatFrequencyResponseReverb
+    
+    struct flatFrequencyResponseReverb:Codable {
+        
+        // controls :
+        
+        static var reverbDurationRange = 0.0001...1.0
+        static var loopDurationRange = 0.0001...1.0 // (Default: 0.008)
+     
+        
+    }
+    
+    // simulator
+    //rhinoGuitarProcessor AKRhinoGuitarProcessor
+    
+    struct rhinoGuitarProcessor:Codable {
+        
+        // controls :
+    
+        // postGain
+        // lowGain
+        // midGain
+        // highGain
+        // distortion
+        static var gainRange = -20...20
+        static var distortion = 0...1
+    }
+    
+    // AKTremolo
+    struct tremolo:Codable {
+        
+        // controls :
+        
+        // frequencyRange
+        // depth
+        // waveform: AKTable = AKTable(.nameOfForm)   11 options
+       
+        static var frequencyRange = 80...1200
+        static var depthRange = 0...1
+    }
+    
 }
 
 
