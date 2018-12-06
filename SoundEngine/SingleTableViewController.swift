@@ -551,7 +551,7 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
         print("Effect Order changed")
         print(audio.selectedEffectsData)
         helper.shared.saveCurrentSettings()
-        
+        audio.shared.resetAudioEffects()
         
         
     }

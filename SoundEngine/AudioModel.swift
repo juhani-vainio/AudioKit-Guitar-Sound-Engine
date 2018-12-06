@@ -574,6 +574,9 @@ class audio {
         connectMic()
         connectAudioInputs()
         //connectEffects()
+        
+        print("---------- STARTING AUDIO WITH ----------")
+        print("selectedAudioInputs \(audio.selectedAudioInputs)")
      
     }
     
@@ -666,14 +669,14 @@ class audio {
     func addToselectedEffects(id : String) {
         switch id {
             //effects
-        case "bitCrusher" : audio.selectedEffects.append(audio.bitCrusher!)
-        case "clipper":  audio.selectedEffects.append(audio.clipper!)
-        case "dynaRageCompressor":  audio.selectedEffects.append(audio.dynaRageCompressor!)
-        case "autoWah":  audio.selectedEffects.append(audio.autoWah!)
-        case "delay":  audio.selectedEffects.append(audio.delay!)
-        case "decimator": audio.selectedEffects.append(audio.decimator!)
-        case "tanhDistortion": audio.selectedEffects.append(audio.tanhDistortion!)
-        case "ringModulator": audio.selectedEffects.append(audio.ringModulator!)
+        case "bitCrusher" : audio.selectedAudioInputs.append(audio.bitCrusher!)
+        case "clipper":  audio.selectedAudioInputs.append(audio.clipper!)
+        case "dynaRageCompressor":  audio.selectedAudioInputs.append(audio.dynaRageCompressor!)
+        case "autoWah":  audio.selectedAudioInputs.append(audio.autoWah!)
+        case "delay":  audio.selectedAudioInputs.append(audio.delay!)
+        case "decimator": audio.selectedAudioInputs.append(audio.decimator!)
+        case "tanhDistortion": audio.selectedAudioInputs.append(audio.tanhDistortion!)
+        case "ringModulator": audio.selectedAudioInputs.append(audio.ringModulator!)
         
         // Filters
             
@@ -705,9 +708,12 @@ class audio {
     
     func connectMic() {
         
+        
+        mic?.connect(to: inputMixer!)
+        
         // mieti tää
-        defaultAmp = Amp.model.defaultAmpModel(input: mic!)
-        defaultAmp?.connect(to: inputMixer!)
+       // defaultAmp = Amp.model.defaultAmpModel(input: mic!)
+        //defaultAmp?.connect(to: inputMixer!)
     }
     
     func connectFilters() {
@@ -717,21 +723,21 @@ class audio {
     
     func connectAudioInputs() {
         
-        for input in 0..<audio.selectedEffects.count {
+        for input in 0..<audio.selectedAudioInputs.count {
             
             if input == 0 {
-                inputMixer?.connect(to: audio.selectedEffects[0])
+                inputMixer?.connect(to: audio.selectedAudioInputs[0])
                 
             }
             else {
-                audio.selectedEffects[input-1].connect(to: audio.selectedEffects[input])
+                audio.selectedAudioInputs[input-1].connect(to: audio.selectedAudioInputs[input])
             }
         }
         
-        if audio.selectedEffects.isEmpty {
+        if audio.selectedAudioInputs.isEmpty {
             inputMixer!.connect(to: outputMixer!)
         } else {
-            audio.selectedEffects.last?.connect(to: outputMixer!)
+            audio.selectedAudioInputs.last?.connect(to: outputMixer!)
         }
         
         // LAST TO OUTPUT
@@ -750,6 +756,27 @@ class audio {
         
     }
     
+    
+    func resetAudioEffects() {
+        do {
+            try AudioKit.stop()
+        } catch {
+            print("Could not stop AudioKit")
+        }
+        for input in 0..<audio.selectedAudioInputs.count {
+            audio.selectedAudioInputs[input].disconnectOutput()
+            audio.selectedAudioInputs[input].disconnectInput()
+            print("DISCONNECT \(audio.selectedAudioInputs[input])")
+        }
+        inputMixer?.disconnectOutput()
+        print("DISCONNECT \(String(describing: inputMixer))")
+        mic?.disconnectOutput()
+        print("DISCONNECT \(String(describing: mic))")
+        audio.selectedAudioInputs.removeAll()
+        startAudio()
+    }
+    
+    /*
     func connectEffects() {
         
         
@@ -873,7 +900,7 @@ class audio {
         
     }
     
-  
+  */
     
     
     
@@ -996,7 +1023,7 @@ class audio {
     
     // ARRAYS FOR CONSTRUCTING THE SOUND
     
-    static var selectedEffects = [AKInput]()
+    static var selectedAudioInputs = [AKInput]()
     
     var audioIn = [AKInput]()
     var firstList = [AKInput]()
