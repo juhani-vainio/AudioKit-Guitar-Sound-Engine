@@ -609,6 +609,22 @@
                                             </collectionViewCell>
                                         </cells>
                                     </collectionView>
+                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="FxF-Xw-IOi">
+                                        <rect key="frame" x="294" y="716" width="696" height="29"/>
+                                        <segments>
+                                            <segment title="First"/>
+                                            <segment title="Second"/>
+                                            <segment title="3"/>
+                                            <segment title="4"/>
+                                            <segment title="5"/>
+                                            <segment title="6"/>
+                                            <segment title="7"/>
+                                            <segment title="8"/>
+                                        </segments>
+                                        <connections>
+                                            <action selector="bufferLengthSegmentAction:" destination="1RR-5N-S1x" eventType="valueChanged" id="3zK-8G-ddZ"/>
+                                        </connections>
+                                    </segmentedControl>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -616,6 +632,7 @@
                                     <constraint firstItem="rsv-eE-YLr" firstAttribute="trailing" secondItem="Uc0-Ys-8yK" secondAttribute="trailing" id="9gq-u4-HNj"/>
                                     <constraint firstItem="6i5-7n-FuP" firstAttribute="leading" secondItem="rsv-eE-YLr" secondAttribute="leading" id="AAW-eD-f0n"/>
                                     <constraint firstItem="rsv-eE-YLr" firstAttribute="bottom" secondItem="Uc0-Ys-8yK" secondAttribute="bottom" id="D1Q-V7-rO3"/>
+                                    <constraint firstItem="rsv-eE-YLr" firstAttribute="trailing" secondItem="FxF-Xw-IOi" secondAttribute="trailing" constant="34" id="EB7-dP-pTG"/>
                                     <constraint firstItem="rsv-eE-YLr" firstAttribute="trailing" secondItem="MgD-ZC-mKf" secondAttribute="trailing" id="FW4-JV-LXJ"/>
                                     <constraint firstItem="6i5-7n-FuP" firstAttribute="top" secondItem="cbj-b9-PyT" secondAttribute="bottom" id="GkT-6b-52u"/>
                                     <constraint firstItem="MgD-ZC-mKf" firstAttribute="leading" secondItem="rsv-eE-YLr" secondAttribute="leading" id="H8u-rw-akD"/>
@@ -623,7 +640,9 @@
                                     <constraint firstItem="Uc0-Ys-8yK" firstAttribute="leading" secondItem="tsM-lv-a1B" secondAttribute="trailing" id="Oho-Vw-uex"/>
                                     <constraint firstItem="cbj-b9-PyT" firstAttribute="top" secondItem="rsv-eE-YLr" secondAttribute="top" id="SLf-4m-6gs"/>
                                     <constraint firstItem="rsv-eE-YLr" firstAttribute="bottom" secondItem="tsM-lv-a1B" secondAttribute="bottom" id="Skv-pN-yAZ"/>
+                                    <constraint firstItem="FxF-Xw-IOi" firstAttribute="leading" secondItem="rsv-eE-YLr" secondAttribute="leading" constant="294" id="aJR-f9-5tg"/>
                                     <constraint firstItem="rsv-eE-YLr" firstAttribute="trailing" secondItem="cbj-b9-PyT" secondAttribute="trailing" id="hgH-vv-gNb"/>
+                                    <constraint firstItem="rsv-eE-YLr" firstAttribute="bottom" secondItem="FxF-Xw-IOi" secondAttribute="bottom" constant="24" id="j7W-ej-0Kq"/>
                                     <constraint firstItem="cbj-b9-PyT" firstAttribute="leading" secondItem="rsv-eE-YLr" secondAttribute="leading" id="pIW-Mu-mkg"/>
                                     <constraint firstItem="Uc0-Ys-8yK" firstAttribute="top" secondItem="Yf4-76-uEX" secondAttribute="bottom" id="plu-pd-d0h"/>
                                     <constraint firstItem="rsv-eE-YLr" firstAttribute="top" secondItem="MgD-ZC-mKf" secondAttribute="top" id="rWb-Zo-hv5"/>
@@ -646,6 +665,7 @@
                     <connections>
                         <outlet property="addButton" destination="6dg-gD-4xQ" id="eG8-As-Uqf"/>
                         <outlet property="availableEffects" destination="6i5-7n-FuP" id="bed-4i-l2X"/>
+                        <outlet property="bufferLengthSegment" destination="FxF-Xw-IOi" id="dh3-js-AHr"/>
                         <outlet property="mainCollection" destination="Uc0-Ys-8yK" id="tf4-jJ-5IO"/>
                         <outlet property="mainViewBackground" destination="xFX-i0-fCU" id="nEB-Yb-CZq"/>
                         <outlet property="selectedEffects" destination="tsM-lv-a1B" id="gaE-Ym-DCc"/>

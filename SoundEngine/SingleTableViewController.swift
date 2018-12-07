@@ -20,6 +20,7 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
     fileprivate var sourceIndexPath: IndexPath?
     fileprivate var snapshot: UIView?
     
+    @IBOutlet weak var bufferLengthSegment: UISegmentedControl!
     @IBOutlet weak var mainViewBackground: UIView!
     @IBOutlet weak var addButton: UIButton!
     
@@ -31,9 +32,14 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Set up Interface
-        Colors.palette.setInterfaceColorScheme(name: "spotify")
+        
+        let savedBufferLength = UserDefaults.standard.integer(forKey: "bufferLength")
+        audio.shared.setBufferLength(segment: savedBufferLength)
+        bufferLengthSegment.selectedSegmentIndex = savedBufferLength
+        
+        interfaceSetup()
+        
+      
         
         audio.shared.createEffects()
         
@@ -45,6 +51,24 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
         
         
         audio.shared.startAudio()
+        
+    }
+    
+    
+    func interfaceSetup() {
+        // Set up Interface Colors
+        Colors.palette.setInterfaceColorScheme(name: "spotify")
+        addButton.backgroundColor = interface.buttonBackground
+        addButton.setTitleColor(interface.highlight, for: .normal)
+        
+        
+        availableEffects.backgroundColor = interface.tableAltBackground
+        selectedEffects.backgroundColor = UIColor.clear
+       
+        
+        mainCollection.backgroundColor = UIColor.clear
+        mainViewBackground.backgroundColor = interface.mainBackground
+ 
         
     }
     
@@ -697,4 +721,11 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
     }
     
 
+    @IBAction func bufferLengthSegmentAction(_ sender: UISegmentedControl) {
+        let segment = sender.selectedSegmentIndex
+        audio.shared.setBufferLength(segment: segment)
+        UserDefaults.standard.set(segment, forKey: "bufferLength")
+        
+    }
+    
 }

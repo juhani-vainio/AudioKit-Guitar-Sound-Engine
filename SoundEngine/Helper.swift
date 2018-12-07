@@ -488,6 +488,7 @@ class helper {
         
         getSavedChain(name: "activeSound")
   
+        
     }
     
     func addSpaces(text: String) -> String {

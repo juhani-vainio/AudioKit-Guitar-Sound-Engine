@@ -20,6 +20,8 @@ struct effectData {
 class audio {
     static let shared = audio()
     
+    static var bufferLength = Int()
+    
    static let allPossibleEffectsData = [
     effectData(id: "bitCrusher", opened: false, title: "Bit Crusher", sliderRowsForTable: "double"),
     effectData(id: "tanhDistortion", opened: false, title: "Tanh Distortion", sliderRowsForTable: "quatro"),
@@ -580,11 +582,35 @@ class audio {
      
     }
     
-   
+    func setBufferLength(segment: Int) {
+        
+        switch segment {
+        case 0:
+            AKSettings.bufferLength = .shortest     // 0.0007
+        case 1:
+            AKSettings.bufferLength = .veryShort    // 0.001
+        case 2:
+            AKSettings.bufferLength = .short        // 0.002
+        case 3:
+            AKSettings.bufferLength = .medium       // 0.006
+        case 4:
+            AKSettings.bufferLength = .long         // 0.01
+        case 5:
+            AKSettings.bufferLength = .veryLong     // 0.02
+        case 6:
+            AKSettings.bufferLength = .longest      // 0.09
+        case 7:
+            AKSettings.bufferLength = .huge         // 0.05
+        default:
+            break
+        }
+        
+        print("Buffer Legth   \(AKSettings.bufferLength.duration)")
+    }
+    
     func audioKitSettings() {
         
-        AKSettings.bufferLength = .shortest
-        
+    
         AKSettings.audioInputEnabled = true
         
         AKSettings.playbackWhileMuted = true
