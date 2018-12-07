@@ -8,6 +8,7 @@
 
 import AudioKit
 import UIKit
+import MediaPlayer
 
 fileprivate var longPressGesture: UILongPressGestureRecognizer!
 
@@ -20,6 +21,8 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
     fileprivate var sourceIndexPath: IndexPath?
     fileprivate var snapshot: UIView?
     
+    @IBOutlet weak var inputLevel: UISlider!
+    @IBOutlet weak var volumeView: UIView!
     @IBOutlet weak var bufferLengthSegment: UISegmentedControl!
     @IBOutlet weak var mainViewBackground: UIView!
     @IBOutlet weak var addButton: UIButton!
@@ -58,7 +61,15 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
     
     func interfaceSetup() {
        
-        bufferLengthSegment.selectedSegmentIndex = settings.bufferLenght - 1
+        let myVolumeView = MPVolumeView(frame: volumeView.bounds)
+        myVolumeView.showsRouteButton = false
+        myVolumeView.backgroundColor = UIColor.clear
+        volumeView.backgroundColor = UIColor.clear
+        volumeView.addSubview(myVolumeView)
+        inputLevel.setValue(Float((audio.shared.mic?.volume)!), animated: true)
+        inputLevel.addTarget(self, action: #selector(inputLevelChanged), for: .valueChanged)
+        
+        bufferLengthSegment.selectedSegmentIndex = settings.bufferLength - 1
         
         addButton.backgroundColor = interface.buttonBackground
         addButton.setTitleColor(interface.highlight, for: .normal)
@@ -74,6 +85,9 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
         
     }
     
+    @objc func inputLevelChanged(slider: UISlider) {
+        audio.shared.mic?.volume = Double(slider.value)
+    }
 
     // MARK: TABLEVIEWS
     func createTableViews() {

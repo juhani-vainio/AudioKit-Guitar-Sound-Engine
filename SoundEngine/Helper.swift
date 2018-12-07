@@ -481,7 +481,7 @@ class helper {
         
         let savedBufferLength = UserDefaults.standard.integer(forKey: "bufferLength")
         if savedBufferLength != 0 {
-            settings.bufferLenght = savedBufferLength
+            settings.bufferLength = savedBufferLength
         }
         
         // all saved sounds

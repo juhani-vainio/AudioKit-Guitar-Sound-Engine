@@ -10,5 +10,5 @@ import Foundation
 
 struct settings {
     static var name = "default"
-    static var bufferLenght = 7
+    static var bufferLength = 7
 }

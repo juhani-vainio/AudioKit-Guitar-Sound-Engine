@@ -609,6 +609,60 @@
                                             </collectionViewCell>
                                         </cells>
                                     </collectionView>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4OQ-LW-q7x">
+                                        <rect key="frame" x="752" y="110" width="272" height="598"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="vQt-JS-abB">
+                                                <rect key="frame" x="12" y="0.0" width="248" height="598"/>
+                                                <subviews>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yBg-Fn-S3k">
+                                                        <rect key="frame" x="0.0" y="0.0" width="248" height="299"/>
+                                                        <subviews>
+                                                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="yyv-xl-OlQ">
+                                                                <rect key="frame" x="-2" y="129.5" width="252" height="41"/>
+                                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="40" id="IZI-oJ-bym"/>
+                                                                </constraints>
+                                                            </slider>
+                                                        </subviews>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="trailing" secondItem="yyv-xl-OlQ" secondAttribute="trailing" id="1Kq-V1-3NI"/>
+                                                            <constraint firstItem="yyv-xl-OlQ" firstAttribute="leading" secondItem="yBg-Fn-S3k" secondAttribute="leading" id="d6q-kg-EVi"/>
+                                                            <constraint firstItem="yyv-xl-OlQ" firstAttribute="centerY" secondItem="yBg-Fn-S3k" secondAttribute="centerY" id="jyQ-PX-iMP"/>
+                                                        </constraints>
+                                                    </view>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sIM-gH-MCO">
+                                                        <rect key="frame" x="0.0" y="299" width="248" height="299"/>
+                                                        <subviews>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aBp-fJ-qOK">
+                                                                <rect key="frame" x="0.0" y="129.5" width="248" height="40"/>
+                                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="40" id="wRT-lX-SZQ"/>
+                                                                </constraints>
+                                                            </view>
+                                                        </subviews>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <constraints>
+                                                            <constraint firstItem="aBp-fJ-qOK" firstAttribute="leading" secondItem="sIM-gH-MCO" secondAttribute="leading" id="D0T-Gv-6Tq"/>
+                                                            <constraint firstItem="aBp-fJ-qOK" firstAttribute="centerY" secondItem="sIM-gH-MCO" secondAttribute="centerY" id="fzg-Eg-POK"/>
+                                                            <constraint firstAttribute="trailing" secondItem="aBp-fJ-qOK" secondAttribute="trailing" id="rFY-7H-hrl"/>
+                                                        </constraints>
+                                                    </view>
+                                                </subviews>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </stackView>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstItem="vQt-JS-abB" firstAttribute="top" secondItem="4OQ-LW-q7x" secondAttribute="top" id="HWG-cE-qSA"/>
+                                            <constraint firstAttribute="trailing" secondItem="vQt-JS-abB" secondAttribute="trailing" constant="12" id="NGg-ZY-2XM"/>
+                                            <constraint firstItem="vQt-JS-abB" firstAttribute="leading" secondItem="4OQ-LW-q7x" secondAttribute="leading" constant="12" id="sG2-rG-rdy"/>
+                                            <constraint firstAttribute="bottom" secondItem="vQt-JS-abB" secondAttribute="bottom" id="tBm-R3-SRH"/>
+                                        </constraints>
+                                    </view>
                                     <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="FxF-Xw-IOi">
                                         <rect key="frame" x="294" y="716" width="696" height="29"/>
                                         <segments>
@@ -636,6 +690,8 @@
                                     <constraint firstItem="rsv-eE-YLr" firstAttribute="trailing" secondItem="MgD-ZC-mKf" secondAttribute="trailing" id="FW4-JV-LXJ"/>
                                     <constraint firstItem="6i5-7n-FuP" firstAttribute="top" secondItem="cbj-b9-PyT" secondAttribute="bottom" id="GkT-6b-52u"/>
                                     <constraint firstItem="MgD-ZC-mKf" firstAttribute="leading" secondItem="rsv-eE-YLr" secondAttribute="leading" id="H8u-rw-akD"/>
+                                    <constraint firstItem="rsv-eE-YLr" firstAttribute="bottom" secondItem="4OQ-LW-q7x" secondAttribute="bottom" constant="60" id="ILO-Wl-4yW"/>
+                                    <constraint firstItem="4OQ-LW-q7x" firstAttribute="top" secondItem="cbj-b9-PyT" secondAttribute="bottom" id="L0x-UM-cKF"/>
                                     <constraint firstItem="rsv-eE-YLr" firstAttribute="bottom" secondItem="6i5-7n-FuP" secondAttribute="bottom" id="M3U-Yx-YPZ"/>
                                     <constraint firstItem="Uc0-Ys-8yK" firstAttribute="leading" secondItem="tsM-lv-a1B" secondAttribute="trailing" id="Oho-Vw-uex"/>
                                     <constraint firstItem="cbj-b9-PyT" firstAttribute="top" secondItem="rsv-eE-YLr" secondAttribute="top" id="SLf-4m-6gs"/>
@@ -643,6 +699,8 @@
                                     <constraint firstItem="FxF-Xw-IOi" firstAttribute="leading" secondItem="rsv-eE-YLr" secondAttribute="leading" constant="294" id="aJR-f9-5tg"/>
                                     <constraint firstItem="rsv-eE-YLr" firstAttribute="trailing" secondItem="cbj-b9-PyT" secondAttribute="trailing" id="hgH-vv-gNb"/>
                                     <constraint firstItem="rsv-eE-YLr" firstAttribute="bottom" secondItem="FxF-Xw-IOi" secondAttribute="bottom" constant="24" id="j7W-ej-0Kq"/>
+                                    <constraint firstItem="4OQ-LW-q7x" firstAttribute="width" secondItem="6i5-7n-FuP" secondAttribute="width" id="kmA-lZ-BMz"/>
+                                    <constraint firstItem="rsv-eE-YLr" firstAttribute="trailing" secondItem="4OQ-LW-q7x" secondAttribute="trailing" id="moT-h5-ejb"/>
                                     <constraint firstItem="cbj-b9-PyT" firstAttribute="leading" secondItem="rsv-eE-YLr" secondAttribute="leading" id="pIW-Mu-mkg"/>
                                     <constraint firstItem="Uc0-Ys-8yK" firstAttribute="top" secondItem="Yf4-76-uEX" secondAttribute="bottom" id="plu-pd-d0h"/>
                                     <constraint firstItem="rsv-eE-YLr" firstAttribute="top" secondItem="MgD-ZC-mKf" secondAttribute="top" id="rWb-Zo-hv5"/>
@@ -666,9 +724,11 @@
                         <outlet property="addButton" destination="6dg-gD-4xQ" id="eG8-As-Uqf"/>
                         <outlet property="availableEffects" destination="6i5-7n-FuP" id="bed-4i-l2X"/>
                         <outlet property="bufferLengthSegment" destination="FxF-Xw-IOi" id="dh3-js-AHr"/>
+                        <outlet property="inputLevel" destination="yyv-xl-OlQ" id="Nkr-1X-Gug"/>
                         <outlet property="mainCollection" destination="Uc0-Ys-8yK" id="tf4-jJ-5IO"/>
                         <outlet property="mainViewBackground" destination="xFX-i0-fCU" id="nEB-Yb-CZq"/>
                         <outlet property="selectedEffects" destination="tsM-lv-a1B" id="gaE-Ym-DCc"/>
+                        <outlet property="volumeView" destination="aBp-fJ-qOK" id="HdG-P1-NCL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nqT-ng-GfI" userLabel="First Responder" sceneMemberID="firstResponder"/>

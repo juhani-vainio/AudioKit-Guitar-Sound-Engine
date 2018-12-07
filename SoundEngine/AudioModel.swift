@@ -613,7 +613,7 @@ class audio {
             AKSettings.bufferLength = .huge         // 0.05
                                                     // 2048
         }
-        settings.bufferLenght = segment
+        settings.bufferLength = segment
         
         print("Buffer Legth   \(AKSettings.bufferLength.duration)")
         print("Buffer Legth   \(AKSettings.bufferLength.samplesCount)")
@@ -621,7 +621,7 @@ class audio {
     
     func audioKitSettings() {
         
-        audio.shared.setBufferLength(segment: settings.bufferLenght)
+        audio.shared.setBufferLength(segment: settings.bufferLength)
         AKSettings.audioInputEnabled = true
         
         AKSettings.playbackWhileMuted = true
