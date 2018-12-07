@@ -33,11 +33,12 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let savedBufferLength = UserDefaults.standard.integer(forKey: "bufferLength")
-        audio.shared.setBufferLength(segment: savedBufferLength)
-        bufferLengthSegment.selectedSegmentIndex = savedBufferLength
         
-        interfaceSetup()
+         // Set up Interface Colors
+        Colors.palette.setInterfaceColorScheme(name: "spotify")
+        
+        
+        
         
       
         
@@ -51,13 +52,14 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
         
         
         audio.shared.startAudio()
-        
+        interfaceSetup()
     }
     
     
     func interfaceSetup() {
-        // Set up Interface Colors
-        Colors.palette.setInterfaceColorScheme(name: "spotify")
+       
+        bufferLengthSegment.selectedSegmentIndex = settings.bufferLenght - 1
+        
         addButton.backgroundColor = interface.buttonBackground
         addButton.setTitleColor(interface.highlight, for: .normal)
         
@@ -722,7 +724,7 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
     
 
     @IBAction func bufferLengthSegmentAction(_ sender: UISegmentedControl) {
-        let segment = sender.selectedSegmentIndex
+        let segment = sender.selectedSegmentIndex + 1
         audio.shared.setBufferLength(segment: segment)
         UserDefaults.standard.set(segment, forKey: "bufferLength")
         

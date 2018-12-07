@@ -585,32 +585,43 @@ class audio {
     func setBufferLength(segment: Int) {
         
         switch segment {
-        case 0:
-            AKSettings.bufferLength = .shortest     // 0.0007
         case 1:
-            AKSettings.bufferLength = .veryShort    // 0.001
+            AKSettings.bufferLength = .shortest     // 0.0007
+                                                    // 32
         case 2:
-            AKSettings.bufferLength = .short        // 0.002
+            AKSettings.bufferLength = .veryShort    // 0.001
+                                                    // 64
         case 3:
-            AKSettings.bufferLength = .medium       // 0.006
+            AKSettings.bufferLength = .short        // 0.002
+                                                    // 128
         case 4:
-            AKSettings.bufferLength = .long         // 0.01
+            AKSettings.bufferLength = .medium       // 0.006
+                                                    // 256
         case 5:
-            AKSettings.bufferLength = .veryLong     // 0.02
+            AKSettings.bufferLength = .long         // 0.01
+                                                    // 512
         case 6:
-            AKSettings.bufferLength = .longest      // 0.09
+            AKSettings.bufferLength = .veryLong     // 0.02
+                                                    // 1024
         case 7:
             AKSettings.bufferLength = .huge         // 0.05
+                                                    // 2048
+        case 8:
+            AKSettings.bufferLength = .longest      // 0.09
+                                                    // 4096
         default:
-            break
+            AKSettings.bufferLength = .huge         // 0.05
+                                                    // 2048
         }
+        settings.bufferLenght = segment
         
         print("Buffer Legth   \(AKSettings.bufferLength.duration)")
+        print("Buffer Legth   \(AKSettings.bufferLength.samplesCount)")
     }
     
     func audioKitSettings() {
         
-    
+        audio.shared.setBufferLength(segment: settings.bufferLenght)
         AKSettings.audioInputEnabled = true
         
         AKSettings.playbackWhileMuted = true

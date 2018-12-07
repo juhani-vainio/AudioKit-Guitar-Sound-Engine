@@ -476,7 +476,14 @@ class helper {
     }
  
     func checkUserDefaults() {
+        
         print("checkUserDefaults")
+        
+        let savedBufferLength = UserDefaults.standard.integer(forKey: "bufferLength")
+        if savedBufferLength != 0 {
+            settings.bufferLenght = savedBufferLength
+        }
+        
         // all saved sounds
         let savedSounds = UserDefaults.standard.stringArray(forKey: "savedSounds")  ?? [String]()
         if savedSounds.isNotEmpty {
