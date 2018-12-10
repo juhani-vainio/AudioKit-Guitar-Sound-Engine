@@ -102,14 +102,14 @@ struct delay:Codable {
     // Tag = 5
     struct variableDelay:Codable {
         
-        // controls needed : 3
+        // controls needed : 2
         // time
         // feedback
         // maximumDelayTime
   
         static var timeRange = 0.0001...3   // This value must not exceed the maximum delay time.
         static var feedbackRange = 0...1
-        static var maximumDelayTimeRange = 0.0001...3
+       //   static var maximumDelayTimeRange = 0.0001...3
 
     }
     
@@ -198,7 +198,7 @@ struct decimator:Codable {
             let phaserInfo = "phaser - another way of creating an unusual sound; the signal is split, a portion is filtered with an all-pass filter to produce a phase-shift, and then the unfiltered and filtered signals are mixed. The phaser effect was originally a simpler implementation of the flanger effect since delays were difficult to implement with analog equipment. Phasers are often used to give a synthesized or electronic effect to natural sounds, such as human speech. The voice of C-3PO from Star Wars was created by taking the actor's voice and treating it with a phaser."
             // https://en.wikipedia.org/wiki/Audio_signal_processing
             
-            // controls needed : 9
+            // controls needed : 5
             // notchMinimumFrequency
             // notchMaximumFrequency
             // notchWidth
@@ -265,7 +265,7 @@ struct decimator:Codable {
         struct dynamicsProcessor:Codable {
             //  is a dynamics
             
-            // controls needed : 10
+            // controls needed : 8
             // threshold: Double = -20,
             // headRoom: Double = 5,
             // expansionRatio: Double = 2,
@@ -285,16 +285,16 @@ struct decimator:Codable {
             static var attackDurationRange = 0.0001...0.2 // Default: 0.001
             static var releaseDurationRange = 0.01...3 // Default: 0.05
             static var masterGainRange = -40...40 //  dB Default: 0
-            static var compressionAmountRange = -40...40 //  dB Default: 0
-            static var inputAmplitudeRange = -40...40 //  dB Default: 0
-            static var outputAmplitudeRange = -40...40 //  dB Default: 0
+            // GET ONLY  static var compressionAmountRange = -40...40 //  dB Default: 0
+            // GET ONLY  static var inputAmplitudeRange = -40...40 //  dB Default: 0
+            // GET ONLY  static var outputAmplitudeRange = -40...40 //  dB Default: 0
             static var dryWetMixRange = 0...1
         }
     
         // DYNAMIC RANGE PROCESSOR AKDynamicRangeCompressor
         // Dynamic range compressor from Faust
         
-        struct dynamicRangeProcessor:Codable {
+        struct dynamicRangeCompressor:Codable {
             //  is a dynamics
             
             // controls needed : 4
@@ -336,7 +336,7 @@ struct decimator:Codable {
    
     struct reverb:Codable {
         
-      static var dryWetMix = 0...1
+      static var dryWetMixRange = 0...1
         
     }
     
@@ -344,7 +344,7 @@ struct decimator:Codable {
 
     struct reverb2:Codable {
         
-        // controls :
+        // controls : 7
        
         static var gainRange = -20...20 //  dB Default: 0
         static var minDelayTimeRange = 0.0001...1.0 // (Default: 0.008)
@@ -382,26 +382,12 @@ struct decimator:Codable {
         // controls :
         
         static var reverbDurationRange = 0.0001...1.0
-        static var loopDurationRange = 0.0001...1.0 // (Default: 0.008)
+      //  static var loopDurationRange = 0.0001...1.0 // (Default: 0.008)
      
         
     }
     
-    // simulator
-    //rhinoGuitarProcessor AKRhinoGuitarProcessor
-    
-    struct rhinoGuitarProcessor:Codable {
-        
-        // controls :
-    
-        // postGain
-        // lowGain
-        // midGain
-        // highGain
-        // distortion
-        static var gainRange = -20...20
-        static var distortion = 0...1
-    }
+   
     
     // AKTremolo
     struct tremolo:Codable {
@@ -414,6 +400,23 @@ struct decimator:Codable {
        
         static var frequencyRange = 80...1200
         static var depthRange = 0...1
+    }
+    
+    
+    // simulator
+    //rhinoGuitarProcessor AKRhinoGuitarProcessor
+    
+    struct rhinoGuitarProcessor:Codable {
+        
+        // controls :
+        
+        // postGain
+        // lowGain
+        // midGain
+        // highGain
+        // distortion
+        static var gainRange = -20...20
+        static var distortion = 0...1
     }
     
 }

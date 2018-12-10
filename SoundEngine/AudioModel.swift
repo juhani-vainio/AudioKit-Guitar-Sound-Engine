@@ -11,10 +11,11 @@ import AudioKit
 
 
 struct effectData {
+ 
     var id = String()           // effect ID
     var opened = Bool()         // for expanding tableviewcells
     var title = String()        // name of effect for users
-    var sliderRowsForTable = String()    // type of interface for cell
+    var type = String()         // type of element to get location and type of interface for cell
 }
 
 class audio {
@@ -23,55 +24,88 @@ class audio {
     static var bufferLength = Int()
     
    static let allPossibleEffectsData = [
-    effectData(id: "bitCrusher", opened: false, title: "Bit Crusher", sliderRowsForTable: "double"),
-    effectData(id: "tanhDistortion", opened: false, title: "Tanh Distortion", sliderRowsForTable: "quatro"),
-    effectData(id: "dynaRageCompressor", opened: false, title: "Compressor", sliderRowsForTable: "quatro"),
-    effectData(id: "delay", opened: false, title: "Delay", sliderRowsForTable: "triple"),
-    effectData(id: "ringModulator", opened: false, title: "Ring Modulator", sliderRowsForTable: "quatro"),
-    effectData(id: "clipper",opened: false, title: "Clipper", sliderRowsForTable: "single"),
-    effectData(id: "autoWah" , opened: false, title: "Wah Wah!", sliderRowsForTable: "triple"),
-    effectData(id: "decimator" ,opened: false, title: "Decimator", sliderRowsForTable: "triple")
+    // DISTORTIONS
+    effectData(id: "bitCrusher", opened: false, title: "Bit Crusher", type: "2"),
+    effectData(id: "tanhDistortion", opened: false, title: "Tanh Distortion", type: "4"),
+    effectData(id: "ringModulator", opened: false, title: "Ring Modulator", type: "4"),
+    effectData(id: "clipper",opened: false, title: "Clipper", type: "1"),
+    effectData(id: "decimator" ,opened: false, title: "Decimator", type: "3"),
+    
+    // WAH
+    effectData(id: "autoWah" , opened: false, title: "Wah Wah!", type: "3"),
+    
+    // DYNAMICS
+    effectData(id: "compressor" ,opened: false, title: "Compressor", type: "6"),
+    effectData(id: "dynaRageCompressor", opened: false, title: "Dyna Rage Compressor", type: "4"),
+    effectData(id: "dynamicsProcessor" ,opened: false, title: "Dynamics Processor", type: "8"),
+    effectData(id: "dynamicRangeCompressor" ,opened: false, title: "Dynamic Range Compressor", type: "4"),
+    
+    //TIME BASED
+    effectData(id: "delay", opened: false, title: "Delay", type: "3"),
+    effectData(id: "variableDelay", opened: false, title: "Variable Delay", type: "2"),
+    effectData(id: "flanger" ,opened: false, title: "Flanger", type: "4"),
+    effectData(id: "phaser" ,opened: false, title: "Phaser", type: "5"),
+    effectData(id: "chorus" ,opened: false, title: "Chorus", type: "4"),
+    effectData(id: "reverb" ,opened: false, title: "Reverb", type: "1"),
+    effectData(id: "reverb2" ,opened: false, title: "Reverb 2", type: "7"),
+    effectData(id: "chowningReverb" ,opened: false, title: "Chowning Reverb", type: "0"),
+    effectData(id: "costelloReverb" ,opened: false, title: "Costello Reverb", type: "2"),
+    effectData(id: "flatFrequencyResponseReverb" ,opened: false, title: "Flat Freq Response Reverb", type: "1"),
+    effectData(id: "tremolo" ,opened: false, title: "Tremolo", type: "2"),
     ]
     
     
-    static let finalFiltersData = [effectData(id: "masterBooster", opened: false, title: "Booster", sliderRowsForTable: ""),
-                                   effectData(id: "toneFilter", opened: false, title: "Tone", sliderRowsForTable: ""),
-                                   effectData(id: "equalizerFilter1", opened: false, title: "", sliderRowsForTable: ""),
-                                   effectData(id: "equalizerFilter2", opened: false, title: "", sliderRowsForTable: ""),
-                                   effectData(id: "equalizerFilter3", opened: false, title: "", sliderRowsForTable: ""),
-                                   effectData(id: "equalizerFilter4", opened: false, title: "", sliderRowsForTable: ""),
-                                   effectData(id: "equalizerFilter5", opened: false, title: "", sliderRowsForTable: ""),
-                                   effectData(id: "equalizerFilter6", opened: false, title: "", sliderRowsForTable: ""),
-                                   effectData(id: "equalizerFilter7", opened: false, title: "", sliderRowsForTable: ""),
-                                   effectData(id: "equalizerFilter8", opened: false, title: "", sliderRowsForTable: ""),
-                                   effectData(id: "equalizerFilter9", opened: false, title: "", sliderRowsForTable: ""),
-                                   effectData(id: "equalizerFilter10", opened: false, title: "", sliderRowsForTable: ""),
-                                   effectData(id: "equalizerFilter11", opened: false, title: "", sliderRowsForTable: ""),
-                                   effectData(id: "equalizerFilter12", opened: false, title: "", sliderRowsForTable: ""),
-                                   effectData(id: "highPassFilter", opened: false, title: "High Pass", sliderRowsForTable: ""),
-                                   effectData(id: "lowPassFilter", opened: false, title: "Low Pass", sliderRowsForTable: "")
+    static let allPossibleFiltersData = [
+                                   effectData(id: "toneFilter", opened: false, title: "Tone", type: "filter_"),
+                                   effectData(id: "toneComplementFilter", opened: false, title: "Tone", type: "filter_"),
+                                   effectData(id: "highPassFilter", opened: false, title: "High Pass", type: "filter_"),
+                                   effectData(id: "lowPassFilter", opened: false, title: "Low Pass", type: "filter_"),
+                                   effectData(id: "highShelfFilter", opened: false, title: "Tone", type: "filter_"),
+                                   effectData(id: "lowShelfFilter", opened: false, title: "Tone", type: "filter_"),
+                                   effectData(id: "bandPassButterworthFilter", opened: false, title: "Tone", type: "filter_"),
+                                   effectData(id: "bandRejectButterworthFilter", opened: false, title: "Tone", type: "filter_"),
+                                   effectData(id: "lowPassButterworthFilter", opened: false, title: "Tone", type: "filter_"),
+                                   effectData(id: "highPassButterworthFilter", opened: false, title: "Tone", type: "filter_"),
+                                   effectData(id: "modalResonanceFilter", opened: false, title: "Tone", type: "filter_"),
+                                   effectData(id: "resonantFilter", opened: false, title: "Tone", type: "filter_"),
+                                   effectData(id: "peakingParametricEqualizerFilter", opened: false, title: "Tone", type: "filter_"),
+                                   effectData(id: "lowShelfParametricEqualizerFilter", opened: false, title: "Tone", type: "filter_"),
+                                   effectData(id: "highShelfParametricEqualizerFilter", opened: false, title: "Tone", type: "filter_"),
+                                   effectData(id: "formantFilter", opened: false, title: "Tone", type: "filter_"),
+                                   effectData(id: "rolandTB303Filter", opened: false, title: "Tone", type: "filter_"),
+                                   effectData(id: "korgLowPassFilter", opened: false, title: "Tone", type: "filter_"),
+                                   effectData(id: "threePoleLowpassFilter", opened: false, title: "Tone", type: "filter_"),
+                                   effectData(id: "moogLadder", opened: false, title: "Tone", type: "filter_"),
+                                   effectData(id: "dcBlock", opened: false, title: "Tone", type: "filter_"),
+                                   effectData(id: "stringResonator", opened: false, title: "Tone", type: "filter_"),
+                                   effectData(id: "combFilterReverb", opened: false, title: "Tone", type: "filter_"),
+                                   effectData(id: "equalizerFilter1", opened: false, title: "", type: "filter_"),
+                                   effectData(id: "equalizerFilter2", opened: false, title: "", type: "filter_"),
+                                   effectData(id: "equalizerFilter3", opened: false, title: "", type: "filter_"),
+                                   effectData(id: "equalizerFilter4", opened: false, title: "", type: "filter_"),
+                                   effectData(id: "equalizerFilter5", opened: false, title: "", type: "filter_"),
+                                   effectData(id: "equalizerFilter6", opened: false, title: "", type: "filter_"),
+                                   effectData(id: "equalizerFilter7", opened: false, title: "", type: "filter_"),
+                                   effectData(id: "equalizerFilter8", opened: false, title: "", type: "filter_"),
+                                   effectData(id: "equalizerFilter9", opened: false, title: "", type: "filter_"),
+                                   effectData(id: "equalizerFilter10", opened: false, title: "", type: "filter_"),
+                                   effectData(id: "equalizerFilter11", opened: false, title: "", type: "filter_"),
+                                   effectData(id: "equalizerFilter12", opened: false, title: "", type: "filter_")
     ]
     
     
     static var availableEffectsData = [
-        effectData(id: "bitCrusher", opened: false, title: "Bit Crusher", sliderRowsForTable: "double"),
-        effectData(id: "tanhDistortion", opened: false, title: "Tanh Distortion", sliderRowsForTable: "quatro"),
-        effectData(id: "dynaRageCompressor", opened: false, title: "Compressor", sliderRowsForTable: "quatro"),
-        effectData(id: "delay", opened: false, title: "Delay", sliderRowsForTable: "triple"),
-        effectData(id: "ringModulator", opened: false, title: "Ring Modulator", sliderRowsForTable: "quatro")
+        effectData(id: "bitCrusher", opened: false, title: "Bit Crusher", type: "2"),
+        effectData(id: "tanhDistortion", opened: false, title: "Tanh Distortion", type: "4"),
+        effectData(id: "dynaRageCompressor", opened: false, title: "Compressor", type: "4"),
+        effectData(id: "delay", opened: false, title: "Delay", type: "3"),
+        effectData(id: "ringModulator", opened: false, title: "Ring Modulator", type: "4")
         ]
     
      // VÄLIAIKAINEN MALLI
-    /*
-    static var selectedUnitsAfterData = [effectData(id: "delay", opened: false, title: "Delay", sliderRowsForTable: "triple"),
-                                         effectData(id: "ringModulator", opened: false, title: "Ring Modulator", sliderRowsForTable: "quatro")
-    ]
-     
-     */
-     // VÄLIAIKAINEN MALLI
-    static var selectedEffectsData = [effectData(id: "clipper",opened: false, title: "Clipper", sliderRowsForTable: "single"),
-                                          effectData(id: "autoWah" , opened: false, title: "Wah Wah!", sliderRowsForTable: "triple"),
-                                          effectData(id: "decimator" ,opened: false, title: "Decimator", sliderRowsForTable: "triple")
+    static var selectedEffectsData = [effectData(id: "clipper",opened: false, title: "Clipper", type: "1"),
+                                          effectData(id: "autoWah" , opened: false, title: "Wah Wah!", type: "3"),
+                                          effectData(id: "decimator" ,opened: false, title: "Decimator", type: "3")
     ]
  
     func changeValues(id: String, slider: Int, value: Double) -> String {
@@ -214,6 +248,30 @@ class audio {
                 
             }
             
+        case "variableDelay" :
+            switch slider {
+            case 0:
+                if  audio.variableDelay!.isStarted == true {
+                    audio.variableDelay?.stop()
+                    newValue = "OFF"
+                } else {
+                    audio.variableDelay?.start()
+                    newValue = "ON"
+                }
+            case 1:
+                audio.variableDelay?.time = value
+                let text = String(value)
+                newValue = String(text.prefix(3))
+            case 2:
+                audio.variableDelay?.feedback = value
+                let text = String(value)
+                newValue = String(text.prefix(3))
+            
+                
+            default: break
+                
+            }
+            
         case "decimator" :
             switch slider {
             case 0:
@@ -287,6 +345,343 @@ class audio {
             default: break
                 
             }
+            
+        case "flanger" :
+            switch slider {
+            case 0:
+                if  audio.flanger!.isStarted == true {
+                    audio.flanger?.stop()
+                    newValue = "OFF"
+                } else {
+                    audio.flanger?.start()
+                    newValue = "ON"
+                }
+            case 1:
+                audio.flanger?.frequency = value
+                let text = String(value)
+                newValue = String(text.prefix(3))
+            case 2:
+                audio.flanger?.depth = value
+                let text = String(value)
+                newValue = String(text.prefix(3))
+            case 3:
+                audio.flanger?.feedback = value
+                let text = String(value)
+                newValue = String(text.prefix(3))
+            case 4:
+                audio.flanger?.dryWetMix = value
+                let text = String(value)
+                newValue = String(text.prefix(3))
+            default: break
+                
+            }
+            
+        case "phaser" :
+            switch slider {
+            case 0:
+                if  audio.phaser!.isStarted == true {
+                    audio.phaser?.stop()
+                    newValue = "OFF"
+                } else {
+                    audio.phaser?.start()
+                    newValue = "ON"
+                }
+            case 1:
+                audio.phaser?.notchWidth = value
+                let text = String(value)
+                newValue = String(text.prefix(3))
+            case 2:
+                audio.phaser?.notchFrequency = value
+                let text = String(value)
+                newValue = String(text.prefix(3))
+            case 3:
+                audio.phaser?.depth = value
+                let text = String(value)
+                newValue = String(text.prefix(3))
+            case 4:
+                audio.phaser?.feedback = value
+                let text = String(value)
+                newValue = String(text.prefix(3))
+            case 5:
+                audio.phaser?.lfoBPM = value
+                let text = String(value)
+                newValue = String(text.prefix(3))
+            default: break
+                
+            }
+        case "chorus" :
+            switch slider {
+            case 0:
+                if  audio.chorus!.isStarted == true {
+                    audio.chorus?.stop()
+                    newValue = "OFF"
+                } else {
+                    audio.chorus?.start()
+                    newValue = "ON"
+                }
+            case 1:
+                audio.chorus?.frequency = value
+                let text = String(value)
+                newValue = String(text.prefix(3))
+            case 2:
+                audio.chorus?.depth = value
+                let text = String(value)
+                newValue = String(text.prefix(3))
+            case 3:
+                audio.chorus?.feedback = value
+                let text = String(value)
+                newValue = String(text.prefix(3))
+            case 4:
+                audio.chorus?.dryWetMix = value
+                let text = String(value)
+                newValue = String(text.prefix(3))
+            
+            default: break
+                
+            }
+            
+        case "compressor" :
+            switch slider {
+            case 0:
+                if  audio.compressor!.isStarted == true {
+                    audio.compressor?.stop()
+                    newValue = "OFF"
+                } else {
+                    audio.compressor?.start()
+                    newValue = "ON"
+                }
+            case 1:
+                audio.compressor?.threshold = value
+                let text = String(value)
+                newValue = String(text.prefix(3))
+            case 2:
+                audio.compressor?.headRoom = value
+                let text = String(value)
+                newValue = String(text.prefix(3))
+            case 3:
+                audio.compressor?.attackDuration = value
+                let text = String(value)
+                newValue = String(text.prefix(3))
+            case 4:
+                audio.compressor?.releaseDuration = value
+                let text = String(value)
+                newValue = String(text.prefix(3))
+            case 5:
+                audio.compressor?.masterGain = value
+                let text = String(value)
+                newValue = String(text.prefix(3))
+            case 6:
+                audio.compressor?.dryWetMix = value
+                let text = String(value)
+                newValue = String(text.prefix(3))
+                
+            default: break
+                
+            }
+            
+        case "dynamicsProcessor" :
+            switch slider {
+            case 0:
+                if  audio.dynamicsProcessor!.isStarted == true {
+                    audio.dynamicsProcessor?.stop()
+                    newValue = "OFF"
+                } else {
+                    audio.dynamicsProcessor?.start()
+                    newValue = "ON"
+                }
+            case 1:
+                audio.dynamicsProcessor?.threshold = value
+                let text = String(value)
+                newValue = String(text.prefix(3))
+            case 2:
+                audio.dynamicsProcessor?.headRoom = value
+                let text = String(value)
+                newValue = String(text.prefix(3))
+            case 3:
+                audio.dynamicsProcessor?.expansionRatio = value
+                let text = String(value)
+                newValue = String(text.prefix(3))
+            case 4:
+                audio.dynamicsProcessor?.expansionThreshold = value
+                let text = String(value)
+                newValue = String(text.prefix(3))
+            case 5:
+                audio.dynamicsProcessor?.attackDuration = value
+                let text = String(value)
+                newValue = String(text.prefix(3))
+            case 6:
+                audio.dynamicsProcessor?.releaseDuration = value
+                let text = String(value)
+                newValue = String(text.prefix(3))
+            case 7:
+                audio.dynamicsProcessor?.masterGain = value
+                let text = String(value)
+                newValue = String(text.prefix(3))
+            
+            case 8:
+                audio.dynamicsProcessor?.dryWetMix = value
+                let text = String(value)
+                newValue = String(text.prefix(3))
+                
+            default: break
+                
+            }
+        case "dynamicRangeCompressor" :
+            switch slider {
+            case 0:
+                if  audio.dynamicRangeCompressor!.isStarted == true {
+                    audio.dynamicRangeCompressor?.stop()
+                    newValue = "OFF"
+                } else {
+                    audio.dynamicRangeCompressor?.start()
+                    newValue = "ON"
+                }
+            case 1:
+                audio.dynamicRangeCompressor?.ratio = value
+                let text = String(value)
+                newValue = String(text.prefix(3))
+            case 2:
+                audio.dynamicRangeCompressor?.threshold = value
+                let text = String(value)
+                newValue = String(text.prefix(3))
+            case 3:
+                audio.dynamicRangeCompressor?.attackDuration = value
+                let text = String(value)
+                newValue = String(text.prefix(3))
+            case 4:
+                audio.dynamicRangeCompressor?.releaseDuration = value
+                let text = String(value)
+                newValue = String(text.prefix(3))
+                
+            default: break
+                
+            }
+        case "reverb" :
+            switch slider {
+            case 0:
+                if  audio.reverb!.isStarted == true {
+                    audio.reverb?.stop()
+                    newValue = "OFF"
+                } else {
+                    audio.reverb?.start()
+                    newValue = "ON"
+                }
+            case 1:
+                audio.reverb?.dryWetMix = value
+                let text = String(value)
+                newValue = String(text.prefix(3))
+            
+            default: break
+                
+            }
+            
+        case "reverb2" :
+            switch slider {
+            case 0:
+                if  audio.reverb2!.isStarted == true {
+                    audio.reverb2?.stop()
+                    newValue = "OFF"
+                } else {
+                    audio.reverb2?.start()
+                    newValue = "ON"
+                }
+            case 1:
+                audio.reverb2?.gain = value
+                let text = String(value)
+                newValue = String(text.prefix(3))
+            case 2:
+                audio.reverb2?.minDelayTime = value
+                let text = String(value)
+                newValue = String(text.prefix(3))
+            case 3:
+                audio.reverb2?.maxDelayTime = value
+                let text = String(value)
+                newValue = String(text.prefix(3))
+            case 4:
+                audio.reverb2?.decayTimeAt0Hz = value
+                let text = String(value)
+                newValue = String(text.prefix(3))
+            case 5:
+                audio.reverb2?.decayTimeAtNyquist = value
+                let text = String(value)
+                newValue = String(text.prefix(3))
+            case 6:
+                audio.reverb2?.randomizeReflections = value
+                let text = String(value)
+                newValue = String(text.prefix(3))
+            case 7:
+                audio.reverb2?.dryWetMix = value
+                let text = String(value)
+                newValue = String(text.prefix(3))
+                
+            default: break
+                
+            }
+            
+        case "costelloReverb" :
+            switch slider {
+            case 0:
+                if  audio.costelloReverb!.isStarted == true {
+                    audio.costelloReverb?.stop()
+                    newValue = "OFF"
+                } else {
+                    audio.costelloReverb?.start()
+                    newValue = "ON"
+                }
+            case 1:
+                audio.costelloReverb?.cutoffFrequency = value
+                let text = String(value)
+                newValue = String(text.prefix(3))
+            case 2:
+                audio.costelloReverb?.feedback = value
+                let text = String(value)
+                newValue = String(text.prefix(3))
+            
+                
+            default: break
+                
+            }
+        case "flatFrequencyResponseReverb" :
+            switch slider {
+            case 0:
+                if  audio.flatFrequencyResponseReverb!.isStarted == true {
+                    audio.flatFrequencyResponseReverb?.stop()
+                    newValue = "OFF"
+                } else {
+                    audio.flatFrequencyResponseReverb?.start()
+                    newValue = "ON"
+                }
+            case 1:
+                audio.flatFrequencyResponseReverb?.reverbDuration = value
+                let text = String(value)
+                newValue = String(text.prefix(3))
+            
+            default: break
+                
+            }
+            
+        case "tremolo" :
+            switch slider {
+            case 0:
+                if  audio.tremolo!.isStarted == true {
+                    audio.tremolo?.stop()
+                    newValue = "OFF"
+                } else {
+                    audio.tremolo?.start()
+                    newValue = "ON"
+                }
+            case 1:
+                audio.tremolo?.frequency = value
+                let text = String(value)
+                newValue = String(text.prefix(3))
+            case 2:
+                audio.tremolo?.depth = value
+                let text = String(value)
+                newValue = String(text.prefix(3))
+                
+            default: break
+            }
+            
         default: break
         }
         return newValue
@@ -458,6 +853,29 @@ class audio {
            
             default: break
             }
+            
+        case "variableDelay" :
+            // DELAY
+            switch slider {
+            case 1:
+                min = Float(Effects.variableDelay.timeRange.lowerBound)
+                max = Float(Effects.variableDelay.timeRange.upperBound)
+                valueForSlider = Float(audio.variableDelay!.time)
+                name = "Time"
+                value = String(audio.variableDelay!.time)
+                value = String(value.prefix(3))
+                isOn = audio.variableDelay!.isStarted
+            case 2:
+                min = Float(Effects.variableDelay.feedbackRange.lowerBound)
+                max = Float(Effects.variableDelay.feedbackRange.upperBound)
+                valueForSlider = Float(audio.variableDelay!.feedback)
+                name = "Feedback"
+                value = String(audio.variableDelay!.feedback)
+                value = String(value.prefix(3))
+                isOn = audio.variableDelay!.isStarted
+            
+            default: break
+            }
           
         case "decimator" :
             // DECIMATOR
@@ -540,6 +958,437 @@ class audio {
                 isOn = audio.ringModulator!.isStarted
             default: break
             }
+            
+        case "flanger" :
+        
+            switch slider {
+            case 1:
+                min = Float(Effects.flanger.frequencyRange.lowerBound)
+                max = Float(Effects.flanger.frequencyRange.upperBound)
+                valueForSlider = Float(audio.flanger!.frequency)
+                name = "Frequency"
+                value = String(audio.flanger!.frequency)
+                value = String(value.prefix(3))
+                isOn = audio.flanger!.isStarted
+            case 2:
+                min = Float(Effects.flanger.depthRange.lowerBound)
+                max = Float(Effects.flanger.depthRange.upperBound)
+                valueForSlider = Float(audio.flanger!.depth)
+                name = "Depth"
+                value = String(audio.flanger!.depth)
+                value = String(value.prefix(3))
+                isOn = audio.flanger!.isStarted
+            case 3:
+                min = Float(Effects.flanger.feedbackRange.lowerBound)
+                max = Float(Effects.flanger.feedbackRange.upperBound)
+                valueForSlider = Float(audio.flanger!.feedback)
+                name = "Feedback"
+                value = String(audio.flanger!.feedback)
+                value = String(value.prefix(3))
+                isOn = audio.flanger!.isStarted
+            case 4:
+                min = Float(Effects.flanger.dryWetMixRange.lowerBound)
+                max = Float(Effects.flanger.dryWetMixRange.upperBound)
+                valueForSlider = Float(audio.flanger!.dryWetMix)
+                name = "Mix"
+                value = String(audio.flanger!.dryWetMix)
+                value = String(value.prefix(3))
+                isOn = audio.flanger!.isStarted
+            default: break
+            }
+            
+        case "phaser" :
+           
+            switch slider {
+            case 1:
+                min = Float(Effects.phaser.notchWidthRange.lowerBound)
+                max = Float(Effects.phaser.notchWidthRange.upperBound)
+                valueForSlider = Float(audio.phaser!.notchWidth)
+                name = "Notch Width"
+                value = String(audio.phaser!.notchWidth)
+                value = String(value.prefix(3))
+                isOn = audio.phaser!.isStarted
+            case 2:
+                min = Float(Effects.phaser.notchFrequencyRange.lowerBound)
+                max = Float(Effects.phaser.notchFrequencyRange.upperBound)
+                valueForSlider = Float(audio.phaser!.notchFrequency)
+                name = "Notch Frequency"
+                value = String(audio.phaser!.notchFrequency)
+                value = String(value.prefix(3))
+                isOn = audio.phaser!.isStarted
+            case 3:
+                min = Float(Effects.phaser.depthRange.lowerBound)
+                max = Float(Effects.phaser.depthRange.upperBound)
+                valueForSlider = Float(audio.phaser!.depth)
+                name = "Depth"
+                value = String(audio.phaser!.depth)
+                value = String(value.prefix(3))
+                isOn = audio.phaser!.isStarted
+            case 4:
+                min = Float(Effects.phaser.feedbackRange.lowerBound)
+                max = Float(Effects.phaser.feedbackRange.upperBound)
+                valueForSlider = Float(audio.phaser!.feedback)
+                name = "Feedback"
+                value = String(audio.phaser!.feedback)
+                value = String(value.prefix(3))
+                isOn = audio.phaser!.isStarted
+            case 5:
+                min = Float(Effects.phaser.lfoBPMRange.lowerBound)
+                max = Float(Effects.phaser.lfoBPMRange.upperBound)
+                valueForSlider = Float(audio.phaser!.lfoBPM)
+                name = "lfo BPM"
+                value = String(audio.phaser!.lfoBPM)
+                value = String(value.prefix(3))
+                isOn = audio.phaser!.isStarted
+            default: break
+            }
+        case "chorus" :
+            
+            switch slider {
+            case 1:
+                min = Float(Effects.chorus.frequencyRange.lowerBound)
+                max = Float(Effects.chorus.frequencyRange.upperBound)
+                valueForSlider = Float(audio.chorus!.frequency)
+                name = "Frequency"
+                value = String(audio.chorus!.frequency)
+                value = String(value.prefix(3))
+                isOn = audio.chorus!.isStarted
+            case 2:
+                min = Float(Effects.chorus.depthRange.lowerBound)
+                max = Float(Effects.chorus.depthRange.upperBound)
+                valueForSlider = Float(audio.chorus!.depth)
+                name = "Depth"
+                value = String(audio.chorus!.depth)
+                value = String(value.prefix(3))
+                isOn = audio.chorus!.isStarted
+            case 3:
+                min = Float(Effects.chorus.feedbackRange.lowerBound)
+                max = Float(Effects.chorus.feedbackRange.upperBound)
+                valueForSlider = Float(audio.chorus!.feedback)
+                name = "Feedback"
+                value = String(audio.chorus!.feedback)
+                value = String(value.prefix(3))
+                isOn = audio.chorus!.isStarted
+            case 4:
+                min = Float(Effects.chorus.dryWetMixRange.lowerBound)
+                max = Float(Effects.chorus.dryWetMixRange.upperBound)
+                valueForSlider = Float(audio.chorus!.dryWetMix)
+                name = "Mix"
+                value = String(audio.chorus!.dryWetMix)
+                value = String(value.prefix(3))
+                isOn = audio.chorus!.isStarted
+            
+            default: break
+            }
+            
+        case "compressor" :
+            
+            switch slider {
+            case 1:
+                min = Float(Effects.compressor.thresholdRange.lowerBound)
+                max = Float(Effects.compressor.thresholdRange.upperBound)
+                valueForSlider = Float(audio.compressor!.threshold)
+                name = "Threshold"
+                value = String(audio.compressor!.threshold)
+                value = String(value.prefix(3))
+                isOn = audio.compressor!.isStarted
+            case 2:
+                min = Float(Effects.compressor.headRoomRange.lowerBound)
+                max = Float(Effects.compressor.headRoomRange.upperBound)
+                valueForSlider = Float(audio.compressor!.headRoom)
+                name = "Headroom"
+                value = String(audio.compressor!.headRoom)
+                value = String(value.prefix(3))
+                isOn = audio.compressor!.isStarted
+            case 3:
+                min = Float(Effects.compressor.attackDurationRange.lowerBound)
+                max = Float(Effects.compressor.attackDurationRange.upperBound)
+                valueForSlider = Float(audio.compressor!.attackDuration)
+                name = "Attack Duration"
+                value = String(audio.compressor!.attackDuration)
+                value = String(value.prefix(3))
+                isOn = audio.compressor!.isStarted
+            case 4:
+                min = Float(Effects.compressor.releaseDurationRange.lowerBound)
+                max = Float(Effects.compressor.releaseDurationRange.upperBound)
+                valueForSlider = Float(audio.compressor!.releaseDuration)
+                name = "Release Duration"
+                value = String(audio.compressor!.releaseDuration)
+                value = String(value.prefix(3))
+                isOn = audio.compressor!.isStarted
+            case 5:
+                min = Float(Effects.compressor.masterGainRange.lowerBound)
+                max = Float(Effects.compressor.masterGainRange.upperBound)
+                valueForSlider = Float(audio.compressor!.masterGain)
+                name = "Master Gain"
+                value = String(audio.compressor!.masterGain)
+                value = String(value.prefix(3))
+                isOn = audio.compressor!.isStarted
+           
+            case 6:
+                min = Float(Effects.compressor.dryWetMixRange.lowerBound)
+                max = Float(Effects.compressor.dryWetMixRange.upperBound)
+                valueForSlider = Float(audio.compressor!.dryWetMix)
+                name = "Mix"
+                value = String(audio.compressor!.dryWetMix)
+                value = String(value.prefix(3))
+                isOn = audio.compressor!.isStarted
+                
+            default: break
+            }
+            
+        case "dynamicsProcessor" :
+            
+            switch slider {
+            case 1:
+                min = Float(Effects.dynamicsProcessor.thresholdRange.lowerBound)
+                max = Float(Effects.dynamicsProcessor.thresholdRange.upperBound)
+                valueForSlider = Float(audio.dynamicsProcessor!.threshold)
+                name = "Threshold"
+                value = String(audio.dynamicsProcessor!.threshold)
+                value = String(value.prefix(3))
+                isOn = audio.dynamicsProcessor!.isStarted
+            case 2:
+                min = Float(Effects.dynamicsProcessor.headRoomRange.lowerBound)
+                max = Float(Effects.dynamicsProcessor.headRoomRange.upperBound)
+                valueForSlider = Float(audio.dynamicsProcessor!.headRoom)
+                name = "Headroom"
+                value = String(audio.dynamicsProcessor!.headRoom)
+                value = String(value.prefix(3))
+                isOn = audio.dynamicsProcessor!.isStarted
+            case 3:
+                min = Float(Effects.dynamicsProcessor.expansionRatioRange.lowerBound)
+                max = Float(Effects.dynamicsProcessor.expansionRatioRange.upperBound)
+                valueForSlider = Float(audio.dynamicsProcessor!.expansionRatio)
+                name = "Expansion Ratio"
+                value = String(audio.dynamicsProcessor!.expansionRatio)
+                value = String(value.prefix(3))
+                isOn = audio.dynamicsProcessor!.isStarted
+            case 4:
+                min = Float(Effects.dynamicsProcessor.expansionThresholdRange.lowerBound)
+                max = Float(Effects.dynamicsProcessor.expansionThresholdRange.upperBound)
+                valueForSlider = Float(audio.dynamicsProcessor!.expansionThreshold)
+                name = "Expansion Threshold"
+                value = String(audio.dynamicsProcessor!.expansionThreshold)
+                value = String(value.prefix(3))
+                isOn = audio.dynamicsProcessor!.isStarted
+            case 5:
+                min = Float(Effects.dynamicsProcessor.attackDurationRange.lowerBound)
+                max = Float(Effects.dynamicsProcessor.attackDurationRange.upperBound)
+                valueForSlider = Float(audio.dynamicsProcessor!.attackDuration)
+                name = "Attack Duration"
+                value = String(audio.dynamicsProcessor!.attackDuration)
+                value = String(value.prefix(3))
+                isOn = audio.dynamicsProcessor!.isStarted
+            case 6:
+                min = Float(Effects.dynamicsProcessor.releaseDurationRange.lowerBound)
+                max = Float(Effects.dynamicsProcessor.releaseDurationRange.upperBound)
+                valueForSlider = Float(audio.dynamicsProcessor!.releaseDuration)
+                name = "Release Duration"
+                value = String(audio.dynamicsProcessor!.releaseDuration)
+                value = String(value.prefix(3))
+                isOn = audio.dynamicsProcessor!.isStarted
+            case 7:
+                min = Float(Effects.dynamicsProcessor.masterGainRange.lowerBound)
+                max = Float(Effects.dynamicsProcessor.masterGainRange.upperBound)
+                valueForSlider = Float(audio.dynamicsProcessor!.masterGain)
+                name = "Master Gain"
+                value = String(audio.dynamicsProcessor!.masterGain)
+                value = String(value.prefix(3))
+                isOn = audio.dynamicsProcessor!.isStarted
+                
+            case 8:
+                min = Float(Effects.dynamicsProcessor.dryWetMixRange.lowerBound)
+                max = Float(Effects.dynamicsProcessor.dryWetMixRange.upperBound)
+                valueForSlider = Float(audio.dynamicsProcessor!.dryWetMix)
+                name = "Mix"
+                value = String(audio.dynamicsProcessor!.dryWetMix)
+                value = String(value.prefix(3))
+                isOn = audio.dynamicsProcessor!.isStarted
+                
+            default: break
+            }
+            
+        case "dynamicRangeCompressor" :
+            
+            switch slider {
+            case 1:
+                min = Float(Effects.dynamicRangeCompressor.ratioRange.lowerBound)
+                max = Float(Effects.dynamicRangeCompressor.ratioRange.upperBound)
+                valueForSlider = Float(audio.dynamicRangeCompressor!.ratio)
+                name = "Ratio"
+                value = String(audio.dynamicRangeCompressor!.ratio)
+                value = String(value.prefix(3))
+                isOn = audio.dynamicRangeCompressor!.isStarted
+            case 2:
+                min = Float(Effects.dynamicRangeCompressor.thresholdRange.lowerBound)
+                max = Float(Effects.dynamicRangeCompressor.thresholdRange.upperBound)
+                valueForSlider = Float(audio.dynamicRangeCompressor!.threshold)
+                name = "Threshold"
+                value = String(audio.dynamicRangeCompressor!.threshold)
+                value = String(value.prefix(3))
+                isOn = audio.dynamicRangeCompressor!.isStarted
+           
+            case 3:
+                min = Float(Effects.dynamicRangeCompressor.attackDurationRange.lowerBound)
+                max = Float(Effects.dynamicRangeCompressor.attackDurationRange.upperBound)
+                valueForSlider = Float(audio.dynamicRangeCompressor!.attackDuration)
+                name = "Attack Duration"
+                value = String(audio.dynamicRangeCompressor!.attackDuration)
+                value = String(value.prefix(3))
+                isOn = audio.dynamicRangeCompressor!.isStarted
+            case 4:
+                min = Float(Effects.dynamicRangeCompressor.releaseDurationRange.lowerBound)
+                max = Float(Effects.dynamicRangeCompressor.releaseDurationRange.upperBound)
+                valueForSlider = Float(audio.dynamicRangeCompressor!.releaseDuration)
+                name = "Release Duration"
+                value = String(audio.dynamicRangeCompressor!.releaseDuration)
+                value = String(value.prefix(3))
+                isOn = audio.dynamicRangeCompressor!.isStarted
+            
+                
+            default: break
+            }
+            
+        case "reverb" :
+            
+            switch slider {
+            case 1:
+                min = Float(Effects.reverb.dryWetMixRange.lowerBound)
+                max = Float(Effects.reverb.dryWetMixRange.upperBound)
+                valueForSlider = Float(audio.reverb!.dryWetMix)
+                name = "Mix"
+                value = String(audio.reverb!.dryWetMix)
+                value = String(value.prefix(3))
+                isOn = audio.reverb!.isStarted
+         
+            default: break
+            }
+            
+        case "reverb2" :
+            
+            switch slider {
+            case 1:
+                min = Float(Effects.reverb2.gainRange.lowerBound)
+                max = Float(Effects.reverb2.gainRange.upperBound)
+                valueForSlider = Float(audio.reverb2!.gain)
+                name = "Gain"
+                value = String(audio.reverb2!.gain)
+                value = String(value.prefix(3))
+                isOn = audio.reverb2!.isStarted
+            case 2:
+                min = Float(Effects.reverb2.minDelayTimeRange.lowerBound)
+                max = Float(Effects.reverb2.minDelayTimeRange.upperBound)
+                valueForSlider = Float(audio.reverb2!.minDelayTime)
+                name = "Min Delay Time"
+                value = String(audio.reverb2!.minDelayTime)
+                value = String(value.prefix(3))
+                isOn = audio.reverb2!.isStarted
+            case 3:
+                min = Float(Effects.reverb2.maxDelayTimeRange.lowerBound)
+                max = Float(Effects.reverb2.maxDelayTimeRange.upperBound)
+                valueForSlider = Float(audio.reverb2!.maxDelayTime)
+                name = "Max Delay Time"
+                value = String(audio.reverb2!.maxDelayTime)
+                value = String(value.prefix(3))
+                isOn = audio.reverb2!.isStarted
+            case 4:
+                min = Float(Effects.reverb2.decayTimeAt0HzRange.lowerBound)
+                max = Float(Effects.reverb2.decayTimeAt0HzRange.upperBound)
+                valueForSlider = Float(audio.reverb2!.decayTimeAt0Hz)
+                name = "0Hz Decay Time"
+                value = String(audio.reverb2!.decayTimeAt0Hz)
+                value = String(value.prefix(3))
+                isOn = audio.reverb2!.isStarted
+            case 5:
+                min = Float(Effects.reverb2.decayTimeAtNyquistRange.lowerBound)
+                max = Float(Effects.reverb2.decayTimeAtNyquistRange.upperBound)
+                valueForSlider = Float(audio.reverb2!.decayTimeAtNyquist)
+                name = "Nyquist Decay Time"
+                value = String(audio.reverb2!.decayTimeAtNyquist)
+                value = String(value.prefix(3))
+                isOn = audio.reverb2!.isStarted
+            case 6:
+                min = Float(Effects.reverb2.randomizeReflectionsRange.lowerBound)
+                max = Float(Effects.reverb2.randomizeReflectionsRange.upperBound)
+                valueForSlider = Float(audio.reverb2!.randomizeReflections)
+                name = "Randomize Reflections"
+                value = String(audio.reverb2!.randomizeReflections)
+                value = String(value.prefix(3))
+                isOn = audio.reverb2!.isStarted
+            case 7:
+                min = Float(Effects.reverb2.dryWetMixRange.lowerBound)
+                max = Float(Effects.reverb2.dryWetMixRange.upperBound)
+                valueForSlider = Float(audio.reverb2!.dryWetMix)
+                name = "Mix"
+                value = String(audio.reverb2!.dryWetMix)
+                value = String(value.prefix(3))
+                isOn = audio.reverb2!.isStarted
+                
+            default: break
+            }
+            
+        case "costelloReverb" :
+            
+            switch slider {
+            case 1:
+                min = Float(Effects.costelloReverb.cutOffRange.lowerBound)
+                max = Float(Effects.costelloReverb.cutOffRange.upperBound)
+                valueForSlider = Float(audio.costelloReverb!.cutoffFrequency)
+                name = "Cut Off Frequency"
+                value = String(audio.costelloReverb!.cutoffFrequency)
+                value = String(value.prefix(3))
+                isOn = audio.costelloReverb!.isStarted
+            case 2:
+                min = Float(Effects.costelloReverb.feedbackRange.lowerBound)
+                max = Float(Effects.costelloReverb.feedbackRange.upperBound)
+                valueForSlider = Float(audio.costelloReverb!.feedback)
+                name = "Feedback"
+                value = String(audio.costelloReverb!.feedback)
+                value = String(value.prefix(3))
+                isOn = audio.costelloReverb!.isStarted
+           
+                
+            default: break
+            }
+        case "flatFrequencyResponseReverb" :
+            
+            switch slider {
+            case 1:
+                min = Float(Effects.flatFrequencyResponseReverb.reverbDurationRange.lowerBound)
+                max = Float(Effects.flatFrequencyResponseReverb.reverbDurationRange.upperBound)
+                valueForSlider = Float(audio.flatFrequencyResponseReverb!.reverbDuration)
+                name = "Reverb Duration"
+                value = String(audio.flatFrequencyResponseReverb!.reverbDuration)
+                value = String(value.prefix(3))
+                isOn = audio.flatFrequencyResponseReverb!.isStarted
+           
+                
+            default: break
+            }
+        case "tremolo" :
+            
+            switch slider {
+            case 1:
+                min = Float(Effects.tremolo.frequencyRange.lowerBound)
+                max = Float(Effects.tremolo.frequencyRange.upperBound)
+                valueForSlider = Float(audio.tremolo!.frequency)
+                name = "Frequency"
+                value = String(audio.tremolo!.frequency)
+                value = String(value.prefix(3))
+                isOn = audio.tremolo!.isStarted
+            case 2:
+                min = Float(Effects.tremolo.depthRange.lowerBound)
+                max = Float(Effects.tremolo.depthRange.upperBound)
+                valueForSlider = Float(audio.tremolo!.depth)
+                name = "Depth"
+                value = String(audio.tremolo!.depth)
+                value = String(value.prefix(3))
+                isOn = audio.tremolo!.isStarted
+                
+            default: break
+            }
+            
         default: break
         }
         return (min, max, valueForSlider, value, name, isOn)
@@ -583,6 +1432,8 @@ class audio {
     }
     
     func setBufferLength(segment: Int) {
+        
+        // TODO: kokeile täytyykö käynnistää audiokit uudestaa jotta tulee voimaan
         
         switch segment {
         case 1:
@@ -646,62 +1497,7 @@ class audio {
      
         
     }
-   /*
-    func createEffectList() {
-        
-        
-        
-       
-        for effect in 0..<audio.selectedUnitsBeforeData.count {
-            let id = audio.selectedUnitsBeforeData[effect].id
-            switch id {
-            case "bitCrusher" : self.firstList.append(audio.bitCrusher!)
-            case "clipper":  self.firstList.append(clipper!)
-            case "dynaRageCompressor":  self.firstList.append(dynaRageCompressor!)
-            case "autoWah":  self.firstList.append(autoWah!)
-            case "delay":  self.firstList.append(delay!)
-            case "decimator": self.firstList.append(decimator!)
-            case "tanhDistortion": self.firstList.append(tanhDistortion!)
-            case "ringModulator": self.firstList.append(ringModulator!)
-            default : print("NOTHING to do over HERE")
-                
-            }
-        }
-     
-     
-        for effect in 0..<audio.selectedUnitsAfterData.count {
-            let id = audio.selectedUnitsAfterData[effect].id
-            switch id {
-            case "bitCrusher" : self.thirdList.append(audio.bitCrusher!)
-            case "clipper":  self.thirdList.append(clipper!)
-            case "dynaRageCompressor":  self.thirdList.append(dynaRageCompressor!)
-            case "autoWah":  self.thirdList.append(autoWah!)
-            case "delay":  self.thirdList.append(delay!)
-            case "decimator": self.thirdList.append(decimator!)
-            case "tanhDistortion": self.thirdList.append(tanhDistortion!)
-            case "ringModulator": self.thirdList.append(ringModulator!)
-            default : print("NOTHING to do over HERE EITHER")
-                
-            }
-        }
-        
-        for effect in 0..<audio.finalFiltersData.count {
-            let id = audio.finalFiltersData[effect].id
-            switch id {
-            case "toneFilter" : self.audioOut.append(audio.toneFilter!)
-            
-            default : print("NOTHING to do over HERE EITHER neither here")
-                
-            }
-        }
-        
   
-        // Make one big list for the whole sound
-        
-        
-    }
-  
-    */
     
     func addToselectedEffects(id : String) {
         switch id {
@@ -747,15 +1543,19 @@ class audio {
         
         
         mic?.connect(to: inputMixer!)
-        
+        //connectMicMonitors()
         // mieti tää
        // defaultAmp = Amp.model.defaultAmpModel(input: mic!)
         //defaultAmp?.connect(to: inputMixer!)
     }
     
-    func connectFilters() {
-        
-        
+    func connectMicMonitors() {
+        let trackedAmplitude = AKAmplitudeTracker(mic)
+       // let timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(fireTimer), userInfo: nil, repeats: true)
+        let timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { timer in
+            print("AMPLITUDE:    \(trackedAmplitude.amplitude)")
+        }
+        timer.fire()
     }
     
     func connectAudioInputs() {
@@ -772,13 +1572,13 @@ class audio {
         }
         
         if audio.selectedAudioInputs.isEmpty {
-            inputMixer!.connect(to: outputMixer!)
+            inputMixer!.connect(to: outputBooster!)
         } else {
-            audio.selectedAudioInputs.last?.connect(to: outputMixer!)
+            audio.selectedAudioInputs.last?.connect(to: outputBooster!)
         }
         
         // LAST TO OUTPUT
-        AudioKit.output = outputMixer
+        AudioKit.output = outputBooster
         if AudioKit.output == nil {
             AudioKit.output = inputMixer
         }
@@ -792,6 +1592,8 @@ class audio {
         }
         
     }
+    
+    
     
     
     func resetAudioEffects() {
@@ -813,143 +1615,8 @@ class audio {
         startAudio()
     }
     
-    /*
-    func connectEffects() {
-        
-        
-        // TODO:
-        // Kokeile DryWeMixeriä joka väliin???
-        // Splittaa ensin
-       
-        // CONNECT to input: If there are effects before main unit
-        for pedal in 0..<firstList.count {
-            
-            if pedal == 0 {
-                inputMixer?.connect(to: firstList[0])
-                
-            }
-            else {
-                firstList[pedal-1].connect(to: firstList[pedal])
-            }
-        }
-        
-        if firstList .isEmpty {
-            inputMixer!.connect(to: mixerForFirstList!)
-        } else {
-            firstList.last?.connect(to: mixerForFirstList!)
-        }
-        
-        
-        
-        // CONNECT to soundEffectsBefore: If there are units in the main unit
-        for pedal in 0..<secondList.count {
-            
-            if pedal == 0 {
-                mixerForFirstList?.connect(to: secondList[0])
-                
-            }
-            else {
-                secondList[pedal-1].connect(to: secondList[pedal])
-            }
-        }
-        
-        if secondList .isEmpty {
-            mixerForFirstList!.connect(to: mixerForSecondList!)
-        } else {
-            secondList.last?.connect(to: mixerForSecondList!)
-        }
-        
-        
-        
-        
-        
-        
-        // CONNECT to mainUnits: If there are units in the soundEffectsAfter
-        for pedal in 0..<thirdList.count {
-            
-            if pedal == 0 {
-                mixerForSecondList?.connect(to: thirdList[0])
-                
-            }
-            else {
-                thirdList[pedal-1].connect(to: thirdList[pedal])
-            }
-        }
-        
-        if thirdList .isEmpty {
-            mixerForSecondList!.connect(to: mixerForThirdList!)
-        } else {
-            thirdList.last?.connect(to: mixerForThirdList!)
-        }
-        
-        
-        
-        // CONNECT to soundEffectsAfter: If there are units in the finishers
-        for pedal in 0..<audioOut.count {
-            
-            if pedal == 0 {
-                mixerForThirdList?.connect(to: audioOut[0])
-                
-            }
-            else {
-                audioOut[pedal-1].connect(to: audioOut[pedal])
-            }
-        }
-        
-        if audioOut .isEmpty {
-            mixerForThirdList!.connect(to: outputMixer!)
-        } else {
-            audioOut.last?.connect(to: outputMixer!)
-        }
-        
-        
-        // CONNECT last  efefcts to the finalFilters
-        for pedal in 0..<finalFilters.count {
-            
-            if pedal == 0 {
-                outputMixer?.connect(to: finalFilters[0])
-                
-            }
-            else {
-                finalFilters[pedal-1].connect(to: finalFilters[pedal])
-            }
-        }
-        
-        if finalFilters .isEmpty {
-            outputMixer!.connect(to: filterMixer!)
-        } else {
-            finalFilters.last?.connect(to: filterMixer!)
-        }
-        
-        // LAST TO OUTPUT
-        AudioKit.output = filterMixer
-        if AudioKit.output == nil {
-            AudioKit.output = inputMixer
-        }
-   
-        // START AUDIOKIT
-        do {
-            try AudioKit.start()
-            print("START AUDIOKIT")
-        } catch {
-            print("Could not start AudioKit")
-        }
-        
-    }
-    
-  */
-    
-    
-    
-    
-    
-    
-    
-    
-    
+  
 
-    var defaultAmp: AKNode?
-    
     
     var inputMixer: AKMixer?
     var mixerForFirstList: AKMixer?
@@ -958,10 +1625,10 @@ class audio {
     var outputMixer: AKMixer?
     
     
-    
     var filterMixer: AKMixer?
     
     var mic: AKMicrophone?
+    var outputBooster : AKBooster?
     
     
     // EFFECTS
@@ -1071,12 +1738,14 @@ class audio {
     var finalFilters = [AKInput]()
     
     
+    
     func createEffects() {
         
-        defaultAmp = AKNode()
+      
         
         // UTILITIES
         mic = AKMicrophone()
+        outputBooster = AKBooster()
         
         // MIXERS
         inputMixer = AKMixer()

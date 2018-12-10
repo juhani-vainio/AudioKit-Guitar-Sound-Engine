@@ -104,6 +104,13 @@ class helper {
                 array.updateValue(String(audio.delay!.lowPassCutoff), forKey: "lowPassCutOff")
                 array.updateValue(String(audio.delay!.dryWetMix), forKey: "dryWetMix")
             
+        case "variableDelay" :
+            array.updateValue(location, forKey: "location")
+            array.updateValue(effect.id, forKey: "name")
+            array.updateValue(String(audio.variableDelay!.isStarted), forKey: "isStarted")
+            array.updateValue(String(audio.variableDelay!.time), forKey: "time")
+            array.updateValue(String(audio.variableDelay!.feedback), forKey: "feedback")
+    
             
         case "decimator" :
                 array.updateValue(location, forKey: "location")
@@ -124,14 +131,109 @@ class helper {
                 array.updateValue(String(audio.ringModulator!.mix), forKey: "mix")
             
             
+        case "flanger" :
+            array.updateValue(location, forKey: "location")
+            array.updateValue(effect.id, forKey: "name")
+            array.updateValue(String(audio.flanger!.isStarted), forKey: "isStarted")
+            array.updateValue(String(audio.flanger!.frequency), forKey: "frequency")
+            array.updateValue(String(audio.flanger!.depth), forKey: "depth")
+            array.updateValue(String(audio.flanger!.feedback), forKey: "feedback")
+            array.updateValue(String(audio.flanger!.dryWetMix), forKey: "dryWetMix")
             
+        case "phaser" :
+            array.updateValue(location, forKey: "location")
+            array.updateValue(effect.id, forKey: "name")
+            array.updateValue(String(audio.phaser!.isStarted), forKey: "isStarted")
+            array.updateValue(String(audio.phaser!.notchWidth), forKey: "notchWidth")
+            array.updateValue(String(audio.phaser!.notchFrequency), forKey: "notchFrequency")
+            array.updateValue(String(audio.phaser!.depth), forKey: "depth")
+             array.updateValue(String(audio.phaser!.feedback), forKey: "feedback")
+             array.updateValue(String(audio.phaser!.lfoBPM), forKey: "lfoBPM")
             
+        case "chorus" :
+            array.updateValue(location, forKey: "location")
+            array.updateValue(effect.id, forKey: "name")
+            array.updateValue(String(audio.chorus!.isStarted), forKey: "isStarted")
+            array.updateValue(String(audio.chorus!.frequency), forKey: "frequency")
+            array.updateValue(String(audio.chorus!.depth), forKey: "depth")
+            array.updateValue(String(audio.chorus!.feedback), forKey: "feedback")
+            array.updateValue(String(audio.chorus!.dryWetMix), forKey: "dryWetMix")
             
-        // TODO lisää filtterit
+        case "compressor" :
+            array.updateValue(location, forKey: "location")
+            array.updateValue(effect.id, forKey: "name")
+            array.updateValue(String(audio.compressor!.isStarted), forKey: "isStarted")
+            array.updateValue(String(audio.compressor!.threshold), forKey: "threshold")
+            array.updateValue(String(audio.compressor!.headRoom), forKey: "headRoom")
+            array.updateValue(String(audio.compressor!.attackDuration), forKey: "attackDuration")
+            array.updateValue(String(audio.compressor!.releaseDuration), forKey: "releaseDuration")
+            array.updateValue(String(audio.compressor!.masterGain), forKey: "masterGain")
+            array.updateValue(String(audio.compressor!.dryWetMix), forKey: "dryWetMix")
             
+        case "dynamicsProcessor" :
+            array.updateValue(location, forKey: "location")
+            array.updateValue(effect.id, forKey: "name")
+            array.updateValue(String(audio.dynamicsProcessor!.isStarted), forKey: "isStarted")
+            array.updateValue(String(audio.dynamicsProcessor!.threshold), forKey: "threshold")
+            array.updateValue(String(audio.dynamicsProcessor!.headRoom), forKey: "headRoom")
+            array.updateValue(String(audio.dynamicsProcessor!.expansionRatio), forKey: "expansionRatio")
+            array.updateValue(String(audio.dynamicsProcessor!.expansionThreshold), forKey: "expansionThreshold")
+            array.updateValue(String(audio.dynamicsProcessor!.attackDuration), forKey: "attackDuration")
+            array.updateValue(String(audio.dynamicsProcessor!.releaseDuration), forKey: "releaseDuration")
+            array.updateValue(String(audio.dynamicsProcessor!.masterGain), forKey: "masterGain")
+            array.updateValue(String(audio.dynamicsProcessor!.dryWetMix), forKey: "dryWetMix")
             
+        case "dynamicRangeCompressor" :
+            array.updateValue(location, forKey: "location")
+            array.updateValue(effect.id, forKey: "name")
+            array.updateValue(String(audio.dynamicRangeCompressor!.isStarted), forKey: "isStarted")
+            array.updateValue(String(audio.dynamicRangeCompressor!.ratio), forKey: "ratio")
+            array.updateValue(String(audio.dynamicRangeCompressor!.threshold), forKey: "threshold")
+            array.updateValue(String(audio.dynamicRangeCompressor!.attackDuration), forKey: "attackDuration")
+            array.updateValue(String(audio.dynamicRangeCompressor!.releaseDuration), forKey: "releaseDuration")
+           
+        case "reverb" :
+            array.updateValue(location, forKey: "location")
+            array.updateValue(effect.id, forKey: "name")
+            array.updateValue(String(audio.reverb!.isStarted), forKey: "isStarted")
+            array.updateValue(String(audio.reverb!.dryWetMix), forKey: "dryWetMix")
             
+        case "reverb2" :
+            array.updateValue(location, forKey: "location")
+            array.updateValue(effect.id, forKey: "name")
+            array.updateValue(String(audio.reverb2!.isStarted), forKey: "isStarted")
+            array.updateValue(String(audio.reverb2!.gain), forKey: "gain")
+            array.updateValue(String(audio.reverb2!.minDelayTime), forKey: "minDelayTime")
+            array.updateValue(String(audio.reverb2!.maxDelayTime), forKey: "maxDelayTime")
+            array.updateValue(String(audio.reverb2!.decayTimeAtNyquist), forKey: "decayTimeAtNyquist")
+            array.updateValue(String(audio.reverb2!.decayTimeAt0Hz), forKey: "decayTimeAt0Hz")
+            array.updateValue(String(audio.reverb2!.randomizeReflections), forKey: "randomizeReflections")
+            array.updateValue(String(audio.reverb2!.dryWetMix), forKey: "dryWetMix")
             
+        case "chowningReverb" :
+            array.updateValue(location, forKey: "location")
+            array.updateValue(effect.id, forKey: "name")
+            array.updateValue(String(audio.chowningReverb!.isStarted), forKey: "isStarted")
+            
+        case "costelloReverb" :
+            array.updateValue(location, forKey: "location")
+            array.updateValue(effect.id, forKey: "name")
+            array.updateValue(String(audio.costelloReverb!.isStarted), forKey: "isStarted")
+            array.updateValue(String(audio.costelloReverb!.cutoffFrequency), forKey: "cutoffFrequency")
+            array.updateValue(String(audio.costelloReverb!.feedback), forKey: "feedback")
+       
+        case "flatFrequencyResponseReverb" :
+            array.updateValue(location, forKey: "location")
+            array.updateValue(effect.id, forKey: "name")
+            array.updateValue(String(audio.flatFrequencyResponseReverb!.isStarted), forKey: "isStarted")
+            array.updateValue(String(audio.flatFrequencyResponseReverb!.reverbDuration), forKey: "reverbDuration")
+            
+        case "tremolo" :
+            array.updateValue(location, forKey: "location")
+            array.updateValue(effect.id, forKey: "name")
+            array.updateValue(String(audio.tremolo!.isStarted), forKey: "isStarted")
+            array.updateValue(String(audio.tremolo!.frequency), forKey: "frequency")
+            array.updateValue(String(audio.tremolo!.depth), forKey: "depth")
             
         default : print("addToDictionaryToSave default hmmm?")
             
@@ -339,6 +441,25 @@ class helper {
                 let started = Bool(isStarted)!
                 if started == true {audio.delay!.start()} else {audio.delay!.stop()}
                 
+            case "variableDelay" :
+                
+                guard let feedback = (effect as AnyObject).value(forKey: "feedback")! as? String else {
+                    return
+                }
+           
+                guard let time = (effect as AnyObject).value(forKey: "time")! as? String else {
+                    return
+                }
+                guard let isStarted = (effect as AnyObject).value(forKey: "isStarted")! as? String else {
+                    return
+                }
+                
+                audio.variableDelay!.feedback = Double(feedback)!
+                audio.variableDelay!.time = TimeInterval(time)!
+                
+                let started = Bool(isStarted)!
+                if started == true {audio.variableDelay!.start()} else {audio.variableDelay!.stop()}
+                
                 
             case "decimator" :
                 guard let decimation = (effect as AnyObject).value(forKey: "decimation")! as? String else {
@@ -386,6 +507,310 @@ class helper {
                 let started = Bool(isStarted)!
                 if started == true {audio.ringModulator!.start()} else {audio.ringModulator!.stop()}
                 
+            case "flanger" :
+         
+                guard let frequency = (effect as AnyObject).value(forKey: "frequency")! as? String else {
+                    return
+                }
+                guard let depth = (effect as AnyObject).value(forKey: "depth")! as? String else {
+                    return
+                }
+                guard let feedback = (effect as AnyObject).value(forKey: "feedback")! as? String else {
+                    return
+                }
+                guard let dryWetMix = (effect as AnyObject).value(forKey: "dryWetMix")! as? String else {
+                    return
+                }
+                guard let isStarted = (effect as AnyObject).value(forKey: "isStarted")! as? String else {
+                    return
+                }
+                
+                audio.flanger!.frequency = Double(frequency)!
+                audio.flanger!.depth = Double(depth)!
+                audio.flanger!.feedback = Double(feedback)!
+                audio.flanger!.dryWetMix = Double(dryWetMix)!
+                let started = Bool(isStarted)!
+                if started == true {audio.flanger!.start()} else {audio.flanger!.stop()}
+                
+            case "phaser" :
+                
+                guard let notchWidth = (effect as AnyObject).value(forKey: "notchWidth")! as? String else {
+                    return
+                }
+                guard let notchFrequency = (effect as AnyObject).value(forKey: "notchFrequency")! as? String else {
+                    return
+                }
+                guard let depth = (effect as AnyObject).value(forKey: "depth")! as? String else {
+                    return
+                }
+                guard let feedback = (effect as AnyObject).value(forKey: "feedback")! as? String else {
+                    return
+                }
+                guard let lfoBPM = (effect as AnyObject).value(forKey: "lfoBPM")! as? String else {
+                    return
+                }
+                guard let isStarted = (effect as AnyObject).value(forKey: "isStarted")! as? String else {
+                    return
+                }
+                
+                audio.phaser!.notchWidth = Double(notchWidth)!
+                audio.phaser!.notchFrequency = Double(notchFrequency)!
+                audio.phaser!.depth = Double(depth)!
+                audio.phaser!.feedback = Double(feedback)!
+                audio.phaser!.lfoBPM = Double(lfoBPM)!
+                let started = Bool(isStarted)!
+                if started == true {audio.phaser!.start()} else {audio.phaser!.stop()}
+                
+            case "chorus" :
+                
+                guard let frequency = (effect as AnyObject).value(forKey: "frequency")! as? String else {
+                    return
+                }
+                guard let depth = (effect as AnyObject).value(forKey: "depth")! as? String else {
+                    return
+                }
+                guard let feedback = (effect as AnyObject).value(forKey: "feedback")! as? String else {
+                    return
+                }
+                guard let dryWetMix = (effect as AnyObject).value(forKey: "dryWetMix")! as? String else {
+                    return
+                }
+                guard let isStarted = (effect as AnyObject).value(forKey: "isStarted")! as? String else {
+                    return
+                }
+                
+                audio.chorus!.frequency = Double(frequency)!
+                audio.chorus!.depth = Double(depth)!
+                audio.chorus!.feedback = Double(feedback)!
+                audio.chorus!.dryWetMix = Double(dryWetMix)!
+                let started = Bool(isStarted)!
+                if started == true {audio.chorus!.start()} else {audio.chorus!.stop()}
+                
+            case "compressor" :
+                
+                guard let threshold = (effect as AnyObject).value(forKey: "threshold")! as? String else {
+                    return
+                }
+                guard let headRoom = (effect as AnyObject).value(forKey: "headRoom")! as? String else {
+                    return
+                }
+                guard let attackDuration = (effect as AnyObject).value(forKey: "attackDuration")! as? String else {
+                    return
+                }
+                guard let releaseDuration = (effect as AnyObject).value(forKey: "releaseDuration")! as? String else {
+                    return
+                }
+               
+                guard let masterGain = (effect as AnyObject).value(forKey: "masterGain")! as? String else {
+                    return
+                }
+                guard let dryWetMix = (effect as AnyObject).value(forKey: "dryWetMix")! as? String else {
+                    return
+                }
+                guard let isStarted = (effect as AnyObject).value(forKey: "isStarted")! as? String else {
+                    return
+                }
+                
+                audio.compressor!.threshold = Double(threshold)!
+                audio.compressor!.headRoom = Double(headRoom)!
+                audio.compressor!.attackDuration = Double(attackDuration)!
+                audio.compressor!.releaseDuration = Double(releaseDuration)!
+                audio.compressor!.masterGain = Double(masterGain)!
+                audio.compressor!.dryWetMix = Double(dryWetMix)!
+               
+                let started = Bool(isStarted)!
+                if started == true {audio.compressor!.start()} else {audio.compressor!.stop()}
+                
+            case "dynamicsProcessor" :
+                
+                guard let threshold = (effect as AnyObject).value(forKey: "threshold")! as? String else {
+                    return
+                }
+                guard let headRoom = (effect as AnyObject).value(forKey: "headRoom")! as? String else {
+                    return
+                }
+                guard let expansionRatio = (effect as AnyObject).value(forKey: "expansionRatio")! as? String else {
+                    return
+                }
+                guard let expansionThreshold = (effect as AnyObject).value(forKey: "expansionThreshold")! as? String else {
+                    return
+                }
+                
+                guard let attackDuration = (effect as AnyObject).value(forKey: "attackDuration")! as? String else {
+                    return
+                }
+                guard let releaseDuration = (effect as AnyObject).value(forKey: "releaseDuration")! as? String else {
+                    return
+                }
+                
+                guard let masterGain = (effect as AnyObject).value(forKey: "masterGain")! as? String else {
+                    return
+                }
+                guard let dryWetMix = (effect as AnyObject).value(forKey: "dryWetMix")! as? String else {
+                    return
+                }
+                guard let isStarted = (effect as AnyObject).value(forKey: "isStarted")! as? String else {
+                    return
+                }
+                
+                audio.dynamicsProcessor!.threshold = Double(threshold)!
+                audio.dynamicsProcessor!.headRoom = Double(headRoom)!
+                audio.dynamicsProcessor!.expansionRatio = Double(expansionRatio)!
+                audio.dynamicsProcessor!.expansionThreshold = Double(expansionThreshold)!
+                audio.dynamicsProcessor!.attackDuration = Double(attackDuration)!
+                audio.dynamicsProcessor!.releaseDuration = Double(releaseDuration)!
+                audio.dynamicsProcessor!.masterGain = Double(masterGain)!
+                audio.dynamicsProcessor!.dryWetMix = Double(dryWetMix)!
+                
+                let started = Bool(isStarted)!
+                if started == true {audio.dynamicsProcessor!.start()} else {audio.dynamicsProcessor!.stop()}
+                
+                
+            case "dynamicRangeCompressor" :
+                
+                guard let threshold = (effect as AnyObject).value(forKey: "threshold")! as? String else {
+                    return
+                }
+        
+                guard let ratio = (effect as AnyObject).value(forKey: "ratio")! as? String else {
+                    return
+                }
+                
+                guard let attackDuration = (effect as AnyObject).value(forKey: "attackDuration")! as? String else {
+                    return
+                }
+                guard let releaseDuration = (effect as AnyObject).value(forKey: "releaseDuration")! as? String else {
+                    return
+                }
+             
+                guard let isStarted = (effect as AnyObject).value(forKey: "isStarted")! as? String else {
+                    return
+                }
+                
+                audio.dynamicRangeCompressor!.ratio = Double(ratio)!
+                audio.dynamicRangeCompressor!.threshold = Double(threshold)!
+               
+                audio.dynamicRangeCompressor!.attackDuration = Double(attackDuration)!
+                audio.dynamicRangeCompressor!.releaseDuration = Double(releaseDuration)!
+               
+                
+                let started = Bool(isStarted)!
+                if started == true {audio.dynamicRangeCompressor!.start()} else {audio.dynamicRangeCompressor!.stop()}
+                
+            case "reverb" :
+                
+              
+                guard let dryWetMix = (effect as AnyObject).value(forKey: "dryWetMix")! as? String else {
+                    return
+                }
+                guard let isStarted = (effect as AnyObject).value(forKey: "isStarted")! as? String else {
+                    return
+                }
+                
+                audio.reverb!.dryWetMix = Double(dryWetMix)!
+                let started = Bool(isStarted)!
+                if started == true {audio.reverb!.start()} else {audio.reverb!.stop()}
+                
+            case "reverb2" :
+                
+                guard let gain = (effect as AnyObject).value(forKey: "gain")! as? String else {
+                    return
+                }
+                guard let minDelayTime = (effect as AnyObject).value(forKey: "minDelayTime")! as? String else {
+                    return
+                }
+                guard let maxDelayTime = (effect as AnyObject).value(forKey: "maxDelayTime")! as? String else {
+                    return
+                }
+                guard let dryWetMix = (effect as AnyObject).value(forKey: "dryWetMix")! as? String else {
+                    return
+                }
+                guard let decayTimeAt0Hz = (effect as AnyObject).value(forKey: "decayTimeAt0Hz")! as? String else {
+                    return
+                }
+                guard let decayTimeAtNyquist = (effect as AnyObject).value(forKey: "decayTimeAtNyquist")! as? String else {
+                    return
+                }
+                guard let randomizeReflections = (effect as AnyObject).value(forKey: "randomizeReflections")! as? String else {
+                    return
+                }
+                guard let isStarted = (effect as AnyObject).value(forKey: "isStarted")! as? String else {
+                    return
+                }
+                
+                audio.reverb2!.gain = Double(gain)!
+                audio.reverb2!.minDelayTime = Double(minDelayTime)!
+                audio.reverb2!.maxDelayTime = Double(maxDelayTime)!
+                audio.reverb2!.decayTimeAt0Hz = Double(decayTimeAt0Hz)!
+                audio.reverb2!.decayTimeAtNyquist = Double(decayTimeAtNyquist)!
+                audio.reverb2!.randomizeReflections = Double(randomizeReflections)!
+                audio.reverb2!.dryWetMix = Double(dryWetMix)!
+                let started = Bool(isStarted)!
+                if started == true {audio.reverb2!.start()} else {audio.reverb2!.stop()}
+                
+            case "chowningReverb" :
+                
+                guard let isStarted = (effect as AnyObject).value(forKey: "isStarted")! as? String else {
+                    return
+                }
+         
+                let started = Bool(isStarted)!
+                if started == true {audio.chowningReverb!.start()} else {audio.chowningReverb!.stop()}
+                
+            case "costelloReverb" :
+                
+                guard let cutoffFrequency = (effect as AnyObject).value(forKey: "cutoffFrequency")! as? String else {
+                    return
+                }
+             
+                guard let feedback = (effect as AnyObject).value(forKey: "feedback")! as? String else {
+                    return
+                }
+               
+                guard let isStarted = (effect as AnyObject).value(forKey: "isStarted")! as? String else {
+                    return
+                }
+                
+            
+                audio.costelloReverb!.cutoffFrequency = Double(cutoffFrequency)!
+                audio.costelloReverb!.feedback = Double(feedback)!
+      
+                let started = Bool(isStarted)!
+                if started == true {audio.costelloReverb!.start()} else {audio.costelloReverb!.stop()}
+                
+            case "flatFrequencyResponseReverb" :
+                
+                guard let reverbDuration = (effect as AnyObject).value(forKey: "reverbDuration")! as? String else {
+                    return
+                }
+                guard let isStarted = (effect as AnyObject).value(forKey: "isStarted")! as? String else {
+                    return
+                }
+                
+                audio.flatFrequencyResponseReverb!.reverbDuration = Double(reverbDuration)!
+   
+                let started = Bool(isStarted)!
+                if started == true {audio.flatFrequencyResponseReverb!.start()} else {audio.flatFrequencyResponseReverb!.stop()}
+                
+            case "tremolo" :
+                
+                guard let frequency = (effect as AnyObject).value(forKey: "frequency")! as? String else {
+                    return
+                }
+                guard let depth = (effect as AnyObject).value(forKey: "depth")! as? String else {
+                    return
+                }
+               
+                guard let isStarted = (effect as AnyObject).value(forKey: "isStarted")! as? String else {
+                    return
+                }
+                
+                audio.tremolo!.frequency = Double(frequency)!
+                audio.tremolo!.depth = Double(depth)!
+             
+                let started = Bool(isStarted)!
+                if started == true {audio.tremolo!.start()} else {audio.tremolo!.stop()}
+                
                 
             default : print("NOTHIN HERE")
                 
@@ -408,6 +833,11 @@ class helper {
             print("Get values for \(name)")
             let chainArray = UserDefaults.standard.array(forKey: name) ?? [[String:String]]()
             if chainArray.isNotEmpty{
+                setValuesForReceivedChain(valuesForChain: chainArray)
+            }
+            else {
+                // FIRST TIMER
+                print("FIRST TIME OPENING APP...... NO SOUNDS......")
                 setValuesForReceivedChain(valuesForChain: chainArray)
             }
         }

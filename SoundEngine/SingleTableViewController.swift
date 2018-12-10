@@ -22,13 +22,15 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
     fileprivate var snapshot: UIView?
     
     @IBOutlet weak var inputLevel: UISlider!
+    @IBOutlet weak var outputLevel: UISlider!
     @IBOutlet weak var volumeView: UIView!
     @IBOutlet weak var bufferLengthSegment: UISegmentedControl!
     @IBOutlet weak var mainViewBackground: UIView!
     @IBOutlet weak var addButton: UIButton!
     
     @IBOutlet weak var availableEffects: UITableView!
-
+    @IBOutlet weak var availableFilters: UITableView!
+    
     @IBOutlet weak var selectedEffects: UITableView!
     
     @IBOutlet weak var mainCollection: UICollectionView!
@@ -68,6 +70,8 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
         volumeView.addSubview(myVolumeView)
         inputLevel.setValue(Float((audio.shared.mic?.volume)!), animated: true)
         inputLevel.addTarget(self, action: #selector(inputLevelChanged), for: .valueChanged)
+        outputLevel.setValue(Float((audio.shared.outputBooster?.gain)!), animated: true)
+        outputLevel.addTarget(self, action: #selector(outputLevelChanged), for: .valueChanged)
         
         bufferLengthSegment.selectedSegmentIndex = settings.bufferLength - 1
         
@@ -87,6 +91,12 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
     
     @objc func inputLevelChanged(slider: UISlider) {
         audio.shared.mic?.volume = Double(slider.value)
+        print(audio.shared.mic?.volume)
+    }
+    
+    @objc func outputLevelChanged(slider: UISlider) {
+        audio.shared.outputBooster?.gain = Double(slider.value)
+        print("\(audio.shared.outputBooster?.dB) dB")
     }
 
     // MARK: TABLEVIEWS
@@ -107,10 +117,18 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
         let doubleNib = UINib(nibName: "DoubleTableViewCell", bundle: nil)
         let tripleNib = UINib(nibName: "TripleTableViewCell", bundle: nil)
         let quatroNib = UINib(nibName: "QuatroTableViewCell", bundle: nil)
+        let pentaNib = UINib(nibName: "PentaTableViewCell", bundle: nil)
+        let hexaNib = UINib(nibName: "HexaTableViewCell", bundle: nil)
+        let heptaNib = UINib(nibName: "HeptaTableViewCell", bundle: nil)
+        let octaNib = UINib(nibName: "OctaTableViewCell", bundle: nil)
         selectedEffects.register(nib, forCellReuseIdentifier: "TableViewCell")
         selectedEffects.register(doubleNib, forCellReuseIdentifier: "DoubleTableViewCell")
         selectedEffects.register(tripleNib, forCellReuseIdentifier: "TripleTableViewCell")
         selectedEffects.register(quatroNib, forCellReuseIdentifier: "QuatroTableViewCell")
+        selectedEffects.register(pentaNib, forCellReuseIdentifier: "PentaTableViewCell")
+        selectedEffects.register(hexaNib, forCellReuseIdentifier: "HexaTableViewCell")
+        selectedEffects.register(heptaNib, forCellReuseIdentifier: "HeptaTableViewCell")
+        selectedEffects.register(octaNib, forCellReuseIdentifier: "OctaTableViewCell")
         
         longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(self.handleLongGesture(longPress:)))
         selectedEffects.addGestureRecognizer(longPressGesture)
@@ -249,7 +267,7 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
         if tableView == selectedEffects {
             cellOpened = audio.selectedEffectsData[indexPath.row].opened
             cellTitle = audio.selectedEffectsData[indexPath.row].title
-            cellType = audio.selectedEffectsData[indexPath.row].sliderRowsForTable
+            cellType = audio.selectedEffectsData[indexPath.row].type
             cellIsLast = audio.selectedEffectsData.endIndex - 1 == indexPath.row
             cellId = audio.selectedEffectsData[indexPath.row].id
             
@@ -273,7 +291,49 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
             
             switch cellType {
                 
-            case "double":
+    
+            case "1":
+                // One slider
+                let cell = tableView.dequeueReusableCell(withIdentifier: "TableViewCell", for: indexPath) as! TableViewCell
+                
+                let slider = audio.shared.getValues(id: cellId, slider: 1)
+                cell.sliderTitle.text = slider.name
+                cell.sliderValue.text = slider.value
+                cell.slider.minimumValue = slider.min
+                cell.slider.maximumValue = slider.max
+                cell.slider.value = slider.valueForSlider
+                
+                cell.id = cellId
+                cell.title.text = cellTitle
+                cell.selectedBackgroundView = backgroundView
+                
+                if slider.isOn {
+                    cell.onOffButton.setTitle("ON", for: .normal)
+                    cell.onOffButton.setTitleColor(interface.text, for: .normal)
+                } else {
+                    cell.onOffButton.setTitle("OFF", for: .normal)
+                    cell.onOffButton.setTitleColor(interface.textIdle, for: .normal)
+                    if slider.name.contains("ix") {
+                        cell.slider.isEnabled = false
+                    }
+                    
+                }
+                if cellOpened == true {
+                    if cellIsLast {
+                        cell.bottomConstraint.constant = 8
+                    } else {
+                        cell.bottomConstraint.constant = 0
+                    }
+                    cell.controllerHeight.constant = CGFloat(50)
+                    cell.controllersView.isHidden = false
+                } else {
+                    cell.controllerHeight.constant = CGFloat(0)
+                    cell.controllersView.isHidden = true
+                }
+                
+                returnCell = cell
+                
+            case "2":
                 // Has two sliders
                 let cell = tableView.dequeueReusableCell(withIdentifier: "DoubleTableViewCell", for: indexPath) as! DoubleTableViewCell
                 
@@ -323,7 +383,7 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
                 }
                 returnCell = cell
                 
-            case "triple":
+            case "3":
                 // Has two sliders
                 let cell = tableView.dequeueReusableCell(withIdentifier: "TripleTableViewCell", for: indexPath) as! TripleTableViewCell
                 let slider1 = audio.shared.getValues(id: cellId, slider: 1)
@@ -384,7 +444,7 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
                 }
                 returnCell = cell
                 
-            case "quatro":
+            case "4":
                 // Has two sliders
                 let cell = tableView.dequeueReusableCell(withIdentifier: "QuatroTableViewCell", for: indexPath) as! QuatroTableViewCell
                 
@@ -447,6 +507,382 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
                         cell.bottomConstraint.constant = 0
                     }
                     cell.controllerHeight.constant = CGFloat(4 * 50)
+                    cell.controllersView.isHidden = false
+                } else {
+                    cell.controllerHeight.constant = CGFloat(0)
+                    cell.controllersView.isHidden = true
+                }
+                returnCell = cell
+                
+            case "5":
+                // Has two sliders
+                let cell = tableView.dequeueReusableCell(withIdentifier: "PentaTableViewCell", for: indexPath) as! PentaTableViewCell
+                
+                let slider1 = audio.shared.getValues(id: cellId, slider: 1)
+                cell.slider1Title.text = slider1.name
+                cell.slider1Value.text = slider1.value
+                cell.slider1.minimumValue = slider1.min
+                cell.slider1.maximumValue = slider1.max
+                cell.slider1.value = slider1.valueForSlider
+                
+                let slider2 = audio.shared.getValues(id: cellId, slider: 2)
+                cell.slider2Title.text = slider2.name
+                cell.slider2Value.text = slider2.value
+                cell.slider2.minimumValue = slider2.min
+                cell.slider2.maximumValue = slider2.max
+                cell.slider2.value = slider2.valueForSlider
+                
+                let slider3 = audio.shared.getValues(id: cellId, slider: 3)
+                cell.slider3Title.text = slider3.name
+                cell.slider3Value.text = slider3.value
+                cell.slider3.minimumValue = slider3.min
+                cell.slider3.maximumValue = slider3.max
+                cell.slider3.value = slider3.valueForSlider
+                
+                let slider4 = audio.shared.getValues(id: cellId, slider: 4)
+                cell.slider4Title.text = slider4.name
+                cell.slider4Value.text = slider4.value
+                cell.slider4.minimumValue = slider4.min
+                cell.slider4.maximumValue = slider4.max
+                cell.slider4.value = slider4.valueForSlider
+                
+                let slider5 = audio.shared.getValues(id: cellId, slider: 5)
+                cell.slider5Title.text = slider5.name
+                cell.slider5Value.text = slider5.value
+                cell.slider5.minimumValue = slider5.min
+                cell.slider5.maximumValue = slider5.max
+                cell.slider5.value = slider5.valueForSlider
+                
+                cell.id = cellId
+                cell.title.text = cellTitle
+                cell.selectedBackgroundView = backgroundView
+                
+                if slider1.isOn {
+                    cell.onOffButton.setTitle("ON", for: .normal)
+                    cell.onOffButton.setTitleColor(interface.text, for: .normal)
+                } else {
+                    cell.onOffButton.setTitle("OFF", for: .normal)
+                    cell.onOffButton.setTitleColor(interface.textIdle, for: .normal)
+                    if slider1.name.contains("ix") {
+                        cell.slider1.isEnabled = false
+                    }
+                    if slider2.name.contains("ix") {
+                        cell.slider2.isEnabled = false
+                    }
+                    if slider3.name.contains("ix") {
+                        cell.slider3.isEnabled = false
+                    }
+                    if slider4.name.contains("ix") {
+                        cell.slider4.isEnabled = false
+                    }
+                    if slider5.name.contains("ix") {
+                        cell.slider5.isEnabled = false
+                    }
+                }
+                if cellOpened == true {
+                    if cellIsLast {
+                        cell.bottomConstraint.constant = 8
+                    } else {
+                        cell.bottomConstraint.constant = 0
+                    }
+                    cell.controllerHeight.constant = CGFloat(5 * 50)
+                    cell.controllersView.isHidden = false
+                } else {
+                    cell.controllerHeight.constant = CGFloat(0)
+                    cell.controllersView.isHidden = true
+                }
+                returnCell = cell
+                
+            case "6":
+                // Has two sliders
+                let cell = tableView.dequeueReusableCell(withIdentifier: "HexaTableViewCell", for: indexPath) as! HexaTableViewCell
+                
+                let slider1 = audio.shared.getValues(id: cellId, slider: 1)
+                cell.slider1Title.text = slider1.name
+                cell.slider1Value.text = slider1.value
+                cell.slider1.minimumValue = slider1.min
+                cell.slider1.maximumValue = slider1.max
+                cell.slider1.value = slider1.valueForSlider
+                
+                let slider2 = audio.shared.getValues(id: cellId, slider: 2)
+                cell.slider2Title.text = slider2.name
+                cell.slider2Value.text = slider2.value
+                cell.slider2.minimumValue = slider2.min
+                cell.slider2.maximumValue = slider2.max
+                cell.slider2.value = slider2.valueForSlider
+                
+                let slider3 = audio.shared.getValues(id: cellId, slider: 3)
+                cell.slider3Title.text = slider3.name
+                cell.slider3Value.text = slider3.value
+                cell.slider3.minimumValue = slider3.min
+                cell.slider3.maximumValue = slider3.max
+                cell.slider3.value = slider3.valueForSlider
+                
+                let slider4 = audio.shared.getValues(id: cellId, slider: 4)
+                cell.slider4Title.text = slider4.name
+                cell.slider4Value.text = slider4.value
+                cell.slider4.minimumValue = slider4.min
+                cell.slider4.maximumValue = slider4.max
+                cell.slider4.value = slider4.valueForSlider
+                
+                let slider5 = audio.shared.getValues(id: cellId, slider: 5)
+                cell.slider5Title.text = slider5.name
+                cell.slider5Value.text = slider5.value
+                cell.slider5.minimumValue = slider5.min
+                cell.slider5.maximumValue = slider5.max
+                cell.slider5.value = slider5.valueForSlider
+                
+                let slider6 = audio.shared.getValues(id: cellId, slider: 6)
+                cell.slider6Title.text = slider6.name
+                cell.slider6Value.text = slider6.value
+                cell.slider6.minimumValue = slider6.min
+                cell.slider6.maximumValue = slider6.max
+                cell.slider6.value = slider6.valueForSlider
+                
+                cell.id = cellId
+                cell.title.text = cellTitle
+                cell.selectedBackgroundView = backgroundView
+                
+                if slider1.isOn {
+                    cell.onOffButton.setTitle("ON", for: .normal)
+                    cell.onOffButton.setTitleColor(interface.text, for: .normal)
+                } else {
+                    cell.onOffButton.setTitle("OFF", for: .normal)
+                    cell.onOffButton.setTitleColor(interface.textIdle, for: .normal)
+                    if slider1.name.contains("ix") {
+                        cell.slider1.isEnabled = false
+                    }
+                    if slider2.name.contains("ix") {
+                        cell.slider2.isEnabled = false
+                    }
+                    if slider3.name.contains("ix") {
+                        cell.slider3.isEnabled = false
+                    }
+                    if slider4.name.contains("ix") {
+                        cell.slider4.isEnabled = false
+                    }
+                    if slider5.name.contains("ix") {
+                        cell.slider5.isEnabled = false
+                    }
+                    if slider6.name.contains("ix") {
+                        cell.slider6.isEnabled = false
+                    }
+                }
+                if cellOpened == true {
+                    if cellIsLast {
+                        cell.bottomConstraint.constant = 8
+                    } else {
+                        cell.bottomConstraint.constant = 0
+                    }
+                    cell.controllerHeight.constant = CGFloat(6 * 50)
+                    cell.controllersView.isHidden = false
+                } else {
+                    cell.controllerHeight.constant = CGFloat(0)
+                    cell.controllersView.isHidden = true
+                }
+                returnCell = cell
+                
+            case "7":
+                // Has two sliders
+                let cell = tableView.dequeueReusableCell(withIdentifier: "HeptaTableViewCell", for: indexPath) as! HeptaTableViewCell
+                
+                let slider1 = audio.shared.getValues(id: cellId, slider: 1)
+                cell.slider1Title.text = slider1.name
+                cell.slider1Value.text = slider1.value
+                cell.slider1.minimumValue = slider1.min
+                cell.slider1.maximumValue = slider1.max
+                cell.slider1.value = slider1.valueForSlider
+                
+                let slider2 = audio.shared.getValues(id: cellId, slider: 2)
+                cell.slider2Title.text = slider2.name
+                cell.slider2Value.text = slider2.value
+                cell.slider2.minimumValue = slider2.min
+                cell.slider2.maximumValue = slider2.max
+                cell.slider2.value = slider2.valueForSlider
+                
+                let slider3 = audio.shared.getValues(id: cellId, slider: 3)
+                cell.slider3Title.text = slider3.name
+                cell.slider3Value.text = slider3.value
+                cell.slider3.minimumValue = slider3.min
+                cell.slider3.maximumValue = slider3.max
+                cell.slider3.value = slider3.valueForSlider
+                
+                let slider4 = audio.shared.getValues(id: cellId, slider: 4)
+                cell.slider4Title.text = slider4.name
+                cell.slider4Value.text = slider4.value
+                cell.slider4.minimumValue = slider4.min
+                cell.slider4.maximumValue = slider4.max
+                cell.slider4.value = slider4.valueForSlider
+                
+                let slider5 = audio.shared.getValues(id: cellId, slider: 5)
+                cell.slider5Title.text = slider5.name
+                cell.slider5Value.text = slider5.value
+                cell.slider5.minimumValue = slider5.min
+                cell.slider5.maximumValue = slider5.max
+                cell.slider5.value = slider5.valueForSlider
+                
+                let slider6 = audio.shared.getValues(id: cellId, slider: 6)
+                cell.slider6Title.text = slider6.name
+                cell.slider6Value.text = slider6.value
+                cell.slider6.minimumValue = slider6.min
+                cell.slider6.maximumValue = slider6.max
+                cell.slider6.value = slider6.valueForSlider
+                
+                let slider7 = audio.shared.getValues(id: cellId, slider: 7)
+                cell.slider7Title.text = slider7.name
+                cell.slider7Value.text = slider7.value
+                cell.slider7.minimumValue = slider7.min
+                cell.slider7.maximumValue = slider7.max
+                cell.slider7.value = slider7.valueForSlider
+                
+                cell.id = cellId
+                cell.title.text = cellTitle
+                cell.selectedBackgroundView = backgroundView
+                
+                if slider1.isOn {
+                    cell.onOffButton.setTitle("ON", for: .normal)
+                    cell.onOffButton.setTitleColor(interface.text, for: .normal)
+                } else {
+                    cell.onOffButton.setTitle("OFF", for: .normal)
+                    cell.onOffButton.setTitleColor(interface.textIdle, for: .normal)
+                    if slider1.name.contains("ix") {
+                        cell.slider1.isEnabled = false
+                    }
+                    if slider2.name.contains("ix") {
+                        cell.slider2.isEnabled = false
+                    }
+                    if slider3.name.contains("ix") {
+                        cell.slider3.isEnabled = false
+                    }
+                    if slider4.name.contains("ix") {
+                        cell.slider4.isEnabled = false
+                    }
+                    if slider5.name.contains("ix") {
+                        cell.slider5.isEnabled = false
+                    }
+                    if slider6.name.contains("ix") {
+                        cell.slider6.isEnabled = false
+                    }
+                    if slider7.name.contains("ix") {
+                        cell.slider7.isEnabled = false
+                    }
+                }
+                if cellOpened == true {
+                    if cellIsLast {
+                        cell.bottomConstraint.constant = 8
+                    } else {
+                        cell.bottomConstraint.constant = 0
+                    }
+                    cell.controllerHeight.constant = CGFloat(7 * 50)
+                    cell.controllersView.isHidden = false
+                } else {
+                    cell.controllerHeight.constant = CGFloat(0)
+                    cell.controllersView.isHidden = true
+                }
+                returnCell = cell
+                
+            case "8":
+                // Has two sliders
+                let cell = tableView.dequeueReusableCell(withIdentifier: "OctaTableViewCell", for: indexPath) as! OctaTableViewCell
+                
+                let slider1 = audio.shared.getValues(id: cellId, slider: 1)
+                cell.slider1Title.text = slider1.name
+                cell.slider1Value.text = slider1.value
+                cell.slider1.minimumValue = slider1.min
+                cell.slider1.maximumValue = slider1.max
+                cell.slider1.value = slider1.valueForSlider
+                
+                let slider2 = audio.shared.getValues(id: cellId, slider: 2)
+                cell.slider2Title.text = slider2.name
+                cell.slider2Value.text = slider2.value
+                cell.slider2.minimumValue = slider2.min
+                cell.slider2.maximumValue = slider2.max
+                cell.slider2.value = slider2.valueForSlider
+                
+                let slider3 = audio.shared.getValues(id: cellId, slider: 3)
+                cell.slider3Title.text = slider3.name
+                cell.slider3Value.text = slider3.value
+                cell.slider3.minimumValue = slider3.min
+                cell.slider3.maximumValue = slider3.max
+                cell.slider3.value = slider3.valueForSlider
+                
+                let slider4 = audio.shared.getValues(id: cellId, slider: 4)
+                cell.slider4Title.text = slider4.name
+                cell.slider4Value.text = slider4.value
+                cell.slider4.minimumValue = slider4.min
+                cell.slider4.maximumValue = slider4.max
+                cell.slider4.value = slider4.valueForSlider
+                
+                let slider5 = audio.shared.getValues(id: cellId, slider: 5)
+                cell.slider5Title.text = slider5.name
+                cell.slider5Value.text = slider5.value
+                cell.slider5.minimumValue = slider5.min
+                cell.slider5.maximumValue = slider5.max
+                cell.slider5.value = slider5.valueForSlider
+                
+                let slider6 = audio.shared.getValues(id: cellId, slider: 6)
+                cell.slider6Title.text = slider6.name
+                cell.slider6Value.text = slider6.value
+                cell.slider6.minimumValue = slider6.min
+                cell.slider6.maximumValue = slider6.max
+                cell.slider6.value = slider6.valueForSlider
+                
+                let slider7 = audio.shared.getValues(id: cellId, slider: 7)
+                cell.slider7Title.text = slider7.name
+                cell.slider7Value.text = slider7.value
+                cell.slider7.minimumValue = slider7.min
+                cell.slider7.maximumValue = slider7.max
+                cell.slider7.value = slider7.valueForSlider
+                
+                let slider8 = audio.shared.getValues(id: cellId, slider: 8)
+                cell.slider8Title.text = slider8.name
+                cell.slider8Value.text = slider8.value
+                cell.slider8.minimumValue = slider8.min
+                cell.slider8.maximumValue = slider8.max
+                cell.slider8.value = slider8.valueForSlider
+                
+                cell.id = cellId
+                cell.title.text = cellTitle
+                cell.selectedBackgroundView = backgroundView
+                
+                if slider1.isOn {
+                    cell.onOffButton.setTitle("ON", for: .normal)
+                    cell.onOffButton.setTitleColor(interface.text, for: .normal)
+                } else {
+                    cell.onOffButton.setTitle("OFF", for: .normal)
+                    cell.onOffButton.setTitleColor(interface.textIdle, for: .normal)
+                    if slider1.name.contains("ix") {
+                        cell.slider1.isEnabled = false
+                    }
+                    if slider2.name.contains("ix") {
+                        cell.slider2.isEnabled = false
+                    }
+                    if slider3.name.contains("ix") {
+                        cell.slider3.isEnabled = false
+                    }
+                    if slider4.name.contains("ix") {
+                        cell.slider4.isEnabled = false
+                    }
+                    if slider5.name.contains("ix") {
+                        cell.slider5.isEnabled = false
+                    }
+                    if slider6.name.contains("ix") {
+                        cell.slider6.isEnabled = false
+                    }
+                    if slider7.name.contains("ix") {
+                        cell.slider7.isEnabled = false
+                    }
+                    if slider8.name.contains("ix") {
+                        cell.slider8.isEnabled = false
+                    }
+                }
+                if cellOpened == true {
+                    if cellIsLast {
+                        cell.bottomConstraint.constant = 8
+                    } else {
+                        cell.bottomConstraint.constant = 0
+                    }
+                    cell.controllerHeight.constant = CGFloat(8 * 50)
                     cell.controllersView.isHidden = false
                 } else {
                     cell.controllerHeight.constant = CGFloat(0)

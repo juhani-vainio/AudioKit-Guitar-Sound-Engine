@@ -25,6 +25,14 @@
 		575EE7E321BAF8E4008E9C11 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 575EE7E221BAF8E4008E9C11 /* Settings.swift */; };
 		57612AE121B172A1001A7231 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57612AE021B172A0001A7231 /* Helper.swift */; };
 		57612AE321B17396001A7231 /* Collections.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57612AE221B17396001A7231 /* Collections.swift */; };
+		578B32CD21BE9522002A7EEE /* PentaTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 578B32CB21BE9522002A7EEE /* PentaTableViewCell.swift */; };
+		578B32CE21BE9522002A7EEE /* PentaTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 578B32CC21BE9522002A7EEE /* PentaTableViewCell.xib */; };
+		578B32D121BE9537002A7EEE /* HexaTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 578B32CF21BE9537002A7EEE /* HexaTableViewCell.swift */; };
+		578B32D221BE9537002A7EEE /* HexaTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 578B32D021BE9537002A7EEE /* HexaTableViewCell.xib */; };
+		578B32D521BE9548002A7EEE /* HeptaTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 578B32D321BE9548002A7EEE /* HeptaTableViewCell.swift */; };
+		578B32D621BE9548002A7EEE /* HeptaTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 578B32D421BE9548002A7EEE /* HeptaTableViewCell.xib */; };
+		578B32D921BE9558002A7EEE /* OctaTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 578B32D721BE9558002A7EEE /* OctaTableViewCell.swift */; };
+		578B32DA21BE9558002A7EEE /* OctaTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 578B32D821BE9558002A7EEE /* OctaTableViewCell.xib */; };
 		578F421521A5708A003076EC /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 578F421421A5708A003076EC /* Colors.swift */; };
 		579368D2219EF91400227AF8 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 579368D0219EF91400227AF8 /* TableViewCell.swift */; };
 		579368D3219EF91400227AF8 /* TableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 579368D1219EF91400227AF8 /* TableViewCell.xib */; };
@@ -92,6 +100,14 @@
 		575EE7E221BAF8E4008E9C11 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		57612AE021B172A0001A7231 /* Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		57612AE221B17396001A7231 /* Collections.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Collections.swift; sourceTree = "<group>"; };
+		578B32CB21BE9522002A7EEE /* PentaTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PentaTableViewCell.swift; sourceTree = "<group>"; };
+		578B32CC21BE9522002A7EEE /* PentaTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PentaTableViewCell.xib; sourceTree = "<group>"; };
+		578B32CF21BE9537002A7EEE /* HexaTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HexaTableViewCell.swift; sourceTree = "<group>"; };
+		578B32D021BE9537002A7EEE /* HexaTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HexaTableViewCell.xib; sourceTree = "<group>"; };
+		578B32D321BE9548002A7EEE /* HeptaTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeptaTableViewCell.swift; sourceTree = "<group>"; };
+		578B32D421BE9548002A7EEE /* HeptaTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HeptaTableViewCell.xib; sourceTree = "<group>"; };
+		578B32D721BE9558002A7EEE /* OctaTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OctaTableViewCell.swift; sourceTree = "<group>"; };
+		578B32D821BE9558002A7EEE /* OctaTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OctaTableViewCell.xib; sourceTree = "<group>"; };
 		578F421421A5708A003076EC /* Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		579368D0219EF91400227AF8 /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 		579368D1219EF91400227AF8 /* TableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TableViewCell.xib; sourceTree = "<group>"; };
@@ -239,6 +255,14 @@
 				57E397A721A96F8500F2871A /* TripleTableViewCell.xib */,
 				57E397AA21A96FCF00F2871A /* QuatroTableViewCell.swift */,
 				57E397AB21A96FCF00F2871A /* QuatroTableViewCell.xib */,
+				578B32CB21BE9522002A7EEE /* PentaTableViewCell.swift */,
+				578B32CC21BE9522002A7EEE /* PentaTableViewCell.xib */,
+				578B32CF21BE9537002A7EEE /* HexaTableViewCell.swift */,
+				578B32D021BE9537002A7EEE /* HexaTableViewCell.xib */,
+				578B32D321BE9548002A7EEE /* HeptaTableViewCell.swift */,
+				578B32D421BE9548002A7EEE /* HeptaTableViewCell.xib */,
+				578B32D721BE9558002A7EEE /* OctaTableViewCell.swift */,
+				578B32D821BE9558002A7EEE /* OctaTableViewCell.xib */,
 			);
 			path = TableViews;
 			sourceTree = "<group>";
@@ -390,11 +414,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				578B32D621BE9548002A7EEE /* HeptaTableViewCell.xib in Resources */,
 				57075ED4219C4911003F2D4F /* LaunchScreen.storyboard in Resources */,
 				57075ED1219C4911003F2D4F /* Assets.xcassets in Resources */,
+				578B32D221BE9537002A7EEE /* HexaTableViewCell.xib in Resources */,
+				578B32CE21BE9522002A7EEE /* PentaTableViewCell.xib in Resources */,
 				57075ECC219C490C003F2D4F /* Main.storyboard in Resources */,
 				57A631EB21A965B5000069FA /* DoubleTableViewCell.xib in Resources */,
 				579368D3219EF91400227AF8 /* TableViewCell.xib in Resources */,
+				578B32DA21BE9558002A7EEE /* OctaTableViewCell.xib in Resources */,
 				5705EFF0219DE7D6005EF724 /* SoundsCollectionViewCell.xib in Resources */,
 				57E397AD21A96FCF00F2871A /* QuatroTableViewCell.xib in Resources */,
 				5705EFE4219DDF90005EF724 /* DefaultMainCollectionViewCell.xib in Resources */,
@@ -483,12 +511,16 @@
 				573AE53721AEECE700452624 /* Amp.swift in Sources */,
 				57075EC9219C490C003F2D4F /* ViewController.swift in Sources */,
 				578F421521A5708A003076EC /* Colors.swift in Sources */,
+				578B32D121BE9537002A7EEE /* HexaTableViewCell.swift in Sources */,
 				5705EFE3219DDF90005EF724 /* DefaultMainCollectionViewCell.swift in Sources */,
 				57075ECF219C490C003F2D4F /* SoundEngine.xcdatamodeld in Sources */,
 				5705EFEF219DE7D6005EF724 /* SoundsCollectionViewCell.swift in Sources */,
+				578B32D521BE9548002A7EEE /* HeptaTableViewCell.swift in Sources */,
+				578B32CD21BE9522002A7EEE /* PentaTableViewCell.swift in Sources */,
 				57E397BE21AC1E5300F2871A /* AudioModel.swift in Sources */,
 				57A631EA21A965B5000069FA /* DoubleTableViewCell.swift in Sources */,
 				57612AE121B172A1001A7231 /* Helper.swift in Sources */,
+				578B32D921BE9558002A7EEE /* OctaTableViewCell.swift in Sources */,
 				57075EC7219C490C003F2D4F /* AppDelegate.swift in Sources */,
 				57E397C021AC3B8C00F2871A /* Effects.swift in Sources */,
 				57E397BC21AC15D200F2871A /* SnappingFlowLayout.swift in Sources */,
