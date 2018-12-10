@@ -946,6 +946,7 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
             let row = IndexPath(item: indexPath.row, section: 0)
             self.availableEffects.deleteRows(at: [row], with: .none)
             self.availableEffects.isHidden = true
+            self.resetEffectChain()
         }
         else {
      
@@ -985,6 +986,7 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
             
              if tableView == selectedEffects {
                 // remove and insert data between arrays
+                audio.selectedEffectsData[indexPath.row].opened = false
                 let tempData = audio.selectedEffectsData[indexPath.row]
                 audio.availableEffectsData.append(tempData)
                 // Arrange available units list aplhabetically
@@ -993,6 +995,7 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
                 audio.selectedEffectsData.remove(at: indexPath.row)
                 let row = IndexPath(item: indexPath.row, section: 0)
                 self.selectedEffects.deleteRows(at: [row], with: .none)
+                self.resetEffectChain()
             }
             
             
@@ -1177,6 +1180,19 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
         let segment = sender.selectedSegmentIndex + 1
         audio.shared.setBufferLength(segment: segment)
         UserDefaults.standard.set(segment, forKey: "bufferLength")
+        do {
+            try AudioKit.stop()
+        } catch {
+            print("Could not stop AudioKit")
+        }
+        // START AUDIOKIT
+        do {
+            try AudioKit.start()
+            print("START AUDIOKIT")
+        } catch {
+            print("Could not start AudioKit")
+        }
+
         
     }
     

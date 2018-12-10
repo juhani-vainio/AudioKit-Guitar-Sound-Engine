@@ -94,19 +94,9 @@ class audio {
     ]
     
     
-    static var availableEffectsData = [
-        effectData(id: "bitCrusher", opened: false, title: "Bit Crusher", type: "2"),
-        effectData(id: "tanhDistortion", opened: false, title: "Tanh Distortion", type: "4"),
-        effectData(id: "dynaRageCompressor", opened: false, title: "Compressor", type: "4"),
-        effectData(id: "delay", opened: false, title: "Delay", type: "3"),
-        effectData(id: "ringModulator", opened: false, title: "Ring Modulator", type: "4")
-        ]
+    static var availableEffectsData = [effectData]()
     
-     // VÄLIAIKAINEN MALLI
-    static var selectedEffectsData = [effectData(id: "clipper",opened: false, title: "Clipper", type: "1"),
-                                          effectData(id: "autoWah" , opened: false, title: "Wah Wah!", type: "3"),
-                                          effectData(id: "decimator" ,opened: false, title: "Decimator", type: "3")
-    ]
+    static var selectedEffectsData = [effectData]()
  
     func changeValues(id: String, slider: Int, value: Double) -> String {
         var newValue = String()
@@ -1461,13 +1451,14 @@ class audio {
             AKSettings.bufferLength = .longest      // 0.09
                                                     // 4096
         default:
-            AKSettings.bufferLength = .huge         // 0.05
-                                                    // 2048
+            AKSettings.bufferLength = .long         // 0.01
+                                                    // 512
         }
         settings.bufferLength = segment
         
         print("Buffer Legth   \(AKSettings.bufferLength.duration)")
         print("Buffer Legth   \(AKSettings.bufferLength.samplesCount)")
+        
     }
     
     func audioKitSettings() {
@@ -1507,9 +1498,24 @@ class audio {
         case "dynaRageCompressor":  audio.selectedAudioInputs.append(audio.dynaRageCompressor!)
         case "autoWah":  audio.selectedAudioInputs.append(audio.autoWah!)
         case "delay":  audio.selectedAudioInputs.append(audio.delay!)
+        case "variableDelay": audio.selectedAudioInputs.append(audio.variableDelay!)
         case "decimator": audio.selectedAudioInputs.append(audio.decimator!)
         case "tanhDistortion": audio.selectedAudioInputs.append(audio.tanhDistortion!)
         case "ringModulator": audio.selectedAudioInputs.append(audio.ringModulator!)
+        case "flanger": audio.selectedAudioInputs.append(audio.flanger!)
+        case "phaser": audio.selectedAudioInputs.append(audio.ringModulator!)
+        case "chorus": audio.selectedAudioInputs.append(audio.chorus!)
+        case "compressor": audio.selectedAudioInputs.append(audio.compressor!)
+        case "dynamicsProcessor": audio.selectedAudioInputs.append(audio.dynamicsProcessor!)
+        case "dynamicRangeCompressor": audio.selectedAudioInputs.append(audio.dynamicRangeCompressor!)
+        case "dynaRageCompressor": audio.selectedAudioInputs.append(audio.dynaRageCompressor!)
+        case "reverb": audio.selectedAudioInputs.append(audio.reverb!)
+        case "reverb2": audio.selectedAudioInputs.append(audio.reverb2!)
+        case "chowningReverb": audio.selectedAudioInputs.append(audio.chowningReverb!)
+        case "costelloReverb": audio.selectedAudioInputs.append(audio.costelloReverb!)
+        case "flatFrequencyResponseReverb": audio.selectedAudioInputs.append(audio.flatFrequencyResponseReverb!)
+        case "tremolo": audio.selectedAudioInputs.append(audio.tremolo!)
+            
         
         // Filters
             
