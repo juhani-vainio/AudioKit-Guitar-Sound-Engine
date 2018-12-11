@@ -507,11 +507,20 @@
                                                         <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                                         <state key="normal" title="APPNAME"/>
                                                     </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R5F-eE-cvp">
+                                                        <rect key="frame" x="885" y="30" width="72" height="30"/>
+                                                        <state key="normal" title="SETTINGS"/>
+                                                        <connections>
+                                                            <action selector="settingsButtonTapped:" destination="1RR-5N-S1x" eventType="touchUpInside" id="SRJ-Gc-UVX"/>
+                                                        </connections>
+                                                    </button>
                                                 </subviews>
                                                 <color key="backgroundColor" red="0.99942404029999998" green="0.98555368190000003" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstItem="dAe-ac-SMY" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="6dg-gD-4xQ" secondAttribute="trailing" constant="8" symbolic="YES" id="90n-ub-yDh"/>
+                                                    <constraint firstItem="R5F-eE-cvp" firstAttribute="centerY" secondItem="MlY-bi-MvG" secondAttribute="centerY" id="9fm-aD-jpX"/>
                                                     <constraint firstItem="Bw7-Zj-QMO" firstAttribute="leading" secondItem="dAe-ac-SMY" secondAttribute="trailing" constant="52" id="Ab7-D0-Y1h"/>
+                                                    <constraint firstItem="MlY-bi-MvG" firstAttribute="trailing" secondItem="R5F-eE-cvp" secondAttribute="trailing" constant="67" id="FUy-Rq-qNG"/>
                                                     <constraint firstItem="6dg-gD-4xQ" firstAttribute="centerY" secondItem="dAe-ac-SMY" secondAttribute="centerY" id="RHe-Zm-J66"/>
                                                     <constraint firstItem="MlY-bi-MvG" firstAttribute="trailing" secondItem="Bw7-Zj-QMO" secondAttribute="trailing" constant="293" id="cxZ-pJ-Fzc"/>
                                                     <constraint firstItem="dAe-ac-SMY" firstAttribute="centerX" secondItem="Yf4-76-uEX" secondAttribute="centerX" id="eyf-Qt-vR2"/>
@@ -588,35 +597,6 @@
                                         </prototypes>
                                         <sections/>
                                     </tableView>
-                                    <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="rGj-Pk-k43">
-                                        <rect key="frame" x="376" y="55" width="272" height="658"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <prototypes>
-                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" textLabel="7fP-My-TQn" style="IBUITableViewCellStyleDefault" id="RWR-DQ-MKM">
-                                                <rect key="frame" x="0.0" y="28" width="272" height="44"/>
-                                                <autoresizingMask key="autoresizingMask"/>
-                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="RWR-DQ-MKM" id="Tx2-xH-lik">
-                                                    <rect key="frame" x="0.0" y="0.0" width="272" height="43.5"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <subviews>
-                                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="7fP-My-TQn">
-                                                            <rect key="frame" x="15" y="0.0" width="242" height="43.5"/>
-                                                            <autoresizingMask key="autoresizingMask"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                            <nil key="textColor"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                    </subviews>
-                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                </tableViewCellContentView>
-                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            </tableViewCell>
-                                        </prototypes>
-                                        <sections/>
-                                    </tableView>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Uc0-Ys-8yK">
                                         <rect key="frame" x="272" y="110" width="752" height="658"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -641,7 +621,7 @@
                                             </collectionViewCell>
                                         </cells>
                                     </collectionView>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4OQ-LW-q7x">
+                                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4OQ-LW-q7x">
                                         <rect key="frame" x="752" y="110" width="272" height="598"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="vQt-JS-abB">
@@ -839,13 +819,13 @@
                     <connections>
                         <outlet property="addButton" destination="6dg-gD-4xQ" id="eG8-As-Uqf"/>
                         <outlet property="availableEffects" destination="6i5-7n-FuP" id="bed-4i-l2X"/>
-                        <outlet property="availableFilters" destination="rGj-Pk-k43" id="Zwc-pv-t3p"/>
                         <outlet property="bufferLengthSegment" destination="FxF-Xw-IOi" id="dh3-js-AHr"/>
                         <outlet property="inputLevel" destination="yyv-xl-OlQ" id="Nkr-1X-Gug"/>
                         <outlet property="mainCollection" destination="Uc0-Ys-8yK" id="tf4-jJ-5IO"/>
                         <outlet property="mainViewBackground" destination="xFX-i0-fCU" id="nEB-Yb-CZq"/>
                         <outlet property="outputLevel" destination="Dp3-Ks-RgX" id="Fr9-pS-Rd5"/>
                         <outlet property="selectedEffects" destination="tsM-lv-a1B" id="gaE-Ym-DCc"/>
+                        <outlet property="settingsView" destination="4OQ-LW-q7x" id="VSL-0E-nCO"/>
                         <outlet property="volumeView" destination="aBp-fJ-qOK" id="HdG-P1-NCL"/>
                     </connections>
                 </viewController>

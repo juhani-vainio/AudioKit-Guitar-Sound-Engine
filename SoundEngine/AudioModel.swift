@@ -1422,9 +1422,7 @@ class audio {
     }
     
     func setBufferLength(segment: Int) {
-        
-        // TODO: kokeile täytyykö käynnistää audiokit uudestaa jotta tulee voimaan
-        
+                
         switch segment {
         case 1:
             AKSettings.bufferLength = .shortest     // 0.0007

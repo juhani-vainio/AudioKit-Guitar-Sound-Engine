@@ -21,6 +21,7 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
     fileprivate var sourceIndexPath: IndexPath?
     fileprivate var snapshot: UIView?
     
+    @IBOutlet weak var settingsView: UIView!
     @IBOutlet weak var inputLevel: UISlider!
     @IBOutlet weak var outputLevel: UISlider!
     @IBOutlet weak var volumeView: UIView!
@@ -29,7 +30,7 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
     @IBOutlet weak var addButton: UIButton!
     
     @IBOutlet weak var availableEffects: UITableView!
-    @IBOutlet weak var availableFilters: UITableView!
+   
     
     @IBOutlet weak var selectedEffects: UITableView!
     
@@ -1175,7 +1176,14 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
         
     }
     
-
+    @IBAction func settingsButtonTapped(_ sender: Any) {
+        if self.settingsView.isHidden {
+            self.settingsView.isHidden = false
+        } else {
+            self.settingsView.isHidden = true
+        }
+    }
+    
     @IBAction func bufferLengthSegmentAction(_ sender: UISegmentedControl) {
         let segment = sender.selectedSegmentIndex + 1
         audio.shared.setBufferLength(segment: segment)
