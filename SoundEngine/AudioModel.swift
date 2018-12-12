@@ -18,6 +18,12 @@ struct effectData {
     var type = String()         // type of element to get location and type of interface for cell
 }
 
+struct eqData {
+    var id = String()           // effect ID
+    var title = String()        // name of effect for users
+    var type = String()
+}
+
 class audio {
     static let shared = audio()
     
@@ -78,21 +84,22 @@ class audio {
                                    effectData(id: "moogLadder", opened: false, title: "Tone", type: "filter_"),
                                    effectData(id: "dcBlock", opened: false, title: "Tone", type: "filter_"),
                                    effectData(id: "stringResonator", opened: false, title: "Tone", type: "filter_"),
-                                   effectData(id: "combFilterReverb", opened: false, title: "Tone", type: "filter_"),
-                                   effectData(id: "equalizerFilter1", opened: false, title: "", type: "filter_"),
-                                   effectData(id: "equalizerFilter2", opened: false, title: "", type: "filter_"),
-                                   effectData(id: "equalizerFilter3", opened: false, title: "", type: "filter_"),
-                                   effectData(id: "equalizerFilter4", opened: false, title: "", type: "filter_"),
-                                   effectData(id: "equalizerFilter5", opened: false, title: "", type: "filter_"),
-                                   effectData(id: "equalizerFilter6", opened: false, title: "", type: "filter_"),
-                                   effectData(id: "equalizerFilter7", opened: false, title: "", type: "filter_"),
-                                   effectData(id: "equalizerFilter8", opened: false, title: "", type: "filter_"),
-                                   effectData(id: "equalizerFilter9", opened: false, title: "", type: "filter_"),
-                                   effectData(id: "equalizerFilter10", opened: false, title: "", type: "filter_"),
-                                   effectData(id: "equalizerFilter11", opened: false, title: "", type: "filter_"),
-                                   effectData(id: "equalizerFilter12", opened: false, title: "", type: "filter_")
+                                   effectData(id: "combFilterReverb", opened: false, title: "Tone", type: "filter_")
+                                   
     ]
     
+    static let equaliserFiltersData = [
+        eqData(id: "equalizerFilter1", title: "", type: "filter_"),
+        eqData(id: "equalizerFilter2", title: "", type: "filter_"),
+        eqData(id: "equalizerFilter3", title: "", type: "filter_"),
+        eqData(id: "equalizerFilter4", title: "", type: "filter_"),
+        eqData(id: "equalizerFilter5", title: "", type: "filter_"),
+        eqData(id: "equalizerFilter6", title: "", type: "filter_"),
+        eqData(id: "equalizerFilter7", title: "", type: "filter_"),
+        eqData(id: "equalizerFilter8", title: "", type: "filter_"),
+        eqData(id: "equalizerFilter9", title: "", type: "filter_"),
+        eqData(id: "equalizerFilter10", title: "", type: "filter_"),
+    ]
     
     static var availableEffectsData = [effectData]()
     
@@ -101,6 +108,54 @@ class audio {
     func changeValues(id: String, slider: Int, value: Double) -> String {
         var newValue = String()
         switch id {
+        case "eq10" :
+            switch slider {
+           
+            case 1:
+                audio.equalizerFilter1?.gain = value
+                let text = String(value)
+                newValue = String(text.prefix(3))
+            case 2:
+                audio.equalizerFilter2?.gain = value
+                let text = String(value)
+                newValue = String(text.prefix(3))
+            case 3:
+                audio.equalizerFilter3?.gain = value
+                let text = String(value)
+                newValue = String(text.prefix(3))
+            case 4:
+                audio.equalizerFilter4?.gain = value
+                let text = String(value)
+                newValue = String(text.prefix(3))
+            case 5:
+                audio.equalizerFilter5?.gain = value
+                let text = String(value)
+                newValue = String(text.prefix(3))
+            case 6:
+                audio.equalizerFilter6?.gain = value
+                let text = String(value)
+                newValue = String(text.prefix(3))
+            case 7:
+                audio.equalizerFilter7?.gain = value
+                let text = String(value)
+                newValue = String(text.prefix(3))
+            case 8:
+                audio.equalizerFilter8?.gain = value
+                let text = String(value)
+                newValue = String(text.prefix(3))
+            case 9:
+                audio.equalizerFilter9?.gain = value
+                let text = String(value)
+                newValue = String(text.prefix(3))
+            case 10:
+                audio.equalizerFilter10?.gain = value
+                let text = String(value)
+                newValue = String(text.prefix(3))
+                
+            default: break
+                
+            }
+            
         case "bitCrusher" :
             switch slider {
             case 0:
@@ -675,6 +730,50 @@ class audio {
         default: break
         }
         return newValue
+    }
+    
+    func getEQValues(slider: Int) -> (min: Float, max: Float, valueForSlider: Float, value: String, name : String) {
+        let min = Float(Filters.equalizerFilter.gainRange.lowerBound)
+        let max = Float(Filters.equalizerFilter.gainRange.upperBound)
+        var valueForSlider = Float(0.69)
+        var name = ""
+        var value = ""
+        
+        switch slider {
+        case 1: valueForSlider = Float(audio.equalizerFilter1!.gain)
+            name = String(audio.equalizerFilter1!.centerFrequency)
+            value = String(audio.equalizerFilter1!.gain)
+        case 2: valueForSlider = Float(audio.equalizerFilter2!.gain)
+        name = String(audio.equalizerFilter2!.centerFrequency)
+        value = String(audio.equalizerFilter2!.gain)
+        case 3: valueForSlider = Float(audio.equalizerFilter3!.gain)
+        name = String(audio.equalizerFilter3!.centerFrequency)
+        value = String(audio.equalizerFilter3!.gain)
+        case 4: valueForSlider = Float(audio.equalizerFilter4!.gain)
+        name = String(audio.equalizerFilter4!.centerFrequency)
+        value = String(audio.equalizerFilter4!.gain)
+        case 5: valueForSlider = Float(audio.equalizerFilter5!.gain)
+        name = String(audio.equalizerFilter5!.centerFrequency)
+        value = String(audio.equalizerFilter5!.gain)
+        case 6: valueForSlider = Float(audio.equalizerFilter6!.gain)
+        name = String(audio.equalizerFilter6!.centerFrequency)
+        value = String(audio.equalizerFilter6!.gain)
+        case 7: valueForSlider = Float(audio.equalizerFilter7!.gain)
+        name = String(audio.equalizerFilter7!.centerFrequency)
+        value = String(audio.equalizerFilter7!.gain)
+        case 8: valueForSlider = Float(audio.equalizerFilter8!.gain)
+        name = String(audio.equalizerFilter8!.centerFrequency)
+        value = String(audio.equalizerFilter8!.gain)
+        case 9: valueForSlider = Float(audio.equalizerFilter9!.gain)
+        name = String(audio.equalizerFilter9!.centerFrequency)
+        value = String(audio.equalizerFilter9!.gain)
+        case 10: valueForSlider = Float(audio.equalizerFilter10!.gain)
+        name = String(audio.equalizerFilter10!.centerFrequency)
+        value = String(audio.equalizerFilter10!.gain)
+        default: break
+        }
+        
+        return (min, max, valueForSlider, value, name)
     }
     
     func getValues(id: String, slider: Int) -> (min: Float, max: Float, valueForSlider: Float, value: String, name : String, isOn: Bool) {
@@ -1576,10 +1675,24 @@ class audio {
         }
         
         if audio.selectedAudioInputs.isEmpty {
-            inputMixer!.connect(to: outputBooster!)
+            inputMixer!.connect(to: outputMixer!)
         } else {
-            audio.selectedAudioInputs.last?.connect(to: outputBooster!)
+            audio.selectedAudioInputs.last?.connect(to: outputMixer!)
         }
+        
+        
+        // Connect to EQ
+        outputMixer?.connect(to: audio.equalizerFilter1!)
+        audio.equalizerFilter1?.connect(to: audio.equalizerFilter2!)
+        audio.equalizerFilter2?.connect(to: audio.equalizerFilter3!)
+        audio.equalizerFilter3?.connect(to: audio.equalizerFilter4!)
+        audio.equalizerFilter4?.connect(to: audio.equalizerFilter5!)
+        audio.equalizerFilter5?.connect(to: audio.equalizerFilter6!)
+        audio.equalizerFilter6?.connect(to: audio.equalizerFilter7!)
+        audio.equalizerFilter7?.connect(to: audio.equalizerFilter8!)
+        audio.equalizerFilter8?.connect(to: audio.equalizerFilter9!)
+        audio.equalizerFilter9?.connect(to: audio.equalizerFilter10!)
+        audio.equalizerFilter10?.connect(to: outputBooster!)
         
         // LAST TO OUTPUT
         AudioKit.output = outputBooster
@@ -1810,52 +1923,53 @@ class audio {
         audio.equalizerFilter1 = AKEqualizerFilter()
         audio.equalizerFilter1?.bandwidth = 44.7
         audio.equalizerFilter1?.centerFrequency = 32
-        audio.equalizerFilter1?.gain = Filters.equalizerFilter.filterBand1Gain
+        audio.equalizerFilter1?.gain = 1
+        
         
         audio.equalizerFilter2 = AKEqualizerFilter()
         audio.equalizerFilter2?.bandwidth = 70.8
         audio.equalizerFilter2?.centerFrequency = 64
-        audio.equalizerFilter2?.gain = Filters.equalizerFilter.filterBand2Gain
+        audio.equalizerFilter2?.gain = 1
         
         audio.equalizerFilter3 = AKEqualizerFilter()
         audio.equalizerFilter3?.bandwidth = 141
         audio.equalizerFilter3?.centerFrequency = 125
-        audio.equalizerFilter3?.gain = Filters.equalizerFilter.filterBand3Gain
+        audio.equalizerFilter3?.gain = 1
         
         audio.equalizerFilter4 = AKEqualizerFilter()
         audio.equalizerFilter4?.bandwidth = 282
         audio.equalizerFilter4?.centerFrequency = 250
-        audio.equalizerFilter4?.gain = Filters.equalizerFilter.filterBand4Gain
+        audio.equalizerFilter4?.gain = 1
         
         audio.equalizerFilter5 = AKEqualizerFilter()
         audio.equalizerFilter5?.bandwidth = 562
         audio.equalizerFilter5?.centerFrequency = 500
-        audio.equalizerFilter5?.gain = Filters.equalizerFilter.filterBand5Gain
+        audio.equalizerFilter5?.gain = 1
         
         audio.equalizerFilter6 = AKEqualizerFilter()
         audio.equalizerFilter6?.bandwidth = 1112
         audio.equalizerFilter6?.centerFrequency = 1000
-        audio.equalizerFilter6?.gain = Filters.equalizerFilter.filterBand6Gain
+        audio.equalizerFilter6?.gain = 1
         
         audio.equalizerFilter7 = AKEqualizerFilter()
         audio.equalizerFilter7?.bandwidth = 2222
         audio.equalizerFilter7?.centerFrequency = 2000
-        audio.equalizerFilter7?.gain = Filters.equalizerFilter.filterBand7Gain
+        audio.equalizerFilter7?.gain = 1
         
         audio.equalizerFilter8 = AKEqualizerFilter()
         audio.equalizerFilter8?.bandwidth = 4444
         audio.equalizerFilter8?.centerFrequency = 4000
-        audio.equalizerFilter8?.gain = Filters.equalizerFilter.filterBand8Gain
+        audio.equalizerFilter8?.gain = 1
         
         audio.equalizerFilter9 = AKEqualizerFilter()
         audio.equalizerFilter9?.bandwidth = 8888
         audio.equalizerFilter9?.centerFrequency = 8000
-        audio.equalizerFilter9?.gain = Filters.equalizerFilter.filterBand9Gain
+        audio.equalizerFilter9?.gain = 1
         
         audio.equalizerFilter10 = AKEqualizerFilter()
         audio.equalizerFilter10?.bandwidth = 17000
         audio.equalizerFilter10?.centerFrequency = 16000
-        audio.equalizerFilter10?.gain = Filters.equalizerFilter.filterBand10Gain
+        audio.equalizerFilter10?.gain = 1
         
     
         

@@ -162,8 +162,11 @@ class Filters: Codable {
     // AKEqualizerFilter
     struct equalizerFilter: Codable {
         
+        static var gainRange = 0...2
+        
         static var isStarted = Bool(false)
         
+        /*
         static var filterBand1Gain = Double()
         
         static var  filterBand2Gain = Double(1.4)
@@ -187,7 +190,7 @@ class Filters: Codable {
         static var  filterBand11Gain = Double(1.3)
         
         static var  filterBand12Gain = Double(1.3)
-        
+        */
 
     }
     
