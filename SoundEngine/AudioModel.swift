@@ -109,7 +109,6 @@ class audio {
         switch id {
         case "eq10":
             if isOn == true {
-                print("TOGGLE ON")
                 audio.equalizerFilter1?.start()
                 audio.equalizerFilter2?.start()
                 audio.equalizerFilter3?.start()
@@ -121,7 +120,6 @@ class audio {
                 audio.equalizerFilter9?.start()
                 audio.equalizerFilter10?.start()
             } else {
-                print("TOGGLE OFF")
                 audio.equalizerFilter1?.stop()
                 audio.equalizerFilter2?.stop()
                 audio.equalizerFilter3?.stop()

@@ -111,11 +111,9 @@ class EQCollectionViewCell: UICollectionViewCell {
     
     @objc func toggleOnOff(onOffSwitch : UISwitch) {
         if onOffSwitch.isOn {
-            print("SWITCH IS ON")
             audio.shared.toggleOnOff(id: self.id, isOn: true)
         }
         else {
-            print("SWITCH IS OFF")
             audio.shared.toggleOnOff(id: self.id, isOn: false)
         }
     }

@@ -31,6 +31,12 @@ class helper {
                 dictionary.append(array)
             }
         }
+        
+        let eqDataArray = createEQDataArray()
+        if eqDataArray.isNotEmpty{
+            dictionary.append(eqDataArray)
+        }
+        
         /*
         for effect in audio.selectedUnitsAfterData {
             let array = createEffectDataArray(effect: effect, location: "selectedUnitsAfterData")
@@ -46,6 +52,23 @@ class helper {
          */
         saveNameForChain(name: name)
         UserDefaults.standard.set(dictionary, forKey: name)
+    }
+    
+    func createEQDataArray() -> [String: String] {
+        var array = [String: String]()
+            array.updateValue("equalizerFilter", forKey: "name")
+            array.updateValue(String(audio.equalizerFilter1!.gain), forKey: "gain1")
+            array.updateValue(String(audio.equalizerFilter2!.gain), forKey: "gain2")
+            array.updateValue(String(audio.equalizerFilter3!.gain), forKey: "gain3")
+            array.updateValue(String(audio.equalizerFilter4!.gain), forKey: "gain4")
+            array.updateValue(String(audio.equalizerFilter5!.gain), forKey: "gain5")
+            array.updateValue(String(audio.equalizerFilter6!.gain), forKey: "gain6")
+            array.updateValue(String(audio.equalizerFilter7!.gain), forKey: "gain7")
+            array.updateValue(String(audio.equalizerFilter8!.gain), forKey: "gain8")
+            array.updateValue(String(audio.equalizerFilter9!.gain), forKey: "gain9")
+            array.updateValue(String(audio.equalizerFilter10!.gain), forKey: "gain10")
+      
+        return array
     }
     
     func createEffectDataArray(effect: effectData, location: String) -> [String: String] {
@@ -260,20 +283,16 @@ class helper {
      
     }
     
-    func replaceEffectDataArrays(name: String, location: String) {
+    func replaceEffectDataArrays(name: String) {
         
-        print("Place \(name) to \(location)")
         // get interface relevant data and place to relevant lists
         if audio.allPossibleEffectsData.contains(where: {$0.id == name}) {
             print("allPossibleEffectsData.contains \(name)")
             if let thisEffectData = audio.allPossibleEffectsData.first(where: {$0.id == name}) {
                 print("this effects \(thisEffectData)")
-                switch location {
-                    case "selectedEffectsData" : audio.selectedEffectsData.append(thisEffectData)
-                    //case "selectedUnitsAfterData" : audio.selectedUnitsAfterData.append(thisEffectData)
-                    //TODO add filters
-                    default :  audio.selectedEffectsData.append(thisEffectData)
-                }
+                
+                  audio.selectedEffectsData.append(thisEffectData)
+                
             }
             else {
                 // item could not be found
@@ -309,12 +328,59 @@ class helper {
         audio.availableEffectsData.removeAll()
         for effect in valuesForChain {
             let name:String = (effect as AnyObject).value(forKey: "name") as! String
-            let location:String = (effect as AnyObject).value(forKey: "location") as! String
+           // let location:String = (effect as AnyObject).value(forKey: "location") as! String
             // tyhjennä listat ennen lisäystä....
            
-            replaceEffectDataArrays(name:name, location:location)
+            if name != "equalizerFilter" {
+               replaceEffectDataArrays(name:name)
+            }
+            
             
             switch name {
+            case "equalizerFilter" :
+                guard let gain1 = (effect as AnyObject).value(forKey: "gain1")! as? String else {
+                    return
+                }
+                guard let gain2 = (effect as AnyObject).value(forKey: "gain2")! as? String else {
+                    return
+                }
+                guard let gain3 = (effect as AnyObject).value(forKey: "gain3")! as? String else {
+                    return
+                }
+                guard let gain4 = (effect as AnyObject).value(forKey: "gain4")! as? String else {
+                    return
+                }
+                guard let gain5 = (effect as AnyObject).value(forKey: "gain5")! as? String else {
+                    return
+                }
+                guard let gain6 = (effect as AnyObject).value(forKey: "gain6")! as? String else {
+                    return
+                }
+                guard let gain7 = (effect as AnyObject).value(forKey: "gain7")! as? String else {
+                    return
+                }
+                guard let gain8 = (effect as AnyObject).value(forKey: "gain8")! as? String else {
+                    return
+                }
+                guard let gain9 = (effect as AnyObject).value(forKey: "gain9")! as? String else {
+                    return
+                }
+                guard let gain10 = (effect as AnyObject).value(forKey: "gain10")! as? String else {
+                    return
+                }
+             
+                
+                audio.equalizerFilter1?.gain = Double(gain1)!
+                audio.equalizerFilter2?.gain = Double(gain2)!
+                audio.equalizerFilter3?.gain = Double(gain3)!
+                audio.equalizerFilter4?.gain = Double(gain4)!
+                audio.equalizerFilter5?.gain = Double(gain5)!
+                audio.equalizerFilter6?.gain = Double(gain6)!
+                audio.equalizerFilter7?.gain = Double(gain7)!
+                audio.equalizerFilter8?.gain = Double(gain8)!
+                audio.equalizerFilter9?.gain = Double(gain9)!
+                audio.equalizerFilter10?.gain = Double(gain10)!
+                
             case "bitCrusher" :
                 guard let sampleRate = (effect as AnyObject).value(forKey: "sampleRate")! as? String else {
                     return
@@ -886,6 +952,12 @@ class helper {
             }
             
         }
+        
+        let eqDataArray = createEQDataArray()
+        if eqDataArray.isNotEmpty{
+            dictionary.append(eqDataArray)
+        }
+        
         /*
         for effect in audio.selectedUnitsAfterData {
             let array = createEffectDataArray(effect: effect, location: "selectedUnitsAfterData")
