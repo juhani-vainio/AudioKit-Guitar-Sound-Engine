@@ -488,6 +488,7 @@
             <connections>
                 <outlet property="bottomLabelsView" destination="hNY-6k-slC" id="wGs-ji-WpU"/>
                 <outlet property="controllers" destination="pJa-Mg-vco" id="pAX-Ot-EAM"/>
+                <outlet property="onOffSwitch" destination="M1S-ny-FLR" id="SWu-Qe-hpF"/>
                 <outlet property="slider1" destination="6xZ-2g-hGh" id="ZZi-ov-nHz"/>
                 <outlet property="slider10" destination="e5S-TD-f9f" id="VMZ-q7-rQp"/>
                 <outlet property="slider10Title" destination="Qfp-W5-enY" id="nJ7-ku-cS8"/>

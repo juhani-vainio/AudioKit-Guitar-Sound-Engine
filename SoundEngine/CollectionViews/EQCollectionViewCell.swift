@@ -10,6 +10,7 @@ import UIKit
 
 class EQCollectionViewCell: UICollectionViewCell {
 
+    @IBOutlet weak var onOffSwitch: UISwitch!
     var id = String()
     
     @IBOutlet weak var topLabelsView: UIView!
@@ -103,7 +104,20 @@ class EQCollectionViewCell: UICollectionViewCell {
         slider9.addTarget(self, action: #selector(valueChanged), for: .valueChanged)
         slider10.addTarget(self, action: #selector(valueChanged), for: .valueChanged)
         
+        onOffSwitch.addTarget(self, action: #selector(toggleOnOff), for: .valueChanged)
         
+        audio.shared.toggleOnOff(id: self.id, isOn: onOffSwitch.isOn)
+    }
+    
+    @objc func toggleOnOff(onOffSwitch : UISwitch) {
+        if onOffSwitch.isOn {
+            print("SWITCH IS ON")
+            audio.shared.toggleOnOff(id: self.id, isOn: true)
+        }
+        else {
+            print("SWITCH IS OFF")
+            audio.shared.toggleOnOff(id: self.id, isOn: false)
+        }
     }
     
     @objc func valueChanged(slider: UISlider) {

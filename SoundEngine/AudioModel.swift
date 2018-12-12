@@ -104,6 +104,39 @@ class audio {
     static var availableEffectsData = [effectData]()
     
     static var selectedEffectsData = [effectData]()
+    
+    func toggleOnOff(id: String, isOn: Bool) {
+        switch id {
+        case "eq10":
+            if isOn == true {
+                print("TOGGLE ON")
+                audio.equalizerFilter1?.start()
+                audio.equalizerFilter2?.start()
+                audio.equalizerFilter3?.start()
+                audio.equalizerFilter4?.start()
+                audio.equalizerFilter5?.start()
+                audio.equalizerFilter6?.start()
+                audio.equalizerFilter7?.start()
+                audio.equalizerFilter8?.start()
+                audio.equalizerFilter9?.start()
+                audio.equalizerFilter10?.start()
+            } else {
+                print("TOGGLE OFF")
+                audio.equalizerFilter1?.stop()
+                audio.equalizerFilter2?.stop()
+                audio.equalizerFilter3?.stop()
+                audio.equalizerFilter4?.stop()
+                audio.equalizerFilter5?.stop()
+                audio.equalizerFilter6?.stop()
+                audio.equalizerFilter7?.stop()
+                audio.equalizerFilter8?.stop()
+                audio.equalizerFilter9?.stop()
+                audio.equalizerFilter10?.stop()
+            }
+        default:
+            break
+        }
+    }
  
     func changeValues(id: String, slider: Int, value: Double) -> String {
         var newValue = String()
@@ -1724,6 +1757,31 @@ class audio {
             audio.selectedAudioInputs[input].disconnectInput()
             print("DISCONNECT \(audio.selectedAudioInputs[input])")
         }
+        
+        // DISCONNECT EQs
+        
+        audio.equalizerFilter1?.disconnectOutput()
+        audio.equalizerFilter2?.disconnectOutput()
+        audio.equalizerFilter3?.disconnectOutput()
+        audio.equalizerFilter4?.disconnectOutput()
+        audio.equalizerFilter5?.disconnectOutput()
+        audio.equalizerFilter6?.disconnectOutput()
+        audio.equalizerFilter7?.disconnectOutput()
+        audio.equalizerFilter8?.disconnectOutput()
+        audio.equalizerFilter9?.disconnectOutput()
+        audio.equalizerFilter10?.disconnectOutput()
+        
+        audio.equalizerFilter1?.disconnectInput()
+        audio.equalizerFilter2?.disconnectInput()
+        audio.equalizerFilter3?.disconnectInput()
+        audio.equalizerFilter4?.disconnectInput()
+        audio.equalizerFilter5?.disconnectInput()
+        audio.equalizerFilter6?.disconnectInput()
+        audio.equalizerFilter7?.disconnectInput()
+        audio.equalizerFilter8?.disconnectInput()
+        audio.equalizerFilter9?.disconnectInput()
+        audio.equalizerFilter10?.disconnectInput()
+        
         inputMixer?.disconnectOutput()
         print("DISCONNECT \(String(describing: inputMixer))")
         mic?.disconnectOutput()
