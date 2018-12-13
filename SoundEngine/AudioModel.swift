@@ -1684,7 +1684,6 @@ class audio {
     
         let timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { timer in
             let micAmplitude = self.micTracker?.amplitude
-            
             let outputAmplitude = self.outputAmplitudeTracker?.amplitude
             print("AMPLITUDE:    \(outputAmplitude)")
             print("MIC AMP       \(micAmplitude)")

@@ -778,22 +778,75 @@
                                             <constraint firstAttribute="bottom" secondItem="vQt-JS-abB" secondAttribute="bottom" id="tBm-R3-SRH"/>
                                         </constraints>
                                     </view>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6as-gz-2aZ">
+                                        <rect key="frame" x="465" y="713" width="94" height="30"/>
+                                        <state key="normal" title="SAVE SOUND"/>
+                                        <connections>
+                                            <action selector="saveSoundButtonAction:" destination="1RR-5N-S1x" eventType="touchUpInside" id="AW0-mZ-yce"/>
+                                        </connections>
+                                    </button>
+                                    <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="o8z-fK-JRW">
+                                        <rect key="frame" x="352" y="140" width="320" height="508"/>
+                                        <color key="backgroundColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="320" id="cYS-du-Tvv"/>
+                                        </constraints>
+                                        <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <prototypes>
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" textLabel="Uoc-uq-DtE" style="IBUITableViewCellStyleDefault" id="ZAh-Oe-ycI">
+                                                <rect key="frame" x="0.0" y="28" width="320" height="44"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ZAh-Oe-ycI" id="yPp-PP-8YJ">
+                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <subviews>
+                                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Uoc-uq-DtE">
+                                                            <rect key="frame" x="15" y="0.0" width="290" height="43.5"/>
+                                                            <autoresizingMask key="autoresizingMask"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </tableViewCellContentView>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </tableViewCell>
+                                        </prototypes>
+                                        <sections/>
+                                    </tableView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ufS-MQ-peE">
+                                        <rect key="frame" x="261" y="713" width="97" height="30"/>
+                                        <state key="normal" title="LOAD SOUND"/>
+                                        <connections>
+                                            <action selector="loadSoundButtonAction:" destination="1RR-5N-S1x" eventType="touchUpInside" id="DA3-Ep-KO7"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
+                                    <constraint firstItem="rsv-eE-YLr" firstAttribute="bottom" secondItem="6as-gz-2aZ" secondAttribute="bottom" constant="25" id="1ak-Uj-kiX"/>
                                     <constraint firstItem="6i5-7n-FuP" firstAttribute="trailing" secondItem="Uc0-Ys-8yK" secondAttribute="leading" id="49M-BG-mLp"/>
                                     <constraint firstItem="rsv-eE-YLr" firstAttribute="trailing" secondItem="Uc0-Ys-8yK" secondAttribute="trailing" id="9gq-u4-HNj"/>
                                     <constraint firstItem="6i5-7n-FuP" firstAttribute="leading" secondItem="rsv-eE-YLr" secondAttribute="leading" id="AAW-eD-f0n"/>
                                     <constraint firstItem="rsv-eE-YLr" firstAttribute="bottom" secondItem="Uc0-Ys-8yK" secondAttribute="bottom" id="D1Q-V7-rO3"/>
                                     <constraint firstItem="rsv-eE-YLr" firstAttribute="trailing" secondItem="MgD-ZC-mKf" secondAttribute="trailing" id="FW4-JV-LXJ"/>
+                                    <constraint firstItem="o8z-fK-JRW" firstAttribute="centerX" secondItem="rsv-eE-YLr" secondAttribute="centerX" id="G2v-nt-T5t"/>
                                     <constraint firstItem="6i5-7n-FuP" firstAttribute="top" secondItem="cbj-b9-PyT" secondAttribute="bottom" id="GkT-6b-52u"/>
                                     <constraint firstItem="MgD-ZC-mKf" firstAttribute="leading" secondItem="rsv-eE-YLr" secondAttribute="leading" id="H8u-rw-akD"/>
                                     <constraint firstItem="rsv-eE-YLr" firstAttribute="bottom" secondItem="4OQ-LW-q7x" secondAttribute="bottom" constant="60" id="ILO-Wl-4yW"/>
+                                    <constraint firstItem="6as-gz-2aZ" firstAttribute="centerX" secondItem="rsv-eE-YLr" secondAttribute="centerX" id="JL9-q6-jMI"/>
+                                    <constraint firstItem="6as-gz-2aZ" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="ufS-MQ-peE" secondAttribute="trailing" constant="8" symbolic="YES" id="JW4-gh-VvV"/>
                                     <constraint firstItem="4OQ-LW-q7x" firstAttribute="top" secondItem="cbj-b9-PyT" secondAttribute="bottom" id="L0x-UM-cKF"/>
                                     <constraint firstItem="rsv-eE-YLr" firstAttribute="bottom" secondItem="6i5-7n-FuP" secondAttribute="bottom" id="M3U-Yx-YPZ"/>
+                                    <constraint firstItem="ufS-MQ-peE" firstAttribute="leading" secondItem="rsv-eE-YLr" secondAttribute="leading" constant="261" id="MXB-Mg-HyK"/>
                                     <constraint firstItem="Uc0-Ys-8yK" firstAttribute="leading" secondItem="tsM-lv-a1B" secondAttribute="trailing" id="Oho-Vw-uex"/>
                                     <constraint firstItem="cbj-b9-PyT" firstAttribute="top" secondItem="rsv-eE-YLr" secondAttribute="top" id="SLf-4m-6gs"/>
                                     <constraint firstItem="rsv-eE-YLr" firstAttribute="bottom" secondItem="tsM-lv-a1B" secondAttribute="bottom" id="Skv-pN-yAZ"/>
+                                    <constraint firstItem="ufS-MQ-peE" firstAttribute="centerY" secondItem="6as-gz-2aZ" secondAttribute="centerY" id="T5R-cg-1Df"/>
+                                    <constraint firstItem="o8z-fK-JRW" firstAttribute="top" secondItem="rsv-eE-YLr" secondAttribute="top" constant="120" id="UxK-Iu-sLC"/>
+                                    <constraint firstItem="rsv-eE-YLr" firstAttribute="bottom" secondItem="o8z-fK-JRW" secondAttribute="bottom" constant="120" id="gRT-eW-jnT"/>
                                     <constraint firstItem="rsv-eE-YLr" firstAttribute="trailing" secondItem="cbj-b9-PyT" secondAttribute="trailing" id="hgH-vv-gNb"/>
                                     <constraint firstItem="4OQ-LW-q7x" firstAttribute="width" secondItem="6i5-7n-FuP" secondAttribute="width" id="kmA-lZ-BMz"/>
                                     <constraint firstItem="rsv-eE-YLr" firstAttribute="trailing" secondItem="4OQ-LW-q7x" secondAttribute="trailing" id="moT-h5-ejb"/>
@@ -824,6 +877,7 @@
                         <outlet property="mainCollection" destination="Uc0-Ys-8yK" id="tf4-jJ-5IO"/>
                         <outlet property="mainViewBackground" destination="xFX-i0-fCU" id="nEB-Yb-CZq"/>
                         <outlet property="outputLevel" destination="Dp3-Ks-RgX" id="Fr9-pS-Rd5"/>
+                        <outlet property="savedSoundsTableView" destination="o8z-fK-JRW" id="JK9-c4-1tK"/>
                         <outlet property="selectedEffects" destination="tsM-lv-a1B" id="gaE-Ym-DCc"/>
                         <outlet property="settingsView" destination="4OQ-LW-q7x" id="VSL-0E-nCO"/>
                         <outlet property="volumeView" destination="aBp-fJ-qOK" id="HdG-P1-NCL"/>

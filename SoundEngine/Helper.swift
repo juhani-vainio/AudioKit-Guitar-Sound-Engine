@@ -991,6 +991,7 @@ class helper {
         if savedSounds.isNotEmpty {
             print("savedSOunds is NOT empty")
             Collections.savedSounds = savedSounds
+            print(Collections.savedSounds)
         } else {
             print("savedSounds is empty")
         }

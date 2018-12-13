@@ -21,6 +21,7 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
     fileprivate var sourceIndexPath: IndexPath?
     fileprivate var snapshot: UIView?
     
+    @IBOutlet weak var savedSoundsTableView: UITableView!
     @IBOutlet weak var settingsView: UIView!
     @IBOutlet weak var inputLevel: UISlider!
     @IBOutlet weak var outputLevel: UISlider!
@@ -83,6 +84,7 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
         availableEffects.backgroundColor = interface.tableAltBackground
         selectedEffects.backgroundColor = UIColor.clear
        
+        savedSoundsTableView.backgroundColor = interface.tableBackground
         
         mainCollection.backgroundColor = UIColor.clear
         mainViewBackground.backgroundColor = interface.mainBackground
@@ -108,6 +110,8 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
         availableEffects.dataSource = self
         selectedEffects.delegate = self
         selectedEffects.dataSource = self
+        savedSoundsTableView.delegate = self
+        savedSoundsTableView.dataSource = self
         
         registerTableViewCells()
     }
@@ -244,7 +248,10 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
        
         var value = 0
-        if tableView == availableEffects {
+        if tableView == savedSoundsTableView {
+            value = Collections.savedSounds.count
+        }
+        else if tableView == availableEffects {
             value = audio.availableEffectsData.count
             
         } else if tableView == selectedEffects {
@@ -265,7 +272,10 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
         var cellIsLast = Bool()
         var cellId = String()
         
-        if tableView == selectedEffects {
+        if tableView == savedSoundsTableView{
+            cellTitle = Collections.savedSounds[indexPath.row]
+        }
+        else if tableView == selectedEffects {
             cellOpened = audio.selectedEffectsData[indexPath.row].opened
             cellTitle = audio.selectedEffectsData[indexPath.row].title
             cellType = audio.selectedEffectsData[indexPath.row].type
@@ -278,7 +288,8 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
             cellTitle = audio.availableEffectsData[indexPath.row].title
             
         }
-        if tableView == availableEffects {
+        
+        if tableView == availableEffects || tableView == savedSoundsTableView {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell") else {return UITableViewCell()}
             cell.textLabel?.text = cellTitle
             cell.textLabel?.textColor = interface.text
@@ -939,7 +950,18 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
     
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if tableView == availableEffects {
+        if tableView == savedSoundsTableView {
+            let sound = Collections.savedSounds[indexPath.row]
+            
+            helper.shared.getSavedChain(name: sound)
+            self.selectedEffects.reloadData()
+            self.mainCollection.reloadData()
+            self.resetEffectChain()
+            savedSoundsTableView.isHidden = true
+            
+        }
+        
+        else if tableView == availableEffects {
             let tempData = audio.availableEffectsData[indexPath.row]
             audio.selectedEffectsData.append(tempData)
             self.selectedEffects.reloadData()
@@ -1277,6 +1299,65 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
         }
 
         
+    }
+    
+    
+    @IBAction func loadSoundButtonAction(_ sender: Any) {
+        if self.savedSoundsTableView.isHidden {
+            self.savedSoundsTableView.isHidden = false
+        }
+    }
+    
+    @IBAction func saveSoundButtonAction(_ sender: Any) {
+        popUpDialogueForNewSound()
+    }
+    
+    // MARK: DIALOGUES
+    
+    func popUpDialogueForNewSound() {
+        let alert = UIAlertController(title: "Name of your new sound?", message: nil, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        
+        // Create an OK Button
+        let okAction = UIAlertAction(title: "OK", style: .default, handler: { action in
+            
+            if let name = alert.textFields?.first?.text {
+                print("Your new sound is: \(name)")
+                if self.nameCheck {
+                    helper.shared.saveEffectChain(name: name)
+                   
+                }
+                
+            }
+        })
+        
+        // Add the OK Button to the Alert Controller
+        alert.addAction(okAction)
+        self.nameCheck = false
+        okAction.isEnabled = false
+        // Add a text field to the alert controller
+        alert.addTextField { (textField) in
+            textField.enablesReturnKeyAutomatically = true
+            textField.placeholder = "Input name here..."
+            // Observe the UITextFieldTextDidChange notification to be notified in the below block when text is changed
+            NotificationCenter.default.addObserver(forName: UITextField.textDidChangeNotification, object:textField , queue: OperationQueue.main, using: {_ in
+                // Being in this block means that something fired the UITextFieldTextDidChange notification.
+                let text = textField.text
+                if Collections.savedSounds.contains(text!) || Collections.cantTouchThis.contains(text!) {
+                    okAction.isEnabled = false
+                    self.nameCheck = false
+                }
+                    
+                else {
+                    let textCount = textField.text?.trimmingCharacters(in: .whitespacesAndNewlines).characters.count ?? 0
+                    let textIsNotEmpty = textCount > 0
+                    self.nameCheck = textIsNotEmpty
+                    okAction.isEnabled = textIsNotEmpty
+                }
+            })
+        }
+        
+        self.present(alert, animated: true)
     }
     
 }
