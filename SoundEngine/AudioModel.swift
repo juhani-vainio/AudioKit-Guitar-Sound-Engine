@@ -1545,6 +1545,7 @@ class audio {
         connectMic()
         connectAudioInputs()
         //connectEffects()
+       
         
         print("---------- STARTING AUDIO WITH ----------")
         print("selectedAudioInputs \(audio.selectedAudioInputs)")
@@ -1636,7 +1637,6 @@ class audio {
         case "compressor": audio.selectedAudioInputs.append(audio.compressor!)
         case "dynamicsProcessor": audio.selectedAudioInputs.append(audio.dynamicsProcessor!)
         case "dynamicRangeCompressor": audio.selectedAudioInputs.append(audio.dynamicRangeCompressor!)
-        case "dynaRageCompressor": audio.selectedAudioInputs.append(audio.dynaRageCompressor!)
         case "reverb": audio.selectedAudioInputs.append(audio.reverb!)
         case "reverb2": audio.selectedAudioInputs.append(audio.reverb2!)
         case "chowningReverb": audio.selectedAudioInputs.append(audio.chowningReverb!)
@@ -1675,19 +1675,19 @@ class audio {
     
     func connectMic() {
         
-        
         mic?.connect(to: inputMixer!)
-        //connectMicMonitors()
-        // mieti tää
-       // defaultAmp = Amp.model.defaultAmpModel(input: mic!)
-        //defaultAmp?.connect(to: inputMixer!)
+        startAmplitudeMonitors()
+ 
     }
     
-    func connectMicMonitors() {
-        let trackedAmplitude = AKAmplitudeTracker(mic)
-       // let timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(fireTimer), userInfo: nil, repeats: true)
+    func startAmplitudeMonitors() {
+    
         let timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { timer in
-            print("AMPLITUDE:    \(trackedAmplitude.amplitude)")
+            let micAmplitude = self.micTracker?.amplitude
+            
+            let outputAmplitude = self.outputAmplitudeTracker?.amplitude
+            print("AMPLITUDE:    \(outputAmplitude)")
+            print("MIC AMP       \(micAmplitude)")
         }
         timer.fire()
     }
@@ -1725,8 +1725,10 @@ class audio {
         audio.equalizerFilter9?.connect(to: audio.equalizerFilter10!)
         audio.equalizerFilter10?.connect(to: outputBooster!)
         
+        outputBooster?.connect(to: outputAmplitudeTracker!)
+        
         // LAST TO OUTPUT
-        AudioKit.output = outputBooster
+        AudioKit.output = outputAmplitudeTracker
         if AudioKit.output == nil {
             AudioKit.output = inputMixer
         }
@@ -1780,6 +1782,11 @@ class audio {
         audio.equalizerFilter9?.disconnectInput()
         audio.equalizerFilter10?.disconnectInput()
         
+        
+        // DISCONNECT MONITORS
+        outputAmplitudeTracker?.disconnectInput()
+        outputAmplitudeTracker?.disconnectOutput()
+        
         inputMixer?.disconnectOutput()
         print("DISCONNECT \(String(describing: inputMixer))")
         mic?.disconnectOutput()
@@ -1788,8 +1795,9 @@ class audio {
         startAudio()
     }
     
-  
-
+    // MONITORS
+    var outputAmplitudeTracker : AKAmplitudeTracker?
+    var micTracker : AKMicrophoneTracker?
     
     var inputMixer: AKMixer?
     var mixerForFirstList: AKMixer?
@@ -1880,7 +1888,7 @@ class audio {
     static var modalResonanceFilter : AKModalResonanceFilter?
     static var resonantFilter : AKResonantFilter?
     static var lowShelfParametricEqualizerFilter: AKLowShelfParametricEqualizerFilter?
-    var highShelfParametricEqualizerFilter: AKHighShelfParametricEqualizerFilter?
+    static var highShelfParametricEqualizerFilter: AKHighShelfParametricEqualizerFilter?
     static var peakingParametricEqualizerFilter : AKPeakingParametricEqualizerFilter?
     
     static var formantFilter : AKFormantFilter?
@@ -1914,7 +1922,11 @@ class audio {
     
     func createEffects() {
         
-      
+        // MONITORS
+        outputAmplitudeTracker = AKAmplitudeTracker()
+        outputAmplitudeTracker?.start()
+        micTracker = AKMicrophoneTracker()
+        micTracker?.start()
         
         // UTILITIES
         mic = AKMicrophone()
@@ -2056,7 +2068,7 @@ class audio {
         audio.resonantFilter = AKResonantFilter()
         audio.peakingParametricEqualizerFilter = AKPeakingParametricEqualizerFilter()
         audio.lowShelfParametricEqualizerFilter = AKLowShelfParametricEqualizerFilter()
-        highShelfParametricEqualizerFilter = AKHighShelfParametricEqualizerFilter()
+        audio.highShelfParametricEqualizerFilter = AKHighShelfParametricEqualizerFilter()
         
         audio.formantFilter = AKFormantFilter()
         audio.rolandTB303Filter = AKRolandTB303Filter()
