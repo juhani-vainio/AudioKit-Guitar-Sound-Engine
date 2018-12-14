@@ -107,7 +107,8 @@ class helper {
                 array.updateValue(String(audio.dynaRageCompressor!.threshold), forKey: "threshold")
                 array.updateValue(String(audio.dynaRageCompressor!.attackDuration), forKey: "attackDuration")
                 array.updateValue(String(audio.dynaRageCompressor!.releaseDuration), forKey: "releaseDuration")
-            
+                array.updateValue(String(audio.dynaRageCompressor!.rage), forKey: "rage")
+                array.updateValue(String(audio.dynaRageCompressor!.rageIsOn), forKey: "rageIsOn")
             
         case "autoWah" :
                 array.updateValue(location, forKey: "location")
@@ -167,11 +168,15 @@ class helper {
             array.updateValue(location, forKey: "location")
             array.updateValue(effect.id, forKey: "name")
             array.updateValue(String(audio.phaser!.isStarted), forKey: "isStarted")
+             array.updateValue(String(audio.phaser!.notchMinimumFrequency), forKey: "notchMinimumFrequency")
+            array.updateValue(String(audio.phaser!.notchMaximumFrequency), forKey: "notchMaximumFrequency")
             array.updateValue(String(audio.phaser!.notchWidth), forKey: "notchWidth")
             array.updateValue(String(audio.phaser!.notchFrequency), forKey: "notchFrequency")
+             array.updateValue(String(audio.phaser!.vibratoMode), forKey: "vibratoMode")
             array.updateValue(String(audio.phaser!.depth), forKey: "depth")
              array.updateValue(String(audio.phaser!.feedback), forKey: "feedback")
              array.updateValue(String(audio.phaser!.lfoBPM), forKey: "lfoBPM")
+            array.updateValue(String(audio.phaser!.inverted), forKey: "inverted")
             
         case "chorus" :
             array.updateValue(location, forKey: "location")
@@ -448,9 +453,17 @@ class helper {
                 guard let threshold = (effect as AnyObject).value(forKey: "threshold")! as? String else {
                     return
                 }
+                guard let rage = (effect as AnyObject).value(forKey: "rage")! as? String else {
+                    return
+                }
+                guard let rageIsOn = (effect as AnyObject).value(forKey: "rageIsOn")! as? String else {
+                    return
+                }
                 guard let isStarted = (effect as AnyObject).value(forKey: "isStarted")! as? String else {
                     return
                 }
+                audio.dynaRageCompressor!.rageIsOn = Bool(rageIsOn)!
+                audio.dynaRageCompressor!.rage = Double(rage)!
                 audio.dynaRageCompressor!.attackDuration = Double(attackDuration)!
                 audio.dynaRageCompressor!.releaseDuration = Double(releaseDuration)!
                 audio.dynaRageCompressor!.ratio = Double(ratio)!
@@ -600,10 +613,19 @@ class helper {
                 
             case "phaser" :
                 
+                guard let notchMinimumFrequency = (effect as AnyObject).value(forKey: "notchMinimumFrequency")! as? String else {
+                    return
+                }
+                guard let notchMaximumFrequency = (effect as AnyObject).value(forKey: "notchMaximumFrequency")! as? String else {
+                    return
+                }
                 guard let notchWidth = (effect as AnyObject).value(forKey: "notchWidth")! as? String else {
                     return
                 }
                 guard let notchFrequency = (effect as AnyObject).value(forKey: "notchFrequency")! as? String else {
+                    return
+                }
+                guard let vibratoMode = (effect as AnyObject).value(forKey: "vibratoMode")! as? String else {
                     return
                 }
                 guard let depth = (effect as AnyObject).value(forKey: "depth")! as? String else {
@@ -615,10 +637,16 @@ class helper {
                 guard let lfoBPM = (effect as AnyObject).value(forKey: "lfoBPM")! as? String else {
                     return
                 }
+                guard let inverted = (effect as AnyObject).value(forKey: "inverted")! as? String else {
+                    return
+                }
                 guard let isStarted = (effect as AnyObject).value(forKey: "isStarted")! as? String else {
                     return
                 }
-                
+                audio.phaser!.inverted = Double(inverted)!
+                audio.phaser!.vibratoMode = Double(vibratoMode)!
+                audio.phaser!.notchMinimumFrequency = Double(notchMinimumFrequency)!
+                audio.phaser!.notchMaximumFrequency = Double(notchMaximumFrequency)!
                 audio.phaser!.notchWidth = Double(notchWidth)!
                 audio.phaser!.notchFrequency = Double(notchFrequency)!
                 audio.phaser!.depth = Double(depth)!

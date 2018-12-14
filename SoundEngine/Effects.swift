@@ -39,10 +39,10 @@ struct bitCrusher:Codable {
         // positiveShapeParameter
         // negativeShapeParameter
         
-        static var pregainRange = -10...20
-        static var postgainRange = -10...20
-        static var positiveShapeParameterRange = 0...1
-        static var negativeShapeParameterRange = 0...1
+        static var pregainRange = 0...10
+        static var postgainRange = 0...10
+        static var positiveShapeParameterRange = -10...10
+        static var negativeShapeParameterRange = -10...10
         
         
     }
@@ -63,7 +63,7 @@ struct autoWah:Codable {
     
     static var wahRange = 0...1
     static var mixRange = 0...1
-    static var amplitudeRange = 0...2
+    static var amplitudeRange = 0...1
   
     }
 
@@ -93,7 +93,7 @@ struct delay:Codable {
     static var timeRange = 0.0001...3
     static var feedbackRange = 0...1
     static var dryWetMixRange = 0...1
-    static var lowPassCutOffRange = 1000...20000
+    static var lowPassCutOffRange = 10000...20000
   
 
     }
@@ -164,7 +164,7 @@ struct decimator:Codable {
         // balance
         // mix
         
-        static var frequencyRange = 80...1200
+        static var frequencyRange = 0.5...8000
         static var balanceRange = 0...1
         static var mixRange = 0...1
         
@@ -184,7 +184,7 @@ struct decimator:Codable {
             // feedback
             // dryWetMix
             
-            static var frequencyRange = 80...1200
+            static var frequencyRange = 20...20000
             static var depthRange = 0...1
             static var feedbackRange = 0...1
             static var dryWetMixRange = 0...1
@@ -198,7 +198,7 @@ struct decimator:Codable {
             let phaserInfo = "phaser - another way of creating an unusual sound; the signal is split, a portion is filtered with an all-pass filter to produce a phase-shift, and then the unfiltered and filtered signals are mixed. The phaser effect was originally a simpler implementation of the flanger effect since delays were difficult to implement with analog equipment. Phasers are often used to give a synthesized or electronic effect to natural sounds, such as human speech. The voice of C-3PO from Star Wars was created by taking the actor's voice and treating it with a phaser."
             // https://en.wikipedia.org/wiki/Audio_signal_processing
             
-            // controls needed : 5
+            // controls needed : 7
             // notchMinimumFrequency
             // notchMaximumFrequency
             // notchWidth
@@ -209,9 +209,14 @@ struct decimator:Codable {
             // inverted
             // lfoBPM           // Low-frequency oscillation (LFO)   Beats Per Minute (BPM)
          
-    
+            
+            static var notchMinimumFrequencyRange = 20...5000
+            static var notchMaximumFrequencyRange = 20...10000
+            
             static var notchWidthRange = 10...5000
             static var notchFrequencyRange = 1.1...4
+            static var vibratoModeRange = 0...1
+            // inverted    1 or 0                   Bool?   UISwitch    default = 0
             static var depthRange = 0...1
             static var feedbackRange = 0...1
             static var lfoBPMRange = 24...360
@@ -232,7 +237,7 @@ struct decimator:Codable {
             // feedback
             // dryWetMix
             
-            static var frequencyRange = 80...1200
+            static var frequencyRange = 20...20000
             static var depthRange = 0...1
             static var feedbackRange = 0...1
             static var dryWetMixRange = 0...1
@@ -278,11 +283,11 @@ struct decimator:Codable {
             // outputAmplitude: Double = 0)
 
         
-            static var thresholdRange = -40...20 // dB default -20
+            static var thresholdRange = -100...20 // dB default -20
             static var headRoomRange = 0.1...40 // dB default 5
             static var expansionRatioRange = 1...50  // default 2
-            static var expansionThresholdRange = 1...50 // default 2
-            static var attackDurationRange = 0.0001...0.2 // Default: 0.001
+            static var expansionThresholdRange = -120...0 // default 0
+            static var attackDurationRange = 0.001...0.3 // Default: 0.001
             static var releaseDurationRange = 0.01...3 // Default: 0.05
             static var masterGainRange = -40...40 //  dB Default: 0
             // GET ONLY  static var compressionAmountRange = -40...40 //  dB Default: 0
@@ -303,17 +308,19 @@ struct decimator:Codable {
             // attackDuration: Double = 0.001,
             // releaseDuration: Double = 0.05,
             
-            static var ratioRange = 1...30
-            static var thresholdRange = 0...40
-            static var attackDurationRange = 0.0001...0.2 // Default: 0.001
-            static var releaseDurationRange = 0.01...3 // Default: 0.05
+            static var ratioRange = 0.01...100
+            static var thresholdRange = -100...0
+            static var attackDurationRange = 0...1
+            static var releaseDurationRange = 0...1 // Default: 0.1
             
         }
+    
+  
         
         // COMPRESSOR    AKDynaRageCompressor
-        // Tag = 3
+   
         struct dynaRageCompressor:Codable {
-            
+            // is a guitar processor
             let compressionInfo = "compression - the reduction of the dynamic range of a sound to avoid unintentional fluctuation in the dynamics."
             
             // controls needed : 4 + 1 + switch
@@ -323,12 +330,13 @@ struct decimator:Codable {
             // releaseDuration
             
             // + rage
+            // + rage switch
             
             static var ratioRange = 1...30
-            static var thresholdRange = 0...40
+            static var thresholdRange = -100...0
             static var attackDurationRange = 0.0001...0.2   // 0,1 ms
             static var releaseDurationRange = 0.01...3
-            
+            static var rageRatio = 0...1
             
         }
     
@@ -369,8 +377,8 @@ struct decimator:Codable {
         
         // controls :
         
-        static var cutOffRange = 1000...20000
-        static var feedbackRange = 0...1 //
+        static var cutOffRange = 12...20000  // default 4000
+        static var feedbackRange = 0...1
      
         // 0.6 gives a good small ‘live’ room sound, 0.8 a small hall, and 0.9 a large hall. A setting of exactly 1 means infinite length, while higher values will make the opcode unstable.
         
@@ -381,8 +389,8 @@ struct decimator:Codable {
         
         // controls :
         
-        static var reverbDurationRange = 0.0001...1.0
-      //  static var loopDurationRange = 0.0001...1.0 // (Default: 0.008)
+        static var reverbDurationRange = 0...10
+       // static var loopDurationRange = 0.0001...1.0 // (Default: 0.008)
      
         
     }
@@ -398,16 +406,49 @@ struct decimator:Codable {
         // depth
         // waveform: AKTable = AKTable(.nameOfForm)   11 options
        
-        static var frequencyRange = 80...1200
+        static var frequencyRange = 20...20000
         static var depthRange = 0...1
     }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    // TODO OOOOO
+    
+    
+    
+    
+    struct combFilterReverb: Codable {
+        static var reverbDuration = Double()
+        static var loopDuration = Double()
+        static var isStarted = Bool(false)
+    }
+    
+    
+    struct peakLimiter:Codable {
+        
+        
+    }
+    
+    struct expander:Codable {
+        
+        
+    }
+    
+    
     
     
     // simulator
     //rhinoGuitarProcessor AKRhinoGuitarProcessor
     
     struct rhinoGuitarProcessor:Codable {
-        
+              // is a guitar processor
         // controls :
         
         // postGain

@@ -42,15 +42,15 @@ class audio {
     
     // DYNAMICS
     effectData(id: "compressor" ,opened: false, title: "Compressor", type: "6"),
-    effectData(id: "dynaRageCompressor", opened: false, title: "Dyna Rage Compressor", type: "4"),
+    effectData(id: "dynaRageCompressor", opened: false, title: "Dyna Rage Compressor", type: "5"),
     effectData(id: "dynamicsProcessor" ,opened: false, title: "Dynamics Processor", type: "8"),
     effectData(id: "dynamicRangeCompressor" ,opened: false, title: "Dynamic Range Compressor", type: "4"),
     
     //TIME BASED
-    effectData(id: "delay", opened: false, title: "Delay", type: "3"),
+    effectData(id: "delay", opened: false, title: "Delay", type: "4"),
     effectData(id: "variableDelay", opened: false, title: "Variable Delay", type: "2"),
     effectData(id: "flanger" ,opened: false, title: "Flanger", type: "4"),
-    effectData(id: "phaser" ,opened: false, title: "Phaser", type: "5"),
+    effectData(id: "phaser" ,opened: false, title: "Phaser", type: "8"),
     effectData(id: "chorus" ,opened: false, title: "Chorus", type: "4"),
     effectData(id: "reverb" ,opened: false, title: "Reverb", type: "1"),
     effectData(id: "reverb2" ,opened: false, title: "Reverb 2", type: "7"),
@@ -107,6 +107,11 @@ class audio {
     
     func toggleOnOff(id: String, isOn: Bool) {
         switch id {
+        case "dynaRageCompressor":
+            if isOn == true { audio.dynaRageCompressor?.rageIsOn = true } else { audio.dynaRageCompressor?.rageIsOn = false }
+        case "phaser":
+            if isOn == true { audio.phaser?.inverted = 1 } else { audio.phaser?.inverted = 0 }
+            
         case "eq10":
             if isOn == true {
                 audio.equalizerFilter1?.start()
@@ -136,6 +141,8 @@ class audio {
         }
     }
  
+    
+    
     func changeValues(id: String, slider: Int, value: Double) -> String {
         var newValue = String()
         switch id {
@@ -144,44 +151,54 @@ class audio {
            
             case 1:
                 audio.equalizerFilter1?.gain = value
-                let text = String(value)
-                newValue = String(text.prefix(3))
+                let decibels = ratioToDecibel(ratio: value)
+                let text = String(decibels)
+                newValue = String(text.prefix(4))
             case 2:
                 audio.equalizerFilter2?.gain = value
-                let text = String(value)
-                newValue = String(text.prefix(3))
+                let decibels = ratioToDecibel(ratio: value)
+                let text = String(decibels)
+                newValue = String(text.prefix(4))
             case 3:
                 audio.equalizerFilter3?.gain = value
-                let text = String(value)
-                newValue = String(text.prefix(3))
+                let decibels = ratioToDecibel(ratio: value)
+                let text = String(decibels)
+                newValue = String(text.prefix(4))
             case 4:
                 audio.equalizerFilter4?.gain = value
-                let text = String(value)
-                newValue = String(text.prefix(3))
+                let decibels = ratioToDecibel(ratio: value)
+                let text = String(decibels)
+                newValue = String(text.prefix(4))
             case 5:
                 audio.equalizerFilter5?.gain = value
-                let text = String(value)
-                newValue = String(text.prefix(3))
+                let decibels = ratioToDecibel(ratio: value)
+                let text = String(decibels)
+                newValue = String(text.prefix(4))
             case 6:
                 audio.equalizerFilter6?.gain = value
-                let text = String(value)
-                newValue = String(text.prefix(3))
+                let decibels = ratioToDecibel(ratio: value)
+                let text = String(decibels)
+                newValue = String(text.prefix(4))
             case 7:
                 audio.equalizerFilter7?.gain = value
-                let text = String(value)
-                newValue = String(text.prefix(3))
+                let decibels = ratioToDecibel(ratio: value)
+                let text = String(decibels)
+                newValue = String(text.prefix(4))
             case 8:
                 audio.equalizerFilter8?.gain = value
-                let text = String(value)
-                newValue = String(text.prefix(3))
+                let decibels = ratioToDecibel(ratio: value)
+                let text = String(decibels)
+                newValue = String(text.prefix(4))
             case 9:
                 audio.equalizerFilter9?.gain = value
-                let text = String(value)
-                newValue = String(text.prefix(3))
+                let decibels = ratioToDecibel(ratio: value)
+                let text = String(decibels)
+                newValue = String(text.prefix(4))
             case 10:
                 audio.equalizerFilter10?.gain = value
-                let text = String(value)
-                newValue = String(text.prefix(3))
+                let decibels = ratioToDecibel(ratio: value)
+                let text = String(decibels)
+                newValue = String(text.prefix(4))
                 
             default: break
                 
@@ -266,6 +283,10 @@ class audio {
                 audio.dynaRageCompressor?.releaseDuration = value
                 let text = String(value)
                 newValue = String(text.prefix(3))
+            case 5:
+                audio.dynaRageCompressor?.rage = value
+                let text = String(value)
+                newValue = String(text.prefix(3))
             default: break
                 
             }
@@ -316,6 +337,10 @@ class audio {
                 let text = String(value)
                 newValue = String(text.prefix(3))
             case 3:
+                audio.delay?.lowPassCutoff = value
+                let text = String(value)
+                newValue = String(text.prefix(3))
+            case 4:
                 audio.delay?.dryWetMix = value
                 let text = String(value)
                 newValue = String(text.prefix(3))
@@ -463,22 +488,34 @@ class audio {
                     newValue = "ON"
                 }
             case 1:
-                audio.phaser?.notchWidth = value
+                audio.phaser?.notchMinimumFrequency = value
                 let text = String(value)
                 newValue = String(text.prefix(3))
             case 2:
-                audio.phaser?.notchFrequency = value
+                audio.phaser?.notchMaximumFrequency = value
                 let text = String(value)
                 newValue = String(text.prefix(3))
             case 3:
-                audio.phaser?.depth = value
+                audio.phaser?.notchWidth = value
                 let text = String(value)
                 newValue = String(text.prefix(3))
             case 4:
-                audio.phaser?.feedback = value
+                audio.phaser?.notchFrequency = value
                 let text = String(value)
                 newValue = String(text.prefix(3))
             case 5:
+                audio.phaser?.vibratoMode = value
+                let text = String(value)
+                newValue = String(text.prefix(3))
+            case 6:
+                audio.phaser?.depth = value
+                let text = String(value)
+                newValue = String(text.prefix(3))
+            case 7:
+                audio.phaser?.feedback = value
+                let text = String(value)
+                newValue = String(text.prefix(3))
+            case 8:
                 audio.phaser?.lfoBPM = value
                 let text = String(value)
                 newValue = String(text.prefix(3))
@@ -731,7 +768,7 @@ class audio {
                 audio.flatFrequencyResponseReverb?.reverbDuration = value
                 let text = String(value)
                 newValue = String(text.prefix(3))
-            
+           
             default: break
                 
             }
@@ -910,6 +947,14 @@ class audio {
                 value = String(audio.dynaRageCompressor!.releaseDuration)
                 value = String(value.prefix(3))
                 isOn = audio.dynaRageCompressor!.isStarted
+            case 5:
+                min = Float(Effects.dynaRageCompressor.rageRatio.lowerBound)
+                max = Float(Effects.dynaRageCompressor.rageRatio.upperBound)
+                valueForSlider = Float(audio.dynaRageCompressor!.rage)
+                name = "Rage"
+                value = String(audio.dynaRageCompressor!.rage)
+                value = String(value.prefix(3))
+                isOn = audio.dynaRageCompressor!.isStarted
             default: break
             }
            
@@ -963,6 +1008,14 @@ class audio {
                 value = String(value.prefix(3))
                 isOn = audio.delay!.isStarted
             case 3:
+                min = Float(Effects.delay.lowPassCutOffRange.lowerBound)
+                max = Float(Effects.delay.lowPassCutOffRange.upperBound)
+                valueForSlider = Float(audio.delay!.lowPassCutoff)
+                name = "Low Pass Cut Off"
+                value = String(audio.delay!.lowPassCutoff)
+                value = String(value.prefix(3))
+                isOn = audio.delay!.isStarted
+            case 4:
                 min = Float(Effects.delay.dryWetMixRange.lowerBound)
                 max = Float(Effects.delay.dryWetMixRange.upperBound)
                 valueForSlider = Float(audio.delay!.dryWetMix)
@@ -975,7 +1028,7 @@ class audio {
             }
             
         case "variableDelay" :
-            // DELAY
+            // VARIABLE DELAY
             switch slider {
             case 1:
                 min = Float(Effects.variableDelay.timeRange.lowerBound)
@@ -1121,6 +1174,22 @@ class audio {
            
             switch slider {
             case 1:
+                min = Float(Effects.phaser.notchMinimumFrequencyRange.lowerBound)
+                max = Float(Effects.phaser.notchMinimumFrequencyRange.upperBound)
+                valueForSlider = Float(audio.phaser!.notchMinimumFrequency)
+                name = "Notch Min Frequency"
+                value = String(audio.phaser!.notchMinimumFrequency)
+                value = String(value.prefix(3))
+                isOn = audio.phaser!.isStarted
+            case 2:
+                min = Float(Effects.phaser.notchMaximumFrequencyRange.lowerBound)
+                max = Float(Effects.phaser.notchMaximumFrequencyRange.upperBound)
+                valueForSlider = Float(audio.phaser!.notchMaximumFrequency)
+                name = "Notch Max Frequency"
+                value = String(audio.phaser!.notchMaximumFrequency)
+                value = String(value.prefix(3))
+                isOn = audio.phaser!.isStarted
+            case 3:
                 min = Float(Effects.phaser.notchWidthRange.lowerBound)
                 max = Float(Effects.phaser.notchWidthRange.upperBound)
                 valueForSlider = Float(audio.phaser!.notchWidth)
@@ -1128,7 +1197,7 @@ class audio {
                 value = String(audio.phaser!.notchWidth)
                 value = String(value.prefix(3))
                 isOn = audio.phaser!.isStarted
-            case 2:
+            case 4:
                 min = Float(Effects.phaser.notchFrequencyRange.lowerBound)
                 max = Float(Effects.phaser.notchFrequencyRange.upperBound)
                 valueForSlider = Float(audio.phaser!.notchFrequency)
@@ -1136,7 +1205,15 @@ class audio {
                 value = String(audio.phaser!.notchFrequency)
                 value = String(value.prefix(3))
                 isOn = audio.phaser!.isStarted
-            case 3:
+            case 5:
+                min = Float(Effects.phaser.vibratoModeRange.lowerBound)
+                max = Float(Effects.phaser.vibratoModeRange.upperBound)
+                valueForSlider = Float(audio.phaser!.vibratoMode)
+                name = "Vibrato Mode"
+                value = String(audio.phaser!.vibratoMode)
+                value = String(value.prefix(3))
+                isOn = audio.phaser!.isStarted
+            case 6:
                 min = Float(Effects.phaser.depthRange.lowerBound)
                 max = Float(Effects.phaser.depthRange.upperBound)
                 valueForSlider = Float(audio.phaser!.depth)
@@ -1144,7 +1221,7 @@ class audio {
                 value = String(audio.phaser!.depth)
                 value = String(value.prefix(3))
                 isOn = audio.phaser!.isStarted
-            case 4:
+            case 7:
                 min = Float(Effects.phaser.feedbackRange.lowerBound)
                 max = Float(Effects.phaser.feedbackRange.upperBound)
                 valueForSlider = Float(audio.phaser!.feedback)
@@ -1152,7 +1229,7 @@ class audio {
                 value = String(audio.phaser!.feedback)
                 value = String(value.prefix(3))
                 isOn = audio.phaser!.isStarted
-            case 5:
+            case 8:
                 min = Float(Effects.phaser.lfoBPMRange.lowerBound)
                 max = Float(Effects.phaser.lfoBPMRange.upperBound)
                 valueForSlider = Float(audio.phaser!.lfoBPM)
@@ -1529,6 +1606,16 @@ class audio {
     
     
     
+    
+    func ratioToDecibel(ratio: Double) -> Double {
+        let dB = 20 * log10(ratio)
+        return dB
+    }
+    
+    func decibelToRatio(dB:Double) -> Double {
+        let ratio = 10 ^ Int((dB/20))
+        return Double(ratio)
+    }
     
     
     
