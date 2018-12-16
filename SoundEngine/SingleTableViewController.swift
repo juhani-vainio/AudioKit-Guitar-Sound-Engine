@@ -68,8 +68,10 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
        
         inputLevel.setValue(Float((audio.shared.inputBooster?.dB)!), animated: true)
         inputLevel.addTarget(self, action: #selector(inputLevelChanged), for: .valueChanged)
+        inputLevel.addTarget(self, action: #selector(inputLevelChangeEnded), for: .touchUpInside)
         outputLevel.setValue(Float((audio.shared.outputBooster?.dB)!), animated: true)
         outputLevel.addTarget(self, action: #selector(outputLevelChanged), for: .valueChanged)
+        outputLevel.addTarget(self, action: #selector(outputLevelChangeEnded), for: .touchUpInside)
         
         bufferLengthSegment.selectedSegmentIndex = settings.bufferLength - 1
         
@@ -90,14 +92,24 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
     
     @objc func inputLevelChanged(slider: UISlider) {
         audio.shared.inputBooster?.dB = Double(slider.value)
-        print("Input --- \(audio.shared.inputBooster?.dB) dB")
+      //  print("Input --- \(audio.shared.inputBooster?.dB) dB")
+    }
+    
+    @objc func inputLevelChangeEnded(slider: UISlider) {
+        
+        UserDefaults.standard.set(audio.shared.inputBooster?.dB, forKey: "inputBooster")
     }
     
     @objc func outputLevelChanged(slider: UISlider) {
         audio.shared.outputBooster?.dB = Double(slider.value)
-   
-        print("Output --- \(audio.shared.outputBooster?.dB) dB --- \(audio.shared.outputBooster?.gain)")
+      //  print("Output --- \(audio.shared.outputBooster?.dB) dB --- \(audio.shared.outputBooster?.gain)")
     }
+    
+    @objc func outputLevelChangeEnded(slider: UISlider) {
+     
+        UserDefaults.standard.set(audio.shared.outputBooster?.dB, forKey: "outputBooster")
+    }
+    
 
     // MARK: TABLEVIEWS
     func createTableViews() {

@@ -1013,6 +1013,14 @@ class helper {
         if savedBufferLength != 0 {
             settings.bufferLength = savedBufferLength
         }
+        let inputBooster = UserDefaults.standard.double(forKey: "inputBooster")
+        if inputBooster != 0 {
+            audio.shared.inputBooster?.dB = inputBooster
+        }
+        let outputBooster = UserDefaults.standard.double(forKey: "outputBooster")
+        if outputBooster != 0 {
+            audio.shared.outputBooster?.dB = outputBooster
+        }
         
         // all saved sounds
         let savedSounds = UserDefaults.standard.stringArray(forKey: "savedSounds")  ?? [String]()
