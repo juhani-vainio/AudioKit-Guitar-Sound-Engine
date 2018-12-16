@@ -8,12 +8,12 @@
 
 import AudioKit
 import UIKit
-import MediaPlayer
 
 fileprivate var longPressGesture: UILongPressGestureRecognizer!
 
 class SingleTableViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UITableViewDelegate, UITableViewDataSource  {
   
+   
     var nameCheck = Bool()
     var effectChainNeedsReset = Bool(false)
     private let parallaxLayout = ParallaxFlowLayout()
@@ -25,7 +25,7 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
     @IBOutlet weak var settingsView: UIView!
     @IBOutlet weak var inputLevel: UISlider!
     @IBOutlet weak var outputLevel: UISlider!
-    @IBOutlet weak var volumeView: UIView!
+   
     @IBOutlet weak var bufferLengthSegment: UISegmentedControl!
     @IBOutlet weak var mainViewBackground: UIView!
     @IBOutlet weak var addButton: UIButton!
@@ -65,14 +65,10 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
     
     func interfaceSetup() {
        
-        let myVolumeView = MPVolumeView(frame: volumeView.bounds)
-        myVolumeView.showsRouteButton = false
-        myVolumeView.backgroundColor = UIColor.clear
-        volumeView.backgroundColor = UIColor.clear
-        volumeView.addSubview(myVolumeView)
-        inputLevel.setValue(Float((audio.shared.mic?.volume)!), animated: true)
+       
+        inputLevel.setValue(Float((audio.shared.inputBooster?.dB)!), animated: true)
         inputLevel.addTarget(self, action: #selector(inputLevelChanged), for: .valueChanged)
-        outputLevel.setValue(Float((audio.shared.outputBooster?.gain)!), animated: true)
+        outputLevel.setValue(Float((audio.shared.outputBooster?.dB)!), animated: true)
         outputLevel.addTarget(self, action: #selector(outputLevelChanged), for: .valueChanged)
         
         bufferLengthSegment.selectedSegmentIndex = settings.bufferLength - 1
@@ -93,13 +89,14 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
     }
     
     @objc func inputLevelChanged(slider: UISlider) {
-        audio.shared.mic?.volume = Double(slider.value)
-        print(audio.shared.mic?.volume)
+        audio.shared.inputBooster?.dB = Double(slider.value)
+        print("Input --- \(audio.shared.inputBooster?.dB) dB")
     }
     
     @objc func outputLevelChanged(slider: UISlider) {
-        audio.shared.outputBooster?.gain = Double(slider.value)
-        print("\(audio.shared.outputBooster?.dB) dB")
+        audio.shared.outputBooster?.dB = Double(slider.value)
+   
+        print("Output --- \(audio.shared.outputBooster?.dB) dB --- \(audio.shared.outputBooster?.gain)")
     }
 
     // MARK: TABLEVIEWS

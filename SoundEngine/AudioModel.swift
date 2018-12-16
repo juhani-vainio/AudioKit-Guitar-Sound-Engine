@@ -140,65 +140,117 @@ class audio {
             break
         }
     }
- 
     
+    func convertWithBooster(gain: Double) -> Float {
+        let booster = AKBooster()
+        booster.gain = gain
+        return Float(booster.dB)
+    }
+ 
+    func getEQValues(slider: Int) -> (min: Float, max: Float, valueForSlider: Float, value: String, name : String) {
+        let min = -6
+        let max = 6
+        var valueForSlider = Float(0.69)
+        var name = ""
+        var value = ""
+        
+        switch slider {
+        case 1:
+        valueForSlider = convertWithBooster(gain: audio.equalizerFilter1!.gain)
+        name = String(audio.equalizerFilter1!.centerFrequency)
+        case 2:
+            valueForSlider = convertWithBooster(gain: audio.equalizerFilter2!.gain)
+            name = String(audio.equalizerFilter2!.centerFrequency)
+        case 3:
+            valueForSlider = convertWithBooster(gain: audio.equalizerFilter3!.gain)
+            name = String(audio.equalizerFilter3!.centerFrequency)
+        case 4:
+            valueForSlider = convertWithBooster(gain: audio.equalizerFilter4!.gain)
+            name = String(audio.equalizerFilter4!.centerFrequency)
+        case 5:
+            valueForSlider = convertWithBooster(gain: audio.equalizerFilter5!.gain)
+            name = String(audio.equalizerFilter5!.centerFrequency)
+        case 6:
+            valueForSlider = convertWithBooster(gain: audio.equalizerFilter6!.gain)
+            name = String(audio.equalizerFilter6!.centerFrequency)
+        case 7:
+            valueForSlider = convertWithBooster(gain: audio.equalizerFilter7!.gain)
+            name = String(audio.equalizerFilter7!.centerFrequency)
+        case 8:
+            valueForSlider = convertWithBooster(gain: audio.equalizerFilter8!.gain)
+            name = String(audio.equalizerFilter8!.centerFrequency)
+        case 9:
+            valueForSlider = convertWithBooster(gain: audio.equalizerFilter9!.gain)
+            name = String(audio.equalizerFilter9!.centerFrequency)
+        case 10:
+            valueForSlider = convertWithBooster(gain: audio.equalizerFilter10!.gain)
+            name = String(audio.equalizerFilter10!.centerFrequency)
+        
+       
+        default: break
+        }
+        
+        var text = String(valueForSlider)
+        text = String(text.prefix(4))
+        value = text + "dB"
+        
+        return (Float(min), Float(max), valueForSlider, value, name)
+    }
+    
+    func convertSliderValue(oldValue:Double) -> Double{
+    let oldMax = 1
+        let oldMin = 0
+        let newMax = 2
+        let newMin = 0.5
+    let oldRange = (oldMax - oldMin)
+    let newRange = (newMax - newMin)
+    let newValue = (((oldValue - oldMin) * newRange) / oldRange) + newMin
+        return newValue
+    }
+    
+
     
     func changeValues(id: String, slider: Int, value: Double) -> String {
         var newValue = String()
         switch id {
         case "eq10" :
+            let booster = AKBooster()
+            booster.dB = value
+            let text = String(value)
+            newValue = String(text.prefix(4)) + "dB"
             switch slider {
            
             case 1:
-                audio.equalizerFilter1?.gain = value
-                let decibels = ratioToDecibel(ratio: value)
-                let text = String(decibels)
-                newValue = String(text.prefix(4))
+               
+                audio.equalizerFilter1?.gain = booster.gain
+                
             case 2:
-                audio.equalizerFilter2?.gain = value
-                let decibels = ratioToDecibel(ratio: value)
-                let text = String(decibels)
-                newValue = String(text.prefix(4))
+                audio.equalizerFilter2?.gain = booster.gain
+               
             case 3:
-                audio.equalizerFilter3?.gain = value
-                let decibels = ratioToDecibel(ratio: value)
-                let text = String(decibels)
-                newValue = String(text.prefix(4))
+                audio.equalizerFilter3?.gain = booster.gain
+               
             case 4:
-                audio.equalizerFilter4?.gain = value
-                let decibels = ratioToDecibel(ratio: value)
-                let text = String(decibels)
-                newValue = String(text.prefix(4))
+                audio.equalizerFilter4?.gain = booster.gain
+              
             case 5:
-                audio.equalizerFilter5?.gain = value
-                let decibels = ratioToDecibel(ratio: value)
-                let text = String(decibels)
-                newValue = String(text.prefix(4))
+                audio.equalizerFilter5?.gain = booster.gain
+          
             case 6:
-                audio.equalizerFilter6?.gain = value
-                let decibels = ratioToDecibel(ratio: value)
-                let text = String(decibels)
-                newValue = String(text.prefix(4))
+                audio.equalizerFilter6?.gain = booster.gain
+              
             case 7:
-                audio.equalizerFilter7?.gain = value
-                let decibels = ratioToDecibel(ratio: value)
-                let text = String(decibels)
-                newValue = String(text.prefix(4))
+                audio.equalizerFilter7?.gain = booster.gain
+          
             case 8:
-                audio.equalizerFilter8?.gain = value
-                let decibels = ratioToDecibel(ratio: value)
-                let text = String(decibels)
-                newValue = String(text.prefix(4))
+                audio.equalizerFilter8?.gain = booster.gain
+               
             case 9:
-                audio.equalizerFilter9?.gain = value
-                let decibels = ratioToDecibel(ratio: value)
-                let text = String(decibels)
-                newValue = String(text.prefix(4))
+                audio.equalizerFilter9?.gain = booster.gain
+          
             case 10:
-                audio.equalizerFilter10?.gain = value
-                let decibels = ratioToDecibel(ratio: value)
-                let text = String(decibels)
-                newValue = String(text.prefix(4))
+                audio.equalizerFilter10?.gain = booster.gain
+              
                 
             default: break
                 
@@ -800,49 +852,7 @@ class audio {
         return newValue
     }
     
-    func getEQValues(slider: Int) -> (min: Float, max: Float, valueForSlider: Float, value: String, name : String) {
-        let min = Float(Filters.equalizerFilter.gainRange.lowerBound)
-        let max = Float(Filters.equalizerFilter.gainRange.upperBound)
-        var valueForSlider = Float(0.69)
-        var name = ""
-        var value = ""
-        
-        switch slider {
-        case 1: valueForSlider = Float(audio.equalizerFilter1!.gain)
-            name = String(audio.equalizerFilter1!.centerFrequency)
-            value = String(audio.equalizerFilter1!.gain)
-        case 2: valueForSlider = Float(audio.equalizerFilter2!.gain)
-        name = String(audio.equalizerFilter2!.centerFrequency)
-        value = String(audio.equalizerFilter2!.gain)
-        case 3: valueForSlider = Float(audio.equalizerFilter3!.gain)
-        name = String(audio.equalizerFilter3!.centerFrequency)
-        value = String(audio.equalizerFilter3!.gain)
-        case 4: valueForSlider = Float(audio.equalizerFilter4!.gain)
-        name = String(audio.equalizerFilter4!.centerFrequency)
-        value = String(audio.equalizerFilter4!.gain)
-        case 5: valueForSlider = Float(audio.equalizerFilter5!.gain)
-        name = String(audio.equalizerFilter5!.centerFrequency)
-        value = String(audio.equalizerFilter5!.gain)
-        case 6: valueForSlider = Float(audio.equalizerFilter6!.gain)
-        name = String(audio.equalizerFilter6!.centerFrequency)
-        value = String(audio.equalizerFilter6!.gain)
-        case 7: valueForSlider = Float(audio.equalizerFilter7!.gain)
-        name = String(audio.equalizerFilter7!.centerFrequency)
-        value = String(audio.equalizerFilter7!.gain)
-        case 8: valueForSlider = Float(audio.equalizerFilter8!.gain)
-        name = String(audio.equalizerFilter8!.centerFrequency)
-        value = String(audio.equalizerFilter8!.gain)
-        case 9: valueForSlider = Float(audio.equalizerFilter9!.gain)
-        name = String(audio.equalizerFilter9!.centerFrequency)
-        value = String(audio.equalizerFilter9!.gain)
-        case 10: valueForSlider = Float(audio.equalizerFilter10!.gain)
-        name = String(audio.equalizerFilter10!.centerFrequency)
-        value = String(audio.equalizerFilter10!.gain)
-        default: break
-        }
-        
-        return (min, max, valueForSlider, value, name)
-    }
+  
     
     func getValues(id: String, slider: Int) -> (min: Float, max: Float, valueForSlider: Float, value: String, name : String, isOn: Bool) {
         var min = Float(0.0)
@@ -1761,9 +1771,9 @@ class audio {
     
     
     func connectMic() {
-        
-        mic?.connect(to: inputMixer!)
-        startAmplitudeMonitors()
+        mic?.connect(to: inputBooster!)
+        //mic?.connect(to: inputMixer!)
+       // startAmplitudeMonitors()
  
     }
     
@@ -1783,7 +1793,8 @@ class audio {
         for input in 0..<audio.selectedAudioInputs.count {
             
             if input == 0 {
-                inputMixer?.connect(to: audio.selectedAudioInputs[0])
+                inputBooster?.connect(to: audio.selectedAudioInputs[0])
+               // inputMixer?.connect(to: audio.selectedAudioInputs[0])
                 
             }
             else {
@@ -1792,7 +1803,8 @@ class audio {
         }
         
         if audio.selectedAudioInputs.isEmpty {
-            inputMixer!.connect(to: outputMixer!)
+            inputBooster!.connect(to: outputMixer!)
+           // inputMixer!.connect(to: outputMixer!)
         } else {
             audio.selectedAudioInputs.last?.connect(to: outputMixer!)
         }
@@ -1816,7 +1828,8 @@ class audio {
         // LAST TO OUTPUT
         AudioKit.output = outputAmplitudeTracker
         if AudioKit.output == nil {
-            AudioKit.output = inputMixer
+            AudioKit.output =  inputBooster
+           // AudioKit.output = inputMixer
         }
         
         // START AUDIOKIT
@@ -1873,10 +1886,12 @@ class audio {
         outputAmplitudeTracker?.disconnectInput()
         outputAmplitudeTracker?.disconnectOutput()
         
-        inputMixer?.disconnectOutput()
-        print("DISCONNECT \(String(describing: inputMixer))")
+        inputBooster?.disconnectOutput()
+        inputBooster?.disconnectInput()
+        //inputMixer?.disconnectOutput()
+  
         mic?.disconnectOutput()
-        print("DISCONNECT \(String(describing: mic))")
+        
         audio.selectedAudioInputs.removeAll()
         startAudio()
     }
@@ -1896,6 +1911,7 @@ class audio {
     
     var mic: AKMicrophone?
     var outputBooster : AKBooster?
+    var inputBooster : AKBooster?
     
     
     // EFFECTS
@@ -2017,6 +2033,9 @@ class audio {
         // UTILITIES
         mic = AKMicrophone()
         outputBooster = AKBooster()
+        outputBooster?.start()
+        inputBooster = AKBooster()
+        inputBooster?.start()
         
         // MIXERS
         inputMixer = AKMixer()

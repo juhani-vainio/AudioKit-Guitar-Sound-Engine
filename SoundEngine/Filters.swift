@@ -167,7 +167,7 @@ class Filters: Codable {
         /// a peak at the center frequency with a width dependent on bandwidth. If gain
         /// is less than 1, a notch is formed around the center frequency.
         
-        static var gainRange = 0.5...2  // 0.5 = -6dB , 0.7 = -3dB, 1 = 0, 1.4 = +3dB, 2 = +6dB
+        static var gainRange = 0...2  // 0.5 = -6dB , 0.7 = -3dB, 1 = 0, 1.4 = +3dB, 2 = +6dB
         
         static var isStarted = Bool(false)
         
