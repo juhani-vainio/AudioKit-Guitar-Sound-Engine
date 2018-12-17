@@ -1096,8 +1096,11 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
     
     func registerCollectionViewCells() {
         
-        let mainNib = UINib(nibName: "EQCollectionViewCell", bundle: nil)
-        mainCollection.register(mainNib, forCellWithReuseIdentifier: "EQCollectionViewCell")
+        let eqNib = UINib(nibName: "EQCollectionViewCell", bundle: nil)
+        mainCollection.register(eqNib, forCellWithReuseIdentifier: "EQCollectionViewCell")
+        
+        let eq31Nib = UINib(nibName: "EQ31CollectionViewCell", bundle: nil)
+        mainCollection.register(eq31Nib, forCellWithReuseIdentifier: "EQ31CollectionViewCell")
         
         let compressNib = UINib(nibName: "CompressionCollectionViewCell", bundle: nil)
         mainCollection.register(compressNib, forCellWithReuseIdentifier: "CompressionCollectionViewCell")
@@ -1127,89 +1130,321 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
         
     }
     
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         var returnCell = UICollectionViewCell()
         var cellId = String()
-        
+        cellId = "eq31"
+        audio.shared.switchEQBandwidthRatio(id: cellId)
         if collectionView == mainCollection  {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "EQCollectionViewCell", for: indexPath) as! EQCollectionViewCell
-            cellId = "eq10"
-            cell.id = cellId
+            if cellId == "eq10" {
+                
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "EQCollectionViewCell", for: indexPath) as! EQCollectionViewCell
+                cell.id = cellId
+                
+                let slider1 = audio.shared.getEQValues(id: cellId, slider: 1)
+                cell.slider1Title.text = slider1.name
+                cell.slider1Value.text = slider1.value
+                cell.slider1.minimumValue = slider1.min
+                cell.slider1.maximumValue = slider1.max
+                cell.slider1.value = slider1.valueForSlider
+                
+                let slider2 = audio.shared.getEQValues(id: cellId, slider: 2)
+                cell.slider2Title.text = slider2.name
+                cell.slider2Value.text = slider2.value
+                cell.slider2.minimumValue = slider2.min
+                cell.slider2.maximumValue = slider2.max
+                cell.slider2.value = slider2.valueForSlider
+                
+                let slider3 = audio.shared.getEQValues(id: cellId, slider: 3)
+                cell.slider3Title.text = slider3.name
+                cell.slider3Value.text = slider3.value
+                cell.slider3.minimumValue = slider3.min
+                cell.slider3.maximumValue = slider3.max
+                cell.slider3.value = slider3.valueForSlider
+                
+                let slider4 = audio.shared.getEQValues(id: cellId, slider: 4)
+                cell.slider4Title.text = slider4.name
+                cell.slider4Value.text = slider4.value
+                cell.slider4.minimumValue = slider4.min
+                cell.slider4.maximumValue = slider4.max
+                cell.slider4.value = slider4.valueForSlider
+                
+                let slider5 = audio.shared.getEQValues(id: cellId, slider: 5)
+                cell.slider5Title.text = slider5.name
+                cell.slider5Value.text = slider5.value
+                cell.slider5.minimumValue = slider5.min
+                cell.slider5.maximumValue = slider5.max
+                cell.slider5.value = slider5.valueForSlider
+                
+                let slider6 = audio.shared.getEQValues(id: cellId, slider: 6)
+                cell.slider6Title.text = slider6.name
+                cell.slider6Value.text = slider6.value
+                cell.slider6.minimumValue = slider6.min
+                cell.slider6.maximumValue = slider6.max
+                cell.slider6.value = slider6.valueForSlider
+                
+                let slider7 = audio.shared.getEQValues(id: cellId, slider: 7)
+                cell.slider7Title.text = slider7.name
+                cell.slider7Value.text = slider7.value
+                cell.slider7.minimumValue = slider7.min
+                cell.slider7.maximumValue = slider7.max
+                cell.slider7.value = slider7.valueForSlider
+                
+                let slider8 = audio.shared.getEQValues(id: cellId, slider: 8)
+                cell.slider8Title.text = slider8.name
+                cell.slider8Value.text = slider8.value
+                cell.slider8.minimumValue = slider8.min
+                cell.slider8.maximumValue = slider8.max
+                cell.slider8.value = slider8.valueForSlider
+                
+                let slider9 = audio.shared.getEQValues(id: cellId, slider: 9)
+                cell.slider9Title.text = slider9.name
+                cell.slider9Value.text = slider9.value
+                cell.slider9.minimumValue = slider9.min
+                cell.slider9.maximumValue = slider9.max
+                cell.slider9.value = slider9.valueForSlider
+                
+                let slider10 = audio.shared.getEQValues(id: cellId, slider: 10)
+                cell.slider10Title.text = slider10.name
+                cell.slider10Value.text = slider10.value
+                cell.slider10.minimumValue = slider10.min
+                cell.slider10.maximumValue = slider10.max
+                cell.slider10.value = slider10.valueForSlider
+                
+                returnCell = cell
             
-            let slider1 = audio.shared.getEQValues(slider: 1)
-            cell.slider1Title.text = slider1.name
-            cell.slider1Value.text = slider1.value
-            cell.slider1.minimumValue = slider1.min
-            cell.slider1.maximumValue = slider1.max
-            cell.slider1.value = slider1.valueForSlider
-            
-            let slider2 = audio.shared.getEQValues(slider: 2)
-            cell.slider2Title.text = slider2.name
-            cell.slider2Value.text = slider2.value
-            cell.slider2.minimumValue = slider2.min
-            cell.slider2.maximumValue = slider2.max
-            cell.slider2.value = slider2.valueForSlider
-            
-            let slider3 = audio.shared.getEQValues(slider: 3)
-            cell.slider3Title.text = slider3.name
-            cell.slider3Value.text = slider3.value
-            cell.slider3.minimumValue = slider3.min
-            cell.slider3.maximumValue = slider3.max
-            cell.slider3.value = slider3.valueForSlider
-            
-            let slider4 = audio.shared.getEQValues(slider: 4)
-            cell.slider4Title.text = slider4.name
-            cell.slider4Value.text = slider4.value
-            cell.slider4.minimumValue = slider4.min
-            cell.slider4.maximumValue = slider4.max
-            cell.slider4.value = slider4.valueForSlider
-            
-            let slider5 = audio.shared.getEQValues(slider: 5)
-            cell.slider5Title.text = slider5.name
-            cell.slider5Value.text = slider5.value
-            cell.slider5.minimumValue = slider5.min
-            cell.slider5.maximumValue = slider5.max
-            cell.slider5.value = slider5.valueForSlider
-            
-            let slider6 = audio.shared.getEQValues(slider: 6)
-            cell.slider6Title.text = slider6.name
-            cell.slider6Value.text = slider6.value
-            cell.slider6.minimumValue = slider6.min
-            cell.slider6.maximumValue = slider6.max
-            cell.slider6.value = slider6.valueForSlider
-            
-            let slider7 = audio.shared.getEQValues(slider: 7)
-            cell.slider7Title.text = slider7.name
-            cell.slider7Value.text = slider7.value
-            cell.slider7.minimumValue = slider7.min
-            cell.slider7.maximumValue = slider7.max
-            cell.slider7.value = slider7.valueForSlider
-            
-            let slider8 = audio.shared.getEQValues(slider: 8)
-            cell.slider8Title.text = slider8.name
-            cell.slider8Value.text = slider8.value
-            cell.slider8.minimumValue = slider8.min
-            cell.slider8.maximumValue = slider8.max
-            cell.slider8.value = slider8.valueForSlider
-            
-            let slider9 = audio.shared.getEQValues(slider: 9)
-            cell.slider9Title.text = slider9.name
-            cell.slider9Value.text = slider9.value
-            cell.slider9.minimumValue = slider9.min
-            cell.slider9.maximumValue = slider9.max
-            cell.slider9.value = slider9.valueForSlider
-            
-            let slider10 = audio.shared.getEQValues(slider: 10)
-            cell.slider10Title.text = slider10.name
-            cell.slider10Value.text = slider10.value
-            cell.slider10.minimumValue = slider10.min
-            cell.slider10.maximumValue = slider10.max
-            cell.slider10.value = slider10.valueForSlider
-            
-            returnCell = cell
-        }
+            }
         
+            else if cellId == "eq31" {
+                
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "EQ31CollectionViewCell", for: indexPath) as! EQ31CollectionViewCell
+                cell.id = cellId
+                
+                let slider1 = audio.shared.getEQValues(id: cellId, slider: 1)
+                cell.slider1Title.text = slider1.name
+                cell.slider1Value.text = slider1.value
+                cell.slider1.minimumValue = slider1.min
+                cell.slider1.maximumValue = slider1.max
+                cell.slider1.value = slider1.valueForSlider
+                
+                let slider2 = audio.shared.getEQValues(id: cellId, slider: 2)
+                cell.slider2Title.text = slider2.name
+                cell.slider2Value.text = slider2.value
+                cell.slider2.minimumValue = slider2.min
+                cell.slider2.maximumValue = slider2.max
+                cell.slider2.value = slider2.valueForSlider
+                
+                let slider3 = audio.shared.getEQValues(id: cellId, slider: 3)
+                cell.slider3Title.text = slider3.name
+                cell.slider3Value.text = slider3.value
+                cell.slider3.minimumValue = slider3.min
+                cell.slider3.maximumValue = slider3.max
+                cell.slider3.value = slider3.valueForSlider
+                
+                let slider4 = audio.shared.getEQValues(id: cellId, slider: 4)
+                cell.slider4Title.text = slider4.name
+                cell.slider4Value.text = slider4.value
+                cell.slider4.minimumValue = slider4.min
+                cell.slider4.maximumValue = slider4.max
+                cell.slider4.value = slider4.valueForSlider
+                
+                let slider5 = audio.shared.getEQValues(id: cellId, slider: 5)
+                cell.slider5Title.text = slider5.name
+                cell.slider5Value.text = slider5.value
+                cell.slider5.minimumValue = slider5.min
+                cell.slider5.maximumValue = slider5.max
+                cell.slider5.value = slider5.valueForSlider
+                
+                let slider6 = audio.shared.getEQValues(id: cellId, slider: 6)
+                cell.slider6Title.text = slider6.name
+                cell.slider6Value.text = slider6.value
+                cell.slider6.minimumValue = slider6.min
+                cell.slider6.maximumValue = slider6.max
+                cell.slider6.value = slider6.valueForSlider
+                
+                let slider7 = audio.shared.getEQValues(id: cellId, slider: 7)
+                cell.slider7Title.text = slider7.name
+                cell.slider7Value.text = slider7.value
+                cell.slider7.minimumValue = slider7.min
+                cell.slider7.maximumValue = slider7.max
+                cell.slider7.value = slider7.valueForSlider
+                
+                let slider8 = audio.shared.getEQValues(id: cellId, slider: 8)
+                cell.slider8Title.text = slider8.name
+                cell.slider8Value.text = slider8.value
+                cell.slider8.minimumValue = slider8.min
+                cell.slider8.maximumValue = slider8.max
+                cell.slider8.value = slider8.valueForSlider
+                
+                let slider9 = audio.shared.getEQValues(id: cellId, slider: 9)
+                cell.slider9Title.text = slider9.name
+                cell.slider9Value.text = slider9.value
+                cell.slider9.minimumValue = slider9.min
+                cell.slider9.maximumValue = slider9.max
+                cell.slider9.value = slider9.valueForSlider
+                
+                let slider10 = audio.shared.getEQValues(id: cellId, slider: 10)
+                cell.slider10Title.text = slider10.name
+                cell.slider10Value.text = slider10.value
+                cell.slider10.minimumValue = slider10.min
+                cell.slider10.maximumValue = slider10.max
+                cell.slider10.value = slider10.valueForSlider
+                
+                let slider11 = audio.shared.getEQValues(id: cellId, slider: 11)
+                cell.slider11Title.text = slider11.name
+                cell.slider11Value.text = slider11.value
+                cell.slider11.minimumValue = slider11.min
+                cell.slider11.maximumValue = slider11.max
+                cell.slider11.value = slider11.valueForSlider
+                
+                let slider12 = audio.shared.getEQValues(id: cellId, slider: 12)
+                cell.slider12Title.text = slider12.name
+                cell.slider12Value.text = slider12.value
+                cell.slider12.minimumValue = slider12.min
+                cell.slider12.maximumValue = slider12.max
+                cell.slider12.value = slider12.valueForSlider
+                
+                let slider13 = audio.shared.getEQValues(id: cellId, slider: 13)
+                cell.slider13Title.text = slider13.name
+                cell.slider13Value.text = slider13.value
+                cell.slider13.minimumValue = slider13.min
+                cell.slider13.maximumValue = slider13.max
+                cell.slider13.value = slider13.valueForSlider
+                
+                let slider14 = audio.shared.getEQValues(id: cellId, slider: 14)
+                cell.slider14Title.text = slider14.name
+                cell.slider14Value.text = slider14.value
+                cell.slider14.minimumValue = slider14.min
+                cell.slider14.maximumValue = slider14.max
+                cell.slider14.value = slider14.valueForSlider
+                
+                let slider15 = audio.shared.getEQValues(id: cellId, slider: 15)
+                cell.slider15Title.text = slider15.name
+                cell.slider15Value.text = slider15.value
+                cell.slider15.minimumValue = slider15.min
+                cell.slider15.maximumValue = slider15.max
+                cell.slider15.value = slider15.valueForSlider
+                
+                let slider16 = audio.shared.getEQValues(id: cellId, slider: 16)
+                cell.slider16Title.text = slider16.name
+                cell.slider16Value.text = slider16.value
+                cell.slider16.minimumValue = slider16.min
+                cell.slider16.maximumValue = slider16.max
+                cell.slider16.value = slider16.valueForSlider
+                
+                let slider17 = audio.shared.getEQValues(id: cellId, slider: 17)
+                cell.slider17Title.text = slider17.name
+                cell.slider17Value.text = slider17.value
+                cell.slider17.minimumValue = slider17.min
+                cell.slider17.maximumValue = slider17.max
+                cell.slider17.value = slider17.valueForSlider
+                
+                let slider18 = audio.shared.getEQValues(id: cellId, slider: 18)
+                cell.slider18Title.text = slider18.name
+                cell.slider18Value.text = slider18.value
+                cell.slider18.minimumValue = slider18.min
+                cell.slider18.maximumValue = slider18.max
+                cell.slider18.value = slider18.valueForSlider
+                
+                let slider19 = audio.shared.getEQValues(id: cellId, slider: 19)
+                cell.slider19Title.text = slider19.name
+                cell.slider19Value.text = slider19.value
+                cell.slider19.minimumValue = slider19.min
+                cell.slider19.maximumValue = slider19.max
+                cell.slider19.value = slider19.valueForSlider
+                
+                let slider20 = audio.shared.getEQValues(id: cellId, slider: 20)
+                cell.slider20Title.text = slider20.name
+                cell.slider20Value.text = slider20.value
+                cell.slider20.minimumValue = slider20.min
+                cell.slider20.maximumValue = slider20.max
+                cell.slider20.value = slider20.valueForSlider
+                
+                let slider21 = audio.shared.getEQValues(id: cellId, slider: 21)
+                cell.slider12Title.text = slider21.name
+                cell.slider21Value.text = slider21.value
+                cell.slider21.minimumValue = slider21.min
+                cell.slider21.maximumValue = slider21.max
+                cell.slider21.value = slider21.valueForSlider
+                
+                let slider22 = audio.shared.getEQValues(id: cellId, slider: 22)
+                cell.slider22Title.text = slider22.name
+                cell.slider22Value.text = slider22.value
+                cell.slider22.minimumValue = slider22.min
+                cell.slider22.maximumValue = slider22.max
+                cell.slider22.value = slider22.valueForSlider
+                
+                let slider23 = audio.shared.getEQValues(id: cellId, slider: 23)
+                cell.slider23Title.text = slider23.name
+                cell.slider23Value.text = slider23.value
+                cell.slider23.minimumValue = slider23.min
+                cell.slider23.maximumValue = slider23.max
+                cell.slider23.value = slider23.valueForSlider
+                
+                let slider24 = audio.shared.getEQValues(id: cellId, slider: 24)
+                cell.slider24Title.text = slider24.name
+                cell.slider24Value.text = slider24.value
+                cell.slider24.minimumValue = slider24.min
+                cell.slider24.maximumValue = slider24.max
+                cell.slider24.value = slider24.valueForSlider
+                
+                let slider25 = audio.shared.getEQValues(id: cellId, slider: 25)
+                cell.slider25Title.text = slider25.name
+                cell.slider25Value.text = slider25.value
+                cell.slider25.minimumValue = slider25.min
+                cell.slider25.maximumValue = slider25.max
+                cell.slider25.value = slider25.valueForSlider
+                
+                let slider26 = audio.shared.getEQValues(id: cellId, slider: 26)
+                cell.slider26Title.text = slider26.name
+                cell.slider26Value.text = slider26.value
+                cell.slider26.minimumValue = slider26.min
+                cell.slider26.maximumValue = slider26.max
+                cell.slider26.value = slider26.valueForSlider
+                
+                let slider27 = audio.shared.getEQValues(id: cellId, slider: 27)
+                cell.slider27Title.text = slider27.name
+                cell.slider27Value.text = slider27.value
+                cell.slider27.minimumValue = slider27.min
+                cell.slider27.maximumValue = slider27.max
+                cell.slider27.value = slider27.valueForSlider
+                
+                let slider28 = audio.shared.getEQValues(id: cellId, slider: 28)
+                cell.slider28Title.text = slider28.name
+                cell.slider28Value.text = slider28.value
+                cell.slider28.minimumValue = slider28.min
+                cell.slider28.maximumValue = slider28.max
+                cell.slider28.value = slider28.valueForSlider
+                
+                let slider29 = audio.shared.getEQValues(id: cellId, slider: 29)
+                cell.slider29Title.text = slider9.name
+                cell.slider29Value.text = slider29.value
+                cell.slider29.minimumValue = slider29.min
+                cell.slider29.maximumValue = slider29.max
+                cell.slider29.value = slider29.valueForSlider
+                
+                let slider30 = audio.shared.getEQValues(id: cellId, slider: 30)
+                cell.slider30Title.text = slider30.name
+                cell.slider30Value.text = slider30.value
+                cell.slider30.minimumValue = slider30.min
+                cell.slider30.maximumValue = slider30.max
+                cell.slider30.value = slider30.valueForSlider
+                
+                let slider31 = audio.shared.getEQValues(id: cellId, slider: 31)
+                cell.slider31Title.text = slider31.name
+                cell.slider31Value.text = slider31.value
+                cell.slider31.minimumValue = slider31.min
+                cell.slider31.maximumValue = slider31.max
+                cell.slider31.value = slider31.valueForSlider
+                
+                returnCell = cell
+                
+            }
+            
+            
+        }
         return returnCell
     }
     

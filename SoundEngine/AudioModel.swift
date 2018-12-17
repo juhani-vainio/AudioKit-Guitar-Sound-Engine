@@ -114,6 +114,30 @@ class audio {
             
         case "eq10":
             if isOn == true {
+                audio.equalizerFilter3?.start()
+                audio.equalizerFilter6?.start()
+                audio.equalizerFilter9?.start()
+                audio.equalizerFilter12?.start()
+                audio.equalizerFilter15?.start()
+                audio.equalizerFilter18?.start()
+                audio.equalizerFilter21?.start()
+                audio.equalizerFilter24?.start()
+                audio.equalizerFilter27?.start()
+                audio.equalizerFilter30?.start()
+            } else {
+                audio.equalizerFilter3?.stop()
+                audio.equalizerFilter6?.stop()
+                audio.equalizerFilter9?.stop()
+                audio.equalizerFilter12?.stop()
+                audio.equalizerFilter15?.stop()
+                audio.equalizerFilter18?.stop()
+                audio.equalizerFilter21?.stop()
+                audio.equalizerFilter24?.stop()
+                audio.equalizerFilter27?.stop()
+                audio.equalizerFilter30?.stop()
+            }
+        case "eq31":
+            if isOn == true {
                 audio.equalizerFilter1?.start()
                 audio.equalizerFilter2?.start()
                 audio.equalizerFilter3?.start()
@@ -124,6 +148,29 @@ class audio {
                 audio.equalizerFilter8?.start()
                 audio.equalizerFilter9?.start()
                 audio.equalizerFilter10?.start()
+                
+                audio.equalizerFilter11?.start()
+                audio.equalizerFilter12?.start()
+                audio.equalizerFilter13?.start()
+                audio.equalizerFilter14?.start()
+                audio.equalizerFilter15?.start()
+                audio.equalizerFilter16?.start()
+                audio.equalizerFilter17?.start()
+                audio.equalizerFilter18?.start()
+                audio.equalizerFilter19?.start()
+                audio.equalizerFilter20?.start()
+                
+                audio.equalizerFilter21?.start()
+                audio.equalizerFilter22?.start()
+                audio.equalizerFilter23?.start()
+                audio.equalizerFilter24?.start()
+                audio.equalizerFilter25?.start()
+                audio.equalizerFilter26?.start()
+                audio.equalizerFilter27?.start()
+                audio.equalizerFilter28?.start()
+                audio.equalizerFilter29?.start()
+                audio.equalizerFilter30?.start()
+                audio.equalizerFilter31?.start()
             } else {
                 audio.equalizerFilter1?.stop()
                 audio.equalizerFilter2?.stop()
@@ -135,6 +182,29 @@ class audio {
                 audio.equalizerFilter8?.stop()
                 audio.equalizerFilter9?.stop()
                 audio.equalizerFilter10?.stop()
+                
+                audio.equalizerFilter11?.stop()
+                audio.equalizerFilter12?.stop()
+                audio.equalizerFilter13?.stop()
+                audio.equalizerFilter14?.stop()
+                audio.equalizerFilter15?.stop()
+                audio.equalizerFilter16?.stop()
+                audio.equalizerFilter17?.stop()
+                audio.equalizerFilter18?.stop()
+                audio.equalizerFilter19?.stop()
+                audio.equalizerFilter20?.stop()
+                
+                audio.equalizerFilter21?.stop()
+                audio.equalizerFilter22?.stop()
+                audio.equalizerFilter23?.stop()
+                audio.equalizerFilter24?.stop()
+                audio.equalizerFilter25?.stop()
+                audio.equalizerFilter26?.stop()
+                audio.equalizerFilter27?.stop()
+                audio.equalizerFilter28?.stop()
+                audio.equalizerFilter29?.stop()
+                audio.equalizerFilter30?.stop()
+                audio.equalizerFilter31?.stop()
             }
         default:
             break
@@ -147,48 +217,156 @@ class audio {
         return Float(booster.dB)
     }
  
-    func getEQValues(slider: Int) -> (min: Float, max: Float, valueForSlider: Float, value: String, name : String) {
+    func getEQValues(id: String, slider: Int) -> (min: Float, max: Float, valueForSlider: Float, value: String, name : String) {
         let min = -6
         let max = 6
         var valueForSlider = Float(0.69)
         var name = ""
         var value = ""
+        switch id {
+        case "eq10":
+            
+            switch slider {
+            case 1:
+                valueForSlider = convertWithBooster(gain: audio.equalizerFilter3!.gain)
+                name = String(audio.equalizerFilter3!.centerFrequency)
+            case 2:
+                valueForSlider = convertWithBooster(gain: audio.equalizerFilter6!.gain)
+                name = String(audio.equalizerFilter6!.centerFrequency)
+            case 3:
+                valueForSlider = convertWithBooster(gain: audio.equalizerFilter9!.gain)
+                name = String(audio.equalizerFilter9!.centerFrequency)
+            case 4:
+                valueForSlider = convertWithBooster(gain: audio.equalizerFilter12!.gain)
+                name = String(audio.equalizerFilter12!.centerFrequency)
+            case 5:
+                valueForSlider = convertWithBooster(gain: audio.equalizerFilter15!.gain)
+                name = String(audio.equalizerFilter15!.centerFrequency)
+            case 6:
+                valueForSlider = convertWithBooster(gain: audio.equalizerFilter18!.gain)
+                name = String(audio.equalizerFilter18!.centerFrequency)
+            case 7:
+                valueForSlider = convertWithBooster(gain: audio.equalizerFilter21!.gain)
+                name = String(audio.equalizerFilter21!.centerFrequency)
+            case 8:
+                valueForSlider = convertWithBooster(gain: audio.equalizerFilter24!.gain)
+                name = String(audio.equalizerFilter24!.centerFrequency)
+            case 9:
+                valueForSlider = convertWithBooster(gain: audio.equalizerFilter27!.gain)
+                name = String(audio.equalizerFilter27!.centerFrequency)
+            case 10:
+                valueForSlider = convertWithBooster(gain: audio.equalizerFilter30!.gain)
+                name = String(audio.equalizerFilter30!.centerFrequency)
+                
+            default: break
+            }
+            
+        case "eq31":
+            
+            switch slider {
+            case 1:
+                valueForSlider = convertWithBooster(gain: audio.equalizerFilter1!.gain)
+                name = String(audio.equalizerFilter1!.centerFrequency)
+            case 2:
+                valueForSlider = convertWithBooster(gain: audio.equalizerFilter2!.gain)
+                name = String(audio.equalizerFilter2!.centerFrequency)
+            case 3:
+                valueForSlider = convertWithBooster(gain: audio.equalizerFilter3!.gain)
+                name = String(audio.equalizerFilter3!.centerFrequency)
+            case 4:
+                valueForSlider = convertWithBooster(gain: audio.equalizerFilter4!.gain)
+                name = String(audio.equalizerFilter4!.centerFrequency)
+            case 5:
+                valueForSlider = convertWithBooster(gain: audio.equalizerFilter5!.gain)
+                name = String(audio.equalizerFilter5!.centerFrequency)
+            case 6:
+                valueForSlider = convertWithBooster(gain: audio.equalizerFilter6!.gain)
+                name = String(audio.equalizerFilter6!.centerFrequency)
+            case 7:
+                valueForSlider = convertWithBooster(gain: audio.equalizerFilter7!.gain)
+                name = String(audio.equalizerFilter7!.centerFrequency)
+            case 8:
+                valueForSlider = convertWithBooster(gain: audio.equalizerFilter8!.gain)
+                name = String(audio.equalizerFilter8!.centerFrequency)
+            case 9:
+                valueForSlider = convertWithBooster(gain: audio.equalizerFilter9!.gain)
+                name = String(audio.equalizerFilter9!.centerFrequency)
+            case 10:
+                valueForSlider = convertWithBooster(gain: audio.equalizerFilter10!.gain)
+                name = String(audio.equalizerFilter10!.centerFrequency)
+            case 11:
+                valueForSlider = convertWithBooster(gain: audio.equalizerFilter11!.gain)
+                name = String(audio.equalizerFilter11!.centerFrequency)
+            case 12:
+                valueForSlider = convertWithBooster(gain: audio.equalizerFilter12!.gain)
+                name = String(audio.equalizerFilter12!.centerFrequency)
+            case 13:
+                valueForSlider = convertWithBooster(gain: audio.equalizerFilter13!.gain)
+                name = String(audio.equalizerFilter13!.centerFrequency)
+            case 14:
+                valueForSlider = convertWithBooster(gain: audio.equalizerFilter14!.gain)
+                name = String(audio.equalizerFilter14!.centerFrequency)
+            case 15:
+                valueForSlider = convertWithBooster(gain: audio.equalizerFilter15!.gain)
+                name = String(audio.equalizerFilter15!.centerFrequency)
+            case 16:
+                valueForSlider = convertWithBooster(gain: audio.equalizerFilter16!.gain)
+                name = String(audio.equalizerFilter16!.centerFrequency)
+            case 17:
+                valueForSlider = convertWithBooster(gain: audio.equalizerFilter17!.gain)
+                name = String(audio.equalizerFilter17!.centerFrequency)
+            case 18:
+                valueForSlider = convertWithBooster(gain: audio.equalizerFilter18!.gain)
+                name = String(audio.equalizerFilter18!.centerFrequency)
+            case 19:
+                valueForSlider = convertWithBooster(gain: audio.equalizerFilter19!.gain)
+                name = String(audio.equalizerFilter19!.centerFrequency)
+            case 20:
+                valueForSlider = convertWithBooster(gain: audio.equalizerFilter20!.gain)
+                name = String(audio.equalizerFilter20!.centerFrequency)
+            case 21:
+                valueForSlider = convertWithBooster(gain: audio.equalizerFilter21!.gain)
+                name = String(audio.equalizerFilter21!.centerFrequency)
+            case 22:
+                valueForSlider = convertWithBooster(gain: audio.equalizerFilter22!.gain)
+                name = String(audio.equalizerFilter22!.centerFrequency)
+            case 23:
+                valueForSlider = convertWithBooster(gain: audio.equalizerFilter23!.gain)
+                name = String(audio.equalizerFilter23!.centerFrequency)
+            case 24:
+                valueForSlider = convertWithBooster(gain: audio.equalizerFilter24!.gain)
+                name = String(audio.equalizerFilter24!.centerFrequency)
+            case 25:
+                valueForSlider = convertWithBooster(gain: audio.equalizerFilter25!.gain)
+                name = String(audio.equalizerFilter25!.centerFrequency)
+            case 26:
+                valueForSlider = convertWithBooster(gain: audio.equalizerFilter26!.gain)
+                name = String(audio.equalizerFilter26!.centerFrequency)
+            case 27:
+                valueForSlider = convertWithBooster(gain: audio.equalizerFilter27!.gain)
+                name = String(audio.equalizerFilter27!.centerFrequency)
+            case 28:
+                valueForSlider = convertWithBooster(gain: audio.equalizerFilter28!.gain)
+                name = String(audio.equalizerFilter28!.centerFrequency)
+            case 29:
+                valueForSlider = convertWithBooster(gain: audio.equalizerFilter29!.gain)
+                name = String(audio.equalizerFilter29!.centerFrequency)
+            case 30:
+                valueForSlider = convertWithBooster(gain: audio.equalizerFilter30!.gain)
+                name = String(audio.equalizerFilter30!.centerFrequency)
+            case 31:
+                valueForSlider = convertWithBooster(gain: audio.equalizerFilter31!.gain)
+                name = String(audio.equalizerFilter31!.centerFrequency)
+                
+                
+            default: break
+            }
         
-        switch slider {
-        case 1:
-        valueForSlider = convertWithBooster(gain: audio.equalizerFilter1!.gain)
-        name = String(audio.equalizerFilter1!.centerFrequency)
-        case 2:
-            valueForSlider = convertWithBooster(gain: audio.equalizerFilter2!.gain)
-            name = String(audio.equalizerFilter2!.centerFrequency)
-        case 3:
-            valueForSlider = convertWithBooster(gain: audio.equalizerFilter3!.gain)
-            name = String(audio.equalizerFilter3!.centerFrequency)
-        case 4:
-            valueForSlider = convertWithBooster(gain: audio.equalizerFilter4!.gain)
-            name = String(audio.equalizerFilter4!.centerFrequency)
-        case 5:
-            valueForSlider = convertWithBooster(gain: audio.equalizerFilter5!.gain)
-            name = String(audio.equalizerFilter5!.centerFrequency)
-        case 6:
-            valueForSlider = convertWithBooster(gain: audio.equalizerFilter6!.gain)
-            name = String(audio.equalizerFilter6!.centerFrequency)
-        case 7:
-            valueForSlider = convertWithBooster(gain: audio.equalizerFilter7!.gain)
-            name = String(audio.equalizerFilter7!.centerFrequency)
-        case 8:
-            valueForSlider = convertWithBooster(gain: audio.equalizerFilter8!.gain)
-            name = String(audio.equalizerFilter8!.centerFrequency)
-        case 9:
-            valueForSlider = convertWithBooster(gain: audio.equalizerFilter9!.gain)
-            name = String(audio.equalizerFilter9!.centerFrequency)
-        case 10:
-            valueForSlider = convertWithBooster(gain: audio.equalizerFilter10!.gain)
-            name = String(audio.equalizerFilter10!.centerFrequency)
         
-       
-        default: break
+        default:
+            break
         }
+        
         
         var text = String(valueForSlider)
         text = String(text.prefix(4))
@@ -222,35 +400,143 @@ class audio {
            
             case 1:
                
+                audio.equalizerFilter3?.gain = booster.gain
+                
+            case 2:
+                audio.equalizerFilter6?.gain = booster.gain
+               
+            case 3:
+                audio.equalizerFilter9?.gain = booster.gain
+               
+            case 4:
+                audio.equalizerFilter12?.gain = booster.gain
+              
+            case 5:
+                audio.equalizerFilter15?.gain = booster.gain
+          
+            case 6:
+                audio.equalizerFilter18?.gain = booster.gain
+              
+            case 7:
+                audio.equalizerFilter21?.gain = booster.gain
+          
+            case 8:
+                audio.equalizerFilter24?.gain = booster.gain
+               
+            case 9:
+                audio.equalizerFilter27?.gain = booster.gain
+          
+            case 10:
+                audio.equalizerFilter30?.gain = booster.gain
+              
+                
+            default: break
+                
+            }
+            
+        case "eq31" :
+            let booster = AKBooster()
+            booster.dB = value
+            let text = String(value)
+            newValue = String(text.prefix(4)) + "dB"
+            switch slider {
+                
+            case 1:
+                
                 audio.equalizerFilter1?.gain = booster.gain
                 
             case 2:
                 audio.equalizerFilter2?.gain = booster.gain
-               
+                
             case 3:
                 audio.equalizerFilter3?.gain = booster.gain
-               
+                
             case 4:
                 audio.equalizerFilter4?.gain = booster.gain
-              
+                
             case 5:
                 audio.equalizerFilter5?.gain = booster.gain
-          
+                
             case 6:
                 audio.equalizerFilter6?.gain = booster.gain
-              
+                
             case 7:
                 audio.equalizerFilter7?.gain = booster.gain
-          
+                
             case 8:
                 audio.equalizerFilter8?.gain = booster.gain
-               
+                
             case 9:
                 audio.equalizerFilter9?.gain = booster.gain
-          
+                
             case 10:
                 audio.equalizerFilter10?.gain = booster.gain
-              
+                
+            case 11:
+                
+                audio.equalizerFilter11?.gain = booster.gain
+                
+            case 12:
+                audio.equalizerFilter12?.gain = booster.gain
+                
+            case 13:
+                audio.equalizerFilter13?.gain = booster.gain
+                
+            case 14:
+                audio.equalizerFilter14?.gain = booster.gain
+                
+            case 15:
+                audio.equalizerFilter15?.gain = booster.gain
+                
+            case 16:
+                audio.equalizerFilter16?.gain = booster.gain
+                
+            case 17:
+                audio.equalizerFilter17?.gain = booster.gain
+                
+            case 18:
+                audio.equalizerFilter18?.gain = booster.gain
+                
+            case 19:
+                audio.equalizerFilter19?.gain = booster.gain
+                
+            case 20:
+                audio.equalizerFilter20?.gain = booster.gain
+                
+            case 21:
+                
+                audio.equalizerFilter21?.gain = booster.gain
+                
+            case 22:
+                audio.equalizerFilter22?.gain = booster.gain
+                
+            case 23:
+                audio.equalizerFilter23?.gain = booster.gain
+                
+            case 24:
+                audio.equalizerFilter24?.gain = booster.gain
+                
+            case 25:
+                audio.equalizerFilter25?.gain = booster.gain
+                
+            case 26:
+                audio.equalizerFilter26?.gain = booster.gain
+                
+            case 27:
+                audio.equalizerFilter27?.gain = booster.gain
+                
+            case 28:
+                audio.equalizerFilter28?.gain = booster.gain
+                
+            case 29:
+                audio.equalizerFilter29?.gain = booster.gain
+                
+            case 30:
+                audio.equalizerFilter30?.gain = booster.gain
+                
+            case 31:
+                audio.equalizerFilter31?.gain = booster.gain
+                
                 
             default: break
                 
@@ -1607,7 +1893,17 @@ class audio {
     
     
     
-    
+    func switchEQBandwidthRatio(id: String) {
+        
+        if id == "eq10" {
+                audio.eqBandwidthRatio = 0.6
+        }
+        else if id == "eq31" {
+            audio.eqBandwidthRatio = 0.35
+        }
+        
+        setBandwidthsForEQ()
+    }
     
     
     
@@ -1821,7 +2117,28 @@ class audio {
         audio.equalizerFilter7?.connect(to: audio.equalizerFilter8!)
         audio.equalizerFilter8?.connect(to: audio.equalizerFilter9!)
         audio.equalizerFilter9?.connect(to: audio.equalizerFilter10!)
-        audio.equalizerFilter10?.connect(to: outputBooster!)
+        audio.equalizerFilter10?.connect(to: audio.equalizerFilter11!)
+        audio.equalizerFilter11?.connect(to: audio.equalizerFilter12!)
+        audio.equalizerFilter12?.connect(to: audio.equalizerFilter13!)
+        audio.equalizerFilter13?.connect(to: audio.equalizerFilter14!)
+        audio.equalizerFilter14?.connect(to: audio.equalizerFilter15!)
+        audio.equalizerFilter15?.connect(to: audio.equalizerFilter16!)
+        audio.equalizerFilter16?.connect(to: audio.equalizerFilter17!)
+        audio.equalizerFilter17?.connect(to: audio.equalizerFilter18!)
+        audio.equalizerFilter18?.connect(to: audio.equalizerFilter19!)
+        audio.equalizerFilter19?.connect(to: audio.equalizerFilter20!)
+        audio.equalizerFilter20?.connect(to: audio.equalizerFilter21!)
+        audio.equalizerFilter21?.connect(to: audio.equalizerFilter22!)
+        audio.equalizerFilter22?.connect(to: audio.equalizerFilter23!)
+        audio.equalizerFilter23?.connect(to: audio.equalizerFilter24!)
+        audio.equalizerFilter24?.connect(to: audio.equalizerFilter25!)
+        audio.equalizerFilter25?.connect(to: audio.equalizerFilter26!)
+        audio.equalizerFilter26?.connect(to: audio.equalizerFilter27!)
+        audio.equalizerFilter27?.connect(to: audio.equalizerFilter28!)
+        audio.equalizerFilter28?.connect(to: audio.equalizerFilter29!)
+        audio.equalizerFilter29?.connect(to: audio.equalizerFilter30!)
+        audio.equalizerFilter30?.connect(to: audio.equalizerFilter31!)
+        audio.equalizerFilter31?.connect(to: outputBooster!)
         
         outputBooster?.connect(to: outputAmplitudeTracker!)
         
@@ -1880,6 +2197,53 @@ class audio {
         audio.equalizerFilter8?.disconnectInput()
         audio.equalizerFilter9?.disconnectInput()
         audio.equalizerFilter10?.disconnectInput()
+        
+        audio.equalizerFilter11?.disconnectOutput()
+        audio.equalizerFilter12?.disconnectOutput()
+        audio.equalizerFilter13?.disconnectOutput()
+        audio.equalizerFilter14?.disconnectOutput()
+        audio.equalizerFilter15?.disconnectOutput()
+        audio.equalizerFilter16?.disconnectOutput()
+        audio.equalizerFilter17?.disconnectOutput()
+        audio.equalizerFilter18?.disconnectOutput()
+        audio.equalizerFilter19?.disconnectOutput()
+        audio.equalizerFilter20?.disconnectOutput()
+        
+        audio.equalizerFilter11?.disconnectInput()
+        audio.equalizerFilter12?.disconnectInput()
+        audio.equalizerFilter13?.disconnectInput()
+        audio.equalizerFilter14?.disconnectInput()
+        audio.equalizerFilter15?.disconnectInput()
+        audio.equalizerFilter16?.disconnectInput()
+        audio.equalizerFilter17?.disconnectInput()
+        audio.equalizerFilter18?.disconnectInput()
+        audio.equalizerFilter19?.disconnectInput()
+        audio.equalizerFilter20?.disconnectInput()
+        
+        audio.equalizerFilter21?.disconnectOutput()
+        audio.equalizerFilter22?.disconnectOutput()
+        audio.equalizerFilter23?.disconnectOutput()
+        audio.equalizerFilter24?.disconnectOutput()
+        audio.equalizerFilter25?.disconnectOutput()
+        audio.equalizerFilter26?.disconnectOutput()
+        audio.equalizerFilter27?.disconnectOutput()
+        audio.equalizerFilter28?.disconnectOutput()
+        audio.equalizerFilter29?.disconnectOutput()
+        audio.equalizerFilter30?.disconnectOutput()
+        
+        audio.equalizerFilter21?.disconnectInput()
+        audio.equalizerFilter22?.disconnectInput()
+        audio.equalizerFilter23?.disconnectInput()
+        audio.equalizerFilter24?.disconnectInput()
+        audio.equalizerFilter25?.disconnectInput()
+        audio.equalizerFilter26?.disconnectInput()
+        audio.equalizerFilter27?.disconnectInput()
+        audio.equalizerFilter28?.disconnectInput()
+        audio.equalizerFilter29?.disconnectInput()
+        audio.equalizerFilter30?.disconnectInput()
+        
+        audio.equalizerFilter31?.disconnectOutput()
+        audio.equalizerFilter31?.disconnectInput()
         
         
         // DISCONNECT MONITORS
@@ -1957,6 +2321,7 @@ class audio {
      static var autoWah: AKAutoWah?
     
     
+    static var eqBandwidthRatio = Double(0.6)
     static var equalizerFilter1: AKEqualizerFilter?
     static var equalizerFilter2: AKEqualizerFilter?
     static var equalizerFilter3: AKEqualizerFilter?
@@ -1967,8 +2332,30 @@ class audio {
     static var equalizerFilter8: AKEqualizerFilter?
     static var equalizerFilter9: AKEqualizerFilter?
     static var equalizerFilter10: AKEqualizerFilter?
+    
     static var equalizerFilter11: AKEqualizerFilter?
     static var equalizerFilter12: AKEqualizerFilter?
+    static var equalizerFilter13: AKEqualizerFilter?
+    static var equalizerFilter14: AKEqualizerFilter?
+    static var equalizerFilter15: AKEqualizerFilter?
+    static var equalizerFilter16: AKEqualizerFilter?
+    static var equalizerFilter17: AKEqualizerFilter?
+    static var equalizerFilter18: AKEqualizerFilter?
+    static var equalizerFilter19: AKEqualizerFilter?
+    static var equalizerFilter20: AKEqualizerFilter?
+    
+    static var equalizerFilter21: AKEqualizerFilter?
+    static var equalizerFilter22: AKEqualizerFilter?
+    static var equalizerFilter23: AKEqualizerFilter?
+    static var equalizerFilter24: AKEqualizerFilter?
+    static var equalizerFilter25: AKEqualizerFilter?
+    static var equalizerFilter26: AKEqualizerFilter?
+    static var equalizerFilter27: AKEqualizerFilter?
+    static var equalizerFilter28: AKEqualizerFilter?
+    static var equalizerFilter29: AKEqualizerFilter?
+    static var equalizerFilter30: AKEqualizerFilter?
+    static var equalizerFilter31: AKEqualizerFilter?
+    
     
     static var highPassFilter : AKHighPassFilter?
     static var lowPassFilter: AKLowPassFilter?
@@ -2020,7 +2407,39 @@ class audio {
     
     var finalFilters = [AKInput]()
     
-    
+    func setBandwidthsForEQ() {
+        audio.equalizerFilter1?.bandwidth = audio.equalizerFilter1!.centerFrequency * audio.eqBandwidthRatio
+        audio.equalizerFilter2?.bandwidth = audio.equalizerFilter2!.centerFrequency * audio.eqBandwidthRatio
+        audio.equalizerFilter3?.bandwidth = audio.equalizerFilter3!.centerFrequency * audio.eqBandwidthRatio
+        audio.equalizerFilter4?.bandwidth = audio.equalizerFilter4!.centerFrequency * audio.eqBandwidthRatio
+        audio.equalizerFilter5?.bandwidth = audio.equalizerFilter5!.centerFrequency * audio.eqBandwidthRatio
+        audio.equalizerFilter6?.bandwidth = audio.equalizerFilter6!.centerFrequency * audio.eqBandwidthRatio
+        audio.equalizerFilter7?.bandwidth = audio.equalizerFilter7!.centerFrequency * audio.eqBandwidthRatio
+        audio.equalizerFilter8?.bandwidth = audio.equalizerFilter8!.centerFrequency * audio.eqBandwidthRatio
+        audio.equalizerFilter9?.bandwidth = audio.equalizerFilter9!.centerFrequency * audio.eqBandwidthRatio
+        audio.equalizerFilter10?.bandwidth = audio.equalizerFilter10!.centerFrequency * audio.eqBandwidthRatio
+        audio.equalizerFilter11?.bandwidth = audio.equalizerFilter11!.centerFrequency * audio.eqBandwidthRatio
+        audio.equalizerFilter12?.bandwidth = audio.equalizerFilter12!.centerFrequency * audio.eqBandwidthRatio
+        audio.equalizerFilter13?.bandwidth = audio.equalizerFilter13!.centerFrequency * audio.eqBandwidthRatio
+        audio.equalizerFilter14?.bandwidth = audio.equalizerFilter14!.centerFrequency * audio.eqBandwidthRatio
+        audio.equalizerFilter15?.bandwidth = audio.equalizerFilter15!.centerFrequency * audio.eqBandwidthRatio
+        audio.equalizerFilter16?.bandwidth = audio.equalizerFilter16!.centerFrequency * audio.eqBandwidthRatio
+        audio.equalizerFilter17?.bandwidth = audio.equalizerFilter17!.centerFrequency * audio.eqBandwidthRatio
+        audio.equalizerFilter18?.bandwidth = audio.equalizerFilter18!.centerFrequency * audio.eqBandwidthRatio
+        audio.equalizerFilter19?.bandwidth = audio.equalizerFilter19!.centerFrequency * audio.eqBandwidthRatio
+        audio.equalizerFilter20?.bandwidth = audio.equalizerFilter20!.centerFrequency * audio.eqBandwidthRatio
+        audio.equalizerFilter21?.bandwidth = audio.equalizerFilter21!.centerFrequency * audio.eqBandwidthRatio
+        audio.equalizerFilter22?.bandwidth = audio.equalizerFilter22!.centerFrequency * audio.eqBandwidthRatio
+        audio.equalizerFilter23?.bandwidth = audio.equalizerFilter23!.centerFrequency * audio.eqBandwidthRatio
+        audio.equalizerFilter24?.bandwidth = audio.equalizerFilter24!.centerFrequency * audio.eqBandwidthRatio
+        audio.equalizerFilter25?.bandwidth = audio.equalizerFilter25!.centerFrequency * audio.eqBandwidthRatio
+        audio.equalizerFilter26?.bandwidth = audio.equalizerFilter26!.centerFrequency * audio.eqBandwidthRatio
+        audio.equalizerFilter27?.bandwidth = audio.equalizerFilter27!.centerFrequency * audio.eqBandwidthRatio
+        audio.equalizerFilter28?.bandwidth = audio.equalizerFilter28!.centerFrequency * audio.eqBandwidthRatio
+        audio.equalizerFilter29?.bandwidth = audio.equalizerFilter29!.centerFrequency * audio.eqBandwidthRatio
+        audio.equalizerFilter30?.bandwidth = audio.equalizerFilter30!.centerFrequency * audio.eqBandwidthRatio
+         audio.equalizerFilter31?.bandwidth = audio.equalizerFilter31!.centerFrequency * audio.eqBandwidthRatio
+    }
     
     func createEffects() {
         
@@ -2094,57 +2513,159 @@ class audio {
         
         
         audio.equalizerFilter1 = AKEqualizerFilter()
-        audio.equalizerFilter1?.bandwidth = 44.7
-        audio.equalizerFilter1?.centerFrequency = 32
+        audio.equalizerFilter1?.centerFrequency = 20
         audio.equalizerFilter1?.gain = 1
-        
+        audio.equalizerFilter1?.bandwidth = audio.equalizerFilter1!.centerFrequency * audio.eqBandwidthRatio
         
         audio.equalizerFilter2 = AKEqualizerFilter()
-        audio.equalizerFilter2?.bandwidth = 70.8
-        audio.equalizerFilter2?.centerFrequency = 64
+        audio.equalizerFilter2?.centerFrequency = 25
         audio.equalizerFilter2?.gain = 1
+        audio.equalizerFilter2?.bandwidth = audio.equalizerFilter2!.centerFrequency * audio.eqBandwidthRatio
         
         audio.equalizerFilter3 = AKEqualizerFilter()
-        audio.equalizerFilter3?.bandwidth = 141
-        audio.equalizerFilter3?.centerFrequency = 125
+        audio.equalizerFilter3?.centerFrequency = 31.5
         audio.equalizerFilter3?.gain = 1
+        audio.equalizerFilter3?.bandwidth = audio.equalizerFilter3!.centerFrequency * audio.eqBandwidthRatio
         
         audio.equalizerFilter4 = AKEqualizerFilter()
-        audio.equalizerFilter4?.bandwidth = 282
-        audio.equalizerFilter4?.centerFrequency = 250
+        audio.equalizerFilter4?.centerFrequency = 40
         audio.equalizerFilter4?.gain = 1
+        audio.equalizerFilter4?.bandwidth = audio.equalizerFilter4!.centerFrequency * audio.eqBandwidthRatio
         
         audio.equalizerFilter5 = AKEqualizerFilter()
-        audio.equalizerFilter5?.bandwidth = 562
-        audio.equalizerFilter5?.centerFrequency = 500
+        audio.equalizerFilter5?.centerFrequency = 50
         audio.equalizerFilter5?.gain = 1
+        audio.equalizerFilter5?.bandwidth = audio.equalizerFilter5!.centerFrequency * audio.eqBandwidthRatio
         
         audio.equalizerFilter6 = AKEqualizerFilter()
-        audio.equalizerFilter6?.bandwidth = 1112
-        audio.equalizerFilter6?.centerFrequency = 1000
+        audio.equalizerFilter6?.centerFrequency = 63
         audio.equalizerFilter6?.gain = 1
+        audio.equalizerFilter6?.bandwidth = audio.equalizerFilter6!.centerFrequency * audio.eqBandwidthRatio
         
         audio.equalizerFilter7 = AKEqualizerFilter()
-        audio.equalizerFilter7?.bandwidth = 2222
-        audio.equalizerFilter7?.centerFrequency = 2000
+        audio.equalizerFilter7?.centerFrequency = 80
         audio.equalizerFilter7?.gain = 1
+        audio.equalizerFilter7!.bandwidth = audio.equalizerFilter7!.centerFrequency * audio.eqBandwidthRatio
         
         audio.equalizerFilter8 = AKEqualizerFilter()
-        audio.equalizerFilter8?.bandwidth = 4444
-        audio.equalizerFilter8?.centerFrequency = 4000
+        audio.equalizerFilter8?.centerFrequency = 100
         audio.equalizerFilter8?.gain = 1
+        audio.equalizerFilter8?.bandwidth = audio.equalizerFilter8!.centerFrequency * audio.eqBandwidthRatio
         
         audio.equalizerFilter9 = AKEqualizerFilter()
-        audio.equalizerFilter9?.bandwidth = 8888
-        audio.equalizerFilter9?.centerFrequency = 8000
+        audio.equalizerFilter9?.centerFrequency = 125
         audio.equalizerFilter9?.gain = 1
+        audio.equalizerFilter9?.bandwidth = audio.equalizerFilter9!.centerFrequency * audio.eqBandwidthRatio
         
         audio.equalizerFilter10 = AKEqualizerFilter()
-        audio.equalizerFilter10?.bandwidth = 17000
-        audio.equalizerFilter10?.centerFrequency = 16000
+        audio.equalizerFilter10?.centerFrequency = 160
         audio.equalizerFilter10?.gain = 1
+        audio.equalizerFilter10?.bandwidth = audio.equalizerFilter10!.centerFrequency * audio.eqBandwidthRatio
         
-    
+        audio.equalizerFilter11 = AKEqualizerFilter()
+        audio.equalizerFilter11?.centerFrequency = 200
+        audio.equalizerFilter11?.gain = 1
+        audio.equalizerFilter11?.bandwidth = audio.equalizerFilter11!.centerFrequency * audio.eqBandwidthRatio
+        
+        audio.equalizerFilter12 = AKEqualizerFilter()
+        audio.equalizerFilter12?.centerFrequency = 250
+        audio.equalizerFilter12?.gain = 1
+        audio.equalizerFilter12?.bandwidth = audio.equalizerFilter12!.centerFrequency * audio.eqBandwidthRatio
+        
+        audio.equalizerFilter13 = AKEqualizerFilter()
+        audio.equalizerFilter13?.centerFrequency = 315
+        audio.equalizerFilter13?.gain = 1
+        audio.equalizerFilter13?.bandwidth = audio.equalizerFilter13!.centerFrequency * audio.eqBandwidthRatio
+        
+        audio.equalizerFilter14 = AKEqualizerFilter()
+        audio.equalizerFilter14?.centerFrequency = 400
+        audio.equalizerFilter14?.gain = 1
+        audio.equalizerFilter14?.bandwidth = audio.equalizerFilter14!.centerFrequency * audio.eqBandwidthRatio
+        
+        audio.equalizerFilter15 = AKEqualizerFilter()
+        audio.equalizerFilter15?.centerFrequency = 500
+        audio.equalizerFilter15?.gain = 1
+        audio.equalizerFilter15?.bandwidth = audio.equalizerFilter15!.centerFrequency * audio.eqBandwidthRatio
+        
+        audio.equalizerFilter16 = AKEqualizerFilter()
+        audio.equalizerFilter16?.centerFrequency = 630
+        audio.equalizerFilter16?.gain = 1
+        audio.equalizerFilter16?.bandwidth = audio.equalizerFilter16!.centerFrequency * audio.eqBandwidthRatio
+        
+        audio.equalizerFilter17 = AKEqualizerFilter()
+        audio.equalizerFilter17?.centerFrequency = 800
+        audio.equalizerFilter17?.gain = 1
+        audio.equalizerFilter17!.bandwidth = audio.equalizerFilter17!.centerFrequency * audio.eqBandwidthRatio
+        
+        audio.equalizerFilter18 = AKEqualizerFilter()
+        audio.equalizerFilter18?.centerFrequency = 1000
+        audio.equalizerFilter18?.gain = 1
+        audio.equalizerFilter18?.bandwidth = audio.equalizerFilter18!.centerFrequency * audio.eqBandwidthRatio
+        
+        audio.equalizerFilter19 = AKEqualizerFilter()
+        audio.equalizerFilter19?.centerFrequency = 1250
+        audio.equalizerFilter19?.gain = 1
+        audio.equalizerFilter19?.bandwidth = audio.equalizerFilter19!.centerFrequency * audio.eqBandwidthRatio
+        
+        audio.equalizerFilter20 = AKEqualizerFilter()
+        audio.equalizerFilter20?.centerFrequency = 1600
+        audio.equalizerFilter20?.gain = 1
+        audio.equalizerFilter20?.bandwidth = audio.equalizerFilter10!.centerFrequency * audio.eqBandwidthRatio
+        
+        audio.equalizerFilter21 = AKEqualizerFilter()
+        audio.equalizerFilter21?.centerFrequency = 2000
+        audio.equalizerFilter21?.gain = 1
+        audio.equalizerFilter21?.bandwidth = audio.equalizerFilter21!.centerFrequency * audio.eqBandwidthRatio
+        
+        audio.equalizerFilter22 = AKEqualizerFilter()
+        audio.equalizerFilter22?.centerFrequency = 2500
+        audio.equalizerFilter22?.gain = 1
+        audio.equalizerFilter22?.bandwidth = audio.equalizerFilter22!.centerFrequency * audio.eqBandwidthRatio
+        
+        audio.equalizerFilter23 = AKEqualizerFilter()
+        audio.equalizerFilter23?.centerFrequency = 3150
+        audio.equalizerFilter23?.gain = 1
+        audio.equalizerFilter23?.bandwidth = audio.equalizerFilter23!.centerFrequency * audio.eqBandwidthRatio
+        
+        audio.equalizerFilter24 = AKEqualizerFilter()
+        audio.equalizerFilter24?.centerFrequency = 4000
+        audio.equalizerFilter24?.gain = 1
+        audio.equalizerFilter24?.bandwidth = audio.equalizerFilter24!.centerFrequency * audio.eqBandwidthRatio
+        
+        audio.equalizerFilter25 = AKEqualizerFilter()
+        audio.equalizerFilter25?.centerFrequency = 5000
+        audio.equalizerFilter25?.gain = 1
+        audio.equalizerFilter25?.bandwidth = audio.equalizerFilter25!.centerFrequency * audio.eqBandwidthRatio
+        
+        audio.equalizerFilter26 = AKEqualizerFilter()
+        audio.equalizerFilter26?.centerFrequency = 6300
+        audio.equalizerFilter26?.gain = 1
+        audio.equalizerFilter26?.bandwidth = audio.equalizerFilter26!.centerFrequency * audio.eqBandwidthRatio
+        
+        audio.equalizerFilter27 = AKEqualizerFilter()
+        audio.equalizerFilter27?.centerFrequency = 8000
+        audio.equalizerFilter27?.gain = 1
+        audio.equalizerFilter27!.bandwidth = audio.equalizerFilter27!.centerFrequency * audio.eqBandwidthRatio
+        
+        audio.equalizerFilter28 = AKEqualizerFilter()
+        audio.equalizerFilter28?.centerFrequency = 10000
+        audio.equalizerFilter28?.gain = 1
+        audio.equalizerFilter28?.bandwidth = audio.equalizerFilter28!.centerFrequency * audio.eqBandwidthRatio
+        
+        audio.equalizerFilter29 = AKEqualizerFilter()
+        audio.equalizerFilter29?.centerFrequency = 12500
+        audio.equalizerFilter29?.gain = 1
+        audio.equalizerFilter29?.bandwidth = audio.equalizerFilter29!.centerFrequency * audio.eqBandwidthRatio
+        
+        audio.equalizerFilter30 = AKEqualizerFilter()
+        audio.equalizerFilter30?.centerFrequency = 16000
+        audio.equalizerFilter30?.gain = 1
+        audio.equalizerFilter30?.bandwidth = audio.equalizerFilter30!.centerFrequency * audio.eqBandwidthRatio
+        
+        audio.equalizerFilter31 = AKEqualizerFilter()
+        audio.equalizerFilter31?.centerFrequency = 20000
+        audio.equalizerFilter31?.gain = 1
+        audio.equalizerFilter31?.bandwidth = audio.equalizerFilter31!.centerFrequency * audio.eqBandwidthRatio
         
         
         audio.highPassFilter = AKHighPassFilter()

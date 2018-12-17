@@ -67,7 +67,28 @@ class helper {
             array.updateValue(String(audio.equalizerFilter8!.gain), forKey: "gain8")
             array.updateValue(String(audio.equalizerFilter9!.gain), forKey: "gain9")
             array.updateValue(String(audio.equalizerFilter10!.gain), forKey: "gain10")
-      
+        array.updateValue(String(audio.equalizerFilter11!.gain), forKey: "gain11")
+        array.updateValue(String(audio.equalizerFilter12!.gain), forKey: "gain12")
+        array.updateValue(String(audio.equalizerFilter13!.gain), forKey: "gain13")
+        array.updateValue(String(audio.equalizerFilter14!.gain), forKey: "gain14")
+        array.updateValue(String(audio.equalizerFilter15!.gain), forKey: "gain15")
+        array.updateValue(String(audio.equalizerFilter16!.gain), forKey: "gain16")
+        array.updateValue(String(audio.equalizerFilter17!.gain), forKey: "gain17")
+        array.updateValue(String(audio.equalizerFilter18!.gain), forKey: "gain18")
+        array.updateValue(String(audio.equalizerFilter19!.gain), forKey: "gain19")
+        array.updateValue(String(audio.equalizerFilter20!.gain), forKey: "gain20")
+        array.updateValue(String(audio.equalizerFilter21!.gain), forKey: "gain21")
+        array.updateValue(String(audio.equalizerFilter22!.gain), forKey: "gain22")
+        array.updateValue(String(audio.equalizerFilter23!.gain), forKey: "gain23")
+        array.updateValue(String(audio.equalizerFilter24!.gain), forKey: "gain24")
+        array.updateValue(String(audio.equalizerFilter25!.gain), forKey: "gain25")
+        array.updateValue(String(audio.equalizerFilter26!.gain), forKey: "gain26")
+        array.updateValue(String(audio.equalizerFilter27!.gain), forKey: "gain27")
+        array.updateValue(String(audio.equalizerFilter28!.gain), forKey: "gain28")
+        array.updateValue(String(audio.equalizerFilter29!.gain), forKey: "gain29")
+        array.updateValue(String(audio.equalizerFilter30!.gain), forKey: "gain30")
+      array.updateValue(String(audio.equalizerFilter31!.gain), forKey: "gain31")
+        
         return array
     }
     
@@ -373,7 +394,71 @@ class helper {
                 guard let gain10 = (effect as AnyObject).value(forKey: "gain10")! as? String else {
                     return
                 }
+                
+                guard let gain11 = (effect as AnyObject).value(forKey: "gain11")! as? String else {
+                    return
+                }
+                guard let gain12 = (effect as AnyObject).value(forKey: "gain12")! as? String else {
+                    return
+                }
+                guard let gain13 = (effect as AnyObject).value(forKey: "gain13")! as? String else {
+                    return
+                }
+                guard let gain14 = (effect as AnyObject).value(forKey: "gain14")! as? String else {
+                    return
+                }
+                guard let gain15 = (effect as AnyObject).value(forKey: "gain15")! as? String else {
+                    return
+                }
+                guard let gain16 = (effect as AnyObject).value(forKey: "gain16")! as? String else {
+                    return
+                }
+                guard let gain17 = (effect as AnyObject).value(forKey: "gain17")! as? String else {
+                    return
+                }
+                guard let gain18 = (effect as AnyObject).value(forKey: "gain18")! as? String else {
+                    return
+                }
+                guard let gain19 = (effect as AnyObject).value(forKey: "gain19")! as? String else {
+                    return
+                }
+                guard let gain20 = (effect as AnyObject).value(forKey: "gain20")! as? String else {
+                    return
+                }
              
+                guard let gain21 = (effect as AnyObject).value(forKey: "gain21")! as? String else {
+                    return
+                }
+                guard let gain22 = (effect as AnyObject).value(forKey: "gain22")! as? String else {
+                    return
+                }
+                guard let gain23 = (effect as AnyObject).value(forKey: "gain23")! as? String else {
+                    return
+                }
+                guard let gain24 = (effect as AnyObject).value(forKey: "gain24")! as? String else {
+                    return
+                }
+                guard let gain25 = (effect as AnyObject).value(forKey: "gain25")! as? String else {
+                    return
+                }
+                guard let gain26 = (effect as AnyObject).value(forKey: "gain26")! as? String else {
+                    return
+                }
+                guard let gain27 = (effect as AnyObject).value(forKey: "gain27")! as? String else {
+                    return
+                }
+                guard let gain28 = (effect as AnyObject).value(forKey: "gain28")! as? String else {
+                    return
+                }
+                guard let gain29 = (effect as AnyObject).value(forKey: "gain29")! as? String else {
+                    return
+                }
+                guard let gain30 = (effect as AnyObject).value(forKey: "gain30")! as? String else {
+                    return
+                }
+                guard let gain31 = (effect as AnyObject).value(forKey: "gain31")! as? String else {
+                    return
+                }
                 
                 audio.equalizerFilter1?.gain = Double(gain1)!
                 audio.equalizerFilter2?.gain = Double(gain2)!
@@ -385,6 +470,31 @@ class helper {
                 audio.equalizerFilter8?.gain = Double(gain8)!
                 audio.equalizerFilter9?.gain = Double(gain9)!
                 audio.equalizerFilter10?.gain = Double(gain10)!
+                
+                audio.equalizerFilter11?.gain = Double(gain11)!
+                audio.equalizerFilter12?.gain = Double(gain12)!
+                audio.equalizerFilter13?.gain = Double(gain13)!
+                audio.equalizerFilter14?.gain = Double(gain14)!
+                audio.equalizerFilter15?.gain = Double(gain15)!
+                audio.equalizerFilter16?.gain = Double(gain16)!
+                audio.equalizerFilter17?.gain = Double(gain17)!
+                audio.equalizerFilter18?.gain = Double(gain18)!
+                audio.equalizerFilter19?.gain = Double(gain19)!
+                audio.equalizerFilter20?.gain = Double(gain20)!
+                
+                audio.equalizerFilter21?.gain = Double(gain21)!
+                audio.equalizerFilter22?.gain = Double(gain22)!
+                audio.equalizerFilter23?.gain = Double(gain23)!
+                audio.equalizerFilter24?.gain = Double(gain24)!
+                audio.equalizerFilter25?.gain = Double(gain25)!
+                audio.equalizerFilter26?.gain = Double(gain26)!
+                audio.equalizerFilter27?.gain = Double(gain27)!
+                audio.equalizerFilter28?.gain = Double(gain28)!
+                audio.equalizerFilter29?.gain = Double(gain29)!
+                audio.equalizerFilter30?.gain = Double(gain30)!
+                audio.equalizerFilter31?.gain = Double(gain31)!
+                
+       
                 
             case "bitCrusher" :
                 guard let sampleRate = (effect as AnyObject).value(forKey: "sampleRate")! as? String else {

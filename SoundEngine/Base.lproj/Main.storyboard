@@ -542,20 +542,20 @@
                                         <viewLayoutGuide key="safeArea" id="r6o-hm-PQG"/>
                                     </view>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="tsM-lv-a1B">
-                                        <rect key="frame" x="0.0" y="110" width="272" height="658"/>
+                                        <rect key="frame" x="0.0" y="110" width="0.0" height="658"/>
                                         <color key="backgroundColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" textLabel="OEr-cA-Leg" style="IBUITableViewCellStyleDefault" id="FyD-93-1FB">
-                                                <rect key="frame" x="0.0" y="28" width="272" height="44"/>
+                                                <rect key="frame" x="0.0" y="28" width="0.0" height="44"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="FyD-93-1FB" id="02Q-9B-EpZ">
-                                                    <rect key="frame" x="0.0" y="0.0" width="272" height="43.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="0.0" height="43.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="OEr-cA-Leg">
-                                                            <rect key="frame" x="15" y="0.0" width="242" height="43.5"/>
+                                                            <rect key="frame" x="-15" y="0.0" width="30" height="43.5"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
@@ -572,6 +572,9 @@
                                     <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="6i5-7n-FuP">
                                         <rect key="frame" x="0.0" y="110" width="272" height="658"/>
                                         <color key="backgroundColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="272" id="90b-B9-JB1"/>
+                                        </constraints>
                                         <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <prototypes>
@@ -598,11 +601,8 @@
                                         <sections/>
                                     </tableView>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Uc0-Ys-8yK">
-                                        <rect key="frame" x="272" y="110" width="752" height="658"/>
+                                        <rect key="frame" x="0.0" y="110" width="1024" height="658"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" secondItem="Uc0-Ys-8yK" secondAttribute="height" multiplier="8:7" id="f2G-7n-lZi"/>
-                                        </constraints>
                                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="arZ-N8-x2l">
                                             <size key="itemSize" width="50" height="50"/>
                                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -799,7 +799,6 @@
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="rsv-eE-YLr" firstAttribute="bottom" secondItem="6as-gz-2aZ" secondAttribute="bottom" constant="25" id="1ak-Uj-kiX"/>
-                                    <constraint firstItem="6i5-7n-FuP" firstAttribute="trailing" secondItem="Uc0-Ys-8yK" secondAttribute="leading" id="49M-BG-mLp"/>
                                     <constraint firstItem="rsv-eE-YLr" firstAttribute="trailing" secondItem="Uc0-Ys-8yK" secondAttribute="trailing" id="9gq-u4-HNj"/>
                                     <constraint firstItem="6i5-7n-FuP" firstAttribute="leading" secondItem="rsv-eE-YLr" secondAttribute="leading" id="AAW-eD-f0n"/>
                                     <constraint firstItem="rsv-eE-YLr" firstAttribute="bottom" secondItem="Uc0-Ys-8yK" secondAttribute="bottom" id="D1Q-V7-rO3"/>
@@ -814,6 +813,7 @@
                                     <constraint firstItem="rsv-eE-YLr" firstAttribute="bottom" secondItem="6i5-7n-FuP" secondAttribute="bottom" id="M3U-Yx-YPZ"/>
                                     <constraint firstItem="ufS-MQ-peE" firstAttribute="leading" secondItem="rsv-eE-YLr" secondAttribute="leading" constant="261" id="MXB-Mg-HyK"/>
                                     <constraint firstItem="Uc0-Ys-8yK" firstAttribute="leading" secondItem="tsM-lv-a1B" secondAttribute="trailing" id="Oho-Vw-uex"/>
+                                    <constraint firstItem="Uc0-Ys-8yK" firstAttribute="leading" secondItem="rsv-eE-YLr" secondAttribute="leading" id="Pzf-kn-Ne8"/>
                                     <constraint firstItem="cbj-b9-PyT" firstAttribute="top" secondItem="rsv-eE-YLr" secondAttribute="top" id="SLf-4m-6gs"/>
                                     <constraint firstItem="rsv-eE-YLr" firstAttribute="bottom" secondItem="tsM-lv-a1B" secondAttribute="bottom" id="Skv-pN-yAZ"/>
                                     <constraint firstItem="ufS-MQ-peE" firstAttribute="centerY" secondItem="6as-gz-2aZ" secondAttribute="centerY" id="T5R-cg-1Df"/>

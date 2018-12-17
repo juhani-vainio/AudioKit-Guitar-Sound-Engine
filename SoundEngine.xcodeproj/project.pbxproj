@@ -37,6 +37,8 @@
 		579368D3219EF91400227AF8 /* TableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 579368D1219EF91400227AF8 /* TableViewCell.xib */; };
 		57A631EA21A965B5000069FA /* DoubleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A631E821A965B5000069FA /* DoubleTableViewCell.swift */; };
 		57A631EB21A965B5000069FA /* DoubleTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 57A631E921A965B5000069FA /* DoubleTableViewCell.xib */; };
+		57DD133521C7E1EE00506663 /* EQ31CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57DD133321C7E1EE00506663 /* EQ31CollectionViewCell.swift */; };
+		57DD133621C7E1EE00506663 /* EQ31CollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 57DD133421C7E1EE00506663 /* EQ31CollectionViewCell.xib */; };
 		57E397A821A96F8500F2871A /* TripleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E397A621A96F8500F2871A /* TripleTableViewCell.swift */; };
 		57E397A921A96F8500F2871A /* TripleTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 57E397A721A96F8500F2871A /* TripleTableViewCell.xib */; };
 		57E397AC21A96FCF00F2871A /* QuatroTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E397AA21A96FCF00F2871A /* QuatroTableViewCell.swift */; };
@@ -111,6 +113,8 @@
 		579368D1219EF91400227AF8 /* TableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TableViewCell.xib; sourceTree = "<group>"; };
 		57A631E821A965B5000069FA /* DoubleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleTableViewCell.swift; sourceTree = "<group>"; };
 		57A631E921A965B5000069FA /* DoubleTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DoubleTableViewCell.xib; sourceTree = "<group>"; };
+		57DD133321C7E1EE00506663 /* EQ31CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EQ31CollectionViewCell.swift; sourceTree = "<group>"; };
+		57DD133421C7E1EE00506663 /* EQ31CollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EQ31CollectionViewCell.xib; sourceTree = "<group>"; };
 		57E397A621A96F8500F2871A /* TripleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripleTableViewCell.swift; sourceTree = "<group>"; };
 		57E397A721A96F8500F2871A /* TripleTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TripleTableViewCell.xib; sourceTree = "<group>"; };
 		57E397AA21A96FCF00F2871A /* QuatroTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuatroTableViewCell.swift; sourceTree = "<group>"; };
@@ -273,6 +277,8 @@
 				57E397B721AC15D200F2871A /* LastCollectionViewCell.xib */,
 				5705EFE1219DDF90005EF724 /* EQCollectionViewCell.swift */,
 				5705EFE2219DDF90005EF724 /* EQCollectionViewCell.xib */,
+				57DD133321C7E1EE00506663 /* EQ31CollectionViewCell.swift */,
+				57DD133421C7E1EE00506663 /* EQ31CollectionViewCell.xib */,
 				5705EFED219DE7D6005EF724 /* SoundsCollectionViewCell.swift */,
 				5705EFEE219DE7D6005EF724 /* SoundsCollectionViewCell.xib */,
 				57E397B321AC15BA00F2871A /* ParallaxFlowLayout.swift */,
@@ -417,6 +423,7 @@
 				578B32D221BE9537002A7EEE /* HexaTableViewCell.xib in Resources */,
 				578B32CE21BE9522002A7EEE /* PentaTableViewCell.xib in Resources */,
 				57075ECC219C490C003F2D4F /* Main.storyboard in Resources */,
+				57DD133621C7E1EE00506663 /* EQ31CollectionViewCell.xib in Resources */,
 				57A631EB21A965B5000069FA /* DoubleTableViewCell.xib in Resources */,
 				579368D3219EF91400227AF8 /* TableViewCell.xib in Resources */,
 				578B32DA21BE9558002A7EEE /* OctaTableViewCell.xib in Resources */,
@@ -509,6 +516,7 @@
 				578F421521A5708A003076EC /* Colors.swift in Sources */,
 				578B32D121BE9537002A7EEE /* HexaTableViewCell.swift in Sources */,
 				5705EFE3219DDF90005EF724 /* EQCollectionViewCell.swift in Sources */,
+				57DD133521C7E1EE00506663 /* EQ31CollectionViewCell.swift in Sources */,
 				57075ECF219C490C003F2D4F /* SoundEngine.xcdatamodeld in Sources */,
 				5705EFEF219DE7D6005EF724 /* SoundsCollectionViewCell.swift in Sources */,
 				578B32D521BE9548002A7EEE /* HeptaTableViewCell.swift in Sources */,
