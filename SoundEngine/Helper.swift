@@ -10,6 +10,8 @@ import Foundation
 import UIKit
 
 class helper {
+    
+    
     // COLLECTION VIEW LAYOUTS
     static var activeLayout = ""
     static var smallLayoutSize = CGFloat()

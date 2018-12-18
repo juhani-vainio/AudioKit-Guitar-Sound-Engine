@@ -2149,16 +2149,56 @@ class audio {
            // AudioKit.output = inputMixer
         }
         
-        // START AUDIOKIT
-        do {
-            try AudioKit.start()
-            print("START AUDIOKIT")
-        } catch {
-            print("Could not start AudioKit")
+        if initialStart == true {
+            // silence before starting to reduce unnesseccary sounds
+            micVolume = mic!.volume
+            mic?.volume = 0
+            // START AUDIOKIT
+            do {
+                
+                try AudioKit.start()
+                
+                print("START AUDIOKIT")
+            } catch {
+                print("Could not start AudioKit")
+            }
+            turnUpVolume()
+            
         }
+        else {
+            // RESTART AUDIOKIT
+            do {
+                
+                try AudioKit.start()
+                
+                print("START AUDIOKIT")
+            } catch {
+                print("Could not start AudioKit")
+            }
+        }
+        
+       
+       
+     
         
     }
     
+    func turnUpVolume() {
+   
+        let timer = Timer.scheduledTimer(withTimeInterval: 0.05, repeats: true) { timer in
+            print("Waiting for audiokit to start... .... .....")
+            if AudioKit.engine.isRunning {
+                sleep(1)
+                self.mic?.volume = self.micVolume
+               self.initialStart = false
+                print("Audiokit did start ! !! !!!")
+                timer.invalidate()
+            }
+
+        }
+        timer.fire()
+        
+    }
     
     
     
@@ -2259,6 +2299,9 @@ class audio {
         audio.selectedAudioInputs.removeAll()
         startAudio()
     }
+    
+    var initialStart = true
+    var micVolume = Double()
     
     // MONITORS
     var outputAmplitudeTracker : AKAmplitudeTracker?
@@ -2440,21 +2483,22 @@ class audio {
         audio.equalizerFilter30?.bandwidth = audio.equalizerFilter30!.centerFrequency * audio.eqBandwidthRatio
          audio.equalizerFilter31?.bandwidth = audio.equalizerFilter31!.centerFrequency * audio.eqBandwidthRatio
     }
+  
     
     func createEffects() {
         
         // MONITORS
         outputAmplitudeTracker = AKAmplitudeTracker()
-        outputAmplitudeTracker?.start()
+        
         micTracker = AKMicrophoneTracker()
-        micTracker?.start()
+        
         
         // UTILITIES
         mic = AKMicrophone()
         outputBooster = AKBooster()
-        outputBooster?.start()
+        
         inputBooster = AKBooster()
-        inputBooster?.start()
+        
         
         // MIXERS
         inputMixer = AKMixer()
@@ -2464,12 +2508,7 @@ class audio {
         mixerForThirdList = AKMixer()
         outputMixer = AKMixer()
         
-        mixerForSecondList?.start()
-        inputMixer?.start()
-        mixerForFirstList?.start()
-        mixerForThirdList?.start()
-        filterMixer?.start()
-        outputMixer?.start()
+     
         
         // EFFECTS
         // Delay
@@ -2672,10 +2711,10 @@ class audio {
         audio.lowPassFilter = AKLowPassFilter()
         
         audio.toneFilter = AKToneFilter()
-        audio.toneFilter?.start()
+        //audio.toneFilter?.start()
         
         audio.masterBooster = AKBooster()
-        audio.masterBooster?.start()
+        //audio.masterBooster?.start()
         
         
         
@@ -2707,6 +2746,19 @@ class audio {
         audio.dcBlock = AKDCBlock()
         audio.stringResonator = AKStringResonator()
         audio.combFilterReverb = AKCombFilterReverb()
+        
+        
+        
+        
+        
+        outputAmplitudeTracker?.start()
+        micTracker?.start()
+        
+        outputBooster?.start()
+        inputBooster?.start()
+        
+        //inputMixer?.start()
+        outputMixer?.start()
         
     }
 
