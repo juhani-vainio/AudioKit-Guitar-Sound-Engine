@@ -56,7 +56,7 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
         createCollectionViews()
         createTableViews()
         
-        
+        audio.shared.audioKitSettings()
         
         audio.shared.startAudio()
         interfaceSetup()

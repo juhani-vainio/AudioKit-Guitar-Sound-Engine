@@ -1930,7 +1930,6 @@ class audio {
     
     func startAudio() {
         
-        audioKitSettings()
         createInputListForSound()
        // createEffectList()
       //  setEffectValues(initial: true)
@@ -2025,7 +2024,7 @@ class audio {
         case "tanhDistortion": audio.selectedAudioInputs.append(audio.tanhDistortion!)
         case "ringModulator": audio.selectedAudioInputs.append(audio.ringModulator!)
         case "flanger": audio.selectedAudioInputs.append(audio.flanger!)
-        case "phaser": audio.selectedAudioInputs.append(audio.ringModulator!)
+        case "phaser": audio.selectedAudioInputs.append(audio.phaser!)
         case "chorus": audio.selectedAudioInputs.append(audio.chorus!)
         case "compressor": audio.selectedAudioInputs.append(audio.compressor!)
         case "dynamicsProcessor": audio.selectedAudioInputs.append(audio.dynamicsProcessor!)
@@ -2496,16 +2495,11 @@ class audio {
         // UTILITIES
         mic = AKMicrophone()
         outputBooster = AKBooster()
-        
         inputBooster = AKBooster()
         
         
         // MIXERS
         inputMixer = AKMixer()
-        filterMixer = AKMixer()
-        mixerForFirstList = AKMixer()
-        mixerForSecondList = AKMixer()
-        mixerForThirdList = AKMixer()
         outputMixer = AKMixer()
         
      
@@ -2751,6 +2745,8 @@ class audio {
         
         
         
+        // start essential units
+        
         outputAmplitudeTracker?.start()
         micTracker?.start()
         
@@ -2759,6 +2755,47 @@ class audio {
         
         //inputMixer?.start()
         outputMixer?.start()
+        
+        // stop all effects
+     
+        // Delay
+        audio.delay?.stop()
+        audio.variableDelay?.stop()
+        
+        // Dynamics
+        audio.dynaRageCompressor?.stop()
+        audio.compressor?.stop()
+        audio.dynamicsProcessor?.stop()
+        audio.dynamicRangeCompressor?.stop()
+        
+        // Distorion effects
+        audio.bitCrusher?.stop()
+        audio.clipper?.stop()
+        audio.tanhDistortion?.stop()
+        audio.decimator?.stop()
+        audio.ringModulator?.stop()
+        
+        // Modulation effects
+        audio.flanger?.stop()
+        audio.phaser?.stop()
+        audio.chorus?.stop()
+        
+        
+        // Reverb
+        audio.chowningReverb?.stop()
+        audio.costelloReverb?.stop()
+        audio.flatFrequencyResponseReverb?.stop()
+        audio.reverb?.stop()
+        audio.reverb2?.stop()
+        
+        // Simulators
+        audio.rhinoGuitarProcessor?.stop()
+        
+        // tremolo
+        audio.tremolo?.stop()
+        
+        // FILTERS
+        audio.autoWah?.stop()
         
     }
 
