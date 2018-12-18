@@ -280,6 +280,7 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
         var cellType = String()
         var cellIsLast = Bool()
         var cellId = String()
+        var cellIsSpecial = Bool()
         
         if tableView == savedSoundsTableView{
             cellTitle = Collections.savedSounds[indexPath.row]
@@ -290,7 +291,12 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
             cellType = audio.selectedEffectsData[indexPath.row].type
             cellIsLast = audio.selectedEffectsData.endIndex - 1 == indexPath.row
             cellId = audio.selectedEffectsData[indexPath.row].id
-            
+            if Collections.specialEffects.contains(cellId) {
+                cellIsSpecial = true
+            }
+            else {
+                cellIsSpecial = false
+            }
         }
     
         else {
@@ -347,9 +353,19 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
                     }
                     cell.controllerHeight.constant = CGFloat(50)
                     cell.controllersView.isHidden = false
+                    if cellIsSpecial {
+                        cell.specialViewHeight.constant = CGFloat(50)
+                        cell.specialView.isHidden = false
+                    }
+                    else {
+                        cell.specialViewHeight.constant = CGFloat(0)
+                        cell.specialView.isHidden = true
+                    }
                 } else {
                     cell.controllerHeight.constant = CGFloat(0)
                     cell.controllersView.isHidden = true
+                    cell.specialViewHeight.constant = CGFloat(0)
+                    cell.specialView.isHidden = true
                 }
                 
                 returnCell = cell
@@ -398,10 +414,21 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
                     }
                     cell.controllerHeight.constant = CGFloat(2 * 50)
                     cell.controllersView.isHidden = false
+                    if cellIsSpecial {
+                        cell.specialViewHeight.constant = CGFloat(50)
+                        cell.specialView.isHidden = false
+                    }
+                    else {
+                        cell.specialViewHeight.constant = CGFloat(0)
+                        cell.specialView.isHidden = true
+                    }
                 } else {
                     cell.controllerHeight.constant = CGFloat(0)
                     cell.controllersView.isHidden = true
+                    cell.specialViewHeight.constant = CGFloat(0)
+                    cell.specialView.isHidden = true
                 }
+                
                 returnCell = cell
                 
             case "3":
@@ -459,10 +486,21 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
                     }
                     cell.controllerHeight.constant = CGFloat(3 * 50)
                     cell.controllersView.isHidden = false
+                    if cellIsSpecial {
+                        cell.specialViewHeight.constant = CGFloat(50)
+                        cell.specialView.isHidden = false
+                    }
+                    else {
+                        cell.specialViewHeight.constant = CGFloat(0)
+                        cell.specialView.isHidden = true
+                    }
                 } else {
                     cell.controllerHeight.constant = CGFloat(0)
                     cell.controllersView.isHidden = true
+                    cell.specialViewHeight.constant = CGFloat(0)
+                    cell.specialView.isHidden = true
                 }
+                
                 returnCell = cell
                 
             case "4":
@@ -521,6 +559,7 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
                     }
                     
                 }
+                
                 if cellOpened == true {
                     if cellIsLast {
                         cell.bottomConstraint.constant = 8
@@ -529,10 +568,22 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
                     }
                     cell.controllerHeight.constant = CGFloat(4 * 50)
                     cell.controllersView.isHidden = false
-                } else {
+                    if cellIsSpecial {
+                        cell.specialViewHeight.constant = CGFloat(50)
+                        cell.specialView.isHidden = false
+                    }
+                    else {
+                        cell.specialViewHeight.constant = CGFloat(0)
+                        cell.specialView.isHidden = true
+                    }
+                }
+                else {
                     cell.controllerHeight.constant = CGFloat(0)
                     cell.controllersView.isHidden = true
+                    cell.specialViewHeight.constant = CGFloat(0)
+                    cell.specialView.isHidden = true
                 }
+                
                 returnCell = cell
                 
             case "5":
@@ -608,10 +659,21 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
                     }
                     cell.controllerHeight.constant = CGFloat(5 * 50)
                     cell.controllersView.isHidden = false
+                    if cellIsSpecial {
+                        cell.specialViewHeight.constant = CGFloat(50)
+                        cell.specialView.isHidden = false
+                    }
+                    else {
+                        cell.specialViewHeight.constant = CGFloat(0)
+                        cell.specialView.isHidden = true
+                    }
                 } else {
                     cell.controllerHeight.constant = CGFloat(0)
                     cell.controllersView.isHidden = true
+                    cell.specialViewHeight.constant = CGFloat(0)
+                    cell.specialView.isHidden = true
                 }
+                
                 returnCell = cell
                 
             case "6":
@@ -697,10 +759,21 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
                     }
                     cell.controllerHeight.constant = CGFloat(6 * 50)
                     cell.controllersView.isHidden = false
+                    if cellIsSpecial == true {
+                        cell.specialViewHeight.constant = CGFloat(50)
+                        cell.specialView.isHidden = false
+                    }
+                    else {
+                        cell.specialViewHeight.constant = CGFloat(0)
+                        cell.specialView.isHidden = true
+                    }
                 } else {
                     cell.controllerHeight.constant = CGFloat(0)
                     cell.controllersView.isHidden = true
+                    cell.specialViewHeight.constant = CGFloat(0)
+                    cell.specialView.isHidden = true
                 }
+                
                 returnCell = cell
                 
             case "7":
@@ -796,10 +869,21 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
                     }
                     cell.controllerHeight.constant = CGFloat(7 * 50)
                     cell.controllersView.isHidden = false
+                    if cellIsSpecial {
+                        cell.specialViewHeight.constant = CGFloat(50)
+                        cell.specialView.isHidden = false
+                    }
+                    else {
+                        cell.specialViewHeight.constant = CGFloat(0)
+                        cell.specialView.isHidden = true
+                    }
                 } else {
                     cell.controllerHeight.constant = CGFloat(0)
                     cell.controllersView.isHidden = true
+                    cell.specialViewHeight.constant = CGFloat(0)
+                    cell.specialView.isHidden = true
                 }
+                
                 returnCell = cell
                 
             case "8":
@@ -905,10 +989,21 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
                     }
                     cell.controllerHeight.constant = CGFloat(8 * 50)
                     cell.controllersView.isHidden = false
+                    if cellIsSpecial {
+                        cell.specialViewHeight.constant = CGFloat(50)
+                        cell.specialView.isHidden = false
+                    }
+                    else {
+                        cell.specialViewHeight.constant = CGFloat(0)
+                        cell.specialView.isHidden = true
+                    }
                 } else {
                     cell.controllerHeight.constant = CGFloat(0)
                     cell.controllersView.isHidden = true
+                    cell.specialViewHeight.constant = CGFloat(0)
+                    cell.specialView.isHidden = true
                 }
+                
                 returnCell = cell
                 
             default:
@@ -937,18 +1032,11 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
                     }
                     
                 }
-                if cellOpened == true {
-                    if cellIsLast {
-                        cell.bottomConstraint.constant = 8
-                    } else {
-                        cell.bottomConstraint.constant = 0
-                    }
-                    cell.controllerHeight.constant = CGFloat(50)
-                    cell.controllersView.isHidden = false
-                } else {
                     cell.controllerHeight.constant = CGFloat(0)
                     cell.controllersView.isHidden = true
-                }
+                    cell.specialViewHeight.constant = CGFloat(0)
+                    cell.specialView.isHidden = true
+                
                 
                 returnCell = cell
             }

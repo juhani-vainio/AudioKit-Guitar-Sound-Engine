@@ -13,9 +13,14 @@ class TableViewCell: UITableViewCell {
     var id = String()
     
     var sliders = [String]()
-
   
+    @IBOutlet weak var specialSwitch: UISwitch!
+    @IBOutlet weak var specialTitle: UILabel!
+    @IBOutlet weak var specialViewArea: UIView!
+    @IBOutlet weak var specialViewHeight: NSLayoutConstraint!
+    @IBOutlet weak var specialView: UIView!
     @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
+    
     @IBOutlet weak var sliderValue: UILabel!
     @IBOutlet weak var sliderTitle: UILabel!
     @IBOutlet weak var slider: UISlider!
@@ -33,10 +38,23 @@ class TableViewCell: UITableViewCell {
         sliderValue.textColor = interface.text
         controllersView.backgroundColor = interface.heading
         controllersView.layer.cornerRadius = 8
+    
         onOffButton.backgroundColor = UIColor.clear
         slider.addTarget(self, action: #selector(valueChanged), for: .valueChanged)
         onOffButton.addTarget(self, action: #selector(toggleOnOff), for: .touchDown)
         
+        specialViewArea.backgroundColor = interface.heading
+        specialViewArea.layer.cornerRadius = 8
+        specialSwitch.onTintColor = interface.positive
+        specialSwitch.transform = CGAffineTransform(scaleX: 0.7, y: 0.7);
+        // specialSwitch.tintColor = interface.negative
+        specialTitle.textColor = interface.text
+        specialSwitch.addTarget(self, action: #selector(switchValueChanged), for: .valueChanged)
+        
+    }
+    
+    @objc func switchValueChanged(toggle: UISwitch) {
+        audio.shared.toggleOnOff(id: self.id, isOn: toggle.isOn)
     }
     
     func setOnOff() {
@@ -53,6 +71,8 @@ class TableViewCell: UITableViewCell {
         }
         
     }
+    
+
     
     @objc func toggleOnOff() {
         let text = audio.shared.changeValues(id:self.id, slider: 0, value: 0)

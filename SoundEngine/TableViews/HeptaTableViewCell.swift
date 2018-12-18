@@ -12,6 +12,12 @@ class HeptaTableViewCell: UITableViewCell {
     
     var id = String()
     
+    @IBOutlet weak var specialSwitch: UISwitch!
+    @IBOutlet weak var specialTitle: UILabel!
+    @IBOutlet weak var specialViewArea: UIView!
+    @IBOutlet weak var specialViewHeight: NSLayoutConstraint!
+    @IBOutlet weak var specialView: UIView!
+    
     @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
     var sliders = [String]()
     
@@ -76,6 +82,18 @@ class HeptaTableViewCell: UITableViewCell {
         
         onOffButton.addTarget(self, action: #selector(toggleOnOff), for: .touchDown)
         
+        specialViewArea.backgroundColor = interface.heading
+        specialViewArea.layer.cornerRadius = 8
+        specialSwitch.onTintColor = interface.positive
+        specialSwitch.transform = CGAffineTransform(scaleX: 0.7, y: 0.7);
+        // specialSwitch.tintColor = interface.negative
+        specialTitle.textColor = interface.text
+        specialSwitch.addTarget(self, action: #selector(switchValueChanged), for: .valueChanged)
+        
+    }
+    
+    @objc func switchValueChanged(toggle: UISwitch) {
+        audio.shared.toggleOnOff(id: self.id, isOn: toggle.isOn)
     }
     
     func setOnOff() {

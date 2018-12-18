@@ -12,6 +12,7 @@ class Collections: Codable {
         static var savedSounds = [String]()
         static var savedFilterSettings = [String]()
         static let cantTouchThis = ["bufferLength", "savedSounds", "activeSound", "inputBooster", "outputBoster"]
+        static var specialEffects = ["dynaRageCompressor", "phaser"]
 }
 
 

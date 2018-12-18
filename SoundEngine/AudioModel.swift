@@ -108,10 +108,16 @@ class audio {
     func toggleOnOff(id: String, isOn: Bool) {
         switch id {
         case "dynaRageCompressor":
-            if isOn == true { audio.dynaRageCompressor?.rageIsOn = true } else { audio.dynaRageCompressor?.rageIsOn = false }
+            if isOn == true {
+                audio.dynaRageCompressor?.rageIsOn = true
+            } else {
+                audio.dynaRageCompressor?.rageIsOn = false
+                
+            }
+            print("audio.dynaRageCompressor?.rageIsOn \(audio.dynaRageCompressor?.rageIsOn)")
         case "phaser":
             if isOn == true { audio.phaser?.inverted = 1 } else { audio.phaser?.inverted = 0 }
-            
+            print("audio.phaser?.inverted \(audio.phaser?.inverted)")
         case "eq10":
             if isOn == true {
                 audio.equalizerFilter3?.start()
