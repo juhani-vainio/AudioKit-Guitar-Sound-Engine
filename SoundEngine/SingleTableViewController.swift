@@ -330,6 +330,16 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
                 cell.slider.maximumValue = slider.max
                 cell.slider.value = slider.valueForSlider
                 
+                if cellIsSpecial {
+                    let special = audio.shared.getValues(id: cellId, slider: 0)
+                    cell.specialTitle.text = special.name
+                    if special.valueForSlider == 0 {
+                        cell.specialSwitch.isOn = false
+                    } else {
+                        cell.specialSwitch.isOn = true
+                    }
+                }
+                
                 cell.id = cellId
                 cell.title.text = cellTitle
                 cell.selectedBackgroundView = backgroundView
@@ -387,6 +397,16 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
                 cell.slider2.minimumValue = slider2.min
                 cell.slider2.maximumValue = slider2.max
                 cell.slider2.value = slider2.valueForSlider
+                
+                if cellIsSpecial {
+                    let special = audio.shared.getValues(id: cellId, slider: 0)
+                    cell.specialTitle.text = special.name
+                    if special.valueForSlider == 0 {
+                        cell.specialSwitch.isOn = false
+                    } else {
+                        cell.specialSwitch.isOn = true
+                    }
+                }
                 
                 cell.id = cellId
                 cell.title.text = cellTitle
@@ -456,6 +476,16 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
                 cell.slider3.minimumValue = slider3.min
                 cell.slider3.maximumValue = slider3.max
                 cell.slider3.value = slider3.valueForSlider
+                
+                if cellIsSpecial {
+                    let special = audio.shared.getValues(id: cellId, slider: 0)
+                    cell.specialTitle.text = special.name
+                    if special.valueForSlider == 0 {
+                        cell.specialSwitch.isOn = false
+                    } else {
+                        cell.specialSwitch.isOn = true
+                    }
+                }
                 
                 cell.id = cellId
                 cell.title.text = cellTitle
@@ -534,6 +564,16 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
                 cell.slider4.minimumValue = slider4.min
                 cell.slider4.maximumValue = slider4.max
                 cell.slider4.value = slider4.valueForSlider
+                
+                if cellIsSpecial {
+                    let special = audio.shared.getValues(id: cellId, slider: 0)
+                    cell.specialTitle.text = special.name
+                    if special.valueForSlider == 0 {
+                        cell.specialSwitch.isOn = false
+                    } else {
+                        cell.specialSwitch.isOn = true
+                    }
+                }
                 
                 cell.id = cellId
                 cell.title.text = cellTitle
@@ -624,6 +664,16 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
                 cell.slider5.minimumValue = slider5.min
                 cell.slider5.maximumValue = slider5.max
                 cell.slider5.value = slider5.valueForSlider
+                
+                if cellIsSpecial {
+                    let special = audio.shared.getValues(id: cellId, slider: 0)
+                    cell.specialTitle.text = special.name
+                    if special.valueForSlider == 0 {
+                        cell.specialSwitch.isOn = false
+                    } else {
+                        cell.specialSwitch.isOn = true
+                    }
+                }
                 
                 cell.id = cellId
                 cell.title.text = cellTitle
@@ -721,6 +771,16 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
                 cell.slider6.minimumValue = slider6.min
                 cell.slider6.maximumValue = slider6.max
                 cell.slider6.value = slider6.valueForSlider
+                
+                if cellIsSpecial {
+                    let special = audio.shared.getValues(id: cellId, slider: 0)
+                    cell.specialTitle.text = special.name
+                    if special.valueForSlider == 0 {
+                        cell.specialSwitch.isOn = false
+                    } else {
+                        cell.specialSwitch.isOn = true
+                    }
+                }
                 
                 cell.id = cellId
                 cell.title.text = cellTitle
@@ -828,6 +888,16 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
                 cell.slider7.minimumValue = slider7.min
                 cell.slider7.maximumValue = slider7.max
                 cell.slider7.value = slider7.valueForSlider
+                
+                if cellIsSpecial {
+                    let special = audio.shared.getValues(id: cellId, slider: 0)
+                    cell.specialTitle.text = special.name
+                    if special.valueForSlider == 0 {
+                        cell.specialSwitch.isOn = false
+                    } else {
+                        cell.specialSwitch.isOn = true
+                    }
+                }
                 
                 cell.id = cellId
                 cell.title.text = cellTitle
@@ -946,6 +1016,16 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
                 cell.slider8.maximumValue = slider8.max
                 cell.slider8.value = slider8.valueForSlider
                 
+                if cellIsSpecial {
+                    let special = audio.shared.getValues(id: cellId, slider: 0)
+                    cell.specialTitle.text = special.name
+                    if special.valueForSlider == 0 {
+                        cell.specialSwitch.isOn = false
+                    } else {
+                        cell.specialSwitch.isOn = true
+                    }
+                }
+                
                 cell.id = cellId
                 cell.title.text = cellTitle
                 cell.selectedBackgroundView = backgroundView
@@ -1017,6 +1097,16 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
                 cell.slider.maximumValue = slider.max
                 cell.slider.value = slider.valueForSlider
                 
+                if cellIsSpecial {
+                    let special = audio.shared.getValues(id: cellId, slider: 0)
+                    cell.specialTitle.text = special.name
+                    if special.valueForSlider == 0 {
+                        cell.specialSwitch.isOn = false
+                    } else {
+                        cell.specialSwitch.isOn = true
+                    }
+                }
+                
                 cell.id = cellId
                 cell.title.text = cellTitle
                 cell.selectedBackgroundView = backgroundView
@@ -1069,7 +1159,27 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
             self.resetEffectChain()
         }
         else {
-     
+            
+           if audio.selectedEffectsData[indexPath.row].opened == false {
+                // close previous cell
+                if let previous = audio.selectedEffectsData.firstIndex(where: {$0.opened == true}) {
+                    audio.selectedEffectsData[previous].opened = false
+                    let row = IndexPath(item: previous, section: 0)
+                    tableView.reloadRows(at: [row], with: .fade)
+                }
+                // open this cell
+                audio.selectedEffectsData[indexPath.row].opened = true
+                let row = IndexPath(item: indexPath.row, section: 0)
+                tableView.reloadRows(at: [row], with: .fade)
+                tableView.scrollToRow(at: indexPath, at: .top, animated: true)
+            }
+           else {
+            audio.selectedEffectsData[indexPath.row].opened = false
+            let row = IndexPath(item: indexPath.row, section: 0)
+            tableView.reloadRows(at: [row], with: .fade)
+
+            }
+            /*
             if audio.selectedEffectsData[indexPath.row].opened == true {
                 audio.selectedEffectsData[indexPath.row].opened = false
                 let row = IndexPath(item: indexPath.row, section: 0)
@@ -1080,7 +1190,7 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
                 let row = IndexPath(item: indexPath.row, section: 0)
                 tableView.reloadRows(at: [row], with: .fade)
             }
-      
+             */
         }
     }
     

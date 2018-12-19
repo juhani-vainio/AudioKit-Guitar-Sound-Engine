@@ -222,6 +222,8 @@ class audio {
         booster.gain = gain
         return Float(booster.dB)
     }
+    
+    func getSpecialValues() {}
  
     func getEQValues(id: String, slider: Int) -> (min: Float, max: Float, valueForSlider: Float, value: String, name : String) {
         let min = -6
@@ -1199,7 +1201,7 @@ class audio {
                 min = Float(Effects.tanhDistortion.positiveShapeParameterRange.lowerBound)
                 max = Float(Effects.tanhDistortion.positiveShapeParameterRange.upperBound)
                 valueForSlider = Float(audio.tanhDistortion!.positiveShapeParameter)
-                name = "+"
+                name = "Positive Shape"
                 value = String(audio.tanhDistortion!.positiveShapeParameter)
                 value = String(value.prefix(3))
                 isOn = audio.tanhDistortion!.isStarted
@@ -1207,7 +1209,7 @@ class audio {
                 min = Float(Effects.tanhDistortion.negativeShapeParameterRange.lowerBound)
                 max = Float(Effects.tanhDistortion.negativeShapeParameterRange.upperBound)
                 valueForSlider = Float(audio.tanhDistortion!.negativeShapeParameter)
-                name = "-"
+                name = "Negative Shape"
                 value = String(audio.tanhDistortion!.negativeShapeParameter)
                 value = String(value.prefix(3))
                 isOn = audio.tanhDistortion!.isStarted
@@ -1217,6 +1219,16 @@ class audio {
         case "dynaRageCompressor" :
             // COMPRESSOR
             switch slider {
+            case 0:
+                name = "Rage"
+                if audio.dynaRageCompressor?.rageIsOn == true {
+                    valueForSlider = 1
+                } else {
+                    valueForSlider = 0
+                }
+
+                isOn = audio.dynaRageCompressor!.isStarted
+
             case 1:
                 min = Float(Effects.dynaRageCompressor.ratioRange.lowerBound)
                 max = Float(Effects.dynaRageCompressor.ratioRange.upperBound)
@@ -1475,6 +1487,10 @@ class audio {
         case "phaser" :
            
             switch slider {
+            case 0:
+                name = "Inverted"
+                valueForSlider = Float(audio.phaser!.inverted)
+                isOn = audio.phaser!.isStarted
             case 1:
                 min = Float(Effects.phaser.notchMinimumFrequencyRange.lowerBound)
                 max = Float(Effects.phaser.notchMinimumFrequencyRange.upperBound)
