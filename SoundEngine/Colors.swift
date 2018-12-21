@@ -31,21 +31,64 @@ class Colors {
     
     func colorForEffect(name: String) -> UIColor {
         var color = UIColor()
+        var color2 = UIColor()
         switch name {
-        case "AKBitCrusher" : color = UIColor.magenta
-        case "AKTanhDistortion" : color = UIColor.brown
-        case "AKClipper" : color = UIColor.blue
-        case "AKDynaRageCompressor" : color = UIColor.white
-        case "AKAutoWah" : color = UIColor.black
-        case "AKDelay" : color = UIColor.yellow
-        case "AKDecimator" : color = UIColor.cyan
-        case "AKRingModulator" : color = UIColor.purple
+        case "bitCrusher" : color = UIColor.magenta
+        case "tanhDistortion" : color = UIColor.brown
+        case "clipper" : color = UIColor.blue
+        case "dynaRageCompressor" : color = UIColor.white
+        case "autoWah" : color = UIColor.black
+        case "delay" : color = UIColor.yellow
+        case "decimator" : color = UIColor.cyan
+        case "ringModulator" : color = UIColor.purple
+    
+        case "flanger": color = UIColor.brown
+        case "phaser": color = UIColor.cyan
+        case "chorus": color = UIColor.magenta
+        case "compressor": color = UIColor.white
+        case "dynamicsProcessor": color = UIColor.white
+        case "dynamicRangeCompressor": color = UIColor.white
+        case "reverb": color = UIColor.green
+        case "reverb2": color = UIColor.green
+        case "chowningReverb": color = UIColor.red
+        case "costelloReverb": color = UIColor.red
+        case "flatFrequencyResponseReverb": color = UIColor.red
+        case "tremolo": color = UIColor.yellow
         default : color = UIColor.black
         }
         return color
     }
     
-    
+    func next(value: Int) -> UIColor {
+        var color = UIColor()
+        var newValue = Int()
+        if value > 8 {
+            newValue = value - 8
+            if newValue > 8 {
+                newValue = value - 16
+                if newValue > 8 {
+                    newValue = value - 24
+                }
+            }
+            
+        }
+        else {
+            newValue = value
+        }
+        switch newValue {
+        case 1 : color = UIColor.magenta
+        case 2 : color = UIColor.brown
+        case 3 : color = UIColor.blue
+        case 4 : color = UIColor.white
+        case 5 : color = UIColor.black
+        case 6 : color = UIColor.yellow
+        case 7 : color = UIColor.cyan
+        case 8 : color = UIColor.purple
+        default : color = UIColor.black
+            
+        }
+        return color
+    }
     
     
     

@@ -21,6 +21,7 @@
 		573AE53721AEECE700452624 /* Amp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 573AE53621AEECE700452624 /* Amp.swift */; };
 		573AE53921AEEE9800452624 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 573AE53821AEEE9800452624 /* AudioToolbox.framework */; };
 		5752059F21AD547F0005889E /* Filters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5752059E21AD547E0005889E /* Filters.swift */; };
+		57567AAE21CB9DA50030CBEC /* WaveformModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57567AAD21CB9DA50030CBEC /* WaveformModel.swift */; };
 		575EE7E321BAF8E4008E9C11 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 575EE7E221BAF8E4008E9C11 /* Settings.swift */; };
 		57612AE121B172A1001A7231 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57612AE021B172A0001A7231 /* Helper.swift */; };
 		57612AE321B17396001A7231 /* Collections.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57612AE221B17396001A7231 /* Collections.swift */; };
@@ -97,6 +98,7 @@
 		573AE53821AEEE9800452624 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		573AE53A21AEEE9800452624 /* SoundEngine.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SoundEngine.entitlements; sourceTree = "<group>"; };
 		5752059E21AD547E0005889E /* Filters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filters.swift; sourceTree = "<group>"; };
+		57567AAD21CB9DA50030CBEC /* WaveformModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaveformModel.swift; sourceTree = "<group>"; };
 		575EE7E221BAF8E4008E9C11 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		57612AE021B172A0001A7231 /* Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		57612AE221B17396001A7231 /* Collections.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Collections.swift; sourceTree = "<group>"; };
@@ -206,6 +208,7 @@
 			children = (
 				57EDC83521B80E4500621899 /* SingleTableViewController.swift */,
 				57E397BD21AC1E5300F2871A /* AudioModel.swift */,
+				57567AAD21CB9DA50030CBEC /* WaveformModel.swift */,
 				57075ECA219C490C003F2D4F /* Main.storyboard */,
 				57075ED2219C4911003F2D4F /* LaunchScreen.storyboard */,
 				57612AE021B172A0001A7231 /* Helper.swift */,
@@ -519,6 +522,7 @@
 				57DD133521C7E1EE00506663 /* EQ31CollectionViewCell.swift in Sources */,
 				57075ECF219C490C003F2D4F /* SoundEngine.xcdatamodeld in Sources */,
 				5705EFEF219DE7D6005EF724 /* SoundsCollectionViewCell.swift in Sources */,
+				57567AAE21CB9DA50030CBEC /* WaveformModel.swift in Sources */,
 				578B32D521BE9548002A7EEE /* HeptaTableViewCell.swift in Sources */,
 				578B32CD21BE9522002A7EEE /* PentaTableViewCell.swift in Sources */,
 				57E397BE21AC1E5300F2871A /* AudioModel.swift in Sources */,

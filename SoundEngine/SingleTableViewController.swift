@@ -7,6 +7,7 @@
 //
 
 import AudioKit
+import AudioKitUI
 import UIKit
 
 fileprivate var longPressGesture: UILongPressGestureRecognizer!
@@ -17,6 +18,13 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
     var nameCheck = Bool()
     var effectChainNeedsReset = Bool(false)
     private let parallaxLayout = ParallaxFlowLayout()
+    
+    @IBOutlet weak var plotsMainView: UIView!
+    @IBOutlet weak var waveformView: UIView!
+    
+    @IBOutlet weak var plotView1: UIView!
+    @IBOutlet weak var plotView2: UIView!
+    
     
     fileprivate var sourceIndexPath: IndexPath?
     fileprivate var snapshot: UIView?
@@ -88,7 +96,141 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
         mainViewBackground.backgroundColor = interface.mainBackground
  
         
+        buildWaveforStackView()
+       // updateWaveformView()
+    
+        
+        
+        
+        
     }
+    
+    func updateWaveformView(){
+        
+        var oscillator = AKOscillator(waveform: AKTable(.sine))
+        
+        // var oscillator = AKFMOscillator(waveform: AKTable(.sine))
+        oscillator.frequency = 512
+        
+        let clip = AKClipper(oscillator, limit: 0.9)
+        let reverb = AKReverb(clip, dryWetMix: 0.5)
+        AudioKit.output = AKBooster(reverb, gain: 0.0)
+        do { try AudioKit.start()
+            print("START AUDIOKIT")
+        } catch {
+            print("Could not start THIS FUCKING AudioKit")
+        }
+        oscillator.start()
+        /*
+        let plot1 = AKNodeOutputPlot(oscillator, frame: CGRect(x: 0, y: 0, width: plotView1.frame.width, height: plotView1.frame.height))
+        plot1.plotType = .buffer
+        plot1.shouldFill = false
+        plot1.shouldMirror = false
+        plot1.color = AKColor.blue
+        plotView1.addSubview(plot1)
+        
+        let plot2 = AKNodeOutputPlot(clip, frame: CGRect(x: 0, y: 0, width: plotView2.frame.width, height: plotView2.frame.height))
+        plot2.plotType = .buffer
+        plot2.shouldFill = false
+        plot2.shouldMirror = false
+        plot2.color = AKColor.blue
+        plotView2.addSubview(plot2)
+        */
+        
+        var stackUnit1 = AKNodeOutputPlot(oscillator, frame: CGRect(x: 0, y: 0, width: waveformView.frame.width / 3, height: 80))
+        stackUnit1.heightAnchor.constraint(equalToConstant: 80).isActive = true
+        stackUnit1.widthAnchor.constraint(equalToConstant: waveformView.frame.width / 3).isActive = true
+        stackUnit1.plotType = .buffer
+        stackUnit1.shouldFill = false
+        stackUnit1.shouldMirror = false
+        stackUnit1.color = AKColor.blue
+        
+        var stackUnit2 = AKNodeOutputPlot(clip, frame: CGRect(x: 0, y: 0, width: waveformView.frame.width / 3, height: 80))
+        stackUnit2.heightAnchor.constraint(equalToConstant: 80).isActive = true
+        stackUnit2.widthAnchor.constraint(equalToConstant: waveformView.frame.width / 3).isActive = true
+        stackUnit2.plotType = .buffer
+        stackUnit2.shouldFill = false
+        stackUnit2.shouldMirror = false
+        stackUnit2.color = AKColor.blue
+        
+        var stackUnit3 = AKNodeOutputPlot(reverb, frame: CGRect(x: 0, y: 0, width: waveformView.frame.width / 3, height: 80))
+        stackUnit3.heightAnchor.constraint(equalToConstant: 80).isActive = true
+        stackUnit3.widthAnchor.constraint(equalToConstant: waveformView.frame.width / 3).isActive = true
+        stackUnit3.plotType = .buffer
+        stackUnit3.shouldFill = false
+        stackUnit3.shouldMirror = false
+        stackUnit3.color = AKColor.blue
+        
+        
+        var stack = UIStackView()
+        stack.distribution = .fillEqually
+        stack.axis = .horizontal
+        stack.alignment = .center
+        stack.spacing = 0
+        
+        
+        stack.addArrangedSubview(stackUnit1)
+        stack.addArrangedSubview(stackUnit2)
+        stack.addArrangedSubview(stackUnit3)
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        
+        waveformView.addSubview(stack)
+        
+        //Constraints
+        stack.centerXAnchor.constraint(equalTo: waveformView.centerXAnchor).isActive = true
+        stack.centerYAnchor.constraint(equalTo: waveformView.centerYAnchor).isActive = true
+
+        stackUnit1.backgroundColor = UIColor.green
+        stackUnit2.backgroundColor = UIColor.brown
+        stackUnit3.backgroundColor = UIColor.cyan
+        
+    }
+    
+    var recyclabeView = UIView()
+    
+    func buildWaveforStackView() {
+        
+        let stack = UIStackView()
+        stack.distribution = .fillEqually
+        stack.axis = .horizontal
+        stack.alignment = .center
+        stack.spacing = 0
+        
+        let units = audio.selectedAudioInputs.count
+        let stackUnitWidth = waveformView.frame.width / CGFloat(units)
+        var unitCount = 0
+        for unit in audio.selectedAudioInputs {
+                unit.outputNode.removeTap(onBus: 0)
+                let node = unit as! AKNode
+                let stackUnit = AKNodeOutputPlot(node, frame: CGRect(x: 0, y: 0, width: stackUnitWidth, height: 80))
+                stackUnit.heightAnchor.constraint(equalToConstant: 80).isActive = true
+                stackUnit.widthAnchor.constraint(equalToConstant: stackUnitWidth).isActive = true
+                stackUnit.plotType = .buffer
+                stackUnit.shouldFill = false
+                stackUnit.shouldMirror = false
+               // let nextColor = Colors.palette.materialDesignColors(x: unitCount, y: unitCount)
+                let name = audio.selectedEffectsData[unitCount].id
+                let color = Colors.palette.colorForEffect(name: name)
+                stackUnit.color = color
+                stackUnit.backgroundColor = interface.heading
+                stack.addArrangedSubview(stackUnit)
+         
+            unitCount = unitCount + 1
+            
+        }
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        
+        
+        recyclabeView = UIView(frame: CGRect(x: 0, y: 0, width: waveformView.frame.width, height: waveformView.frame.height))
+        recyclabeView.addSubview(stack)
+        waveformView.addSubview(recyclabeView)
+
+        //Constraints
+        stack.centerXAnchor.constraint(equalTo: waveformView.centerXAnchor).isActive = true
+        stack.centerYAnchor.constraint(equalTo: waveformView.centerYAnchor).isActive = true
+        
+    }
+    
     
     @objc func inputLevelChanged(slider: UISlider) {
         audio.shared.inputBooster?.dB = Double(slider.value)
@@ -1262,6 +1404,11 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
         helper.shared.saveCurrentSettings()
         audio.shared.resetAudioEffects()
         
+        // remove old waveform plots
+        
+
+        
+        buildWaveforStackView()
         
     }
     

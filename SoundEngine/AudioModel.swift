@@ -8,6 +8,7 @@
 
 import Foundation
 import AudioKit
+import AudioKitUI
 
 
 struct effectData {
@@ -1960,7 +1961,7 @@ class audio {
         connectAudioInputs()
         //connectEffects()
        
-        
+       
         print("---------- STARTING AUDIO WITH ----------")
         print("selectedAudioInputs \(audio.selectedAudioInputs)")
      
@@ -2084,22 +2085,29 @@ class audio {
             addToselectedEffects(id:id)
         }
          */
+        
+        // COPY LIST FOR WaveformModel
+       // waveform.selectedAudioInputsForWaveformPlot = audio.selectedAudioInputs
+        
     }
     
     
     func connectMic() {
         mic?.connect(to: inputBooster!)
-        //mic?.connect(to: inputMixer!)
-       // startAmplitudeMonitors()
+        inputBooster?.connect(to: inputAmplitudeTracker!)
+
+        startAmplitudeMonitors()
  
     }
     
     func startAmplitudeMonitors() {
     
-        let timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { timer in
+        let timer = Timer.scheduledTimer(withTimeInterval: 0.01, repeats: true) { timer in
             let micAmplitude = self.micTracker?.amplitude
+            let inputAmplitude = self.inputAmplitudeTracker?.amplitude
             let outputAmplitude = self.outputAmplitudeTracker?.amplitude
-            print("AMPLITUDE:    \(outputAmplitude)")
+            print("INPUT AMPLITUDE:    \(inputAmplitude)")
+            print("OUTPUT AMPLITUDE:    \(outputAmplitude)")
             print("MIC AMP       \(micAmplitude)")
         }
         timer.fire()
@@ -2110,7 +2118,7 @@ class audio {
         for input in 0..<audio.selectedAudioInputs.count {
             
             if input == 0 {
-                inputBooster?.connect(to: audio.selectedAudioInputs[0])
+                inputAmplitudeTracker?.connect(to: audio.selectedAudioInputs[0])
                // inputMixer?.connect(to: audio.selectedAudioInputs[0])
                 
             }
@@ -2120,7 +2128,7 @@ class audio {
         }
         
         if audio.selectedAudioInputs.isEmpty {
-            inputBooster!.connect(to: outputMixer!)
+            inputAmplitudeTracker!.connect(to: outputMixer!)
            // inputMixer!.connect(to: outputMixer!)
         } else {
             audio.selectedAudioInputs.last?.connect(to: outputMixer!)
@@ -2233,6 +2241,7 @@ class audio {
             audio.selectedAudioInputs[input].disconnectOutput()
             audio.selectedAudioInputs[input].disconnectInput()
             print("DISCONNECT \(audio.selectedAudioInputs[input])")
+           
         }
         
         // DISCONNECT EQs
@@ -2311,8 +2320,14 @@ class audio {
         outputAmplitudeTracker?.disconnectInput()
         outputAmplitudeTracker?.disconnectOutput()
         
+        inputAmplitudeTracker?.disconnectInput()
+        inputAmplitudeTracker?.disconnectOutput()
+        
         inputBooster?.disconnectOutput()
         inputBooster?.disconnectInput()
+        
+        outputBooster?.disconnectOutput()
+        outputBooster?.disconnectInput()
         //inputMixer?.disconnectOutput()
   
         mic?.disconnectOutput()
@@ -2326,6 +2341,7 @@ class audio {
     
     // MONITORS
     var outputAmplitudeTracker : AKAmplitudeTracker?
+    var inputAmplitudeTracker : AKAmplitudeTracker?
     var micTracker : AKMicrophoneTracker?
     
     var inputMixer: AKMixer?
@@ -2510,7 +2526,7 @@ class audio {
         
         // MONITORS
         outputAmplitudeTracker = AKAmplitudeTracker()
-        
+        inputAmplitudeTracker = AKAmplitudeTracker()
         micTracker = AKMicrophoneTracker()
         
         
