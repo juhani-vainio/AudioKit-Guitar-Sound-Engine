@@ -39,9 +39,12 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
     @IBOutlet weak var addButton: UIButton!
     
     @IBOutlet weak var availableEffects: UITableView!
-   
-    
+
+    @IBOutlet weak var availableFilters: UITableView!
     @IBOutlet weak var selectedEffects: UITableView!
+    
+    @IBOutlet weak var selectedFilters: UITableView!
+    
     
     @IBOutlet weak var mainCollection: UICollectionView!
     
@@ -88,7 +91,9 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
         
         
         availableEffects.backgroundColor = interface.tableAltBackground
+        availableFilters.backgroundColor = interface.tableAltBackground
         selectedEffects.backgroundColor = UIColor.clear
+        selectedFilters.backgroundColor = UIColor.clear
        
         savedSoundsTableView.backgroundColor = interface.tableBackground
         
@@ -196,10 +201,11 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
         stack.alignment = .center
         stack.spacing = 0
         
-        let units = audio.selectedAudioInputs.count
+        let units = audio.selectedEffectsData.count
         let stackUnitWidth = waveformView.frame.width / CGFloat(units)
         var unitCount = 0
         for unit in audio.selectedAudioInputs {
+            if unitCount < units {
                 unit.outputNode.removeTap(onBus: 0)
                 let node = unit as! AKNode
                 let stackUnit = AKNodeOutputPlot(node, frame: CGRect(x: 0, y: 0, width: stackUnitWidth, height: 80))
@@ -216,7 +222,7 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
                 stack.addArrangedSubview(stackUnit)
          
             unitCount = unitCount + 1
-            
+            }
         }
         stack.translatesAutoresizingMaskIntoConstraints = false
         
@@ -259,8 +265,14 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
         audio.availableEffectsData = audio.availableEffectsData.sorted{ $0.title < $1.title }
         availableEffects.delegate = self
         availableEffects.dataSource = self
+        audio.availableFiltersData = audio.availableFiltersData.sorted{ $0.title < $1.title }
+        availableFilters.delegate = self
+        availableFilters.dataSource = self
+        
         selectedEffects.delegate = self
         selectedEffects.dataSource = self
+        selectedFilters.delegate = self
+        selectedFilters.dataSource = self
         savedSoundsTableView.delegate = self
         savedSoundsTableView.dataSource = self
         
@@ -286,8 +298,21 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
         selectedEffects.register(heptaNib, forCellReuseIdentifier: "HeptaTableViewCell")
         selectedEffects.register(octaNib, forCellReuseIdentifier: "OctaTableViewCell")
         
+        selectedFilters.register(nib, forCellReuseIdentifier: "TableViewCell")
+        selectedFilters.register(doubleNib, forCellReuseIdentifier: "DoubleTableViewCell")
+        selectedFilters.register(tripleNib, forCellReuseIdentifier: "TripleTableViewCell")
+        selectedFilters.register(quatroNib, forCellReuseIdentifier: "QuatroTableViewCell")
+        selectedFilters.register(pentaNib, forCellReuseIdentifier: "PentaTableViewCell")
+        selectedFilters.register(hexaNib, forCellReuseIdentifier: "HexaTableViewCell")
+        selectedFilters.register(heptaNib, forCellReuseIdentifier: "HeptaTableViewCell")
+        selectedFilters.register(octaNib, forCellReuseIdentifier: "OctaTableViewCell")
+
+        
+        
+        
         longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(self.handleLongGesture(longPress:)))
         selectedEffects.addGestureRecognizer(longPressGesture)
+     
         
     }
     
@@ -405,9 +430,17 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
         else if tableView == availableEffects {
             value = audio.availableEffectsData.count
             
-        } else if tableView == selectedEffects {
+        }
+        else if tableView == availableFilters {
+            value = audio.availableFiltersData.count
+            
+        }
+        else if tableView == selectedEffects {
             // unitsAfter List
             value = audio.selectedEffectsData.count
+        }
+        else if tableView == selectedFilters {
+            value = audio.selectedFiltersData.count
         }
         return value
     }
@@ -440,13 +473,32 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
                 cellIsSpecial = false
             }
         }
+        
+        else if tableView == selectedFilters {
+            cellOpened = audio.selectedFiltersData[indexPath.row].opened
+            cellTitle = audio.selectedFiltersData[indexPath.row].title
+            cellType = audio.selectedFiltersData[indexPath.row].type
+            cellIsLast = audio.selectedFiltersData.endIndex - 1 == indexPath.row
+            cellId = audio.selectedFiltersData[indexPath.row].id
+            if Collections.specialEffects.contains(cellId) {
+                cellIsSpecial = true
+            }
+            else {
+                cellIsSpecial = false
+            }
+        }
     
+        else if tableView == availableFilters {
+            cellTitle = audio.availableFiltersData[indexPath.row].title
+            
+        }
+            
         else {
             cellTitle = audio.availableEffectsData[indexPath.row].title
             
         }
         
-        if tableView == availableEffects || tableView == savedSoundsTableView {
+        if tableView == availableEffects || tableView == availableFilters || tableView == savedSoundsTableView {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell") else {return UITableViewCell()}
             cell.textLabel?.text = cellTitle
             cell.textLabel?.textColor = interface.text
@@ -456,6 +508,8 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
             returnCell = cell
             
         }
+        
+            
         else {
             
             switch cellType {
@@ -594,7 +648,7 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
                 returnCell = cell
                 
             case "3":
-                // Has two sliders
+                
                 let cell = tableView.dequeueReusableCell(withIdentifier: "TripleTableViewCell", for: indexPath) as! TripleTableViewCell
                 let slider1 = audio.shared.getValues(id: cellId, slider: 1)
                 cell.slider1Title.text = slider1.name
@@ -676,7 +730,7 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
                 returnCell = cell
                 
             case "4":
-                // Has two sliders
+                
                 let cell = tableView.dequeueReusableCell(withIdentifier: "QuatroTableViewCell", for: indexPath) as! QuatroTableViewCell
                 
                 let slider1 = audio.shared.getValues(id: cellId, slider: 1)
@@ -1284,6 +1338,7 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
             
             helper.shared.getSavedChain(name: sound)
             self.selectedEffects.reloadData()
+            self.selectedFilters.reloadData()
             self.mainCollection.reloadData()
             self.resetEffectChain()
             savedSoundsTableView.isHidden = true
@@ -1300,7 +1355,19 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
             self.availableEffects.isHidden = true
             self.resetEffectChain()
         }
-        else {
+            
+        else if tableView == availableFilters {
+            let tempData = audio.availableFiltersData[indexPath.row]
+            audio.selectedFiltersData.append(tempData)
+            self.selectedFilters.reloadData()
+            audio.availableFiltersData.remove(at: indexPath.row)
+            let row = IndexPath(item: indexPath.row, section: 0)
+            self.availableFilters.deleteRows(at: [row], with: .none)
+            self.availableFilters.isHidden = true
+            self.resetEffectChain()
+        }
+            
+        else if tableView == selectedEffects {
             
            if audio.selectedEffectsData[indexPath.row].opened == false {
                 // close previous cell
@@ -1321,18 +1388,30 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
             tableView.reloadRows(at: [row], with: .fade)
 
             }
-            /*
-            if audio.selectedEffectsData[indexPath.row].opened == true {
-                audio.selectedEffectsData[indexPath.row].opened = false
+          
+        }
+        else if tableView == selectedFilters {
+            
+            if audio.selectedFiltersData[indexPath.row].opened == false {
+                // close previous cell
+                if let previous = audio.selectedFiltersData.firstIndex(where: {$0.opened == true}) {
+                    audio.selectedFiltersData[previous].opened = false
+                    let row = IndexPath(item: previous, section: 0)
+                    tableView.reloadRows(at: [row], with: .fade)
+                }
+                // open this cell
+                audio.selectedFiltersData[indexPath.row].opened = true
                 let row = IndexPath(item: indexPath.row, section: 0)
                 tableView.reloadRows(at: [row], with: .fade)
+                tableView.scrollToRow(at: indexPath, at: .top, animated: true)
             }
             else {
-                audio.selectedEffectsData[indexPath.row].opened = true
+                audio.selectedFiltersData[indexPath.row].opened = false
                 let row = IndexPath(item: indexPath.row, section: 0)
                 tableView.reloadRows(at: [row], with: .fade)
+                
             }
-             */
+            
         }
     }
     
@@ -1347,6 +1426,14 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
             }
         }
     
+        else if tableView == selectedFilters {
+            if audio.selectedFiltersData[indexPath.row].opened {
+                return false
+            }
+            else {
+                return true
+            }
+        }
             
         else {
             return true
@@ -1370,6 +1457,19 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
                 self.resetEffectChain()
             }
             
+            else if tableView == selectedFilters {
+                // remove and insert data between arrays
+                audio.selectedFiltersData[indexPath.row].opened = false
+                let tempData = audio.selectedFiltersData[indexPath.row]
+                audio.availableFiltersData.append(tempData)
+                // Arrange available units list aplhabetically
+                audio.availableFiltersData = audio.availableFiltersData.sorted{ $0.title < $1.title }
+                self.availableFilters.reloadData()
+                audio.selectedFiltersData.remove(at: indexPath.row)
+                let row = IndexPath(item: indexPath.row, section: 0)
+                self.selectedFilters.deleteRows(at: [row], with: .none)
+                self.resetEffectChain()
+            }
             
         }
         
@@ -1399,8 +1499,7 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
     func resetEffectChain() {
       //  unplugEffects()
        // connectEffects()
-        print("Effect Order changed")
-        print(audio.selectedEffectsData)
+      
         helper.shared.saveCurrentSettings()
         audio.shared.resetAudioEffects()
         
@@ -1852,6 +1951,16 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
         }
     }
     
+    @IBAction func checkTapped(_ sender: Any) {
+        print(AudioKit.printConnections())
+    }
+    @IBAction func addFilterTapped(_ sender: Any) {
+        if self.availableFilters.isHidden {
+            self.availableFilters.isHidden = false
+        } else {
+            self.availableFilters.isHidden = true
+        }
+    }
     
     @IBAction func addButtonTapped(_ sender: Any) {
         if self.availableEffects.isHidden {

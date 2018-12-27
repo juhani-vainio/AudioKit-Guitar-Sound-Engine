@@ -336,12 +336,20 @@ class helper {
             if audio.selectedEffectsData.contains(where: {$0.id == effect.id})   {
                 
             }
-            /*else if audio.selectedUnitsAfterData.contains(where: {$0.id == effect.id})   {
-                
-            }
- */
+  
             else {
                 audio.availableEffectsData.append(effect)
+            }
+        }
+        // same or filters
+        
+        for effect in audio.allPossibleFiltersData {
+            if audio.selectedFiltersData.contains(where: {$0.id == effect.id})   {
+                
+            }
+                
+            else {
+                audio.availableFiltersData.append(effect)
             }
         }
     }
@@ -354,6 +362,8 @@ class helper {
         audio.selectedEffectsData.removeAll()
        // audio.selectedUnitsAfterData.removeAll()
         audio.availableEffectsData.removeAll()
+        audio.selectedFiltersData.removeAll()
+        audio.availableFiltersData.removeAll()
         for effect in valuesForChain {
             let name:String = (effect as AnyObject).value(forKey: "name") as! String
            // let location:String = (effect as AnyObject).value(forKey: "location") as! String

@@ -112,6 +112,7 @@ class Filters: Codable {
     }
 
     struct moogLadder: Codable {
+        
         static var cutoffFrequency = Double()
         static var resonance = Double()
         static var isStarted = Bool(false)

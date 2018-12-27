@@ -420,16 +420,7 @@ struct decimator:Codable {
     
     
     // TODO OOOOO
-    
-    
-    
-    
-    struct combFilterReverb: Codable {
-        static var reverbDuration = Double()
-        static var loopDuration = Double()
-        static var isStarted = Bool(false)
-    }
-    
+  
     
     struct peakLimiter:Codable {
         
