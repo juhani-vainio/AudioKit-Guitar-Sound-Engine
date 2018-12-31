@@ -205,24 +205,32 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
         let stackUnitWidth = waveformView.frame.width / CGFloat(units)
         var unitCount = 0
         for unit in audio.selectedAudioInputs {
-            if unitCount < units {
+            
                 unit.outputNode.removeTap(onBus: 0)
-                let node = unit as! AKNode
-                let stackUnit = AKNodeOutputPlot(node, frame: CGRect(x: 0, y: 0, width: stackUnitWidth, height: 80))
-                stackUnit.heightAnchor.constraint(equalToConstant: 80).isActive = true
-                stackUnit.widthAnchor.constraint(equalToConstant: stackUnitWidth).isActive = true
-                stackUnit.plotType = .buffer
-                stackUnit.shouldFill = false
-                stackUnit.shouldMirror = false
-               // let nextColor = Colors.palette.materialDesignColors(x: unitCount, y: unitCount)
-                let name = audio.selectedEffectsData[unitCount].id
-                let color = Colors.palette.colorForEffect(name: name)
-                stackUnit.color = color
-                stackUnit.backgroundColor = interface.heading
-                stack.addArrangedSubview(stackUnit)
+              
+                    let node = unit as! AKNode
+                    let stackUnit = AKNodeOutputPlot(node, frame: CGRect(x: 0, y: 0, width: stackUnitWidth, height: 80))
+                    stackUnit.heightAnchor.constraint(equalToConstant: 80).isActive = true
+                    stackUnit.widthAnchor.constraint(equalToConstant: stackUnitWidth).isActive = true
+                    stackUnit.plotType = .buffer
+                    stackUnit.shouldFill = false
+                    stackUnit.shouldMirror = false
+                    // let nextColor = Colors.palette.materialDesignColors(x: unitCount, y: unitCount)
+                    if unitCount < units {
+                        let name = audio.selectedEffectsData[unitCount].id
+                        let color = Colors.palette.colorForEffect(name: name)
+                        stackUnit.color = color
+                    }
+                    else {
+                        stackUnit.color = UIColor.red
+                    }
+                    stackUnit.backgroundColor = interface.heading
+                    stack.addArrangedSubview(stackUnit)
+                
+               
          
             unitCount = unitCount + 1
-            }
+            
         }
         stack.translatesAutoresizingMaskIntoConstraints = false
         

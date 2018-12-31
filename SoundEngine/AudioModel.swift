@@ -79,7 +79,7 @@ class audio {
         effectData(id: "threeBandFilter", opened: false, title: "3 Band", type: "3"), // Bass , Mid, High
         effectData(id: "sevenBandFilter", opened: false, title: "7 Band", type: "7"), // Sub-Bass, Bass, Low Mid, Mid, Upper Mid, Precence, Brilliance
         // TONE   " toneFilter & toneComplementFilter "
-        effectData(id: "toneFilters", opened: false, title: "Tone", type: "2"),
+        effectData(id: "toneFilters", opened: false, title: "Tone", type: "1"),
         // CUT    " highPassFilter & lowPassFilter  either normal or highPassButterworthFilter & lowPassButterworthFilter"
         effectData(id: "highLowPassFilters", opened: false, title: "Cut off", type: "2"), // add switch for FLAT as in butterworth for the pass filters
         effectData(id: "moogLadder", opened: false, title: "Moog Ladder", type: "2"),
@@ -388,8 +388,6 @@ class audio {
         return newValue
     }
     
-
-    
     func changeValues(id: String, slider: Int, value: Double) -> String {
         var newValue = String()
         switch id {
@@ -425,13 +423,62 @@ class audio {
                 
             }
             
+        case "toneFilters":
+            switch slider {
+            case 0:
+                if  audio.toneFilter!.isStarted == true {
+                    audio.toneFilter?.stop()
+                    audio.toneComplementFilter?.stop()
+                    newValue = "OFF"
+                } else {
+                    audio.toneFilter?.start()
+                    audio.toneComplementFilter?.start()
+                    newValue = "ON"
+                }
+            case 1:
+                audio.toneFilter?.halfPowerPoint = value
+                let text = String(value)
+                newValue = String(text.prefix(3))
+            case 2:
+                audio.toneComplementFilter?.halfPowerPoint = value
+                let text = String(value)
+                newValue = String(text.prefix(3))
+                
+            default: break
+                
+            }
+            
+        case "moogLadder":
+            switch slider {
+            case 0:
+                if  audio.moogLadder!.isStarted == true {
+                    audio.moogLadder?.stop()
+                   
+                    newValue = "OFF"
+                } else {
+                    audio.moogLadder?.start()
+      
+                    newValue = "ON"
+                }
+            case 1:
+                audio.moogLadder?.cutoffFrequency = value
+                let text = String(value)
+                newValue = String(text.prefix(3))
+            case 2:
+                audio.moogLadder?.resonance = value
+                let text = String(value)
+                newValue = String(text.prefix(3))
+                
+            default: break
+                
+            }
+            
             
         /*
         case "sevenBandFilter":
-        case "toneFilters":
+
         case "highLowPassFilters":
-        case "moogLadder":
-        case "moogLadder":
+        
         case "resonantFilter":
         case "stringResonator":
         case "modalResonanceFilter":
@@ -1226,12 +1273,56 @@ class audio {
                 isOn = audio.threeBandFilterLow!.isStarted
             default: break
             }
+            
+        case "toneFilters":
+            switch slider {
+            case 1:
+                min = 40
+                max = 5000
+                valueForSlider = Float(audio.toneFilter!.halfPowerPoint)
+                name = "Tone"
+                value = String(audio.toneFilter!.halfPowerPoint)
+                value = String(value.prefix(3))
+                isOn = audio.toneFilter!.isStarted
+            case 2:
+                min = 20
+                max = 4000
+                valueForSlider = Float(audio.toneComplementFilter!.halfPowerPoint)
+                name = "Tone Complement"
+                value = String(audio.toneComplementFilter!.halfPowerPoint)
+                value = String(value.prefix(3))
+                isOn = audio.toneComplementFilter!.isStarted
+            
+            default: break
+            }
+            
+        case "moogLadder":
+            switch slider {
+            case 1:
+                min = 40
+                max = 5000
+                valueForSlider = Float(audio.moogLadder!.cutoffFrequency)
+                name = "Cut off"
+                value = String(audio.moogLadder!.cutoffFrequency)
+                value = String(value.prefix(3))
+                isOn = audio.moogLadder!.isStarted
+            case 2:
+                min = 0
+                max = 1
+                valueForSlider = Float(audio.moogLadder!.resonance)
+                name = "Resonance"
+                value = String(audio.moogLadder!.resonance)
+                value = String(value.prefix(3))
+                isOn = audio.moogLadder!.isStarted
+                
+            default: break
+            }
             /*
         case "sevenBandFilter":
-        case "toneFilters":
+     
         case "highLowPassFilters":
-        case "moogLadder":
-        case "moogLadder":
+        case "":
+
         case "resonantFilter":
         case "stringResonator":
         case "modalResonanceFilter":
@@ -2116,12 +2207,44 @@ class audio {
         
     }
   
+    func  addBalancer(id : String) {
+ 
+        switch id {
+        //effects
+        case "bitCrusher" : audio.tempBalancer = AKBalancer(comparator: audio.bitCrusher!)
+        case "clipper" : audio.tempBalancer = AKBalancer(comparator: audio.clipper!)
+        case "dynaRageCompressor":  audio.tempBalancer = AKBalancer(comparator: audio.dynaRageCompressor!)
+        case "autoWah":  audio.tempBalancer = AKBalancer(comparator: audio.autoWah!)
+        case "delay":  audio.tempBalancer = AKBalancer(comparator: audio.delay!)
+        case "variableDelay": audio.tempBalancer = AKBalancer(comparator: audio.variableDelay!)
+        case "decimator": audio.tempBalancer = AKBalancer(comparator: audio.decimator!)
+        case "tanhDistortion": audio.tempBalancer = AKBalancer(comparator: audio.tanhDistortion!)
+        case "ringModulator": audio.tempBalancer = AKBalancer(comparator: audio.ringModulator!)
+        case "flanger": audio.tempBalancer = AKBalancer(comparator: audio.flanger!)
+        case "phaser": audio.tempBalancer = AKBalancer(comparator: audio.phaser!)
+        case "chorus": audio.tempBalancer = AKBalancer(comparator: audio.chorus!)
+        case "compressor": audio.tempBalancer = AKBalancer(comparator: audio.compressor!)
+        case "dynamicsProcessor": audio.tempBalancer = AKBalancer(comparator: audio.dynamicsProcessor!)
+        case "dynamicRangeCompressor": audio.tempBalancer = AKBalancer(comparator: audio.dynamicRangeCompressor!)
+        case "reverb": audio.tempBalancer = AKBalancer(comparator: audio.reverb!)
+        case "reverb2": audio.tempBalancer = AKBalancer(comparator: audio.reverb2!)
+        case "chowningReverb": audio.tempBalancer = AKBalancer(comparator: audio.chowningReverb!)
+        case "costelloReverb": audio.tempBalancer = AKBalancer(comparator: audio.costelloReverb!)
+        case "flatFrequencyResponseReverb": audio.tempBalancer = AKBalancer(comparator: audio.flatFrequencyResponseReverb!)
+        case "tremolo": audio.selectedAudioInputs.append(audio.tremolo!)
+            
+        case "first" : audio.tempBalancer = AKBalancer(comparator: inputAmplitudeTracker!)
+            default : print("NOTHING to do over HERE either neither")
+        }
+        
+        audio.selectedAudioInputs.append(audio.tempBalancer!)
+    }
     
     func addToselectedEffects(id : String) {
         switch id {
             //effects
         case "bitCrusher" : audio.selectedAudioInputs.append(audio.bitCrusher!)
-        case "clipper":  audio.selectedAudioInputs.append(audio.clipper!)
+        case "clipper" : audio.selectedAudioInputs.append(audio.clipper!)
         case "dynaRageCompressor":  audio.selectedAudioInputs.append(audio.dynaRageCompressor!)
         case "autoWah":  audio.selectedAudioInputs.append(audio.autoWah!)
         case "delay":  audio.selectedAudioInputs.append(audio.delay!)
@@ -2149,6 +2272,10 @@ class audio {
                                 audio.selectedAudioInputs.append(audio.threeBandFilterMid!)
                                 audio.selectedAudioInputs.append(audio.threeBandFilterLow!)
             
+        case "toneFilters": audio.selectedAudioInputs.append(audio.toneFilter!)
+                            //audio.selectedAudioInputs.append(audio.toneComplementFilter!)
+        case "moogLadder": audio.selectedAudioInputs.append(audio.moogLadder!)
+       
         default : print("NOTHING to do over HERE")
             
         }
@@ -2158,7 +2285,20 @@ class audio {
         // EFFECTS
         for effect in 0..<audio.selectedEffectsData.count {
             let id = audio.selectedEffectsData[effect].id
-            addToselectedEffects(id:id)
+            
+               addToselectedEffects(id:id)
+        
+            if id == "clipper" {
+                if effect > 0 {
+                    addBalancer(id: audio.selectedEffectsData[effect - 1].id)
+                
+                }
+                else {
+                    addBalancer(id: "first")
+                }
+                
+            }
+            
             }
         // FILTERS
         for effect in 0..<audio.selectedFiltersData.count {
@@ -2324,78 +2464,7 @@ class audio {
             print("DISCONNECT \(audio.selectedAudioInputs[input])")
            
         }
-        
-        // DISCONNECT EQs
-        /*
-        audio.equalizerFilter1?.disconnectOutput()
-        audio.equalizerFilter2?.disconnectOutput()
-        audio.equalizerFilter3?.disconnectOutput()
-        audio.equalizerFilter4?.disconnectOutput()
-        audio.equalizerFilter5?.disconnectOutput()
-        audio.equalizerFilter6?.disconnectOutput()
-        audio.equalizerFilter7?.disconnectOutput()
-        audio.equalizerFilter8?.disconnectOutput()
-        audio.equalizerFilter9?.disconnectOutput()
-        audio.equalizerFilter10?.disconnectOutput()
-        
-        audio.equalizerFilter1?.disconnectInput()
-        audio.equalizerFilter2?.disconnectInput()
-        audio.equalizerFilter3?.disconnectInput()
-        audio.equalizerFilter4?.disconnectInput()
-        audio.equalizerFilter5?.disconnectInput()
-        audio.equalizerFilter6?.disconnectInput()
-        audio.equalizerFilter7?.disconnectInput()
-        audio.equalizerFilter8?.disconnectInput()
-        audio.equalizerFilter9?.disconnectInput()
-        audio.equalizerFilter10?.disconnectInput()
-        
-        audio.equalizerFilter11?.disconnectOutput()
-        audio.equalizerFilter12?.disconnectOutput()
-        audio.equalizerFilter13?.disconnectOutput()
-        audio.equalizerFilter14?.disconnectOutput()
-        audio.equalizerFilter15?.disconnectOutput()
-        audio.equalizerFilter16?.disconnectOutput()
-        audio.equalizerFilter17?.disconnectOutput()
-        audio.equalizerFilter18?.disconnectOutput()
-        audio.equalizerFilter19?.disconnectOutput()
-        audio.equalizerFilter20?.disconnectOutput()
-        
-        audio.equalizerFilter11?.disconnectInput()
-        audio.equalizerFilter12?.disconnectInput()
-        audio.equalizerFilter13?.disconnectInput()
-        audio.equalizerFilter14?.disconnectInput()
-        audio.equalizerFilter15?.disconnectInput()
-        audio.equalizerFilter16?.disconnectInput()
-        audio.equalizerFilter17?.disconnectInput()
-        audio.equalizerFilter18?.disconnectInput()
-        audio.equalizerFilter19?.disconnectInput()
-        audio.equalizerFilter20?.disconnectInput()
-        
-        audio.equalizerFilter21?.disconnectOutput()
-        audio.equalizerFilter22?.disconnectOutput()
-        audio.equalizerFilter23?.disconnectOutput()
-        audio.equalizerFilter24?.disconnectOutput()
-        audio.equalizerFilter25?.disconnectOutput()
-        audio.equalizerFilter26?.disconnectOutput()
-        audio.equalizerFilter27?.disconnectOutput()
-        audio.equalizerFilter28?.disconnectOutput()
-        audio.equalizerFilter29?.disconnectOutput()
-        audio.equalizerFilter30?.disconnectOutput()
-        
-        audio.equalizerFilter21?.disconnectInput()
-        audio.equalizerFilter22?.disconnectInput()
-        audio.equalizerFilter23?.disconnectInput()
-        audio.equalizerFilter24?.disconnectInput()
-        audio.equalizerFilter25?.disconnectInput()
-        audio.equalizerFilter26?.disconnectInput()
-        audio.equalizerFilter27?.disconnectInput()
-        audio.equalizerFilter28?.disconnectInput()
-        audio.equalizerFilter29?.disconnectInput()
-        audio.equalizerFilter30?.disconnectInput()
-        
-        audio.equalizerFilter31?.disconnectOutput()
-        audio.equalizerFilter31?.disconnectInput()
-        */
+  
         
         // DISCONNECT MONITORS
         outputAmplitudeTracker?.disconnectInput()
@@ -2416,6 +2485,9 @@ class audio {
         audio.selectedAudioInputs.removeAll()
         startAudio()
     }
+    
+    
+    static var tempBalancer: AKBalancer?
     
     var initialStart = true
     var micVolume = Double()
@@ -2573,6 +2645,10 @@ class audio {
     
     var finalFilters = [AKInput]()
     
+    
+    
+    
+    
     func setBandwidthsForEQ() {
         audio.equalizerFilter1?.bandwidth = audio.equalizerFilter1!.centerFrequency * audio.eqBandwidthRatio
         audio.equalizerFilter2?.bandwidth = audio.equalizerFilter2!.centerFrequency * audio.eqBandwidthRatio
@@ -2620,6 +2696,7 @@ class audio {
         mic = AKMicrophone()
         outputBooster = AKBooster()
         inputBooster = AKBooster()
+        
         
         
         // MIXERS
@@ -2684,6 +2761,12 @@ class audio {
         audio.threeBandFilterLow?.centerFrequency = 100
         audio.threeBandFilterLow?.bandwidth = 100 * 0.7
         audio.threeBandFilterLow?.gain = 1
+        
+        
+        audio.toneFilter = AKToneFilter()
+        audio.toneComplementFilter = AKToneComplementFilter()
+        
+        
         
         
         audio.equalizerFilter1 = AKEqualizerFilter()
@@ -2845,8 +2928,7 @@ class audio {
         audio.highPassFilter = AKHighPassFilter()
         audio.lowPassFilter = AKLowPassFilter()
         
-        audio.toneFilter = AKToneFilter()
-        //audio.toneFilter?.start()
+       
         
         audio.masterBooster = AKBooster()
         //audio.masterBooster?.start()
