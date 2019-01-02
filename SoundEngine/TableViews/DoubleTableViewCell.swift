@@ -12,6 +12,7 @@ class DoubleTableViewCell: UITableViewCell {
     
     var id = String()
     
+    @IBOutlet weak var coloringView: UIView!
     @IBOutlet weak var specialSwitch: UISwitch!
     @IBOutlet weak var specialTitle: UILabel!
     @IBOutlet weak var specialViewArea: UIView!
@@ -32,6 +33,7 @@ class DoubleTableViewCell: UITableViewCell {
     @IBOutlet weak var title: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
+        coloringView.layer.cornerRadius = coloringView.bounds.width / 2
         // Initialization code
         self.contentView.backgroundColor = UIColor.clear
         self.backgroundColor = interface.tableBackground

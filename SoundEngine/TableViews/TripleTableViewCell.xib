@@ -53,6 +53,13 @@
                             <constraint firstAttribute="bottom" secondItem="avh-pO-wuF" secondAttribute="bottom" constant="8" id="xWK-Bb-ipa"/>
                         </constraints>
                     </view>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cZY-fS-3lO">
+                        <rect key="frame" x="2" y="19" width="8" height="8"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="cZY-fS-3lO" secondAttribute="height" multiplier="1:1" id="NVO-ds-f18"/>
+                        </constraints>
+                    </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8PM-XB-0Pg">
                         <rect key="frame" x="12" y="7" width="252" height="32"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -194,7 +201,10 @@
                     <constraint firstItem="8PM-XB-0Pg" firstAttribute="leading" secondItem="Fve-oP-8n7" secondAttribute="leading" constant="12" id="BYs-1a-48D"/>
                     <constraint firstItem="ZRa-aC-o9e" firstAttribute="leading" secondItem="8PM-XB-0Pg" secondAttribute="trailing" id="D4A-Wv-6F0"/>
                     <constraint firstItem="aIj-Ei-0i0" firstAttribute="leading" secondItem="zhw-I7-wXU" secondAttribute="leading" id="H9J-b5-s2I"/>
+                    <constraint firstItem="cZY-fS-3lO" firstAttribute="centerY" secondItem="8PM-XB-0Pg" secondAttribute="centerY" id="L1p-6d-KEo"/>
                     <constraint firstItem="zhw-I7-wXU" firstAttribute="bottom" secondItem="aIj-Ei-0i0" secondAttribute="top" id="XCo-LD-ESa"/>
+                    <constraint firstItem="8PM-XB-0Pg" firstAttribute="leading" secondItem="cZY-fS-3lO" secondAttribute="trailing" constant="2" id="ZlI-ef-4ld"/>
+                    <constraint firstItem="cZY-fS-3lO" firstAttribute="leading" secondItem="Fve-oP-8n7" secondAttribute="leading" constant="2" id="fwl-gG-UZh"/>
                     <constraint firstItem="aIj-Ei-0i0" firstAttribute="trailing" secondItem="zhw-I7-wXU" secondAttribute="trailing" id="rhT-Pa-EDP"/>
                     <constraint firstItem="8PM-XB-0Pg" firstAttribute="top" secondItem="Fve-oP-8n7" secondAttribute="top" constant="7" id="ryF-4g-RDO"/>
                     <constraint firstAttribute="trailing" secondItem="ZRa-aC-o9e" secondAttribute="trailing" constant="16" id="upO-ak-K3r"/>
@@ -204,6 +214,7 @@
             <viewLayoutGuide key="safeArea" id="vNO-c6-PWZ"/>
             <connections>
                 <outlet property="bottomConstraint" destination="AqK-nA-YKa" id="HhN-J4-JvZ"/>
+                <outlet property="coloringView" destination="cZY-fS-3lO" id="Ips-g7-RrN"/>
                 <outlet property="controllerHeight" destination="uVf-sH-dzW" id="yw2-ST-fTT"/>
                 <outlet property="controllersView" destination="zhw-I7-wXU" id="Fm1-P5-Jnr"/>
                 <outlet property="onOffButton" destination="ZRa-aC-o9e" id="gny-ix-8EJ"/>

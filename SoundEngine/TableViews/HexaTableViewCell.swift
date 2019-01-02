@@ -11,7 +11,7 @@ import UIKit
 class HexaTableViewCell: UITableViewCell {
     
     var id = String()
-    
+    @IBOutlet weak var coloringView: UIView!
     @IBOutlet weak var specialSwitch: UISwitch!
     @IBOutlet weak var specialTitle: UILabel!
     @IBOutlet weak var specialViewArea: UIView!
@@ -47,6 +47,8 @@ class HexaTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        coloringView.layer.cornerRadius = coloringView.bounds.width / 2
+        
         self.contentView.backgroundColor = UIColor.clear
         self.backgroundColor = interface.tableBackground
         self.title.textColor = interface.text

@@ -76,10 +76,11 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
     
     func interfaceSetup() {
        
-       
+        inputLevel.transform = CGAffineTransform(rotationAngle: CGFloat(-Double.pi/2))
         inputLevel.setValue(Float((audio.shared.inputBooster?.dB)!), animated: true)
         inputLevel.addTarget(self, action: #selector(inputLevelChanged), for: .valueChanged)
         inputLevel.addTarget(self, action: #selector(inputLevelChangeEnded), for: .touchUpInside)
+        outputLevel.transform = CGAffineTransform(rotationAngle: CGFloat(-Double.pi/2))
         outputLevel.setValue(Float((audio.shared.outputBooster?.dB)!), animated: true)
         outputLevel.addTarget(self, action: #selector(outputLevelChanged), for: .valueChanged)
         outputLevel.addTarget(self, action: #selector(outputLevelChangeEnded), for: .touchUpInside)
@@ -205,9 +206,9 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
         let stackUnitWidth = waveformView.frame.width / CGFloat(units)
         var unitCount = 0
         for unit in audio.selectedAudioInputs {
-            
+
                 unit.outputNode.removeTap(onBus: 0)
-              
+              if unitCount < units {
                     let node = unit as! AKNode
                     let stackUnit = AKNodeOutputPlot(node, frame: CGRect(x: 0, y: 0, width: stackUnitWidth, height: 80))
                     stackUnit.heightAnchor.constraint(equalToConstant: 80).isActive = true
@@ -215,20 +216,14 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
                     stackUnit.plotType = .buffer
                     stackUnit.shouldFill = false
                     stackUnit.shouldMirror = false
-                    // let nextColor = Colors.palette.materialDesignColors(x: unitCount, y: unitCount)
-                    if unitCount < units {
+            
                         let name = audio.selectedEffectsData[unitCount].id
                         let color = Colors.palette.colorForEffect(name: name)
                         stackUnit.color = color
+                        stackUnit.backgroundColor = interface.heading
+                        stack.addArrangedSubview(stackUnit)
                     }
-                    else {
-                        stackUnit.color = UIColor.red
-                    }
-                    stackUnit.backgroundColor = interface.heading
-                    stack.addArrangedSubview(stackUnit)
-                
-               
-         
+  
             unitCount = unitCount + 1
             
         }
@@ -464,6 +459,7 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
         var cellIsLast = Bool()
         var cellId = String()
         var cellIsSpecial = Bool()
+        var cellColorCoding = UIColor()
         
         if tableView == savedSoundsTableView{
             cellTitle = Collections.savedSounds[indexPath.row]
@@ -474,6 +470,8 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
             cellType = audio.selectedEffectsData[indexPath.row].type
             cellIsLast = audio.selectedEffectsData.endIndex - 1 == indexPath.row
             cellId = audio.selectedEffectsData[indexPath.row].id
+            cellColorCoding = Colors.palette.colorForEffect(name: cellId)
+            
             if Collections.specialEffects.contains(cellId) {
                 cellIsSpecial = true
             }
@@ -488,6 +486,7 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
             cellType = audio.selectedFiltersData[indexPath.row].type
             cellIsLast = audio.selectedFiltersData.endIndex - 1 == indexPath.row
             cellId = audio.selectedFiltersData[indexPath.row].id
+            cellColorCoding = Colors.palette.colorForEffect(name: cellId)
             if Collections.specialEffects.contains(cellId) {
                 cellIsSpecial = true
             }
@@ -503,7 +502,8 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
             
         else {
             cellTitle = audio.availableEffectsData[indexPath.row].title
-            
+            cellId = audio.availableEffectsData[indexPath.row].id
+            cellColorCoding = Colors.palette.colorForEffect(name: cellId)
         }
         
         if tableView == availableEffects || tableView == availableFilters || tableView == savedSoundsTableView {
@@ -526,6 +526,7 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
             case "1":
                 // One slider
                 let cell = tableView.dequeueReusableCell(withIdentifier: "TableViewCell", for: indexPath) as! TableViewCell
+                cell.coloringView.backgroundColor = cellColorCoding
                 
                 let slider = audio.shared.getValues(id: cellId, slider: 1)
                 cell.sliderTitle.text = slider.name
@@ -533,6 +534,7 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
                 cell.slider.minimumValue = slider.min
                 cell.slider.maximumValue = slider.max
                 cell.slider.value = slider.valueForSlider
+                
                 
                 if cellIsSpecial {
                     let special = audio.shared.getValues(id: cellId, slider: 0)
@@ -587,6 +589,7 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
             case "2":
                 // Has two sliders
                 let cell = tableView.dequeueReusableCell(withIdentifier: "DoubleTableViewCell", for: indexPath) as! DoubleTableViewCell
+                cell.coloringView.backgroundColor = cellColorCoding
                 
                 let slider1 = audio.shared.getValues(id: cellId, slider: 1)
                 cell.slider1Title.text = slider1.name
@@ -658,6 +661,7 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
             case "3":
                 
                 let cell = tableView.dequeueReusableCell(withIdentifier: "TripleTableViewCell", for: indexPath) as! TripleTableViewCell
+                cell.coloringView.backgroundColor = cellColorCoding
                 let slider1 = audio.shared.getValues(id: cellId, slider: 1)
                 cell.slider1Title.text = slider1.name
                 cell.slider1Value.text = slider1.value
@@ -740,6 +744,7 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
             case "4":
                 
                 let cell = tableView.dequeueReusableCell(withIdentifier: "QuatroTableViewCell", for: indexPath) as! QuatroTableViewCell
+                cell.coloringView.backgroundColor = cellColorCoding
                 
                 let slider1 = audio.shared.getValues(id: cellId, slider: 1)
                 cell.slider1Title.text = slider1.name
@@ -833,6 +838,7 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
             case "5":
                 // Has two sliders
                 let cell = tableView.dequeueReusableCell(withIdentifier: "PentaTableViewCell", for: indexPath) as! PentaTableViewCell
+                cell.coloringView.backgroundColor = cellColorCoding
                 
                 let slider1 = audio.shared.getValues(id: cellId, slider: 1)
                 cell.slider1Title.text = slider1.name
@@ -933,6 +939,7 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
             case "6":
                 // Has two sliders
                 let cell = tableView.dequeueReusableCell(withIdentifier: "HexaTableViewCell", for: indexPath) as! HexaTableViewCell
+                cell.coloringView.backgroundColor = cellColorCoding
                 
                 let slider1 = audio.shared.getValues(id: cellId, slider: 1)
                 cell.slider1Title.text = slider1.name
@@ -1043,6 +1050,7 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
             case "7":
                 // Has two sliders
                 let cell = tableView.dequeueReusableCell(withIdentifier: "HeptaTableViewCell", for: indexPath) as! HeptaTableViewCell
+                cell.coloringView.backgroundColor = cellColorCoding
                 
                 let slider1 = audio.shared.getValues(id: cellId, slider: 1)
                 cell.slider1Title.text = slider1.name
@@ -1163,6 +1171,7 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
             case "8":
                 // Has two sliders
                 let cell = tableView.dequeueReusableCell(withIdentifier: "OctaTableViewCell", for: indexPath) as! OctaTableViewCell
+                cell.coloringView.backgroundColor = cellColorCoding
                 
                 let slider1 = audio.shared.getValues(id: cellId, slider: 1)
                 cell.slider1Title.text = slider1.name
@@ -1293,6 +1302,7 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
             default:
                 // One slider
                 let cell = tableView.dequeueReusableCell(withIdentifier: "TableViewCell", for: indexPath) as! TableViewCell
+                cell.coloringView.backgroundColor = cellColorCoding
                 
                 let slider = audio.shared.getValues(id: cellId, slider: 1)
                 cell.sliderTitle.text = slider.name

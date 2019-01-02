@@ -54,7 +54,7 @@ class Colors {
         case "costelloReverb": color = UIColor.red
         case "flatFrequencyResponseReverb": color = UIColor.red
         case "tremolo": color = UIColor.yellow
-        default : color = UIColor.black
+        default : color = UIColor.clear
         }
         return color
     }

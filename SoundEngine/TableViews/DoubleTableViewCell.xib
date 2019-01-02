@@ -19,6 +19,13 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="204.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ihb-Dt-Wyr">
+                        <rect key="frame" x="2" y="19" width="8" height="8"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="Ihb-Dt-Wyr" secondAttribute="height" multiplier="1:1" id="Oqj-Dl-4qf"/>
+                        </constraints>
+                    </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oKx-Hq-Z4i">
                         <rect key="frame" x="12" y="134" width="296" height="50"/>
                         <subviews>
@@ -154,16 +161,19 @@
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
+                    <constraint firstItem="Ihb-Dt-Wyr" firstAttribute="centerY" secondItem="3Te-vY-Urb" secondAttribute="centerY" id="09H-0s-veW"/>
                     <constraint firstItem="U9T-eq-xbr" firstAttribute="top" secondItem="3Te-vY-Urb" secondAttribute="bottom" constant="7" id="1jc-rx-e6A"/>
                     <constraint firstItem="vb6-Io-XhO" firstAttribute="leading" secondItem="3Te-vY-Urb" secondAttribute="trailing" id="F2S-rb-6ND"/>
                     <constraint firstAttribute="trailing" secondItem="U9T-eq-xbr" secondAttribute="trailing" constant="12" id="HXz-g1-riu"/>
                     <constraint firstItem="vb6-Io-XhO" firstAttribute="centerY" secondItem="3Te-vY-Urb" secondAttribute="centerY" id="M8u-BB-ImX"/>
+                    <constraint firstItem="3Te-vY-Urb" firstAttribute="leading" secondItem="Ihb-Dt-Wyr" secondAttribute="trailing" constant="2" id="N0H-VQ-DVa"/>
                     <constraint firstAttribute="bottom" secondItem="oKx-Hq-Z4i" secondAttribute="bottom" id="VYo-74-mkP"/>
                     <constraint firstItem="3Te-vY-Urb" firstAttribute="top" secondItem="cVY-dL-JYx" secondAttribute="top" constant="7" id="WNI-jZ-a0e"/>
                     <constraint firstItem="U9T-eq-xbr" firstAttribute="leading" secondItem="cVY-dL-JYx" secondAttribute="leading" constant="12" id="Xc6-d0-n9l"/>
                     <constraint firstItem="oKx-Hq-Z4i" firstAttribute="trailing" secondItem="U9T-eq-xbr" secondAttribute="trailing" id="Z8q-0A-g5C"/>
                     <constraint firstItem="oKx-Hq-Z4i" firstAttribute="top" secondItem="U9T-eq-xbr" secondAttribute="bottom" id="ZZ5-5j-TLA"/>
                     <constraint firstItem="3Te-vY-Urb" firstAttribute="leading" secondItem="cVY-dL-JYx" secondAttribute="leading" constant="12" id="eim-kc-tR8"/>
+                    <constraint firstItem="Ihb-Dt-Wyr" firstAttribute="leading" secondItem="cVY-dL-JYx" secondAttribute="leading" constant="2" id="gv4-EK-vEp"/>
                     <constraint firstAttribute="trailing" secondItem="vb6-Io-XhO" secondAttribute="trailing" constant="16" id="mLo-pg-FtE"/>
                     <constraint firstItem="oKx-Hq-Z4i" firstAttribute="leading" secondItem="U9T-eq-xbr" secondAttribute="leading" id="ncp-Wo-wly"/>
                 </constraints>
@@ -172,6 +182,7 @@
             <viewLayoutGuide key="safeArea" id="DOZ-HC-Esc"/>
             <connections>
                 <outlet property="bottomConstraint" destination="VYo-74-mkP" id="DY7-Ve-jes"/>
+                <outlet property="coloringView" destination="Ihb-Dt-Wyr" id="NCr-QJ-jb4"/>
                 <outlet property="controllerHeight" destination="5ys-4i-zPH" id="Wb1-4O-fkB"/>
                 <outlet property="controllersView" destination="U9T-eq-xbr" id="JC6-Wc-uqi"/>
                 <outlet property="onOffButton" destination="vb6-Io-XhO" id="5bG-Yz-q6b"/>

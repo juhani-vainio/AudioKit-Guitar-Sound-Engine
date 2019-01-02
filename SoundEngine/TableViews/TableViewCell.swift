@@ -14,6 +14,7 @@ class TableViewCell: UITableViewCell {
     
     var sliders = [String]()
   
+    @IBOutlet weak var coloringView: UIView!
     @IBOutlet weak var specialSwitch: UISwitch!
     @IBOutlet weak var specialTitle: UILabel!
     @IBOutlet weak var specialViewArea: UIView!
@@ -30,6 +31,9 @@ class TableViewCell: UITableViewCell {
     @IBOutlet weak var title: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
+        coloringView.layer.cornerRadius = coloringView.bounds.width / 2
+        
+        
         // Initialization code
         contentView.backgroundColor = UIColor.clear
         backgroundColor = interface.tableBackground

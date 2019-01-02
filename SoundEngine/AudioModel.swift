@@ -43,33 +43,34 @@ class audio {
     
    static let allPossibleEffectsData = [
     // DISTORTIONS
+    effectData(id: "clipper",opened: false, title: "Clipper", type: "1"),
     effectData(id: "bitCrusher", opened: false, title: "Bit Crusher", type: "2"),
+    effectData(id: "decimator" ,opened: false, title: "Decimator", type: "3"),
     effectData(id: "tanhDistortion", opened: false, title: "Tanh Distortion", type: "4"),
     effectData(id: "ringModulator", opened: false, title: "Ring Modulator", type: "4"),
-    effectData(id: "clipper",opened: false, title: "Clipper", type: "1"),
-    effectData(id: "decimator" ,opened: false, title: "Decimator", type: "3"),
     
     // WAH
     effectData(id: "autoWah" , opened: false, title: "Wah Wah!", type: "3"),
     
     // DYNAMICS
-    effectData(id: "compressor" ,opened: false, title: "Compressor", type: "6"),
-    effectData(id: "dynaRageCompressor", opened: false, title: "Dyna Rage Compressor", type: "5"),
-    effectData(id: "dynamicsProcessor" ,opened: false, title: "Dynamics Processor", type: "8"),
     effectData(id: "dynamicRangeCompressor" ,opened: false, title: "Dynamic Range Compressor", type: "4"),
+    effectData(id: "dynaRageCompressor", opened: false, title: "Dyna Rage Compressor", type: "5"),
+    effectData(id: "compressor" ,opened: false, title: "Compressor", type: "6"),
+    effectData(id: "dynamicsProcessor" ,opened: false, title: "Dynamics Processor", type: "8"),
     
-    //TIME BASED
-    effectData(id: "delay", opened: false, title: "Delay", type: "4"),
-    effectData(id: "variableDelay", opened: false, title: "Variable Delay", type: "2"),
-    effectData(id: "flanger" ,opened: false, title: "Flanger", type: "4"),
-    effectData(id: "phaser" ,opened: false, title: "Phaser", type: "8"),
-    effectData(id: "chorus" ,opened: false, title: "Chorus", type: "4"),
-    effectData(id: "reverb" ,opened: false, title: "Reverb", type: "1"),
-    effectData(id: "reverb2" ,opened: false, title: "Reverb 2", type: "7"),
+  
     effectData(id: "chowningReverb" ,opened: false, title: "Chowning Reverb", type: "0"),
-    effectData(id: "costelloReverb" ,opened: false, title: "Costello Reverb", type: "2"),
     effectData(id: "flatFrequencyResponseReverb" ,opened: false, title: "Flat Freq Response Reverb", type: "1"),
+    effectData(id: "reverb" ,opened: false, title: "Reverb", type: "1"),
+    effectData(id: "variableDelay", opened: false, title: "Variable Delay", type: "2"),
+    effectData(id: "costelloReverb" ,opened: false, title: "Costello Reverb", type: "2"),
     effectData(id: "tremolo" ,opened: false, title: "Tremolo", type: "2"),
+    effectData(id: "delay", opened: false, title: "Delay", type: "4"),
+    effectData(id: "flanger" ,opened: false, title: "Flanger", type: "4"),
+    effectData(id: "chorus" ,opened: false, title: "Chorus", type: "4"),
+    effectData(id: "reverb2" ,opened: false, title: "Reverb 2", type: "7"),
+    effectData(id: "phaser" ,opened: false, title: "Phaser", type: "8")
+    
     ]
     
     
@@ -2211,33 +2212,25 @@ class audio {
  
         switch id {
         //effects
-        case "bitCrusher" : audio.tempBalancer = AKBalancer(comparator: audio.bitCrusher!)
-        case "clipper" : audio.tempBalancer = AKBalancer(comparator: audio.clipper!)
-        case "dynaRageCompressor":  audio.tempBalancer = AKBalancer(comparator: audio.dynaRageCompressor!)
-        case "autoWah":  audio.tempBalancer = AKBalancer(comparator: audio.autoWah!)
-        case "delay":  audio.tempBalancer = AKBalancer(comparator: audio.delay!)
-        case "variableDelay": audio.tempBalancer = AKBalancer(comparator: audio.variableDelay!)
-        case "decimator": audio.tempBalancer = AKBalancer(comparator: audio.decimator!)
-        case "tanhDistortion": audio.tempBalancer = AKBalancer(comparator: audio.tanhDistortion!)
-        case "ringModulator": audio.tempBalancer = AKBalancer(comparator: audio.ringModulator!)
-        case "flanger": audio.tempBalancer = AKBalancer(comparator: audio.flanger!)
-        case "phaser": audio.tempBalancer = AKBalancer(comparator: audio.phaser!)
-        case "chorus": audio.tempBalancer = AKBalancer(comparator: audio.chorus!)
-        case "compressor": audio.tempBalancer = AKBalancer(comparator: audio.compressor!)
-        case "dynamicsProcessor": audio.tempBalancer = AKBalancer(comparator: audio.dynamicsProcessor!)
-        case "dynamicRangeCompressor": audio.tempBalancer = AKBalancer(comparator: audio.dynamicRangeCompressor!)
-        case "reverb": audio.tempBalancer = AKBalancer(comparator: audio.reverb!)
-        case "reverb2": audio.tempBalancer = AKBalancer(comparator: audio.reverb2!)
-        case "chowningReverb": audio.tempBalancer = AKBalancer(comparator: audio.chowningReverb!)
-        case "costelloReverb": audio.tempBalancer = AKBalancer(comparator: audio.costelloReverb!)
-        case "flatFrequencyResponseReverb": audio.tempBalancer = AKBalancer(comparator: audio.flatFrequencyResponseReverb!)
-        case "tremolo": audio.selectedAudioInputs.append(audio.tremolo!)
-            
-        case "first" : audio.tempBalancer = AKBalancer(comparator: inputAmplitudeTracker!)
+        case "bitCrusher" : audio.bitCrusherBalancer = AKBalancer(comparator: audio.bitCrusher!)
+                            audio.selectedAudioInputs.append(audio.bitCrusherBalancer!)
+        case "clipper" : audio.clipperBalancer = AKBalancer(comparator: audio.clipper!)
+                        audio.selectedAudioInputs.append(audio.clipperBalancer!)
+        case "autoWah":  audio.autoWahBalancer = AKBalancer(comparator: audio.autoWah!)
+                        audio.selectedAudioInputs.append(audio.autoWahBalancer!)
+        case "decimator": audio.decimatorBalancer = AKBalancer(comparator: audio.decimator!)
+                        audio.selectedAudioInputs.append(audio.decimatorBalancer!)
+        case "tanhDistortion": audio.tanhDistortionBalancer = AKBalancer(comparator: audio.tanhDistortion!)
+                            audio.selectedAudioInputs.append(audio.tanhDistortionBalancer!)
+        case "ringModulator": audio.ringModulatorBalancer = AKBalancer(comparator: audio.ringModulator!)
+                            audio.selectedAudioInputs.append(audio.ringModulatorBalancer!)
+    
+        case "input" : audio.inputBalancer = AKBalancer(comparator: inputAmplitudeTracker!)
+                        audio.selectedAudioInputs.append(audio.inputBalancer!)
             default : print("NOTHING to do over HERE either neither")
         }
         
-        audio.selectedAudioInputs.append(audio.tempBalancer!)
+        
     }
     
     func addToselectedEffects(id : String) {
@@ -2287,18 +2280,17 @@ class audio {
             let id = audio.selectedEffectsData[effect].id
             
                addToselectedEffects(id:id)
-        
-            if id == "clipper" {
-                if effect > 0 {
-                    addBalancer(id: audio.selectedEffectsData[effect - 1].id)
+        /*
+            if effect > 0 {
+                addBalancer(id: audio.selectedEffectsData[effect - 1].id)
                 
                 }
-                else {
-                    addBalancer(id: "first")
-                }
-                
+            else {
+                addBalancer(id: "input")
             }
-            
+            */
+        
+
             }
         // FILTERS
         for effect in 0..<audio.selectedFiltersData.count {
@@ -2453,18 +2445,15 @@ class audio {
     
     
     func resetAudioEffects() {
-        do {
-            try AudioKit.stop()
-        } catch {
-            print("Could not stop AudioKit")
-        }
+      
+        
         for input in 0..<audio.selectedAudioInputs.count {
             audio.selectedAudioInputs[input].disconnectOutput()
             audio.selectedAudioInputs[input].disconnectInput()
             print("DISCONNECT \(audio.selectedAudioInputs[input])")
            
         }
-  
+       
         
         // DISCONNECT MONITORS
         outputAmplitudeTracker?.disconnectInput()
@@ -2482,12 +2471,27 @@ class audio {
   
         mic?.disconnectOutput()
         
+     
+        
         audio.selectedAudioInputs.removeAll()
+        
+        do {
+            try AudioKit.stop()
+        } catch {
+            print("Could not stop AudioKit")
+        }
+        
         startAudio()
     }
     
     
-    static var tempBalancer: AKBalancer?
+    static var clipperBalancer: AKBalancer?
+    static var inputBalancer: AKBalancer?
+    static var decimatorBalancer: AKBalancer?
+    static var tanhDistortionBalancer: AKBalancer?
+    static var ringModulatorBalancer: AKBalancer?
+    static var autoWahBalancer: AKBalancer?
+    static var bitCrusherBalancer: AKBalancer?
     
     var initialStart = true
     var micVolume = Double()

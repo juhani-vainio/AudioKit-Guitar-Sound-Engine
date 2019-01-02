@@ -215,6 +215,13 @@
                         </constraints>
                         <state key="normal" title="OFF"/>
                     </button>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ovg-Id-NGM">
+                        <rect key="frame" x="2" y="19" width="8" height="8"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="ovg-Id-NGM" secondAttribute="height" multiplier="1:1" id="bpF-RW-5w9"/>
+                        </constraints>
+                    </view>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
@@ -222,20 +229,24 @@
                     <constraint firstAttribute="bottom" secondItem="n8R-Ri-Y1T" secondAttribute="bottom" id="JPo-kH-9k3"/>
                     <constraint firstItem="lXm-bf-atp" firstAttribute="top" secondItem="wPR-a2-sPm" secondAttribute="bottom" constant="7" id="Kp6-tk-Xwe"/>
                     <constraint firstItem="n8R-Ri-Y1T" firstAttribute="top" secondItem="lXm-bf-atp" secondAttribute="bottom" id="LFa-92-nDI"/>
+                    <constraint firstItem="ovg-Id-NGM" firstAttribute="centerY" secondItem="wPR-a2-sPm" secondAttribute="centerY" id="MT7-VF-0gD"/>
                     <constraint firstItem="1Ia-0f-ZsU" firstAttribute="leading" secondItem="wPR-a2-sPm" secondAttribute="trailing" id="MlB-55-ibc"/>
                     <constraint firstAttribute="trailing" secondItem="1Ia-0f-ZsU" secondAttribute="trailing" constant="16" id="OcE-Nd-6w2"/>
                     <constraint firstItem="wPR-a2-sPm" firstAttribute="leading" secondItem="gKj-PZ-igb" secondAttribute="leading" constant="12" id="QnT-z0-YCw"/>
                     <constraint firstItem="wPR-a2-sPm" firstAttribute="top" secondItem="gKj-PZ-igb" secondAttribute="top" constant="7" id="SFD-id-z2j"/>
                     <constraint firstItem="n8R-Ri-Y1T" firstAttribute="leading" secondItem="lXm-bf-atp" secondAttribute="leading" id="ZP5-q2-TRR"/>
+                    <constraint firstItem="ovg-Id-NGM" firstAttribute="leading" secondItem="gKj-PZ-igb" secondAttribute="leading" constant="2" id="iRy-zN-tRD"/>
                     <constraint firstItem="lXm-bf-atp" firstAttribute="leading" secondItem="gKj-PZ-igb" secondAttribute="leading" constant="12" id="jWX-oE-kPF"/>
                     <constraint firstAttribute="trailing" secondItem="lXm-bf-atp" secondAttribute="trailing" constant="12" id="lTU-c5-R56"/>
                     <constraint firstItem="1Ia-0f-ZsU" firstAttribute="centerY" secondItem="wPR-a2-sPm" secondAttribute="centerY" id="sPQ-MD-hf6"/>
+                    <constraint firstItem="wPR-a2-sPm" firstAttribute="leading" secondItem="ovg-Id-NGM" secondAttribute="trailing" constant="2" id="zof-AP-PZJ"/>
                 </constraints>
             </tableViewCellContentView>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <viewLayoutGuide key="safeArea" id="TWP-ND-zg8"/>
             <connections>
                 <outlet property="bottomConstraint" destination="JPo-kH-9k3" id="4c5-Yt-jYo"/>
+                <outlet property="coloringView" destination="ovg-Id-NGM" id="3mN-8q-Jtb"/>
                 <outlet property="controllerHeight" destination="Clf-AL-LX8" id="Rgg-ZW-J3Q"/>
                 <outlet property="controllersView" destination="lXm-bf-atp" id="I6Y-Dj-3xR"/>
                 <outlet property="onOffButton" destination="1Ia-0f-ZsU" id="9dG-Uy-gV9"/>
