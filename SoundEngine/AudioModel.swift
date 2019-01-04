@@ -75,19 +75,26 @@ class audio {
     
     
     static let allPossibleFiltersData = [
-        // BAND  either 3 or 7
+        // EQUALIZER either 3 or 7 BAND
         // https://www.teachmeaudio.com/mixing/techniques/audio-spectrum/
-        effectData(id: "threeBandFilter", opened: false, title: "3 Band", type: "3"), // Bass , Mid, High
-        effectData(id: "sevenBandFilter", opened: false, title: "7 Band", type: "7"), // Sub-Bass, Bass, Low Mid, Mid, Upper Mid, Precence, Brilliance
+        effectData(id: "Equalizer", opened: false, title: "Equalizer", type: "Equalizer"), // Bass , Mid, High
+        //effectData(id: "sevenBandFilter", opened: false, title: "7 Band", type: "Equalizer"), // Sub-Bass, Bass, Low Mid, Mid, Upper Mid, Precence, Brilliance
+        
+        // CUT    " highPassFilter & lowPassFilter  either normal or highPassButterworthFilter & lowPassButterworthFilter"
+        effectData(id: "highLowPassFilters", opened: false, title: "Cut off", type: "PassFilters"), // add switch for FLAT as in butterworth for the pass filters
+        
         // TONE   " toneFilter & toneComplementFilter "
         effectData(id: "toneFilters", opened: false, title: "Tone", type: "1"),
-        // CUT    " highPassFilter & lowPassFilter  either normal or highPassButterworthFilter & lowPassButterworthFilter"
-        effectData(id: "highLowPassFilters", opened: false, title: "Cut off", type: "2"), // add switch for FLAT as in butterworth for the pass filters
+        effectData(id: "dcBlock", opened: false, title: "DC Block", type: "0"), // Switch
+        
+        
+        
+        // These similar tables as in effects
         effectData(id: "moogLadder", opened: false, title: "Moog Ladder", type: "2"),
         effectData(id: "resonantFilter", opened: false, title: "Resonant", type: "2"),
         effectData(id: "stringResonator", opened: false, title: "String Resonator", type: "2"),
         effectData(id: "modalResonanceFilter", opened: false, title: "Modal Resonance", type: "2"),
-        effectData(id: "dcBlock", opened: false, title: "DC Block", type: "0"), // Switch
+        
         effectData(id: "combFilterReverb", opened: false, title: "Comb Reverb", type: "2")
     ]
     
@@ -100,6 +107,45 @@ class audio {
     static var availableFiltersData = [effectData]()
     
     static var selectedFiltersData = [effectData]()
+    
+    func toggleEQ(id: String) {
+        switch id {
+        case "threeBandFilter":
+            audio.threeBandFilterHigh?.start()
+            audio.threeBandFilterMid?.start()
+            audio.threeBandFilterLow?.start()
+            audio.sevenBandFilterBrilliance?.stop()
+            audio.sevenBandFilterPrecence?.stop()
+            audio.sevenBandFilterUpperMid?.stop()
+            audio.sevenBandFilterMid?.stop()
+            audio.sevenBandFilterLowMid?.stop()
+            audio.sevenBandFilterBass?.stop()
+            audio.sevenBandFilterSubBass?.stop()
+            
+        case "sevenBandFilter":
+            audio.sevenBandFilterBrilliance?.start()
+            audio.sevenBandFilterPrecence?.start()
+            audio.sevenBandFilterUpperMid?.start()
+            audio.sevenBandFilterMid?.start()
+            audio.sevenBandFilterLowMid?.start()
+            audio.sevenBandFilterBass?.start()
+            audio.sevenBandFilterSubBass?.start()
+            audio.threeBandFilterHigh?.stop()
+            audio.threeBandFilterMid?.stop()
+            audio.threeBandFilterLow?.stop()
+        default:
+            audio.threeBandFilterHigh?.start()
+            audio.threeBandFilterMid?.start()
+            audio.threeBandFilterLow?.start()
+            audio.sevenBandFilterBrilliance?.stop()
+            audio.sevenBandFilterPrecence?.stop()
+            audio.sevenBandFilterUpperMid?.stop()
+            audio.sevenBandFilterMid?.stop()
+            audio.sevenBandFilterLowMid?.stop()
+            audio.sevenBandFilterBass?.stop()
+            audio.sevenBandFilterSubBass?.stop()
+        }
+    }
     
     func toggleOnOff(id: String, isOn: Bool) {
         switch id {
@@ -219,6 +265,125 @@ class audio {
         return Float(booster.dB)
     }
     
+    func changeEQValues(slider: String, value: Double) -> String {
+        var newValue = String()
+       
+            switch slider {
+                
+            case "threeBandHighSlider":
+                audio.threeBandFilterHigh?.gain = value
+                let text = String(value)
+                newValue = String(text.prefix(3))
+            case "threeBandMidSlider":
+                audio.threeBandFilterMid?.gain = value
+                let text = String(value)
+                newValue = String(text.prefix(3))
+            case "threeBandLowSlider":
+                audio.threeBandFilterLow?.gain = value
+                let text = String(value)
+                newValue = String(text.prefix(3))
+                
+            case "sevenBandBrillianceSlider":
+                audio.sevenBandFilterBrilliance?.gain = value
+                let text = String(value)
+                newValue = String(text.prefix(3))
+            case "sevenBandPrecenceSlider":
+                audio.sevenBandFilterPrecence?.gain = value
+                let text = String(value)
+                newValue = String(text.prefix(3))
+            case "sevenBandUpperMidSlider":
+                audio.sevenBandFilterUpperMid?.gain = value
+                let text = String(value)
+                newValue = String(text.prefix(3))
+            case "sevenBandMidSlider":
+                audio.sevenBandFilterMid?.gain = value
+                let text = String(value)
+                newValue = String(text.prefix(3))
+            case "sevenBandLowMidSlider":
+                audio.sevenBandFilterLowMid?.gain = value
+                let text = String(value)
+                newValue = String(text.prefix(3))
+            case "sevenBandBassSlider":
+                audio.sevenBandFilterBass?.gain = value
+                let text = String(value)
+                newValue = String(text.prefix(3))
+            case "sevenBandSubBassSlider":
+                audio.sevenBandFilterSubBass?.gain = value
+                let text = String(value)
+                newValue = String(text.prefix(3))
+          
+                
+            default: break
+                
+            }
+        return newValue
+    }
+    
+    func getEQ(id: String, slider: Int) -> (min: Float, max: Float, valueForSlider: Float, value: String) {
+        let min = 0.1
+        let max = 3
+        var valueForSlider = Float(0.69)
+        var value = ""
+        switch id {
+            case "threeBandFilter":
+                
+            switch slider {
+            case 1:
+                valueForSlider = Float(audio.threeBandFilterHigh!.gain)
+                value = String(audio.threeBandFilterHigh!.gain)
+                value = String(value.prefix(3))
+  
+            case 2:
+                valueForSlider = Float(audio.threeBandFilterMid!.gain)
+                value = String(audio.threeBandFilterMid!.gain)
+                value = String(value.prefix(3))
+            case 3:
+                valueForSlider = Float(audio.threeBandFilterLow!.gain)
+                value = String(audio.threeBandFilterLow!.gain)
+                value = String(value.prefix(3))
+            default: break
+            }
+        case "sevenBandFilter":
+            
+            switch slider {
+            case 1:
+                valueForSlider = Float(audio.sevenBandFilterBrilliance!.gain)
+                value = String(audio.sevenBandFilterBrilliance!.gain)
+                value = String(value.prefix(3))
+                
+            case 2:
+                valueForSlider = Float(audio.sevenBandFilterPrecence!.gain)
+                value = String(audio.sevenBandFilterPrecence!.gain)
+                value = String(value.prefix(3))
+            case 3:
+                valueForSlider = Float(audio.sevenBandFilterUpperMid!.gain)
+                value = String(audio.sevenBandFilterUpperMid!.gain)
+                value = String(value.prefix(3))
+            case 4:
+                valueForSlider = Float(audio.sevenBandFilterMid!.gain)
+                value = String(audio.sevenBandFilterMid!.gain)
+                value = String(value.prefix(3))
+                
+            case 5:
+                valueForSlider = Float(audio.sevenBandFilterLowMid!.gain)
+                value = String(audio.sevenBandFilterLowMid!.gain)
+                value = String(value.prefix(3))
+            case 6:
+                valueForSlider = Float(audio.sevenBandFilterBass!.gain)
+                value = String(audio.sevenBandFilterBass!.gain)
+                value = String(value.prefix(3))
+            case 7:
+                valueForSlider = Float(audio.sevenBandFilterSubBass!.gain)
+                value = String(audio.sevenBandFilterSubBass!.gain)
+                value = String(value.prefix(3))
+            default: break
+            }
+            
+        default: break
+        }
+        
+        return (Float(min), Float(max), valueForSlider, value)
+    }
  
     func getEQValues(id: String, slider: Int) -> (min: Float, max: Float, valueForSlider: Float, value: String, name : String) {
         let min = -6
@@ -392,21 +557,10 @@ class audio {
     func changeValues(id: String, slider: Int, value: Double) -> String {
         var newValue = String()
         switch id {
-            
+            /*
         case "threeBandFilter":
             switch slider {
-            case 0:
-                if  audio.threeBandFilterHigh!.isStarted == true {
-                    audio.threeBandFilterHigh?.stop()
-                    audio.threeBandFilterMid?.stop()
-                    audio.threeBandFilterLow?.stop()
-                    newValue = "OFF"
-                } else {
-                    audio.threeBandFilterHigh?.start()
-                    audio.threeBandFilterMid?.start()
-                    audio.threeBandFilterLow?.start()
-                    newValue = "ON"
-                }
+            
             case 1:
                 audio.threeBandFilterHigh?.gain = value
                 let text = String(value)
@@ -423,6 +577,7 @@ class audio {
             default: break
                 
             }
+            */
             
         case "toneFilters":
             switch slider {
@@ -475,9 +630,9 @@ class audio {
             }
             
             
-        /*
-        case "sevenBandFilter":
-
+        
+       // case "sevenBandFilter":
+/*
         case "highLowPassFilters":
         
         case "resonantFilter":
@@ -485,8 +640,8 @@ class audio {
         case "modalResonanceFilter":
         case "dcBlock":
         case "combFilterReverb":
-         
-        */
+         */
+  
             
         case "eq10" :
             let booster = AKBooster()
@@ -1245,7 +1400,7 @@ class audio {
         var value = ""
         var isOn = Bool()
         switch id {
-            
+        /*
         case "threeBandFilter":
             switch slider {
             case 1:
@@ -1274,6 +1429,7 @@ class audio {
                 isOn = audio.threeBandFilterLow!.isStarted
             default: break
             }
+ */
             
         case "toneFilters":
             switch slider {
@@ -1318,19 +1474,18 @@ class audio {
                 
             default: break
             }
-            /*
-        case "sevenBandFilter":
-     
+        
+       // case "sevenBandFilter":
+     /*
         case "highLowPassFilters":
-        case "":
-
+ 
         case "resonantFilter":
         case "stringResonator":
         case "modalResonanceFilter":
         case "dcBlock":
         case "combFilterReverb":
+ */
  
-        */
  
         case "bitCrusher" :
             // BITCRUSHER
@@ -2261,13 +2416,38 @@ class audio {
         
         // Filters
             
-        case "threeBandFilter": audio.selectedAudioInputs.append(audio.threeBandFilterHigh!)
+        case "Equalizer": audio.selectedAudioInputs.append(audio.threeBandFilterHigh!)
                                 audio.selectedAudioInputs.append(audio.threeBandFilterMid!)
                                 audio.selectedAudioInputs.append(audio.threeBandFilterLow!)
+                                audio.selectedAudioInputs.append(audio.sevenBandFilterBrilliance!)
+                                audio.selectedAudioInputs.append(audio.sevenBandFilterPrecence!)
+                                audio.selectedAudioInputs.append(audio.sevenBandFilterUpperMid!)
+                                audio.selectedAudioInputs.append(audio.sevenBandFilterMid!)
+                                audio.selectedAudioInputs.append(audio.sevenBandFilterLowMid!)
+                                audio.selectedAudioInputs.append(audio.sevenBandFilterBass!)
+                                audio.selectedAudioInputs.append(audio.sevenBandFilterSubBass!)
+            
+        
             
         case "toneFilters": audio.selectedAudioInputs.append(audio.toneFilter!)
                             //audio.selectedAudioInputs.append(audio.toneComplementFilter!)
         case "moogLadder": audio.selectedAudioInputs.append(audio.moogLadder!)
+            
+        case "highLowPassFilters":  audio.selectedAudioInputs.append(audio.lowPassFilter!)
+                                    audio.selectedAudioInputs.append(audio.lowPassButterworthFilter!)
+                                    audio.selectedAudioInputs.append(audio.highPassFilter!)
+                                    audio.selectedAudioInputs.append(audio.highPassButterworthFilter!)
+                                     // audio.selectedAudioInputs.append(audio.highShelfFilter!)
+                                     // audio.selectedAudioInputs.append(audio.highShelfParametricEqualizerFilter!)
+                                     // audio.selectedAudioInputs.append(audio.lowShelfFilter!)
+                                     // audio.selectedAudioInputs.append(audio.lowShelfParametricEqualizerFilter!)
+            
+        case "resonantFilter":      audio.selectedAudioInputs.append(audio.resonantFilter!)
+        case "stringResonator":     audio.selectedAudioInputs.append(audio.stringResonator!)
+        case "modalResonanceFilter": audio.selectedAudioInputs.append(audio.modalResonanceFilter!)
+        case "dcBlock":             audio.selectedAudioInputs.append(audio.dcBlock!)
+        case "combFilterReverb":    audio.selectedAudioInputs.append(audio.combFilterReverb!)
+            
        
         default : print("NOTHING to do over HERE")
             
@@ -2557,10 +2737,20 @@ class audio {
     static var autoWah: AKAutoWah?
     
     // FILTERS
+    
+    static var eqSelection = Int(0)
   
     static var threeBandFilterHigh: AKEqualizerFilter?
     static var threeBandFilterMid: AKEqualizerFilter?
     static var threeBandFilterLow: AKEqualizerFilter?
+    
+    static var sevenBandFilterBrilliance: AKEqualizerFilter?
+    static var sevenBandFilterPrecence: AKEqualizerFilter?
+    static var sevenBandFilterUpperMid: AKEqualizerFilter?
+    static var sevenBandFilterMid: AKEqualizerFilter?
+    static var sevenBandFilterLowMid: AKEqualizerFilter?
+    static var sevenBandFilterBass: AKEqualizerFilter?
+    static var sevenBandFilterSubBass: AKEqualizerFilter?
     
     
     static var eqBandwidthRatio = Double(0.6)
@@ -2750,21 +2940,62 @@ class audio {
         
         // FILTERS
         
-        
+        // 3 - BAND
+        let threeRatio = 0.7
         audio.threeBandFilterHigh = AKEqualizerFilter()
         audio.threeBandFilterHigh?.centerFrequency = 2000
-        audio.threeBandFilterHigh?.bandwidth = 2000 * 0.7
+        audio.threeBandFilterHigh?.bandwidth = 2000 * threeRatio
         audio.threeBandFilterHigh?.gain = 1
         
         audio.threeBandFilterMid = AKEqualizerFilter()
         audio.threeBandFilterMid?.centerFrequency = 500
-        audio.threeBandFilterMid?.bandwidth = 500 * 0.7
+        audio.threeBandFilterMid?.bandwidth = 500 * threeRatio
         audio.threeBandFilterMid?.gain = 1
         
         audio.threeBandFilterLow = AKEqualizerFilter()
         audio.threeBandFilterLow?.centerFrequency = 100
-        audio.threeBandFilterLow?.bandwidth = 100 * 0.7
+        audio.threeBandFilterLow?.bandwidth = 100 * threeRatio
         audio.threeBandFilterLow?.gain = 1
+        
+        
+        // 7 - BAND
+        let sevenRatio = (0.5)
+        //https://www.teachmeaudio.com/mixing/techniques/audio-spectrum/
+        audio.sevenBandFilterBrilliance = AKEqualizerFilter()   // 6 kHz to 20 kHz
+        audio.sevenBandFilterBrilliance?.centerFrequency = 6400
+        audio.sevenBandFilterBrilliance?.bandwidth = 6400 * sevenRatio
+        audio.sevenBandFilterBrilliance?.gain = 1
+        
+        
+        audio.sevenBandFilterPrecence = AKEqualizerFilter()     // 4 kHz to 6 kHz
+        audio.sevenBandFilterPrecence?.centerFrequency = 4200
+        audio.sevenBandFilterPrecence?.bandwidth = 4200 * sevenRatio
+        audio.sevenBandFilterPrecence?.gain = 1
+        
+        audio.sevenBandFilterUpperMid = AKEqualizerFilter()     // 2 to 4 kHz
+        audio.sevenBandFilterUpperMid?.centerFrequency = 2000
+        audio.sevenBandFilterUpperMid?.bandwidth = 2000 * sevenRatio
+        audio.sevenBandFilterUpperMid?.gain = 1
+        
+        audio.sevenBandFilterMid = AKEqualizerFilter()          // 500 Hz to 2 kHz
+        audio.sevenBandFilterMid?.centerFrequency = 500
+        audio.sevenBandFilterMid?.bandwidth = 500 * sevenRatio
+        audio.sevenBandFilterMid?.gain = 1
+        
+        audio.sevenBandFilterLowMid = AKEqualizerFilter()       // 250 to 500 Hz
+        audio.sevenBandFilterLowMid?.centerFrequency = 250
+        audio.sevenBandFilterLowMid?.bandwidth = 250 * sevenRatio
+        audio.sevenBandFilterLowMid?.gain = 1
+        
+        audio.sevenBandFilterBass = AKEqualizerFilter()    // 60 to 250 Hz
+        audio.sevenBandFilterBass?.centerFrequency = 70
+        audio.sevenBandFilterBass?.bandwidth = 70 * sevenRatio
+        audio.sevenBandFilterBass?.gain = 1
+        
+        audio.sevenBandFilterSubBass = AKEqualizerFilter() // 20 to 60 Hz
+        audio.sevenBandFilterSubBass?.centerFrequency = 30
+        audio.sevenBandFilterSubBass?.bandwidth = 30 * sevenRatio
+        audio.sevenBandFilterSubBass?.gain = 1
         
         
         audio.toneFilter = AKToneFilter()

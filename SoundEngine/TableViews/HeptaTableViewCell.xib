@@ -20,7 +20,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BcT-dE-uLr">
-                        <rect key="frame" x="12" y="396" width="296" height="50"/>
+                        <rect key="frame" x="12" y="410" width="296" height="50"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iI9-Zm-DEC">
                                 <rect key="frame" x="24" y="8" width="248" height="34"/>
@@ -54,17 +54,17 @@
                         </constraints>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ipy-QF-lkq">
-                        <rect key="frame" x="12" y="7" width="252" height="32"/>
+                        <rect key="frame" x="24" y="14" width="200" height="32"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="32" id="pHk-A3-5ox"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="22"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="okF-q0-HAB">
-                        <rect key="frame" x="12" y="46" width="296" height="350"/>
+                        <rect key="frame" x="12" y="60" width="296" height="350"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="M1v-SE-h6p">
                                 <rect key="frame" x="12" y="0.0" width="272" height="350"/>
@@ -305,25 +305,27 @@
                         </constraints>
                     </view>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EIf-zM-TX4">
-                        <rect key="frame" x="264" y="6" width="40" height="34"/>
+                        <rect key="frame" x="224" y="12" width="80" height="36"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="40" id="PgB-az-NdA"/>
+                            <constraint firstAttribute="width" constant="80" id="PgB-az-NdA"/>
                         </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
                         <state key="normal" title="OFF"/>
                     </button>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aYx-qE-9Do">
-                        <rect key="frame" x="2" y="19" width="8" height="8"/>
+                        <rect key="frame" x="2" y="20" width="20" height="20"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="aYx-qE-9Do" secondAttribute="height" multiplier="1:1" id="s5e-JA-Na6"/>
                         </constraints>
                     </view>
                 </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
                     <constraint firstItem="aYx-qE-9Do" firstAttribute="leading" secondItem="eKy-yZ-KhO" secondAttribute="leading" constant="2" id="Auh-3d-rw9"/>
                     <constraint firstItem="BcT-dE-uLr" firstAttribute="trailing" secondItem="okF-q0-HAB" secondAttribute="trailing" id="Jl8-8W-B0o"/>
-                    <constraint firstItem="okF-q0-HAB" firstAttribute="top" secondItem="ipy-QF-lkq" secondAttribute="bottom" constant="7" id="LFL-PO-lL0"/>
-                    <constraint firstItem="ipy-QF-lkq" firstAttribute="leading" secondItem="eKy-yZ-KhO" secondAttribute="leading" constant="12" id="Ma5-N2-D98"/>
+                    <constraint firstItem="okF-q0-HAB" firstAttribute="top" secondItem="ipy-QF-lkq" secondAttribute="bottom" constant="14" id="LFL-PO-lL0"/>
+                    <constraint firstItem="ipy-QF-lkq" firstAttribute="leading" secondItem="eKy-yZ-KhO" secondAttribute="leading" constant="24" id="Ma5-N2-D98"/>
                     <constraint firstItem="BcT-dE-uLr" firstAttribute="top" secondItem="okF-q0-HAB" secondAttribute="bottom" id="NIo-53-Rfp"/>
                     <constraint firstItem="EIf-zM-TX4" firstAttribute="centerY" secondItem="ipy-QF-lkq" secondAttribute="centerY" id="Rzv-hP-9vf"/>
                     <constraint firstItem="okF-q0-HAB" firstAttribute="leading" secondItem="eKy-yZ-KhO" secondAttribute="leading" constant="12" id="ZFJ-wr-zhd"/>
@@ -334,7 +336,7 @@
                     <constraint firstAttribute="trailing" secondItem="EIf-zM-TX4" secondAttribute="trailing" constant="16" id="obj-2j-JRx"/>
                     <constraint firstAttribute="trailing" secondItem="okF-q0-HAB" secondAttribute="trailing" constant="12" id="qsM-Pw-e0I"/>
                     <constraint firstAttribute="bottom" secondItem="BcT-dE-uLr" secondAttribute="bottom" id="xCQ-gZ-Po5"/>
-                    <constraint firstItem="ipy-QF-lkq" firstAttribute="top" secondItem="eKy-yZ-KhO" secondAttribute="top" constant="7" id="yib-Pv-Cgd"/>
+                    <constraint firstItem="ipy-QF-lkq" firstAttribute="top" secondItem="eKy-yZ-KhO" secondAttribute="top" constant="14" id="yib-Pv-Cgd"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="ChA-Ml-gNo"/>

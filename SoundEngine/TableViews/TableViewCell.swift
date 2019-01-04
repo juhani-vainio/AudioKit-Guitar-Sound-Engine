@@ -36,7 +36,7 @@ class TableViewCell: UITableViewCell {
         
         // Initialization code
         contentView.backgroundColor = UIColor.clear
-        backgroundColor = interface.tableBackground
+        backgroundColor = UIColor.clear
         title.textColor = interface.text
         sliderTitle.textColor = interface.text
         sliderValue.textColor = interface.text
@@ -54,7 +54,9 @@ class TableViewCell: UITableViewCell {
         // specialSwitch.tintColor = interface.negative
         specialTitle.textColor = interface.text
         specialSwitch.addTarget(self, action: #selector(switchValueChanged), for: .valueChanged)
-        
+        onOffButton.layer.borderWidth = 2
+        onOffButton.layer.borderColor = interface.text.cgColor
+        onOffButton.layer.cornerRadius = onOffButton.bounds.height / 2
     }
     
     @objc func switchValueChanged(toggle: UISwitch) {
@@ -68,6 +70,7 @@ class TableViewCell: UITableViewCell {
    
         } else {
             onOffButton.setTitleColor(interface.textIdle, for: .normal)
+            
             if (sliderTitle.text?.contains("ix"))! {
                 slider.isEnabled = false
             }

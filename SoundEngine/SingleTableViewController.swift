@@ -19,18 +19,18 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
     var effectChainNeedsReset = Bool(false)
     private let parallaxLayout = ParallaxFlowLayout()
     
-    @IBOutlet weak var plotsMainView: UIView!
+    @IBOutlet weak var topView: UIView!
+    
     @IBOutlet weak var waveformView: UIView!
     
-    @IBOutlet weak var plotView1: UIView!
-    @IBOutlet weak var plotView2: UIView!
+  
     
     
     fileprivate var sourceIndexPath: IndexPath?
     fileprivate var snapshot: UIView?
     
     @IBOutlet weak var savedSoundsTableView: UITableView!
-    @IBOutlet weak var settingsView: UIView!
+   
     @IBOutlet weak var inputLevel: UISlider!
     @IBOutlet weak var outputLevel: UISlider!
    
@@ -96,7 +96,7 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
         selectedEffects.backgroundColor = UIColor.clear
         selectedFilters.backgroundColor = UIColor.clear
        
-        savedSoundsTableView.backgroundColor = interface.tableBackground
+        savedSoundsTableView.backgroundColor = UIColor.white
         
         mainCollection.backgroundColor = UIColor.clear
         mainViewBackground.backgroundColor = interface.mainBackground
@@ -105,8 +105,8 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
         buildWaveforStackView()
        // updateWaveformView()
     
-        
-        
+        topView.backgroundColor = UIColor.clear
+        waveformView.backgroundColor = UIColor.clear
         
         
     }
@@ -220,7 +220,7 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
                         let name = audio.selectedEffectsData[unitCount].id
                         let color = Colors.palette.colorForEffect(name: name)
                         stackUnit.color = color
-                        stackUnit.backgroundColor = interface.heading
+                        stackUnit.backgroundColor = UIColor.black
                         stack.addArrangedSubview(stackUnit)
                     }
   
@@ -292,6 +292,9 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
         let hexaNib = UINib(nibName: "HexaTableViewCell", bundle: nil)
         let heptaNib = UINib(nibName: "HeptaTableViewCell", bundle: nil)
         let octaNib = UINib(nibName: "OctaTableViewCell", bundle: nil)
+        let passNib = UINib(nibName: "PassFiltersTableViewCell", bundle: nil)
+        let eqNib = UINib(nibName: "EqualizerTableViewCell", bundle: nil)
+        
         selectedEffects.register(nib, forCellReuseIdentifier: "TableViewCell")
         selectedEffects.register(doubleNib, forCellReuseIdentifier: "DoubleTableViewCell")
         selectedEffects.register(tripleNib, forCellReuseIdentifier: "TripleTableViewCell")
@@ -310,6 +313,8 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
         selectedFilters.register(heptaNib, forCellReuseIdentifier: "HeptaTableViewCell")
         selectedFilters.register(octaNib, forCellReuseIdentifier: "OctaTableViewCell")
 
+        selectedFilters.register(passNib, forCellReuseIdentifier: "PassFiltersTableViewCell")
+        selectedFilters.register(eqNib, forCellReuseIdentifier: "EqualizerTableViewCell")
         
         
         
@@ -448,6 +453,23 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
         return value
     }
     
+    @objc func toggleEQ(toggle:UISegmentedControl) {
+        let selection = toggle.selectedSegmentIndex
+        switch selection {
+        case 0 :
+                print("switch to three band EQ") // switch to threeband EQ
+                audio.shared.toggleEQ(id: "threeBandFilter")
+            case 1 :
+                print("switch to seven band EQ") // switch to 7 EQ
+                audio.shared.toggleEQ(id: "sevenBandFilter")
+        default:
+            print("three band EQ") // threeband EQ
+        }
+        audio.eqSelection = selection
+        selectedFilters.reloadData()
+        
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let backgroundView = UIView()
         backgroundView.backgroundColor = UIColor.clear
@@ -522,7 +544,102 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
             
             switch cellType {
                 
+            case "PassFilters":
+                let cell = tableView.dequeueReusableCell(withIdentifier: "PassFiltersTableViewCell", for: indexPath) as! PassFiltersTableViewCell
     
+                returnCell = cell
+                
+            case "Equalizer":
+                
+                let cell = tableView.dequeueReusableCell(withIdentifier: "EqualizerTableViewCell", for: indexPath) as! EqualizerTableViewCell
+                
+                cell.segmentControl.selectedSegmentIndex = audio.eqSelection
+                
+                cell.segmentControl.addTarget(self, action: #selector(toggleEQ), for: .valueChanged)
+                
+                if cell.segmentControl.selectedSegmentIndex == 1 {
+                    
+                    cell.controllersHeight.constant = CGFloat(350)
+                    cell.threeStack.isHidden = true
+                    cell.sevenStack.isHidden = false
+                    cell.segmentControl.selectedSegmentIndex = 1
+                    audio.shared.toggleEQ(id: "sevenBandFilter")
+                    
+                   // Sub-Bass, Bass, Low Mid, Mid, Upper Mid, Precence, Brilliance
+                    
+                    let brilliance = audio.shared.getEQ(id: "sevenBandFilter", slider: 1)
+                    cell.sevenBandBrillianceValue.text = brilliance.value
+                    cell.sevenBandBrillianceSlider.value = brilliance.valueForSlider
+                    cell.sevenBandBrillianceSlider.minimumValue = brilliance.min
+                    cell.sevenBandBrillianceSlider.maximumValue = brilliance.max
+                    
+                    let precence = audio.shared.getEQ(id: "sevenBandFilter", slider: 2)
+                    cell.sevenBandPrecenceValue.text = precence.value
+                    cell.sevenBandPrecenceSlider.value = precence.valueForSlider
+                    cell.sevenBandPrecenceSlider.minimumValue = precence.min
+                    cell.sevenBandPrecenceSlider.maximumValue = precence.max
+                    
+                 
+                    let uMid = audio.shared.getEQ(id: "sevenBandFilter", slider: 3)
+                    cell.sevenBandUpperMidValue.text = uMid.value
+                    cell.sevenBandUpperMidSlider.value = uMid.valueForSlider
+                    cell.sevenBandUpperMidSlider.minimumValue = uMid.min
+                    cell.sevenBandUpperMidSlider.maximumValue = uMid.max
+                    
+                    let mid = audio.shared.getEQ(id: "sevenBandFilter", slider: 4)
+                    cell.sevenBandMidValue.text = mid.value
+                    cell.sevenBandMidSlider.value = mid.valueForSlider
+                    cell.sevenBandMidSlider.minimumValue = mid.min
+                    cell.sevenBandMidSlider.maximumValue = mid.max
+                    
+                    let lMid = audio.shared.getEQ(id: "sevenBandFilter", slider: 5)
+                    cell.sevenBandLowMidValue.text = lMid.value
+                    cell.sevenBandLowMidSlider.value = lMid.valueForSlider
+                    cell.sevenBandLowMidSlider.minimumValue = lMid.min
+                    cell.sevenBandLowMidSlider.maximumValue = lMid.max
+                    
+                    let low = audio.shared.getEQ(id: "sevenBandFilter", slider: 6)
+                    cell.sevenBandBassValue.text = low.value
+                    cell.sevenBandBassSlider.value = low.valueForSlider
+                    cell.sevenBandBassSlider.minimumValue = low.min
+                    cell.sevenBandBassSlider.maximumValue = low.max
+                    
+                    let bass = audio.shared.getEQ(id: "sevenBandFilter", slider: 7)
+                    cell.sevenBandSubBassValue.text = bass.value
+                    cell.sevenBandSubBassSlider.value = bass.valueForSlider
+                    cell.sevenBandSubBassSlider.minimumValue = bass.min
+                    cell.sevenBandSubBassSlider.maximumValue = bass.max
+                    
+                } else if cell.segmentControl.selectedSegmentIndex == 0 {
+                    cell.controllersHeight.constant = CGFloat(150)
+                    cell.threeStack.isHidden = false
+                    cell.sevenStack.isHidden = true
+                    cell.segmentControl.selectedSegmentIndex = 0
+                    audio.shared.toggleEQ(id: "threeBandFilter")
+                    
+                    let high = audio.shared.getEQ(id: "threeBandFilter", slider: 1)
+                    cell.threeBandHighValue.text = high.value
+                    cell.threeBandHighSlider.value = high.valueForSlider
+                    cell.threeBandHighSlider.minimumValue = high.min
+                    cell.threeBandHighSlider.maximumValue = high.max
+                    
+                    let mid = audio.shared.getEQ(id: "threeBandFilter", slider: 2)
+                    cell.threeBandMidValue.text = mid.value
+                    cell.threeBandMidSlider.value = mid.valueForSlider
+                    cell.threeBandMidSlider.minimumValue = mid.min
+                    cell.threeBandMidSlider.maximumValue = mid.max
+                    
+                    let low = audio.shared.getEQ(id: "threeBandFilter", slider: 3)
+                    cell.threeBandLowValue.text = low.value
+                    cell.threeBandLowSlider.value = low.valueForSlider
+                    cell.threeBandLowSlider.minimumValue = low.min
+                    cell.threeBandLowSlider.maximumValue = low.max
+                    
+                }
+                
+                returnCell = cell
+                
+                
             case "1":
                 // One slider
                 let cell = tableView.dequeueReusableCell(withIdentifier: "TableViewCell", for: indexPath) as! TableViewCell
@@ -552,10 +669,10 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
                 
                 if slider.isOn {
                     cell.onOffButton.setTitle("ON", for: .normal)
-                    cell.onOffButton.setTitleColor(interface.text, for: .normal)
+                    //cell.onOffButton.setTitleColor(interface.text, for: .normal)
                 } else {
                     cell.onOffButton.setTitle("OFF", for: .normal)
-                    cell.onOffButton.setTitleColor(interface.textIdle, for: .normal)
+                    //cell.onOffButton.setTitleColor(interface.textIdle, for: .normal)
                     if slider.name.contains("ix") {
                         cell.slider.isEnabled = false
                     }
@@ -1989,13 +2106,7 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
         
     }
     
-    @IBAction func settingsButtonTapped(_ sender: Any) {
-        if self.settingsView.isHidden {
-            self.settingsView.isHidden = false
-        } else {
-            self.settingsView.isHidden = true
-        }
-    }
+
     
     @IBAction func bufferLengthSegmentAction(_ sender: UISegmentedControl) {
         let segment = sender.selectedSegmentIndex + 1

@@ -36,7 +36,7 @@ class DoubleTableViewCell: UITableViewCell {
         coloringView.layer.cornerRadius = coloringView.bounds.width / 2
         // Initialization code
         self.contentView.backgroundColor = UIColor.clear
-        self.backgroundColor = interface.tableBackground
+        self.backgroundColor = UIColor.clear
         self.title.textColor = interface.text
         self.slider1Value.textColor = interface.text
         self.slider1Title.textColor = interface.text
@@ -58,7 +58,9 @@ class DoubleTableViewCell: UITableViewCell {
         // specialSwitch.tintColor = interface.negative
         specialTitle.textColor = interface.text
         specialSwitch.addTarget(self, action: #selector(switchValueChanged), for: .valueChanged)
-        
+        onOffButton.layer.borderWidth = 2
+        onOffButton.layer.borderColor = interface.text.cgColor
+        onOffButton.layer.cornerRadius = onOffButton.bounds.height / 2
     }
     
     @objc func switchValueChanged(toggle: UISwitch) {

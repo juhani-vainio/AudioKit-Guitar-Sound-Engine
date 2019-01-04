@@ -25,6 +25,8 @@
 		575EE7E321BAF8E4008E9C11 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 575EE7E221BAF8E4008E9C11 /* Settings.swift */; };
 		57612AE121B172A1001A7231 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57612AE021B172A0001A7231 /* Helper.swift */; };
 		57612AE321B17396001A7231 /* Collections.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57612AE221B17396001A7231 /* Collections.swift */; };
+		577F61D021DF7B6400853F29 /* EqualizerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 577F61CE21DF7B6400853F29 /* EqualizerTableViewCell.swift */; };
+		577F61D121DF7B6400853F29 /* EqualizerTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 577F61CF21DF7B6400853F29 /* EqualizerTableViewCell.xib */; };
 		578B32CD21BE9522002A7EEE /* PentaTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 578B32CB21BE9522002A7EEE /* PentaTableViewCell.swift */; };
 		578B32CE21BE9522002A7EEE /* PentaTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 578B32CC21BE9522002A7EEE /* PentaTableViewCell.xib */; };
 		578B32D121BE9537002A7EEE /* HexaTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 578B32CF21BE9537002A7EEE /* HexaTableViewCell.swift */; };
@@ -38,6 +40,8 @@
 		579368D3219EF91400227AF8 /* TableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 579368D1219EF91400227AF8 /* TableViewCell.xib */; };
 		57A631EA21A965B5000069FA /* DoubleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A631E821A965B5000069FA /* DoubleTableViewCell.swift */; };
 		57A631EB21A965B5000069FA /* DoubleTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 57A631E921A965B5000069FA /* DoubleTableViewCell.xib */; };
+		57CF7DD921DE46260016CD67 /* PassFiltersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57CF7DD721DE46260016CD67 /* PassFiltersTableViewCell.swift */; };
+		57CF7DDA21DE46260016CD67 /* PassFiltersTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 57CF7DD821DE46260016CD67 /* PassFiltersTableViewCell.xib */; };
 		57DD133521C7E1EE00506663 /* EQ31CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57DD133321C7E1EE00506663 /* EQ31CollectionViewCell.swift */; };
 		57DD133621C7E1EE00506663 /* EQ31CollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 57DD133421C7E1EE00506663 /* EQ31CollectionViewCell.xib */; };
 		57E397A821A96F8500F2871A /* TripleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E397A621A96F8500F2871A /* TripleTableViewCell.swift */; };
@@ -102,6 +106,8 @@
 		575EE7E221BAF8E4008E9C11 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		57612AE021B172A0001A7231 /* Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		57612AE221B17396001A7231 /* Collections.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Collections.swift; sourceTree = "<group>"; };
+		577F61CE21DF7B6400853F29 /* EqualizerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EqualizerTableViewCell.swift; sourceTree = "<group>"; };
+		577F61CF21DF7B6400853F29 /* EqualizerTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EqualizerTableViewCell.xib; sourceTree = "<group>"; };
 		578B32CB21BE9522002A7EEE /* PentaTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PentaTableViewCell.swift; sourceTree = "<group>"; };
 		578B32CC21BE9522002A7EEE /* PentaTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PentaTableViewCell.xib; sourceTree = "<group>"; };
 		578B32CF21BE9537002A7EEE /* HexaTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HexaTableViewCell.swift; sourceTree = "<group>"; };
@@ -115,6 +121,8 @@
 		579368D1219EF91400227AF8 /* TableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TableViewCell.xib; sourceTree = "<group>"; };
 		57A631E821A965B5000069FA /* DoubleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleTableViewCell.swift; sourceTree = "<group>"; };
 		57A631E921A965B5000069FA /* DoubleTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DoubleTableViewCell.xib; sourceTree = "<group>"; };
+		57CF7DD721DE46260016CD67 /* PassFiltersTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassFiltersTableViewCell.swift; sourceTree = "<group>"; };
+		57CF7DD821DE46260016CD67 /* PassFiltersTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PassFiltersTableViewCell.xib; sourceTree = "<group>"; };
 		57DD133321C7E1EE00506663 /* EQ31CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EQ31CollectionViewCell.swift; sourceTree = "<group>"; };
 		57DD133421C7E1EE00506663 /* EQ31CollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EQ31CollectionViewCell.xib; sourceTree = "<group>"; };
 		57E397A621A96F8500F2871A /* TripleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripleTableViewCell.swift; sourceTree = "<group>"; };
@@ -251,6 +259,10 @@
 		57E397AE21AC12B200F2871A /* TableViews */ = {
 			isa = PBXGroup;
 			children = (
+				577F61CE21DF7B6400853F29 /* EqualizerTableViewCell.swift */,
+				577F61CF21DF7B6400853F29 /* EqualizerTableViewCell.xib */,
+				57CF7DD721DE46260016CD67 /* PassFiltersTableViewCell.swift */,
+				57CF7DD821DE46260016CD67 /* PassFiltersTableViewCell.xib */,
 				579368D0219EF91400227AF8 /* TableViewCell.swift */,
 				579368D1219EF91400227AF8 /* TableViewCell.xib */,
 				57A631E821A965B5000069FA /* DoubleTableViewCell.swift */,
@@ -420,6 +432,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				577F61D121DF7B6400853F29 /* EqualizerTableViewCell.xib in Resources */,
+				57CF7DDA21DE46260016CD67 /* PassFiltersTableViewCell.xib in Resources */,
 				578B32D621BE9548002A7EEE /* HeptaTableViewCell.xib in Resources */,
 				57075ED4219C4911003F2D4F /* LaunchScreen.storyboard in Resources */,
 				57075ED1219C4911003F2D4F /* Assets.xcassets in Resources */,
@@ -523,6 +537,8 @@
 				57075ECF219C490C003F2D4F /* SoundEngine.xcdatamodeld in Sources */,
 				5705EFEF219DE7D6005EF724 /* SoundsCollectionViewCell.swift in Sources */,
 				57567AAE21CB9DA50030CBEC /* WaveformModel.swift in Sources */,
+				577F61D021DF7B6400853F29 /* EqualizerTableViewCell.swift in Sources */,
+				57CF7DD921DE46260016CD67 /* PassFiltersTableViewCell.swift in Sources */,
 				578B32D521BE9548002A7EEE /* HeptaTableViewCell.swift in Sources */,
 				578B32CD21BE9522002A7EEE /* PentaTableViewCell.swift in Sources */,
 				57E397BE21AC1E5300F2871A /* AudioModel.swift in Sources */,
