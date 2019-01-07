@@ -459,13 +459,15 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
         case 0 :
                 print("switch to three band EQ") // switch to threeband EQ
                 audio.shared.toggleEQ(id: "threeBandFilter")
+                audio.eqSelection = 0
             case 1 :
                 print("switch to seven band EQ") // switch to 7 EQ
                 audio.shared.toggleEQ(id: "sevenBandFilter")
+                audio.eqSelection = 1
         default:
             print("three band EQ") // threeband EQ
         }
-        audio.eqSelection = selection
+        
         selectedFilters.reloadData()
         
     }
@@ -569,46 +571,52 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
                     
                     let brilliance = audio.shared.getEQ(id: "sevenBandFilter", slider: 1)
                     cell.sevenBandBrillianceValue.text = brilliance.value
-                    cell.sevenBandBrillianceSlider.value = brilliance.valueForSlider
                     cell.sevenBandBrillianceSlider.minimumValue = brilliance.min
                     cell.sevenBandBrillianceSlider.maximumValue = brilliance.max
+                    cell.sevenBandBrillianceSlider.value = brilliance.valueForSlider
                     
                     let precence = audio.shared.getEQ(id: "sevenBandFilter", slider: 2)
                     cell.sevenBandPrecenceValue.text = precence.value
-                    cell.sevenBandPrecenceSlider.value = precence.valueForSlider
                     cell.sevenBandPrecenceSlider.minimumValue = precence.min
                     cell.sevenBandPrecenceSlider.maximumValue = precence.max
+                    cell.sevenBandPrecenceSlider.value = precence.valueForSlider
+                    
                     
                  
                     let uMid = audio.shared.getEQ(id: "sevenBandFilter", slider: 3)
                     cell.sevenBandUpperMidValue.text = uMid.value
-                    cell.sevenBandUpperMidSlider.value = uMid.valueForSlider
                     cell.sevenBandUpperMidSlider.minimumValue = uMid.min
                     cell.sevenBandUpperMidSlider.maximumValue = uMid.max
+                    cell.sevenBandUpperMidSlider.value = uMid.valueForSlider
+                    
                     
                     let mid = audio.shared.getEQ(id: "sevenBandFilter", slider: 4)
                     cell.sevenBandMidValue.text = mid.value
-                    cell.sevenBandMidSlider.value = mid.valueForSlider
                     cell.sevenBandMidSlider.minimumValue = mid.min
                     cell.sevenBandMidSlider.maximumValue = mid.max
+                    cell.sevenBandMidSlider.value = mid.valueForSlider
+                    
                     
                     let lMid = audio.shared.getEQ(id: "sevenBandFilter", slider: 5)
                     cell.sevenBandLowMidValue.text = lMid.value
-                    cell.sevenBandLowMidSlider.value = lMid.valueForSlider
                     cell.sevenBandLowMidSlider.minimumValue = lMid.min
                     cell.sevenBandLowMidSlider.maximumValue = lMid.max
+                    cell.sevenBandLowMidSlider.value = lMid.valueForSlider
+                    
                     
                     let low = audio.shared.getEQ(id: "sevenBandFilter", slider: 6)
                     cell.sevenBandBassValue.text = low.value
-                    cell.sevenBandBassSlider.value = low.valueForSlider
                     cell.sevenBandBassSlider.minimumValue = low.min
                     cell.sevenBandBassSlider.maximumValue = low.max
+                    cell.sevenBandBassSlider.value = low.valueForSlider
+                    
                     
                     let bass = audio.shared.getEQ(id: "sevenBandFilter", slider: 7)
                     cell.sevenBandSubBassValue.text = bass.value
-                    cell.sevenBandSubBassSlider.value = bass.valueForSlider
                     cell.sevenBandSubBassSlider.minimumValue = bass.min
                     cell.sevenBandSubBassSlider.maximumValue = bass.max
+                    cell.sevenBandSubBassSlider.value = bass.valueForSlider
+                    
                     
                 } else if cell.segmentControl.selectedSegmentIndex == 0 {
                     cell.controllersHeight.constant = CGFloat(150)
@@ -619,21 +627,24 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
                     
                     let high = audio.shared.getEQ(id: "threeBandFilter", slider: 1)
                     cell.threeBandHighValue.text = high.value
-                    cell.threeBandHighSlider.value = high.valueForSlider
                     cell.threeBandHighSlider.minimumValue = high.min
                     cell.threeBandHighSlider.maximumValue = high.max
+                    cell.threeBandHighSlider.value = high.valueForSlider
+                   
                     
                     let mid = audio.shared.getEQ(id: "threeBandFilter", slider: 2)
                     cell.threeBandMidValue.text = mid.value
-                    cell.threeBandMidSlider.value = mid.valueForSlider
                     cell.threeBandMidSlider.minimumValue = mid.min
                     cell.threeBandMidSlider.maximumValue = mid.max
+                    cell.threeBandMidSlider.value = mid.valueForSlider
+                    
                     
                     let low = audio.shared.getEQ(id: "threeBandFilter", slider: 3)
                     cell.threeBandLowValue.text = low.value
-                    cell.threeBandLowSlider.value = low.valueForSlider
                     cell.threeBandLowSlider.minimumValue = low.min
                     cell.threeBandLowSlider.maximumValue = low.max
+                    cell.threeBandLowSlider.value = low.valueForSlider
+                   
                     
                 }
                 
