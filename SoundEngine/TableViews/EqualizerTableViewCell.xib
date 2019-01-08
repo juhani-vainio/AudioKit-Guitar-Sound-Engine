@@ -444,6 +444,7 @@
                 <outletCollection property="labels" destination="WRS-jc-PI2" collectionClass="NSMutableArray" id="Eb2-5Y-nxv"/>
                 <outletCollection property="labels" destination="Uqa-6n-31p" collectionClass="NSMutableArray" id="bnf-eM-n7n"/>
                 <outletCollection property="labels" destination="BiT-dz-HZq" collectionClass="NSMutableArray" id="kng-YE-QTC"/>
+                <outletCollection property="labels" destination="ogh-ZC-f7k" collectionClass="NSMutableArray" id="K7c-Ew-3BE"/>
             </connections>
             <point key="canvasLocation" x="41.600000000000001" y="235.68215892053973"/>
         </tableViewCell>

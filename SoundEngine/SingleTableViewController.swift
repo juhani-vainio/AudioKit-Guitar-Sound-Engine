@@ -1485,6 +1485,8 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
             helper.shared.getSavedChain(name: sound)
             self.selectedEffects.reloadData()
             self.selectedFilters.reloadData()
+            self.availableEffects.reloadData()
+            self.availableFilters.reloadData()
             self.mainCollection.reloadData()
             self.resetEffectChain()
             savedSoundsTableView.isHidden = true
@@ -1572,24 +1574,15 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
             }
         }
     
-        else if tableView == selectedFilters {
-            if audio.selectedFiltersData[indexPath.row].opened {
-                return false
-            }
-            else {
-                return true
-            }
-        }
-            
         else {
-            return true
+            return false
         }
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if (editingStyle == .delete) {
+        if tableView == selectedEffects {
+            if (editingStyle == .delete) {
             
-             if tableView == selectedEffects {
                 // remove and insert data between arrays
                 audio.selectedEffectsData[indexPath.row].opened = false
                 let tempData = audio.selectedEffectsData[indexPath.row]
@@ -1602,25 +1595,26 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
                 self.selectedEffects.deleteRows(at: [row], with: .none)
                 self.resetEffectChain()
             }
-            
-            else if tableView == selectedFilters {
-                // remove and insert data between arrays
-                audio.selectedFiltersData[indexPath.row].opened = false
-                let tempData = audio.selectedFiltersData[indexPath.row]
-                audio.availableFiltersData.append(tempData)
-                // Arrange available units list aplhabetically
-                audio.availableFiltersData = audio.availableFiltersData.sorted{ $0.title < $1.title }
-                self.availableFilters.reloadData()
-                audio.selectedFiltersData.remove(at: indexPath.row)
-                let row = IndexPath(item: indexPath.row, section: 0)
-                self.selectedFilters.deleteRows(at: [row], with: .none)
-                self.resetEffectChain()
-            }
-            
         }
         
-        
     }
+
+func removeFilter() {
+     /*
+        // remove and insert data between arrays
+        audio.selectedFiltersData[indexPath.row].opened = false
+        let tempData = audio.selectedFiltersData[indexPath.row]
+        audio.availableFiltersData.append(tempData)
+        // Arrange available units list aplhabetically
+        audio.availableFiltersData = audio.availableFiltersData.sorted{ $0.title < $1.title }
+        self.availableFilters.reloadData()
+        audio.selectedFiltersData.remove(at: indexPath.row)
+        let row = IndexPath(item: indexPath.row, section: 0)
+        self.selectedFilters.deleteRows(at: [row], with: .none)
+        self.resetEffectChain()
+ 
+    */
+}
     
     func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
         if tableView == selectedEffects {
@@ -1652,7 +1646,6 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
         // remove old waveform plots
         
 
-        
         buildWaveforStackView()
         
     }
@@ -2153,7 +2146,7 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
     // MARK: DIALOGUES
     
     func popUpDialogueForNewSound() {
-        let alert = UIAlertController(title: "Name of your new sound?", message: nil, preferredStyle: .alert)
+        let alert = UIAlertController(title: "Name your new sound?", message: nil, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         
         // Create an OK Button
@@ -2163,7 +2156,7 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
                 print("Your new sound is: \(name)")
                 if self.nameCheck {
                     helper.shared.saveEffectChain(name: name)
-                   
+                    self.savedSoundsTableView.reloadData()
                 }
                 
             }
