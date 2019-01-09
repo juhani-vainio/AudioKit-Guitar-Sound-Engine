@@ -35,7 +35,7 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
     @IBOutlet weak var outputLevel: UISlider!
    
     @IBOutlet weak var bufferLengthSegment: UISegmentedControl!
-    @IBOutlet weak var mainViewBackground: UIView!
+    @IBOutlet weak var soundEngine: UIView!
     @IBOutlet weak var addButton: UIButton!
     
     @IBOutlet weak var availableEffects: UITableView!
@@ -48,8 +48,22 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
     
     @IBOutlet weak var mainCollection: UICollectionView!
     
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+    
+        self.soundsTapGesture = UITapGestureRecognizer(target: self, action: #selector(handleSoundsTap))
+        self.soundsTab.addGestureRecognizer(soundsTapGesture)
+        self.soundsTab.isUserInteractionEnabled = true
+        
+        self.effectsTapGesture = UITapGestureRecognizer(target: self, action: #selector(handleEffectsTap))
+        self.effectsTab.addGestureRecognizer(effectsTapGesture)
+        self.effectsTab.isUserInteractionEnabled = true
+        
+        self.filtersTapGesture = UITapGestureRecognizer(target: self, action: #selector(handleFiltersTap))
+        self.filtersTab.addGestureRecognizer(filtersTapGesture)
+        self.filtersTab.isUserInteractionEnabled = true
         
         
          // Set up Interface Colors
@@ -87,8 +101,9 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
         
         bufferLengthSegment.selectedSegmentIndex = settings.bufferLength - 1
         
-        addButton.backgroundColor = interface.buttonBackground
-        addButton.setTitleColor(interface.highlight, for: .normal)
+        soundsTab.backgroundColor = interface.mainBackground
+        effectsTab.backgroundColor = interface.mainBackground
+        filtersTab.backgroundColor = interface.mainBackground
         
         
         availableEffects.backgroundColor = interface.tableAltBackground
@@ -99,7 +114,7 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
         savedSoundsTableView.backgroundColor = UIColor.white
         
         mainCollection.backgroundColor = UIColor.clear
-        mainViewBackground.backgroundColor = interface.mainBackground
+        soundEngine.backgroundColor = interface.mainBackground
  
         
         buildWaveforStackView()
@@ -2093,24 +2108,8 @@ func removeFilter() {
     @IBAction func checkTapped(_ sender: Any) {
         print(AudioKit.printConnections())
     }
-    @IBAction func addFilterTapped(_ sender: Any) {
-        if self.availableFilters.isHidden {
-            self.availableFilters.isHidden = false
-        } else {
-            self.availableFilters.isHidden = true
-        }
-    }
-    
-    @IBAction func addButtonTapped(_ sender: Any) {
-        if self.availableEffects.isHidden {
-            self.availableEffects.isHidden = false
-        } else {
-            self.availableEffects.isHidden = true
-        }
-        
-    }
-    
 
+    
     
     @IBAction func bufferLengthSegmentAction(_ sender: UISegmentedControl) {
         let segment = sender.selectedSegmentIndex + 1
@@ -2191,4 +2190,64 @@ func removeFilter() {
         self.present(alert, animated: true)
     }
     
+    var soundsTapGesture = UITapGestureRecognizer()
+    var effectsTapGesture = UITapGestureRecognizer()
+    var filtersTapGesture = UITapGestureRecognizer()
+    
+    @IBOutlet weak var soundsTab: UIView!
+    @IBOutlet weak var effectsTab: UIView!
+    @IBOutlet weak var filtersTab: UIView!
+    
+    @objc func handleSoundsTap(){
+        print("SOUNDS TAPPED")
+        
+            if self.savedSoundsTableView.isHidden {
+                self.savedSoundsTableView.isHidden = false
+                self.soundsTab.backgroundColor = interface.heading
+                
+                // hide other tabs
+                self.availableEffects.isHidden = true
+                self.effectsTab.backgroundColor = interface.mainBackground
+                self.availableFilters.isHidden = true
+                self.filtersTab.backgroundColor = interface.mainBackground
+            }
+            else {
+                self.savedSoundsTableView.isHidden = true
+                self.soundsTab.backgroundColor = interface.mainBackground
+            }
+    }
+    @objc func handleEffectsTap(){
+        print("EFFECTS TAPPED")
+        if self.availableEffects.isHidden {
+            self.availableEffects.isHidden = false
+            self.effectsTab.backgroundColor = interface.heading
+            
+            // hide other tabs
+            self.savedSoundsTableView.isHidden = true
+            self.soundsTab.backgroundColor = interface.mainBackground
+            self.availableFilters.isHidden = true
+            self.filtersTab.backgroundColor = interface.mainBackground
+        } else {
+            self.availableEffects.isHidden = true
+            self.effectsTab.backgroundColor = interface.mainBackground
+        }
+        
+    }
+    @objc func handleFiltersTap(){
+        print("FILTERS TAPPED")
+        if self.availableFilters.isHidden {
+            self.availableFilters.isHidden = false
+             self.filtersTab.backgroundColor = interface.heading
+            
+            // hide other tabs
+            self.availableEffects.isHidden = true
+            self.effectsTab.backgroundColor = interface.mainBackground
+            self.savedSoundsTableView.isHidden = true
+            self.soundsTab.backgroundColor = interface.mainBackground
+        } else {
+            self.availableFilters.isHidden = true
+             self.filtersTab.backgroundColor = interface.mainBackground
+        }
+       
+    }
 }
