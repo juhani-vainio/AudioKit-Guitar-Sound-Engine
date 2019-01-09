@@ -90,11 +90,11 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
     
     func interfaceSetup() {
        
-        inputLevel.transform = CGAffineTransform(rotationAngle: CGFloat(-Double.pi/2))
+        // inputLevel.transform = CGAffineTransform(rotationAngle: CGFloat(-Double.pi/2))
         inputLevel.setValue(Float((audio.shared.inputBooster?.dB)!), animated: true)
         inputLevel.addTarget(self, action: #selector(inputLevelChanged), for: .valueChanged)
         inputLevel.addTarget(self, action: #selector(inputLevelChangeEnded), for: .touchUpInside)
-        outputLevel.transform = CGAffineTransform(rotationAngle: CGFloat(-Double.pi/2))
+        //  outputLevel.transform = CGAffineTransform(rotationAngle: CGFloat(-Double.pi/2))
         outputLevel.setValue(Float((audio.shared.outputBooster?.dB)!), animated: true)
         outputLevel.addTarget(self, action: #selector(outputLevelChanged), for: .valueChanged)
         outputLevel.addTarget(self, action: #selector(outputLevelChangeEnded), for: .touchUpInside)
