@@ -37,7 +37,7 @@ class Colors {
         case "tanhDistortion" : color = UIColor.brown
         case "clipper" : color = UIColor.blue
         case "dynaRageCompressor" : color = UIColor.white
-        case "autoWah" : color = UIColor.black
+        case "autoWah" : color = UIColor.yellow
         case "delay" : color = UIColor.yellow
         case "decimator" : color = UIColor.cyan
         case "ringModulator" : color = UIColor.purple
@@ -54,7 +54,7 @@ class Colors {
         case "costelloReverb": color = UIColor.red
         case "flatFrequencyResponseReverb": color = UIColor.red
         case "tremolo": color = UIColor.yellow
-        default : color = UIColor.clear
+        default : color = UIColor.white
         }
         return color
     }
