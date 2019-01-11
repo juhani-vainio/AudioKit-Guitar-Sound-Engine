@@ -14,41 +14,48 @@ fileprivate var longPressGesture: UILongPressGestureRecognizer!
 
 class SingleTableViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UITableViewDelegate, UITableViewDataSource  {
   
-   
-    var nameCheck = Bool()
-    var effectChainNeedsReset = Bool(false)
-    private let parallaxLayout = ParallaxFlowLayout()
-    
-    @IBOutlet weak var topView: UIView!
-    
-    @IBOutlet weak var waveformView: UIView!
-    
-    @IBOutlet weak var soundEngineHeight: NSLayoutConstraint!
-    @IBOutlet weak var soundsViewHeight: NSLayoutConstraint!
-    
-    @IBOutlet weak var availableFiltersHeight: NSLayoutConstraint!
-    @IBOutlet weak var availableEffectsHeight: NSLayoutConstraint!
-    @IBOutlet weak var soundsView: UIView!
-    
-    
     fileprivate var sourceIndexPath: IndexPath?
     fileprivate var snapshot: UIView?
     
-    @IBOutlet weak var savedSoundsTableView: UITableView!
+    var nameCheck = Bool()
+    var effectChainNeedsReset = Bool(false)
+    private let parallaxLayout = ParallaxFlowLayout()
+  
+    @IBOutlet weak var soundEngineHeight: NSLayoutConstraint!
+    @IBOutlet weak var soundsViewHeight: NSLayoutConstraint!
+    @IBOutlet weak var availableFiltersHeight: NSLayoutConstraint!
+    @IBOutlet weak var availableEffectsHeight: NSLayoutConstraint!
    
     @IBOutlet weak var inputLevel: UISlider!
     @IBOutlet weak var outputLevel: UISlider!
-   
     @IBOutlet weak var bufferLengthSegment: UISegmentedControl!
-    @IBOutlet weak var soundEngine: UIView!
-    @IBOutlet weak var addButton: UIButton!
     
+    @IBOutlet weak var topView: UIView!
+    @IBOutlet weak var bottomView: UIView!
+    @IBOutlet weak var waveformView: UIView!
+    @IBOutlet weak var soundsView: UIView!
+    @IBOutlet weak var savedSoundsTableView: UITableView!
+    @IBOutlet weak var soundEngine: UIView!
+    @IBOutlet weak var soundsTab: UIView!
+    @IBOutlet weak var effectsTab: UIView!
+    @IBOutlet weak var filtersTab: UIView!
+    @IBOutlet weak var availableEffectsView: UIView!
     @IBOutlet weak var availableEffects: UITableView!
-
+    @IBOutlet weak var availableFiltersView: UIView!
     @IBOutlet weak var availableFilters: UITableView!
     @IBOutlet weak var selectedEffects: UITableView!
-    
     @IBOutlet weak var selectedFilters: UITableView!
+    
+    @IBOutlet weak var inputLevelView: UIView!
+    @IBOutlet weak var outputLevelView: UIView!
+    
+    
+    var viewForSoundGraphic = UIView()
+    var stack = UIStackView()
+    
+    @IBOutlet weak var soundTitle: UILabel!
+    @IBOutlet weak var effectsTitle: UILabel!
+    @IBOutlet weak var filtersTitle: UILabel!
     
     
     @IBOutlet weak var mainCollection: UICollectionView!
@@ -58,7 +65,7 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
     }
     
     func setAvailableEffectsHeight() {
-        let newHeight = CGFloat(audio.availableEffectsData.count * 44)
+        let newHeight = CGFloat(audio.availableEffectsData.count * 44 + 40)
         let maxHeight = CGFloat(self.soundEngineHeight.constant - 52)
         if newHeight < maxHeight {
             self.availableEffectsHeight.constant = newHeight
@@ -70,7 +77,7 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
     }
     
     func setAvailableFiltersHeight() {
-        let newHeight = CGFloat(audio.availableFiltersData.count * 44)
+        let newHeight = CGFloat(audio.availableFiltersData.count * 44 + 40)
         let maxHeight = CGFloat(self.soundEngineHeight.constant - 52)
         if newHeight < maxHeight {
             self.availableFiltersHeight.constant = newHeight
@@ -100,10 +107,7 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
          // Set up Interface Colors
         Colors.palette.setInterfaceColorScheme(name: "spotify")
         
-        
-        
-        
-      
+ 
         
         audio.shared.createEffects()
         
@@ -120,155 +124,84 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
     
     
     func interfaceSetup() {
-       
+        
         // inputLevel.transform = CGAffineTransform(rotationAngle: CGFloat(-Double.pi/2))
         inputLevel.setValue(Float((audio.shared.inputBooster?.dB)!), animated: true)
         inputLevel.addTarget(self, action: #selector(inputLevelChanged), for: .valueChanged)
         inputLevel.addTarget(self, action: #selector(inputLevelChangeEnded), for: .touchUpInside)
+ 
         //  outputLevel.transform = CGAffineTransform(rotationAngle: CGFloat(-Double.pi/2))
         outputLevel.setValue(Float((audio.shared.outputBooster?.dB)!), animated: true)
         outputLevel.addTarget(self, action: #selector(outputLevelChanged), for: .valueChanged)
         outputLevel.addTarget(self, action: #selector(outputLevelChangeEnded), for: .touchUpInside)
-        
-        bufferLengthSegment.selectedSegmentIndex = settings.bufferLength - 1
-        
-        soundsTab.backgroundColor = interface.mainBackground
-        effectsTab.backgroundColor = interface.mainBackground
-        filtersTab.backgroundColor = interface.mainBackground
-        
-        
-        availableEffects.backgroundColor = interface.tableAltBackground
-        availableFilters.backgroundColor = interface.tableAltBackground
-        selectedEffects.backgroundColor = UIColor.clear
-        selectedFilters.backgroundColor = UIColor.clear
-       
-        savedSoundsTableView.backgroundColor = UIColor.white
-        
-        mainCollection.backgroundColor = UIColor.clear
-        soundEngine.backgroundColor = interface.mainBackground
- 
-        
-        buildWaveforStackView()
-       // updateWaveformView()
     
-        topView.backgroundColor = UIColor.clear
-        waveformView.backgroundColor = UIColor.clear
-        
+        bufferLengthSegment.selectedSegmentIndex = settings.bufferLength - 1
+    
+        savedSoundsTableView.layer.cornerRadius = 8
         soundsView.layer.cornerRadius = 8
         availableFilters.layer.cornerRadius = 8
         availableEffects.layer.cornerRadius = 8
-    
-        
-        
-        stack.translatesAutoresizingMaskIntoConstraints = false
-        stack.distribution = .fillEqually
-        stack.axis = .horizontal
-        stack.alignment = .center
-        stack.spacing = 0
-        recyclabeView = UIView(frame: CGRect(x: 0, y: 0, width: waveformView.frame.width, height: waveformView.frame.height))
-        recyclabeView.addSubview(stack)
-        waveformView.addSubview(recyclabeView)
-        
-        stack.centerXAnchor.constraint(equalTo: waveformView.centerXAnchor).isActive = true
-        stack.centerYAnchor.constraint(equalTo: waveformView.centerYAnchor).isActive = true
-        
-    }
-    
-    func updateWaveformView(){
-        
-        var oscillator = AKOscillator(waveform: AKTable(.sine))
-        
-        // var oscillator = AKFMOscillator(waveform: AKTable(.sine))
-        oscillator.frequency = 512
-        
-        let clip = AKClipper(oscillator, limit: 0.9)
-        let reverb = AKReverb(clip, dryWetMix: 0.5)
-        AudioKit.output = AKBooster(reverb, gain: 0.0)
-        do { try AudioKit.start()
-            print("START AUDIOKIT")
-        } catch {
-            print("Could not start THIS FUCKING AudioKit")
-        }
-        oscillator.start()
-        /*
-        let plot1 = AKNodeOutputPlot(oscillator, frame: CGRect(x: 0, y: 0, width: plotView1.frame.width, height: plotView1.frame.height))
-        plot1.plotType = .buffer
-        plot1.shouldFill = false
-        plot1.shouldMirror = false
-        plot1.color = AKColor.blue
-        plotView1.addSubview(plot1)
-        
-        let plot2 = AKNodeOutputPlot(clip, frame: CGRect(x: 0, y: 0, width: plotView2.frame.width, height: plotView2.frame.height))
-        plot2.plotType = .buffer
-        plot2.shouldFill = false
-        plot2.shouldMirror = false
-        plot2.color = AKColor.blue
-        plotView2.addSubview(plot2)
-        */
-        
-        var stackUnit1 = AKNodeOutputPlot(oscillator, frame: CGRect(x: 0, y: 0, width: waveformView.frame.width / 3, height: 80))
-        stackUnit1.heightAnchor.constraint(equalToConstant: 80).isActive = true
-        stackUnit1.widthAnchor.constraint(equalToConstant: waveformView.frame.width / 3).isActive = true
-        stackUnit1.plotType = .buffer
-        stackUnit1.shouldFill = false
-        stackUnit1.shouldMirror = false
-        stackUnit1.color = AKColor.blue
-        
-        var stackUnit2 = AKNodeOutputPlot(clip, frame: CGRect(x: 0, y: 0, width: waveformView.frame.width / 3, height: 80))
-        stackUnit2.heightAnchor.constraint(equalToConstant: 80).isActive = true
-        stackUnit2.widthAnchor.constraint(equalToConstant: waveformView.frame.width / 3).isActive = true
-        stackUnit2.plotType = .buffer
-        stackUnit2.shouldFill = false
-        stackUnit2.shouldMirror = false
-        stackUnit2.color = AKColor.blue
-        
-        var stackUnit3 = AKNodeOutputPlot(reverb, frame: CGRect(x: 0, y: 0, width: waveformView.frame.width / 3, height: 80))
-        stackUnit3.heightAnchor.constraint(equalToConstant: 80).isActive = true
-        stackUnit3.widthAnchor.constraint(equalToConstant: waveformView.frame.width / 3).isActive = true
-        stackUnit3.plotType = .buffer
-        stackUnit3.shouldFill = false
-        stackUnit3.shouldMirror = false
-        stackUnit3.color = AKColor.blue
-        
-        
-        var stack = UIStackView()
-        stack.distribution = .fillEqually
-        stack.axis = .horizontal
-        stack.alignment = .center
-        stack.spacing = 0
-        
-        
-        stack.addArrangedSubview(stackUnit1)
-        stack.addArrangedSubview(stackUnit2)
-        stack.addArrangedSubview(stackUnit3)
-        stack.translatesAutoresizingMaskIntoConstraints = false
-        
-        waveformView.addSubview(stack)
-        
-        //Constraints
-        stack.centerXAnchor.constraint(equalTo: waveformView.centerXAnchor).isActive = true
-        stack.centerYAnchor.constraint(equalTo: waveformView.centerYAnchor).isActive = true
+        selectedEffects.layer.cornerRadius = 8
+        selectedFilters.layer.cornerRadius = 8
+        availableFiltersView.layer.cornerRadius = 8
+        availableEffectsView.layer.cornerRadius = 8
 
-        stackUnit1.backgroundColor = UIColor.green
-        stackUnit2.backgroundColor = UIColor.brown
-        stackUnit3.backgroundColor = UIColor.cyan
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        stack.distribution = .fillEqually
+        stack.axis = .horizontal
+        stack.alignment = .center
+        stack.spacing = 0
+        viewForSoundGraphic = UIView(frame: CGRect(x: 0, y: 0, width: waveformView.frame.width, height: waveformView.frame.height))
+        viewForSoundGraphic.addSubview(stack)
+        waveformView.addSubview(viewForSoundGraphic)
+        stack.centerXAnchor.constraint(equalTo: waveformView.centerXAnchor).isActive = true
+        stack.centerYAnchor.constraint(equalTo: waveformView.centerYAnchor).isActive = true
+        
+        buildWaveforStackView()
+        setColors()
         
     }
     
-    var recyclabeView = UIView()
-    var stack = UIStackView()
-    
+    func setColors() {
+        bufferLengthSegment.tintColor = interface.button
+        bufferLengthSegment.backgroundColor = interface.buttonBackground
+        
+        inputLevel.minimumTrackTintColor = interface.sliderMin
+        inputLevel.maximumTrackTintColor = interface.sliderMax
+        outputLevel.minimumTrackTintColor = interface.sliderMin
+        outputLevel.maximumTrackTintColor = interface.sliderMax
+        
+        topView.backgroundColor = interface.topView
+        bottomView.backgroundColor = interface.bottomView
+        waveformView.backgroundColor = UIColor.clear
+        
+        soundsTab.backgroundColor = interface.heading
+        effectsTab.backgroundColor = interface.heading
+        filtersTab.backgroundColor = interface.heading
+        
+        soundsView.backgroundColor = interface.altBackground
+        savedSoundsTableView.backgroundColor = interface.tableBackground
+        
+        availableEffectsView.backgroundColor = interface.altBackground
+        availableFiltersView.backgroundColor = interface.altBackground
+        availableEffects.backgroundColor = interface.tableBackground
+        availableFilters.backgroundColor = interface.tableBackground
+        
+        selectedEffects.backgroundColor = UIColor.clear
+        selectedFilters.backgroundColor = UIColor.clear
+        
+        soundEngine.backgroundColor = UIColor.clear
+        soundTitle.textColor = interface.textAlt
+        effectsTitle.textColor = interface.text
+        filtersTitle.textColor = interface.text
+    }
+  
     func buildWaveforStackView() {
         
-        print("Stack count ---- \(stack.arrangedSubviews.count)")
-        
         for subview in stack.arrangedSubviews {
-            print("REMOVE: \(subview)")
-            
-        stack.removeArrangedSubview(subview)
+            stack.removeArrangedSubview(subview)
             subview.isHidden = true
         }
-        
         
         let units = audio.selectedEffectsData.count
         let stackUnitWidth = waveformView.frame.width / CGFloat(units)
@@ -293,12 +226,8 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
                     }
   
             unitCount = unitCount + 1
-            
         }
-        
-        
     }
-    
     
     @objc func inputLevelChanged(slider: UISlider) {
         audio.shared.inputBooster?.dB = Double(slider.value)
@@ -1561,6 +1490,7 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
             let row = IndexPath(item: indexPath.row, section: 0)
             self.availableEffects.deleteRows(at: [row], with: .none)
             self.availableEffects.isHidden = true
+            self.availableEffectsView.isHidden = true
             self.resetEffectChain()
         }
             
@@ -1572,6 +1502,7 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
             let row = IndexPath(item: indexPath.row, section: 0)
             self.availableFilters.deleteRows(at: [row], with: .none)
             self.availableFilters.isHidden = true
+            self.availableFiltersView.isHidden = true
             self.resetEffectChain()
         }
             
@@ -2177,14 +2108,7 @@ func removeFilter() {
     }
     
     
-    @IBAction func loadSoundButtonAction(_ sender: Any) {
-       
-        /*
-        if self.savedSoundsTableView.isHidden {
-            self.savedSoundsTableView.isHidden = false
-        }
- */
-    }
+
     
     @IBAction func saveSoundButtonAction(_ sender: Any) {
         popUpDialogueForNewSound()
@@ -2243,9 +2167,7 @@ func removeFilter() {
     var effectsTapGesture = UITapGestureRecognizer()
     var filtersTapGesture = UITapGestureRecognizer()
     
-    @IBOutlet weak var soundsTab: UIView!
-    @IBOutlet weak var effectsTab: UIView!
-    @IBOutlet weak var filtersTab: UIView!
+
     
     @objc func handleSoundsTap(){
         print("SOUNDS TAPPED")
@@ -2253,17 +2175,19 @@ func removeFilter() {
             if self.soundsView.isHidden {
                 self.setSoundsViewHeight()
                 self.soundsView.isHidden = false
-                self.soundsTab.backgroundColor = interface.heading
+                self.soundsTab.backgroundColor = interface.highlight
                 
                 // hide other tabs
                 self.availableEffects.isHidden = true
-                self.effectsTab.backgroundColor = interface.mainBackground
+                self.availableEffectsView.isHidden = true
+                self.effectsTab.backgroundColor = interface.heading
                 self.availableFilters.isHidden = true
-                self.filtersTab.backgroundColor = interface.mainBackground
+                self.availableFiltersView.isHidden = true
+                self.filtersTab.backgroundColor = interface.heading
             }
             else {
                 self.soundsView.isHidden = true
-                self.soundsTab.backgroundColor = interface.mainBackground
+                self.soundsTab.backgroundColor = interface.heading
             }
     }
     @objc func handleEffectsTap(){
@@ -2271,16 +2195,19 @@ func removeFilter() {
         if self.availableEffects.isHidden {
             self.setAvailableEffectsHeight()
             self.availableEffects.isHidden = false
-            self.effectsTab.backgroundColor = interface.heading
+            self.availableEffectsView.isHidden = false
+            self.effectsTab.backgroundColor = interface.highlight
             
             // hide other tabs
             self.soundsView.isHidden = true
-            self.soundsTab.backgroundColor = interface.mainBackground
+            self.soundsTab.backgroundColor = interface.heading
             self.availableFilters.isHidden = true
-            self.filtersTab.backgroundColor = interface.mainBackground
+            self.availableFiltersView.isHidden = true
+            self.filtersTab.backgroundColor = interface.heading
         } else {
             self.availableEffects.isHidden = true
-            self.effectsTab.backgroundColor = interface.mainBackground
+            self.availableEffectsView.isHidden = true
+            self.effectsTab.backgroundColor = interface.heading
         }
         
     }
@@ -2289,16 +2216,19 @@ func removeFilter() {
         if self.availableFilters.isHidden {
             self.setAvailableFiltersHeight()
             self.availableFilters.isHidden = false
-             self.filtersTab.backgroundColor = interface.heading
+            self.availableFiltersView.isHidden = false
+            self.filtersTab.backgroundColor = interface.highlight
             
             // hide other tabs
             self.availableEffects.isHidden = true
-            self.effectsTab.backgroundColor = interface.mainBackground
+            self.availableEffectsView.isHidden = true
+            self.effectsTab.backgroundColor = interface.heading
             self.soundsView.isHidden = true
-            self.soundsTab.backgroundColor = interface.mainBackground
+            self.soundsTab.backgroundColor = interface.heading
         } else {
             self.availableFilters.isHidden = true
-             self.filtersTab.backgroundColor = interface.mainBackground
+            self.availableFiltersView.isHidden = true
+             self.filtersTab.backgroundColor = interface.heading
         }
        
     }

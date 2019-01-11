@@ -14,15 +14,23 @@ struct interface {
     // tables & collections
     // order from bottom
     static var mainBackground = UIColor()
+    static var altBackground = UIColor()
+    static var topView = UIColor()
+    static var bottomView = UIColor()
+    static var button = UIColor()
     static var buttonBackground = UIColor()
     static var tableBackground = UIColor()
     static var tableAltBackground = UIColor()
     static var heading = UIColor()
     static var text = UIColor()
     static var textIdle = UIColor()
+    static var textAlt = UIColor()
     static var highlight = UIColor()
     static var positive = UIColor()
     static var negative = UIColor()
+    static var sliderMin = UIColor()
+    static var sliderMax = UIColor()
+    static var sliderThumb = UIColor()
 }
 
 class Colors {
@@ -100,65 +108,45 @@ class Colors {
         
         switch name {
             
-        case "bluePinkGreen":
-            interface.mainBackground = UIColor(rgb: bluePinkGreen[0])
-            interface.buttonBackground = UIColor(rgb: bluePinkGreen[1])
-            interface.tableBackground = UIColor(rgb: bluePinkGreen[2])
-            interface.tableAltBackground = UIColor(rgb: bluePinkGreen[3])
-            interface.heading = UIColor(rgb: bluePinkGreen[4])
-            interface.text = UIColor(rgb: bluePinkGreen[5])
-            interface.textIdle = UIColor(rgb: bluePinkGreen[6])
-            interface.positive = UIColor(rgb: bluePinkGreen[7])
-            interface.negative = UIColor(rgb: bluePinkGreen[8])
-            interface.highlight = UIColor(rgb: bluePinkGreen[9])
+        
      
         case "spotify":
-            interface.mainBackground = UIColor(rgb: spotify[0])
-            interface.buttonBackground = UIColor(rgb: spotify[1])
-            interface.tableBackground = UIColor(rgb: spotify[1])
-            interface.tableAltBackground = UIColor(rgb: spotify[1])
-            interface.heading = UIColor(rgb: spotify[2])
-            interface.text = UIColor(rgb: spotify[5])
-            interface.textIdle = UIColor(rgb: spotify[6])
-            interface.positive = UIColor(rgb: spotify[7])
-            interface.negative = UIColor(rgb: spotify[8])
-            interface.highlight = UIColor(rgb: spotify[9])
+            interface.mainBackground = UIColor(rgb: 0x000000)
+            interface.altBackground = UIColor(rgb: 0x000000)
+            interface.topView = UIColor(rgb: 0x000000)
+            interface.bottomView = UIColor(rgb: 0x000000)
+            interface.button = UIColor(rgb: 0xFFFFFF)
+            interface.buttonBackground = UIColor(rgb: 0x121212)
+            interface.tableBackground = UIColor(rgb: 0x121212)
+            interface.tableAltBackground = UIColor(rgb: 0x121212)
+            interface.heading = UIColor(rgb: 0x181818)
+            interface.text = UIColor(rgb: 0xFFFFFF)
+            interface.textIdle = UIColor(rgb: 0x888888)
+            interface.textAlt = UIColor(rgb: 0xFFFFFF)
+            interface.positive = UIColor(rgb: 0x00B95B)
+            interface.negative = UIColor(rgb: 0xFF4A3A)
+            interface.highlight = UIColor(rgb: 0x4286D2)
+            interface.sliderMin = UIColor(rgb: 0x4286D2)
+            interface.sliderMax = UIColor(rgb: 0x4286D2)
+            interface.sliderThumb = UIColor(rgb: 0xFFFFFF)
         
-        case "finder":
-            interface.mainBackground = UIColor(rgb: finder[0])
-            interface.buttonBackground = UIColor(rgb: finder[1])
-            interface.tableBackground = UIColor(rgb: finder[2])
-            interface.tableAltBackground = UIColor(rgb: finder[3])
-            interface.heading = UIColor(rgb: finder[4])
-            interface.text = UIColor(rgb: finder[5])
-            interface.textIdle = UIColor(rgb: finder[6])
-            interface.positive = UIColor(rgb: finder[7])
-            interface.negative = UIColor(rgb: finder[8])
-            interface.highlight = UIColor(rgb: finder[9])
-            
-        case "joku":
-            interface.mainBackground = UIColor(rgb: joku[0])
-            interface.buttonBackground = UIColor(rgb: joku[1])
-            interface.tableBackground = UIColor(rgb: joku[2])
-            interface.tableAltBackground = UIColor(rgb: joku[3])
-            interface.heading = UIColor(rgb: joku[4])
-            interface.text = UIColor(rgb: joku[5])
-            interface.textIdle = UIColor(rgb: joku[6])
-            interface.positive = UIColor(rgb: joku[7])
-            interface.negative = UIColor(rgb: joku[8])
-            interface.highlight = UIColor(rgb: joku[9])
-            
         default:
             interface.mainBackground = UIColor.black
+            interface.altBackground = UIColor.white
+            interface.button = UIColor.white
             interface.buttonBackground = UIColor.darkGray
             interface.tableBackground = UIColor.gray
             interface.tableAltBackground = UIColor.lightGray
             interface.heading = UIColor.lightText
             interface.text = UIColor.lightText
+            interface.textAlt = UIColor.lightText
             interface.textIdle = UIColor.darkText
             interface.highlight = UIColor.cyan
             interface.positive = UIColor.green
             interface.negative = UIColor.red
+            interface.sliderMin = UIColor.yellow
+            interface.sliderMax = UIColor.magenta
+            interface.sliderThumb = UIColor.white
         }
         
     }
