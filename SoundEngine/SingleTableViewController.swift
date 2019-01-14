@@ -67,7 +67,16 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
     
     
     func setSoundsViewHeight() {
-        self.soundsViewHeight.constant = CGFloat(Collections.savedSounds.count * 44 + 58)
+        let newHeight = CGFloat(Collections.savedSounds.count * 44 + 78)
+        let maxHeight = CGFloat(self.soundEngineHeight.constant - 52)
+        if newHeight < maxHeight {
+            self.soundsViewHeight.constant = newHeight
+        }
+        else {
+            self.soundsViewHeight.constant = maxHeight
+        }
+        
+        
     }
     
     func setAvailableEffectsHeight() {
@@ -160,6 +169,10 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
         selectedFilters.layer.cornerRadius = 8
         availableFiltersView.layer.cornerRadius = 8
         availableEffectsView.layer.cornerRadius = 8
+        soundsTab.layer.cornerRadius = 8
+        effectsTab.layer.cornerRadius = 8
+        filtersTab.layer.cornerRadius = 8
+        
 
         stack.translatesAutoresizingMaskIntoConstraints = false
         stack.distribution = .fillEqually
@@ -1520,7 +1533,7 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
             self.mainCollection.reloadData()
             self.resetEffectChain()
            // savedSoundsTableView.isHidden = true
-            soundsView.isHidden = true
+            handleSoundsTap()
             
         }
         
@@ -1531,8 +1544,9 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
             audio.availableEffectsData.remove(at: indexPath.row)
             let row = IndexPath(item: indexPath.row, section: 0)
             self.availableEffects.deleteRows(at: [row], with: .none)
-            self.availableEffects.isHidden = true
-            self.availableEffectsView.isHidden = true
+            handleEffectsTap()
+           // self.availableEffects.isHidden = true
+           // self.availableEffectsView.isHidden = true
             self.resetEffectChain()
         }
             
@@ -1543,8 +1557,9 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
             audio.availableFiltersData.remove(at: indexPath.row)
             let row = IndexPath(item: indexPath.row, section: 0)
             self.availableFilters.deleteRows(at: [row], with: .none)
-            self.availableFilters.isHidden = true
-            self.availableFiltersView.isHidden = true
+            handleFiltersTap()
+            // self.availableFilters.isHidden = true
+            // self.availableFiltersView.isHidden = true
             self.resetEffectChain()
         }
             
@@ -1634,15 +1649,16 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
         else if tableView == savedSoundsTableView {
             if (editingStyle == .delete) {
                 let name = Collections.savedSounds[indexPath.row]
-                print(UserDefaults.standard.dictionaryRepresentation().keys)
                 print("DELETE THIS KEY : \(name)")
                 UserDefaults.standard.removeObject(forKey: name)
-                print(UserDefaults.standard.dictionaryRepresentation().keys) 
                 Collections.savedSounds.remove(at: indexPath.row)
                 UserDefaults.standard.set(Collections.savedSounds, forKey: "savedSounds")
                 let row = IndexPath(item: indexPath.row, section: 0)
                 savedSoundsTableView.deleteRows(at: [row], with: .none)
-                
+                if name == self.soundTitle.text {
+                    self.soundTitle.text = "Sounds"
+                    UserDefaults.standard.setValue("Sounds", forKey: "NameOfSound")
+                }
             }
         }
         
@@ -2200,7 +2216,14 @@ func removeFilter() {
         // Add a text field to the alert controller
         alert.addTextField { (textField) in
             textField.enablesReturnKeyAutomatically = true
-            textField.text = self.soundTitle.text
+            
+            if self.soundTitle.text == "Sounds" {
+                textField.placeholder = "Name this sound"
+            }
+            else {
+                textField.text = self.soundTitle.text
+            }
+            
             
             let textCount = textField.text?.trimmingCharacters(in: .whitespacesAndNewlines).characters.count ?? 0
             let textIsNotEmpty = textCount > 0
