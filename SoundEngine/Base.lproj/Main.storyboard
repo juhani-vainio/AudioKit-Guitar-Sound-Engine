@@ -1057,12 +1057,14 @@
                         <outlet property="mainCollection" destination="Uc0-Ys-8yK" id="tf4-jJ-5IO"/>
                         <outlet property="outputLevel" destination="Dp3-Ks-RgX" id="Fr9-pS-Rd5"/>
                         <outlet property="outputLevelView" destination="TbG-eP-usm" id="cK6-CC-oe1"/>
+                        <outlet property="saveSoundsButton" destination="6as-gz-2aZ" id="S5e-Hm-ZWx"/>
                         <outlet property="savedSoundsTableView" destination="o8z-fK-JRW" id="JK9-c4-1tK"/>
                         <outlet property="selectedEffects" destination="tsM-lv-a1B" id="gaE-Ym-DCc"/>
                         <outlet property="selectedFilters" destination="X1K-Mq-y6U" id="1s8-2K-NDJ"/>
                         <outlet property="soundEngine" destination="xFX-i0-fCU" id="nEB-Yb-CZq"/>
                         <outlet property="soundEngineHeight" destination="26J-SZ-tPx" id="JYf-Ny-oRf"/>
                         <outlet property="soundTitle" destination="4wD-C3-DKL" id="Wuo-Fp-cAW"/>
+                        <outlet property="soundsLibraryTitle" destination="P7t-tz-3Vd" id="kTh-be-Kea"/>
                         <outlet property="soundsTab" destination="HvL-25-IQX" id="xWn-pJ-0YC"/>
                         <outlet property="soundsView" destination="Gpa-J0-Xvd" id="Z6Y-EE-Apf"/>
                         <outlet property="soundsViewHeight" destination="zJE-VM-oUb" id="yEK-IN-6SI"/>

@@ -49,6 +49,9 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
     @IBOutlet weak var inputLevelView: UIView!
     @IBOutlet weak var outputLevelView: UIView!
     
+  
+    
+    @IBOutlet weak var saveSoundsButton: UIButton!
     
     var viewForSoundGraphic = UIView()
     var stack = UIStackView()
@@ -58,7 +61,10 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
     @IBOutlet weak var filtersTitle: UILabel!
     
     
+    @IBOutlet weak var soundsLibraryTitle: UILabel!
     @IBOutlet weak var mainCollection: UICollectionView!
+    
+    
     
     func setSoundsViewHeight() {
         self.soundsViewHeight.constant = CGFloat(Collections.savedSounds.count * 44 + 58)
@@ -90,6 +96,8 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
     
         self.soundsTapGesture = UITapGestureRecognizer(target: self, action: #selector(handleSoundsTap))
         self.soundsTab.addGestureRecognizer(soundsTapGesture)
@@ -124,6 +132,13 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
     
     
     func interfaceSetup() {
+        let name = UserDefaults.standard.string(forKey: "NameOfSound")
+        if name != nil {
+            self.soundTitle.text = name
+        } else {
+            self.soundTitle.text = "Sounds"
+        }
+        
         
         // inputLevel.transform = CGAffineTransform(rotationAngle: CGFloat(-Double.pi/2))
         inputLevel.setValue(Float((audio.shared.inputBooster?.dB)!), animated: true)
@@ -194,10 +209,12 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
         soundTitle.textColor = interface.textAlt
         effectsTitle.textColor = interface.text
         filtersTitle.textColor = interface.text
+        
+        soundsLibraryTitle.textColor = interface.text
     }
   
     func buildWaveforStackView() {
-        
+    
         for subview in stack.arrangedSubviews {
             stack.removeArrangedSubview(subview)
             subview.isHidden = true
@@ -311,6 +328,30 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
      
         
     }
+    
+    /*
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        if tableView == selectedEffects {
+            
+        }
+    }
+ 
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if tableView == selectedEffects {
+         return "Effects"
+        }
+        else if tableView == selectedFilters {
+            return "Filters"
+        }
+        else {
+            return ""
+            
+    }
+    
+     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 50
+    }
+     */
     
     @objc func handleLongGesture(longPress: UILongPressGestureRecognizer) {
         let state = longPress.state
@@ -1469,7 +1510,8 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if tableView == savedSoundsTableView {
             let sound = Collections.savedSounds[indexPath.row]
-            
+            UserDefaults.standard.setValue(sound, forKey: "NameOfSound")
+            self.soundTitle.text = sound
             helper.shared.getSavedChain(name: sound)
             self.selectedEffects.reloadData()
             self.selectedFilters.reloadData()
@@ -1564,7 +1606,9 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
                 return true
             }
         }
-    
+        else if tableView == savedSoundsTableView{
+            return true
+        }
         else {
             return false
         }
@@ -1585,6 +1629,20 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
                 let row = IndexPath(item: indexPath.row, section: 0)
                 self.selectedEffects.deleteRows(at: [row], with: .none)
                 self.resetEffectChain()
+            }
+        }
+        else if tableView == savedSoundsTableView {
+            if (editingStyle == .delete) {
+                let name = Collections.savedSounds[indexPath.row]
+                print(UserDefaults.standard.dictionaryRepresentation().keys)
+                print("DELETE THIS KEY : \(name)")
+                UserDefaults.standard.removeObject(forKey: name)
+                print(UserDefaults.standard.dictionaryRepresentation().keys) 
+                Collections.savedSounds.remove(at: indexPath.row)
+                UserDefaults.standard.set(Collections.savedSounds, forKey: "savedSounds")
+                let row = IndexPath(item: indexPath.row, section: 0)
+                savedSoundsTableView.deleteRows(at: [row], with: .none)
+                
             }
         }
         
@@ -1628,15 +1686,10 @@ func removeFilter() {
     }
     
     func resetEffectChain() {
-      //  unplugEffects()
-       // connectEffects()
-      
+
         helper.shared.saveCurrentSettings()
         audio.shared.resetAudioEffects()
         
-        // remove old waveform plots
-        
-
         buildWaveforStackView()
         
     }
@@ -2109,6 +2162,7 @@ func removeFilter() {
     
     
 
+
     
     @IBAction func saveSoundButtonAction(_ sender: Any) {
         popUpDialogueForNewSound()
@@ -2117,18 +2171,23 @@ func removeFilter() {
     // MARK: DIALOGUES
     
     func popUpDialogueForNewSound() {
-        let alert = UIAlertController(title: "Name your new sound?", message: nil, preferredStyle: .alert)
+        let alert = UIAlertController(title: "Save new sound?", message: nil, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         
         // Create an OK Button
-        let okAction = UIAlertAction(title: "OK", style: .default, handler: { action in
+        let okAction = UIAlertAction(title: "Save", style: .default, handler: { action in
             
             if let name = alert.textFields?.first?.text {
                 print("Your new sound is: \(name)")
                 if self.nameCheck {
+                    
+                    
                     helper.shared.saveEffectChain(name: name)
                     self.savedSoundsTableView.reloadData()
                     self.setSoundsViewHeight()
+                    self.soundTitle.text = name
+                    UserDefaults.standard.setValue(name, forKey: "NameOfSound")
+                    self.handleSoundsTap()
                 }
                 
             }
@@ -2141,15 +2200,27 @@ func removeFilter() {
         // Add a text field to the alert controller
         alert.addTextField { (textField) in
             textField.enablesReturnKeyAutomatically = true
-            textField.placeholder = "Input name here..."
+            textField.text = self.soundTitle.text
+            
+            let textCount = textField.text?.trimmingCharacters(in: .whitespacesAndNewlines).characters.count ?? 0
+            let textIsNotEmpty = textCount > 0
+            self.nameCheck = textIsNotEmpty
+            okAction.isEnabled = textIsNotEmpty
+            
             // Observe the UITextFieldTextDidChange notification to be notified in the below block when text is changed
             NotificationCenter.default.addObserver(forName: UITextField.textDidChangeNotification, object:textField , queue: OperationQueue.main, using: {_ in
                 // Being in this block means that something fired the UITextFieldTextDidChange notification.
                 let text = textField.text
-                if Collections.savedSounds.contains(text!) || Collections.cantTouchThis.contains(text!) {
+                if  Collections.cantTouchThis.contains(text!) {
                     okAction.isEnabled = false
                     self.nameCheck = false
                 }
+                /*
+                else if Collections.savedSounds.contains(text!) {
+                    okAction.isEnabled = true
+                    self.nameCheck = false
+                }
+                    */
                     
                 else {
                     let textCount = textField.text?.trimmingCharacters(in: .whitespacesAndNewlines).characters.count ?? 0
@@ -2232,4 +2303,6 @@ func removeFilter() {
         }
        
     }
+    
+    
 }
