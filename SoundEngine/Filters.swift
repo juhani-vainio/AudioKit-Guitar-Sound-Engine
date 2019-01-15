@@ -135,11 +135,7 @@ class Filters: Codable {
     }
    
 
-    
-    
-    
-    
-    
+
     struct masterMixer: Codable {
         static var volume = Double(1.0)
     }

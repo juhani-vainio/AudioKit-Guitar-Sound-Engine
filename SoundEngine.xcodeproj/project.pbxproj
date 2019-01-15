@@ -54,6 +54,8 @@
 		57E397BC21AC15D200F2871A /* SnappingFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E397B921AC15D200F2871A /* SnappingFlowLayout.swift */; };
 		57E397BE21AC1E5300F2871A /* AudioModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E397BD21AC1E5300F2871A /* AudioModel.swift */; };
 		57E397C021AC3B8C00F2871A /* Effects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E397BF21AC3B8C00F2871A /* Effects.swift */; };
+		57EC1B2721EDDF7800C29D8B /* SwitchBoardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EC1B2521EDDF7700C29D8B /* SwitchBoardTableViewCell.swift */; };
+		57EC1B2821EDDF7800C29D8B /* SwitchBoardTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 57EC1B2621EDDF7700C29D8B /* SwitchBoardTableViewCell.xib */; };
 		57EDC83621B80E4500621899 /* SingleTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EDC83521B80E4500621899 /* SingleTableViewController.swift */; };
 		8C27423C1DFC32BBD8C2CE74 /* Pods_SoundEngine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CED5D13550FE0930E527543 /* Pods_SoundEngine.framework */; };
 		AFD87D80A5DD4EE17D1F36EB /* Pods_SoundEngineTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C56B2AAD0B6E46CA1FADE31B /* Pods_SoundEngineTests.framework */; };
@@ -140,6 +142,8 @@
 		57E397B921AC15D200F2871A /* SnappingFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SnappingFlowLayout.swift; path = "../../../Sound Engineer/Sound Engineer/vanhat/Layouts/FlowLayouts/SnappingFlowLayout.swift"; sourceTree = "<group>"; };
 		57E397BD21AC1E5300F2871A /* AudioModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioModel.swift; sourceTree = "<group>"; };
 		57E397BF21AC3B8C00F2871A /* Effects.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Effects.swift; sourceTree = "<group>"; };
+		57EC1B2521EDDF7700C29D8B /* SwitchBoardTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchBoardTableViewCell.swift; sourceTree = "<group>"; };
+		57EC1B2621EDDF7700C29D8B /* SwitchBoardTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SwitchBoardTableViewCell.xib; sourceTree = "<group>"; };
 		57EDC83521B80E4500621899 /* SingleTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleTableViewController.swift; sourceTree = "<group>"; };
 		611CF29D88D71CCBCA2AFD3F /* Pods_SoundEngineUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SoundEngineUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C883F5D89E09495EA2EE37A /* Pods-SoundEngineUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SoundEngineUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SoundEngineUITests/Pods-SoundEngineUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -259,6 +263,8 @@
 		57E397AE21AC12B200F2871A /* TableViews */ = {
 			isa = PBXGroup;
 			children = (
+				57EC1B2521EDDF7700C29D8B /* SwitchBoardTableViewCell.swift */,
+				57EC1B2621EDDF7700C29D8B /* SwitchBoardTableViewCell.xib */,
 				577F61CE21DF7B6400853F29 /* EqualizerTableViewCell.swift */,
 				577F61CF21DF7B6400853F29 /* EqualizerTableViewCell.xib */,
 				57CF7DD721DE46260016CD67 /* PassFiltersTableViewCell.swift */,
@@ -442,6 +448,7 @@
 				57075ECC219C490C003F2D4F /* Main.storyboard in Resources */,
 				57DD133621C7E1EE00506663 /* EQ31CollectionViewCell.xib in Resources */,
 				57A631EB21A965B5000069FA /* DoubleTableViewCell.xib in Resources */,
+				57EC1B2821EDDF7800C29D8B /* SwitchBoardTableViewCell.xib in Resources */,
 				579368D3219EF91400227AF8 /* TableViewCell.xib in Resources */,
 				578B32DA21BE9558002A7EEE /* OctaTableViewCell.xib in Resources */,
 				5705EFF0219DE7D6005EF724 /* SoundsCollectionViewCell.xib in Resources */,
@@ -539,6 +546,7 @@
 				57567AAE21CB9DA50030CBEC /* WaveformModel.swift in Sources */,
 				577F61D021DF7B6400853F29 /* EqualizerTableViewCell.swift in Sources */,
 				57CF7DD921DE46260016CD67 /* PassFiltersTableViewCell.swift in Sources */,
+				57EC1B2721EDDF7800C29D8B /* SwitchBoardTableViewCell.swift in Sources */,
 				578B32D521BE9548002A7EEE /* HeptaTableViewCell.swift in Sources */,
 				578B32CD21BE9522002A7EEE /* PentaTableViewCell.swift in Sources */,
 				57E397BE21AC1E5300F2871A /* AudioModel.swift in Sources */,

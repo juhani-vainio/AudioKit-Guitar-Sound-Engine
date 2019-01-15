@@ -499,6 +499,33 @@ class helper {
             }
             
            
+        case "moogLadder" :
+            array.updateValue(location, forKey: "location")
+            array.updateValue(effect.id, forKey: "name")
+            array.updateValue(String(audio.moogLadder!.isStarted), forKey: "isStarted")
+            array.updateValue(String(audio.moogLadder!.cutoffFrequency), forKey: "cutoffFrequency")
+            array.updateValue(String(audio.moogLadder!.resonance), forKey: "resonance")
+            
+        case "resonantFilter" :
+            array.updateValue(location, forKey: "location")
+            array.updateValue(effect.id, forKey: "name")
+            array.updateValue(String(audio.resonantFilter!.isStarted), forKey: "isStarted")
+            array.updateValue(String(audio.resonantFilter!.frequency), forKey: "frequency")
+            array.updateValue(String(audio.resonantFilter!.bandwidth), forKey: "bandwidth")
+            
+        case "stringResonator" :
+            array.updateValue(location, forKey: "location")
+            array.updateValue(effect.id, forKey: "name")
+            array.updateValue(String(audio.stringResonator!.isStarted), forKey: "isStarted")
+            array.updateValue(String(audio.stringResonator!.fundamentalFrequency), forKey: "fundamentalFrequency")
+            array.updateValue(String(audio.stringResonator!.feedback), forKey: "feedback")
+            
+        case "modalResonanceFilter" :
+            array.updateValue(location, forKey: "location")
+            array.updateValue(effect.id, forKey: "name")
+            array.updateValue(String(audio.modalResonanceFilter!.isStarted), forKey: "isStarted")
+            array.updateValue(String(audio.modalResonanceFilter!.frequency), forKey: "frequency")
+            array.updateValue(String(audio.modalResonanceFilter!.qualityFactor), forKey: "qualityFactor")
             
             
             
@@ -1139,6 +1166,81 @@ class helper {
                 }
                 
                 
+            case "moogLadder" :
+                
+                guard let cutoffFrequency = (effect as AnyObject).value(forKey: "cutoffFrequency")! as? String else {
+                    return
+                }
+                guard let resonance = (effect as AnyObject).value(forKey: "resonance")! as? String else {
+                    return
+                }
+                
+                guard let isStarted = (effect as AnyObject).value(forKey: "isStarted")! as? String else {
+                    return
+                }
+                
+                audio.moogLadder!.cutoffFrequency = Double(cutoffFrequency)!
+                audio.moogLadder!.resonance = Double(resonance)!
+                
+                let started = Bool(isStarted)!
+                if started == true {audio.moogLadder!.start()} else {audio.moogLadder!.stop()}
+                
+            case "resonantFilter" :
+                
+                guard let frequency = (effect as AnyObject).value(forKey: "frequency")! as? String else {
+                    return
+                }
+                guard let bandwidth = (effect as AnyObject).value(forKey: "bandwidth")! as? String else {
+                    return
+                }
+                
+                guard let isStarted = (effect as AnyObject).value(forKey: "isStarted")! as? String else {
+                    return
+                }
+                
+                audio.resonantFilter!.frequency = Double(frequency)!
+                audio.resonantFilter!.bandwidth = Double(bandwidth)!
+                
+                let started = Bool(isStarted)!
+                if started == true {audio.resonantFilter!.start()} else {audio.resonantFilter!.stop()}
+                
+            case "stringResonator" :
+                
+                guard let fundamentalFrequency = (effect as AnyObject).value(forKey: "fundamentalFrequency")! as? String else {
+                    return
+                }
+                guard let feedback = (effect as AnyObject).value(forKey: "feedback")! as? String else {
+                    return
+                }
+                
+                guard let isStarted = (effect as AnyObject).value(forKey: "isStarted")! as? String else {
+                    return
+                }
+                
+                audio.stringResonator!.fundamentalFrequency = Double(fundamentalFrequency)!
+                audio.stringResonator!.feedback = Double(feedback)!
+                
+                let started = Bool(isStarted)!
+                if started == true {audio.stringResonator!.start()} else {audio.stringResonator!.stop()}
+                
+            case "modalResonanceFilter" :
+                
+                guard let frequency = (effect as AnyObject).value(forKey: "frequency")! as? String else {
+                    return
+                }
+                guard let qualityFactor = (effect as AnyObject).value(forKey: "qualityFactor")! as? String else {
+                    return
+                }
+                
+                guard let isStarted = (effect as AnyObject).value(forKey: "isStarted")! as? String else {
+                    return
+                }
+                
+                audio.modalResonanceFilter!.frequency = Double(frequency)!
+                audio.modalResonanceFilter!.qualityFactor = Double(qualityFactor)!
+                
+                let started = Bool(isStarted)!
+                if started == true {audio.modalResonanceFilter!.start()} else {audio.modalResonanceFilter!.stop()}
                 
                 
                 /*

@@ -95,7 +95,7 @@ class audio {
         effectData(id: "stringResonator", opened: false, title: "String Resonator", type: "2"),
         effectData(id: "modalResonanceFilter", opened: false, title: "Modal Resonance", type: "2"),
         
-        effectData(id: "combFilterReverb", opened: false, title: "Comb Reverb", type: "2")
+       
     ]
     
 
@@ -629,17 +629,90 @@ class audio {
                 
             }
             
+       
+        case "modalResonanceFilter":
+            switch slider {
+            case 0:
+                if  audio.modalResonanceFilter!.isStarted == true {
+                    audio.modalResonanceFilter?.stop()
+                    
+                    newValue = "OFF"
+                } else {
+                    audio.modalResonanceFilter?.start()
+                    
+                    newValue = "ON"
+                }
+            case 1:
+                audio.modalResonanceFilter?.frequency = value
+                let text = String(value)
+                newValue = String(text.prefix(3))
+            case 2:
+                audio.modalResonanceFilter?.qualityFactor = value
+                let text = String(value)
+                newValue = String(text.prefix(3))
+                
+            default: break
+                
+            }
+        case "stringResonator":
+            switch slider {
+            case 0:
+                if  audio.stringResonator!.isStarted == true {
+                    audio.stringResonator?.stop()
+                    
+                    newValue = "OFF"
+                } else {
+                    audio.stringResonator?.start()
+                    
+                    newValue = "ON"
+                }
+            case 1:
+                audio.stringResonator?.fundamentalFrequency = value
+                let text = String(value)
+                newValue = String(text.prefix(3))
+            case 2:
+                audio.stringResonator?.feedback = value
+                let text = String(value)
+                newValue = String(text.prefix(3))
+                
+            default: break
+                
+            }
+        case "resonantFilter":
+            switch slider {
+            case 0:
+                if  audio.resonantFilter!.isStarted == true {
+                    audio.resonantFilter?.stop()
+                    
+                    newValue = "OFF"
+                } else {
+                    audio.resonantFilter?.start()
+                    
+                    newValue = "ON"
+                }
+            case 1:
+                audio.resonantFilter?.frequency = value
+                let text = String(value)
+                newValue = String(text.prefix(3))
+            case 2:
+                audio.resonantFilter?.bandwidth = value
+                let text = String(value)
+                newValue = String(text.prefix(3))
+                
+            default: break
+                
+            }
             
         
        // case "sevenBandFilter":
 /*
         case "highLowPassFilters":
         
-        case "resonantFilter":
-        case "stringResonator":
-        case "modalResonanceFilter":
+        case "":
+        case "":
+        case "":
         case "dcBlock":
-        case "combFilterReverb":
+        case "":
          */
   
             
@@ -1434,16 +1507,16 @@ class audio {
         case "toneFilters":
             switch slider {
             case 1:
-                min = 40
-                max = 5000
+                min = 12
+                max = 20000
                 valueForSlider = Float(audio.toneFilter!.halfPowerPoint)
                 name = "Tone"
                 value = String(audio.toneFilter!.halfPowerPoint)
                 value = String(value.prefix(3))
                 isOn = audio.toneFilter!.isStarted
             case 2:
-                min = 20
-                max = 4000
+                min = 12
+                max = 20000
                 valueForSlider = Float(audio.toneComplementFilter!.halfPowerPoint)
                 name = "Tone Complement"
                 value = String(audio.toneComplementFilter!.halfPowerPoint)
@@ -1456,8 +1529,8 @@ class audio {
         case "moogLadder":
             switch slider {
             case 1:
-                min = 40
-                max = 5000
+                min = 12
+                max = 20000
                 valueForSlider = Float(audio.moogLadder!.cutoffFrequency)
                 name = "Cut off"
                 value = String(audio.moogLadder!.cutoffFrequency)
@@ -1465,7 +1538,7 @@ class audio {
                 isOn = audio.moogLadder!.isStarted
             case 2:
                 min = 0
-                max = 1
+                max = 2
                 valueForSlider = Float(audio.moogLadder!.resonance)
                 name = "Resonance"
                 value = String(audio.moogLadder!.resonance)
@@ -1474,16 +1547,82 @@ class audio {
                 
             default: break
             }
+            
+        case "resonantFilter":
+            switch slider {
+            case 1:
+                min = 100
+                max = 20000
+                valueForSlider = Float(audio.resonantFilter!.frequency)
+                name = "Frequency"
+                value = String(audio.resonantFilter!.frequency)
+                value = String(value.prefix(3))
+                isOn = audio.resonantFilter!.isStarted
+            case 2:
+                min = 0
+                max = 10000
+                valueForSlider = Float(audio.resonantFilter!.bandwidth)
+                name = "Bandwidth"
+                value = String(audio.resonantFilter!.bandwidth)
+                value = String(value.prefix(3))
+                isOn = audio.resonantFilter!.isStarted
+                
+            default: break
+            }
+            
+        case "stringResonator":
+            switch slider {
+            case 1:
+                min = 12
+                max = 10000
+                valueForSlider = Float(audio.stringResonator!.fundamentalFrequency)
+                name = "Frequency"
+                value = String(audio.stringResonator!.fundamentalFrequency)
+                value = String(value.prefix(3))
+                isOn = audio.stringResonator!.isStarted
+            case 2:
+                min = 0
+                max = 1
+                valueForSlider = Float(audio.stringResonator!.feedback)
+                name = "Feedback"
+                value = String(audio.stringResonator!.feedback)
+                value = String(value.prefix(3))
+                isOn = audio.stringResonator!.isStarted
+                
+            default: break
+            }
+            
+        case "modalResonanceFilter":
+            switch slider {
+            case 1:
+                min = 12
+                max = 20000
+                valueForSlider = Float(audio.modalResonanceFilter!.frequency)
+                name = "Frequency"
+                value = String(audio.modalResonanceFilter!.frequency)
+                value = String(value.prefix(3))
+                isOn = audio.modalResonanceFilter!.isStarted
+            case 2:
+                min = 0
+                max = 100
+                valueForSlider = Float(audio.modalResonanceFilter!.qualityFactor)
+                name = "Quality Factor"
+                value = String(audio.modalResonanceFilter!.qualityFactor)
+                value = String(value.prefix(3))
+                isOn = audio.modalResonanceFilter!.isStarted
+                
+            default: break
+            }
         
        // case "sevenBandFilter":
      /*
         case "highLowPassFilters":
  
-        case "resonantFilter":
-        case "stringResonator":
-        case "modalResonanceFilter":
+        case "":
+        case "":
+        case "":
         case "dcBlock":
-        case "combFilterReverb":
+        
  */
  
  
@@ -2446,7 +2585,7 @@ class audio {
         case "stringResonator":     audio.selectedAudioInputs.append(audio.stringResonator!)
         case "modalResonanceFilter": audio.selectedAudioInputs.append(audio.modalResonanceFilter!)
         case "dcBlock":             audio.selectedAudioInputs.append(audio.dcBlock!)
-        case "combFilterReverb":    audio.selectedAudioInputs.append(audio.combFilterReverb!)
+      
             
        
         default : print("NOTHING to do over HERE")
@@ -2818,7 +2957,7 @@ class audio {
     
     static var moogLadder: AKMoogLadder?
     
-    static var combFilterReverb: AKCombFilterReverb?
+
     
     static var dcBlock: AKDCBlock?
     
@@ -3196,7 +3335,7 @@ class audio {
         
         audio.dcBlock = AKDCBlock()
         audio.stringResonator = AKStringResonator()
-        audio.combFilterReverb = AKCombFilterReverb()
+        
         
         
         
