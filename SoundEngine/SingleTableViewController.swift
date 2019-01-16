@@ -30,7 +30,9 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
     @IBOutlet weak var outputLevel: UISlider!
     @IBOutlet weak var bufferLengthSegment: UISegmentedControl!
     
+    @IBOutlet weak var toolBar: UIView!
     @IBOutlet weak var topView: UIView!
+    
     @IBOutlet weak var bottomView: UIView!
     @IBOutlet weak var waveformView: UIView!
     @IBOutlet weak var soundsView: UIView!
@@ -190,6 +192,7 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
         
     }
     
+    @IBOutlet weak var top: UIView!
     func setColors() {
         bufferLengthSegment.tintColor = interface.button
         bufferLengthSegment.backgroundColor = interface.buttonBackground
@@ -203,6 +206,8 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
         bottomView.backgroundColor = interface.bottomView
         waveformView.backgroundColor = UIColor.clear
         
+        toolBar.backgroundColor = interface.topView
+        top.backgroundColor = interface.topView
         soundsTab.backgroundColor = interface.heading
         effectsTab.backgroundColor = interface.heading
         filtersTab.backgroundColor = interface.heading
@@ -590,13 +595,13 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
                 
             case "PassFilters":
                 let cell = tableView.dequeueReusableCell(withIdentifier: "PassFiltersTableViewCell", for: indexPath) as! PassFiltersTableViewCell
-    
+                cell.selectedBackgroundView = backgroundView
                 returnCell = cell
                 
             case "Equalizer":
                 
                 let cell = tableView.dequeueReusableCell(withIdentifier: "EqualizerTableViewCell", for: indexPath) as! EqualizerTableViewCell
-                
+                cell.selectedBackgroundView = backgroundView
                 cell.segmentControl.selectedSegmentIndex = audio.eqSelection
                 
                 cell.segmentControl.addTarget(self, action: #selector(toggleEQ), for: .valueChanged)
@@ -1621,7 +1626,7 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
                 return true
             }
         }
-        else if tableView == savedSoundsTableView{
+        else if tableView == savedSoundsTableView {
             return true
         }
         else {

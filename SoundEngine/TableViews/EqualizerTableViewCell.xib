@@ -20,7 +20,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UdQ-8c-Ebd">
-                        <rect key="frame" x="12" y="51" width="296" height="350"/>
+                        <rect key="frame" x="12" y="52" width="296" height="350"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="2rh-qg-ey6">
                                 <rect key="frame" x="12" y="0.0" width="272" height="350"/>
@@ -366,7 +366,7 @@
                         </constraints>
                     </view>
                     <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="wH8-4c-hoO">
-                        <rect key="frame" x="204" y="11" width="100" height="29"/>
+                        <rect key="frame" x="204" y="12" width="100" height="29"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="28" id="GS0-me-9Cr"/>
                             <constraint firstAttribute="width" constant="100" id="SLZ-Cj-0NI"/>
@@ -377,7 +377,7 @@
                         </segments>
                     </segmentedControl>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="EQUALIZER" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ogh-ZC-f7k">
-                        <rect key="frame" x="16" y="11.5" width="180" height="26.5"/>
+                        <rect key="frame" x="16" y="12.5" width="180" height="26.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="22"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -387,7 +387,7 @@
                 <constraints>
                     <constraint firstItem="UdQ-8c-Ebd" firstAttribute="top" secondItem="wH8-4c-hoO" secondAttribute="bottom" constant="12" id="60C-Lm-3Zn"/>
                     <constraint firstAttribute="trailing" secondItem="UdQ-8c-Ebd" secondAttribute="trailing" constant="12" id="HYE-Oi-MQO"/>
-                    <constraint firstItem="wH8-4c-hoO" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="11" id="LUR-YW-6Lm"/>
+                    <constraint firstItem="wH8-4c-hoO" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="12" id="LUR-YW-6Lm"/>
                     <constraint firstItem="UdQ-8c-Ebd" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="12" id="Nbh-ul-X0N"/>
                     <constraint firstItem="ogh-ZC-f7k" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="PQv-Sl-nZh"/>
                     <constraint firstItem="ogh-ZC-f7k" firstAttribute="centerY" secondItem="wH8-4c-hoO" secondAttribute="centerY" id="Q1J-fq-dh2"/>

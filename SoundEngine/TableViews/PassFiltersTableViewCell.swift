@@ -10,7 +10,12 @@ import UIKit
 
 class PassFiltersTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var highPassOnOffButton: UIButton!
+    @IBOutlet weak var lowPassOnOffButton: UIButton!
     
+    @IBOutlet weak var highPassSegment: UISegmentedControl!
+    
+    @IBOutlet weak var lowPassSegment: UISegmentedControl!
     @IBOutlet var labels: [UILabel]!
     @IBOutlet weak var controllersView: UIView!
 
@@ -20,15 +25,22 @@ class PassFiltersTableViewCell: UITableViewCell {
     @IBOutlet weak var lowPassSlider: UISlider!
     @IBOutlet weak var highPassSlider: UISlider!
     
-    @IBOutlet weak var highPassSwitch: UISwitch!
-    @IBOutlet weak var lowPassSwitch: UISwitch!
+
+
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+     
+        highPassOnOffButton.backgroundColor = UIColor.clear
+        highPassOnOffButton.layer.borderWidth = 2
+        highPassOnOffButton.layer.borderColor = interface.text.cgColor
+        highPassOnOffButton.layer.cornerRadius = highPassOnOffButton.bounds.height / 2
         
-        lowPassSwitch.transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
-        highPassSwitch.transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
+        lowPassOnOffButton.backgroundColor = UIColor.clear
+        lowPassOnOffButton.layer.borderWidth = 2
+        lowPassOnOffButton.layer.borderColor = interface.text.cgColor
+        lowPassOnOffButton.layer.cornerRadius = lowPassOnOffButton.bounds.height / 2
         
         controllersView.backgroundColor = interface.heading
         controllersView.layer.cornerRadius = 8
@@ -36,11 +48,13 @@ class PassFiltersTableViewCell: UITableViewCell {
         for label in labels {
             label.textColor = interface.text
         }
-        
-        lowPassValueLabel.textColor = interface.text
-        highPassValueLabel.textColor = interface.text
-        
+        highPassSegment.transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
+        lowPassSegment.transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
+        highPassSegment.tintColor = interface.text
+        lowPassSegment.tintColor = interface.text
     }
+    
+    
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)

@@ -81,7 +81,7 @@ class audio {
         //effectData(id: "sevenBandFilter", opened: false, title: "7 Band", type: "Equalizer"), // Sub-Bass, Bass, Low Mid, Mid, Upper Mid, Precence, Brilliance
         
         // CUT    " highPassFilter & lowPassFilter  either normal or highPassButterworthFilter & lowPassButterworthFilter"
-        effectData(id: "highLowPassFilters", opened: false, title: "Cut off", type: "PassFilters"), // add switch for FLAT as in butterworth for the pass filters
+        effectData(id: "highLowPassFilters", opened: false, title: "High & Low Pass Filters", type: "PassFilters"), // add switch for FLAT as in butterworth for the pass filters
         
         // TONE   " toneFilter & toneComplementFilter "
         effectData(id: "toneFilters", opened: false, title: "Tone", type: "1"),
@@ -91,7 +91,7 @@ class audio {
         
         // These similar tables as in effects
         effectData(id: "moogLadder", opened: false, title: "Moog Ladder", type: "2"),
-        effectData(id: "resonantFilter", opened: false, title: "Resonant", type: "2"),
+        effectData(id: "resonantFilter", opened: false, title: "Resonant Filter", type: "2"),
         effectData(id: "stringResonator", opened: false, title: "String Resonator", type: "2"),
         effectData(id: "modalResonanceFilter", opened: false, title: "Modal Resonance", type: "2"),
         
@@ -2483,7 +2483,7 @@ class audio {
         print("audioFormat")
         print(AKSettings.audioFormat.sampleRate) // channels, sample rate, bit depth, interleaved
         
-        AKSettings.defaultToSpeaker = true      // Whether to output to the speaker (rather than receiver) when audio input is enabled
+        AKSettings.defaultToSpeaker = false      // Whether to output to the speaker (rather than receiver) when audio input is enabled
         
         AKSettings.useBluetooth = true          // Whether to use bluetooth when audio input is enabled
         
@@ -3321,6 +3321,8 @@ class audio {
         
         audio.modalResonanceFilter = AKModalResonanceFilter()
         audio.resonantFilter = AKResonantFilter()
+        
+    
         audio.peakingParametricEqualizerFilter = AKPeakingParametricEqualizerFilter()
         audio.lowShelfParametricEqualizerFilter = AKLowShelfParametricEqualizerFilter()
         audio.highShelfParametricEqualizerFilter = AKHighShelfParametricEqualizerFilter()
