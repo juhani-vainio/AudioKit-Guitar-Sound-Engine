@@ -554,6 +554,10 @@ class audio {
         return newValue
     }
     
+    
+   
+    
+    
     func changeValues(id: String, slider: Int, value: Double) -> String {
         var newValue = String()
         switch id {
@@ -1463,7 +1467,126 @@ class audio {
         return newValue
     }
     
-  
+    func getPassFilterValues(slider: Int) -> (min: Float, max: Float, valueForSlider: Float, value: String, name : String, isOn: Bool, segment: Int) {
+        var min = Float(0.0)
+        var max = Float(1.0)
+        var valueForSlider = Float(1.0)
+        var name = ""
+        var value = ""
+        var isOn = Bool()
+        var segment = Int()
+        
+        switch slider {
+        case 1:
+            min = 10
+            max = 20000
+            valueForSlider = Float(audio.highPassFilter!.cutoffFrequency)
+            name = "Cut Off Frequency"
+            value = String(audio.highPassFilter!.cutoffFrequency)
+            value = String(value.prefix(3))
+            isOn = audio.highPassIsStarted
+            segment = audio.highPassSegment
+            
+        case 2:
+            min = 10
+            max = 20000
+            valueForSlider = Float(audio.lowPassFilter!.cutoffFrequency)
+            name = "Cut Off Frequency"
+            value = String(audio.lowPassFilter!.cutoffFrequency)
+            value = String(value.prefix(3))
+            isOn = audio.lowPassIsStarted
+            segment = audio.lowPassSegment
+            
+        default: break
+        }
+        
+        return (min, max, valueForSlider, value, name, isOn, segment)
+    }
+    
+    func changePassFilterValues(slider: Int, value: Double) -> String {
+        var newValue = String()
+        switch slider {
+            
+        case 1:
+            audio.highPassFilter?.cutoffFrequency = value
+            audio.highPassButterworthFilter?.cutoffFrequency = value
+            let text = String(value)
+            newValue = String(text.prefix(3))
+        case 2:
+            audio.lowPassFilter?.cutoffFrequency = value
+            audio.lowPassButterworthFilter?.cutoffFrequency = value
+            let text = String(value)
+            newValue = String(text.prefix(3))
+            
+        default: break
+            
+        }
+        
+        return newValue
+    }
+    
+    func togglePassKneeOnOff(slider: Int, segment: Int, isOn: Bool) {
+        switch slider {
+        case 1:
+            if segment == 0 {
+                audio.highPassSegment = 0
+                if isOn == true {
+                    audio.highPassFilter!.start()
+                    audio.highPassButterworthFilter!.stop()
+                    audio.highPassIsStarted = true
+                } else {
+                    audio.highPassFilter!.stop()
+                    audio.highPassButterworthFilter!.stop()
+                    audio.highPassIsStarted = false
+                }
+                
+            } else {
+                audio.highPassSegment = 1
+                if isOn == true {
+                    audio.highPassFilter!.stop()
+                    audio.highPassButterworthFilter!.start()
+                    audio.highPassIsStarted = true
+                }
+                else {
+                    audio.highPassFilter!.stop()
+                    audio.highPassButterworthFilter!.stop()
+                    audio.highPassIsStarted = false
+                }
+                
+            }
+            
+        case 2:
+            if segment == 0 {
+                audio.lowPassSegment = 0
+                if isOn == true {
+                    audio.lowPassFilter!.start()
+                    audio.lowPassButterworthFilter!.stop()
+                    audio.lowPassIsStarted = true
+                } else {
+                    audio.lowPassFilter!.stop()
+                    audio.lowPassButterworthFilter!.stop()
+                    audio.lowPassIsStarted = false
+                }
+                
+            } else {
+                audio.lowPassSegment = 1
+                if isOn == true {
+                    audio.lowPassFilter!.stop()
+                    audio.lowPassButterworthFilter!.start()
+                    audio.lowPassIsStarted = true
+                }
+                else {
+                    audio.lowPassFilter!.stop()
+                    audio.lowPassButterworthFilter!.stop()
+                    audio.lowPassIsStarted = false
+                }
+                
+            }
+            
+        default: break
+            
+        }
+    }
     
     func getValues(id: String, slider: Int) -> (min: Float, max: Float, valueForSlider: Float, value: String, name : String, isOn: Bool) {
         var min = Float(0.0)
@@ -2929,6 +3052,12 @@ class audio {
     
     static var highPassFilter : AKHighPassFilter?
     static var lowPassFilter: AKLowPassFilter?
+    static var lowPassButterworthFilter: AKLowPassButterworthFilter?
+    static var highPassButterworthFilter: AKHighPassButterworthFilter?
+    static var lowPassIsStarted = Bool()
+    static var highPassIsStarted = Bool()
+    static var lowPassSegment = Int()
+    static var highPassSegment = Int()
     
     static var toneFilter: AKToneFilter?
     
@@ -2940,8 +3069,9 @@ class audio {
     
     static var bandPassButterworthFilter : AKBandPassButterworthFilter?
     static var bandRejectButterworthFilter : AKBandRejectButterworthFilter?
-    static var lowPassButterworthFilter: AKLowPassButterworthFilter?
-    static var highPassButterworthFilter: AKHighPassButterworthFilter?
+    
+    
+
     
     
     static var modalResonanceFilter : AKModalResonanceFilter?
@@ -3354,6 +3484,9 @@ class audio {
         //inputMixer?.start()
         outputMixer?.start()
         
+        
+        
+        
         // stop all effects
      
         // Delay
@@ -3394,6 +3527,19 @@ class audio {
         
         // FILTERS
         audio.autoWah?.stop()
+        
+        
+        // PASS FILTERS
+        audio.highPassButterworthFilter?.cutoffFrequency = audio.highPassFilter!.cutoffFrequency
+        audio.lowPassButterworthFilter?.cutoffFrequency = audio.lowPassFilter!.cutoffFrequency
+        audio.highPassFilter?.stop()
+        audio.lowPassFilter?.stop()
+        audio.highPassButterworthFilter?.stop()
+        audio.lowPassButterworthFilter?.stop()
+        audio.highPassSegment = 0
+        audio.highPassIsStarted = false
+        audio.lowPassSegment = 0
+        audio.lowPassIsStarted = false
         
     }
 

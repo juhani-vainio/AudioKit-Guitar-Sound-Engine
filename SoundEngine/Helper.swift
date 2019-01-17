@@ -497,6 +497,16 @@ class helper {
                 array.updateValue(String(audio.sevenBandFilterPrecence!.gain), forKey: "sevenBandFilterPrecence")
                 array.updateValue(String(audio.sevenBandFilterBrilliance!.gain), forKey: "sevenBandFilterBrilliance")
             }
+        
+        case "highLowPassFilters" :
+            array.updateValue(location, forKey: "location")
+            array.updateValue(effect.id, forKey: "name")
+            array.updateValue(String(audio.highPassIsStarted), forKey: "highPassIsStarted")
+            array.updateValue(String(audio.lowPassIsStarted), forKey: "lowPassIsStarted")
+            array.updateValue(String(audio.highPassSegment), forKey: "highPassSegment")
+            array.updateValue(String(audio.lowPassSegment), forKey: "lowPassSegment")
+            array.updateValue(String(audio.highPassFilter!.cutoffFrequency), forKey: "highPasscutoffFrequency")
+            array.updateValue(String(audio.lowPassFilter!.cutoffFrequency), forKey: "lowPasscutoffFrequency")
             
            
         case "moogLadder" :
@@ -1165,6 +1175,68 @@ class helper {
                     
                 }
                 
+            case "highLowPassFilters" :
+                guard let highPasscutoffFrequency = (effect as AnyObject).value(forKey: "highPasscutoffFrequency")! as? String else {
+                    return
+                }
+                guard let lowPasscutoffFrequency = (effect as AnyObject).value(forKey: "lowPasscutoffFrequency")! as? String else {
+                    return
+                }
+                guard let highPassSegment = (effect as AnyObject).value(forKey: "highPassSegment")! as? String else {
+                    return
+                }
+                guard let lowPassSegment = (effect as AnyObject).value(forKey: "lowPassSegment")! as? String else {
+                    return
+                }
+                guard let highPassIsStarted = (effect as AnyObject).value(forKey: "highPassIsStarted")! as? String else {
+                    return
+                }
+                guard let lowPassIsStarted = (effect as AnyObject).value(forKey: "lowPassIsStarted")! as? String else {
+                    return
+                }
+                
+               
+                audio.highPassFilter!.cutoffFrequency = Double(highPasscutoffFrequency)!
+                audio.highPassButterworthFilter!.cutoffFrequency = Double(highPasscutoffFrequency)!
+                audio.lowPassFilter!.cutoffFrequency = Double(lowPasscutoffFrequency)!
+                audio.lowPassButterworthFilter!.cutoffFrequency = Double(lowPasscutoffFrequency)!
+                
+                audio.highPassSegment = Int(highPassSegment)!
+                audio.lowPassSegment = Int(lowPassSegment)!
+                
+                let highStart = Bool(highPassIsStarted)!
+                if highStart == true {
+                    audio.highPassIsStarted = true
+                    if audio.highPassSegment == 0 {
+                        audio.highPassFilter?.start()
+                        audio.highPassButterworthFilter?.stop()
+                    } else {
+                        audio.highPassFilter?.stop()
+                        audio.highPassButterworthFilter?.start()
+                    }
+                    
+                } else {
+                    audio.highPassIsStarted = false
+                    audio.highPassFilter!.stop()
+                    audio.highPassButterworthFilter!.stop()
+                }
+                
+                let lowStart = Bool(lowPassIsStarted)!
+                if lowStart == true {
+                    audio.lowPassIsStarted = true
+                    if audio.lowPassSegment == 0 {
+                        audio.lowPassFilter?.start()
+                        audio.lowPassButterworthFilter?.stop()
+                    } else {
+                        audio.lowPassFilter?.stop()
+                        audio.lowPassButterworthFilter?.start()
+                    }
+                    
+                } else {
+                    audio.lowPassIsStarted = false
+                    audio.lowPassFilter!.stop()
+                    audio.lowPassButterworthFilter!.stop()
+                }
                 
             case "moogLadder" :
                 

@@ -10,6 +10,9 @@ import UIKit
 
 class PassFiltersTableViewCell: UITableViewCell {
 
+    var highPassOn = Bool()
+    var lowPassOn = Bool()
+    
     @IBOutlet weak var highPassOnOffButton: UIButton!
     @IBOutlet weak var lowPassOnOffButton: UIButton!
     
@@ -52,14 +55,70 @@ class PassFiltersTableViewCell: UITableViewCell {
         lowPassSegment.transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
         highPassSegment.tintColor = interface.text
         lowPassSegment.tintColor = interface.text
+        
+        highPassSlider.addTarget(self, action: #selector(valueChanged), for: .valueChanged)
+        lowPassSlider.addTarget(self, action: #selector(valueChanged), for: .valueChanged)
+        highPassOnOffButton.addTarget(self, action: #selector(toggleOnOff), for: .touchDown)
+        lowPassOnOffButton.addTarget(self, action: #selector(toggleOnOff), for: .touchDown)
+        highPassSegment.addTarget(self, action: #selector(toggleSegment), for: .valueChanged)
+        lowPassSegment.addTarget(self, action: #selector(toggleSegment), for: .valueChanged)
     }
     
-    
+    @objc func toggleSegment(segment: UISegmentedControl) {
+        
+        if segment == highPassSegment {
+            audio.shared.togglePassKneeOnOff(slider: 1, segment: self.highPassSegment.selectedSegmentIndex, isOn: highPassOn)
+        }
+        else if segment == lowPassSegment {
+            audio.shared.togglePassKneeOnOff(slider: 2, segment: self.lowPassSegment.selectedSegmentIndex, isOn: lowPassOn)
+        }
+    }
 
+    @objc func toggleOnOff(button: UIButton) {
+        
+        if button == highPassOnOffButton {
+            if highPassOn == true {
+                highPassOn = false
+                self.highPassOnOffButton.setTitle("OFF", for: .normal)
+            } else {
+                 highPassOn = true
+                self.highPassOnOffButton.setTitle("ON", for: .normal)
+            }
+            audio.shared.togglePassKneeOnOff(slider: 1, segment: self.highPassSegment.selectedSegmentIndex, isOn: highPassOn)
+            
+        }
+        else if button == lowPassOnOffButton {
+            if lowPassOn == true {
+                lowPassOn = false
+                self.lowPassOnOffButton.setTitle("OFF", for: .normal)
+            } else {
+                lowPassOn = true
+                self.lowPassOnOffButton.setTitle("ON", for: .normal)
+            }
+            audio.shared.togglePassKneeOnOff(slider: 2, segment: self.lowPassSegment.selectedSegmentIndex, isOn: lowPassOn)
+        }
+        
+    }
+    
+    @objc func valueChanged(slider: UISlider) {
+        if slider == highPassSlider {
+            let text = audio.shared.changePassFilterValues(slider: 1, value: Double(slider.value))
+            print(text)
+            highPassValueLabel.text = text
+        } else if slider == lowPassSlider {
+            let text = audio.shared.changePassFilterValues(slider: 2, value: Double(slider.value))
+            print(text)
+            lowPassValueLabel.text = text
+        }
+        
+        
+    }
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
+        
         // Configure the view for the selected state
     }
+   
     
 }

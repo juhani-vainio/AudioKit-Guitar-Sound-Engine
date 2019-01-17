@@ -596,6 +596,34 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
             case "PassFilters":
                 let cell = tableView.dequeueReusableCell(withIdentifier: "PassFiltersTableViewCell", for: indexPath) as! PassFiltersTableViewCell
                 cell.selectedBackgroundView = backgroundView
+                let high = audio.shared.getPassFilterValues(slider: 1)
+                cell.highPassSlider.minimumValue = high.min
+                cell.highPassSlider.maximumValue = high.max
+                cell.highPassSlider.value = high.valueForSlider
+                cell.highPassValueLabel.text = high.value
+                cell.highPassSegment.selectedSegmentIndex = high.segment
+                if high.isOn {
+                    cell.highPassOn = true
+                    cell.highPassOnOffButton.setTitle("ON", for: .normal)
+                } else {
+                    cell.highPassOn = false
+                    cell.highPassOnOffButton.setTitle("OFF", for: .normal)
+                }
+                
+                let low = audio.shared.getPassFilterValues(slider: 2)
+                cell.lowPassSlider.minimumValue = low.min
+                cell.lowPassSlider.maximumValue = low.max
+                cell.lowPassSlider.value = low.valueForSlider
+                cell.lowPassValueLabel.text = low.value
+                cell.lowPassSegment.selectedSegmentIndex = low.segment
+                if low.isOn {
+                    cell.lowPassOn = true
+                    cell.lowPassOnOffButton.setTitle("ON", for: .normal)
+                } else {
+                    cell.lowPassOn = false
+                    cell.lowPassOnOffButton.setTitle("OFF", for: .normal)
+                }
+                
                 returnCell = cell
                 
             case "Equalizer":
@@ -2156,7 +2184,21 @@ func removeFilter() {
     }
     
     @IBAction func checkTapped(_ sender: Any) {
-        print(AudioKit.printConnections())
+       // print(AudioKit.printConnections())
+        print("HIGH")
+        print(audio.highPassFilter?.isStarted)
+        print(audio.highPassFilter?.cutoffFrequency)
+        print("HIGH FLAT")
+        print(audio.highPassButterworthFilter?.isStarted)
+        print(audio.highPassButterworthFilter?.cutoffFrequency)
+        
+        print("LOW")
+        print(audio.lowPassFilter?.isStarted)
+        print(audio.lowPassFilter?.cutoffFrequency)
+        print("LOW FLAT")
+        print(audio.lowPassButterworthFilter?.isStarted)
+        print(audio.lowPassButterworthFilter?.cutoffFrequency)
+        
     }
 
     
