@@ -537,7 +537,19 @@ class helper {
             array.updateValue(String(audio.modalResonanceFilter!.frequency), forKey: "frequency")
             array.updateValue(String(audio.modalResonanceFilter!.qualityFactor), forKey: "qualityFactor")
             
+        case "toneFilters" :
+            array.updateValue(location, forKey: "location")
+            array.updateValue(effect.id, forKey: "name")
+            array.updateValue(String(audio.toneFilter!.isStarted), forKey: "toneFilterisStarted")
+            array.updateValue(String(audio.toneComplementFilter!.isStarted), forKey: "toneComplementFilterisStarted")
+            array.updateValue(String(audio.toneFilter!.halfPowerPoint), forKey: "toneFilterhalfPowerPoint")
+            array.updateValue(String(audio.toneComplementFilter!.halfPowerPoint), forKey: "toneComplementFilterhalfPowerPoint")
             
+            
+        case "dcBlock" :
+            array.updateValue(location, forKey: "location")
+            array.updateValue(effect.id, forKey: "name")
+            array.updateValue(String(audio.dcBlock!.isStarted), forKey: "isStarted")
             
         default : print("addToDictionaryToSave default hmmm?")
             
@@ -1314,6 +1326,39 @@ class helper {
                 let started = Bool(isStarted)!
                 if started == true {audio.modalResonanceFilter!.start()} else {audio.modalResonanceFilter!.stop()}
                 
+            case "toneFilters" :
+                
+                guard let toneFilterisStarted = (effect as AnyObject).value(forKey: "toneFilterisStarted")! as? String else {
+                    return
+                }
+                guard let toneComplementFilterisStarted = (effect as AnyObject).value(forKey: "toneComplementFilterisStarted")! as? String else {
+                    return
+                }
+                
+                guard let toneFilterhalfPowerPoint = (effect as AnyObject).value(forKey: "toneFilterhalfPowerPoint")! as? String else {
+                    return
+                }
+                guard let toneComplementFilterhalfPowerPoint = (effect as AnyObject).value(forKey: "toneComplementFilterhalfPowerPoint")! as? String else {
+                    return
+                }
+                
+                audio.toneFilter?.halfPowerPoint = Double(toneFilterhalfPowerPoint)!
+                audio.toneComplementFilter?.halfPowerPoint = Double(toneComplementFilterhalfPowerPoint)!
+                
+                let toneStarted = Bool(toneFilterisStarted)!
+                if toneStarted == true {audio.toneFilter!.start()} else {audio.toneFilter!.stop()}
+                
+                let toneComplementStarted = Bool(toneComplementFilterisStarted)!
+                if toneComplementStarted == true {audio.toneComplementFilter!.start()} else {audio.toneComplementFilter!.stop()}
+                
+                
+            case "dcBlock" :
+                
+                guard let isStarted = (effect as AnyObject).value(forKey: "isStarted")! as? String else {
+                    return
+                }
+                let started = Bool(isStarted)!
+                if started == true {audio.dcBlock!.start()} else {audio.dcBlock!.stop()}
                 
                 /*
                  case "equalizerFilter" :

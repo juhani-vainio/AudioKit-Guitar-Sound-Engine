@@ -84,7 +84,7 @@ class audio {
         effectData(id: "highLowPassFilters", opened: false, title: "High & Low Pass Filters", type: "PassFilters"), // add switch for FLAT as in butterworth for the pass filters
         
         // TONE   " toneFilter & toneComplementFilter "
-        effectData(id: "toneFilters", opened: false, title: "Tone", type: "1"),
+        effectData(id: "toneFilters", opened: false, title: "Tone", type: "2"),
         effectData(id: "dcBlock", opened: false, title: "DC Block", type: "0"), // Switch
         
         
@@ -707,6 +707,22 @@ class audio {
                 
             }
             
+        case "dcBlock":
+            switch slider {
+            case 0:
+            if  audio.dcBlock!.isStarted == true {
+                audio.dcBlock?.stop()
+                
+                newValue = "OFF"
+            } else {
+                audio.dcBlock?.start()
+                
+                newValue = "ON"
+            }
+           
+            default: break
+            
+            }
         
        // case "sevenBandFilter":
 /*
@@ -1736,6 +1752,20 @@ class audio {
                 
             default: break
             }
+            
+        case "dcBlock" :
+            switch slider {
+            case 1:
+                min = 12
+                max = 20000
+                valueForSlider = Float(30)
+                name = "dcBlock"
+                value = String(1.00)
+                value = String(value.prefix(3))
+                isOn = audio.dcBlock!.isStarted
+            
+            default: break
+            }
         
        // case "sevenBandFilter":
      /*
@@ -2692,7 +2722,7 @@ class audio {
         
             
         case "toneFilters": audio.selectedAudioInputs.append(audio.toneFilter!)
-                            //audio.selectedAudioInputs.append(audio.toneComplementFilter!)
+                            audio.selectedAudioInputs.append(audio.toneComplementFilter!)
         case "moogLadder": audio.selectedAudioInputs.append(audio.moogLadder!)
             
         case "highLowPassFilters":  audio.selectedAudioInputs.append(audio.lowPassFilter!)
@@ -3528,6 +3558,15 @@ class audio {
         // FILTERS
         audio.autoWah?.stop()
         
+        audio.toneFilter?.stop()
+        audio.toneComplementFilter?.stop()
+        
+        audio.dcBlock?.stop()
+        audio.resonantFilter?.stop()
+        audio.moogLadder?.stop()
+        audio.resonantFilter?.stop()
+        audio.stringResonator?.stop()
+        audio.modalResonanceFilter?.stop()
         
         // PASS FILTERS
         audio.highPassButterworthFilter?.cutoffFrequency = audio.highPassFilter!.cutoffFrequency

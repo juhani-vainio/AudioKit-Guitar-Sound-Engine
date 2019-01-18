@@ -2184,21 +2184,8 @@ func removeFilter() {
     }
     
     @IBAction func checkTapped(_ sender: Any) {
-       // print(AudioKit.printConnections())
-        print("HIGH")
-        print(audio.highPassFilter?.isStarted)
-        print(audio.highPassFilter?.cutoffFrequency)
-        print("HIGH FLAT")
-        print(audio.highPassButterworthFilter?.isStarted)
-        print(audio.highPassButterworthFilter?.cutoffFrequency)
-        
-        print("LOW")
-        print(audio.lowPassFilter?.isStarted)
-        print(audio.lowPassFilter?.cutoffFrequency)
-        print("LOW FLAT")
-        print(audio.lowPassButterworthFilter?.isStarted)
-        print(audio.lowPassButterworthFilter?.cutoffFrequency)
-        
+        print(AudioKit.printConnections())
+     
     }
 
     

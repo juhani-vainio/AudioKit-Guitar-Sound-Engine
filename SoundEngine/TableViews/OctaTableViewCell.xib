@@ -345,10 +345,10 @@
                         <state key="normal" title="OFF"/>
                     </button>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4dH-Y0-GGG">
-                        <rect key="frame" x="2" y="20.5" width="20" height="20"/>
+                        <rect key="frame" x="24" y="44.5" width="200" height="2"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstAttribute="width" secondItem="4dH-Y0-GGG" secondAttribute="height" multiplier="1:1" id="grP-Wf-4H0"/>
+                            <constraint firstAttribute="height" constant="2" id="Yy9-qR-ftg"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -357,17 +357,17 @@
                     <constraint firstItem="Mfr-Cd-aSN" firstAttribute="top" secondItem="2ee-gG-Kim" secondAttribute="bottom" constant="14" id="0UI-ce-L3l"/>
                     <constraint firstItem="bbS-iT-1bo" firstAttribute="leading" secondItem="Mfr-Cd-aSN" secondAttribute="leading" id="1vp-NP-tql"/>
                     <constraint firstAttribute="bottom" secondItem="bbS-iT-1bo" secondAttribute="bottom" id="6yo-N4-LuM"/>
-                    <constraint firstItem="4dH-Y0-GGG" firstAttribute="centerY" secondItem="2ee-gG-Kim" secondAttribute="centerY" id="BZg-OG-mpi"/>
+                    <constraint firstItem="4dH-Y0-GGG" firstAttribute="trailing" secondItem="2ee-gG-Kim" secondAttribute="trailing" id="Cff-8X-JBZ"/>
                     <constraint firstAttribute="trailing" secondItem="Mfr-Cd-aSN" secondAttribute="trailing" constant="12" id="F6i-YT-7nH"/>
                     <constraint firstItem="2ee-gG-Kim" firstAttribute="top" secondItem="xmY-Dx-tSa" secondAttribute="top" constant="14" id="Fiq-ws-rcM"/>
                     <constraint firstAttribute="trailing" secondItem="9Pm-lO-PDM" secondAttribute="trailing" constant="16" id="Jrb-6q-zGr"/>
-                    <constraint firstItem="4dH-Y0-GGG" firstAttribute="leading" secondItem="xmY-Dx-tSa" secondAttribute="leading" constant="2" id="OXQ-3Y-FeV"/>
+                    <constraint firstItem="4dH-Y0-GGG" firstAttribute="bottom" secondItem="2ee-gG-Kim" secondAttribute="bottom" id="N16-Ck-UMd"/>
                     <constraint firstItem="2ee-gG-Kim" firstAttribute="trailing" secondItem="9Pm-lO-PDM" secondAttribute="leading" id="OYR-B3-QjF"/>
                     <constraint firstItem="2ee-gG-Kim" firstAttribute="leading" secondItem="xmY-Dx-tSa" secondAttribute="leading" constant="24" id="W1O-TR-2AX"/>
                     <constraint firstItem="Mfr-Cd-aSN" firstAttribute="leading" secondItem="xmY-Dx-tSa" secondAttribute="leading" constant="12" id="X3X-95-2Nf"/>
                     <constraint firstItem="9Pm-lO-PDM" firstAttribute="centerY" secondItem="2ee-gG-Kim" secondAttribute="centerY" id="Xgm-49-Eak"/>
-                    <constraint firstItem="2ee-gG-Kim" firstAttribute="leading" secondItem="4dH-Y0-GGG" secondAttribute="trailing" constant="2" id="hpz-np-boY"/>
                     <constraint firstItem="Mfr-Cd-aSN" firstAttribute="bottom" secondItem="bbS-iT-1bo" secondAttribute="top" id="nES-JT-iwr"/>
+                    <constraint firstItem="4dH-Y0-GGG" firstAttribute="leading" secondItem="2ee-gG-Kim" secondAttribute="leading" id="rUB-Ks-lMn"/>
                     <constraint firstItem="bbS-iT-1bo" firstAttribute="trailing" secondItem="Mfr-Cd-aSN" secondAttribute="trailing" id="s00-HO-HfP"/>
                 </constraints>
             </tableViewCellContentView>
