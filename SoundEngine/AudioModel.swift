@@ -576,12 +576,14 @@ class audio {
                 }
             case 1:
                 audio.toneFilter?.halfPowerPoint = value
-                let text = String(value)
-                newValue = String(text.prefix(3))
+                let intValue = Int(round(value))
+                let text = String(intValue)
+                newValue = String(text.prefix(5) + " Hz")
             case 2:
                 audio.toneComplementFilter?.halfPowerPoint = value
-                let text = String(value)
-                newValue = String(text.prefix(3))
+                let intValue = Int(round(value))
+                let text = String(intValue)
+                newValue = String(text.prefix(5) + " Hz")
                 
             default: break
                 
@@ -601,8 +603,9 @@ class audio {
                 }
             case 1:
                 audio.moogLadder?.cutoffFrequency = value
-                let text = String(value)
-                newValue = String(text.prefix(3))
+                let intValue = Int(round(value))
+                let text = String(intValue)
+                newValue = String(text.prefix(5) + " Hz")
             case 2:
                 audio.moogLadder?.resonance = value
                 let text = String(value)
@@ -627,8 +630,9 @@ class audio {
                 }
             case 1:
                 audio.modalResonanceFilter?.frequency = value
-                let text = String(value)
-                newValue = String(text.prefix(3))
+                let intValue = Int(round(value))
+                let text = String(intValue)
+                newValue = String(text.prefix(5) + " Hz")
             case 2:
                 audio.modalResonanceFilter?.qualityFactor = value
                 let text = String(value)
@@ -651,8 +655,9 @@ class audio {
                 }
             case 1:
                 audio.stringResonator?.fundamentalFrequency = value
-                let text = String(value)
-                newValue = String(text.prefix(3))
+                let intValue = Int(round(value))
+                let text = String(intValue)
+                newValue = String(text.prefix(5) + " Hz")
             case 2:
                 audio.stringResonator?.feedback = value
                 let text = String(value)
@@ -675,8 +680,9 @@ class audio {
                 }
             case 1:
                 audio.resonantFilter?.frequency = value
-                let text = String(value)
-                newValue = String(text.prefix(3))
+                let intValue = Int(round(value))
+                let text = String(intValue)
+                newValue = String(text.prefix(5) + " Hz")
             case 2:
                 audio.resonantFilter?.bandwidth = value
                 let text = String(value)
@@ -988,8 +994,9 @@ class audio {
                 newValue = String(text.prefix(3))
             case 3:
                 audio.delay?.lowPassCutoff = value
-                let text = String(value)
-                newValue = String(text.prefix(3))
+                let intValue = Int(round(value))
+                let text = String(intValue)
+                newValue = String(text.prefix(5) + " Hz")
             case 4:
                 audio.delay?.dryWetMix = value
                 let text = String(value)
@@ -1079,12 +1086,14 @@ class audio {
                 }
             case 1:
                 audio.ringModulator?.frequency1 = value
-                let text = String(value)
-                newValue = String(text.prefix(3))
+                let intValue = Int(round(value))
+                let text = String(intValue)
+                newValue = String(text.prefix(5) + " Hz")
             case 2:
                 audio.ringModulator?.frequency2 = value
-                let text = String(value)
-                newValue = String(text.prefix(3))
+                let intValue = Int(round(value))
+                let text = String(intValue)
+                newValue = String(text.prefix(5) + " Hz")
             case 3:
                 audio.ringModulator?.balance = value
                 let text = String(value)
@@ -1109,8 +1118,9 @@ class audio {
                 }
             case 1:
                 audio.flanger?.frequency = value
-                let text = String(value)
-                newValue = String(text.prefix(3))
+                let intValue = Int(round(value))
+                let text = String(intValue)
+                newValue = String(text.prefix(5) + " Hz")
             case 2:
                 audio.flanger?.depth = value
                 let text = String(value)
@@ -1139,20 +1149,23 @@ class audio {
                 }
             case 1:
                 audio.phaser?.notchMinimumFrequency = value
-                let text = String(value)
-                newValue = String(text.prefix(3))
+                let intValue = Int(round(value))
+                let text = String(intValue)
+                newValue = String(text.prefix(5) + " Hz")
             case 2:
                 audio.phaser?.notchMaximumFrequency = value
-                let text = String(value)
-                newValue = String(text.prefix(3))
+                let intValue = Int(round(value))
+                let text = String(intValue)
+                newValue = String(text.prefix(5) + " Hz")
             case 3:
                 audio.phaser?.notchWidth = value
                 let text = String(value)
                 newValue = String(text.prefix(3))
             case 4:
                 audio.phaser?.notchFrequency = value
-                let text = String(value)
-                newValue = String(text.prefix(3))
+                let intValue = Int(round(value))
+                let text = String(intValue)
+                newValue = String(text.prefix(5) + " Hz")
             case 5:
                 audio.phaser?.vibratoMode = value
                 let text = String(value)
@@ -1184,8 +1197,9 @@ class audio {
                 }
             case 1:
                 audio.chorus?.frequency = value
-                let text = String(value)
-                newValue = String(text.prefix(3))
+                let intValue = Int(round(value))
+                let text = String(intValue)
+                newValue = String(text.prefix(5) + " Hz")
             case 2:
                 audio.chorus?.depth = value
                 let text = String(value)
@@ -1393,8 +1407,9 @@ class audio {
                 }
             case 1:
                 audio.costelloReverb?.cutoffFrequency = value
-                let text = String(value)
-                newValue = String(text.prefix(3))
+                let intValue = Int(round(value))
+                let text = String(intValue)
+                newValue = String(text.prefix(5) + " Hz")
             case 2:
                 audio.costelloReverb?.feedback = value
                 let text = String(value)
@@ -1435,8 +1450,9 @@ class audio {
                 }
             case 1:
                 audio.tremolo?.frequency = value
-                let text = String(value)
-                newValue = String(text.prefix(3))
+                let intValue = Int(round(value))
+                let text = String(intValue)
+                newValue = String(text.prefix(5) + " Hz")
             case 2:
                 audio.tremolo?.depth = value
                 let text = String(value)
@@ -1465,8 +1481,9 @@ class audio {
             max = 20000
             valueForSlider = Float(audio.highPassFilter!.cutoffFrequency)
             name = "Cut Off Frequency"
-            value = String(audio.highPassFilter!.cutoffFrequency)
-            value = String(value.prefix(3))
+            let intValue = Int(round(valueForSlider))
+            let text = String(intValue)
+            value = String(text.prefix(5) + " Hz")
             isOn = audio.highPassIsStarted
             segment = audio.highPassSegment
             
@@ -1475,8 +1492,9 @@ class audio {
             max = 20000
             valueForSlider = Float(audio.lowPassFilter!.cutoffFrequency)
             name = "Cut Off Frequency"
-            value = String(audio.lowPassFilter!.cutoffFrequency)
-            value = String(value.prefix(3))
+            let intValue = Int(round(valueForSlider))
+            let text = String(intValue)
+            value = String(text.prefix(5) + " Hz")
             isOn = audio.lowPassIsStarted
             segment = audio.lowPassSegment
             
@@ -1493,13 +1511,15 @@ class audio {
         case 1:
             audio.highPassFilter?.cutoffFrequency = value
             audio.highPassButterworthFilter?.cutoffFrequency = value
-            let text = String(value)
-            newValue = String(text.prefix(3))
+            let intValue = Int(round(value))
+            let text = String(intValue)
+            newValue = String(text.prefix(5) + " Hz")
         case 2:
             audio.lowPassFilter?.cutoffFrequency = value
             audio.lowPassButterworthFilter?.cutoffFrequency = value
-            let text = String(value)
-            newValue = String(text.prefix(3))
+            let intValue = Int(round(value))
+            let text = String(intValue)
+            newValue = String(text.prefix(5) + " Hz")
             
         default: break
             
@@ -1587,16 +1607,18 @@ class audio {
                 max = 20000
                 valueForSlider = Float(audio.toneFilter!.halfPowerPoint)
                 name = "Tone"
-                value = String(audio.toneFilter!.halfPowerPoint)
-                value = String(value.prefix(3))
+                let intValue = Int(round(valueForSlider))
+                let text = String(intValue)
+                value = String(text.prefix(5) + " Hz")
                 isOn = audio.toneFilter!.isStarted
             case 2:
                 min = 12
                 max = 20000
                 valueForSlider = Float(audio.toneComplementFilter!.halfPowerPoint)
                 name = "Tone Complement"
-                value = String(audio.toneComplementFilter!.halfPowerPoint)
-                value = String(value.prefix(3))
+                let intValue = Int(round(valueForSlider))
+                let text = String(intValue)
+                value = String(text.prefix(5) + " Hz")
                 isOn = audio.toneComplementFilter!.isStarted
             
             default: break
@@ -1609,8 +1631,9 @@ class audio {
                 max = 20000
                 valueForSlider = Float(audio.moogLadder!.cutoffFrequency)
                 name = "Cut off"
-                value = String(audio.moogLadder!.cutoffFrequency)
-                value = String(value.prefix(3))
+                let intValue = Int(round(valueForSlider))
+                let text = String(intValue)
+                value = String(text.prefix(5) + " Hz")
                 isOn = audio.moogLadder!.isStarted
             case 2:
                 min = 0
@@ -1631,8 +1654,9 @@ class audio {
                 max = 20000
                 valueForSlider = Float(audio.resonantFilter!.frequency)
                 name = "Frequency"
-                value = String(audio.resonantFilter!.frequency)
-                value = String(value.prefix(3))
+                let intValue = Int(round(valueForSlider))
+                let text = String(intValue)
+                value = String(text.prefix(5) + " Hz")
                 isOn = audio.resonantFilter!.isStarted
             case 2:
                 min = 0
@@ -1653,8 +1677,9 @@ class audio {
                 max = 10000
                 valueForSlider = Float(audio.stringResonator!.fundamentalFrequency)
                 name = "Frequency"
-                value = String(audio.stringResonator!.fundamentalFrequency)
-                value = String(value.prefix(3))
+                let intValue = Int(round(valueForSlider))
+                let text = String(intValue)
+                value = String(text.prefix(5) + " Hz")
                 isOn = audio.stringResonator!.isStarted
             case 2:
                 min = 0
@@ -1675,8 +1700,9 @@ class audio {
                 max = 20000
                 valueForSlider = Float(audio.modalResonanceFilter!.frequency)
                 name = "Frequency"
-                value = String(audio.modalResonanceFilter!.frequency)
-                value = String(value.prefix(3))
+                let intValue = Int(round(valueForSlider))
+                let text = String(intValue)
+                value = String(text.prefix(5) + " Hz")
                 isOn = audio.modalResonanceFilter!.isStarted
             case 2:
                 min = 0
@@ -1875,8 +1901,9 @@ class audio {
                 max = Float(Effects.delay.lowPassCutOffRange.upperBound)
                 valueForSlider = Float(audio.delay!.lowPassCutoff)
                 name = "Low Pass Cut Off"
-                value = String(audio.delay!.lowPassCutoff)
-                value = String(value.prefix(3))
+                let intValue = Int(round(valueForSlider))
+                let text = String(intValue)
+                value = String(text.prefix(5) + " Hz")
                 isOn = audio.delay!.isStarted
             case 4:
                 min = Float(Effects.delay.dryWetMixRange.lowerBound)
@@ -1965,16 +1992,18 @@ class audio {
                 max = Float(Effects.ringModulator.frequencyRange.upperBound)
                 valueForSlider = Float(audio.ringModulator!.frequency1)
                 name = "Freq 1"
-                value = String(audio.ringModulator!.frequency1)
-                value = String(value.prefix(3))
+                let intValue = Int(round(valueForSlider))
+                let text = String(intValue)
+                value = String(text.prefix(5) + " Hz")
                 isOn = audio.ringModulator!.isStarted
             case 2:
                 min = Float(Effects.ringModulator.frequencyRange.lowerBound)
                 max = Float(Effects.ringModulator.frequencyRange.upperBound)
                 valueForSlider = Float(audio.ringModulator!.frequency2)
                 name = "Freq 2"
-                value = String(audio.ringModulator!.frequency2)
-                value = String(value.prefix(3))
+                let intValue = Int(round(valueForSlider))
+                let text = String(intValue)
+                value = String(text.prefix(5) + " Hz")
                 isOn = audio.ringModulator!.isStarted
             case 3:
                 min = Float(Effects.ringModulator.balanceRange.lowerBound)
@@ -2003,8 +2032,9 @@ class audio {
                 max = Float(Effects.flanger.frequencyRange.upperBound)
                 valueForSlider = Float(audio.flanger!.frequency)
                 name = "Frequency"
-                value = String(audio.flanger!.frequency)
-                value = String(value.prefix(3))
+                let intValue = Int(round(valueForSlider))
+                let text = String(intValue)
+                value = String(text.prefix(5) + " Hz")
                 isOn = audio.flanger!.isStarted
             case 2:
                 min = Float(Effects.flanger.depthRange.lowerBound)
@@ -2045,16 +2075,18 @@ class audio {
                 max = Float(Effects.phaser.notchMinimumFrequencyRange.upperBound)
                 valueForSlider = Float(audio.phaser!.notchMinimumFrequency)
                 name = "Notch Min Frequency"
-                value = String(audio.phaser!.notchMinimumFrequency)
-                value = String(value.prefix(3))
+                let intValue = Int(round(valueForSlider))
+                let text = String(intValue)
+                value = String(text.prefix(5) + " Hz")
                 isOn = audio.phaser!.isStarted
             case 2:
                 min = Float(Effects.phaser.notchMaximumFrequencyRange.lowerBound)
                 max = Float(Effects.phaser.notchMaximumFrequencyRange.upperBound)
                 valueForSlider = Float(audio.phaser!.notchMaximumFrequency)
                 name = "Notch Max Frequency"
-                value = String(audio.phaser!.notchMaximumFrequency)
-                value = String(value.prefix(3))
+                let intValue = Int(round(valueForSlider))
+                let text = String(intValue)
+                value = String(text.prefix(5) + " Hz")
                 isOn = audio.phaser!.isStarted
             case 3:
                 min = Float(Effects.phaser.notchWidthRange.lowerBound)
@@ -2069,8 +2101,9 @@ class audio {
                 max = Float(Effects.phaser.notchFrequencyRange.upperBound)
                 valueForSlider = Float(audio.phaser!.notchFrequency)
                 name = "Notch Frequency"
-                value = String(audio.phaser!.notchFrequency)
-                value = String(value.prefix(3))
+                let intValue = Int(round(valueForSlider))
+                let text = String(intValue)
+                value = String(text.prefix(5) + " Hz")
                 isOn = audio.phaser!.isStarted
             case 5:
                 min = Float(Effects.phaser.vibratoModeRange.lowerBound)
@@ -2114,8 +2147,9 @@ class audio {
                 max = Float(Effects.chorus.frequencyRange.upperBound)
                 valueForSlider = Float(audio.chorus!.frequency)
                 name = "Frequency"
-                value = String(audio.chorus!.frequency)
-                value = String(value.prefix(3))
+                let intValue = Int(round(valueForSlider))
+                let text = String(intValue)
+                value = String(text.prefix(5) + " Hz")
                 isOn = audio.chorus!.isStarted
             case 2:
                 min = Float(Effects.chorus.depthRange.lowerBound)
@@ -2400,8 +2434,9 @@ class audio {
                 max = Float(Effects.costelloReverb.cutOffRange.upperBound)
                 valueForSlider = Float(audio.costelloReverb!.cutoffFrequency)
                 name = "Cut Off Frequency"
-                value = String(audio.costelloReverb!.cutoffFrequency)
-                value = String(value.prefix(3))
+                let intValue = Int(round(valueForSlider))
+                let text = String(intValue)
+                value = String(text.prefix(5) + " Hz")
                 isOn = audio.costelloReverb!.isStarted
             case 2:
                 min = Float(Effects.costelloReverb.feedbackRange.lowerBound)
@@ -2438,8 +2473,9 @@ class audio {
                 max = Float(Effects.tremolo.frequencyRange.upperBound)
                 valueForSlider = Float(audio.tremolo!.frequency)
                 name = "Frequency"
-                value = String(audio.tremolo!.frequency)
-                value = String(value.prefix(3))
+                let intValue = Int(round(audio.tremolo!.frequency))
+                value = String(intValue)
+                value = String(value.prefix(5) + " Hz")
                 isOn = audio.tremolo!.isStarted
             case 2:
                 min = Float(Effects.tremolo.depthRange.lowerBound)
