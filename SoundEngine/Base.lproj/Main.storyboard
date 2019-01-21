@@ -530,8 +530,8 @@
                                                                     <constraint firstAttribute="height" constant="40" id="W6R-g5-Rfo"/>
                                                                 </constraints>
                                                             </view>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sounds" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4wD-C3-DKL">
-                                                                <rect key="frame" x="137.5" y="8" width="66.5" height="24"/>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sounds" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4wD-C3-DKL">
+                                                                <rect key="frame" x="45.5" y="8" width="250" height="24"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
@@ -539,6 +539,8 @@
                                                         </subviews>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
+                                                            <constraint firstItem="4wD-C3-DKL" firstAttribute="trailing" secondItem="HvL-25-IQX" secondAttribute="trailing" id="0oB-kR-T4X"/>
+                                                            <constraint firstItem="4wD-C3-DKL" firstAttribute="leading" secondItem="HvL-25-IQX" secondAttribute="leading" id="1ab-oG-G7L"/>
                                                             <constraint firstAttribute="bottom" secondItem="HvL-25-IQX" secondAttribute="bottom" id="Di8-Tw-C0t"/>
                                                             <constraint firstItem="4wD-C3-DKL" firstAttribute="centerX" secondItem="XqB-1d-Sy1" secondAttribute="centerX" id="Xbw-od-Lbk"/>
                                                             <constraint firstItem="4wD-C3-DKL" firstAttribute="centerY" secondItem="XqB-1d-Sy1" secondAttribute="centerY" id="fsz-VI-bmA"/>

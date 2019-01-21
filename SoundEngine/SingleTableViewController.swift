@@ -624,6 +624,17 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
                     cell.lowPassOnOffButton.setTitle("OFF", for: .normal)
                 }
                 
+                if cellOpened == true {
+               
+                    cell.controllersHeight.constant = CGFloat(124)
+                    cell.controllersView.isHidden = false
+                    
+                } else {
+                    cell.controllersHeight.constant = CGFloat(0)
+                    cell.controllersView.isHidden = true
+                  
+                }
+                
                 returnCell = cell
                 
             case "Equalizer":
@@ -719,7 +730,20 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
                     cell.threeBandLowSlider.minimumValue = low.min
                     cell.threeBandLowSlider.maximumValue = low.max
                     cell.threeBandLowSlider.value = low.valueForSlider
-                   
+                }
+                
+                if cellOpened == true {
+                    if cell.segmentControl.selectedSegmentIndex == 1 {
+                    cell.controllersHeight.constant = CGFloat(350)
+                    cell.controllersView.isHidden = false
+                    } else {
+                        cell.controllersHeight.constant = CGFloat(150)
+                        cell.controllersView.isHidden = false
+                    }
+                    
+                } else {
+                    cell.controllersHeight.constant = CGFloat(0)
+                    cell.controllersView.isHidden = true
                     
                 }
                 
@@ -1654,6 +1678,14 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
                 return true
             }
         }
+        if tableView == selectedFilters {
+            if audio.selectedFiltersData[indexPath.row].opened {
+                return false
+            }
+            else {
+                return true
+            }
+        }
         else if tableView == savedSoundsTableView {
             return true
         }
@@ -1679,6 +1711,23 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
                 self.resetEffectChain()
             }
         }
+        else if tableView == selectedFilters {
+            if (editingStyle == .delete) {
+                
+                // remove and insert data between arrays
+                audio.selectedFiltersData[indexPath.row].opened = false
+                let tempData = audio.selectedFiltersData[indexPath.row]
+                audio.availableFiltersData.append(tempData)
+                // Arrange available units list aplhabetically
+                audio.availableFiltersData = audio.availableFiltersData.sorted{ $0.title < $1.title }
+                self.availableFilters.reloadData()
+                audio.selectedFiltersData.remove(at: indexPath.row)
+                let row = IndexPath(item: indexPath.row, section: 0)
+                self.selectedFilters.deleteRows(at: [row], with: .none)
+                self.resetEffectChain()
+            }
+        }
+            
         else if tableView == savedSoundsTableView {
             if (editingStyle == .delete) {
                 let name = Collections.savedSounds[indexPath.row]

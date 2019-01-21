@@ -21,7 +21,8 @@ class PassFiltersTableViewCell: UITableViewCell {
     @IBOutlet weak var lowPassSegment: UISegmentedControl!
     @IBOutlet var labels: [UILabel]!
     @IBOutlet weak var controllersView: UIView!
-
+    @IBOutlet weak var controllersHeight: NSLayoutConstraint!
+    
     @IBOutlet weak var lowPassValueLabel: UILabel!
     @IBOutlet weak var highPassValueLabel: UILabel!
     

@@ -15,15 +15,15 @@
         <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="PassFiltersTableViewCell" rowHeight="253" id="azy-oT-s5G" userLabel="PassFiltersTableViewCell" customClass="PassFiltersTableViewCell" customModule="SoundEngine" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="380" height="253"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="azy-oT-s5G" id="5m5-WD-CnV">
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" tableViewCell="azy-oT-s5G" id="5m5-WD-CnV">
                 <rect key="frame" x="0.0" y="0.0" width="380" height="252.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="voM-N2-pFM">
-                        <rect key="frame" x="12" y="0.0" width="356" height="52"/>
+                        <rect key="frame" x="12" y="0.0" width="356" height="48"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="HIGH &amp; LOW FILTERS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h1Q-mQ-mBo">
-                                <rect key="frame" x="4" y="12.5" width="209.5" height="26.5"/>
+                                <rect key="frame" x="4" y="10.5" width="209.5" height="26.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -31,13 +31,13 @@
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="52" id="4tH-u1-w52"/>
+                            <constraint firstAttribute="height" constant="48" id="4tH-u1-w52"/>
                             <constraint firstItem="h1Q-mQ-mBo" firstAttribute="leading" secondItem="voM-N2-pFM" secondAttribute="leading" constant="4" id="JHv-xG-UIH"/>
                             <constraint firstItem="h1Q-mQ-mBo" firstAttribute="centerY" secondItem="voM-N2-pFM" secondAttribute="centerY" id="lGS-MW-0sl"/>
                         </constraints>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7G7-hp-8Bh">
-                        <rect key="frame" x="12" y="64" width="356" height="124"/>
+                        <rect key="frame" x="12" y="60" width="356" height="124"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="jMY-oM-m82">
                                 <rect key="frame" x="12" y="12" width="332" height="100"/>
@@ -150,6 +150,7 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="jMY-oM-m82" firstAttribute="leading" secondItem="7G7-hp-8Bh" secondAttribute="leading" constant="12" id="AMc-9e-RtW"/>
+                            <constraint firstAttribute="height" constant="124" id="KpI-Sy-SjI"/>
                             <constraint firstAttribute="bottom" secondItem="jMY-oM-m82" secondAttribute="bottom" constant="12" id="WYl-sa-1VL"/>
                             <constraint firstItem="jMY-oM-m82" firstAttribute="top" secondItem="7G7-hp-8Bh" secondAttribute="top" constant="12" id="obk-Ud-eIg"/>
                             <constraint firstAttribute="trailing" secondItem="jMY-oM-m82" secondAttribute="trailing" constant="12" id="pu8-xE-R9B"/>
@@ -163,13 +164,14 @@
                     <constraint firstItem="voM-N2-pFM" firstAttribute="leading" secondItem="5m5-WD-CnV" secondAttribute="leading" constant="12" id="DMB-AV-i3e"/>
                     <constraint firstItem="7G7-hp-8Bh" firstAttribute="leading" secondItem="5m5-WD-CnV" secondAttribute="leading" constant="12" id="Gsn-wa-WVY"/>
                     <constraint firstAttribute="trailing" secondItem="voM-N2-pFM" secondAttribute="trailing" constant="12" id="Tm7-BG-19Y"/>
-                    <constraint firstAttribute="bottom" secondItem="7G7-hp-8Bh" secondAttribute="bottom" constant="14" id="ilE-5z-F5Z"/>
+                    <constraint firstAttribute="bottom" secondItem="7G7-hp-8Bh" secondAttribute="bottom" id="ilE-5z-F5Z"/>
                     <constraint firstItem="voM-N2-pFM" firstAttribute="top" secondItem="5m5-WD-CnV" secondAttribute="top" id="zv6-Q2-SWJ"/>
                 </constraints>
             </tableViewCellContentView>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <viewLayoutGuide key="safeArea" id="cb3-HD-CLF"/>
             <connections>
+                <outlet property="controllersHeight" destination="KpI-Sy-SjI" id="twM-50-oo6"/>
                 <outlet property="controllersView" destination="7G7-hp-8Bh" id="bSL-zY-5hY"/>
                 <outlet property="highPassOnOffButton" destination="jdv-Tz-YGY" id="aQr-6P-RnE"/>
                 <outlet property="highPassSegment" destination="KKv-3c-q7B" id="Bso-ZF-LX4"/>

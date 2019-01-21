@@ -561,28 +561,7 @@ class audio {
     func changeValues(id: String, slider: Int, value: Double) -> String {
         var newValue = String()
         switch id {
-            /*
-        case "threeBandFilter":
-            switch slider {
-            
-            case 1:
-                audio.threeBandFilterHigh?.gain = value
-                let text = String(value)
-                newValue = String(text.prefix(3))
-            case 2:
-                audio.threeBandFilterMid?.gain = value
-                let text = String(value)
-                newValue = String(text.prefix(3))
-            case 3:
-                audio.threeBandFilterLow?.gain = value
-                let text = String(value)
-                newValue = String(text.prefix(3))
-                
-            default: break
-                
-            }
-            */
-            
+        
         case "toneFilters":
             switch slider {
             case 0:
@@ -723,19 +702,7 @@ class audio {
             default: break
             
             }
-        
-       // case "sevenBandFilter":
-/*
-        case "highLowPassFilters":
-        
-        case "":
-        case "":
-        case "":
-        case "dcBlock":
-        case "":
-         */
-  
-            
+          
         case "eq10" :
             let booster = AKBooster()
             booster.dB = value
@@ -1612,37 +1579,7 @@ class audio {
         var value = ""
         var isOn = Bool()
         switch id {
-        /*
-        case "threeBandFilter":
-            switch slider {
-            case 1:
-                min = 0.1
-                max = 3
-                valueForSlider = Float(audio.threeBandFilterHigh!.gain)
-                name = "Treble"
-                value = String(audio.threeBandFilterHigh!.gain)
-                value = String(value.prefix(3))
-                isOn = audio.threeBandFilterHigh!.isStarted
-            case 2:
-                min = 0.1
-                max = 3
-                valueForSlider = Float(audio.threeBandFilterMid!.gain)
-                name = "Mid"
-                value = String(audio.threeBandFilterMid!.gain)
-                value = String(value.prefix(3))
-                isOn = audio.threeBandFilterMid!.isStarted
-            case 3:
-                min = 0.1
-                max = 3
-                valueForSlider = Float(audio.threeBandFilterLow!.gain)
-                name = "Bass"
-                value = String(audio.threeBandFilterLow!.gain)
-                value = String(value.prefix(3))
-                isOn = audio.threeBandFilterLow!.isStarted
-            default: break
-            }
- */
-            
+       
         case "toneFilters":
             switch slider {
             case 1:
@@ -1766,18 +1703,7 @@ class audio {
             
             default: break
             }
-        
-       // case "sevenBandFilter":
-     /*
-        case "highLowPassFilters":
- 
-        case "":
-        case "":
-        case "":
-        case "dcBlock":
-        
- */
- 
+         
  
         case "bitCrusher" :
             // BITCRUSHER
@@ -1918,7 +1844,7 @@ class audio {
                 min = Float(Effects.autoWah.mixRange.lowerBound)
                 max = Float(Effects.autoWah.mixRange.upperBound)
                 valueForSlider = Float(audio.autoWah!.mix)
-                name = "Mix"
+                name = "Dry Wet Mix"
                 value = String(audio.autoWah!.mix)
                 value = String(value.prefix(3))
                 isOn = audio.autoWah!.isStarted
@@ -1956,7 +1882,7 @@ class audio {
                 min = Float(Effects.delay.dryWetMixRange.lowerBound)
                 max = Float(Effects.delay.dryWetMixRange.upperBound)
                 valueForSlider = Float(audio.delay!.dryWetMix)
-                name = "Mix"
+                name = "Dry Wet Mix"
                 value = String(audio.delay!.dryWetMix)
                 value = String(value.prefix(3))
                 isOn = audio.delay!.isStarted
@@ -2100,7 +2026,7 @@ class audio {
                 min = Float(Effects.flanger.dryWetMixRange.lowerBound)
                 max = Float(Effects.flanger.dryWetMixRange.upperBound)
                 valueForSlider = Float(audio.flanger!.dryWetMix)
-                name = "Mix"
+                name = "Dry Wet Mix"
                 value = String(audio.flanger!.dryWetMix)
                 value = String(value.prefix(3))
                 isOn = audio.flanger!.isStarted
@@ -2211,7 +2137,7 @@ class audio {
                 min = Float(Effects.chorus.dryWetMixRange.lowerBound)
                 max = Float(Effects.chorus.dryWetMixRange.upperBound)
                 valueForSlider = Float(audio.chorus!.dryWetMix)
-                name = "Mix"
+                name = "Dry Wet Mix"
                 value = String(audio.chorus!.dryWetMix)
                 value = String(value.prefix(3))
                 isOn = audio.chorus!.isStarted
@@ -2267,7 +2193,7 @@ class audio {
                 min = Float(Effects.compressor.dryWetMixRange.lowerBound)
                 max = Float(Effects.compressor.dryWetMixRange.upperBound)
                 valueForSlider = Float(audio.compressor!.dryWetMix)
-                name = "Mix"
+                name = "Dry Wet Mix"
                 value = String(audio.compressor!.dryWetMix)
                 value = String(value.prefix(3))
                 isOn = audio.compressor!.isStarted
@@ -2339,7 +2265,7 @@ class audio {
                 min = Float(Effects.dynamicsProcessor.dryWetMixRange.lowerBound)
                 max = Float(Effects.dynamicsProcessor.dryWetMixRange.upperBound)
                 valueForSlider = Float(audio.dynamicsProcessor!.dryWetMix)
-                name = "Mix"
+                name = "Dry Wet Mix"
                 value = String(audio.dynamicsProcessor!.dryWetMix)
                 value = String(value.prefix(3))
                 isOn = audio.dynamicsProcessor!.isStarted
@@ -2395,7 +2321,7 @@ class audio {
                 min = Float(Effects.reverb.dryWetMixRange.lowerBound)
                 max = Float(Effects.reverb.dryWetMixRange.upperBound)
                 valueForSlider = Float(audio.reverb!.dryWetMix)
-                name = "Mix"
+                name = "Dry Wet Mix"
                 value = String(audio.reverb!.dryWetMix)
                 value = String(value.prefix(3))
                 isOn = audio.reverb!.isStarted
@@ -2458,7 +2384,7 @@ class audio {
                 min = Float(Effects.reverb2.dryWetMixRange.lowerBound)
                 max = Float(Effects.reverb2.dryWetMixRange.upperBound)
                 valueForSlider = Float(audio.reverb2!.dryWetMix)
-                name = "Mix"
+                name = "Dry Wet Mix"
                 value = String(audio.reverb2!.dryWetMix)
                 value = String(value.prefix(3))
                 isOn = audio.reverb2!.isStarted
