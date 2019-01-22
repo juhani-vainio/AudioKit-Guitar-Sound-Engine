@@ -660,8 +660,8 @@ class audio {
                 newValue = String(text.prefix(5) + " Hz")
             case 2:
                 audio.stringResonator?.feedback = value
-                let text = String(value)
-                newValue = String(text.prefix(3))
+                newValue = String(value * 10)
+                newValue = String(newValue.prefix(3))
                 
             default: break
                 
@@ -876,8 +876,9 @@ class audio {
                 newValue = String(text.prefix(3))
             case 2:
                 audio.bitCrusher?.sampleRate = value
-                let text = String(value)
-                newValue = String(text.prefix(3))
+                let intValue = Int(round(value))
+                let text = String(intValue)
+                newValue = String(text.prefix(5) + " Hz")
             
             default: break
                 
@@ -933,16 +934,16 @@ class audio {
                 newValue = String(text.prefix(3))
             case 3:
                 audio.dynaRageCompressor?.attackDuration = value
-                let text = String(value)
-                newValue = String(text.prefix(3))
+                newValue = String(value )
+                newValue = String(newValue.prefix(5) + " s")
             case 4:
                 audio.dynaRageCompressor?.releaseDuration = value
-                let text = String(value)
-                newValue = String(text.prefix(3))
+                newValue = String(value )
+                newValue = String(newValue.prefix(5) + " s")
             case 5:
                 audio.dynaRageCompressor?.rage = value
-                let text = String(value)
-                newValue = String(text.prefix(3))
+                newValue = String(value * 10)
+                newValue = String(newValue.prefix(3))
             default: break
                 
             }
@@ -959,16 +960,16 @@ class audio {
                 }
             case 1:
                 audio.autoWah?.wah = value
-                let text = String(value)
-                newValue = String(text.prefix(3))
+                newValue = String(value * 10)
+                newValue = String(newValue.prefix(3))
             case 2:
                 audio.autoWah?.amplitude = value
-                let text = String(value)
-                newValue = String(text.prefix(3))
+                newValue = String(value * 10)
+                newValue = String(newValue.prefix(3))
             case 3:
                 audio.autoWah?.mix = value
-                let text = String(value)
-                newValue = String(text.prefix(3))
+                newValue = String(value * 10)
+                newValue = String(newValue.prefix(3))
             
             default: break
                 
@@ -986,12 +987,12 @@ class audio {
                 }
             case 1:
                 audio.delay?.time = value
-                let text = String(value)
-                newValue = String(text.prefix(3))
+                newValue = String(value )
+                newValue = String(newValue.prefix(5) + " s")
             case 2:
                 audio.delay?.feedback = value
-                let text = String(value)
-                newValue = String(text.prefix(3))
+                newValue = String(value * 10)
+                newValue = String(newValue.prefix(3))
             case 3:
                 audio.delay?.lowPassCutoff = value
                 let intValue = Int(round(value))
@@ -999,8 +1000,8 @@ class audio {
                 newValue = String(text.prefix(5) + " Hz")
             case 4:
                 audio.delay?.dryWetMix = value
-                let text = String(value)
-                newValue = String(text.prefix(3))
+                newValue = String(value * 10)
+                newValue = String(newValue.prefix(3))
                 
             default: break
                 
@@ -1018,12 +1019,12 @@ class audio {
                 }
             case 1:
                 audio.variableDelay?.time = value
-                let text = String(value)
-                newValue = String(text.prefix(3))
+                newValue = String(value )
+                newValue = String(newValue.prefix(5) + " s")
             case 2:
                 audio.variableDelay?.feedback = value
-                let text = String(value)
-                newValue = String(text.prefix(3))
+                newValue = String(value * 10)
+                newValue = String(newValue.prefix(3))
             
                 
             default: break
@@ -1042,16 +1043,17 @@ class audio {
                 }
             case 1:
                 audio.decimator?.decimation = value
-                let text = String(value)
-                newValue = String(text.prefix(3))
+                newValue = String(value * 10)
+                newValue = String(newValue.prefix(3))
+                
             case 2:
                 audio.decimator?.rounding = value
-                let text = String(value)
-                newValue = String(text.prefix(3))
+                newValue = String(value * 10)
+                newValue = String(newValue.prefix(3))
             case 3:
                 audio.decimator?.mix = value
-                let text = String(value)
-                newValue = String(text.prefix(3))
+                newValue = String(value * 10)
+                newValue = String(newValue.prefix(3))
                 
             default: break
                 
@@ -1069,8 +1071,8 @@ class audio {
                 }
             case 1:
             audio.clipper?.limit = value
-            let text = String(value)
-            newValue = String(text.prefix(3))
+            newValue = String(value * 100)
+            newValue = String(newValue.prefix(3))
             default: break
                 
             }
@@ -1096,12 +1098,12 @@ class audio {
                 newValue = String(text.prefix(5) + " Hz")
             case 3:
                 audio.ringModulator?.balance = value
-                let text = String(value)
-                newValue = String(text.prefix(3))
+                newValue = String(value * 10)
+                newValue = String(newValue.prefix(3))
             case 4:
                 audio.ringModulator?.mix = value
-                let text = String(value)
-                newValue = String(text.prefix(3))
+                newValue = String(value * 10)
+                newValue = String(newValue.prefix(3))
             default: break
                 
             }
@@ -1123,16 +1125,16 @@ class audio {
                 newValue = String(text.prefix(5) + " Hz")
             case 2:
                 audio.flanger?.depth = value
-                let text = String(value)
-                newValue = String(text.prefix(3))
+                newValue = String(value * 10)
+                newValue = String(newValue.prefix(3))
             case 3:
                 audio.flanger?.feedback = value
-                let text = String(value)
-                newValue = String(text.prefix(3))
+                newValue = String(value * 10)
+                newValue = String(newValue.prefix(3))
             case 4:
                 audio.flanger?.dryWetMix = value
-                let text = String(value)
-                newValue = String(text.prefix(3))
+                newValue = String(value * 10)
+                newValue = String(newValue.prefix(3))
             default: break
                 
             }
@@ -1168,16 +1170,16 @@ class audio {
                 newValue = String(text.prefix(5) + " Hz")
             case 5:
                 audio.phaser?.vibratoMode = value
-                let text = String(value)
-                newValue = String(text.prefix(3))
+                newValue = String(value * 10)
+                newValue = String(newValue.prefix(3))
             case 6:
                 audio.phaser?.depth = value
-                let text = String(value)
-                newValue = String(text.prefix(3))
+                newValue = String(value * 10)
+                newValue = String(newValue.prefix(3))
             case 7:
                 audio.phaser?.feedback = value
-                let text = String(value)
-                newValue = String(text.prefix(3))
+                newValue = String(value * 10)
+                newValue = String(newValue.prefix(3))
             case 8:
                 audio.phaser?.lfoBPM = value
                 let text = String(value)
@@ -1202,16 +1204,16 @@ class audio {
                 newValue = String(text.prefix(5) + " Hz")
             case 2:
                 audio.chorus?.depth = value
-                let text = String(value)
-                newValue = String(text.prefix(3))
+                newValue = String(value * 10)
+                newValue = String(newValue.prefix(3))
             case 3:
                 audio.chorus?.feedback = value
-                let text = String(value)
-                newValue = String(text.prefix(3))
+                newValue = String(value * 10)
+                newValue = String(newValue.prefix(3))
             case 4:
                 audio.chorus?.dryWetMix = value
-                let text = String(value)
-                newValue = String(text.prefix(3))
+                newValue = String(value * 10)
+                newValue = String(newValue.prefix(3))
             
             default: break
                 
@@ -1237,20 +1239,20 @@ class audio {
                 newValue = String(text.prefix(3))
             case 3:
                 audio.compressor?.attackDuration = value
-                let text = String(value)
-                newValue = String(text.prefix(3))
+                newValue = String(value )
+                newValue = String(newValue.prefix(5) + " s")
             case 4:
                 audio.compressor?.releaseDuration = value
-                let text = String(value)
-                newValue = String(text.prefix(3))
+                newValue = String(value )
+                newValue = String(newValue.prefix(5) + " s")
             case 5:
                 audio.compressor?.masterGain = value
-                let text = String(value)
-                newValue = String(text.prefix(3))
+                newValue = String(value * 10)
+                newValue = String(newValue.prefix(3))
             case 6:
                 audio.compressor?.dryWetMix = value
-                let text = String(value)
-                newValue = String(text.prefix(3))
+                newValue = String(value * 10)
+                newValue = String(newValue.prefix(3))
                 
             default: break
                 
@@ -1284,21 +1286,21 @@ class audio {
                 newValue = String(text.prefix(3))
             case 5:
                 audio.dynamicsProcessor?.attackDuration = value
-                let text = String(value)
-                newValue = String(text.prefix(3))
+                newValue = String(value )
+                newValue = String(newValue.prefix(5) + " s")
             case 6:
                 audio.dynamicsProcessor?.releaseDuration = value
-                let text = String(value)
-                newValue = String(text.prefix(3))
+                newValue = String(value )
+                newValue = String(newValue.prefix(5) + " s")
             case 7:
                 audio.dynamicsProcessor?.masterGain = value
-                let text = String(value)
-                newValue = String(text.prefix(3))
+                newValue = String(value * 10)
+                newValue = String(newValue.prefix(3))
             
             case 8:
                 audio.dynamicsProcessor?.dryWetMix = value
-                let text = String(value)
-                newValue = String(text.prefix(3))
+                newValue = String(value * 10)
+                newValue = String(newValue.prefix(3))
                 
             default: break
                 
@@ -1323,12 +1325,12 @@ class audio {
                 newValue = String(text.prefix(3))
             case 3:
                 audio.dynamicRangeCompressor?.attackDuration = value
-                let text = String(value)
-                newValue = String(text.prefix(3))
+                newValue = String(value )
+                newValue = String(newValue.prefix(5) + " s")
             case 4:
                 audio.dynamicRangeCompressor?.releaseDuration = value
-                let text = String(value)
-                newValue = String(text.prefix(3))
+                newValue = String(value )
+                newValue = String(newValue.prefix(5) + " s")
                 
             default: break
                 
@@ -1345,8 +1347,8 @@ class audio {
                 }
             case 1:
                 audio.reverb?.dryWetMix = value
-                let text = String(value)
-                newValue = String(text.prefix(3))
+                newValue = String(value * 10)
+                newValue = String(newValue.prefix(3))
             
             default: break
                 
@@ -1364,8 +1366,8 @@ class audio {
                 }
             case 1:
                 audio.reverb2?.gain = value
-                let text = String(value)
-                newValue = String(text.prefix(3))
+                newValue = String(value * 10)
+                newValue = String(newValue.prefix(3))
             case 2:
                 audio.reverb2?.minDelayTime = value
                 let text = String(value)
@@ -1388,9 +1390,23 @@ class audio {
                 newValue = String(text.prefix(3))
             case 7:
                 audio.reverb2?.dryWetMix = value
-                let text = String(value)
-                newValue = String(text.prefix(3))
+                newValue = String(value * 10)
+                newValue = String(newValue.prefix(3))
                 
+            default: break
+                
+            }
+            
+        case "chowningReverb" :
+            switch slider {
+            case 0:
+                if  audio.chowningReverb!.isStarted == true {
+                    audio.chowningReverb?.stop()
+                    newValue = "OFF"
+                } else {
+                    audio.chowningReverb?.start()
+                    newValue = "ON"
+                }
             default: break
                 
             }
@@ -1412,8 +1428,9 @@ class audio {
                 newValue = String(text.prefix(5) + " Hz")
             case 2:
                 audio.costelloReverb?.feedback = value
-                let text = String(value)
-                newValue = String(text.prefix(3))
+         
+                newValue = String(value * 10)
+                newValue = String(newValue.prefix(3))
             
                 
             default: break
@@ -1431,8 +1448,8 @@ class audio {
                 }
             case 1:
                 audio.flatFrequencyResponseReverb?.reverbDuration = value
-                let text = String(value)
-                newValue = String(text.prefix(3))
+                newValue = String(value )
+                newValue = String(newValue.prefix(5) + " s")
            
             default: break
                 
@@ -1455,8 +1472,8 @@ class audio {
                 newValue = String(text.prefix(5) + " Hz")
             case 2:
                 audio.tremolo?.depth = value
-                let text = String(value)
-                newValue = String(text.prefix(3))
+                newValue = String(value * 10)
+                newValue = String(newValue.prefix(3))
                 
             default: break
             }
@@ -1686,7 +1703,8 @@ class audio {
                 max = 1
                 valueForSlider = Float(audio.stringResonator!.feedback)
                 name = "Feedback"
-                value = String(audio.stringResonator!.feedback)
+                let intValue = Int(valueForSlider * 10)
+                value = String(intValue)
                 value = String(value.prefix(3))
                 isOn = audio.stringResonator!.isStarted
                 
@@ -1747,8 +1765,9 @@ class audio {
                 max = Float(Effects.bitCrusher.sampleRateRange.upperBound)
                 valueForSlider = Float(audio.bitCrusher!.sampleRate)
                 name = "Sample Rate"
-                value = String(audio.bitCrusher!.sampleRate)
-                value = String(value.prefix(3))
+                let intValue = Int(round(valueForSlider))
+                let text = String(intValue)
+                value = String(text.prefix(5) + " Hz")
                 isOn = audio.bitCrusher!.isStarted
             default: break
             }
@@ -1825,16 +1844,16 @@ class audio {
                 max = Float(Effects.dynaRageCompressor.attackDurationRange.upperBound)
                 valueForSlider = Float(audio.dynaRageCompressor!.attackDuration)
                 name = "Attack"
-                value = String(audio.dynaRageCompressor!.attackDuration)
-                value = String(value.prefix(3))
+                value = String(valueForSlider)
+                value = String(value.prefix(5) + " s")
                 isOn = audio.dynaRageCompressor!.isStarted
             case 4:
                 min = Float(Effects.dynaRageCompressor.releaseDurationRange.lowerBound)
                 max = Float(Effects.dynaRageCompressor.releaseDurationRange.upperBound)
                 valueForSlider = Float(audio.dynaRageCompressor!.releaseDuration)
                 name = "Release"
-                value = String(audio.dynaRageCompressor!.releaseDuration)
-                value = String(value.prefix(3))
+                value = String(valueForSlider)
+                value = String(value.prefix(5) + " s")
                 isOn = audio.dynaRageCompressor!.isStarted
             case 5:
                 min = Float(Effects.dynaRageCompressor.rageRatio.lowerBound)
@@ -1855,7 +1874,8 @@ class audio {
                 max = Float(Effects.autoWah.wahRange.upperBound)
                 valueForSlider = Float(audio.autoWah!.wah)
                 name = "Wah"
-                value = String(audio.autoWah!.wah)
+                let intValue = Int(valueForSlider * 10)
+                value = String(intValue)
                 value = String(value.prefix(3))
                 isOn = audio.autoWah!.isStarted
             case 2:
@@ -1863,7 +1883,8 @@ class audio {
                 max = Float(Effects.autoWah.amplitudeRange.upperBound)
                 valueForSlider = Float(audio.autoWah!.amplitude)
                 name = "Amplitude"
-                value = String(audio.autoWah!.amplitude)
+                let intValue = Int(valueForSlider * 10)
+                value = String(intValue)
                 value = String(value.prefix(3))
                 isOn = audio.autoWah!.isStarted
             case 3:
@@ -1871,7 +1892,8 @@ class audio {
                 max = Float(Effects.autoWah.mixRange.upperBound)
                 valueForSlider = Float(audio.autoWah!.mix)
                 name = "Dry Wet Mix"
-                value = String(audio.autoWah!.mix)
+                let intValue = Int(valueForSlider * 10)
+                value = String(intValue)
                 value = String(value.prefix(3))
                 isOn = audio.autoWah!.isStarted
             default: break
@@ -1885,15 +1907,16 @@ class audio {
                 max = Float(Effects.delay.timeRange.upperBound)
                 valueForSlider = Float(audio.delay!.time)
                 name = "Time"
-                value = String(audio.delay!.time)
-                value = String(value.prefix(3))
+                value = String(valueForSlider)
+                value = String(value.prefix(5) + " s")
                 isOn = audio.delay!.isStarted
             case 2:
                 min = Float(Effects.delay.feedbackRange.lowerBound)
                 max = Float(Effects.delay.feedbackRange.upperBound)
                 valueForSlider = Float(audio.delay!.feedback)
                 name = "Feedback"
-                value = String(audio.delay!.feedback)
+                let intValue = Int(valueForSlider * 10)
+                value = String(intValue)
                 value = String(value.prefix(3))
                 isOn = audio.delay!.isStarted
             case 3:
@@ -1910,7 +1933,8 @@ class audio {
                 max = Float(Effects.delay.dryWetMixRange.upperBound)
                 valueForSlider = Float(audio.delay!.dryWetMix)
                 name = "Dry Wet Mix"
-                value = String(audio.delay!.dryWetMix)
+                let intValue = Int(valueForSlider * 10)
+                value = String(intValue)
                 value = String(value.prefix(3))
                 isOn = audio.delay!.isStarted
            
@@ -1933,7 +1957,8 @@ class audio {
                 max = Float(Effects.variableDelay.feedbackRange.upperBound)
                 valueForSlider = Float(audio.variableDelay!.feedback)
                 name = "Feedback"
-                value = String(audio.variableDelay!.feedback)
+                let intValue = Int(valueForSlider * 10)
+                value = String(intValue)
                 value = String(value.prefix(3))
                 isOn = audio.variableDelay!.isStarted
             
@@ -1948,7 +1973,8 @@ class audio {
                 max = Float(Effects.decimator.decimationRange.upperBound)
                 valueForSlider = Float(audio.decimator!.decimation)
                 name = "Decimation"
-                value = String(audio.decimator!.decimation)
+                let intValue = Int(valueForSlider * 10)
+                value = String(intValue)
                 value = String(value.prefix(3))
                 isOn = audio.decimator!.isStarted
             case 2:
@@ -1956,7 +1982,8 @@ class audio {
                 max = Float(Effects.decimator.roundingRange.upperBound)
                 valueForSlider = Float(audio.decimator!.rounding)
                 name = "Rounding"
-                value = String(audio.decimator!.rounding)
+                let intValue = Int(valueForSlider * 10)
+                value = String(intValue)
                 value = String(value.prefix(3))
                 isOn = audio.decimator!.isStarted
             case 3:
@@ -1964,7 +1991,8 @@ class audio {
                 max = Float(Effects.decimator.mixRange.upperBound)
                 valueForSlider = Float(audio.decimator!.mix)
                 name = "Mix"
-                value = String(audio.decimator!.mix)
+                let intValue = Int(valueForSlider * 10)
+                value = String(intValue)
                 value = String(value.prefix(3))
                 isOn = audio.decimator!.isStarted
             default: break
@@ -1977,8 +2005,8 @@ class audio {
                 min = Float(Effects.clipper.limitRange.lowerBound)
                 max = Float(Effects.clipper.limitRange.upperBound)
                 valueForSlider = Float(audio.clipper!.limit)
-                name = "Limit"
-                value = String(audio.clipper!.limit)
+                let intValue = Int(valueForSlider * 100)
+                value = String(intValue)
                 value = String(value.prefix(3))
                 isOn = audio.clipper!.isStarted
             default: break
@@ -2010,7 +2038,8 @@ class audio {
                 max = Float(Effects.ringModulator.balanceRange.upperBound)
                 valueForSlider = Float(audio.ringModulator!.balance)
                 name = "Balance"
-                value = String(audio.ringModulator!.balance)
+                let intValue = Int(valueForSlider * 10)
+                value = String(intValue)
                 value = String(value.prefix(3))
                 isOn = audio.ringModulator!.isStarted
             case 4:
@@ -2018,7 +2047,8 @@ class audio {
                 max = Float(Effects.ringModulator.mixRange.upperBound)
                 valueForSlider = Float(audio.ringModulator!.mix)
                 name = "Mix"
-                value = String(audio.ringModulator!.mix)
+                let intValue = Int(valueForSlider * 10)
+                value = String(intValue)
                 value = String(value.prefix(3))
                 isOn = audio.ringModulator!.isStarted
             default: break
@@ -2041,7 +2071,8 @@ class audio {
                 max = Float(Effects.flanger.depthRange.upperBound)
                 valueForSlider = Float(audio.flanger!.depth)
                 name = "Depth"
-                value = String(audio.flanger!.depth)
+                let intValue = Int(valueForSlider * 10)
+                value = String(intValue)
                 value = String(value.prefix(3))
                 isOn = audio.flanger!.isStarted
             case 3:
@@ -2049,7 +2080,8 @@ class audio {
                 max = Float(Effects.flanger.feedbackRange.upperBound)
                 valueForSlider = Float(audio.flanger!.feedback)
                 name = "Feedback"
-                value = String(audio.flanger!.feedback)
+                let intValue = Int(valueForSlider * 10)
+                value = String(intValue)
                 value = String(value.prefix(3))
                 isOn = audio.flanger!.isStarted
             case 4:
@@ -2057,7 +2089,8 @@ class audio {
                 max = Float(Effects.flanger.dryWetMixRange.upperBound)
                 valueForSlider = Float(audio.flanger!.dryWetMix)
                 name = "Dry Wet Mix"
-                value = String(audio.flanger!.dryWetMix)
+                let intValue = Int(valueForSlider * 10)
+                value = String(intValue)
                 value = String(value.prefix(3))
                 isOn = audio.flanger!.isStarted
             default: break
@@ -2110,7 +2143,8 @@ class audio {
                 max = Float(Effects.phaser.vibratoModeRange.upperBound)
                 valueForSlider = Float(audio.phaser!.vibratoMode)
                 name = "Vibrato Mode"
-                value = String(audio.phaser!.vibratoMode)
+                let intValue = Int(valueForSlider * 10)
+                value = String(intValue)
                 value = String(value.prefix(3))
                 isOn = audio.phaser!.isStarted
             case 6:
@@ -2118,7 +2152,8 @@ class audio {
                 max = Float(Effects.phaser.depthRange.upperBound)
                 valueForSlider = Float(audio.phaser!.depth)
                 name = "Depth"
-                value = String(audio.phaser!.depth)
+                let intValue = Int(valueForSlider * 10)
+                value = String(intValue)
                 value = String(value.prefix(3))
                 isOn = audio.phaser!.isStarted
             case 7:
@@ -2126,7 +2161,8 @@ class audio {
                 max = Float(Effects.phaser.feedbackRange.upperBound)
                 valueForSlider = Float(audio.phaser!.feedback)
                 name = "Feedback"
-                value = String(audio.phaser!.feedback)
+                let intValue = Int(valueForSlider * 10)
+                value = String(intValue)
                 value = String(value.prefix(3))
                 isOn = audio.phaser!.isStarted
             case 8:
@@ -2156,7 +2192,8 @@ class audio {
                 max = Float(Effects.chorus.depthRange.upperBound)
                 valueForSlider = Float(audio.chorus!.depth)
                 name = "Depth"
-                value = String(audio.chorus!.depth)
+                let intValue = Int(valueForSlider * 10)
+                value = String(intValue)
                 value = String(value.prefix(3))
                 isOn = audio.chorus!.isStarted
             case 3:
@@ -2164,7 +2201,8 @@ class audio {
                 max = Float(Effects.chorus.feedbackRange.upperBound)
                 valueForSlider = Float(audio.chorus!.feedback)
                 name = "Feedback"
-                value = String(audio.chorus!.feedback)
+                let intValue = Int(valueForSlider * 10)
+                value = String(intValue)
                 value = String(value.prefix(3))
                 isOn = audio.chorus!.isStarted
             case 4:
@@ -2172,7 +2210,8 @@ class audio {
                 max = Float(Effects.chorus.dryWetMixRange.upperBound)
                 valueForSlider = Float(audio.chorus!.dryWetMix)
                 name = "Dry Wet Mix"
-                value = String(audio.chorus!.dryWetMix)
+                let intValue = Int(valueForSlider * 10)
+                value = String(intValue)
                 value = String(value.prefix(3))
                 isOn = audio.chorus!.isStarted
             
@@ -2203,23 +2242,23 @@ class audio {
                 max = Float(Effects.compressor.attackDurationRange.upperBound)
                 valueForSlider = Float(audio.compressor!.attackDuration)
                 name = "Attack Duration"
-                value = String(audio.compressor!.attackDuration)
-                value = String(value.prefix(3))
+                value = String(valueForSlider)
+                value = String(value.prefix(5) + " s")
                 isOn = audio.compressor!.isStarted
             case 4:
                 min = Float(Effects.compressor.releaseDurationRange.lowerBound)
                 max = Float(Effects.compressor.releaseDurationRange.upperBound)
                 valueForSlider = Float(audio.compressor!.releaseDuration)
                 name = "Release Duration"
-                value = String(audio.compressor!.releaseDuration)
-                value = String(value.prefix(3))
+                value = String(valueForSlider)
+                value = String(value.prefix(5) + " s")
                 isOn = audio.compressor!.isStarted
             case 5:
                 min = Float(Effects.compressor.masterGainRange.lowerBound)
                 max = Float(Effects.compressor.masterGainRange.upperBound)
                 valueForSlider = Float(audio.compressor!.masterGain)
                 name = "Master Gain"
-                value = String(audio.compressor!.masterGain)
+                value = String(valueForSlider * 10)
                 value = String(value.prefix(3))
                 isOn = audio.compressor!.isStarted
            
@@ -2228,7 +2267,7 @@ class audio {
                 max = Float(Effects.compressor.dryWetMixRange.upperBound)
                 valueForSlider = Float(audio.compressor!.dryWetMix)
                 name = "Dry Wet Mix"
-                value = String(audio.compressor!.dryWetMix)
+                value = String(valueForSlider * 10)
                 value = String(value.prefix(3))
                 isOn = audio.compressor!.isStarted
                 
@@ -2275,16 +2314,16 @@ class audio {
                 max = Float(Effects.dynamicsProcessor.attackDurationRange.upperBound)
                 valueForSlider = Float(audio.dynamicsProcessor!.attackDuration)
                 name = "Attack Duration"
-                value = String(audio.dynamicsProcessor!.attackDuration)
-                value = String(value.prefix(3))
+                value = String(valueForSlider)
+                value = String(value.prefix(5) + " s")
                 isOn = audio.dynamicsProcessor!.isStarted
             case 6:
                 min = Float(Effects.dynamicsProcessor.releaseDurationRange.lowerBound)
                 max = Float(Effects.dynamicsProcessor.releaseDurationRange.upperBound)
                 valueForSlider = Float(audio.dynamicsProcessor!.releaseDuration)
                 name = "Release Duration"
-                value = String(audio.dynamicsProcessor!.releaseDuration)
-                value = String(value.prefix(3))
+                value = String(valueForSlider)
+                value = String(value.prefix(5) + " s")
                 isOn = audio.dynamicsProcessor!.isStarted
             case 7:
                 min = Float(Effects.dynamicsProcessor.masterGainRange.lowerBound)
@@ -2332,16 +2371,16 @@ class audio {
                 max = Float(Effects.dynamicRangeCompressor.attackDurationRange.upperBound)
                 valueForSlider = Float(audio.dynamicRangeCompressor!.attackDuration)
                 name = "Attack Duration"
-                value = String(audio.dynamicRangeCompressor!.attackDuration)
-                value = String(value.prefix(3))
+                value = String(valueForSlider)
+                value = String(value.prefix(5) + " s")
                 isOn = audio.dynamicRangeCompressor!.isStarted
             case 4:
                 min = Float(Effects.dynamicRangeCompressor.releaseDurationRange.lowerBound)
                 max = Float(Effects.dynamicRangeCompressor.releaseDurationRange.upperBound)
                 valueForSlider = Float(audio.dynamicRangeCompressor!.releaseDuration)
                 name = "Release Duration"
-                value = String(audio.dynamicRangeCompressor!.releaseDuration)
-                value = String(value.prefix(3))
+                value = String(valueForSlider)
+                value = String(value.prefix(5) + " s")
                 isOn = audio.dynamicRangeCompressor!.isStarted
             
                 
@@ -2356,7 +2395,8 @@ class audio {
                 max = Float(Effects.reverb.dryWetMixRange.upperBound)
                 valueForSlider = Float(audio.reverb!.dryWetMix)
                 name = "Dry Wet Mix"
-                value = String(audio.reverb!.dryWetMix)
+                let intValue = Int(valueForSlider * 10)
+                value = String(intValue)
                 value = String(value.prefix(3))
                 isOn = audio.reverb!.isStarted
          
@@ -2371,7 +2411,8 @@ class audio {
                 max = Float(Effects.reverb2.gainRange.upperBound)
                 valueForSlider = Float(audio.reverb2!.gain)
                 name = "Gain"
-                value = String(audio.reverb2!.gain)
+                let intValue = Int(valueForSlider * 10)
+                value = String(intValue)
                 value = String(value.prefix(3))
                 isOn = audio.reverb2!.isStarted
             case 2:
@@ -2419,10 +2460,24 @@ class audio {
                 max = Float(Effects.reverb2.dryWetMixRange.upperBound)
                 valueForSlider = Float(audio.reverb2!.dryWetMix)
                 name = "Dry Wet Mix"
-                value = String(audio.reverb2!.dryWetMix)
+                let intValue = Int(valueForSlider * 10)
+                value = String(intValue)
                 value = String(value.prefix(3))
                 isOn = audio.reverb2!.isStarted
                 
+            default: break
+            }
+            
+        case "chowningReverb" :
+            switch slider {
+            case 1:
+                min = Float(0)
+                max = Float(1)
+                valueForSlider = Float(1)
+                name = ""
+            
+                value = ""
+                isOn = audio.chowningReverb!.isStarted
             default: break
             }
             
@@ -2443,7 +2498,8 @@ class audio {
                 max = Float(Effects.costelloReverb.feedbackRange.upperBound)
                 valueForSlider = Float(audio.costelloReverb!.feedback)
                 name = "Feedback"
-                value = String(audio.costelloReverb!.feedback)
+                let intValue = Int(valueForSlider * 10)
+                value = String(intValue)
                 value = String(value.prefix(3))
                 isOn = audio.costelloReverb!.isStarted
            
@@ -2458,8 +2514,8 @@ class audio {
                 max = Float(Effects.flatFrequencyResponseReverb.reverbDurationRange.upperBound)
                 valueForSlider = Float(audio.flatFrequencyResponseReverb!.reverbDuration)
                 name = "Reverb Duration"
-                value = String(audio.flatFrequencyResponseReverb!.reverbDuration)
-                value = String(value.prefix(3))
+                value = String(valueForSlider)
+                value = String(value.prefix(5) + " s")
                 isOn = audio.flatFrequencyResponseReverb!.isStarted
            
                 
@@ -2482,7 +2538,8 @@ class audio {
                 max = Float(Effects.tremolo.depthRange.upperBound)
                 valueForSlider = Float(audio.tremolo!.depth)
                 name = "Depth"
-                value = String(audio.tremolo!.depth)
+                let intValue = Int(valueForSlider * 10)
+                value = String(intValue)
                 value = String(value.prefix(3))
                 isOn = audio.tremolo!.isStarted
                 
@@ -2777,43 +2834,6 @@ class audio {
             audio.selectedAudioInputs.last?.connect(to: outputMixer!)
         }
         
-        /*
-        // Connect to EQ
-        outputMixer?.connect(to: audio.equalizerFilter1!)
-        audio.equalizerFilter1?.connect(to: audio.equalizerFilter2!)
-        audio.equalizerFilter2?.connect(to: audio.equalizerFilter3!)
-        audio.equalizerFilter3?.connect(to: audio.equalizerFilter4!)
-        audio.equalizerFilter4?.connect(to: audio.equalizerFilter5!)
-        audio.equalizerFilter5?.connect(to: audio.equalizerFilter6!)
-        audio.equalizerFilter6?.connect(to: audio.equalizerFilter7!)
-        audio.equalizerFilter7?.connect(to: audio.equalizerFilter8!)
-        audio.equalizerFilter8?.connect(to: audio.equalizerFilter9!)
-        audio.equalizerFilter9?.connect(to: audio.equalizerFilter10!)
-        audio.equalizerFilter10?.connect(to: audio.equalizerFilter11!)
-        audio.equalizerFilter11?.connect(to: audio.equalizerFilter12!)
-        audio.equalizerFilter12?.connect(to: audio.equalizerFilter13!)
-        audio.equalizerFilter13?.connect(to: audio.equalizerFilter14!)
-        audio.equalizerFilter14?.connect(to: audio.equalizerFilter15!)
-        audio.equalizerFilter15?.connect(to: audio.equalizerFilter16!)
-        audio.equalizerFilter16?.connect(to: audio.equalizerFilter17!)
-        audio.equalizerFilter17?.connect(to: audio.equalizerFilter18!)
-        audio.equalizerFilter18?.connect(to: audio.equalizerFilter19!)
-        audio.equalizerFilter19?.connect(to: audio.equalizerFilter20!)
-        audio.equalizerFilter20?.connect(to: audio.equalizerFilter21!)
-        audio.equalizerFilter21?.connect(to: audio.equalizerFilter22!)
-        audio.equalizerFilter22?.connect(to: audio.equalizerFilter23!)
-        audio.equalizerFilter23?.connect(to: audio.equalizerFilter24!)
-        audio.equalizerFilter24?.connect(to: audio.equalizerFilter25!)
-        audio.equalizerFilter25?.connect(to: audio.equalizerFilter26!)
-        audio.equalizerFilter26?.connect(to: audio.equalizerFilter27!)
-        audio.equalizerFilter27?.connect(to: audio.equalizerFilter28!)
-        audio.equalizerFilter28?.connect(to: audio.equalizerFilter29!)
-        audio.equalizerFilter29?.connect(to: audio.equalizerFilter30!)
-        audio.equalizerFilter30?.connect(to: audio.equalizerFilter31!)
-        audio.equalizerFilter31?.connect(to: outputBooster!)
-        
-        */
-        
         outputMixer?.connect(to: outputBooster!)
         
         outputBooster?.connect(to: outputAmplitudeTracker!)
@@ -2866,7 +2886,7 @@ class audio {
             if AudioKit.engine.isRunning {
                 sleep(1)
                 self.mic?.volume = self.micVolume
-               self.initialStart = false
+              // self.initialStart = false
                 print("Audiokit did start ! !! !!!")
                 timer.invalidate()
             }
@@ -3493,6 +3513,7 @@ class audio {
         
         // Distorion effects
         audio.bitCrusher?.stop()
+        audio.clipper?.limit = 0.1
         audio.clipper?.stop()
         audio.tanhDistortion?.stop()
         audio.decimator?.stop()

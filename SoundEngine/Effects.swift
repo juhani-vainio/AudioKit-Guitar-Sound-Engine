@@ -22,7 +22,7 @@ struct bitCrusher:Codable {
     // sampleRate
     
     static var bitDepthRange = 1.0 ... 24.0
-    static var sampleRateRange = 0.0 ... 20_000.0
+    static var sampleRateRange = 20.0 ... 20_000.0
 
 }
     
@@ -90,7 +90,7 @@ struct delay:Codable {
     //presetElectricCircuitsDelay()
 
         
-    static var timeRange = 0.0001...3
+    static var timeRange = 0.001...3
     static var feedbackRange = 0...1
     static var dryWetMixRange = 0...1
     static var lowPassCutOffRange = 10000...20000
@@ -107,7 +107,7 @@ struct delay:Codable {
         // feedback
         // maximumDelayTime
   
-        static var timeRange = 0.0001...3   // This value must not exceed the maximum delay time.
+        static var timeRange = 0.001...3   // This value must not exceed the maximum delay time.
         static var feedbackRange = 0...1
        //   static var maximumDelayTimeRange = 0.0001...3
 
@@ -146,7 +146,7 @@ struct decimator:Codable {
         // controls needed : 1
         // limit
     
-        static var limitRange = 0.0001 ... 1.0
+        static var limitRange = 0.0 ... 0.1
         
     }
     
@@ -259,7 +259,7 @@ struct decimator:Codable {
             
             static var thresholdRange = -40...20 // dB default -20
             static var headRoomRange = 0.1...40 // dB default 5
-            static var attackDurationRange = 0.0001...0.2 // Default: 0.001
+            static var attackDurationRange = 0.001...0.2 // Default: 0.001
             static var releaseDurationRange = 0.01...3 // Default: 0.05
             static var masterGainRange = -40...40 //  dB Default: 0
             static var dryWetMixRange = 0...1
@@ -334,7 +334,7 @@ struct decimator:Codable {
             
             static var ratioRange = 1...30
             static var thresholdRange = -100...0
-            static var attackDurationRange = 0.0001...0.2   // 0,1 ms
+            static var attackDurationRange = 0.001...0.2   // 0,1 ms
             static var releaseDurationRange = 0.01...3
             static var rageRatio = 0...1
             
@@ -355,8 +355,8 @@ struct decimator:Codable {
         // controls : 7
        
         static var gainRange = -20...20 //  dB Default: 0
-        static var minDelayTimeRange = 0.0001...1.0 // (Default: 0.008)
-        static var maxDelayTimeRange = 0.0001...1.0 // (Default: 0.050)
+        static var minDelayTimeRange = 0.001...1.0 // (Default: 0.008)
+        static var maxDelayTimeRange = 0.001...1.0 // (Default: 0.050)
         static var decayTimeAt0HzRange = 0.001...20.0 // (Default: 1.0)
         static var decayTimeAtNyquistRange = 0.001...20.0 // (Default: 0.5)
         static var randomizeReflectionsRange = 1...1000 //(Default: 1)
