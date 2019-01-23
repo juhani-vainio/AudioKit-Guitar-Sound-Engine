@@ -2899,7 +2899,7 @@ class audio {
             if AudioKit.engine.isRunning {
                 sleep(1)
                 self.mic?.volume = self.micVolume
-              // self.initialStart = false
+                self.initialStart = false
                 print("Audiokit did start ! !! !!!")
                 timer.invalidate()
             }

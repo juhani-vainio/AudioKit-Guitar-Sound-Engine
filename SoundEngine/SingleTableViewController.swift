@@ -1588,6 +1588,7 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
             self.availableEffects.reloadData()
             self.availableFilters.reloadData()
             self.mainCollection.reloadData()
+            audio.shared.initialStart = true
             self.resetEffectChain()
            // savedSoundsTableView.isHidden = true
             handleSoundsTap()
