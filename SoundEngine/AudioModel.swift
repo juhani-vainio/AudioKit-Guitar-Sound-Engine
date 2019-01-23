@@ -870,6 +870,7 @@ class audio {
                     audio.bitCrusher?.start()
                     newValue = "ON"
                 }
+                
             case 1:
                 audio.bitCrusher?.bitDepth = value
                 let text = String(value)

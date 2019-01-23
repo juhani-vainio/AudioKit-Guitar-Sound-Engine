@@ -238,13 +238,20 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
             subview.isHidden = true
         }
         
-        let units = audio.selectedEffectsData.count
+        var units = 0 // for width calculation
+        for effect in audio.selectedEffectsData {
+            if helper.shared.isOn(id: effect.id) {
+                units = units + 1
+            }
+        }
         let stackUnitWidth = waveformView.frame.width / CGFloat(units)
         var unitCount = 0
         for unit in audio.selectedAudioInputs {
 
                 unit.outputNode.removeTap(onBus: 0)
-              if unitCount < units {
+              if unitCount < audio.selectedEffectsData.count {
+                let name = audio.selectedEffectsData[unitCount].id
+                if helper.shared.isOn(id: name) {
                     let node = unit as! AKNode
                     let stackUnit = AKNodeOutputPlot(node, frame: CGRect(x: 0, y: 0, width: stackUnitWidth, height: 80))
                     stackUnit.heightAnchor.constraint(equalToConstant: 80).isActive = true
@@ -252,13 +259,13 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
                     stackUnit.plotType = .buffer
                     stackUnit.shouldFill = false
                     stackUnit.shouldMirror = false
-            
-                        let name = audio.selectedEffectsData[unitCount].id
-                        let color = Colors.palette.colorForEffect(name: name)
-                        stackUnit.color = color
-                        stackUnit.backgroundColor = UIColor.clear
-                        stack.addArrangedSubview(stackUnit)
+                    let color = Colors.palette.colorForEffect(name: name)
+                    stackUnit.color = color
+                    stackUnit.backgroundColor = UIColor.clear
+                    stack.addArrangedSubview(stackUnit)
                     }
+
+                }
   
             unitCount = unitCount + 1
         }
@@ -517,6 +524,10 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
         
         selectedFilters.reloadData()
         
+    }
+    
+    @objc func toggleOnOff() {
+        buildWaveforStackView()
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -788,6 +799,7 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
                     }
                     
                 }
+                cell.onOffButton.addTarget(self, action: #selector(toggleOnOff), for: .touchUpInside)
                 if cellOpened == true {
                     if cellIsLast {
                         cell.bottomConstraint.constant = 8
@@ -860,6 +872,9 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
                     }
                     
                 }
+                
+                cell.onOffButton.addTarget(self, action: #selector(toggleOnOff), for: .touchUpInside)
+                
                 if cellOpened == true {
                     if cellIsLast {
                         cell.bottomConstraint.constant = 8
@@ -943,6 +958,9 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
                     }
                     
                 }
+                
+                cell.onOffButton.addTarget(self, action: #selector(toggleOnOff), for: .touchUpInside)
+                
                 if cellOpened == true {
                     if cellIsLast {
                         cell.bottomConstraint.constant = 8
@@ -1035,6 +1053,8 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
                     }
                     
                 }
+                
+                cell.onOffButton.addTarget(self, action: #selector(toggleOnOff), for: .touchUpInside)
                 
                 if cellOpened == true {
                     if cellIsLast {
@@ -1138,6 +1158,9 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
                         cell.slider5.isEnabled = false
                     }
                 }
+                
+                cell.onOffButton.addTarget(self, action: #selector(toggleOnOff), for: .touchUpInside)
+                
                 if cellOpened == true {
                     if cellIsLast {
                         cell.bottomConstraint.constant = 8
@@ -1249,6 +1272,9 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
                         cell.slider6.isEnabled = false
                     }
                 }
+                
+                cell.onOffButton.addTarget(self, action: #selector(toggleOnOff), for: .touchUpInside)
+                
                 if cellOpened == true {
                     if cellIsLast {
                         cell.bottomConstraint.constant = 8
@@ -1370,6 +1396,10 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
                         cell.slider7.isEnabled = false
                     }
                 }
+                
+                
+                cell.onOffButton.addTarget(self, action: #selector(toggleOnOff), for: .touchUpInside)
+                
                 if cellOpened == true {
                     if cellIsLast {
                         cell.bottomConstraint.constant = 8
@@ -1501,6 +1531,9 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
                         cell.slider8.isEnabled = false
                     }
                 }
+                
+                cell.onOffButton.addTarget(self, action: #selector(toggleOnOff), for: .touchUpInside)
+                
                 if cellOpened == true {
                     if cellIsLast {
                         cell.bottomConstraint.constant = 8
@@ -1563,6 +1596,9 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
                     }
                     
                 }
+                
+                cell.onOffButton.addTarget(self, action: #selector(toggleOnOff), for: .touchUpInside)
+                
                     cell.controllerHeight.constant = CGFloat(0)
                     cell.controllersView.isHidden = true
                     cell.specialViewHeight.constant = CGFloat(0)
