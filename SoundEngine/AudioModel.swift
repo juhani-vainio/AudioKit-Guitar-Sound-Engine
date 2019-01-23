@@ -608,8 +608,8 @@ class audio {
                 newValue = String(text.prefix(5) + " Hz")
             case 2:
                 audio.moogLadder?.resonance = value
-                let text = String(value)
-                newValue = String(text.prefix(3))
+                newValue = String(value * 10)
+                newValue = String(newValue.prefix(3))
                 
             default: break
                 
@@ -686,7 +686,7 @@ class audio {
             case 2:
                 audio.resonantFilter?.bandwidth = value
                 let text = String(value)
-                newValue = String(text.prefix(3))
+                newValue = String(text.prefix(5))
                 
             default: break
                 
@@ -930,8 +930,8 @@ class audio {
                 newValue = String(text.prefix(3))
             case 2:
                 audio.dynaRageCompressor?.threshold = value
-                let text = String(value)
-                newValue = String(text.prefix(3))
+                newValue = String(value )
+                newValue = String(newValue.prefix(3) + " dB")
             case 3:
                 audio.dynaRageCompressor?.attackDuration = value
                 newValue = String(value )
@@ -1071,7 +1071,7 @@ class audio {
                 }
             case 1:
             audio.clipper?.limit = value
-            newValue = String(value * 100)
+            newValue = String(value * 10)
             newValue = String(newValue.prefix(3))
             default: break
                 
@@ -1161,13 +1161,13 @@ class audio {
                 newValue = String(text.prefix(5) + " Hz")
             case 3:
                 audio.phaser?.notchWidth = value
-                let text = String(value)
-                newValue = String(text.prefix(3))
-            case 4:
-                audio.phaser?.notchFrequency = value
                 let intValue = Int(round(value))
                 let text = String(intValue)
                 newValue = String(text.prefix(5) + " Hz")
+            case 4:
+                audio.phaser?.notchFrequency = value
+                let text = String(value)
+                newValue = String(text.prefix(3) + " Hz")
             case 5:
                 audio.phaser?.vibratoMode = value
                 newValue = String(value * 10)
@@ -1231,12 +1231,12 @@ class audio {
                 }
             case 1:
                 audio.compressor?.threshold = value
-                let text = String(value)
-                newValue = String(text.prefix(3))
+                newValue = String(value)
+                newValue = String(newValue.prefix(3) + " dB")
             case 2:
                 audio.compressor?.headRoom = value
-                let text = String(value)
-                newValue = String(text.prefix(3))
+                newValue = String(value)
+                newValue = String(newValue.prefix(3) + " dB")
             case 3:
                 audio.compressor?.attackDuration = value
                 newValue = String(value )
@@ -1247,8 +1247,8 @@ class audio {
                 newValue = String(newValue.prefix(5) + " s")
             case 5:
                 audio.compressor?.masterGain = value
-                newValue = String(value * 10)
-                newValue = String(newValue.prefix(3))
+                newValue = String(value)
+                newValue = String(newValue.prefix(3) + " dB")
             case 6:
                 audio.compressor?.dryWetMix = value
                 newValue = String(value * 10)
@@ -1270,20 +1270,20 @@ class audio {
                 }
             case 1:
                 audio.dynamicsProcessor?.threshold = value
-                let text = String(value)
-                newValue = String(text.prefix(3))
+                newValue = String(value)
+                newValue = String(newValue.prefix(3) + " dB")
             case 2:
                 audio.dynamicsProcessor?.headRoom = value
-                let text = String(value)
-                newValue = String(text.prefix(3))
+                newValue = String(value)
+                newValue = String(newValue.prefix(3) + " dB")
             case 3:
                 audio.dynamicsProcessor?.expansionRatio = value
-                let text = String(value)
-                newValue = String(text.prefix(3))
+                newValue = String(value)
+                newValue = String(newValue.prefix(3))
             case 4:
                 audio.dynamicsProcessor?.expansionThreshold = value
-                let text = String(value)
-                newValue = String(text.prefix(3))
+                newValue = String(value)
+                newValue = String(newValue.prefix(3) + " dB")
             case 5:
                 audio.dynamicsProcessor?.attackDuration = value
                 newValue = String(value )
@@ -1294,8 +1294,8 @@ class audio {
                 newValue = String(newValue.prefix(5) + " s")
             case 7:
                 audio.dynamicsProcessor?.masterGain = value
-                newValue = String(value * 10)
-                newValue = String(newValue.prefix(3))
+                newValue = String(value)
+                newValue = String(newValue.prefix(3) + " dB")
             
             case 8:
                 audio.dynamicsProcessor?.dryWetMix = value
@@ -1317,12 +1317,12 @@ class audio {
                 }
             case 1:
                 audio.dynamicRangeCompressor?.ratio = value
-                let text = String(value)
-                newValue = String(text.prefix(3))
+                newValue = String(value)
+                newValue = String(newValue.prefix(3))
             case 2:
                 audio.dynamicRangeCompressor?.threshold = value
-                let text = String(value)
-                newValue = String(text.prefix(3))
+                newValue = String(value)
+                newValue = String(newValue.prefix(3) + " dB")
             case 3:
                 audio.dynamicRangeCompressor?.attackDuration = value
                 newValue = String(value )
@@ -1366,24 +1366,24 @@ class audio {
                 }
             case 1:
                 audio.reverb2?.gain = value
-                newValue = String(value * 10)
-                newValue = String(newValue.prefix(3))
+                newValue = String(value)
+                newValue = String(newValue.prefix(3) + " dB")
             case 2:
                 audio.reverb2?.minDelayTime = value
-                let text = String(value)
-                newValue = String(text.prefix(3))
+                newValue = String(value )
+                newValue = String(newValue.prefix(5) + " s")
             case 3:
                 audio.reverb2?.maxDelayTime = value
-                let text = String(value)
-                newValue = String(text.prefix(3))
+                newValue = String(value )
+                newValue = String(newValue.prefix(5) + " s")
             case 4:
                 audio.reverb2?.decayTimeAt0Hz = value
-                let text = String(value)
-                newValue = String(text.prefix(3))
+                newValue = String(value )
+                newValue = String(newValue.prefix(5) + " s")
             case 5:
                 audio.reverb2?.decayTimeAtNyquist = value
-                let text = String(value)
-                newValue = String(text.prefix(3))
+                newValue = String(value )
+                newValue = String(newValue.prefix(5) + " s")
             case 6:
                 audio.reverb2?.randomizeReflections = value
                 let text = String(value)
@@ -1654,10 +1654,11 @@ class audio {
                 isOn = audio.moogLadder!.isStarted
             case 2:
                 min = 0
-                max = 2
+                max = 0.999
                 valueForSlider = Float(audio.moogLadder!.resonance)
                 name = "Resonance"
-                value = String(audio.moogLadder!.resonance)
+                let intValue = Int(valueForSlider * 10)
+                value = String(intValue)
                 value = String(value.prefix(3))
                 isOn = audio.moogLadder!.isStarted
                 
@@ -1681,7 +1682,7 @@ class audio {
                 valueForSlider = Float(audio.resonantFilter!.bandwidth)
                 name = "Bandwidth"
                 value = String(audio.resonantFilter!.bandwidth)
-                value = String(value.prefix(3))
+                value = String(value.prefix(5))
                 isOn = audio.resonantFilter!.isStarted
                 
             default: break
@@ -1814,7 +1815,7 @@ class audio {
             // COMPRESSOR
             switch slider {
             case 0:
-                name = "Rage"
+                name = "Rage is On"
                 if audio.dynaRageCompressor?.rageIsOn == true {
                     valueForSlider = 1
                 } else {
@@ -1836,8 +1837,9 @@ class audio {
                 max = Float(Effects.dynaRageCompressor.thresholdRange.upperBound)
                 valueForSlider = Float(audio.dynaRageCompressor!.threshold)
                 name = "Threshold"
-                value = String(audio.dynaRageCompressor!.threshold)
-                value = String(value.prefix(3))
+                let intValue = Int(valueForSlider)
+                value = String(intValue)
+                value = String(value.prefix(3) + " dB")
                 isOn = audio.dynaRageCompressor!.isStarted
             case 3:
                 min = Float(Effects.dynaRageCompressor.attackDurationRange.lowerBound)
@@ -1860,7 +1862,7 @@ class audio {
                 max = Float(Effects.dynaRageCompressor.rageRatio.upperBound)
                 valueForSlider = Float(audio.dynaRageCompressor!.rage)
                 name = "Rage"
-                value = String(audio.dynaRageCompressor!.rage)
+                value = String(valueForSlider * 10)
                 value = String(value.prefix(3))
                 isOn = audio.dynaRageCompressor!.isStarted
             default: break
@@ -1949,8 +1951,8 @@ class audio {
                 max = Float(Effects.variableDelay.timeRange.upperBound)
                 valueForSlider = Float(audio.variableDelay!.time)
                 name = "Time"
-                value = String(audio.variableDelay!.time)
-                value = String(value.prefix(3))
+                value = String(valueForSlider)
+                value = String(value.prefix(5) + " s")
                 isOn = audio.variableDelay!.isStarted
             case 2:
                 min = Float(Effects.variableDelay.feedbackRange.lowerBound)
@@ -2005,7 +2007,7 @@ class audio {
                 min = Float(Effects.clipper.limitRange.lowerBound)
                 max = Float(Effects.clipper.limitRange.upperBound)
                 valueForSlider = Float(audio.clipper!.limit)
-                let intValue = Int(valueForSlider * 100)
+                let intValue = Int(valueForSlider * 10)
                 value = String(intValue)
                 value = String(value.prefix(3))
                 isOn = audio.clipper!.isStarted
@@ -2126,17 +2128,17 @@ class audio {
                 max = Float(Effects.phaser.notchWidthRange.upperBound)
                 valueForSlider = Float(audio.phaser!.notchWidth)
                 name = "Notch Width"
-                value = String(audio.phaser!.notchWidth)
-                value = String(value.prefix(3))
+                let intValue = Int(round(valueForSlider))
+                let text = String(intValue)
+                value = String(text.prefix(5) + " Hz")
                 isOn = audio.phaser!.isStarted
             case 4:
                 min = Float(Effects.phaser.notchFrequencyRange.lowerBound)
                 max = Float(Effects.phaser.notchFrequencyRange.upperBound)
                 valueForSlider = Float(audio.phaser!.notchFrequency)
                 name = "Notch Frequency"
-                let intValue = Int(round(valueForSlider))
-                let text = String(intValue)
-                value = String(text.prefix(5) + " Hz")
+                let text = String(valueForSlider)
+                value = String(text.prefix(3) + " Hz")
                 isOn = audio.phaser!.isStarted
             case 5:
                 min = Float(Effects.phaser.vibratoModeRange.lowerBound)
@@ -2169,7 +2171,7 @@ class audio {
                 min = Float(Effects.phaser.lfoBPMRange.lowerBound)
                 max = Float(Effects.phaser.lfoBPMRange.upperBound)
                 valueForSlider = Float(audio.phaser!.lfoBPM)
-                name = "lfo BPM"
+                name = "BPM"
                 value = String(audio.phaser!.lfoBPM)
                 value = String(value.prefix(3))
                 isOn = audio.phaser!.isStarted
@@ -2226,16 +2228,18 @@ class audio {
                 max = Float(Effects.compressor.thresholdRange.upperBound)
                 valueForSlider = Float(audio.compressor!.threshold)
                 name = "Threshold"
-                value = String(audio.compressor!.threshold)
-                value = String(value.prefix(3))
+                let intValue = Int(valueForSlider)
+                value = String(intValue)
+                value = String(value.prefix(3) + " dB")
                 isOn = audio.compressor!.isStarted
             case 2:
                 min = Float(Effects.compressor.headRoomRange.lowerBound)
                 max = Float(Effects.compressor.headRoomRange.upperBound)
                 valueForSlider = Float(audio.compressor!.headRoom)
                 name = "Headroom"
-                value = String(audio.compressor!.headRoom)
-                value = String(value.prefix(3))
+                let intValue = Int(valueForSlider)
+                value = String(intValue)
+                value = String(value.prefix(3) + " dB")
                 isOn = audio.compressor!.isStarted
             case 3:
                 min = Float(Effects.compressor.attackDurationRange.lowerBound)
@@ -2258,8 +2262,9 @@ class audio {
                 max = Float(Effects.compressor.masterGainRange.upperBound)
                 valueForSlider = Float(audio.compressor!.masterGain)
                 name = "Master Gain"
-                value = String(valueForSlider * 10)
-                value = String(value.prefix(3))
+                let intValue = Int(valueForSlider)
+                value = String(intValue)
+                value = String(value.prefix(3) + " dB")
                 isOn = audio.compressor!.isStarted
            
             case 6:
@@ -2282,23 +2287,26 @@ class audio {
                 max = Float(Effects.dynamicsProcessor.thresholdRange.upperBound)
                 valueForSlider = Float(audio.dynamicsProcessor!.threshold)
                 name = "Threshold"
-                value = String(audio.dynamicsProcessor!.threshold)
-                value = String(value.prefix(3))
+                let intValue = Int(valueForSlider)
+                value = String(intValue)
+                value = String(value.prefix(3) + " dB")
                 isOn = audio.dynamicsProcessor!.isStarted
             case 2:
                 min = Float(Effects.dynamicsProcessor.headRoomRange.lowerBound)
                 max = Float(Effects.dynamicsProcessor.headRoomRange.upperBound)
                 valueForSlider = Float(audio.dynamicsProcessor!.headRoom)
                 name = "Headroom"
-                value = String(audio.dynamicsProcessor!.headRoom)
-                value = String(value.prefix(3))
+                let intValue = Int(valueForSlider)
+                value = String(intValue)
+                value = String(value.prefix(3) + " dB")
                 isOn = audio.dynamicsProcessor!.isStarted
             case 3:
                 min = Float(Effects.dynamicsProcessor.expansionRatioRange.lowerBound)
                 max = Float(Effects.dynamicsProcessor.expansionRatioRange.upperBound)
                 valueForSlider = Float(audio.dynamicsProcessor!.expansionRatio)
                 name = "Expansion Ratio"
-                value = String(audio.dynamicsProcessor!.expansionRatio)
+                let intValue = Int(valueForSlider)
+                value = String(intValue)
                 value = String(value.prefix(3))
                 isOn = audio.dynamicsProcessor!.isStarted
             case 4:
@@ -2306,8 +2314,9 @@ class audio {
                 max = Float(Effects.dynamicsProcessor.expansionThresholdRange.upperBound)
                 valueForSlider = Float(audio.dynamicsProcessor!.expansionThreshold)
                 name = "Expansion Threshold"
-                value = String(audio.dynamicsProcessor!.expansionThreshold)
-                value = String(value.prefix(3))
+                let intValue = Int(valueForSlider)
+                value = String(intValue)
+                value = String(value.prefix(3) + " dB")
                 isOn = audio.dynamicsProcessor!.isStarted
             case 5:
                 min = Float(Effects.dynamicsProcessor.attackDurationRange.lowerBound)
@@ -2330,8 +2339,9 @@ class audio {
                 max = Float(Effects.dynamicsProcessor.masterGainRange.upperBound)
                 valueForSlider = Float(audio.dynamicsProcessor!.masterGain)
                 name = "Master Gain"
-                value = String(audio.dynamicsProcessor!.masterGain)
-                value = String(value.prefix(3))
+                let intValue = Int(valueForSlider)
+                value = String(intValue)
+                value = String(value.prefix(3) + " dB")
                 isOn = audio.dynamicsProcessor!.isStarted
                 
             case 8:
@@ -2339,7 +2349,8 @@ class audio {
                 max = Float(Effects.dynamicsProcessor.dryWetMixRange.upperBound)
                 valueForSlider = Float(audio.dynamicsProcessor!.dryWetMix)
                 name = "Dry Wet Mix"
-                value = String(audio.dynamicsProcessor!.dryWetMix)
+                let intValue = Int(valueForSlider * 10)
+                value = String(intValue)
                 value = String(value.prefix(3))
                 isOn = audio.dynamicsProcessor!.isStarted
                 
@@ -2354,7 +2365,8 @@ class audio {
                 max = Float(Effects.dynamicRangeCompressor.ratioRange.upperBound)
                 valueForSlider = Float(audio.dynamicRangeCompressor!.ratio)
                 name = "Ratio"
-                value = String(audio.dynamicRangeCompressor!.ratio)
+                let intValue = Int(valueForSlider)
+                value = String(intValue)
                 value = String(value.prefix(3))
                 isOn = audio.dynamicRangeCompressor!.isStarted
             case 2:
@@ -2362,8 +2374,9 @@ class audio {
                 max = Float(Effects.dynamicRangeCompressor.thresholdRange.upperBound)
                 valueForSlider = Float(audio.dynamicRangeCompressor!.threshold)
                 name = "Threshold"
-                value = String(audio.dynamicRangeCompressor!.threshold)
-                value = String(value.prefix(3))
+                let intValue = Int(valueForSlider)
+                value = String(intValue)
+                value = String(value.prefix(3) + " dB")
                 isOn = audio.dynamicRangeCompressor!.isStarted
            
             case 3:
@@ -2411,41 +2424,41 @@ class audio {
                 max = Float(Effects.reverb2.gainRange.upperBound)
                 valueForSlider = Float(audio.reverb2!.gain)
                 name = "Gain"
-                let intValue = Int(valueForSlider * 10)
+                let intValue = Int(valueForSlider)
                 value = String(intValue)
-                value = String(value.prefix(3))
+                value = String(value.prefix(3) + " dB")
                 isOn = audio.reverb2!.isStarted
             case 2:
                 min = Float(Effects.reverb2.minDelayTimeRange.lowerBound)
                 max = Float(Effects.reverb2.minDelayTimeRange.upperBound)
                 valueForSlider = Float(audio.reverb2!.minDelayTime)
                 name = "Min Delay Time"
-                value = String(audio.reverb2!.minDelayTime)
-                value = String(value.prefix(3))
+                value = String(valueForSlider)
+                value = String(value.prefix(5) + " s")
                 isOn = audio.reverb2!.isStarted
             case 3:
                 min = Float(Effects.reverb2.maxDelayTimeRange.lowerBound)
                 max = Float(Effects.reverb2.maxDelayTimeRange.upperBound)
                 valueForSlider = Float(audio.reverb2!.maxDelayTime)
                 name = "Max Delay Time"
-                value = String(audio.reverb2!.maxDelayTime)
-                value = String(value.prefix(3))
+                value = String(valueForSlider)
+                value = String(value.prefix(5) + " s")
                 isOn = audio.reverb2!.isStarted
             case 4:
                 min = Float(Effects.reverb2.decayTimeAt0HzRange.lowerBound)
                 max = Float(Effects.reverb2.decayTimeAt0HzRange.upperBound)
                 valueForSlider = Float(audio.reverb2!.decayTimeAt0Hz)
                 name = "0Hz Decay Time"
-                value = String(audio.reverb2!.decayTimeAt0Hz)
-                value = String(value.prefix(3))
+                value = String(valueForSlider)
+                value = String(value.prefix(5) + " s")
                 isOn = audio.reverb2!.isStarted
             case 5:
                 min = Float(Effects.reverb2.decayTimeAtNyquistRange.lowerBound)
                 max = Float(Effects.reverb2.decayTimeAtNyquistRange.upperBound)
                 valueForSlider = Float(audio.reverb2!.decayTimeAtNyquist)
                 name = "Nyquist Decay Time"
-                value = String(audio.reverb2!.decayTimeAtNyquist)
-                value = String(value.prefix(3))
+                value = String(valueForSlider)
+                value = String(value.prefix(5) + " s")
                 isOn = audio.reverb2!.isStarted
             case 6:
                 min = Float(Effects.reverb2.randomizeReflectionsRange.lowerBound)

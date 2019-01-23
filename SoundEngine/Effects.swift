@@ -146,7 +146,7 @@ struct decimator:Codable {
         // controls needed : 1
         // limit
     
-        static var limitRange = 0.0 ... 0.1
+        static var limitRange = 0.01 ... 1.0
         
     }
     
@@ -259,11 +259,30 @@ struct decimator:Codable {
             
             static var thresholdRange = -40...20 // dB default -20
             static var headRoomRange = 0.1...40 // dB default 5
-            static var attackDurationRange = 0.001...0.2 // Default: 0.001
+            static var attackDurationRange = 0.0001...0.2 // Default: 0.001
             static var releaseDurationRange = 0.01...3 // Default: 0.05
-            static var masterGainRange = -40...40 //  dB Default: 0
+            static var masterGainRange = -8...8 //  dB Default: 0
             static var dryWetMixRange = 0...1
         }
+    
+    // DYNAMIC RANGE COMPRESSOR AKDynamicRangeCompressor
+    // Dynamic range compressor from Faust
+    
+    struct dynamicRangeCompressor:Codable {
+        //  is a dynamics
+        
+        // controls needed : 4
+        // ratio
+        // threshold
+        // attackDuration: Double = 0.001,
+        // releaseDuration: Double = 0.05,
+        
+        static var ratioRange = 0.01...100   // Ratio to compress with, a value > 1 will compress
+        static var thresholdRange = -100...0  // dB
+        static var attackDurationRange = 0...1
+        static var releaseDurationRange = 0...1 // Default: 0.1
+        
+    }
      
         // DYNAMICS PROCESSOR AKDynamicsProcessor
         // AudioKit version of Apple’s DynamicsProcessor Audio Unit
@@ -289,31 +308,14 @@ struct decimator:Codable {
             static var expansionThresholdRange = -120...0 // default 0
             static var attackDurationRange = 0.001...0.3 // Default: 0.001
             static var releaseDurationRange = 0.01...3 // Default: 0.05
-            static var masterGainRange = -40...40 //  dB Default: 0
+            static var masterGainRange = -8...8 //  dB Default: 0
             // GET ONLY  static var compressionAmountRange = -40...40 //  dB Default: 0
             // GET ONLY  static var inputAmplitudeRange = -40...40 //  dB Default: 0
             // GET ONLY  static var outputAmplitudeRange = -40...40 //  dB Default: 0
             static var dryWetMixRange = 0...1
         }
     
-        // DYNAMIC RANGE PROCESSOR AKDynamicRangeCompressor
-        // Dynamic range compressor from Faust
-        
-        struct dynamicRangeCompressor:Codable {
-            //  is a dynamics
-            
-            // controls needed : 4
-            // ratio
-            // threshold
-            // attackDuration: Double = 0.001,
-            // releaseDuration: Double = 0.05,
-            
-            static var ratioRange = 0.01...100
-            static var thresholdRange = -100...0
-            static var attackDurationRange = 0...1
-            static var releaseDurationRange = 0...1 // Default: 0.1
-            
-        }
+    
     
   
         
@@ -355,9 +357,9 @@ struct decimator:Codable {
         // controls : 7
        
         static var gainRange = -20...20 //  dB Default: 0
-        static var minDelayTimeRange = 0.001...1.0 // (Default: 0.008)
-        static var maxDelayTimeRange = 0.001...1.0 // (Default: 0.050)
-        static var decayTimeAt0HzRange = 0.001...20.0 // (Default: 1.0)
+        static var minDelayTimeRange = 0.0001...1.0 // (Default: 0.008)
+        static var maxDelayTimeRange = 0.0001...1.0 // (Default: 0.050)
+        static var decayTimeAt0HzRange = 0.01...20.0 // (Default: 1.0)
         static var decayTimeAtNyquistRange = 0.001...20.0 // (Default: 0.5)
         static var randomizeReflectionsRange = 1...1000 //(Default: 1)
         static var dryWetMixRange = 0...1
