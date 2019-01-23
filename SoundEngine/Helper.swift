@@ -156,40 +156,26 @@ class helper {
         var dictionary = [[String:String]]()
         
         for effect in audio.selectedEffectsData {
-            let array = createEffectDataArray(effect: effect, location: "Effects")
-            if array.isNotEmpty {
-                dictionary.append(array)
+            if isOn(id: effect.id) {
+                let array = createEffectDataArray(effect: effect, location: "Effects")
+                if array.isNotEmpty {
+                    dictionary.append(array)
+                }
             }
+            
         }
         // same for filters
         for effect in audio.selectedFiltersData {
-            let array = createEffectDataArray(effect: effect, location: "Filters")
-            if array.isNotEmpty{
-                dictionary.append(array)
+            if isOn(id: effect.id) {
+                let array = createEffectDataArray(effect: effect, location: "Filters")
+                if array.isNotEmpty{
+                    dictionary.append(array)
+                }
             }
             
         }
         
-        /*
-         let eqDataArray = createEQDataArray()
-         if eqDataArray.isNotEmpty{
-         dictionary.append(eqDataArray)
-         }
-         */
         
-        /*
-         for effect in audio.selectedUnitsAfterData {
-         let array = createEffectDataArray(effect: effect, location: "selectedUnitsAfterData")
-         if array.isNotEmpty {
-         dictionary.append(array)
-         }
-         }
-         
-         for effect in audio.finalFiltersData {
-         let array = createEffectDataArray(effect: effect, location: "finalFiltersData")
-         dictionary.append(array)
-         }
-         */
         saveNameForChain(name: name)
         UserDefaults.standard.set(dictionary, forKey: name)
     }
@@ -1564,6 +1550,173 @@ class helper {
     
     
     
+    func isOn(id: String) -> Bool {
+        var yes = Bool()
+        switch id {
+        case "bitCrusher" :
+            
+            yes = audio.bitCrusher!.isStarted
+            
+            
+        case "tanhDistortion" :
+            
+            yes = audio.tanhDistortion!.isStarted
+            
+        case "clipper" :
+            
+            yes = audio.clipper!.isStarted
+            
+            
+            
+            
+        case "dynaRageCompressor" :
+            
+            yes = audio.dynaRageCompressor!.isStarted
+            
+            
+        case "autoWah" :
+            
+            yes = audio.autoWah!.isStarted
+            
+            
+        case "delay" :
+            
+            yes = audio.delay!.isStarted
+            
+            
+        case "variableDelay" :
+            
+            yes = audio.variableDelay!.isStarted
+            
+            
+            
+        case "decimator" :
+            
+            yes = audio.decimator!.isStarted
+            
+            
+            
+        case "ringModulator" :
+            
+            yes = audio.ringModulator!.isStarted
+            
+            
+            
+        case "flanger" :
+            
+            yes = audio.flanger!.isStarted
+            
+            
+        case "phaser" :
+            
+            yes = audio.phaser!.isStarted
+            
+            
+        case "chorus" :
+            
+            yes = audio.chorus!.isStarted
+            
+            
+        case "compressor" :
+            
+            yes = audio.compressor!.isStarted
+            
+            
+        case "dynamicsProcessor" :
+            
+            yes = audio.dynamicsProcessor!.isStarted
+            
+        case "dynamicRangeCompressor" :
+            
+            yes = audio.dynamicRangeCompressor!.isStarted
+            
+            
+        case "reverb" :
+            
+            yes = audio.reverb!.isStarted
+            
+            
+        case "reverb2" :
+            
+            yes = audio.reverb2!.isStarted
+            
+            
+        case "chowningReverb" :
+            
+            yes = audio.chowningReverb!.isStarted
+        case "costelloReverb" :
+            
+            yes = audio.costelloReverb!.isStarted
+            
+            
+        case "flatFrequencyResponseReverb" :
+            
+            yes = audio.flatFrequencyResponseReverb!.isStarted
+            
+        case "tremolo" :
+            
+            yes = audio.tremolo!.isStarted
+            
+            
+            
+            // FILTERS
+            
+        case "Equalizer" :
+            if audio.threeBandFilterHigh!.isStarted || audio.sevenBandFilterSubBass!.isStarted {
+                yes = true
+            }
+            else {
+                yes = false
+            }
+            
+            
+        case "highLowPassFilters" :
+            
+            if audio.highPassIsStarted || audio.lowPassIsStarted {
+                yes = true
+            }
+            else {
+                yes = false
+            }
+            
+            
+        case "moogLadder" :
+            
+            yes = audio.moogLadder!.isStarted
+            
+            
+        case "resonantFilter" :
+            
+            yes = audio.resonantFilter!.isStarted
+            
+            
+        case "stringResonator" :
+            
+            yes = audio.stringResonator!.isStarted
+            
+            
+        case "modalResonanceFilter" :
+            
+            yes = audio.modalResonanceFilter!.isStarted
+            
+            
+        case "toneFilters" :
+            
+            yes = audio.toneFilter!.isStarted
+            
+            
+            
+        case "dcBlock" :
+            
+            yes = audio.dcBlock!.isStarted
+            
+        default : yes = false
+            
+        }
+        
+        return yes
+        
+    }
     
     
 }

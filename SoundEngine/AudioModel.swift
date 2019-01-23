@@ -2712,6 +2712,8 @@ class audio {
         
     }
     
+   
+    
     func addToselectedEffects(id : String) {
         switch id {
             //effects
