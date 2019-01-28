@@ -55,7 +55,7 @@ class audio {
     // DYNAMICS
     effectData(id: "dynamicRangeCompressor" ,opened: false, title: "Dynamic Range Compressor", type: "4"),
     effectData(id: "dynaRageCompressor", opened: false, title: "Dyna Rage Compressor", type: "5"),
-    effectData(id: "compressor" ,opened: false, title: "Compressor", type: "6"),
+    // effectData(id: "compressor", opened: false, title: "Compressor", type: "6"), TODO: SOme weird bug when disconnecting :     SoundEngine[6362:1672408] AUBase.cpp:1445:DoRender:  ca_require: IsInitialized() Uninitialized
     effectData(id: "dynamicsProcessor" ,opened: false, title: "Dynamics Processor", type: "8"),
     
   
@@ -1813,7 +1813,7 @@ class audio {
             }
           
         case "dynaRageCompressor" :
-            // COMPRESSOR
+           
             switch slider {
             case 0:
                 name = "Rage is On"

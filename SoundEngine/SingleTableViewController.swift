@@ -2381,7 +2381,23 @@ func removeFilter() {
     var effectsTapGesture = UITapGestureRecognizer()
     var filtersTapGesture = UITapGestureRecognizer()
     
-
+/*
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        let touch = touches.first
+        guard let location = touch?.location(in: self.view) else { return }
+        if soundsView.frame.contains(location) {
+            print("Tapped inside soundsView")
+        } else if availableEffectsView.frame.contains(location) {
+            print("Tapped inside Effects view")
+        } else if availableFiltersView.frame.contains(location) {
+            print("Tapped inside Filters")
+        }else {
+            print("Tapped outside")
+        }
+    }
+  
+*/
     
     @objc func handleSoundsTap(){
         print("SOUNDS TAPPED")
