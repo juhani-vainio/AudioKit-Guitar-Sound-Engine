@@ -2850,7 +2850,10 @@ class audio {
             audio.selectedAudioInputs.last?.connect(to: outputMixer!)
         }
         
-        outputMixer?.connect(to: outputBooster!)
+        outputMixer?.connect(to: audio.amp1!)
+        
+        audio.amp1?.connect(to: audio.amp2!)
+        audio.amp2?.connect(to: outputBooster!)
         
         outputBooster?.connect(to: outputAmplitudeTracker!)
         
@@ -2924,6 +2927,10 @@ class audio {
            
         }
        
+        audio.amp1?.disconnectInput()
+        audio.amp1?.disconnectOutput()
+        audio.amp2?.disconnectInput()
+        audio.amp2?.disconnectOutput()
         
         // DISCONNECT MONITORS
         outputAmplitudeTracker?.disconnectInput()
@@ -2954,6 +2961,18 @@ class audio {
         startAudio()
     }
     
+    // AMPS
+    
+    static var amp1: AKDistortion?
+    static var amp2: AKDistortion?
+    static var amp3: AKDistortion?
+    static var amp4: AKDistortion?
+    static var amp5: AKDistortion?
+    static var amp6: AKDistortion?
+    
+    
+    
+    // BALANCERS
     static var clipperBalancer: AKBalancer?
     static var inputBalancer: AKBalancer?
     static var decimatorBalancer: AKBalancer?
@@ -3175,6 +3194,52 @@ class audio {
   
     
     func createEffects() {
+        
+        
+        // AMPS
+        
+        audio.amp1 = AKDistortion()
+        audio.amp1?.delay = Effects.amp1.delay
+        audio.amp1?.decay = Effects.amp1.decay
+        audio.amp1?.delayMix = Effects.amp1.delayMix
+        audio.amp1?.decimation = Effects.amp1.decimation
+        audio.amp1?.rounding = Effects.amp1.rounding
+        audio.amp1?.decimationMix = Effects.amp1.decimationMix
+        audio.amp1?.linearTerm = Effects.amp1.linearTerm
+        audio.amp1?.squaredTerm = Effects.amp1.squaredTerm
+        audio.amp1?.cubicTerm = Effects.amp1.cubicTerm
+        audio.amp1?.polynomialMix = Effects.amp1.polynomialMix
+        audio.amp1?.ringModFreq1 = Effects.amp1.ringModFreq1
+        audio.amp1?.ringModFreq2 = Effects.amp1.ringModFreq2
+        audio.amp1?.ringModBalance = Effects.amp1.ringModBalance
+        audio.amp1?.ringModMix = Effects.amp1.ringModMix
+        audio.amp1?.softClipGain = Effects.amp1.softClipGain
+        audio.amp1?.finalMix = Effects.amp1.finalMix
+        audio.amp1?.stop()
+        
+        audio.amp2 = AKDistortion()
+        audio.amp2?.delay = Effects.amp2.delay
+        audio.amp2?.decay = Effects.amp2.decay
+        audio.amp2?.delayMix = Effects.amp2.delayMix
+        audio.amp2?.decimation = Effects.amp2.decimation
+        audio.amp2?.rounding = Effects.amp2.rounding
+        audio.amp2?.decimationMix = Effects.amp2.decimationMix
+        audio.amp2?.linearTerm = Effects.amp2.linearTerm
+        audio.amp2?.squaredTerm = Effects.amp2.squaredTerm
+        audio.amp2?.cubicTerm = Effects.amp2.cubicTerm
+        audio.amp2?.polynomialMix = Effects.amp2.polynomialMix
+        audio.amp2?.ringModFreq1 = Effects.amp2.ringModFreq1
+        audio.amp2?.ringModFreq2 = Effects.amp2.ringModFreq2
+        audio.amp2?.ringModBalance = Effects.amp2.ringModBalance
+        audio.amp2?.ringModMix = Effects.amp2.ringModMix
+        audio.amp2?.softClipGain = Effects.amp2.softClipGain
+        audio.amp2?.finalMix = Effects.amp2.finalMix
+        audio.amp2?.start()
+        
+        audio.amp3 = AKDistortion()
+        audio.amp4 = AKDistortion()
+        audio.amp5 = AKDistortion()
+        audio.amp6 = AKDistortion()
         
         // MONITORS
         outputAmplitudeTracker = AKAmplitudeTracker()

@@ -30,6 +30,9 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
     @IBOutlet weak var outputLevel: UISlider!
     @IBOutlet weak var bufferLengthSegment: UISegmentedControl!
     
+    @IBOutlet weak var ampSelectionSegmentedView: UISegmentedControl!
+    
+    
     @IBOutlet weak var toolBar: UIView!
     @IBOutlet weak var topView: UIView!
     
@@ -41,6 +44,11 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
     @IBOutlet weak var soundsTab: UIView!
     @IBOutlet weak var effectsTab: UIView!
     @IBOutlet weak var filtersTab: UIView!
+    @IBOutlet weak var hamburgerView: UIView!
+    @IBOutlet weak var settingsView: UIView!
+    @IBOutlet weak var settingControlsView: UIView!
+    @IBOutlet weak var settingsEmptyAreaView: UIView!
+    
     @IBOutlet weak var availableEffectsView: UIView!
     @IBOutlet weak var availableEffects: UITableView!
     @IBOutlet weak var availableFiltersView: UIView!
@@ -122,6 +130,14 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
         self.filtersTab.addGestureRecognizer(filtersTapGesture)
         self.filtersTab.isUserInteractionEnabled = true
         
+        self.hamburgerTapGesture = UITapGestureRecognizer(target: self, action: #selector(handleHamburgerTap))
+        self.hamburgerView.addGestureRecognizer(hamburgerTapGesture)
+        self.hamburgerView.isUserInteractionEnabled = true
+        
+        self.cancelTapGesture = UITapGestureRecognizer(target: self, action: #selector(handleCancelTap))
+        self.settingsEmptyAreaView.addGestureRecognizer(cancelTapGesture)
+        self.settingsEmptyAreaView.isUserInteractionEnabled = true
+        
         
          // Set up Interface Colors
         Colors.palette.setInterfaceColorScheme(name: "spotify")
@@ -174,6 +190,8 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
         soundsTab.layer.cornerRadius = 8
         effectsTab.layer.cornerRadius = 8
         filtersTab.layer.cornerRadius = 8
+        hamburgerView.layer.cornerRadius = 8
+        settingControlsView.layer.cornerRadius = 8
         
 
         stack.translatesAutoresizingMaskIntoConstraints = false
@@ -197,6 +215,9 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
         bufferLengthSegment.tintColor = interface.button
         bufferLengthSegment.backgroundColor = interface.buttonBackground
         
+        ampSelectionSegmentedView.tintColor = interface.button
+        ampSelectionSegmentedView.backgroundColor = interface.buttonBackground
+        
         inputLevel.minimumTrackTintColor = interface.sliderMin
         inputLevel.maximumTrackTintColor = interface.sliderMax
         outputLevel.minimumTrackTintColor = interface.sliderMin
@@ -211,6 +232,8 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
         soundsTab.backgroundColor = interface.heading
         effectsTab.backgroundColor = interface.heading
         filtersTab.backgroundColor = interface.heading
+        hamburgerView.backgroundColor = interface.heading
+        settingControlsView.backgroundColor = interface.topView
         
         soundsView.backgroundColor = interface.altBackground
         savedSoundsTableView.backgroundColor = interface.tableBackground
@@ -2271,10 +2294,48 @@ func removeFilter() {
     
     @IBAction func checkTapped(_ sender: Any) {
         print(AudioKit.printConnections())
+        if (audio.amp2?.isStarted)! {
+            audio.amp2?.stop()
+        } else {
+            audio.amp2?.start()
+        }
+        print("AMP 2 is started = \(audio.amp2?.isStarted)")
      
     }
 
     
+    @IBAction func ampSelectionSegmentAction(_ sender: UISegmentedControl) {
+        audio.amp1?.stop()
+        audio.amp2?.stop()
+        audio.amp3?.stop()
+        audio.amp4?.stop()
+        audio.amp5?.stop()
+        audio.amp6?.stop()
+        let segment = sender.selectedSegmentIndex + 1
+        switch segment {
+        case 1: audio.amp1?.start()
+            print("AMP 1")
+        case 2: audio.amp2?.start()
+            print("AMP 2")
+        case 3: audio.amp3?.start()
+            print("AMP 3")
+        case 4: audio.amp4?.start()
+            print("AMP 4")
+        case 5: audio.amp5?.start()
+            print("AMP 5")
+        case 6: audio.amp6?.start()
+            print("AMP 6")
+        case 7: print("NO AMP")
+        default:
+            print("NO AMP")
+        }
+        print(audio.amp1?.isStarted)
+        print(audio.amp2?.isStarted)
+        print(audio.amp3?.isStarted)
+        print(audio.amp4?.isStarted)
+        print(audio.amp5?.isStarted)
+        print(audio.amp6?.isStarted)
+    }
     
     @IBAction func bufferLengthSegmentAction(_ sender: UISegmentedControl) {
         let segment = sender.selectedSegmentIndex + 1
@@ -2380,6 +2441,8 @@ func removeFilter() {
     var soundsTapGesture = UITapGestureRecognizer()
     var effectsTapGesture = UITapGestureRecognizer()
     var filtersTapGesture = UITapGestureRecognizer()
+    var hamburgerTapGesture = UITapGestureRecognizer()
+    var cancelTapGesture = UITapGestureRecognizer()
     
 /*
     
@@ -2463,5 +2526,20 @@ func removeFilter() {
        
     }
     
+    @objc func handleHamburgerTap() {
+        if settingsView.isHidden {
+            self.settingsView.isHidden = false
+            self.hamburgerView.backgroundColor = interface.highlight
+        }
+        else {
+            self.settingsView.isHidden = true
+            self.hamburgerView.backgroundColor = interface.heading
+        }
+    }
     
+    
+    @objc func handleCancelTap() {
+        self.settingsView.isHidden = true
+        self.hamburgerView.backgroundColor = interface.heading
+    }
 }
