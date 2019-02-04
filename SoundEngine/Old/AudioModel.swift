@@ -20,7 +20,7 @@ Brilliance    6 to 20 kHz
 import Foundation
 import AudioKit
 import AudioKitUI
-
+/*
 
 struct effectData {
  
@@ -94,6 +94,9 @@ class audio {
         effectData(id: "resonantFilter", opened: false, title: "Resonant Filter", type: "2"),
         effectData(id: "stringResonator", opened: false, title: "String Resonator", type: "2"),
         effectData(id: "modalResonanceFilter", opened: false, title: "Modal Resonance", type: "2"),
+        
+        effectData(id: "rhinoGuitarProcessor", opened: false, title: "Guitar Processor", type: "6"),
+        
         
        
     ]
@@ -588,6 +591,49 @@ class audio {
             default: break
                 
             }
+            
+        case "rhinoGuitarProcessor" :
+            switch slider {
+            case 0:
+                if  audio.rhinoGuitarProcessor!.isStarted == true {
+                    audio.rhinoGuitarProcessor?.stop()
+                    
+                    newValue = "OFF"
+                } else {
+                    audio.rhinoGuitarProcessor?.start()
+                    
+                    newValue = "ON"
+                }
+            case 1:
+                audio.rhinoGuitarProcessor?.distortion = value
+                newValue = String(value)
+                newValue = String(newValue.prefix(3))
+            case 2:
+                audio.rhinoGuitarProcessor?.highGain = value
+                newValue = String(value)
+                newValue = String(newValue.prefix(3))
+            case 3:
+                audio.rhinoGuitarProcessor?.midGain = value
+                newValue = String(value)
+                newValue = String(newValue.prefix(3))
+            case 4:
+                audio.rhinoGuitarProcessor?.lowGain = value
+                newValue = String(value)
+                newValue = String(newValue.prefix(3))
+            case 5:
+                audio.rhinoGuitarProcessor?.preGain = value
+                newValue = String(value)
+                newValue = String(newValue.prefix(3))
+            case 6:
+                audio.rhinoGuitarProcessor?.postGain = value
+                newValue = String(value)
+                newValue = String(newValue.prefix(3))
+                
+                
+            default: break
+                
+            }
+            
             
         case "moogLadder":
             switch slider {
@@ -1642,6 +1688,72 @@ class audio {
             default: break
             }
             
+            
+        case "rhinoGuitarProcessor":
+            switch slider {
+            case 1:
+                min = 1
+                max = 20
+                valueForSlider = Float(audio.rhinoGuitarProcessor!.distortion)
+                name = "Distortion"
+                let intValue = Int(valueForSlider)
+                value = String(intValue)
+                value = String(value.prefix(3))
+                isOn = audio.rhinoGuitarProcessor!.isStarted
+            case 2:
+                min = -1
+                max = 1
+                valueForSlider = Float(audio.rhinoGuitarProcessor!.highGain)
+                name = "High"
+                let intValue = Int(valueForSlider)
+                value = String(intValue)
+                value = String(value.prefix(3))
+                isOn = audio.rhinoGuitarProcessor!.isStarted
+                
+            case 3:
+                min = -1
+                max = 1
+                valueForSlider = Float(audio.rhinoGuitarProcessor!.midGain)
+                name = "Mid"
+                let intValue = Int(valueForSlider)
+                value = String(intValue)
+                value = String(value.prefix(3))
+                isOn = audio.rhinoGuitarProcessor!.isStarted
+                
+            case 4:
+                min = -1
+                max = 1
+                valueForSlider = Float(audio.rhinoGuitarProcessor!.lowGain)
+                name = "Low"
+                let intValue = Int(valueForSlider)
+                value = String(intValue)
+                value = String(value.prefix(3))
+                isOn = audio.rhinoGuitarProcessor!.isStarted
+                
+            case 5:
+                min = 0
+                max = 10
+                valueForSlider = Float(audio.rhinoGuitarProcessor!.preGain)
+                name = "Pregain"
+                let intValue = Int(valueForSlider)
+                value = String(intValue)
+                value = String(value.prefix(3))
+                isOn = audio.rhinoGuitarProcessor!.isStarted
+                
+            case 6:
+                min = 0
+                max = 1
+                valueForSlider = Float(audio.rhinoGuitarProcessor!.postGain)
+                name = "Postgain"
+                let intValue = Int(valueForSlider)
+                value = String(intValue)
+                value = String(value.prefix(3))
+                isOn = audio.rhinoGuitarProcessor!.isStarted
+                
+            default: break
+            }
+            
+            
         case "moogLadder":
             switch slider {
             case 1:
@@ -2607,6 +2719,8 @@ class audio {
  
     
     func startAudio() {
+        audio.shared.createEffects()
+        audio.shared.audioKitSettings()
         
         createInputListForSound()
        // createEffectList()
@@ -2760,6 +2874,8 @@ class audio {
                             audio.selectedAudioInputs.append(audio.toneComplementFilter!)
         case "moogLadder": audio.selectedAudioInputs.append(audio.moogLadder!)
             
+        case "rhinoGuitarProcessor": audio.selectedAudioInputs.append(audio.rhinoGuitarProcessor!)
+            
         case "highLowPassFilters":  audio.selectedAudioInputs.append(audio.lowPassFilter!)
                                     audio.selectedAudioInputs.append(audio.lowPassButterworthFilter!)
                                     audio.selectedAudioInputs.append(audio.highPassFilter!)
@@ -2831,6 +2947,8 @@ class audio {
     
     func connectAudioInputs() {
         
+        print(AudioKit.printConnections())
+        
         for input in 0..<audio.selectedAudioInputs.count {
             
             if input == 0 {
@@ -2843,6 +2961,10 @@ class audio {
             }
         }
         
+         // Connect to list of presets as "amp model"
+        // TODO
+        // for input in 0..<preset.presetAudioInputs.count .... jne
+        
         if audio.selectedAudioInputs.isEmpty {
             inputAmplitudeTracker!.connect(to: outputMixer!)
            // inputMixer!.connect(to: outputMixer!)
@@ -2850,10 +2972,9 @@ class audio {
             audio.selectedAudioInputs.last?.connect(to: outputMixer!)
         }
         
-        outputMixer?.connect(to: audio.amp1!)
+       
         
-        audio.amp1?.connect(to: audio.amp2!)
-        audio.amp2?.connect(to: outputBooster!)
+        outputMixer?.connect(to: outputBooster!)
         
         outputBooster?.connect(to: outputAmplitudeTracker!)
         
@@ -2863,6 +2984,8 @@ class audio {
             AudioKit.output =  inputBooster
            // AudioKit.output = inputMixer
         }
+        
+        print(AudioKit.printConnections())
         
         if initialStart == true {
             // silence before starting to reduce unnesseccary sounds
@@ -2893,7 +3016,7 @@ class audio {
         }
         
        
-       
+       print(AudioKit.printConnections())
      
         
     }
@@ -2905,7 +3028,7 @@ class audio {
             if AudioKit.engine.isRunning {
                 sleep(1)
                 self.mic?.volume = self.micVolume
-                self.initialStart = false
+                //self.initialStart = false
                 print("Audiokit did start ! !! !!!")
                 timer.invalidate()
             }
@@ -2920,17 +3043,19 @@ class audio {
     func resetAudioEffects() {
       
         
+        print(AudioKit.printConnections())
+        
         for input in 0..<audio.selectedAudioInputs.count {
             audio.selectedAudioInputs[input].disconnectOutput()
             audio.selectedAudioInputs[input].disconnectInput()
             print("DISCONNECT \(audio.selectedAudioInputs[input])")
            
         }
-       
-        audio.amp1?.disconnectInput()
-        audio.amp1?.disconnectOutput()
-        audio.amp2?.disconnectInput()
-        audio.amp2?.disconnectOutput()
+        
+        // Same for presets
+        // TODO
+        // for input in 0..<preset.presetAudioInputs.count { }
+
         
         // DISCONNECT MONITORS
         outputAmplitudeTracker?.disconnectInput()
@@ -2945,30 +3070,32 @@ class audio {
         outputBooster?.disconnectOutput()
         outputBooster?.disconnectInput()
         //inputMixer?.disconnectOutput()
+        
+        outputMixer?.disconnectOutput()
+        outputMixer?.disconnectInput()
   
         mic?.disconnectOutput()
         
-     
+        AudioKit.disconnectAllInputs()
+        
+       // audio.shared.stopAll()
         
         audio.selectedAudioInputs.removeAll()
+ 
         
         do {
-            try AudioKit.stop()
+            try AudioKit.shutdown()
         } catch {
             print("Could not stop AudioKit")
         }
         
-        startAudio()
+       // startAudio()
     }
     
-    // AMPS
+    // distorion
     
-    static var amp1: AKDistortion?
-    static var amp2: AKDistortion?
-    static var amp3: AKDistortion?
-    static var amp4: AKDistortion?
-    static var amp5: AKDistortion?
-    static var amp6: AKDistortion?
+    static var distortion: AKDistortion?
+
     
     
     
@@ -3105,41 +3232,24 @@ class audio {
     static var highPassIsStarted = Bool()
     static var lowPassSegment = Int()
     static var highPassSegment = Int()
-    
     static var toneFilter: AKToneFilter?
-    
-
     static var toneComplementFilter : AKToneComplementFilter?
-    
     static var highShelfFilter : AKHighShelfFilter?
     static var lowShelfFilter: AKLowShelfFilter?
-    
     static var bandPassButterworthFilter : AKBandPassButterworthFilter?
     static var bandRejectButterworthFilter : AKBandRejectButterworthFilter?
-    
-    
-
-    
-    
     static var modalResonanceFilter : AKModalResonanceFilter?
     static var resonantFilter : AKResonantFilter?
     static var lowShelfParametricEqualizerFilter: AKLowShelfParametricEqualizerFilter?
     static var highShelfParametricEqualizerFilter: AKHighShelfParametricEqualizerFilter?
     static var peakingParametricEqualizerFilter : AKPeakingParametricEqualizerFilter?
-    
     static var formantFilter : AKFormantFilter?
     static var rolandTB303Filter : AKRolandTB303Filter?
     static var korgLowPassFilter : AKKorgLowPassFilter?
     static var threePoleLowpassFilter: AKThreePoleLowpassFilter?
-    
     static var moogLadder: AKMoogLadder?
-    
-
-    
     static var dcBlock: AKDCBlock?
-    
     static var stringResonator : AKStringResonator?
-    
     static var masterBooster: AKBooster?
     
     // ARRAYS FOR CONSTRUCTING THE SOUND
@@ -3198,48 +3308,26 @@ class audio {
         
         // AMPS
         
-        audio.amp1 = AKDistortion()
-        audio.amp1?.delay = Effects.amp1.delay
-        audio.amp1?.decay = Effects.amp1.decay
-        audio.amp1?.delayMix = Effects.amp1.delayMix
-        audio.amp1?.decimation = Effects.amp1.decimation
-        audio.amp1?.rounding = Effects.amp1.rounding
-        audio.amp1?.decimationMix = Effects.amp1.decimationMix
-        audio.amp1?.linearTerm = Effects.amp1.linearTerm
-        audio.amp1?.squaredTerm = Effects.amp1.squaredTerm
-        audio.amp1?.cubicTerm = Effects.amp1.cubicTerm
-        audio.amp1?.polynomialMix = Effects.amp1.polynomialMix
-        audio.amp1?.ringModFreq1 = Effects.amp1.ringModFreq1
-        audio.amp1?.ringModFreq2 = Effects.amp1.ringModFreq2
-        audio.amp1?.ringModBalance = Effects.amp1.ringModBalance
-        audio.amp1?.ringModMix = Effects.amp1.ringModMix
-        audio.amp1?.softClipGain = Effects.amp1.softClipGain
-        audio.amp1?.finalMix = Effects.amp1.finalMix
-        audio.amp1?.stop()
+        audio.distortion = AKDistortion()
+        audio.distortion?.delay = Effects.distortion.delay
+        audio.distortion?.decay = Effects.distortion.decay
+        audio.distortion?.delayMix = Effects.distortion.delayMix
+        audio.distortion?.decimation = Effects.distortion.decimation
+        audio.distortion?.rounding = Effects.distortion.rounding
+        audio.distortion?.decimationMix = Effects.distortion.decimationMix
+        audio.distortion?.linearTerm = Effects.distortion.linearTerm
+        audio.distortion?.squaredTerm = Effects.distortion.squaredTerm
+        audio.distortion?.cubicTerm = Effects.distortion.cubicTerm
+        audio.distortion?.polynomialMix = Effects.distortion.polynomialMix
+        audio.distortion?.ringModFreq1 = Effects.distortion.ringModFreq1
+        audio.distortion?.ringModFreq2 = Effects.distortion.ringModFreq2
+        audio.distortion?.ringModBalance = Effects.distortion.ringModBalance
+        audio.distortion?.ringModMix = Effects.distortion.ringModMix
+        audio.distortion?.softClipGain = Effects.distortion.softClipGain
+        audio.distortion?.finalMix = Effects.distortion.finalMix
+        audio.distortion?.stop()
         
-        audio.amp2 = AKDistortion()
-        audio.amp2?.delay = Effects.amp2.delay
-        audio.amp2?.decay = Effects.amp2.decay
-        audio.amp2?.delayMix = Effects.amp2.delayMix
-        audio.amp2?.decimation = Effects.amp2.decimation
-        audio.amp2?.rounding = Effects.amp2.rounding
-        audio.amp2?.decimationMix = Effects.amp2.decimationMix
-        audio.amp2?.linearTerm = Effects.amp2.linearTerm
-        audio.amp2?.squaredTerm = Effects.amp2.squaredTerm
-        audio.amp2?.cubicTerm = Effects.amp2.cubicTerm
-        audio.amp2?.polynomialMix = Effects.amp2.polynomialMix
-        audio.amp2?.ringModFreq1 = Effects.amp2.ringModFreq1
-        audio.amp2?.ringModFreq2 = Effects.amp2.ringModFreq2
-        audio.amp2?.ringModBalance = Effects.amp2.ringModBalance
-        audio.amp2?.ringModMix = Effects.amp2.ringModMix
-        audio.amp2?.softClipGain = Effects.amp2.softClipGain
-        audio.amp2?.finalMix = Effects.amp2.finalMix
-        audio.amp2?.start()
-        
-        audio.amp3 = AKDistortion()
-        audio.amp4 = AKDistortion()
-        audio.amp5 = AKDistortion()
-        audio.amp6 = AKDistortion()
+       
         
         // MONITORS
         outputAmplitudeTracker = AKAmplitudeTracker()
@@ -3646,8 +3734,88 @@ class audio {
         
     }
 
-}
+    func stopAll() {
+        
+        
+        
+        inputMixer?.stop()
+        outputMixer?.stop()
+        
+        mic?.stop()
+        outputBooster?.stop()
+        inputBooster?.stop()
+     
+        // Delay
+        audio.delay?.stop()
+        audio.variableDelay?.stop()
+        
+        // Dynamics
+        audio.dynaRageCompressor?.stop()
+        audio.compressor?.stop()
+        audio.dynamicsProcessor?.stop()
+        audio.dynamicRangeCompressor?.stop()
+        
+        // Distorion effects
+        audio.bitCrusher?.stop()
+        audio.clipper?.stop()
+        audio.tanhDistortion?.stop()
+        audio.decimator?.stop()
+        audio.ringModulator?.stop()
+        audio.distortion?.stop()
+        
+        // Modulation effects
+        audio.flanger?.stop()
+        audio.phaser?.stop()
+        audio.chorus?.stop()
+        
+        
+        // Reverb
+        audio.chowningReverb?.stop()
+        audio.costelloReverb?.stop()
+        audio.flatFrequencyResponseReverb?.stop()
+        audio.reverb?.stop()
+        audio.reverb2?.stop()
+        
+        // Simulators
+        audio.rhinoGuitarProcessor?.stop()
+        
+        // tremolo
+        audio.tremolo?.stop()
+        
+        // FILTERS
+        audio.autoWah?.stop()
+        
+        audio.toneFilter?.stop()
+        audio.toneComplementFilter?.stop()
+        
+        audio.dcBlock?.stop()
+        audio.resonantFilter?.stop()
+        audio.moogLadder?.stop()
+        audio.resonantFilter?.stop()
+        audio.stringResonator?.stop()
+        audio.modalResonanceFilter?.stop()
+        
+        // PASS FILTERS
 
+        audio.highPassFilter?.stop()
+        audio.lowPassFilter?.stop()
+        audio.highPassButterworthFilter?.stop()
+        audio.lowPassButterworthFilter?.stop()
+   
+        audio.threeBandFilterHigh?.stop()
+        audio.threeBandFilterMid?.stop()
+        audio.threeBandFilterLow?.stop()
+        
+        audio.sevenBandFilterBrilliance?.stop()
+        audio.sevenBandFilterPrecence?.stop()
+        audio.sevenBandFilterUpperMid?.stop()
+        audio.sevenBandFilterMid?.stop()
+        audio.sevenBandFilterLowMid?.stop()
+        audio.sevenBandFilterBass?.stop()
+        audio.sevenBandFilterSubBass?.stop()
+    }
+}
+*/
 /*
  Sub-Bass (16 Hz to 60 Hz). ...
  Bass (60 Hz to 250 Hz). ...

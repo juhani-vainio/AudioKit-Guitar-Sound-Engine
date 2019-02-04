@@ -336,9 +336,9 @@ struct decimator:Codable {
             
             static var ratioRange = 1...30
             static var thresholdRange = -100...0
-            static var attackDurationRange = 0.001...0.2   // 0,1 ms
-            static var releaseDurationRange = 0.01...3
-            static var rageRatio = 0...1
+            static var attackDurationRange = 0.1...500   // 0,1 ms
+            static var releaseDurationRange = 0.1...500
+            static var rageRatio = 0.1...20
             
         }
     
@@ -455,9 +455,9 @@ struct decimator:Codable {
     
     
     
-    // AMPS    AKDistortion
+    //     AKDistortion
     
-    struct amp1:Codable {
+    struct distortion:Codable {
         
         static var delay: Double = 0.1 // (Milliseconds) ranges from 0.1 to 500 (Default: 0.1)
         static var decay: Double = 0.1 // (Rate) ranges from 0.1 to 50 (Default: 1.0)
@@ -476,27 +476,6 @@ struct decimator:Codable {
         static var softClipGain: Double = -6 // (dB) ranges from -80 to 20 (Default: -6)
         static var finalMix: Double = 0.1 // (Normalized Value) ranges from 0 to 1 (Default: 0.5)
 
-    }
-    
-    struct amp2:Codable {
-        
-        static var delay: Double = 1.0 // (Milliseconds) ranges from 0.1 to 500 (Default: 0.1)
-        static var decay: Double = 1.0 // (Rate) ranges from 0.1 to 50 (Default: 1.0)
-        static var delayMix: Double = 0.5 // (Normalized Value) ranges from 0 to 1 (Default: 0.5)
-        static var decimation: Double = 0.0 // (Normalized Value) ranges from 0 to 1 (Default: 0.5)
-        static var rounding: Double = 0.0 // (Normalized Value) ranges from 0 to 1 (Default: 0.0)
-        static var decimationMix: Double = 0.0 // (Normalized Value) ranges from 0 to 1 (Default: 0.5)
-        static var linearTerm: Double = 0.2 // (Normalized Value) ranges from 0 to 1 (Default: 0.5)
-        static var squaredTerm: Double = 0.2 // (Normalized Value) ranges from 0 to 1 (Default: 0.5)
-        static var cubicTerm: Double = 0.2 // (Normalized Value) ranges from 0 to 1 (Default: 0.5)
-        static var polynomialMix: Double = 0.2 // (Normalized Value) ranges from 0 to 1 (Default: 0.5)
-        static var ringModFreq1: Double = 100 // (Hertz) ranges from 0.5 to 8000 (Default: 100)
-        static var ringModFreq2: Double = 100 // (Hertz) ranges from 0.5 to 8000 (Default: 100)
-        static var ringModBalance: Double = 0.2 // (Normalized Value) ranges from 0 to 1 (Default: 0.5)
-        static var ringModMix: Double = 0.0 // (Normalized Value) ranges from 0 to 1 (Default: 0.0)
-        static var softClipGain: Double = -6 // (dB) ranges from -80 to 20 (Default: -6)
-        static var finalMix: Double = 0.1 // (Normalized Value) ranges from 0 to 1 (Default: 0.5)
-        
     }
     
 }

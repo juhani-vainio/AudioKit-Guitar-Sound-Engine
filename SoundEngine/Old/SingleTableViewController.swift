@@ -9,7 +9,7 @@
 import AudioKit
 import AudioKitUI
 import UIKit
-
+/*
 fileprivate var longPressGesture: UILongPressGestureRecognizer!
 
 class SingleTableViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UITableViewDelegate, UITableViewDataSource  {
@@ -155,6 +155,10 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
         
         audio.shared.startAudio()
         interfaceSetup()
+        
+        
+        
+        
     }
     
     
@@ -1641,6 +1645,10 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
             let sound = Collections.savedSounds[indexPath.row]
             UserDefaults.standard.setValue(sound, forKey: "NameOfSound")
             self.soundTitle.text = sound
+            
+            audio.shared.resetAudioEffects()
+            audio.shared.audioKitSettings()
+            
             helper.shared.getSavedChain(name: sound)
             self.selectedEffects.reloadData()
             self.selectedFilters.reloadData()
@@ -1648,7 +1656,11 @@ class SingleTableViewController: UIViewController, UICollectionViewDelegate, UIC
             self.availableFilters.reloadData()
             self.mainCollection.reloadData()
             audio.shared.initialStart = true
-            self.resetEffectChain()
+            
+            audio.shared.startAudio()
+            buildWaveforStackView()
+            
+           // self.resetEffectChain()
            // savedSoundsTableView.isHidden = true
             handleSoundsTap()
             
@@ -1845,8 +1857,11 @@ func removeFilter() {
     
     func resetEffectChain() {
 
-        helper.shared.saveCurrentSettings()
         audio.shared.resetAudioEffects()
+        audio.shared.audioKitSettings()
+        
+        audio.shared.startAudio()
+        
         
         buildWaveforStackView()
         
@@ -2294,47 +2309,24 @@ func removeFilter() {
     
     @IBAction func checkTapped(_ sender: Any) {
         print(AudioKit.printConnections())
-        if (audio.amp2?.isStarted)! {
-            audio.amp2?.stop()
-        } else {
-            audio.amp2?.start()
-        }
-        print("AMP 2 is started = \(audio.amp2?.isStarted)")
-     
+        
     }
 
     
     @IBAction func ampSelectionSegmentAction(_ sender: UISegmentedControl) {
-        audio.amp1?.stop()
-        audio.amp2?.stop()
-        audio.amp3?.stop()
-        audio.amp4?.stop()
-        audio.amp5?.stop()
-        audio.amp6?.stop()
+        audio.distortion?.stop()
+       
         let segment = sender.selectedSegmentIndex + 1
         switch segment {
-        case 1: audio.amp1?.start()
+        case 1: audio.distortion?.start()
             print("AMP 1")
-        case 2: audio.amp2?.start()
-            print("AMP 2")
-        case 3: audio.amp3?.start()
-            print("AMP 3")
-        case 4: audio.amp4?.start()
-            print("AMP 4")
-        case 5: audio.amp5?.start()
-            print("AMP 5")
-        case 6: audio.amp6?.start()
-            print("AMP 6")
+       
         case 7: print("NO AMP")
         default:
             print("NO AMP")
         }
-        print(audio.amp1?.isStarted)
-        print(audio.amp2?.isStarted)
-        print(audio.amp3?.isStarted)
-        print(audio.amp4?.isStarted)
-        print(audio.amp5?.isStarted)
-        print(audio.amp6?.isStarted)
+        print(audio.distortion?.isStarted)
+        
     }
     
     @IBAction func bufferLengthSegmentAction(_ sender: UISegmentedControl) {
@@ -2543,3 +2535,5 @@ func removeFilter() {
         self.hamburgerView.backgroundColor = interface.heading
     }
 }
+
+ */

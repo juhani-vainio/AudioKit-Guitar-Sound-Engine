@@ -502,6 +502,18 @@ class helper {
             array.updateValue(String(audio.moogLadder!.cutoffFrequency), forKey: "cutoffFrequency")
             array.updateValue(String(audio.moogLadder!.resonance), forKey: "resonance")
             
+        case "rhinoGuitarProcessor" :
+            array.updateValue(location, forKey: "location")
+            array.updateValue(effect.id, forKey: "name")
+            array.updateValue(String(audio.rhinoGuitarProcessor!.isStarted), forKey: "isStarted")
+            array.updateValue(String(audio.rhinoGuitarProcessor!.distortion), forKey: "distortion")
+            array.updateValue(String(audio.rhinoGuitarProcessor!.highGain), forKey: "highGain")
+            array.updateValue(String(audio.rhinoGuitarProcessor!.midGain), forKey: "midGain")
+            array.updateValue(String(audio.rhinoGuitarProcessor!.lowGain), forKey: "lowGain")
+            array.updateValue(String(audio.rhinoGuitarProcessor!.preGain), forKey: "preGain")
+            array.updateValue(String(audio.rhinoGuitarProcessor!.postGain), forKey: "postGain")
+            
+            
         case "resonantFilter" :
             array.updateValue(location, forKey: "location")
             array.updateValue(effect.id, forKey: "name")
@@ -584,11 +596,7 @@ class helper {
             
             replaceEffectDataArrays(name:name)
             
-            /*
-            if name != "equalizerFilter" {
-                replaceEffectDataArrays(name:name)
-            }
-            */
+         
             
             switch name {
                 
@@ -1255,6 +1263,41 @@ class helper {
                 let started = Bool(isStarted)!
                 if started == true {audio.moogLadder!.start()} else {audio.moogLadder!.stop()}
                 
+                
+            case "rhinoGuitarProcessor" :
+                guard let isStarted = (effect as AnyObject).value(forKey: "isStarted")! as? String else {
+                    return
+                }
+                guard let distortion = (effect as AnyObject).value(forKey: "distortion")! as? String else {
+                    return
+                }
+                guard let highGain = (effect as AnyObject).value(forKey: "highGain")! as? String else {
+                    return
+                }
+                guard let midGain = (effect as AnyObject).value(forKey: "midGain")! as? String else {
+                    return
+                }
+                guard let lowGain = (effect as AnyObject).value(forKey: "lowGain")! as? String else {
+                    return
+                }
+                guard let preGain = (effect as AnyObject).value(forKey: "preGain")! as? String else {
+                    return
+                }
+                guard let postGain = (effect as AnyObject).value(forKey: "postGain")! as? String else {
+                    return
+                }
+                
+                audio.rhinoGuitarProcessor?.distortion = Double(distortion)!
+                audio.rhinoGuitarProcessor?.highGain = Double(highGain)!
+                audio.rhinoGuitarProcessor?.midGain = Double(midGain)!
+                audio.rhinoGuitarProcessor?.lowGain = Double(lowGain)!
+                audio.rhinoGuitarProcessor?.preGain = Double(preGain)!
+                audio.rhinoGuitarProcessor?.postGain = Double(postGain)!
+                
+                let started = Bool(isStarted)!
+                if started == true {audio.rhinoGuitarProcessor!.start()} else {audio.rhinoGuitarProcessor!.stop()}
+                
+                
             case "resonantFilter" :
                 
                 guard let frequency = (effect as AnyObject).value(forKey: "frequency")! as? String else {
@@ -1345,141 +1388,7 @@ class helper {
                 }
                 let started = Bool(isStarted)!
                 if started == true {audio.dcBlock!.start()} else {audio.dcBlock!.stop()}
-                
-                /*
-                 case "equalizerFilter" :
-                 guard let gain1 = (effect as AnyObject).value(forKey: "gain1")! as? String else {
-                 return
-                 }
-                 guard let gain2 = (effect as AnyObject).value(forKey: "gain2")! as? String else {
-                 return
-                 }
-                 guard let gain3 = (effect as AnyObject).value(forKey: "gain3")! as? String else {
-                 return
-                 }
-                 guard let gain4 = (effect as AnyObject).value(forKey: "gain4")! as? String else {
-                 return
-                 }
-                 guard let gain5 = (effect as AnyObject).value(forKey: "gain5")! as? String else {
-                 return
-                 }
-                 guard let gain6 = (effect as AnyObject).value(forKey: "gain6")! as? String else {
-                 return
-                 }
-                 guard let gain7 = (effect as AnyObject).value(forKey: "gain7")! as? String else {
-                 return
-                 }
-                 guard let gain8 = (effect as AnyObject).value(forKey: "gain8")! as? String else {
-                 return
-                 }
-                 guard let gain9 = (effect as AnyObject).value(forKey: "gain9")! as? String else {
-                 return
-                 }
-                 guard let gain10 = (effect as AnyObject).value(forKey: "gain10")! as? String else {
-                 return
-                 }
-                 
-                 guard let gain11 = (effect as AnyObject).value(forKey: "gain11")! as? String else {
-                 return
-                 }
-                 guard let gain12 = (effect as AnyObject).value(forKey: "gain12")! as? String else {
-                 return
-                 }
-                 guard let gain13 = (effect as AnyObject).value(forKey: "gain13")! as? String else {
-                 return
-                 }
-                 guard let gain14 = (effect as AnyObject).value(forKey: "gain14")! as? String else {
-                 return
-                 }
-                 guard let gain15 = (effect as AnyObject).value(forKey: "gain15")! as? String else {
-                 return
-                 }
-                 guard let gain16 = (effect as AnyObject).value(forKey: "gain16")! as? String else {
-                 return
-                 }
-                 guard let gain17 = (effect as AnyObject).value(forKey: "gain17")! as? String else {
-                 return
-                 }
-                 guard let gain18 = (effect as AnyObject).value(forKey: "gain18")! as? String else {
-                 return
-                 }
-                 guard let gain19 = (effect as AnyObject).value(forKey: "gain19")! as? String else {
-                 return
-                 }
-                 guard let gain20 = (effect as AnyObject).value(forKey: "gain20")! as? String else {
-                 return
-                 }
-                 
-                 guard let gain21 = (effect as AnyObject).value(forKey: "gain21")! as? String else {
-                 return
-                 }
-                 guard let gain22 = (effect as AnyObject).value(forKey: "gain22")! as? String else {
-                 return
-                 }
-                 guard let gain23 = (effect as AnyObject).value(forKey: "gain23")! as? String else {
-                 return
-                 }
-                 guard let gain24 = (effect as AnyObject).value(forKey: "gain24")! as? String else {
-                 return
-                 }
-                 guard let gain25 = (effect as AnyObject).value(forKey: "gain25")! as? String else {
-                 return
-                 }
-                 guard let gain26 = (effect as AnyObject).value(forKey: "gain26")! as? String else {
-                 return
-                 }
-                 guard let gain27 = (effect as AnyObject).value(forKey: "gain27")! as? String else {
-                 return
-                 }
-                 guard let gain28 = (effect as AnyObject).value(forKey: "gain28")! as? String else {
-                 return
-                 }
-                 guard let gain29 = (effect as AnyObject).value(forKey: "gain29")! as? String else {
-                 return
-                 }
-                 guard let gain30 = (effect as AnyObject).value(forKey: "gain30")! as? String else {
-                 return
-                 }
-                 guard let gain31 = (effect as AnyObject).value(forKey: "gain31")! as? String else {
-                 return
-                 }
-                 
-                 audio.equalizerFilter1?.gain = Double(gain1)!
-                 audio.equalizerFilter2?.gain = Double(gain2)!
-                 audio.equalizerFilter3?.gain = Double(gain3)!
-                 audio.equalizerFilter4?.gain = Double(gain4)!
-                 audio.equalizerFilter5?.gain = Double(gain5)!
-                 audio.equalizerFilter6?.gain = Double(gain6)!
-                 audio.equalizerFilter7?.gain = Double(gain7)!
-                 audio.equalizerFilter8?.gain = Double(gain8)!
-                 audio.equalizerFilter9?.gain = Double(gain9)!
-                 audio.equalizerFilter10?.gain = Double(gain10)!
-                 
-                 audio.equalizerFilter11?.gain = Double(gain11)!
-                 audio.equalizerFilter12?.gain = Double(gain12)!
-                 audio.equalizerFilter13?.gain = Double(gain13)!
-                 audio.equalizerFilter14?.gain = Double(gain14)!
-                 audio.equalizerFilter15?.gain = Double(gain15)!
-                 audio.equalizerFilter16?.gain = Double(gain16)!
-                 audio.equalizerFilter17?.gain = Double(gain17)!
-                 audio.equalizerFilter18?.gain = Double(gain18)!
-                 audio.equalizerFilter19?.gain = Double(gain19)!
-                 audio.equalizerFilter20?.gain = Double(gain20)!
-                 
-                 audio.equalizerFilter21?.gain = Double(gain21)!
-                 audio.equalizerFilter22?.gain = Double(gain22)!
-                 audio.equalizerFilter23?.gain = Double(gain23)!
-                 audio.equalizerFilter24?.gain = Double(gain24)!
-                 audio.equalizerFilter25?.gain = Double(gain25)!
-                 audio.equalizerFilter26?.gain = Double(gain26)!
-                 audio.equalizerFilter27?.gain = Double(gain27)!
-                 audio.equalizerFilter28?.gain = Double(gain28)!
-                 audio.equalizerFilter29?.gain = Double(gain29)!
-                 audio.equalizerFilter30?.gain = Double(gain30)!
-                 audio.equalizerFilter31?.gain = Double(gain31)!
-                 
-                 */
-                
+              
                 
             default : print("NOTHIN HERE")
                 
@@ -1495,60 +1404,6 @@ class helper {
     }
     
 
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    /*
- func createEQDataArray() -> [String: String] {
- var array = [String: String]()
- array.updateValue("equalizerFilter", forKey: "name")
- array.updateValue(String(audio.equalizerFilter1!.gain), forKey: "gain1")
- array.updateValue(String(audio.equalizerFilter2!.gain), forKey: "gain2")
- array.updateValue(String(audio.equalizerFilter3!.gain), forKey: "gain3")
- array.updateValue(String(audio.equalizerFilter4!.gain), forKey: "gain4")
- array.updateValue(String(audio.equalizerFilter5!.gain), forKey: "gain5")
- array.updateValue(String(audio.equalizerFilter6!.gain), forKey: "gain6")
- array.updateValue(String(audio.equalizerFilter7!.gain), forKey: "gain7")
- array.updateValue(String(audio.equalizerFilter8!.gain), forKey: "gain8")
- array.updateValue(String(audio.equalizerFilter9!.gain), forKey: "gain9")
- array.updateValue(String(audio.equalizerFilter10!.gain), forKey: "gain10")
- array.updateValue(String(audio.equalizerFilter11!.gain), forKey: "gain11")
- array.updateValue(String(audio.equalizerFilter12!.gain), forKey: "gain12")
- array.updateValue(String(audio.equalizerFilter13!.gain), forKey: "gain13")
- array.updateValue(String(audio.equalizerFilter14!.gain), forKey: "gain14")
- array.updateValue(String(audio.equalizerFilter15!.gain), forKey: "gain15")
- array.updateValue(String(audio.equalizerFilter16!.gain), forKey: "gain16")
- array.updateValue(String(audio.equalizerFilter17!.gain), forKey: "gain17")
- array.updateValue(String(audio.equalizerFilter18!.gain), forKey: "gain18")
- array.updateValue(String(audio.equalizerFilter19!.gain), forKey: "gain19")
- array.updateValue(String(audio.equalizerFilter20!.gain), forKey: "gain20")
- array.updateValue(String(audio.equalizerFilter21!.gain), forKey: "gain21")
- array.updateValue(String(audio.equalizerFilter22!.gain), forKey: "gain22")
- array.updateValue(String(audio.equalizerFilter23!.gain), forKey: "gain23")
- array.updateValue(String(audio.equalizerFilter24!.gain), forKey: "gain24")
- array.updateValue(String(audio.equalizerFilter25!.gain), forKey: "gain25")
- array.updateValue(String(audio.equalizerFilter26!.gain), forKey: "gain26")
- array.updateValue(String(audio.equalizerFilter27!.gain), forKey: "gain27")
- array.updateValue(String(audio.equalizerFilter28!.gain), forKey: "gain28")
- array.updateValue(String(audio.equalizerFilter29!.gain), forKey: "gain29")
- array.updateValue(String(audio.equalizerFilter30!.gain), forKey: "gain30")
- array.updateValue(String(audio.equalizerFilter31!.gain), forKey: "gain31")
- 
- return array
- }
-
- */
-    
-    
     
     func isOn(id: String) -> Bool {
         var yes = Bool()
@@ -1684,6 +1539,10 @@ class helper {
             
             yes = audio.moogLadder!.isStarted
             
+        case "rhinoGuitarProcessor" :
+            
+            yes = audio.rhinoGuitarProcessor!.isStarted
+            
             
         case "resonantFilter" :
             
@@ -1715,6 +1574,162 @@ class helper {
         }
         
         return yes
+        
+    }
+    
+    func printValues(id: String){
+        print(id)
+        switch id {
+        case "bitCrusher" :
+            
+            print(audio.bitCrusher!.isStarted)
+            
+            
+        case "tanhDistortion" :
+            
+            print(audio.tanhDistortion!.isStarted)
+            
+        case "clipper" :
+            
+            print(audio.clipper!.isStarted)
+            
+            
+            
+            
+        case "dynaRageCompressor" :
+            
+           print(audio.dynaRageCompressor!.isStarted)
+            
+            
+        case "autoWah" :
+            
+            print(audio.autoWah!.isStarted)
+            
+            
+        case "delay" :
+            
+            print(audio.delay!.isStarted)
+            
+            
+        case "variableDelay" :
+            
+           print(audio.variableDelay!.isStarted)
+            
+            
+            
+        case "decimator" :
+            
+            print(audio.decimator!.isStarted)
+            
+            
+            
+        case "ringModulator" :
+            
+            print(audio.ringModulator!.isStarted)
+            
+            
+            
+        case "flanger" :
+            
+            print(audio.flanger!.isStarted)
+            
+            
+        case "phaser" :
+            
+            print(audio.phaser!.isStarted)
+            
+            
+        case "chorus" :
+            
+            print(audio.chorus!.isStarted)
+            
+            
+        case "compressor" :
+            
+           print(audio.compressor!.isStarted)
+            
+            
+        case "dynamicsProcessor" :
+            
+            print(audio.dynamicsProcessor!.isStarted)
+            
+        case "dynamicRangeCompressor" :
+            
+           print(audio.dynamicRangeCompressor!.isStarted)
+            
+            
+        case "reverb" :
+            
+           print(audio.reverb!.isStarted)
+            
+            
+        case "reverb2" :
+            
+            print(audio.reverb2!.isStarted)
+            
+            
+        case "chowningReverb" :
+            
+           print(audio.chowningReverb!.isStarted)
+        case "costelloReverb" :
+            
+           print(audio.costelloReverb!.isStarted)
+            
+            
+        case "flatFrequencyResponseReverb" :
+            
+            print(audio.flatFrequencyResponseReverb!.isStarted)
+            
+        case "tremolo" :
+            
+          print(audio.tremolo!.isStarted)
+            
+            
+            
+            // FILTERS
+            
+        case "Equalizer" :
+            print(audio.threeBandFilterHigh!.isStarted)
+            
+
+            
+        case "moogLadder" :
+            
+            print(audio.moogLadder!.isStarted)
+            
+        case "rhinoGuitarProcessor" :
+            
+            print(audio.rhinoGuitarProcessor!.isStarted)
+            
+            
+        case "resonantFilter" :
+            
+            print(audio.resonantFilter!.isStarted)
+            
+            
+        case "stringResonator" :
+            
+           print(audio.stringResonator!.isStarted)
+            
+            
+        case "modalResonanceFilter" :
+            
+            print(audio.modalResonanceFilter!.isStarted)
+            
+            
+        case "toneFilters" :
+            
+          print(audio.toneFilter!.isStarted)
+            
+            
+            
+        case "dcBlock" :
+            
+           print(audio.dcBlock!.isStarted)
+            
+        default : print("NOT AVAILABLE")
+            
+        }
         
     }
     
