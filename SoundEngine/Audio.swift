@@ -113,11 +113,12 @@ class audio {
         createInputListForSound()
         connectMic()
         connectAudioInputs()
+      
     }
     
     func connectAudioInputs() {
         
-        print(AudioKit.printConnections())
+       // print(AudioKit.printConnections())
         
         for input in 0..<audio.selectedAudioInputs.count {
             
@@ -151,7 +152,7 @@ class audio {
             // AudioKit.output = inputMixer
         }
         
-        print(AudioKit.printConnections())
+       // print(AudioKit.printConnections())
         
         if initialStart == true {
             // silence before starting to reduce unnesseccary sounds
@@ -182,7 +183,7 @@ class audio {
         }
         
         
-        print(AudioKit.printConnections())
+       // print(AudioKit.printConnections())
         
         
     }
@@ -1168,8 +1169,8 @@ class audio {
     }
     
     func getEQ(id: String, slider: Int) -> (min: Float, max: Float, valueForSlider: Float, value: String) {
-        let min = 0.1
-        let max = 3
+        let min = -6
+        let max = 6
         var valueForSlider = Float(0.69)
         var value = ""
         switch id {
@@ -2205,8 +2206,8 @@ class audio {
         case "toneFilters":
             switch slider {
             case 1:
-                min = 12
-                max = 20000
+                min = Float(Filters.toneFilter.halfPowerPointRange.lowerBound)
+                max = Float(Filters.toneFilter.halfPowerPointRange.upperBound)
                 valueForSlider = Float(audio.toneFilter!.halfPowerPoint)
                 name = "Tone"
                 let intValue = Int(round(valueForSlider))
@@ -2214,8 +2215,8 @@ class audio {
                 value = String(text.prefix(5) + " Hz")
                 isOn = audio.toneFilter!.isStarted
             case 2:
-                min = 12
-                max = 20000
+                min = Float(Filters.toneComplementFilter.halfPowerPointRange.lowerBound)
+                max = Float(Filters.toneComplementFilter.halfPowerPointRange.upperBound)
                 valueForSlider = Float(audio.toneComplementFilter!.halfPowerPoint)
                 name = "Tone Complement"
                 let intValue = Int(round(valueForSlider))
@@ -2230,8 +2231,8 @@ class audio {
         case "rhinoGuitarProcessor":
             switch slider {
             case 1:
-                min = 1
-                max = 20
+                min = Float(Effects.rhinoGuitarProcessor.distortionRange.lowerBound)
+                max = Float(Effects.rhinoGuitarProcessor.distortionRange.upperBound)
                 valueForSlider = Float(audio.rhinoGuitarProcessor!.distortion)
                 name = "Distortion"
                 let intValue = Int(valueForSlider)
@@ -2239,8 +2240,8 @@ class audio {
                 value = String(value.prefix(3))
                 isOn = audio.rhinoGuitarProcessor!.isStarted
             case 2:
-                min = -1
-                max = 1
+                min = Float(Effects.rhinoGuitarProcessor.eqGainRange.lowerBound)
+                max = Float(Effects.rhinoGuitarProcessor.eqGainRange.upperBound)
                 valueForSlider = Float(audio.rhinoGuitarProcessor!.highGain)
                 name = "High"
                 let intValue = Int(valueForSlider)
@@ -2249,8 +2250,8 @@ class audio {
                 isOn = audio.rhinoGuitarProcessor!.isStarted
                 
             case 3:
-                min = -1
-                max = 1
+                min = Float(Effects.rhinoGuitarProcessor.eqGainRange.lowerBound)
+                max = Float(Effects.rhinoGuitarProcessor.eqGainRange.upperBound)
                 valueForSlider = Float(audio.rhinoGuitarProcessor!.midGain)
                 name = "Mid"
                 let intValue = Int(valueForSlider)
@@ -2259,8 +2260,8 @@ class audio {
                 isOn = audio.rhinoGuitarProcessor!.isStarted
                 
             case 4:
-                min = -1
-                max = 1
+                min = Float(Effects.rhinoGuitarProcessor.eqGainRange.lowerBound)
+                max = Float(Effects.rhinoGuitarProcessor.eqGainRange.upperBound)
                 valueForSlider = Float(audio.rhinoGuitarProcessor!.lowGain)
                 name = "Low"
                 let intValue = Int(valueForSlider)
@@ -2269,8 +2270,8 @@ class audio {
                 isOn = audio.rhinoGuitarProcessor!.isStarted
                 
             case 5:
-                min = 0
-                max = 10
+                min = Float(Effects.rhinoGuitarProcessor.preGainRange.lowerBound)
+                max = Float(Effects.rhinoGuitarProcessor.preGainRange.upperBound)
                 valueForSlider = Float(audio.rhinoGuitarProcessor!.preGain)
                 name = "Pregain"
                 let intValue = Int(valueForSlider)
@@ -2279,8 +2280,8 @@ class audio {
                 isOn = audio.rhinoGuitarProcessor!.isStarted
                 
             case 6:
-                min = 0
-                max = 1
+                min = Float(Effects.rhinoGuitarProcessor.postGainRange.lowerBound)
+                max = Float(Effects.rhinoGuitarProcessor.postGainRange.upperBound)
                 valueForSlider = Float(audio.rhinoGuitarProcessor!.postGain)
                 name = "Postgain"
                 let intValue = Int(valueForSlider)
@@ -2295,8 +2296,8 @@ class audio {
         case "moogLadder":
             switch slider {
             case 1:
-                min = 12
-                max = 20000
+                min =  Float(Filters.moogLadder.cutoffFrequencyRange.lowerBound)
+                max = Float(Filters.moogLadder.cutoffFrequencyRange.upperBound)
                 valueForSlider = Float(audio.moogLadder!.cutoffFrequency)
                 name = "Cut off"
                 let intValue = Int(round(valueForSlider))
@@ -2304,8 +2305,8 @@ class audio {
                 value = String(text.prefix(5) + " Hz")
                 isOn = audio.moogLadder!.isStarted
             case 2:
-                min = 0
-                max = 0.999
+                min =  Float(Filters.moogLadder.resonanceRange.lowerBound)
+                max = Float(Filters.moogLadder.resonanceRange.upperBound)
                 valueForSlider = Float(audio.moogLadder!.resonance)
                 name = "Resonance"
                 let intValue = Int(valueForSlider * 10)
@@ -2319,8 +2320,8 @@ class audio {
         case "resonantFilter":
             switch slider {
             case 1:
-                min = 100
-                max = 20000
+                min =  Float(Filters.resonantFilter.frequencyRange.lowerBound)
+                max = Float(Filters.resonantFilter.frequencyRange.upperBound)
                 valueForSlider = Float(audio.resonantFilter!.frequency)
                 name = "Frequency"
                 let intValue = Int(round(valueForSlider))
@@ -2328,8 +2329,8 @@ class audio {
                 value = String(text.prefix(5) + " Hz")
                 isOn = audio.resonantFilter!.isStarted
             case 2:
-                min = 0
-                max = 10000
+                min =  Float(Filters.resonantFilter.bandwidthRange.lowerBound)
+                max = Float(Filters.resonantFilter.bandwidthRange.upperBound)
                 valueForSlider = Float(audio.resonantFilter!.bandwidth)
                 name = "Bandwidth"
                 value = String(audio.resonantFilter!.bandwidth)
@@ -2342,8 +2343,8 @@ class audio {
         case "stringResonator":
             switch slider {
             case 1:
-                min = 12
-                max = 10000
+                min =  Float(Filters.stringResonator.fundamentalFrequencyRange.lowerBound)
+                max = Float(Filters.stringResonator.fundamentalFrequencyRange.upperBound)
                 valueForSlider = Float(audio.stringResonator!.fundamentalFrequency)
                 name = "Frequency"
                 let intValue = Int(round(valueForSlider))
@@ -2351,8 +2352,8 @@ class audio {
                 value = String(text.prefix(5) + " Hz")
                 isOn = audio.stringResonator!.isStarted
             case 2:
-                min = 0
-                max = 1
+                min =  Float(Filters.stringResonator.feedbackRange.lowerBound)
+                max = Float(Filters.stringResonator.feedbackRange.upperBound)
                 valueForSlider = Float(audio.stringResonator!.feedback)
                 name = "Feedback"
                 let intValue = Int(valueForSlider * 10)
@@ -2366,8 +2367,8 @@ class audio {
         case "modalResonanceFilter":
             switch slider {
             case 1:
-                min = 12
-                max = 20000
+                min =  Float(Filters.modalResonanceFilter.frequencyRange.lowerBound)
+                max = Float(Filters.modalResonanceFilter.frequencyRange.upperBound)
                 valueForSlider = Float(audio.modalResonanceFilter!.frequency)
                 name = "Frequency"
                 let intValue = Int(round(valueForSlider))
@@ -2375,8 +2376,8 @@ class audio {
                 value = String(text.prefix(5) + " Hz")
                 isOn = audio.modalResonanceFilter!.isStarted
             case 2:
-                min = 0
-                max = 100
+                min =  Float(Filters.modalResonanceFilter.qualityFactorRange.lowerBound)
+                max = Float(Filters.modalResonanceFilter.qualityFactorRange.upperBound)
                 valueForSlider = Float(audio.modalResonanceFilter!.qualityFactor)
                 name = "Quality Factor"
                 value = String(audio.modalResonanceFilter!.qualityFactor)
@@ -2389,8 +2390,8 @@ class audio {
         case "dcBlock" :
             switch slider {
             case 1:
-                min = 12
-                max = 20000
+                min = 0 // no values
+                max = 1 // no values
                 valueForSlider = Float(30)
                 name = "dcBlock"
                 value = String(1.00)

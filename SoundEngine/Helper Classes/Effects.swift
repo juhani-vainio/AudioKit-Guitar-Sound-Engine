@@ -22,7 +22,7 @@ struct bitCrusher:Codable {
     // sampleRate
     
     static var bitDepthRange = 1.0 ... 24.0
-    static var sampleRateRange = 20.0 ... 20_000.0
+    static var sampleRateRange = 0.0 ... 20_000.0
 
 }
     
@@ -107,7 +107,7 @@ struct delay:Codable {
         // feedback
         // maximumDelayTime
   
-        static var timeRange = 0.001...3   // This value must not exceed the maximum delay time.
+        static var timeRange = 0...10   // This value must not exceed the maximum delay time.
         static var feedbackRange = 0...1
        //   static var maximumDelayTimeRange = 0.0001...3
 
@@ -184,7 +184,7 @@ struct decimator:Codable {
             // feedback
             // dryWetMix
             
-            static var frequencyRange = 20...20000
+            static var frequencyRange = 0.1...10
             static var depthRange = 0...1
             static var feedbackRange = 0...1
             static var dryWetMixRange = 0...1
@@ -237,7 +237,7 @@ struct decimator:Codable {
             // feedback
             // dryWetMix
             
-            static var frequencyRange = 20...20000
+            static var frequencyRange = 0.1...10
             static var depthRange = 0...1
             static var feedbackRange = 0...1
             static var dryWetMixRange = 0...1
@@ -261,7 +261,7 @@ struct decimator:Codable {
             static var headRoomRange = 0.1...40 // dB default 5
             static var attackDurationRange = 0.0001...0.2 // Default: 0.001
             static var releaseDurationRange = 0.01...3 // Default: 0.05
-            static var masterGainRange = -8...8 //  dB Default: 0
+            static var masterGainRange = -8...8 //  -40...40    dB Default: 0
             static var dryWetMixRange = 0...1
         }
     
@@ -308,7 +308,7 @@ struct decimator:Codable {
             static var expansionThresholdRange = -120...0 // default 0
             static var attackDurationRange = 0.001...0.3 // Default: 0.001
             static var releaseDurationRange = 0.01...3 // Default: 0.05
-            static var masterGainRange = -8...8 //  dB Default: 0
+            static var masterGainRange = -8...8 // -40...40 dB Default: 0
             // GET ONLY  static var compressionAmountRange = -40...40 //  dB Default: 0
             // GET ONLY  static var inputAmplitudeRange = -40...40 //  dB Default: 0
             // GET ONLY  static var outputAmplitudeRange = -40...40 //  dB Default: 0
@@ -334,10 +334,10 @@ struct decimator:Codable {
             // + rage
             // + rage switch
             
-            static var ratioRange = 1...30
+            static var ratioRange = 1...20
             static var thresholdRange = -100...0
-            static var attackDurationRange = 0.1...500   // 0,1 ms
-            static var releaseDurationRange = 0.1...500
+            static var attackDurationRange = 20...500   // 0,1 ms
+            static var releaseDurationRange = 20...500
             static var rageRatio = 0.1...20
             
         }
@@ -377,7 +377,12 @@ struct decimator:Codable {
     
     struct costelloReverb:Codable {
         
-        // controls :
+        // controls : 2
+        // has presets
+        // presetShortTailCostelloReverb()
+        // presetLowRingingLongTailCostelloReverb()
+        // Print out current values in case you want to save it as a preset
+        // printCurrentValuesAsPreset()
         
         static var cutOffRange = 12...20000  // default 4000
         static var feedbackRange = 0...1
@@ -408,7 +413,7 @@ struct decimator:Codable {
         // depth
         // waveform: AKTable = AKTable(.nameOfForm)   11 options
        
-        static var frequencyRange = 20...20000
+        static var frequencyRange = 0...100
         static var depthRange = 0...1
     }
     
@@ -449,8 +454,10 @@ struct decimator:Codable {
         // midGain
         // highGain
         // distortion
-        static var gainRange = -20...20
-        static var distortion = 0...1
+        static var eqGainRange = -1...1
+        static var distortionRange = 1...20
+        static var preGainRange = 0...10
+        static var postGainRange = 0...1
     }
     
     

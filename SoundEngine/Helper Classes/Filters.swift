@@ -10,6 +10,15 @@ import Foundation
 import AudioKit
 
 class Filters: Codable {
+    
+    // AKToneFilter
+    struct toneFilter: Codable {
+        
+        static var halfPowerPoint = Double(1.0)
+        static var halfPowerPointRange = 20...20000
+        static var isStarted = Bool(false)
+        
+    }
  
     struct toneComplementFilter: Codable {
         static var halfPowerPoint = Double()
@@ -52,13 +61,13 @@ class Filters: Codable {
     }
     
     struct modalResonanceFilter: Codable {
-        static var frequency = Double()
-        static var qualityFactor = Double()
+        static var frequencyRange = 12...20000
+        static var qualityFactorRange = 0...100
         static var isStarted = Bool(false)
     }
     struct resonantFilter: Codable {
-        static var frequency = Double()
-        static var bandwidth = Double()
+        static var frequencyRange = 100...20000
+        static var bandwidthRange = 0...10000
         static var isStarted = Bool(false)
     }
     
@@ -113,8 +122,14 @@ class Filters: Codable {
 
     struct moogLadder: Codable {
         
-        static var cutoffFrequency = Double()
-        static var resonance = Double()
+        // has presets
+        // presetFogMoogLadder()
+        // presetDullNoiseMoogLadder()
+        // Print out current values in case you want to save it as a preset
+        // printCurrentValuesAsPreset()
+        
+        static var cutoffFrequencyRange = 12...20000
+        static var resonanceRange = 0...9.998
         static var isStarted = Bool(false)
     }
     
@@ -123,8 +138,8 @@ class Filters: Codable {
     }
     
     struct stringResonator: Codable {
-        static var fundamentalFrequency = Double()
-        static var feedback = Double()
+        static var fundamentalFrequencyRange = 12...10000
+        static var feedbackRange = 0...1
         static var isStarted = Bool(false)
     }
    
@@ -147,14 +162,7 @@ class Filters: Codable {
         static var isStarted = Bool(false)
     }
     
-    // AKToneFilter
-    struct toneFilter: Codable {
-        
-        static var halfPowerPoint = Double(1.0)
-        static var halfPowerPointRange = 20...20000
-        static var isStarted = Bool(false)
-           
-    }
+  
     
     // AKEqualizerFilter
     struct equalizerFilter: Codable {
@@ -168,31 +176,7 @@ class Filters: Codable {
         
         static var isStarted = Bool(false)
         
-        /*
-        static var filterBand1Gain = Double()
-        
-        static var  filterBand2Gain = Double(1.4)
-       
-        static var  filterBand3Gain = Double(0.8)
-       
-        static var  filterBand4Gain = Double(0.8)
-        
-        static var  filterBand5Gain = Double(1.2)
-        
-        static var  filterBand6Gain = Double(1.3)
-        
-        static var  filterBand7Gain = Double(1.3)
-       
-        static var  filterBand8Gain = Double(1.3)
-        
-        static var  filterBand9Gain = Double(1.3)
-       
-        static var  filterBand10Gain = Double(1.3)
-        
-        static var  filterBand11Gain = Double(1.3)
-        
-        static var  filterBand12Gain = Double(1.3)
-        */
+      
 
     }
     
