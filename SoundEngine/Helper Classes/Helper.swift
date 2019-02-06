@@ -81,6 +81,7 @@ class helper {
     func getSavedChain(name: String) {
         
         if name == "activeSound" {
+            UserDefaults.standard.setValue("Sounds", forKey: "NameOfSound")
             print("Get values for \(name)")
             let chainArray = UserDefaults.standard.array(forKey: name) ?? [[String:String]]()
             if chainArray.isNotEmpty{
@@ -352,6 +353,29 @@ class helper {
             array.updateValue(String(audio.ringModulator!.frequency2), forKey: "frequency2")
             array.updateValue(String(audio.ringModulator!.balance), forKey: "balance")
             array.updateValue(String(audio.ringModulator!.mix), forKey: "mix")
+            
+        case "distortion" :
+            array.updateValue(location, forKey: "location")
+            array.updateValue(effect.id, forKey: "name")
+            array.updateValue(String(audio.distortion!.isStarted), forKey: "isStarted")
+            array.updateValue(String(audio.distortion!.delay), forKey: "delay")
+            array.updateValue(String(audio.distortion!.decay), forKey: "decay")
+            array.updateValue(String(audio.distortion!.decimation), forKey: "decimation")
+            array.updateValue(String(audio.distortion!.rounding), forKey: "rounding")
+            array.updateValue(String(audio.distortion!.decimationMix), forKey: "decimationMix")
+            array.updateValue(String(audio.distortion!.linearTerm), forKey: "linearTerm")
+            array.updateValue(String(audio.distortion!.cubicTerm), forKey: "cubicTerm")
+            array.updateValue(String(audio.distortion!.squaredTerm), forKey: "squaredTerm")
+            array.updateValue(String(audio.distortion!.polynomialMix), forKey: "polynomialMix")
+            array.updateValue(String(audio.distortion!.ringModFreq1), forKey: "ringModFreq1")
+            array.updateValue(String(audio.distortion!.ringModFreq2), forKey: "ringModFreq2")
+            array.updateValue(String(audio.distortion!.ringModBalance), forKey: "ringModBalance")
+            array.updateValue(String(audio.distortion!.ringModMix), forKey: "ringModMix")
+            array.updateValue(String(audio.distortion!.softClipGain), forKey: "softClipGain")
+            array.updateValue(String(audio.distortion!.finalMix), forKey: "finalMix")
+            
+            
+            
             
             
         case "flanger" :
@@ -777,6 +801,76 @@ class helper {
                 if started == true {audio.decimator!.start()} else {audio.decimator!.stop()}
                 
                 
+                
+            case "distortion" :
+                guard let delay = (effect as AnyObject).value(forKey: "delay")! as? String else {
+                    return
+                }
+                guard let decay = (effect as AnyObject).value(forKey: "decay")! as? String else {
+                    return
+                }
+                guard let decimation = (effect as AnyObject).value(forKey: "decimation")! as? String else {
+                    return
+                }
+                guard let rounding = (effect as AnyObject).value(forKey: "rounding")! as? String else {
+                    return
+                }
+                guard let decimationMix = (effect as AnyObject).value(forKey: "decimationMix")! as? String else {
+                    return
+                }
+                guard let linearTerm = (effect as AnyObject).value(forKey: "linearTerm")! as? String else {
+                    return
+                }
+                guard let cubicTerm = (effect as AnyObject).value(forKey: "cubicTerm")! as? String else {
+                    return
+                }
+                guard let squaredTerm = (effect as AnyObject).value(forKey: "squaredTerm")! as? String else {
+                    return
+                }
+                guard let polynomialMix = (effect as AnyObject).value(forKey: "polynomialMix")! as? String else {
+                    return
+                }
+                guard let ringModFreq1 = (effect as AnyObject).value(forKey: "ringModFreq1")! as? String else {
+                    return
+                }
+                guard let ringModFreq2 = (effect as AnyObject).value(forKey: "ringModFreq2")! as? String else {
+                    return
+                }
+                guard let ringModBalance = (effect as AnyObject).value(forKey: "ringModBalance")! as? String else {
+                    return
+                }
+                guard let ringModMix = (effect as AnyObject).value(forKey: "ringModMix")! as? String else {
+                    return
+                }
+                guard let softClipGain = (effect as AnyObject).value(forKey: "softClipGain")! as? String else {
+                    return
+                }
+                guard let finalMix = (effect as AnyObject).value(forKey: "finalMix")! as? String else {
+                    return
+                }
+                
+                guard let isStarted = (effect as AnyObject).value(forKey: "isStarted")! as? String else {
+                    return
+                }
+                
+                audio.distortion!.delay = Double(delay)!
+                audio.distortion!.decay = Double(decay)!
+                audio.distortion!.decimation = Double(decimation)!
+                audio.distortion!.rounding = Double(rounding)!
+                audio.distortion!.decimationMix = Double(decimationMix)!
+                audio.distortion!.linearTerm = Double(linearTerm)!
+                audio.distortion!.cubicTerm = Double(cubicTerm)!
+                audio.distortion!.squaredTerm = Double(squaredTerm)!
+                audio.distortion!.polynomialMix = Double(polynomialMix)!
+                audio.distortion!.ringModFreq1 = Double(ringModFreq1)!
+                audio.distortion!.ringModFreq2 = Double(ringModFreq2)!
+                audio.distortion!.ringModBalance = Double(ringModBalance)!
+                audio.distortion!.ringModMix = Double(ringModMix)!
+                audio.distortion!.softClipGain = Double(softClipGain)!
+                audio.distortion!.finalMix = Double(finalMix)!
+                
+                let started = Bool(isStarted)!
+                if started == true {audio.distortion!.start()} else {audio.distortion!.stop()}
                 
             case "ringModulator" :
                 guard let balance = (effect as AnyObject).value(forKey: "balance")! as? String else {
@@ -1455,6 +1549,10 @@ class helper {
             
             yes = audio.ringModulator!.isStarted
             
+        case "distortion" :
+            
+            yes = audio.distortion!.isStarted
+            
             
             
         case "flanger" :
@@ -1626,7 +1724,10 @@ class helper {
         case "ringModulator" :
             
             print(audio.ringModulator!.isStarted)
+        
+        case "distortion" :
             
+            print(audio.distortion!.isStarted)
             
             
         case "flanger" :

@@ -50,64 +50,77 @@ class audio {
         effectData(id: "decimator" ,opened: false, title: "Decimator", type: "3"),
         effectData(id: "tanhDistortion", opened: false, title: "Tanh Distortion", type: "4"),
         effectData(id: "ringModulator", opened: false, title: "Ring Modulator", type: "4"),
+        effectData(id: "distortion", opened: false, title: "Distortion Unit", type: "8"),
         
-        // WAH
-        effectData(id: "autoWah" , opened: false, title: "Wah Wah!", type: "3"),
+       
+        
         
         // DYNAMICS
         effectData(id: "dynamicRangeCompressor" ,opened: false, title: "Dynamic Range Compressor", type: "4"),
-        effectData(id: "dynaRageCompressor", opened: false, title: "Dyna Rage Compressor", type: "5"),
-        // effectData(id: "compressor", opened: false, title: "Compressor", type: "6"), TODO: SOme weird bug when disconnecting :     SoundEngine[6362:1672408] AUBase.cpp:1445:DoRender:  ca_require: IsInitialized() Uninitialized
+        effectData(id: "compressor", opened: false, title: "Compressor", type: "6"), // TODO: SOme weird bug when disconnecting :     SoundEngine[6362:1672408] AUBase.cpp:1445:DoRender:  ca_require: IsInitialized() Uninitialized
         effectData(id: "dynamicsProcessor" ,opened: false, title: "Dynamics Processor", type: "8"),
+        // missing dynamics: TODO
+        // AKExpander
+        // AKPeakLimiter
         
         
+        // REVERB
+        effectData(id: "costelloReverb" ,opened: false, title: "Costello Reverb", type: "2"),
+        effectData(id: "reverb" ,opened: false, title: "Reverb", type: "1"),
+        effectData(id: "reverb2" ,opened: false, title: "Reverb 2", type: "7"),
         effectData(id: "chowningReverb" ,opened: false, title: "Chowning Reverb", type: "0"),
         effectData(id: "flatFrequencyResponseReverb" ,opened: false, title: "Flat Freq Response Reverb", type: "1"),
-        effectData(id: "reverb" ,opened: false, title: "Reverb", type: "1"),
-        effectData(id: "variableDelay", opened: false, title: "Variable Delay", type: "2"),
-        effectData(id: "costelloReverb" ,opened: false, title: "Costello Reverb", type: "2"),
-        effectData(id: "tremolo" ,opened: false, title: "Tremolo", type: "2"),
+        
+        // DELAY
         effectData(id: "delay", opened: false, title: "Delay", type: "4"),
-        effectData(id: "flanger" ,opened: false, title: "Flanger", type: "4"),
+        effectData(id: "variableDelay", opened: false, title: "Variable Delay", type: "2"),
+        
+        // MODULATION
         effectData(id: "chorus" ,opened: false, title: "Chorus", type: "4"),
-        effectData(id: "reverb2" ,opened: false, title: "Reverb 2", type: "7"),
-        effectData(id: "phaser" ,opened: false, title: "Phaser", type: "8")
+        effectData(id: "flanger" ,opened: false, title: "Flanger", type: "4"),
+        effectData(id: "phaser" ,opened: false, title: "Phaser", type: "8"),
+        // missing modulation: TODO
+        // AKConvulotion
+        // AKZitaReverb
+        
+        // ENVELOPE
+        effectData(id: "tremolo" ,opened: false, title: "Tremolo", type: "2")
+        
+        /*
+         Mixing Nodes
+         AK3DPanner
+         AKBalancer
+         AKBooster
+         AKBoosterAudioUnit
+         AKDryWetMixer
+         AKMixer
+         AKPanner
+         AKStereoFieldLimiter
+         */
         
     ]
     
     
     static let allPossibleFiltersData = [
-        // EQUALIZER either 3 or 7 BAND
-        // https://www.teachmeaudio.com/mixing/techniques/audio-spectrum/
+        // GUITAR PROCESSOR
+        effectData(id: "rhinoGuitarProcessor", opened: false, title: "Guitar Processor", type: "6"),
+        // DYNA RAGE PROCESSOR
+        effectData(id: "dynaRageCompressor", opened: false, title: "Dyna Rage Compressor", type: "5"),
+        // EQUALIZER 7 BAND
         effectData(id: "Equalizer", opened: false, title: "Equalizer", type: "Equalizer"), // Bass , Mid, High
-        //effectData(id: "sevenBandFilter", opened: false, title: "7 Band", type: "Equalizer"), // Sub-Bass, Bass, Low Mid, Mid, Upper Mid, Precence, Brilliance
+         // WAH WAH
+        effectData(id: "autoWah" , opened: false, title: "Wah Wah!", type: "3"),
         
-        // CUT    " highPassFilter & lowPassFilter  either normal or highPassButterworthFilter & lowPassButterworthFilter"
-        effectData(id: "highLowPassFilters", opened: false, title: "High & Low Pass Filters", type: "PassFilters"), // add switch for FLAT as in butterworth for the pass filters
-        
-        // TONE   " toneFilter & toneComplementFilter "
-        effectData(id: "toneFilters", opened: false, title: "Tone", type: "2"),
-        effectData(id: "dcBlock", opened: false, title: "DC Block", type: "0"), // Switch
-        
-        
-        
-        // These similar tables as in effects
+        // BONUS
         effectData(id: "moogLadder", opened: false, title: "Moog Ladder", type: "2"),
         effectData(id: "resonantFilter", opened: false, title: "Resonant Filter", type: "2"),
         effectData(id: "stringResonator", opened: false, title: "String Resonator", type: "2"),
         effectData(id: "modalResonanceFilter", opened: false, title: "Modal Resonance", type: "2"),
-        
-        effectData(id: "rhinoGuitarProcessor", opened: false, title: "Guitar Processor", type: "6"),
-        
-        
+        effectData(id: "highLowPassFilters", opened: false, title: "High & Low Pass Filters", type: "PassFilters") // add switch for FLAT as in butterworth for the pass filters
         
         ]
     
 
-  
-    
-  
-    
     func startAudio() {
         
         createInputListForSound()
@@ -215,6 +228,7 @@ class audio {
         case "decimator": audio.selectedAudioInputs.append(audio.decimator!)
         case "tanhDistortion": audio.selectedAudioInputs.append(audio.tanhDistortion!)
         case "ringModulator": audio.selectedAudioInputs.append(audio.ringModulator!)
+        case "distortion": audio.selectedAudioInputs.append(audio.distortion!)
         case "flanger": audio.selectedAudioInputs.append(audio.flanger!)
         case "phaser": audio.selectedAudioInputs.append(audio.phaser!)
         case "chorus": audio.selectedAudioInputs.append(audio.chorus!)
@@ -306,7 +320,8 @@ class audio {
             
            audio.ringModulator!.start()
             
-            
+        case "distortion" :
+            audio.distortion!.start()
             
         case "flanger" :
             
@@ -1694,6 +1709,85 @@ class audio {
                 
             }
             
+        case "distortion" :
+            switch slider {
+            case 0:
+                if  audio.distortion!.isStarted == true {
+                    audio.distortion?.stop()
+                    newValue = "OFF"
+                } else {
+                    audio.distortion?.start()
+                    newValue = "ON"
+                }
+            case 1:
+                audio.distortion?.delay = value
+                newValue = String(value * 10)
+                newValue = String(newValue.prefix(3))
+            case 2:
+                audio.distortion?.decay = value
+                newValue = String(value * 10)
+                newValue = String(newValue.prefix(3))
+            case 3:
+                audio.distortion?.decimation = value
+                newValue = String(value * 10)
+                newValue = String(newValue.prefix(3))
+            case 4:
+                audio.distortion?.rounding = value
+                newValue = String(value * 10)
+                newValue = String(newValue.prefix(3))
+            case 5:
+                audio.distortion?.decimationMix = value
+                newValue = String(value * 10)
+                newValue = String(newValue.prefix(3))
+            case 6:
+                audio.distortion?.linearTerm = value
+                newValue = String(value * 10)
+                newValue = String(newValue.prefix(3))
+            case 7:
+                audio.distortion?.squaredTerm = value
+                newValue = String(value * 10)
+                newValue = String(newValue.prefix(3))
+            case 8:
+                audio.distortion?.cubicTerm = value
+                newValue = String(value * 10)
+                newValue = String(newValue.prefix(3))
+            case 9:
+                audio.distortion?.polynomialMix = value
+                newValue = String(value * 10)
+                newValue = String(newValue.prefix(3))
+                
+            case 10:
+                audio.distortion?.ringModFreq1 = value
+                let intValue = Int(round(value))
+                let text = String(intValue)
+                newValue = String(text.prefix(5) + " Hz")
+            case 12:
+                audio.distortion?.ringModFreq2 = value
+                let intValue = Int(round(value))
+                let text = String(intValue)
+                newValue = String(text.prefix(5) + " Hz")
+            
+            case 12:
+                audio.distortion?.ringModBalance = value
+                newValue = String(value * 10)
+                newValue = String(newValue.prefix(3))
+            case 13:
+                audio.distortion?.ringModMix = value
+                newValue = String(value * 10)
+                newValue = String(newValue.prefix(3))
+            case 14:
+                audio.distortion?.softClipGain = value
+                newValue = String(value * 10)
+                newValue = String(newValue.prefix(3))
+            case 15:
+                audio.distortion?.finalMix = value
+                newValue = String(value * 10)
+                newValue = String(newValue.prefix(3))
+            
+            default: break
+                
+            }
+            
         case "flanger" :
             switch slider {
             case 0:
@@ -2705,6 +2799,156 @@ class audio {
                 value = String(intValue)
                 value = String(value.prefix(3))
                 isOn = audio.ringModulator!.isStarted
+            default: break
+            }
+            
+        case "distortion" :
+            // DISTORTION
+            switch slider {
+            case 1:
+                min = Float(Effects.distortion.delayRange.lowerBound)
+                max = Float(Effects.distortion.delayRange.upperBound)
+                valueForSlider = Float(audio.distortion!.delay)
+                name = "Delay"
+                let intValue = Int(valueForSlider * 10)
+                value = String(intValue)
+                value = String(value.prefix(3))
+                isOn = audio.distortion!.isStarted
+            case 2:
+                min = Float(Effects.distortion.decayRange.lowerBound)
+                max = Float(Effects.distortion.decayRange.upperBound)
+                valueForSlider = Float(audio.distortion!.decay)
+                name = "Decay"
+                let intValue = Int(valueForSlider * 10)
+                value = String(intValue)
+                value = String(value.prefix(3))
+                isOn = audio.distortion!.isStarted
+            case 3:
+                min = Float(Effects.distortion.normalRange.lowerBound)
+                max = Float(Effects.distortion.normalRange.upperBound)
+                valueForSlider = Float(audio.distortion!.delayMix)
+                name = "Delay Mix"
+                let intValue = Int(valueForSlider * 10)
+                value = String(intValue)
+                value = String(value.prefix(3))
+                isOn = audio.distortion!.isStarted
+            case 4:
+                min = Float(Effects.distortion.normalRange.lowerBound)
+                max = Float(Effects.distortion.normalRange.upperBound)
+                valueForSlider = Float(audio.distortion!.decimation)
+                name = "Decimation"
+                let intValue = Int(valueForSlider * 10)
+                value = String(intValue)
+                value = String(value.prefix(3))
+                isOn = audio.distortion!.isStarted
+            case 5:
+                min = Float(Effects.distortion.normalRange.lowerBound)
+                max = Float(Effects.distortion.normalRange.upperBound)
+                valueForSlider = Float(audio.distortion!.rounding)
+                name = "Rounding"
+                let intValue = Int(valueForSlider * 10)
+                value = String(intValue)
+                value = String(value.prefix(3))
+                isOn = audio.distortion!.isStarted
+            case 6:
+                min = Float(Effects.distortion.normalRange.lowerBound)
+                max = Float(Effects.distortion.normalRange.upperBound)
+                valueForSlider = Float(audio.distortion!.decimationMix)
+                name = "Decimation Mix"
+                let intValue = Int(valueForSlider * 10)
+                value = String(intValue)
+                value = String(value.prefix(3))
+                isOn = audio.distortion!.isStarted
+            case 7:
+                min = Float(Effects.distortion.normalRange.lowerBound)
+                max = Float(Effects.distortion.normalRange.upperBound)
+                valueForSlider = Float(audio.distortion!.linearTerm)
+                name = "Linear"
+                let intValue = Int(valueForSlider * 10)
+                value = String(intValue)
+                value = String(value.prefix(3))
+                isOn = audio.distortion!.isStarted
+            case 8:
+                min = Float(Effects.distortion.normalRange.lowerBound)
+                max = Float(Effects.distortion.normalRange.upperBound)
+                valueForSlider = Float(audio.distortion!.squaredTerm)
+                name = "Squared"
+                let intValue = Int(valueForSlider * 10)
+                value = String(intValue)
+                value = String(value.prefix(3))
+                isOn = audio.distortion!.isStarted
+            case 9:
+                min = Float(Effects.distortion.normalRange.lowerBound)
+                max = Float(Effects.distortion.normalRange.upperBound)
+                valueForSlider = Float(audio.distortion!.cubicTerm)
+                name = "Cubic"
+                let intValue = Int(valueForSlider * 10)
+                value = String(intValue)
+                value = String(value.prefix(3))
+                isOn = audio.distortion!.isStarted
+            case 10:
+                min = Float(Effects.distortion.normalRange.lowerBound)
+                max = Float(Effects.distortion.normalRange.upperBound)
+                valueForSlider = Float(audio.distortion!.polynomialMix)
+                name = "Polynomial Mix"
+                let intValue = Int(valueForSlider * 10)
+                value = String(intValue)
+                value = String(value.prefix(3))
+                isOn = audio.distortion!.isStarted
+            case 11:
+                min = Float(Effects.distortion.ringModFreqRange.lowerBound)
+                max = Float(Effects.distortion.ringModFreqRange.upperBound)
+                valueForSlider = Float(audio.distortion!.ringModFreq1)
+                name = "Ring Mod 1"
+                let intValue = Int(round(valueForSlider))
+                let text = String(intValue)
+                value = String(text.prefix(5) + " Hz")
+                isOn = audio.distortion!.isStarted
+            case 12:
+                min = Float(Effects.distortion.ringModFreqRange.lowerBound)
+                max = Float(Effects.distortion.ringModFreqRange.upperBound)
+                valueForSlider = Float(audio.distortion!.ringModFreq2)
+                name = "Ring Mod 2"
+                let intValue = Int(round(valueForSlider))
+                let text = String(intValue)
+                value = String(text.prefix(5) + " Hz")
+                isOn = audio.distortion!.isStarted
+            case 13:
+                min = Float(Effects.distortion.normalRange.lowerBound)
+                max = Float(Effects.distortion.normalRange.upperBound)
+                valueForSlider = Float(audio.distortion!.ringModBalance)
+                name = "Ring Balance"
+                let intValue = Int(valueForSlider * 10)
+                value = String(intValue)
+                value = String(value.prefix(3))
+                isOn = audio.distortion!.isStarted
+            case 14:
+                min = Float(Effects.distortion.normalRange.lowerBound)
+                max = Float(Effects.distortion.normalRange.upperBound)
+                valueForSlider = Float(audio.distortion!.ringModMix)
+                name = "Ring Mix"
+                let intValue = Int(valueForSlider * 10)
+                value = String(intValue)
+                value = String(value.prefix(3))
+                isOn = audio.distortion!.isStarted
+            case 15:
+                min = Float(Effects.distortion.softClipGainRange.lowerBound)
+                max = Float(Effects.distortion.softClipGainRange.upperBound)
+                valueForSlider = Float(audio.distortion!.softClipGain)
+                name = "Clipping"
+                let intValue = Int(valueForSlider * 10)
+                value = String(intValue)
+                value = String(value.prefix(3))
+                isOn = audio.distortion!.isStarted
+            case 16:
+                min = Float(Effects.distortion.normalRange.lowerBound)
+                max = Float(Effects.distortion.normalRange.upperBound)
+                valueForSlider = Float(audio.distortion!.finalMix)
+                name = "Ring Mix"
+                let intValue = Int(valueForSlider * 10)
+                value = String(intValue)
+                value = String(value.prefix(3))
+                isOn = audio.distortion!.isStarted
             default: break
             }
             
