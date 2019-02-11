@@ -21,8 +21,8 @@ struct bitCrusher:Codable {
     // bitDepth
     // sampleRate
     
-    static var bitDepthRange = 1.0 ... 24.0
-    static var sampleRateRange = 0.0 ... 20_000.0
+    static var bitDepthRange = 1.0 ... 20.0
+    static var sampleRateRange = 40 ... 4_000.0
 
 }
     
@@ -90,9 +90,9 @@ struct delay:Codable {
     //presetElectricCircuitsDelay()
 
         
-    static var timeRange = 0.001...3
+    static var timeRange = 0.001...2
     static var feedbackRange = 0...1
-    static var dryWetMixRange = 0...1
+    static var dryWetMixRange = 0.1...9.9
     static var lowPassCutOffRange = 10000...20000
   
 
@@ -186,7 +186,7 @@ struct decimator:Codable {
             
             static var frequencyRange = 0.1...10
             static var depthRange = 0...1
-            static var feedbackRange = 0...1
+            static var feedbackRange = -0.95...0.95
             static var dryWetMixRange = 0...1
             
         }
@@ -239,7 +239,7 @@ struct decimator:Codable {
             
             static var frequencyRange = 0.1...10
             static var depthRange = 0...1
-            static var feedbackRange = 0...1
+            static var feedbackRange = 0...0.25
             static var dryWetMixRange = 0...1
             
         }
@@ -334,10 +334,10 @@ struct decimator:Codable {
             // + rage
             // + rage switch
             
-            static var ratioRange = 1...20
+            static var ratioRange = 0...20
             static var thresholdRange = -100...0
-            static var attackDurationRange = 20...500   // 0,1 ms
-            static var releaseDurationRange = 20...500
+            static var attackDurationRange = 0...1   // 0,1 ms
+            static var releaseDurationRange = 0...1
             static var rageRatio = 0.1...20
             
         }
@@ -454,10 +454,10 @@ struct decimator:Codable {
         // midGain
         // highGain
         // distortion
-        static var eqGainRange = -1...1
-        static var distortionRange = 1...20
-        static var preGainRange = 0...10
-        static var postGainRange = 0...1
+        static var eqGainRange = 0...3
+        static var distortionRange = 0...20
+        static var preGainRange = 0.01...10
+        static var postGainRange = 0.01...3
     }
     
     

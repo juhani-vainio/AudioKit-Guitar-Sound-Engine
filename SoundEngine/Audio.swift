@@ -43,48 +43,51 @@ class audio {
     
     static var bufferLength = Int()
     
+    static let persistentUnitsData = [effectData]()
+    
     static let allPossibleEffectsData = [
         // DISTORTIONS
-        effectData(id: "clipper",opened: false, title: "Clipper", type: "1"),
-        effectData(id: "bitCrusher", opened: false, title: "Bit Crusher", type: "2"),
-        effectData(id: "decimator" ,opened: false, title: "Decimator", type: "3"),
-        effectData(id: "tanhDistortion", opened: false, title: "Tanh Distortion", type: "4"),
-        effectData(id: "ringModulator", opened: false, title: "Ring Modulator", type: "4"),
-        effectData(id: "distortion", opened: false, title: "Distortion Unit", type: "8"),
+      //  effectData(id: "clipper",opened: false, title: "Clipper", type: "1"),
+       // effectData(id: "bitCrusher", opened: false, title: "Bit CRUSHER", type: "2"),
+       // effectData(id: "decimator" ,opened: false, title: "Decimator", type: "3"),
+      //  effectData(id: "tanhDistortion", opened: false, title: "Tanh Distortion", type: "4"),
+      //  effectData(id: "ringModulator", opened: false, title: "Ring Modulator", type: "4"),
+    //    effectData(id: "distortion", opened: false, title: "Distortion Unit", type: "8"),
         
-       
+        // DYNA RAGE PROCESSOR
+        effectData(id: "dynaRageCompressor", opened: false, title: "RAGE", type: "5"),
         
         
         // DYNAMICS
-        effectData(id: "dynamicRangeCompressor" ,opened: false, title: "Dynamic Range Compressor", type: "4"),
-        effectData(id: "compressor", opened: false, title: "Compressor", type: "6"), // TODO: SOme weird bug when disconnecting :     SoundEngine[6362:1672408] AUBase.cpp:1445:DoRender:  ca_require: IsInitialized() Uninitialized
-        effectData(id: "dynamicsProcessor" ,opened: false, title: "Dynamics Processor", type: "8"),
+    //    effectData(id: "dynamicRangeCompressor" ,opened: false, title: "Dynamic Range Compressor", type: "4"),
+     //   effectData(id: "compressor", opened: false, title: "Compressor", type: "6"), // TODO: SOme weird bug when disconnecting :     SoundEngine[6362:1672408] AUBase.cpp:1445:DoRender:  ca_require: IsInitialized() Uninitialized
+       // effectData(id: "dynamicsProcessor" ,opened: false, title: "Dynamics Processor", type: "8"),
         // missing dynamics: TODO
         // AKExpander
         // AKPeakLimiter
         
         
         // REVERB
-        effectData(id: "costelloReverb" ,opened: false, title: "Costello Reverb", type: "2"),
-        effectData(id: "reverb" ,opened: false, title: "Reverb", type: "1"),
-        effectData(id: "reverb2" ,opened: false, title: "Reverb 2", type: "7"),
-        effectData(id: "chowningReverb" ,opened: false, title: "Chowning Reverb", type: "0"),
-        effectData(id: "flatFrequencyResponseReverb" ,opened: false, title: "Flat Freq Response Reverb", type: "1"),
+        effectData(id: "costelloReverb" ,opened: false, title: "REVERB ", type: "2"),
+       // effectData(id: "reverb" ,opened: false, title: "Reverb", type: "1"),
+      //  effectData(id: "reverb2" ,opened: false, title: "Reverb 2", type: "7"),
+      //  effectData(id: "chowningReverb" ,opened: false, title: "Reverb Chowning", type: "0"),
+      //  effectData(id: "flatFrequencyResponseReverb" ,opened: false, title: "Flat Freq Response Reverb", type: "1"),
         
         // DELAY
-        effectData(id: "delay", opened: false, title: "Delay", type: "4"),
-        effectData(id: "variableDelay", opened: false, title: "Variable Delay", type: "2"),
+        effectData(id: "delay", opened: false, title: "DELAY", type: "3"),
+       // effectData(id: "variableDelay", opened: false, title: "Variable Delay", type: "2"),
         
         // MODULATION
-        effectData(id: "chorus" ,opened: false, title: "Chorus", type: "4"),
-        effectData(id: "flanger" ,opened: false, title: "Flanger", type: "4"),
-        effectData(id: "phaser" ,opened: false, title: "Phaser", type: "8"),
+        effectData(id: "chorus" ,opened: false, title: "CHORUS", type: "4"),
+        effectData(id: "flanger" ,opened: false, title: "FLANGER", type: "4"),
+        effectData(id: "phaser" ,opened: false, title: "PHASER", type: "8"),
         // missing modulation: TODO
         // AKConvulotion
         // AKZitaReverb
         
         // ENVELOPE
-        effectData(id: "tremolo" ,opened: false, title: "Tremolo", type: "2")
+        effectData(id: "tremolo" ,opened: false, title: "TREMOLO", type: "2")
         
         /*
          Mixing Nodes
@@ -102,21 +105,21 @@ class audio {
     
     
     static let allPossibleFiltersData = [
+        
         // GUITAR PROCESSOR
-        effectData(id: "rhinoGuitarProcessor", opened: false, title: "Guitar Processor", type: "6"),
-        // DYNA RAGE PROCESSOR
-        effectData(id: "dynaRageCompressor", opened: false, title: "Dyna Rage Compressor", type: "5"),
-        // EQUALIZER 7 BAND
-        effectData(id: "Equalizer", opened: false, title: "Equalizer", type: "Equalizer"), // Bass , Mid, High
-         // WAH WAH
-        effectData(id: "autoWah" , opened: false, title: "Wah Wah!", type: "3"),
+        effectData(id: "rhinoGuitarProcessor", opened: false, title: "DISTORTION", type: "2"),
+        
+       // effectData(id: "autoWah" , opened: false, title: "Wah Wah!", type: "3"),
         
         // BONUS
-        effectData(id: "moogLadder", opened: false, title: "Moog Ladder", type: "2"),
-        effectData(id: "resonantFilter", opened: false, title: "Resonant Filter", type: "2"),
-        effectData(id: "stringResonator", opened: false, title: "String Resonator", type: "2"),
-        effectData(id: "modalResonanceFilter", opened: false, title: "Modal Resonance", type: "2"),
-        effectData(id: "highLowPassFilters", opened: false, title: "High & Low Pass Filters", type: "PassFilters") // add switch for FLAT as in butterworth for the pass filters
+      //  effectData(id: "moogLadder", opened: false, title: "Moog Ladder", type: "2"),
+       // effectData(id: "resonantFilter", opened: false, title: "Resonant Filter", type: "2"),
+       // effectData(id: "stringResonator", opened: false, title: "String Resonator", type: "2"),
+     //   effectData(id: "modalResonanceFilter", opened: false, title: "Modal Resonance", type: "2"),
+     //   effectData(id: "highLowPassFilters", opened: false, title: "High & Low Pass Filters", type: "PassFilters"), // add switch for FLAT as in butterworth for the pass filters
+        
+        // EQUALIZER 7 BAND
+        effectData(id: "Equalizer", opened: false, title: "EQUALIZER", type: "Equalizer") // Bass , Mid, High
         
         ]
     
@@ -151,10 +154,31 @@ class audio {
         } else {
             audio.selectedAudioInputs.last?.connect(to: outputMixer!)
         }
-        
-        
-        
         outputMixer?.connect(to: outputBooster!)
+        // audio.rhinoGuitarProcessor!.connect(to: outputBooster!)
+       // let balancer = AKBalancer(comparator: outputMixer!)
+       // audio.rhinoGuitarProcessor?.connect(to: balancer)
+       // balancer.connect(to: outputBooster!)
+        
+        /*
+        outputMixer?.connect(to: audio.rhinoGuitarProcessor!)
+        outputMixer?.connect(to: audio.dynaRageCompressor!)
+        
+        let balancer = AKBalancer(comparator: audio.dynaRageCompressor!)
+
+        audio.rhinoGuitarProcessor?.connect(to: balancer)
+        
+        balancer.connect(to: rhinoBooster!)
+        audio.dynaRageCompressor?.connect(to: dynaBooster!)
+        
+        let mixer = AKMixer(rhinoBooster, dynaBooster)
+        mixer.connect(to: outputBooster!)
+       */
+        
+       // audio.rhinoGuitarProcessor?.connect(to: audio.dynaRageCompressor!)
+       // balancer.connect(to: audio.dynaRageCompressor!)
+       // audio.dynaRageCompressor?.connect(to: outputBooster!)
+        
         
         outputBooster?.connect(to: outputAmplitudeTracker!)
         
@@ -465,6 +489,8 @@ class audio {
     var mic: AKMicrophone?
     var outputBooster : AKBooster?
     var inputBooster : AKBooster?
+    var dynaBooster : AKBooster?
+    var rhinoBooster : AKBooster?
     
     
     // EFFECTS
@@ -570,6 +596,8 @@ class audio {
         mic = AKMicrophone()
         outputBooster = AKBooster()
         inputBooster = AKBooster()
+        dynaBooster = AKBooster()
+        rhinoBooster = AKBooster()
         
         // MIXERS
         inputMixer = AKMixer()
@@ -875,6 +903,14 @@ class audio {
             addToselectedEffects(id:id)
             
         }
+        /*
+        // PERSISTENT UNITS
+        for effect in 0..<audio.persistentUnitsData.count {
+            let id = audio.persistentUnitsData[effect].id
+            addToselectedEffects(id:id)
+        }
+        */
+        
         // FILTERS
         for effect in 0..<audio.allPossibleFiltersData.count {
             let id = audio.allPossibleFiltersData[effect].id
@@ -1184,8 +1220,8 @@ class audio {
     }
     
     func getEQ(id: String, slider: Int) -> (min: Float, max: Float, valueForSlider: Float, value: String) {
-        let min = -6
-        let max = 6
+        let min = 0
+        let max = 3
         var valueForSlider = Float(0.69)
         var value = ""
         switch id {
@@ -1297,6 +1333,19 @@ class audio {
             
         case "rhinoGuitarProcessor" :
             switch slider {
+                /*
+            case 0:
+                if  rhinoBooster!.gain != 0 {
+                    audio.rhinoGuitarProcessor?.start()
+                    rhinoBooster!.gain = 0
+                    newValue = "OFF"
+                } else {
+                    audio.rhinoGuitarProcessor?.start()
+                    rhinoBooster!.gain = 1
+                    newValue = "ON"
+                }
+                 */
+                
             case 0:
                 if  audio.rhinoGuitarProcessor!.isStarted == true {
                     audio.rhinoGuitarProcessor?.stop()
@@ -1307,11 +1356,18 @@ class audio {
                     
                     newValue = "ON"
                 }
+ 
             case 1:
                 audio.rhinoGuitarProcessor?.distortion = value
                 newValue = String(value)
                 newValue = String(newValue.prefix(3))
+            
             case 2:
+                audio.rhinoGuitarProcessor?.preGain = value
+                newValue = String(value)
+                newValue = String(newValue.prefix(3))
+           
+            /*case 2:
                 audio.rhinoGuitarProcessor?.highGain = value
                 newValue = String(value)
                 newValue = String(newValue.prefix(3))
@@ -1323,15 +1379,11 @@ class audio {
                 audio.rhinoGuitarProcessor?.lowGain = value
                 newValue = String(value)
                 newValue = String(newValue.prefix(3))
-            case 5:
-                audio.rhinoGuitarProcessor?.preGain = value
-                newValue = String(value)
-                newValue = String(newValue.prefix(3))
             case 6:
                 audio.rhinoGuitarProcessor?.postGain = value
                 newValue = String(value)
                 newValue = String(newValue.prefix(3))
-                
+                */
                 
             default: break
                 
@@ -1517,6 +1569,19 @@ class audio {
             
         case "dynaRageCompressor" :
             switch slider {
+                /*
+            case 0:
+                if  dynaBooster!.gain != 0 {
+                    audio.dynaRageCompressor?.start()
+                    dynaBooster?.gain = 0
+                    newValue = "OFF"
+                } else {
+                    audio.dynaRageCompressor?.start()
+                    dynaBooster?.gain = 1
+                    newValue = "ON"
+                }
+                */
+                
             case 0:
                 if  audio.dynaRageCompressor!.isStarted == true {
                     audio.dynaRageCompressor?.stop()
@@ -1525,6 +1590,7 @@ class audio {
                     audio.dynaRageCompressor?.start()
                     newValue = "ON"
                 }
+ 
             case 1:
                 audio.dynaRageCompressor?.ratio = value
                 let text = String(value)
@@ -1594,15 +1660,18 @@ class audio {
                 audio.delay?.feedback = value
                 newValue = String(value * 10)
                 newValue = String(newValue.prefix(3))
+            
+            case 3:
+                audio.delay?.dryWetMix = value
+                newValue = String(value * 10)
+                newValue = String(newValue.prefix(3))
+             /*
             case 3:
                 audio.delay?.lowPassCutoff = value
                 let intValue = Int(round(value))
                 let text = String(intValue)
                 newValue = String(text.prefix(5) + " Hz")
-            case 4:
-                audio.delay?.dryWetMix = value
-                newValue = String(value * 10)
-                newValue = String(newValue.prefix(3))
+                */
                 
             default: break
                 
@@ -2333,6 +2402,28 @@ class audio {
                 value = String(intValue)
                 value = String(value.prefix(3))
                 isOn = audio.rhinoGuitarProcessor!.isStarted
+            
+                
+            case 2:
+                min = Float(Effects.rhinoGuitarProcessor.preGainRange.lowerBound)
+                max = Float(Effects.rhinoGuitarProcessor.preGainRange.upperBound)
+                valueForSlider = Float(audio.rhinoGuitarProcessor!.preGain)
+                name = "Gain"
+                let intValue = Int(valueForSlider)
+                value = String(intValue)
+                value = String(value.prefix(3))
+                isOn = audio.rhinoGuitarProcessor!.isStarted
+                
+                /*
+            case 6:
+                min = Float(Effects.rhinoGuitarProcessor.postGainRange.lowerBound)
+                max = Float(Effects.rhinoGuitarProcessor.postGainRange.upperBound)
+                valueForSlider = Float(audio.rhinoGuitarProcessor!.postGain)
+                name = "Postgain"
+                let intValue = Int(valueForSlider)
+                value = String(intValue)
+                value = String(value.prefix(3))
+                isOn = audio.rhinoGuitarProcessor!.isStarted
             case 2:
                 min = Float(Effects.rhinoGuitarProcessor.eqGainRange.lowerBound)
                 max = Float(Effects.rhinoGuitarProcessor.eqGainRange.upperBound)
@@ -2362,27 +2453,7 @@ class audio {
                 value = String(intValue)
                 value = String(value.prefix(3))
                 isOn = audio.rhinoGuitarProcessor!.isStarted
-                
-            case 5:
-                min = Float(Effects.rhinoGuitarProcessor.preGainRange.lowerBound)
-                max = Float(Effects.rhinoGuitarProcessor.preGainRange.upperBound)
-                valueForSlider = Float(audio.rhinoGuitarProcessor!.preGain)
-                name = "Pregain"
-                let intValue = Int(valueForSlider)
-                value = String(intValue)
-                value = String(value.prefix(3))
-                isOn = audio.rhinoGuitarProcessor!.isStarted
-                
-            case 6:
-                min = Float(Effects.rhinoGuitarProcessor.postGainRange.lowerBound)
-                max = Float(Effects.rhinoGuitarProcessor.postGainRange.upperBound)
-                valueForSlider = Float(audio.rhinoGuitarProcessor!.postGain)
-                name = "Postgain"
-                let intValue = Int(valueForSlider)
-                value = String(intValue)
-                value = String(value.prefix(3))
-                isOn = audio.rhinoGuitarProcessor!.isStarted
-                
+                */
             default: break
             }
             
@@ -2667,6 +2738,17 @@ class audio {
                 value = String(intValue)
                 value = String(value.prefix(3))
                 isOn = audio.delay!.isStarted
+                
+            case 3:
+                min = Float(Effects.delay.dryWetMixRange.lowerBound)
+                max = Float(Effects.delay.dryWetMixRange.upperBound)
+                valueForSlider = Float(audio.delay!.dryWetMix)
+                name = "Dry Wet Mix"
+                let intValue = Int(valueForSlider * 10)
+                value = String(intValue)
+                value = String(value.prefix(3))
+                isOn = audio.delay!.isStarted
+                /*
             case 3:
                 min = Float(Effects.delay.lowPassCutOffRange.lowerBound)
                 max = Float(Effects.delay.lowPassCutOffRange.upperBound)
@@ -2676,15 +2758,7 @@ class audio {
                 let text = String(intValue)
                 value = String(text.prefix(5) + " Hz")
                 isOn = audio.delay!.isStarted
-            case 4:
-                min = Float(Effects.delay.dryWetMixRange.lowerBound)
-                max = Float(Effects.delay.dryWetMixRange.upperBound)
-                valueForSlider = Float(audio.delay!.dryWetMix)
-                name = "Dry Wet Mix"
-                let intValue = Int(valueForSlider * 10)
-                value = String(intValue)
-                value = String(value.prefix(3))
-                isOn = audio.delay!.isStarted
+            */
                 
             default: break
             }

@@ -1808,7 +1808,8 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
 
     @IBAction func checkTapped(_ sender: Any) {
-        print("SELECTED UNITS")
+        print(AudioKit.printConnections())
+       /* print("SELECTED UNITS")
         for effect in audio.selectedEffectsData {
             helper.shared.printValues(id: effect.id)
             print(helper.shared.isOn(id: effect.id))
@@ -1816,6 +1817,11 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         for filter in audio.selectedFiltersData {
             helper.shared.printValues(id: filter.id)
             print(helper.shared.isOn(id: filter.id))
+        }
+        print("PERSISTENT UNITS")
+        for effect in audio.persistentUnitsData {
+            helper.shared.printValues(id: effect.id)
+            print(helper.shared.isOn(id: effect.id))
         }
         print("ALL POSSIBLE")
        // print(AudioKit.printConnections())
@@ -1827,7 +1833,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
             helper.shared.printValues(id: filter.id)
             print(helper.shared.isOn(id: filter.id))
         }
-        
+        */
         
     }
     

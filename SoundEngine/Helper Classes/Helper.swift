@@ -493,12 +493,11 @@ class helper {
             array.updateValue(location, forKey: "location")
             array.updateValue(effect.id, forKey: "name")
             array.updateValue(String(audio.eqSelection), forKey: "eqSelection")
-            if audio.eqSelection == 0 {
+            
                 array.updateValue(String(audio.threeBandFilterHigh!.gain), forKey: "threeBandFilterHigh")
                 array.updateValue(String(audio.threeBandFilterMid!.gain), forKey: "threeBandFilterMid")
                 array.updateValue(String(audio.threeBandFilterLow!.gain), forKey: "threeBandFilterLow")
-            }
-            else if audio.eqSelection == 1 {
+           
                 array.updateValue(String(audio.sevenBandFilterSubBass!.gain), forKey: "sevenBandFilterSubBass")
                 array.updateValue(String(audio.sevenBandFilterBass!.gain), forKey: "sevenBandFilterBass")
                 array.updateValue(String(audio.sevenBandFilterLowMid!.gain), forKey: "sevenBandFilterLowMid")
@@ -506,7 +505,7 @@ class helper {
                 array.updateValue(String(audio.sevenBandFilterUpperMid!.gain), forKey: "sevenBandFilterUpperMid")
                 array.updateValue(String(audio.sevenBandFilterPrecence!.gain), forKey: "sevenBandFilterPrecence")
                 array.updateValue(String(audio.sevenBandFilterBrilliance!.gain), forKey: "sevenBandFilterBrilliance")
-            }
+            
         
         case "highLowPassFilters" :
             array.updateValue(location, forKey: "location")
@@ -613,6 +612,7 @@ class helper {
         audio.availableEffectsData.removeAll()
         audio.selectedFiltersData.removeAll()
         audio.availableFiltersData.removeAll()
+       // audio.selectedFiltersData = audio.persistentUnitsData
         for effect in valuesForChain {
             let name:String = (effect as AnyObject).value(forKey: "name") as! String
             // let location:String = (effect as AnyObject).value(forKey: "location") as! String
@@ -1229,7 +1229,6 @@ class helper {
     
                 audio.eqSelection = Int(eqSelection)!
                 
-                if eqSelection == "0" {
                     guard let threeBandFilterHigh = (effect as AnyObject).value(forKey: "threeBandFilterHigh")! as? String else {
                         return
                     }
@@ -1242,8 +1241,7 @@ class helper {
                     audio.threeBandFilterHigh?.gain = Double(threeBandFilterHigh)!
                     audio.threeBandFilterMid?.gain = Double(threeBandFilterMid)!
                     audio.threeBandFilterLow?.gain = Double(threeBandFilterLow)!
-                    
-                } else if eqSelection == "1" {
+                
                     guard let sevenBandFilterSubBass = (effect as AnyObject).value(forKey: "sevenBandFilterSubBass")! as? String else {
                         return
                     }
@@ -1273,7 +1271,7 @@ class helper {
                     audio.sevenBandFilterPrecence?.gain = Double(sevenBandFilterPrecence)!
                     audio.sevenBandFilterBrilliance?.gain = Double(sevenBandFilterBrilliance)!
                     
-                }
+                
                 
             case "highLowPassFilters" :
                 guard let highPasscutoffFrequency = (effect as AnyObject).value(forKey: "highPasscutoffFrequency")! as? String else {
