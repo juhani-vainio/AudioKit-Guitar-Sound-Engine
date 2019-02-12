@@ -25,6 +25,7 @@
 		5752059F21AD547F0005889E /* Filters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5752059E21AD547E0005889E /* Filters.swift */; };
 		57567AAE21CB9DA50030CBEC /* WaveformModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57567AAD21CB9DA50030CBEC /* WaveformModel.swift */; };
 		575EE7E321BAF8E4008E9C11 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 575EE7E221BAF8E4008E9C11 /* Settings.swift */; };
+		575FD8662212CD3700F8C9E1 /* MainEffectsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 575FD8652212CD3700F8C9E1 /* MainEffectsViewController.swift */; };
 		57612AE121B172A1001A7231 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57612AE021B172A0001A7231 /* Helper.swift */; };
 		57612AE321B17396001A7231 /* Collections.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57612AE221B17396001A7231 /* Collections.swift */; };
 		577F61D021DF7B6400853F29 /* EqualizerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 577F61CE21DF7B6400853F29 /* EqualizerTableViewCell.swift */; };
@@ -108,6 +109,7 @@
 		5752059E21AD547E0005889E /* Filters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filters.swift; sourceTree = "<group>"; };
 		57567AAD21CB9DA50030CBEC /* WaveformModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaveformModel.swift; sourceTree = "<group>"; };
 		575EE7E221BAF8E4008E9C11 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
+		575FD8652212CD3700F8C9E1 /* MainEffectsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainEffectsViewController.swift; sourceTree = "<group>"; };
 		57612AE021B172A0001A7231 /* Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		57612AE221B17396001A7231 /* Collections.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Collections.swift; sourceTree = "<group>"; };
 		577F61CE21DF7B6400853F29 /* EqualizerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EqualizerTableViewCell.swift; sourceTree = "<group>"; };
@@ -220,6 +222,7 @@
 				57181F992208679700BB7E28 /* MainViewController.swift */,
 				57181F9F22086B5200BB7E28 /* Audio.swift */,
 				57075ECA219C490C003F2D4F /* Main.storyboard */,
+				575FD8652212CD3700F8C9E1 /* MainEffectsViewController.swift */,
 				57075ED2219C4911003F2D4F /* LaunchScreen.storyboard */,
 				57181FA222086BCD00BB7E28 /* Helper Classes */,
 				57075EC6219C490C003F2D4F /* AppDelegate.swift */,
@@ -574,6 +577,7 @@
 				57181F9A2208679700BB7E28 /* MainViewController.swift in Sources */,
 				57181FA022086B5200BB7E28 /* Audio.swift in Sources */,
 				579368D2219EF91400227AF8 /* TableViewCell.swift in Sources */,
+				575FD8662212CD3700F8C9E1 /* MainEffectsViewController.swift in Sources */,
 				57E397AC21A96FCF00F2871A /* QuatroTableViewCell.swift in Sources */,
 				57E397B021AC155600F2871A /* Extensions.swift in Sources */,
 				57EDC83621B80E4500621899 /* SingleTableViewController.swift in Sources */,

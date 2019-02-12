@@ -54,9 +54,15 @@ class audio {
       //  effectData(id: "ringModulator", opened: false, title: "Ring Modulator", type: "4"),
     //    effectData(id: "distortion", opened: false, title: "Distortion Unit", type: "8"),
         
+        
+        // GUITAR PROCESSOR
+        effectData(id: "rhinoGuitarProcessor", opened: false, title: "DISTORTION", type: "2"),
+        
         // DYNA RAGE PROCESSOR
         effectData(id: "dynaRageCompressor", opened: false, title: "RAGE", type: "5"),
         
+        // EQUALIZER 7 BAND
+        effectData(id: "Equalizer", opened: false, title: "EQUALIZER", type: "Equalizer"), // Bass , Mid, High
         
         // DYNAMICS
     //    effectData(id: "dynamicRangeCompressor" ,opened: false, title: "Dynamic Range Compressor", type: "4"),
@@ -104,10 +110,9 @@ class audio {
     ]
     
     
-    static let allPossibleFiltersData = [
+    static let allPossibleFiltersData = [effectData]()
         
-        // GUITAR PROCESSOR
-        effectData(id: "rhinoGuitarProcessor", opened: false, title: "DISTORTION", type: "2"),
+        
         
        // effectData(id: "autoWah" , opened: false, title: "Wah Wah!", type: "3"),
         
@@ -118,10 +123,9 @@ class audio {
      //   effectData(id: "modalResonanceFilter", opened: false, title: "Modal Resonance", type: "2"),
      //   effectData(id: "highLowPassFilters", opened: false, title: "High & Low Pass Filters", type: "PassFilters"), // add switch for FLAT as in butterworth for the pass filters
         
-        // EQUALIZER 7 BAND
-        effectData(id: "Equalizer", opened: false, title: "EQUALIZER", type: "Equalizer") // Bass , Mid, High
         
-        ]
+        
+    
     
 
     func startAudio() {
