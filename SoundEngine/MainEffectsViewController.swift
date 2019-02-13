@@ -1703,7 +1703,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
              for effect in audio.selectedEffectsData {
              helper.shared.printValues(id: effect.id)
              print(helper.shared.isOn(id: effect.id))
-             }
+             */
              
              print("ALL POSSIBLE")
              // print(AudioKit.printConnections())
@@ -1712,7 +1712,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
              print(helper.shared.isOn(id: effect.id))
              }
             
-             */
+ 
             
         }
         

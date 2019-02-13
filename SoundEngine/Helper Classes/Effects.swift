@@ -113,6 +113,16 @@ struct delay:Codable {
 
     }
     
+    // BOOSTER
+    struct booster:Codable {
+        
+        // controls needed : 1
+        // gain
+       
+        
+        static var gainRange = 0...3
+        
+    }
     
     
 // DECIMATOR  AKDecimator

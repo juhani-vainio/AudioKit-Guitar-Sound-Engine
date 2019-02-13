@@ -274,6 +274,12 @@ class helper {
     func createEffectDataArray(effect: effectData, location: String) -> [String: String] {
         var array = [String: String]()
         switch effect.id {
+        case "booster" :
+            array.updateValue(effect.id, forKey: "name")
+            array.updateValue(location, forKey: "location")
+            array.updateValue(String(audio.booster!.isStarted), forKey: "isStarted")
+            array.updateValue(String(audio.booster!.gain), forKey: "gain")
+            
         case "bitCrusher" :
             array.updateValue(effect.id, forKey: "name")
             array.updateValue(location, forKey: "location")
@@ -625,6 +631,19 @@ class helper {
             switch name {
                 
             // EFFECTS
+              
+            case "booster" :
+                guard let gain = (effect as AnyObject).value(forKey: "gain")! as? String else {
+                    return
+                }
+           
+                guard let isStarted = (effect as AnyObject).value(forKey: "isStarted")! as? String else {
+                    return
+                }
+               
+                audio.booster!.gain = Double(gain)!
+                let started = Bool(isStarted)!
+                if started == true {audio.booster!.start()} else {audio.booster!.stop()}
                 
             case "bitCrusher" :
                 guard let sampleRate = (effect as AnyObject).value(forKey: "sampleRate")! as? String else {
@@ -1500,6 +1519,10 @@ class helper {
     func isOn(id: String) -> Bool {
         var yes = Bool()
         switch id {
+        case "booster" :
+            
+            yes = audio.booster!.isStarted
+            
         case "bitCrusher" :
             
             yes = audio.bitCrusher!.isStarted
@@ -1676,6 +1699,11 @@ class helper {
     func printValues(id: String){
         print(id)
         switch id {
+            
+        case "booster" :
+            
+            print(audio.booster!.isStarted)
+            
         case "bitCrusher" :
             
             print(audio.bitCrusher!.isStarted)

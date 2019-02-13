@@ -54,15 +54,7 @@ class audio {
       //  effectData(id: "ringModulator", opened: false, title: "Ring Modulator", type: "4"),
     //    effectData(id: "distortion", opened: false, title: "Distortion Unit", type: "8"),
         
-        
-        // GUITAR PROCESSOR
-        effectData(id: "rhinoGuitarProcessor", opened: false, title: "DISTORTION", type: "2"),
-        
-        // DYNA RAGE PROCESSOR
-        effectData(id: "dynaRageCompressor", opened: false, title: "RAGE", type: "5"),
-        
-        // EQUALIZER 7 BAND
-        effectData(id: "Equalizer", opened: false, title: "EQUALIZER", type: "Equalizer"), // Bass , Mid, High
+
         
         // DYNAMICS
     //    effectData(id: "dynamicRangeCompressor" ,opened: false, title: "Dynamic Range Compressor", type: "4"),
@@ -72,56 +64,51 @@ class audio {
         // AKExpander
         // AKPeakLimiter
         
+        effectData(id: "autoWah" , opened: false, title: "WAH WAH!", type: "3"),
+        effectData(id: "phaser" ,opened: false, title: "PHASER", type: "8"),
         
-        // REVERB
-        effectData(id: "costelloReverb" ,opened: false, title: "REVERB ", type: "2"),
-       // effectData(id: "reverb" ,opened: false, title: "Reverb", type: "1"),
-      //  effectData(id: "reverb2" ,opened: false, title: "Reverb 2", type: "7"),
-      //  effectData(id: "chowningReverb" ,opened: false, title: "Reverb Chowning", type: "0"),
-      //  effectData(id: "flatFrequencyResponseReverb" ,opened: false, title: "Flat Freq Response Reverb", type: "1"),
+        // DYNA RAGE PROCESSOR
+        effectData(id: "dynaRageCompressor", opened: false, title: "RAGE", type: "5"),
         
-        // DELAY
-        effectData(id: "delay", opened: false, title: "DELAY", type: "3"),
-       // effectData(id: "variableDelay", opened: false, title: "Variable Delay", type: "2"),
+        // GUITAR PROCESSOR
+        effectData(id: "rhinoGuitarProcessor", opened: false, title: "DISTORTION", type: "2"),
+        // EQUALIZER 7 BAND
+        effectData(id: "Equalizer", opened: false, title: "EQUALIZER", type: "Equalizer"), // Bass , Mid, High
         
         // MODULATION
         effectData(id: "chorus" ,opened: false, title: "CHORUS", type: "4"),
         effectData(id: "flanger" ,opened: false, title: "FLANGER", type: "4"),
-        effectData(id: "phaser" ,opened: false, title: "PHASER", type: "8"),
-        // missing modulation: TODO
-        // AKConvulotion
-        // AKZitaReverb
         
+
         // ENVELOPE
-        effectData(id: "tremolo" ,opened: false, title: "TREMOLO", type: "2")
+        effectData(id: "tremolo" ,opened: false, title: "TREMOLO", type: "2"),
+        effectData(id: "booster" ,opened: false, title: "BOOSTER", type: "1"),
         
-        /*
-         Mixing Nodes
-         AK3DPanner
-         AKBalancer
-         AKBooster
-         AKBoosterAudioUnit
-         AKDryWetMixer
-         AKMixer
-         AKPanner
-         AKStereoFieldLimiter
-         */
         
+        // DELAY
+        effectData(id: "delay", opened: false, title: "DELAY", type: "3"),
+        
+        // REVERB
+        effectData(id: "costelloReverb" ,opened: false, title: "REVERB ", type: "2"),
+        // effectData(id: "reverb" ,opened: false, title: "Reverb", type: "1"),
+        //  effectData(id: "reverb2" ,opened: false, title: "Reverb 2", type: "7"),
+        //  effectData(id: "chowningReverb" ,opened: false, title: "Reverb Chowning", type: "0"),
+        //  effectData(id: "flatFrequencyResponseReverb" ,opened: false, title: "Flat Freq Response Reverb", type: "1"),
+        
+        
+        // BONUS
+        //  effectData(id: "moogLadder", opened: false, title: "Moog Ladder", type: "2"),
+        // effectData(id: "resonantFilter", opened: false, title: "Resonant Filter", type: "2"),
+        // effectData(id: "stringResonator", opened: false, title: "String Resonator", type: "2"),
+        //   effectData(id: "modalResonanceFilter", opened: false, title: "Modal Resonance", type: "2"),
+        //   effectData(id: "highLowPassFilters", opened: false, title: "High & Low Pass Filters", type: "PassFilters"), // add switch for FLAT as in butterworth for the pass filters
     ]
     
     
     static let allPossibleFiltersData = [effectData]()
         
-        
-        
-       // effectData(id: "autoWah" , opened: false, title: "Wah Wah!", type: "3"),
-        
-        // BONUS
-      //  effectData(id: "moogLadder", opened: false, title: "Moog Ladder", type: "2"),
-       // effectData(id: "resonantFilter", opened: false, title: "Resonant Filter", type: "2"),
-       // effectData(id: "stringResonator", opened: false, title: "String Resonator", type: "2"),
-     //   effectData(id: "modalResonanceFilter", opened: false, title: "Modal Resonance", type: "2"),
-     //   effectData(id: "highLowPassFilters", opened: false, title: "High & Low Pass Filters", type: "PassFilters"), // add switch for FLAT as in butterworth for the pass filters
+    
+
         
         
         
@@ -247,6 +234,7 @@ class audio {
     func addToselectedEffects(id : String) {
         switch id {
         //effects
+        case "booster" : audio.selectedAudioInputs.append(audio.booster!)
         case "bitCrusher" : audio.selectedAudioInputs.append(audio.bitCrusher!)
         case "clipper" : audio.selectedAudioInputs.append(audio.clipper!)
         case "dynaRageCompressor":  audio.selectedAudioInputs.append(audio.dynaRageCompressor!)
@@ -301,6 +289,11 @@ class audio {
     func turnOn(id: String){
        
         switch id {
+            
+        case "booster" :
+            
+            audio.booster!.start()
+            
         case "bitCrusher" :
             
            audio.bitCrusher!.start()
@@ -517,6 +510,9 @@ class audio {
     static var tanhDistortion: AKTanhDistortion?
     static var distortion: AKDistortion?
     
+    // BOOSTER
+    static var booster : AKBooster?
+    
     // Modulation effects
     static var flanger: AKFlanger?
     static var phaser: AKPhaser?
@@ -618,6 +614,9 @@ class audio {
         audio.compressor = AKCompressor()
         audio.dynamicsProcessor = AKDynamicsProcessor()
         audio.dynamicRangeCompressor = AKDynamicRangeCompressor()
+        
+        // booste
+        audio.booster = AKBooster()
         
         // Distorion effects
         audio.bitCrusher =  AKBitCrusher()
@@ -755,6 +754,9 @@ class audio {
         
         // stop all effects
         
+        //Booster
+        audio.booster?.stop()
+        
         // Delay
         audio.delay?.stop()
         audio.variableDelay?.stop()
@@ -828,6 +830,9 @@ class audio {
       //  mic?.stop()
       //  outputBooster?.stop()
       //  inputBooster?.stop()
+        
+        //BOOSTER
+        audio.booster?.stop()
         
         // Delay
         audio.delay?.stop()
@@ -1514,6 +1519,25 @@ class audio {
                 
             }
             
+        case "booster" :
+            switch slider {
+            case 0:
+                if  audio.booster!.isStarted == true {
+                    audio.booster?.stop()
+                    newValue = "OFF"
+                } else {
+                    audio.booster?.start()
+                    newValue = "ON"
+                }
+                
+            case 1:
+                audio.booster?.gain = value
+                let text = String(value)
+                newValue = String(text.prefix(3))
+                
+            default: break
+                
+            }
             
             
         case "bitCrusher" :
@@ -2570,6 +2594,20 @@ class audio {
             default: break
             }
             
+        case "booster" :
+            // BOOSTER
+            switch slider {
+            case 1:
+                min = Float(Effects.booster.gainRange.lowerBound)
+                max = Float(Effects.booster.gainRange.upperBound)
+                valueForSlider = Float(audio.booster!.gain)
+                name = "Gain"
+                value = String(audio.booster!.gain)
+                value = String(value.prefix(3))
+                isOn = audio.booster!.isStarted
+            
+            default: break
+            }
             
         case "bitCrusher" :
             // BITCRUSHER
