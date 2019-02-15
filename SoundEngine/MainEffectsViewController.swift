@@ -144,9 +144,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
             for effect in audio.selectedEffectsData {
                 audio.shared.turnOn(id: effect.id)
             }
-            for filter in audio.selectedFiltersData {
-                audio.shared.turnOn(id: filter.id)
-            }
+       
         }
         
         func interfaceSetup() {
@@ -159,12 +157,16 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
             
             
             // inputLevel.transform = CGAffineTransform(rotationAngle: CGFloat(-Double.pi/2))
-            inputLevel.setValue(Float((audio.shared.inputBooster?.dB)!), animated: true)
+            inputLevel.minimumValue = Float(Effects.booster.dBRange.lowerBound)
+            inputLevel.maximumValue = Float(Effects.booster.dBRange.upperBound)
+            inputLevel.setValue(Float((audio.inputBooster?.dB)!), animated: true)
             inputLevel.addTarget(self, action: #selector(inputLevelChanged), for: .valueChanged)
             inputLevel.addTarget(self, action: #selector(inputLevelChangeEnded), for: .touchUpInside)
             
             //  outputLevel.transform = CGAffineTransform(rotationAngle: CGFloat(-Double.pi/2))
-            outputLevel.setValue(Float((audio.shared.outputBooster?.dB)!), animated: true)
+            outputLevel.minimumValue = Float(Effects.booster.dBRange.lowerBound)
+            outputLevel.maximumValue = Float(Effects.booster.dBRange.upperBound)
+            outputLevel.setValue(Float((audio.outputBooster?.dB)!), animated: true)
             outputLevel.addTarget(self, action: #selector(outputLevelChanged), for: .valueChanged)
             outputLevel.addTarget(self, action: #selector(outputLevelChangeEnded), for: .touchUpInside)
             
@@ -247,58 +249,88 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
                 stack.removeArrangedSubview(subview)
                 subview.isHidden = true
             }
+      
+            let stackUnitWidth = waveformView.frame.width / 2
+          
+            let inputUnit = AKNodeOutputPlot(audio.inputBooster as! AKNode, frame: CGRect(x: 0, y: 0, width: stackUnitWidth, height: 80))
+                        inputUnit.heightAnchor.constraint(equalToConstant: 80).isActive = true
+                        inputUnit.widthAnchor.constraint(equalToConstant: stackUnitWidth).isActive = true
+                        inputUnit.plotType = .buffer
+                        inputUnit.shouldFill = false
+                        inputUnit.shouldMirror = false
+                        inputUnit.color = interface.highlight
+                        inputUnit.backgroundColor = UIColor.clear
+                        stack.addArrangedSubview(inputUnit)
             
-            var units = 0 // for width calculation
-            for effect in audio.selectedEffectsData {
-                if helper.shared.isOn(id: effect.id) {
-                    units = units + 1
-                }
-            }
-            let stackUnitWidth = waveformView.frame.width / CGFloat(units)
-            var unitCount = 0
-            for unit in audio.selectedAudioInputs {
-                
-                unit.outputNode.removeTap(onBus: 0)
-                if unitCount < audio.selectedEffectsData.count {
-                    let name = audio.selectedEffectsData[unitCount].id
-                    if helper.shared.isOn(id: name) {
-                        let node = unit as! AKNode
-                        let stackUnit = AKNodeOutputPlot(node, frame: CGRect(x: 0, y: 0, width: stackUnitWidth, height: 80))
-                        stackUnit.heightAnchor.constraint(equalToConstant: 80).isActive = true
-                        stackUnit.widthAnchor.constraint(equalToConstant: stackUnitWidth).isActive = true
-                        stackUnit.plotType = .buffer
-                        stackUnit.shouldFill = false
-                        stackUnit.shouldMirror = false
-                        let color = Colors.palette.colorForEffect(name: name)
-                        stackUnit.color = color
-                        stackUnit.backgroundColor = UIColor.clear
-                        stack.addArrangedSubview(stackUnit)
-                    }
-                    
-                }
-                
-                unitCount = unitCount + 1
-            }
+            let outputUnit = AKNodeOutputPlot(audio.outputBooster as! AKNode, frame: CGRect(x: 0, y: 0, width: stackUnitWidth, height: 80))
+            outputUnit.heightAnchor.constraint(equalToConstant: 80).isActive = true
+            outputUnit.widthAnchor.constraint(equalToConstant: stackUnitWidth).isActive = true
+            outputUnit.plotType = .buffer
+            outputUnit.shouldFill = false
+            outputUnit.shouldMirror = false
+            outputUnit.color = interface.highlight
+            outputUnit.backgroundColor = UIColor.clear
+            stack.addArrangedSubview(outputUnit)
+        
+            
+            /*
+             for subview in stack.arrangedSubviews {
+             stack.removeArrangedSubview(subview)
+             subview.isHidden = true
+             }
+             
+             var units = 0 // for width calculation
+             for effect in audio.selectedEffectsData {
+             if helper.shared.isOn(id: effect.id) {
+             units = units + 1
+             }
+             }
+             let stackUnitWidth = waveformView.frame.width / CGFloat(units)
+             var unitCount = 0
+             for unit in audio.selectedAudioInputs {
+             
+             unit.outputNode.removeTap(onBus: 0)
+             if unitCount < audio.selectedEffectsData.count {
+             let name = audio.selectedEffectsData[unitCount].id
+             if helper.shared.isOn(id: name) {
+             let node = unit as! AKNode
+             let stackUnit = AKNodeOutputPlot(node, frame: CGRect(x: 0, y: 0, width: stackUnitWidth, height: 80))
+             stackUnit.heightAnchor.constraint(equalToConstant: 80).isActive = true
+             stackUnit.widthAnchor.constraint(equalToConstant: stackUnitWidth).isActive = true
+             stackUnit.plotType = .buffer
+             stackUnit.shouldFill = false
+             stackUnit.shouldMirror = false
+             let color = Colors.palette.colorForEffect(name: name)
+             stackUnit.color = color
+             stackUnit.backgroundColor = UIColor.clear
+             stack.addArrangedSubview(stackUnit)
+             }
+             
+             }
+             
+             unitCount = unitCount + 1
+             }
+        */
         }
         
         @objc func inputLevelChanged(slider: UISlider) {
-            audio.shared.inputBooster?.dB = Double(slider.value)
+            audio.inputBooster?.dB = Double(slider.value)
             //  print("Input --- \(audio.shared.inputBooster?.dB) dB")
         }
         
         @objc func inputLevelChangeEnded(slider: UISlider) {
             
-            UserDefaults.standard.set(audio.shared.inputBooster?.dB, forKey: "inputBooster")
+            UserDefaults.standard.set(audio.inputBooster?.dB, forKey: "inputBooster")
         }
         
         @objc func outputLevelChanged(slider: UISlider) {
-            audio.shared.outputBooster?.dB = Double(slider.value)
+            audio.outputBooster?.dB = Double(slider.value)
             //  print("Output --- \(audio.shared.outputBooster?.dB) dB --- \(audio.shared.outputBooster?.gain)")
         }
         
         @objc func outputLevelChangeEnded(slider: UISlider) {
             
-            UserDefaults.standard.set(audio.shared.outputBooster?.dB, forKey: "outputBooster")
+            UserDefaults.standard.set(audio.outputBooster?.dB, forKey: "outputBooster")
         }
         
         
@@ -495,7 +527,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
         }
         
         @objc func toggleOnOff() {
-            buildWaveforStackView()
+           // buildWaveforStackView()
         }
         
         func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -743,7 +775,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
                     } else {
                         cell.onOffButton.setTitle("OFF", for: .normal)
                         //cell.onOffButton.setTitleColor(interface.textIdle, for: .normal)
-                        if slider.name.contains("ix") {
+                        if slider.name.contains("ix") || slider.name.contains("Volume")  {
                             cell.slider.isEnabled = false
                         }
                         
@@ -816,7 +848,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
                         if slider1.name.contains("ix") {
                             cell.slider1.isEnabled = false
                         }
-                        if slider2.name.contains("ix") {
+                        if slider2.name.contains("ix")  || slider2.name.contains("Volume") {
                             cell.slider2.isEnabled = false
                         }
                         
@@ -902,9 +934,10 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
                         if slider2.name.contains("ix") {
                             cell.slider2.isEnabled = false
                         }
-                        if slider3.name.contains("ix") {
+                        if slider3.name.contains("ix")  || slider3.name.contains("Volume")  {
                             cell.slider3.isEnabled = false
                         }
+                      
                         
                     }
                     
@@ -997,7 +1030,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
                         if slider3.name.contains("ix") {
                             cell.slider3.isEnabled = false
                         }
-                        if slider4.name.contains("ix") {
+                        if slider4.name.contains("ix")  || slider4.name.contains("Volume") {
                             cell.slider4.isEnabled = false
                         }
                         
@@ -1103,7 +1136,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
                         if slider4.name.contains("ix") {
                             cell.slider4.isEnabled = false
                         }
-                        if slider5.name.contains("ix") {
+                        if slider5.name.contains("ix")  || slider5.name.contains("Volume") {
                             cell.slider5.isEnabled = false
                         }
                     }
@@ -1217,7 +1250,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
                         if slider5.name.contains("ix") {
                             cell.slider5.isEnabled = false
                         }
-                        if slider6.name.contains("ix") {
+                        if slider6.name.contains("ix")  || slider6.name.contains("Volume") {
                             cell.slider6.isEnabled = false
                         }
                     }
@@ -1341,7 +1374,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
                         if slider6.name.contains("ix") {
                             cell.slider6.isEnabled = false
                         }
-                        if slider7.name.contains("ix") {
+                        if slider7.name.contains("ix")  || slider7.name.contains("Volume") {
                             cell.slider7.isEnabled = false
                         }
                     }
@@ -1476,7 +1509,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
                         if slider7.name.contains("ix") {
                             cell.slider7.isEnabled = false
                         }
-                        if slider8.name.contains("ix") {
+                        if slider8.name.contains("ix") || slider8.name.contains("Volume")  {
                             cell.slider8.isEnabled = false
                         }
                     }
@@ -1540,7 +1573,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
                     } else {
                         cell.onOffButton.setTitle("OFF", for: .normal)
                         cell.onOffButton.setTitleColor(interface.textIdle, for: .normal)
-                        if slider.name.contains("ix") {
+                        if slider.name.contains("ix")  || slider.name.contains("Volume") {
                             cell.slider.isEnabled = false
                         }
                         
@@ -1577,7 +1610,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
                 
                 resetEffectChain()
                 
-                buildWaveforStackView()
+               // buildWaveforStackView()
                 
                 handleSoundsTap()
                 

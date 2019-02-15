@@ -175,12 +175,12 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         
         // inputLevel.transform = CGAffineTransform(rotationAngle: CGFloat(-Double.pi/2))
-        inputLevel.setValue(Float((audio.shared.inputBooster?.dB)!), animated: true)
+        inputLevel.setValue(Float((audio.inputBooster?.dB)!), animated: true)
         inputLevel.addTarget(self, action: #selector(inputLevelChanged), for: .valueChanged)
         inputLevel.addTarget(self, action: #selector(inputLevelChangeEnded), for: .touchUpInside)
         
         //  outputLevel.transform = CGAffineTransform(rotationAngle: CGFloat(-Double.pi/2))
-        outputLevel.setValue(Float((audio.shared.outputBooster?.dB)!), animated: true)
+        outputLevel.setValue(Float((audio.outputBooster?.dB)!), animated: true)
         outputLevel.addTarget(self, action: #selector(outputLevelChanged), for: .valueChanged)
         outputLevel.addTarget(self, action: #selector(outputLevelChangeEnded), for: .touchUpInside)
         
@@ -299,23 +299,23 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     @objc func inputLevelChanged(slider: UISlider) {
-        audio.shared.inputBooster?.dB = Double(slider.value)
+        audio.inputBooster?.dB = Double(slider.value)
         //  print("Input --- \(audio.shared.inputBooster?.dB) dB")
     }
     
     @objc func inputLevelChangeEnded(slider: UISlider) {
         
-        UserDefaults.standard.set(audio.shared.inputBooster?.dB, forKey: "inputBooster")
+        UserDefaults.standard.set(audio.inputBooster?.dB, forKey: "inputBooster")
     }
     
     @objc func outputLevelChanged(slider: UISlider) {
-        audio.shared.outputBooster?.dB = Double(slider.value)
+        audio.outputBooster?.dB = Double(slider.value)
         //  print("Output --- \(audio.shared.outputBooster?.dB) dB --- \(audio.shared.outputBooster?.gain)")
     }
     
     @objc func outputLevelChangeEnded(slider: UISlider) {
         
-        UserDefaults.standard.set(audio.shared.outputBooster?.dB, forKey: "outputBooster")
+        UserDefaults.standard.set(audio.outputBooster?.dB, forKey: "outputBooster")
     }
     
     

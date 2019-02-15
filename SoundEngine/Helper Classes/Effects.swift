@@ -92,7 +92,7 @@ struct delay:Codable {
         
     static var timeRange = 0.001...2
     static var feedbackRange = 0...1
-    static var dryWetMixRange = 0.1...9.9
+    static var dryWetMixRange = 0.1...0.99
     static var lowPassCutOffRange = 10000...20000
   
 
@@ -119,7 +119,7 @@ struct delay:Codable {
         // controls needed : 1
         // gain
        
-        
+        static var dBRange = -16...16
         static var gainRange = 0...3
         
     }

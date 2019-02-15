@@ -219,16 +219,16 @@
 		57075EC5219C490C003F2D4F /* SoundEngine */ = {
 			isa = PBXGroup;
 			children = (
-				57181F992208679700BB7E28 /* MainViewController.swift */,
 				57181F9F22086B5200BB7E28 /* Audio.swift */,
 				57075ECA219C490C003F2D4F /* Main.storyboard */,
 				575FD8652212CD3700F8C9E1 /* MainEffectsViewController.swift */,
-				57075ED2219C4911003F2D4F /* LaunchScreen.storyboard */,
+				57E397AE21AC12B200F2871A /* TableViews */,
 				57181FA222086BCD00BB7E28 /* Helper Classes */,
 				57075EC6219C490C003F2D4F /* AppDelegate.swift */,
 				57075ED0219C4911003F2D4F /* Assets.xcassets */,
 				57075ED5219C4911003F2D4F /* Info.plist */,
 				573AE53A21AEEE9800452624 /* SoundEngine.entitlements */,
+				57075ED2219C4911003F2D4F /* LaunchScreen.storyboard */,
 				57075ECD219C490C003F2D4F /* SoundEngine.xcdatamodeld */,
 				57181FA122086B6000BB7E28 /* Old */,
 			);
@@ -256,7 +256,7 @@
 		57181FA122086B6000BB7E28 /* Old */ = {
 			isa = PBXGroup;
 			children = (
-				57E397AE21AC12B200F2871A /* TableViews */,
+				57181F992208679700BB7E28 /* MainViewController.swift */,
 				57E397B121AC15BA00F2871A /* CollectionViews */,
 				57EDC83521B80E4500621899 /* SingleTableViewController.swift */,
 				573AE53621AEECE700452624 /* Amp.swift */,

@@ -1,14 +1,14 @@
 //
-//  TripleTableViewCell.swift
+//  HeptaTableViewCell.swift
 //  SoundEngine
 //
-//  Created by Juhani Vainio on 24/11/2018.
+//  Created by Juhani Vainio on 10/12/2018.
 //  Copyright © 2018 JuhaniVainio. All rights reserved.
 //
 
 import UIKit
 
-class TripleTableViewCell: UITableViewCell {
+class HeptaTableViewCell: UITableViewCell {
     
     var id = String()
     @IBOutlet weak var coloringView: UIView!
@@ -20,6 +20,19 @@ class TripleTableViewCell: UITableViewCell {
     
     @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
     var sliders = [String]()
+    
+    @IBOutlet weak var slider7Value: UILabel!
+    @IBOutlet weak var slider7Title: UILabel!
+    @IBOutlet weak var slider7: UISlider!
+    @IBOutlet weak var slider6Value: UILabel!
+    @IBOutlet weak var slider6Title: UILabel!
+    @IBOutlet weak var slider6: UISlider!
+    @IBOutlet weak var slider5Value: UILabel!
+    @IBOutlet weak var slider5Title: UILabel!
+    @IBOutlet weak var slider5: UISlider!
+    @IBOutlet weak var slider4Value: UILabel!
+    @IBOutlet weak var slider4Title: UILabel!
+    @IBOutlet weak var slider4: UISlider!
     @IBOutlet weak var slider3Value: UILabel!
     @IBOutlet weak var slider3Title: UILabel!
     @IBOutlet weak var slider3: UISlider!
@@ -39,7 +52,7 @@ class TripleTableViewCell: UITableViewCell {
         coloringView.layer.cornerRadius = coloringView.bounds.width / 2
         
         self.contentView.backgroundColor = UIColor.clear
-        self.backgroundColor = UIColor.clear
+       self.backgroundColor = UIColor.clear
         self.title.textColor = interface.text
         self.slider1Value.textColor = interface.text
         self.slider1Title.textColor = interface.text
@@ -47,6 +60,15 @@ class TripleTableViewCell: UITableViewCell {
         self.slider2Value.textColor = interface.text
         self.slider3Title.textColor = interface.text
         self.slider3Value.textColor = interface.text
+        self.slider4Title.textColor = interface.text
+        self.slider4Value.textColor = interface.text
+        self.slider5Value.textColor = interface.text
+        self.slider5Title.textColor = interface.text
+        self.slider6Title.textColor = interface.text
+        self.slider6Value.textColor = interface.text
+        self.slider7Title.textColor = interface.text
+        self.slider7Value.textColor = interface.text
+      
         self.controllersView.backgroundColor = interface.heading
         controllersView.layer.cornerRadius = 8
         self.onOffButton.backgroundColor = UIColor.clear
@@ -55,9 +77,13 @@ class TripleTableViewCell: UITableViewCell {
         slider1.addTarget(self, action: #selector(valueChanged), for: .valueChanged)
         slider2.addTarget(self, action: #selector(valueChanged), for: .valueChanged)
         slider3.addTarget(self, action: #selector(valueChanged), for: .valueChanged)
+        slider4.addTarget(self, action: #selector(valueChanged), for: .valueChanged)
+        slider5.addTarget(self, action: #selector(valueChanged), for: .valueChanged)
+        slider6.addTarget(self, action: #selector(valueChanged), for: .valueChanged)
+        slider7.addTarget(self, action: #selector(valueChanged), for: .valueChanged)
         
         onOffButton.addTarget(self, action: #selector(toggleOnOff), for: .touchDown)
-      
+        
         specialViewArea.backgroundColor = interface.heading
         specialViewArea.layer.cornerRadius = 8
         specialSwitch.onTintColor = interface.positive
@@ -80,6 +106,11 @@ class TripleTableViewCell: UITableViewCell {
             slider1.isEnabled = true
             slider2.isEnabled = true
             slider3.isEnabled = true
+            slider4.isEnabled = true
+            slider5.isEnabled = true
+            slider6.isEnabled = true
+            slider7.isEnabled = true
+   
         } else {
             onOffButton.setTitleColor(interface.textIdle, for: .normal)
             if (slider1Title.text?.contains("ix"))! {
@@ -91,6 +122,19 @@ class TripleTableViewCell: UITableViewCell {
             if (slider3Title.text?.contains("ix"))! {
                 slider3.isEnabled = false
             }
+            if (slider4Title.text?.contains("ix"))! {
+                slider4.isEnabled = false
+            }
+            if (slider5Title.text?.contains("ix"))! {
+                slider5.isEnabled = false
+            }
+            if (slider6Title.text?.contains("ix"))! {
+                slider6.isEnabled = false
+            }
+            if (slider7Title.text?.contains("ix"))!  || (slider7Title.text?.contains("Volume"))! {
+                slider7.isEnabled = false
+            }
+           
         }
         
     }
@@ -107,6 +151,11 @@ class TripleTableViewCell: UITableViewCell {
         case slider1: slider1Value.text = audio.shared.changeValues(id:self.id, slider: 1, value: Double(slider.value))
         case slider2: slider2Value.text = audio.shared.changeValues(id:self.id, slider: 2, value: Double(slider.value))
         case slider3: slider3Value.text = audio.shared.changeValues(id:self.id, slider: 3, value: Double(slider.value))
+        case slider4: slider4Value.text = audio.shared.changeValues(id:self.id, slider: 4, value: Double(slider.value))
+        case slider5: slider5Value.text = audio.shared.changeValues(id:self.id, slider: 5, value: Double(slider.value))
+        case slider6: slider6Value.text = audio.shared.changeValues(id:self.id, slider: 6, value: Double(slider.value))
+        case slider7: slider7Value.text = audio.shared.changeValues(id:self.id, slider: 7, value: Double(slider.value))
+     
         default: break
         }
         

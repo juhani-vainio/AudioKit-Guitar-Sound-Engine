@@ -210,11 +210,11 @@ class helper {
         }
         let inputBooster = UserDefaults.standard.double(forKey: "inputBooster")
         if inputBooster != 0 {
-            audio.shared.inputBooster?.dB = inputBooster
+            audio.inputBooster?.dB = inputBooster
         }
         let outputBooster = UserDefaults.standard.double(forKey: "outputBooster")
         if outputBooster != 0 {
-            audio.shared.outputBooster?.dB = outputBooster
+            audio.outputBooster?.dB = outputBooster
         }
         
         // all saved sounds
@@ -278,7 +278,7 @@ class helper {
             array.updateValue(effect.id, forKey: "name")
             array.updateValue(location, forKey: "location")
             array.updateValue(String(audio.booster!.isStarted), forKey: "isStarted")
-            array.updateValue(String(audio.booster!.gain), forKey: "gain")
+            array.updateValue(String(audio.booster!.dB), forKey: "dB")
             
         case "bitCrusher" :
             array.updateValue(effect.id, forKey: "name")
@@ -541,7 +541,7 @@ class helper {
             array.updateValue(String(audio.rhinoGuitarProcessor!.lowGain), forKey: "lowGain")
             array.updateValue(String(audio.rhinoGuitarProcessor!.preGain), forKey: "preGain")
             array.updateValue(String(audio.rhinoGuitarProcessor!.postGain), forKey: "postGain")
-            
+            array.updateValue(String(audio.rhinoBoosterDBValue), forKey: "dB")
             
         case "resonantFilter" :
             array.updateValue(location, forKey: "location")
@@ -633,7 +633,7 @@ class helper {
             // EFFECTS
               
             case "booster" :
-                guard let gain = (effect as AnyObject).value(forKey: "gain")! as? String else {
+                guard let dB = (effect as AnyObject).value(forKey: "dB")! as? String else {
                     return
                 }
            
@@ -641,7 +641,7 @@ class helper {
                     return
                 }
                
-                audio.booster!.gain = Double(gain)!
+                audio.booster!.dB = Double(dB)!
                 let started = Bool(isStarted)!
                 if started == true {audio.booster!.start()} else {audio.booster!.stop()}
                 
@@ -1397,6 +1397,9 @@ class helper {
                 guard let postGain = (effect as AnyObject).value(forKey: "postGain")! as? String else {
                     return
                 }
+                guard let dB = (effect as AnyObject).value(forKey: "dB")! as? String else {
+                    return
+                }
                 
                 audio.rhinoGuitarProcessor?.distortion = Double(distortion)!
                 audio.rhinoGuitarProcessor?.highGain = Double(highGain)!
@@ -1404,9 +1407,17 @@ class helper {
                 audio.rhinoGuitarProcessor?.lowGain = Double(lowGain)!
                 audio.rhinoGuitarProcessor?.preGain = Double(preGain)!
                 audio.rhinoGuitarProcessor?.postGain = Double(postGain)!
+                audio.rhinoBoosterDBValue = Double(dB)!
                 
                 let started = Bool(isStarted)!
-                if started == true {audio.rhinoGuitarProcessor!.start()} else {audio.rhinoGuitarProcessor!.stop()}
+                if started == true {
+                    audio.rhinoGuitarProcessor!.start()
+                    audio.rhinoBooster?.dB = Double(dB)!
+                    
+                } else {
+                    audio.rhinoGuitarProcessor!.stop()
+                    audio.rhinoBooster?.dB = 0
+                }
                 
                 
             case "resonantFilter" :

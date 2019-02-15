@@ -71,7 +71,7 @@ class audio {
         effectData(id: "dynaRageCompressor", opened: false, title: "RAGE", type: "5"),
         
         // GUITAR PROCESSOR
-        effectData(id: "rhinoGuitarProcessor", opened: false, title: "DISTORTION", type: "2"),
+        effectData(id: "rhinoGuitarProcessor", opened: false, title: "DISTORTION", type: "3"),
         // EQUALIZER 7 BAND
         effectData(id: "Equalizer", opened: false, title: "EQUALIZER", type: "Equalizer"), // Bass , Mid, High
         
@@ -82,16 +82,16 @@ class audio {
 
         // ENVELOPE
         effectData(id: "tremolo" ,opened: false, title: "TREMOLO", type: "2"),
-        effectData(id: "booster" ,opened: false, title: "BOOSTER", type: "1"),
+      //  effectData(id: "booster" ,opened: false, title: "BOOSTER", type: "1"),
         
         
         // DELAY
         effectData(id: "delay", opened: false, title: "DELAY", type: "3"),
         
         // REVERB
-        effectData(id: "costelloReverb" ,opened: false, title: "REVERB ", type: "2"),
-        // effectData(id: "reverb" ,opened: false, title: "Reverb", type: "1"),
-        //  effectData(id: "reverb2" ,opened: false, title: "Reverb 2", type: "7"),
+        //effectData(id: "costelloReverb" ,opened: false, title: "REVERB ", type: "2"),
+        // effectData(id: "reverb" ,opened: false, title: "REVERB", type: "1"),
+          effectData(id: "reverb2" ,opened: false, title: "Reverb 2", type: "7"),
         //  effectData(id: "chowningReverb" ,opened: false, title: "Reverb Chowning", type: "0"),
         //  effectData(id: "flatFrequencyResponseReverb" ,opened: false, title: "Flat Freq Response Reverb", type: "1"),
         
@@ -145,38 +145,14 @@ class audio {
         } else {
             audio.selectedAudioInputs.last?.connect(to: outputMixer!)
         }
-        outputMixer?.connect(to: outputBooster!)
-        // audio.rhinoGuitarProcessor!.connect(to: outputBooster!)
-       // let balancer = AKBalancer(comparator: outputMixer!)
-       // audio.rhinoGuitarProcessor?.connect(to: balancer)
-       // balancer.connect(to: outputBooster!)
-        
-        /*
-        outputMixer?.connect(to: audio.rhinoGuitarProcessor!)
-        outputMixer?.connect(to: audio.dynaRageCompressor!)
-        
-        let balancer = AKBalancer(comparator: audio.dynaRageCompressor!)
-
-        audio.rhinoGuitarProcessor?.connect(to: balancer)
-        
-        balancer.connect(to: rhinoBooster!)
-        audio.dynaRageCompressor?.connect(to: dynaBooster!)
-        
-        let mixer = AKMixer(rhinoBooster, dynaBooster)
-        mixer.connect(to: outputBooster!)
-       */
-        
-       // audio.rhinoGuitarProcessor?.connect(to: audio.dynaRageCompressor!)
-       // balancer.connect(to: audio.dynaRageCompressor!)
-       // audio.dynaRageCompressor?.connect(to: outputBooster!)
-        
-        
-        outputBooster?.connect(to: outputAmplitudeTracker!)
+        outputMixer?.connect(to: audio.outputBooster!)
+       
+        audio.outputBooster?.connect(to: outputAmplitudeTracker!)
         
         // LAST TO OUTPUT
         AudioKit.output = outputAmplitudeTracker
         if AudioKit.output == nil {
-            AudioKit.output =  inputBooster
+            AudioKit.output =  audio.inputBooster
             // AudioKit.output = inputMixer
         }
         
@@ -273,6 +249,7 @@ class audio {
         audio.selectedAudioInputs.append(audio.toneComplementFilter!)
         case "moogLadder": audio.selectedAudioInputs.append(audio.moogLadder!)
         case "rhinoGuitarProcessor": audio.selectedAudioInputs.append(audio.rhinoGuitarProcessor!)
+            audio.selectedAudioInputs.append(audio.rhinoBooster!)
         case "highLowPassFilters":  audio.selectedAudioInputs.append(audio.lowPassFilter!)
         audio.selectedAudioInputs.append(audio.lowPassButterworthFilter!)
         audio.selectedAudioInputs.append(audio.highPassFilter!)
@@ -420,6 +397,7 @@ class audio {
         case "rhinoGuitarProcessor" :
             
            audio.rhinoGuitarProcessor!.start()
+            audio.rhinoBooster?.dB = audio.rhinoBoosterDBValue
             
             
         case "resonantFilter" :
@@ -484,11 +462,9 @@ class audio {
     var filterMixer: AKMixer?
     
     var mic: AKMicrophone?
-    var outputBooster : AKBooster?
-    var inputBooster : AKBooster?
-    var dynaBooster : AKBooster?
-    var rhinoBooster : AKBooster?
-    
+    static var outputBooster : AKBooster?
+    static var inputBooster : AKBooster?
+
     
     // EFFECTS
     
@@ -528,6 +504,8 @@ class audio {
     
     // Simulators
     static var rhinoGuitarProcessor: AKRhinoGuitarProcessor?
+    static var rhinoBooster: AKBooster?
+    static var rhinoBoosterDBValue = Double()
     
     // tremolo
     static var tremolo: AKTremolo?
@@ -592,12 +570,18 @@ class audio {
         inputAmplitudeTracker = AKAmplitudeTracker()
         micTracker = AKMicrophoneTracker()
         
-        // UTILITIES
+        // MIC
         mic = AKMicrophone()
-        outputBooster = AKBooster()
-        inputBooster = AKBooster()
-        dynaBooster = AKBooster()
-        rhinoBooster = AKBooster()
+        
+        // boosters
+        audio.booster = AKBooster()
+        audio.outputBooster = AKBooster()
+        audio.inputBooster = AKBooster()
+     
+        
+        
+        audio.masterBooster = AKBooster()
+        //audio.masterBooster?.start()
         
         // MIXERS
         inputMixer = AKMixer()
@@ -615,8 +599,7 @@ class audio {
         audio.dynamicsProcessor = AKDynamicsProcessor()
         audio.dynamicRangeCompressor = AKDynamicRangeCompressor()
         
-        // booste
-        audio.booster = AKBooster()
+        
         
         // Distorion effects
         audio.bitCrusher =  AKBitCrusher()
@@ -641,6 +624,7 @@ class audio {
         
         // Simulators
         audio.rhinoGuitarProcessor = AKRhinoGuitarProcessor()
+        audio.rhinoBooster = AKBooster()
         
         // tremolo
         audio.tremolo = AKTremolo()
@@ -713,8 +697,7 @@ class audio {
         audio.highPassFilter = AKHighPassFilter()
         audio.lowPassFilter = AKLowPassFilter()
         
-        audio.masterBooster = AKBooster()
-        //audio.masterBooster?.start()
+       
         
 
         audio.toneComplementFilter = AKToneComplementFilter()
@@ -743,8 +726,10 @@ class audio {
         outputAmplitudeTracker?.start()
         micTracker?.start()
         
-        outputBooster?.start()
-        inputBooster?.start()
+        //Booster
+       // audio.booster?.start()
+        audio.outputBooster?.start()
+        audio.inputBooster?.start()
         
         //inputMixer?.start()
         outputMixer?.start()
@@ -754,7 +739,6 @@ class audio {
         
         // stop all effects
         
-        //Booster
         audio.booster?.stop()
         
         // Delay
@@ -791,6 +775,8 @@ class audio {
         
         // Simulators
         audio.rhinoGuitarProcessor?.stop()
+        audio.rhinoBoosterDBValue = (audio.rhinoBooster?.dB)!
+        audio.rhinoBooster?.dB = 0
         
         // tremolo
         audio.tremolo?.stop()
@@ -867,6 +853,8 @@ class audio {
         
         // Simulators
         audio.rhinoGuitarProcessor?.stop()
+        audio.rhinoBoosterDBValue = (audio.rhinoBooster?.dB)!
+        audio.rhinoBooster?.dB = 0
         
         // tremolo
         audio.tremolo?.stop()
@@ -949,10 +937,10 @@ class audio {
     
     
     func connectMic() {
-        mic?.connect(to: inputBooster!)
-        inputBooster?.connect(to: inputAmplitudeTracker!)
+        mic?.connect(to: audio.inputBooster!)
+        audio.inputBooster?.connect(to: inputAmplitudeTracker!)
         
-        startAmplitudeMonitors()
+      //  startAmplitudeMonitors()
         
     }
     
@@ -1342,27 +1330,18 @@ class audio {
             
         case "rhinoGuitarProcessor" :
             switch slider {
-                /*
-            case 0:
-                if  rhinoBooster!.gain != 0 {
-                    audio.rhinoGuitarProcessor?.start()
-                    rhinoBooster!.gain = 0
-                    newValue = "OFF"
-                } else {
-                    audio.rhinoGuitarProcessor?.start()
-                    rhinoBooster!.gain = 1
-                    newValue = "ON"
-                }
-                 */
+   
                 
             case 0:
                 if  audio.rhinoGuitarProcessor!.isStarted == true {
                     audio.rhinoGuitarProcessor?.stop()
-                    
+                   // audio.rhinoBoosterDBValue = (audio.rhinoBooster?.dB)!
+                    audio.rhinoBooster?.dB = 0
+                   
                     newValue = "OFF"
                 } else {
                     audio.rhinoGuitarProcessor?.start()
-                    
+                    audio.rhinoBooster?.dB = audio.rhinoBoosterDBValue
                     newValue = "ON"
                 }
  
@@ -1373,6 +1352,12 @@ class audio {
             
             case 2:
                 audio.rhinoGuitarProcessor?.preGain = value
+                newValue = String(value)
+                newValue = String(newValue.prefix(3))
+                
+            case 3:
+                audio.rhinoBooster?.dB = value
+                audio.rhinoBoosterDBValue = value
                 newValue = String(value)
                 newValue = String(newValue.prefix(3))
            
@@ -1531,7 +1516,7 @@ class audio {
                 }
                 
             case 1:
-                audio.booster?.gain = value
+                audio.booster?.dB = value
                 let text = String(value)
                 newValue = String(text.prefix(3))
                 
@@ -1597,19 +1582,8 @@ class audio {
             
         case "dynaRageCompressor" :
             switch slider {
-                /*
-            case 0:
-                if  dynaBooster!.gain != 0 {
-                    audio.dynaRageCompressor?.start()
-                    dynaBooster?.gain = 0
-                    newValue = "OFF"
-                } else {
-                    audio.dynaRageCompressor?.start()
-                    dynaBooster?.gain = 1
-                    newValue = "ON"
-                }
-                */
-                
+    
+             
             case 0:
                 if  audio.dynaRageCompressor!.isStarted == true {
                     audio.dynaRageCompressor?.stop()
@@ -2442,6 +2416,16 @@ class audio {
                 value = String(value.prefix(3))
                 isOn = audio.rhinoGuitarProcessor!.isStarted
                 
+            case 3:
+                min = Float(Effects.booster.dBRange.lowerBound)
+                max = Float(Effects.booster.dBRange.upperBound)
+                valueForSlider = Float(audio.rhinoBoosterDBValue)
+                name = "Volume"
+                let intValue = Int(valueForSlider)
+                value = String(intValue)
+                value = String(value.prefix(3))
+                isOn = audio.rhinoGuitarProcessor!.isStarted
+                
                 /*
             case 6:
                 min = Float(Effects.rhinoGuitarProcessor.postGainRange.lowerBound)
@@ -2598,11 +2582,11 @@ class audio {
             // BOOSTER
             switch slider {
             case 1:
-                min = Float(Effects.booster.gainRange.lowerBound)
-                max = Float(Effects.booster.gainRange.upperBound)
-                valueForSlider = Float(audio.booster!.gain)
-                name = "Gain"
-                value = String(audio.booster!.gain)
+                min = Float(Effects.booster.dBRange.lowerBound)
+                max = Float(Effects.booster.dBRange.upperBound)
+                valueForSlider = Float(audio.booster!.dB)
+                name = "dB"
+                value = String(audio.booster!.dB)
                 value = String(value.prefix(3))
                 isOn = audio.booster!.isStarted
             
