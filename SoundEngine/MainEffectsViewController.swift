@@ -29,7 +29,9 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
         @IBOutlet weak var bufferLengthSegment: UISegmentedControl!
         
         
-        
+        @IBOutlet weak var eqView: UIView!
+        @IBOutlet weak var eqTableView: UITableView!
+    
         @IBOutlet weak var toolBar: UIView!
         @IBOutlet weak var topView: UIView!
         
@@ -177,6 +179,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
    
             availableEffects.layer.cornerRadius = 8
             selectedEffects.layer.cornerRadius = 8
+            eqTableView.layer.cornerRadius = 8
         
             availableEffectsView.layer.cornerRadius = 8
             soundsTab.layer.cornerRadius = 8
@@ -233,9 +236,10 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
          
             
             selectedEffects.backgroundColor = UIColor.clear
-        
+            eqTableView.backgroundColor = UIColor.clear
             
             soundEngine.backgroundColor = UIColor.clear
+            eqView.backgroundColor = UIColor.clear
             soundTitle.textColor = interface.textAlt
             effectsTitle.textColor = interface.text
          
@@ -344,6 +348,9 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
             selectedEffects.delegate = self
             selectedEffects.dataSource = self
             
+            eqTableView.delegate = self
+            eqTableView.dataSource = self
+            
             savedSoundsTableView.delegate = self
             savedSoundsTableView.dataSource = self
             
@@ -373,7 +380,9 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
             selectedEffects.register(octaNib, forCellReuseIdentifier: "OctaTableViewCell")
 
             selectedEffects.register(passNib, forCellReuseIdentifier: "PassFiltersTableViewCell")
-            selectedEffects.register(eqNib, forCellReuseIdentifier: "EqualizerTableViewCell")
+            
+            
+            eqTableView.register(eqNib, forCellReuseIdentifier: "EqualizerTableViewCell")
             
             
             
@@ -504,6 +513,9 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
                 value = audio.selectedEffectsData.count
             }
             
+            else if tableView == eqTableView {
+                value = 1
+            }
             return value
         }
         
@@ -522,8 +534,8 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
                 print("three band EQ") // threeband EQ
             }
             
-            selectedEffects.reloadData()
-            
+           // selectedEffects.reloadData()
+            eqTableView.reloadData()
         }
         
         @objc func toggleOnOff() {
@@ -546,6 +558,12 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
             if tableView == savedSoundsTableView{
                 cellTitle = Collections.savedSounds[indexPath.row]
             }
+            
+            else if tableView == eqTableView {
+                
+                cellType = "Equalizer"
+            }
+                
             else if tableView == selectedEffects {
                 cellOpened = audio.selectedEffectsData[indexPath.row].opened
                 cellTitle = audio.selectedEffectsData[indexPath.row].title
@@ -724,7 +742,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
                         cell.threeBandLowSlider.value = low.valueForSlider
                     }
                     
-                    if cellOpened == true {
+                    
                         if cell.segmentControl.selectedSegmentIndex == 1 {
                             cell.controllersHeight.constant = CGFloat(350)
                             cell.controllersView.isHidden = false
@@ -733,11 +751,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
                             cell.controllersView.isHidden = false
                         }
                         
-                    } else {
-                        cell.controllersHeight.constant = CGFloat(0)
-                        cell.controllersView.isHidden = true
-                        
-                    }
+                   
                     
                     returnCell = cell
                     
@@ -1606,7 +1620,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
                 self.selectedEffects.reloadData()
                
                 self.availableEffects.reloadData()
-          
+                self.eqTableView.reloadData()
                 
                 resetEffectChain()
                 
@@ -1658,7 +1672,11 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
         
         func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
             
-            if tableView == selectedEffects {
+            if tableView == eqTableView {
+                return false
+            }
+            
+            else if tableView == selectedEffects {
                 if audio.selectedEffectsData[indexPath.row].opened {
                     return false
                 }

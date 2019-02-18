@@ -43,7 +43,9 @@ class audio {
     
     static var bufferLength = Int()
     
-    static let persistentUnitsData = [effectData]()
+    static let persistentUnitsData =  [// EQUALIZER 7 BAND
+        effectData(id: "Equalizer", opened: false, title: "EQUALIZER", type: "Equalizer"), // Bass , Mid, High
+    ]
     
     static let allPossibleEffectsData = [
         // DISTORTIONS
@@ -72,9 +74,7 @@ class audio {
         
         // GUITAR PROCESSOR
         effectData(id: "rhinoGuitarProcessor", opened: false, title: "DISTORTION", type: "3"),
-        // EQUALIZER 7 BAND
-        effectData(id: "Equalizer", opened: false, title: "EQUALIZER", type: "Equalizer"), // Bass , Mid, High
-        
+       
         // MODULATION
         effectData(id: "chorus" ,opened: false, title: "CHORUS", type: "4"),
         effectData(id: "flanger" ,opened: false, title: "FLANGER", type: "4"),
@@ -900,20 +900,21 @@ class audio {
             addToselectedEffects(id:id)
             
         }
-        /*
+       // addToselectedEffects(id:"Equalizer")
+        
         // PERSISTENT UNITS
         for effect in 0..<audio.persistentUnitsData.count {
             let id = audio.persistentUnitsData[effect].id
             addToselectedEffects(id:id)
         }
-        */
-        
+ 
+        /*
         // FILTERS
         for effect in 0..<audio.allPossibleFiltersData.count {
             let id = audio.allPossibleFiltersData[effect].id
             addToselectedEffects(id:id)
         }
-        
+         */
     }
     
     

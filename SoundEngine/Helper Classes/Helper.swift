@@ -39,6 +39,7 @@ class helper {
                 print("Not found in all possible effects data \(name)")
             }
         }
+            /*
         else if audio.allPossibleFiltersData.contains(where: {$0.id == name}) {
              if let thisFilterData = audio.allPossibleFiltersData.first(where: {$0.id == name}) {
      
@@ -46,7 +47,7 @@ class helper {
                 
             }
         }
-        
+        */
     }
     
     func rearrangeLists() {
@@ -62,7 +63,7 @@ class helper {
             }
         }
         // same or filters
-        
+        /*
         for effect in audio.allPossibleFiltersData {
             if audio.selectedFiltersData.contains(where: {$0.id == effect.id})   {
                 
@@ -72,6 +73,7 @@ class helper {
                 audio.availableFiltersData.append(effect)
             }
         }
+ */
     }
     
     
@@ -138,6 +140,16 @@ class helper {
             }
             
         }
+        
+        // add persistent data
+        for effect in audio.persistentUnitsData {
+            let array = createEffectDataArray(effect: effect, location: "Effects")
+            if array.isNotEmpty {
+                dictionary.append(array)
+            }
+            
+        }
+        /*
         // same for filters
         for effect in audio.selectedFiltersData {
             let array = createEffectDataArray(effect: effect, location: "Filters")
@@ -146,7 +158,7 @@ class helper {
             }
             
         }
-        
+        */
         UserDefaults.standard.set(dictionary, forKey: "activeSound")
         
         
@@ -165,6 +177,16 @@ class helper {
             }
             
         }
+        // add persistent data
+        for effect in audio.persistentUnitsData {
+                let array = createEffectDataArray(effect: effect, location: "Effects")
+                if array.isNotEmpty {
+                    dictionary.append(array)
+                }
+ 
+        }
+        
+        /*
         // same for filters
         for effect in audio.selectedFiltersData {
             if isOn(id: effect.id) {
@@ -175,7 +197,7 @@ class helper {
             }
             
         }
-        
+        */
         
         saveNameForChain(name: name)
         UserDefaults.standard.set(dictionary, forKey: name)
