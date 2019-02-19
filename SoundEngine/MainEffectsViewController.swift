@@ -65,7 +65,8 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
         @IBOutlet weak var soundTitle: UILabel!
         @IBOutlet weak var effectsTitle: UILabel!
 
-        
+        @IBOutlet weak var settingsTitle: UILabel!
+    
         
         @IBOutlet weak var soundsLibraryTitle: UILabel!
     
@@ -242,7 +243,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
             eqView.backgroundColor = UIColor.clear
             soundTitle.textColor = interface.textAlt
             effectsTitle.textColor = interface.text
-         
+            settingsTitle.textColor = interface.text
             
             soundsLibraryTitle.textColor = interface.text
         }
