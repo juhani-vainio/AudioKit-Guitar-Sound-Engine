@@ -452,6 +452,8 @@ class audio {
     var inputAmplitudeTracker : AKAmplitudeTracker?
     var micTracker : AKMicrophoneTracker?
     
+    var frequencyTracker : AKFrequencyTracker?
+    
     var inputMixer: AKMixer?
     var mixerForFirstList: AKMixer?
     var mixerForSecondList: AKMixer?
@@ -561,7 +563,6 @@ class audio {
     // ARRAYS FOR CONSTRUCTING THE SOUND
     
     static var selectedAudioInputs = [AKInput]()
-
     
     func createEffects() {
  
@@ -569,6 +570,9 @@ class audio {
         outputAmplitudeTracker = AKAmplitudeTracker()
         inputAmplitudeTracker = AKAmplitudeTracker()
         micTracker = AKMicrophoneTracker()
+        
+        frequencyTracker = AKFrequencyTracker()
+        frequencyTracker?.start()
         
         // MIC
         mic = AKMicrophone()
@@ -938,22 +942,42 @@ class audio {
     
     
     func connectMic() {
-        mic?.connect(to: audio.inputBooster!)
+        mic?.connect(to: frequencyTracker!)
+        frequencyTracker?.connect(to: audio.inputBooster!)
         audio.inputBooster?.connect(to: inputAmplitudeTracker!)
-        
-      //  startAmplitudeMonitors()
-        
     }
     
-    func startAmplitudeMonitors() {
-        
-        let timer = Timer.scheduledTimer(withTimeInterval: 0.01, repeats: true) { timer in
-            let micAmplitude = self.micTracker?.amplitude
-            let inputAmplitude = self.inputAmplitudeTracker?.amplitude
-            let outputAmplitude = self.outputAmplitudeTracker?.amplitude
+    func updateTrackerUI() -> String {
+        var note = ""
+        if self.frequencyTracker!.amplitude > 0.1 {
+            let noteFrequencies = [16.35, 17.32, 18.35, 19.45, 20.6, 21.83, 23.12, 24.5, 25.96, 27.5, 29.14, 30.87]
+            let noteNamesWithSharps = ["C", "C♯", "D", "D♯", "E", "F", "F♯", "G", "G♯", "A", "A♯", "B"]
+            let noteNamesWithFlats = ["C", "D♭", "D", "E♭", "E", "F", "G♭", "G", "A♭", "A", "B♭", "B"]
+            var frequency = Float(self.frequencyTracker!.frequency)
+            while (frequency > Float(noteFrequencies[noteFrequencies.count-1])) {
+                frequency = frequency / 2.0
+            }
+            while (frequency < Float(noteFrequencies[0])) {
+                frequency = frequency * 2.0
+            }
+            
+            var minDistance: Float = 10000.0
+            var index = 0
+            
+            for i in 0..<noteFrequencies.count {
+                let distance = fabsf(Float(noteFrequencies[i]) - frequency)
+                if (distance < minDistance){
+                    index = i
+                    minDistance = distance
+                }
+            }
+            let octave = Int(log2f(Float(self.frequencyTracker!.frequency) / frequency))
+            note = noteNamesWithSharps[index] + String(octave)
+            print("Sharps \(noteNamesWithSharps[index])\(octave)")
+            
             
         }
-        timer.fire()
+        return note
     }
     
     func ratioToDecibel(ratio: Double) -> Double {

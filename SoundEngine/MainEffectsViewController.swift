@@ -72,8 +72,21 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
         
         @IBOutlet weak var soundsLibraryTitle: UILabel!
     
+        @IBOutlet weak var tunerNoteLabel: UILabel!
+    
+    
+    func startAmplitudeMonitors() {
         
-        
+        let timer = Timer.scheduledTimer(withTimeInterval: 0.01, repeats: true) { timer in
+            let note = audio.shared.updateTrackerUI()
+          
+            if self.tunerNoteLabel.text != note {
+                self.tunerNoteLabel.text = note
+            }
+        }
+        timer.fire()
+    }
+    
         
         func setSoundsViewHeight() {
             let newHeight = CGFloat(Collections.savedSounds.count * 44 + 78)
@@ -138,7 +151,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
             
             audio.shared.startAudio()
             interfaceSetup()
-            
+            startAmplitudeMonitors()
             
             
             
