@@ -1161,65 +1161,64 @@ class audio {
         }
     }
     
-    
+    func convertToPercent(value: Double, max: Double, min: Double) -> String {
+        var text = String()
+            var percent = value * 100 / (max + abs(min))
+            percent = round(percent)
+            text = String(percent).dropLast(2) + "%"
+     
+        return text
+    }
     
     func changeEQValues(slider: String, value: Double) -> String {
         var newValue = String()
-        
+        let min = Double(0)
+        let max = Double(3)
         switch slider {
             
         case "threeBandHighSlider":
             audio.threeBandFilterHigh?.gain = value
-            let text = String(value)
-            newValue = String(text.prefix(3))
+            
         case "threeBandMidSlider":
             audio.threeBandFilterMid?.gain = value
-            let text = String(value)
-            newValue = String(text.prefix(3))
+         
         case "threeBandLowSlider":
             audio.threeBandFilterLow?.gain = value
-            let text = String(value)
-            newValue = String(text.prefix(3))
             
         case "sevenBandBrillianceSlider":
             audio.sevenBandFilterBrilliance?.gain = value
-            let text = String(value)
-            newValue = String(text.prefix(3))
+           
         case "sevenBandPrecenceSlider":
             audio.sevenBandFilterPrecence?.gain = value
-            let text = String(value)
-            newValue = String(text.prefix(3))
+           
         case "sevenBandUpperMidSlider":
             audio.sevenBandFilterUpperMid?.gain = value
-            let text = String(value)
-            newValue = String(text.prefix(3))
+            
         case "sevenBandMidSlider":
             audio.sevenBandFilterMid?.gain = value
-            let text = String(value)
-            newValue = String(text.prefix(3))
+           
         case "sevenBandLowMidSlider":
             audio.sevenBandFilterLowMid?.gain = value
-            let text = String(value)
-            newValue = String(text.prefix(3))
+           
         case "sevenBandBassSlider":
             audio.sevenBandFilterBass?.gain = value
-            let text = String(value)
-            newValue = String(text.prefix(3))
+           
         case "sevenBandSubBassSlider":
             audio.sevenBandFilterSubBass?.gain = value
-            let text = String(value)
-            newValue = String(text.prefix(3))
             
             
         default: break
             
         }
+        
+        newValue = convertToPercent(value: value, max: max, min: min)
+        
         return newValue
     }
     
     func getEQ(id: String, slider: Int) -> (min: Float, max: Float, valueForSlider: Float, value: String) {
-        let min = 0
-        let max = 3
+        let min = Double(0)
+        let max = Double(3)
         var valueForSlider = Float(0.69)
         var value = ""
         switch id {
@@ -1228,17 +1227,13 @@ class audio {
             switch slider {
             case 1:
                 valueForSlider = Float(audio.threeBandFilterHigh!.gain)
-                value = String(audio.threeBandFilterHigh!.gain)
-                value = String(value.prefix(3))
                 
             case 2:
                 valueForSlider = Float(audio.threeBandFilterMid!.gain)
-                value = String(audio.threeBandFilterMid!.gain)
-                value = String(value.prefix(3))
+              
             case 3:
                 valueForSlider = Float(audio.threeBandFilterLow!.gain)
-                value = String(audio.threeBandFilterLow!.gain)
-                value = String(value.prefix(3))
+               
             default: break
             }
         case "sevenBandFilter":
@@ -1246,39 +1241,32 @@ class audio {
             switch slider {
             case 1:
                 valueForSlider = Float(audio.sevenBandFilterBrilliance!.gain)
-                value = String(audio.sevenBandFilterBrilliance!.gain)
-                value = String(value.prefix(3))
                 
             case 2:
                 valueForSlider = Float(audio.sevenBandFilterPrecence!.gain)
-                value = String(audio.sevenBandFilterPrecence!.gain)
-                value = String(value.prefix(3))
+               
             case 3:
                 valueForSlider = Float(audio.sevenBandFilterUpperMid!.gain)
-                value = String(audio.sevenBandFilterUpperMid!.gain)
-                value = String(value.prefix(3))
+                
             case 4:
                 valueForSlider = Float(audio.sevenBandFilterMid!.gain)
-                value = String(audio.sevenBandFilterMid!.gain)
-                value = String(value.prefix(3))
-                
+               
             case 5:
                 valueForSlider = Float(audio.sevenBandFilterLowMid!.gain)
-                value = String(audio.sevenBandFilterLowMid!.gain)
-                value = String(value.prefix(3))
+               
             case 6:
                 valueForSlider = Float(audio.sevenBandFilterBass!.gain)
-                value = String(audio.sevenBandFilterBass!.gain)
-                value = String(value.prefix(3))
+               
             case 7:
                 valueForSlider = Float(audio.sevenBandFilterSubBass!.gain)
-                value = String(audio.sevenBandFilterSubBass!.gain)
-                value = String(value.prefix(3))
+               
             default: break
             }
             
         default: break
         }
+        
+        value = convertToPercent(value: Double(valueForSlider), max: min, min: max)
         
         return (Float(min), Float(max), valueForSlider, value)
     }

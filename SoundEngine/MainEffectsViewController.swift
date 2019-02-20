@@ -38,6 +38,8 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
         @IBOutlet weak var bottomView: UIView!
         @IBOutlet weak var waveformView: UIView!
         @IBOutlet weak var soundsView: UIView!
+    
+    
         @IBOutlet weak var savedSoundsTableView: UITableView!
         @IBOutlet weak var soundEngine: UIView!
         @IBOutlet weak var soundsTab: UIView!
@@ -103,15 +105,15 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
             super.viewDidLoad()
             
             
-            
             self.soundsTapGesture = UITapGestureRecognizer(target: self, action: #selector(handleSoundsTap))
             self.soundsTab.addGestureRecognizer(soundsTapGesture)
             self.soundsTab.isUserInteractionEnabled = true
+       
             
             self.effectsTapGesture = UITapGestureRecognizer(target: self, action: #selector(handleEffectsTap))
             self.effectsTab.addGestureRecognizer(effectsTapGesture)
             self.effectsTab.isUserInteractionEnabled = true
-            
+     
             self.hamburgerTapGesture = UITapGestureRecognizer(target: self, action: #selector(handleHamburgerTap))
             self.hamburgerView.addGestureRecognizer(hamburgerTapGesture)
             self.hamburgerView.isUserInteractionEnabled = true
@@ -1871,8 +1873,9 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
         }
         
         var soundsTapGesture = UITapGestureRecognizer()
-        var effectsTapGesture = UITapGestureRecognizer()
     
+        var effectsTapGesture = UITapGestureRecognizer()
+       
         var hamburgerTapGesture = UITapGestureRecognizer()
         var cancelTapGesture = UITapGestureRecognizer()
         
@@ -1932,5 +1935,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
             self.settingsView.isHidden = true
             self.hamburgerView.backgroundColor = interface.heading
         }
+    
+
 }
 
