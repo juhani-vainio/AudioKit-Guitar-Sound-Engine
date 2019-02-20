@@ -1271,16 +1271,7 @@ class audio {
         return (Float(min), Float(max), valueForSlider, value)
     }
     
-    func convertSliderValue(oldValue:Double) -> Double{
-        let oldMax = 1
-        let oldMin = 0
-        let newMax = 2
-        let newMin = 0.5
-        let oldRange = (oldMax - oldMin)
-        let newRange = (newMax - newMin)
-        let newValue = (((oldValue - oldMin) * newRange) / oldRange) + newMin
-        return newValue
-    }
+   
     
     
     
@@ -1288,6 +1279,8 @@ class audio {
     
     func changeValues(id: String, slider: Int, value: Double) -> String {
         var newValue = String()
+        var min = Double()
+        var max = Double()
         switch id {
             
         case "toneFilters":
@@ -1318,9 +1311,9 @@ class audio {
             }
             
         case "rhinoGuitarProcessor" :
+           
             switch slider {
    
-                
             case 0:
                 if  audio.rhinoGuitarProcessor!.isStarted == true {
                     audio.rhinoGuitarProcessor?.stop()
@@ -1335,20 +1328,22 @@ class audio {
                 }
  
             case 1:
+                min = Double(Effects.rhinoGuitarProcessor.distortionRange.lowerBound)
+                max = Double(Effects.rhinoGuitarProcessor.distortionRange.upperBound)
+                newValue = convertToPercent(value: value, max: max, min: min)
                 audio.rhinoGuitarProcessor?.distortion = value
-                newValue = String(value)
-                newValue = String(newValue.prefix(3))
             
             case 2:
+                min = Double(Effects.rhinoGuitarProcessor.preGainRange.lowerBound)
+                max = Double(Effects.rhinoGuitarProcessor.preGainRange.upperBound)
+                newValue = convertToPercent(value: value, max: max, min: min)
                 audio.rhinoGuitarProcessor?.preGain = value
-                newValue = String(value)
-                newValue = String(newValue.prefix(3))
-                
+              
             case 3:
                 audio.rhinoBooster?.dB = value
                 audio.rhinoBoosterDBValue = value
                 newValue = String(value)
-                newValue = String(newValue.prefix(3))
+                newValue = String(newValue.prefix(3)) + " dB"
            
             /*case 2:
                 audio.rhinoGuitarProcessor?.highGain = value
@@ -1584,8 +1579,9 @@ class audio {
  
             case 1:
                 audio.dynaRageCompressor?.ratio = value
-                let text = String(value)
-                newValue = String(text.prefix(3))
+                min = Double(Effects.dynaRageCompressor.ratioRange.lowerBound)
+                max = Double(Effects.dynaRageCompressor.ratioRange.upperBound)
+                newValue = convertToPercent(value: value, max: max, min: min)
             case 2:
                 audio.dynaRageCompressor?.threshold = value
                 newValue = String(value )
@@ -1600,8 +1596,9 @@ class audio {
                 newValue = String(newValue.prefix(5) + " s")
             case 5:
                 audio.dynaRageCompressor?.rage = value
-                newValue = String(value * 10)
-                newValue = String(newValue.prefix(3))
+                min = Double(Effects.dynaRageCompressor.rageRatio.lowerBound)
+                max = Double(Effects.dynaRageCompressor.rageRatio.upperBound)
+                newValue = convertToPercent(value: value, max: max, min: min)
             default: break
                 
             }
@@ -1618,16 +1615,19 @@ class audio {
                 }
             case 1:
                 audio.autoWah?.wah = value
-                newValue = String(value * 10)
-                newValue = String(newValue.prefix(3))
+                min = Double(Effects.autoWah.wahRange.lowerBound)
+                max = Double(Effects.autoWah.wahRange.upperBound)
+                newValue = convertToPercent(value: value, max: max, min: min)
             case 2:
                 audio.autoWah?.amplitude = value
-                newValue = String(value * 10)
-                newValue = String(newValue.prefix(3))
+                min = Double(Effects.autoWah.amplitudeRange.lowerBound)
+                max = Double(Effects.autoWah.amplitudeRange.upperBound)
+                newValue = convertToPercent(value: value, max: max, min: min)
             case 3:
                 audio.autoWah?.mix = value
-                newValue = String(value * 10)
-                newValue = String(newValue.prefix(3))
+                min = Double(Effects.autoWah.mixRange.lowerBound)
+                max = Double(Effects.autoWah.mixRange.upperBound)
+                newValue = convertToPercent(value: value, max: max, min: min)
                 
             default: break
                 
@@ -1648,14 +1648,16 @@ class audio {
                 newValue = String(value )
                 newValue = String(newValue.prefix(5) + " s")
             case 2:
+                min = Double(Effects.delay.feedbackRange.lowerBound)
+                max = Double(Effects.delay.feedbackRange.upperBound)
                 audio.delay?.feedback = value
-                newValue = String(value * 10)
-                newValue = String(newValue.prefix(3))
+                newValue = convertToPercent(value: value, max: max, min: min)
             
             case 3:
+                min = Double(Effects.delay.dryWetMixRange.lowerBound)
+                max = Double(Effects.delay.dryWetMixRange.upperBound)
                 audio.delay?.dryWetMix = value
-                newValue = String(value * 10)
-                newValue = String(newValue.prefix(3))
+                newValue = convertToPercent(value: value, max: max, min: min)
              /*
             case 3:
                 audio.delay?.lowPassCutoff = value
@@ -1865,16 +1867,19 @@ class audio {
                 newValue = String(text.prefix(5) + " Hz")
             case 2:
                 audio.flanger?.depth = value
-                newValue = String(value * 10)
-                newValue = String(newValue.prefix(3))
+                min = Double(Effects.flanger.depthRange.lowerBound)
+                max = Double(Effects.flanger.depthRange.upperBound)
+                newValue = convertToPercent(value: value, max: max, min: min)
             case 3:
                 audio.flanger?.feedback = value
-                newValue = String(value * 10)
-                newValue = String(newValue.prefix(3))
+                min = Double(Effects.flanger.feedbackRange.lowerBound)
+                max = Double(Effects.flanger.feedbackRange.upperBound)
+                newValue = convertToPercent(value: value, max: max, min: min)
             case 4:
                 audio.flanger?.dryWetMix = value
-                newValue = String(value * 10)
-                newValue = String(newValue.prefix(3))
+                min = Double(Effects.flanger.dryWetMixRange.lowerBound)
+                max = Double(Effects.flanger.dryWetMixRange.upperBound)
+                newValue = convertToPercent(value: value, max: max, min: min)
             default: break
                 
             }
@@ -1914,12 +1919,14 @@ class audio {
                 newValue = String(newValue.prefix(3))
             case 6:
                 audio.phaser?.depth = value
-                newValue = String(value * 10)
-                newValue = String(newValue.prefix(3))
+                min = Double(Effects.phaser.depthRange.lowerBound)
+                max = Double(Effects.phaser.depthRange.upperBound)
+                newValue = convertToPercent(value: value, max: max, min: min)
             case 7:
                 audio.phaser?.feedback = value
-                newValue = String(value * 10)
-                newValue = String(newValue.prefix(3))
+                min = Double(Effects.phaser.feedbackRange.lowerBound)
+                max = Double(Effects.phaser.feedbackRange.upperBound)
+                newValue = convertToPercent(value: value, max: max, min: min)
             case 8:
                 audio.phaser?.lfoBPM = value
                 let text = String(value)
@@ -1943,17 +1950,21 @@ class audio {
                 let text = String(intValue)
                 newValue = String(text.prefix(5) + " Hz")
             case 2:
+                min = Double(Effects.chorus.depthRange.lowerBound)
+                max = Double(Effects.chorus.depthRange.upperBound)
+                newValue = convertToPercent(value: value, max: max, min: min)
                 audio.chorus?.depth = value
-                newValue = String(value * 10)
-                newValue = String(newValue.prefix(3))
+                
             case 3:
                 audio.chorus?.feedback = value
-                newValue = String(value * 10)
-                newValue = String(newValue.prefix(3))
+                min = Double(Effects.chorus.feedbackRange.lowerBound)
+                max = Double(Effects.chorus.feedbackRange.upperBound)
+                newValue = convertToPercent(value: value, max: max, min: min)
             case 4:
                 audio.chorus?.dryWetMix = value
-                newValue = String(value * 10)
-                newValue = String(newValue.prefix(3))
+                min = Double(Effects.chorus.dryWetMixRange.lowerBound)
+                max = Double(Effects.chorus.dryWetMixRange.upperBound)
+                newValue = convertToPercent(value: value, max: max, min: min)
                 
             default: break
                 
@@ -2212,8 +2223,9 @@ class audio {
                 newValue = String(text.prefix(5) + " Hz")
             case 2:
                 audio.tremolo?.depth = value
-                newValue = String(value * 10)
-                newValue = String(newValue.prefix(3))
+                min = Double(Effects.tremolo.depthRange.lowerBound)
+                max = Double(Effects.tremolo.depthRange.upperBound)
+                newValue = convertToPercent(value: value, max: max, min: min)
                 
             default: break
             }
@@ -2388,10 +2400,8 @@ class audio {
                 min = Float(Effects.rhinoGuitarProcessor.distortionRange.lowerBound)
                 max = Float(Effects.rhinoGuitarProcessor.distortionRange.upperBound)
                 valueForSlider = Float(audio.rhinoGuitarProcessor!.distortion)
+                value = convertToPercent(value: Double(valueForSlider), max: Double(max), min: Double(min))
                 name = "Distortion"
-                let intValue = Int(valueForSlider)
-                value = String(intValue)
-                value = String(value.prefix(3))
                 isOn = audio.rhinoGuitarProcessor!.isStarted
             
                 
@@ -2399,10 +2409,8 @@ class audio {
                 min = Float(Effects.rhinoGuitarProcessor.preGainRange.lowerBound)
                 max = Float(Effects.rhinoGuitarProcessor.preGainRange.upperBound)
                 valueForSlider = Float(audio.rhinoGuitarProcessor!.preGain)
+                value = convertToPercent(value: Double(valueForSlider), max: Double(max), min: Double(min))
                 name = "Gain"
-                let intValue = Int(valueForSlider)
-                value = String(intValue)
-                value = String(value.prefix(3))
                 isOn = audio.rhinoGuitarProcessor!.isStarted
                 
             case 3:
@@ -2412,7 +2420,7 @@ class audio {
                 name = "Volume"
                 let intValue = Int(valueForSlider)
                 value = String(intValue)
-                value = String(value.prefix(3))
+                value = String(value.prefix(3)) + " dB"
                 isOn = audio.rhinoGuitarProcessor!.isStarted
                 
                 /*
@@ -2661,8 +2669,7 @@ class audio {
                 max = Float(Effects.dynaRageCompressor.ratioRange.upperBound)
                 valueForSlider = Float(audio.dynaRageCompressor!.ratio)
                 name = "Ratio"
-                value = String(audio.dynaRageCompressor!.ratio)
-                value = String(value.prefix(3))
+                value = convertToPercent(value: Double(valueForSlider), max: Double(max), min: Double(min))
                 isOn = audio.dynaRageCompressor!.isStarted
             case 2:
                 min = Float(Effects.dynaRageCompressor.thresholdRange.lowerBound)
@@ -2694,8 +2701,7 @@ class audio {
                 max = Float(Effects.dynaRageCompressor.rageRatio.upperBound)
                 valueForSlider = Float(audio.dynaRageCompressor!.rage)
                 name = "Rage"
-                value = String(valueForSlider * 10)
-                value = String(value.prefix(3))
+                value = convertToPercent(value: Double(valueForSlider), max: Double(max), min: Double(min))
                 isOn = audio.dynaRageCompressor!.isStarted
             default: break
             }
@@ -2708,27 +2714,21 @@ class audio {
                 max = Float(Effects.autoWah.wahRange.upperBound)
                 valueForSlider = Float(audio.autoWah!.wah)
                 name = "Wah"
-                let intValue = Int(valueForSlider * 10)
-                value = String(intValue)
-                value = String(value.prefix(3))
+                value = convertToPercent(value: Double(valueForSlider), max: Double(max), min: Double(min))
                 isOn = audio.autoWah!.isStarted
             case 2:
                 min = Float(Effects.autoWah.amplitudeRange.lowerBound)
                 max = Float(Effects.autoWah.amplitudeRange.upperBound)
                 valueForSlider = Float(audio.autoWah!.amplitude)
                 name = "Amplitude"
-                let intValue = Int(valueForSlider * 10)
-                value = String(intValue)
-                value = String(value.prefix(3))
+                value = convertToPercent(value: Double(valueForSlider), max: Double(max), min: Double(min))
                 isOn = audio.autoWah!.isStarted
             case 3:
                 min = Float(Effects.autoWah.mixRange.lowerBound)
                 max = Float(Effects.autoWah.mixRange.upperBound)
                 valueForSlider = Float(audio.autoWah!.mix)
                 name = "Dry Wet Mix"
-                let intValue = Int(valueForSlider * 10)
-                value = String(intValue)
-                value = String(value.prefix(3))
+                value = convertToPercent(value: Double(valueForSlider), max: Double(max), min: Double(min))
                 isOn = audio.autoWah!.isStarted
             default: break
             }
@@ -2749,9 +2749,7 @@ class audio {
                 max = Float(Effects.delay.feedbackRange.upperBound)
                 valueForSlider = Float(audio.delay!.feedback)
                 name = "Feedback"
-                let intValue = Int(valueForSlider * 10)
-                value = String(intValue)
-                value = String(value.prefix(3))
+                value = convertToPercent(value: Double(valueForSlider), max: Double(max), min: Double(min))
                 isOn = audio.delay!.isStarted
                 
             case 3:
@@ -2759,9 +2757,7 @@ class audio {
                 max = Float(Effects.delay.dryWetMixRange.upperBound)
                 valueForSlider = Float(audio.delay!.dryWetMix)
                 name = "Dry Wet Mix"
-                let intValue = Int(valueForSlider * 10)
-                value = String(intValue)
-                value = String(value.prefix(3))
+                value = convertToPercent(value: Double(valueForSlider), max: Double(max), min: Double(min))
                 isOn = audio.delay!.isStarted
                 /*
             case 3:
@@ -2794,9 +2790,7 @@ class audio {
                 max = Float(Effects.variableDelay.feedbackRange.upperBound)
                 valueForSlider = Float(audio.variableDelay!.feedback)
                 name = "Feedback"
-                let intValue = Int(valueForSlider * 10)
-                value = String(intValue)
-                value = String(value.prefix(3))
+                value = convertToPercent(value: Double(valueForSlider), max: Double(max), min: Double(min))
                 isOn = audio.variableDelay!.isStarted
                 
             default: break
@@ -2810,27 +2804,21 @@ class audio {
                 max = Float(Effects.decimator.decimationRange.upperBound)
                 valueForSlider = Float(audio.decimator!.decimation)
                 name = "Decimation"
-                let intValue = Int(valueForSlider * 10)
-                value = String(intValue)
-                value = String(value.prefix(3))
+                value = convertToPercent(value: Double(valueForSlider), max: Double(max), min: Double(min))
                 isOn = audio.decimator!.isStarted
             case 2:
                 min = Float(Effects.decimator.roundingRange.lowerBound)
                 max = Float(Effects.decimator.roundingRange.upperBound)
                 valueForSlider = Float(audio.decimator!.rounding)
                 name = "Rounding"
-                let intValue = Int(valueForSlider * 10)
-                value = String(intValue)
-                value = String(value.prefix(3))
+                value = convertToPercent(value: Double(valueForSlider), max: Double(max), min: Double(min))
                 isOn = audio.decimator!.isStarted
             case 3:
                 min = Float(Effects.decimator.mixRange.lowerBound)
                 max = Float(Effects.decimator.mixRange.upperBound)
                 valueForSlider = Float(audio.decimator!.mix)
                 name = "Mix"
-                let intValue = Int(valueForSlider * 10)
-                value = String(intValue)
-                value = String(value.prefix(3))
+                value = convertToPercent(value: Double(valueForSlider), max: Double(max), min: Double(min))
                 isOn = audio.decimator!.isStarted
             default: break
             }
@@ -2842,9 +2830,7 @@ class audio {
                 min = Float(Effects.clipper.limitRange.lowerBound)
                 max = Float(Effects.clipper.limitRange.upperBound)
                 valueForSlider = Float(audio.clipper!.limit)
-                let intValue = Int(valueForSlider * 10)
-                value = String(intValue)
-                value = String(value.prefix(3))
+                value = convertToPercent(value: Double(valueForSlider), max: Double(max), min: Double(min))
                 isOn = audio.clipper!.isStarted
             default: break
             }
@@ -3058,27 +3044,21 @@ class audio {
                 max = Float(Effects.flanger.depthRange.upperBound)
                 valueForSlider = Float(audio.flanger!.depth)
                 name = "Depth"
-                let intValue = Int(valueForSlider * 10)
-                value = String(intValue)
-                value = String(value.prefix(3))
+                value = convertToPercent(value: Double(valueForSlider), max: Double(max), min: Double(min))
                 isOn = audio.flanger!.isStarted
             case 3:
                 min = Float(Effects.flanger.feedbackRange.lowerBound)
                 max = Float(Effects.flanger.feedbackRange.upperBound)
                 valueForSlider = Float(audio.flanger!.feedback)
                 name = "Feedback"
-                let intValue = Int(valueForSlider * 10)
-                value = String(intValue)
-                value = String(value.prefix(3))
+                value = convertToPercent(value: Double(valueForSlider), max: Double(max), min: Double(min))
                 isOn = audio.flanger!.isStarted
             case 4:
                 min = Float(Effects.flanger.dryWetMixRange.lowerBound)
                 max = Float(Effects.flanger.dryWetMixRange.upperBound)
                 valueForSlider = Float(audio.flanger!.dryWetMix)
                 name = "Dry Wet Mix"
-                let intValue = Int(valueForSlider * 10)
-                value = String(intValue)
-                value = String(value.prefix(3))
+                value = convertToPercent(value: Double(valueForSlider), max: Double(max), min: Double(min))
                 isOn = audio.flanger!.isStarted
             default: break
             }
@@ -3139,18 +3119,14 @@ class audio {
                 max = Float(Effects.phaser.depthRange.upperBound)
                 valueForSlider = Float(audio.phaser!.depth)
                 name = "Depth"
-                let intValue = Int(valueForSlider * 10)
-                value = String(intValue)
-                value = String(value.prefix(3))
+                value = convertToPercent(value: Double(valueForSlider), max: Double(max), min: Double(min))
                 isOn = audio.phaser!.isStarted
             case 7:
                 min = Float(Effects.phaser.feedbackRange.lowerBound)
                 max = Float(Effects.phaser.feedbackRange.upperBound)
                 valueForSlider = Float(audio.phaser!.feedback)
                 name = "Feedback"
-                let intValue = Int(valueForSlider * 10)
-                value = String(intValue)
-                value = String(value.prefix(3))
+                value = convertToPercent(value: Double(valueForSlider), max: Double(max), min: Double(min))
                 isOn = audio.phaser!.isStarted
             case 8:
                 min = Float(Effects.phaser.lfoBPMRange.lowerBound)
@@ -3178,28 +3154,22 @@ class audio {
                 min = Float(Effects.chorus.depthRange.lowerBound)
                 max = Float(Effects.chorus.depthRange.upperBound)
                 valueForSlider = Float(audio.chorus!.depth)
+                value = convertToPercent(value: Double(valueForSlider), max: Double(max), min: Double(min))
                 name = "Depth"
-                let intValue = Int(valueForSlider * 10)
-                value = String(intValue)
-                value = String(value.prefix(3))
                 isOn = audio.chorus!.isStarted
             case 3:
                 min = Float(Effects.chorus.feedbackRange.lowerBound)
                 max = Float(Effects.chorus.feedbackRange.upperBound)
                 valueForSlider = Float(audio.chorus!.feedback)
+                value = convertToPercent(value: Double(valueForSlider), max: Double(max), min: Double(min))
                 name = "Feedback"
-                let intValue = Int(valueForSlider * 10)
-                value = String(intValue)
-                value = String(value.prefix(3))
                 isOn = audio.chorus!.isStarted
             case 4:
                 min = Float(Effects.chorus.dryWetMixRange.lowerBound)
                 max = Float(Effects.chorus.dryWetMixRange.upperBound)
                 valueForSlider = Float(audio.chorus!.dryWetMix)
                 name = "Dry Wet Mix"
-                let intValue = Int(valueForSlider * 10)
-                value = String(intValue)
-                value = String(value.prefix(3))
+                value = convertToPercent(value: Double(valueForSlider), max: Double(max), min: Double(min))
                 isOn = audio.chorus!.isStarted
                 
             default: break
@@ -3393,9 +3363,7 @@ class audio {
                 max = Float(Effects.reverb.dryWetMixRange.upperBound)
                 valueForSlider = Float(audio.reverb!.dryWetMix)
                 name = "Dry Wet Mix"
-                let intValue = Int(valueForSlider * 10)
-                value = String(intValue)
-                value = String(value.prefix(3))
+                value = convertToPercent(value: Double(valueForSlider), max: Double(max), min: Double(min))
                 isOn = audio.reverb!.isStarted
                 
             default: break
@@ -3496,9 +3464,7 @@ class audio {
                 max = Float(Effects.costelloReverb.feedbackRange.upperBound)
                 valueForSlider = Float(audio.costelloReverb!.feedback)
                 name = "Feedback"
-                let intValue = Int(valueForSlider * 10)
-                value = String(intValue)
-                value = String(value.prefix(3))
+                value = convertToPercent(value: Double(valueForSlider), max: Double(max), min: Double(min))
                 isOn = audio.costelloReverb!.isStarted
                 
                 
@@ -3536,9 +3502,7 @@ class audio {
                 max = Float(Effects.tremolo.depthRange.upperBound)
                 valueForSlider = Float(audio.tremolo!.depth)
                 name = "Depth"
-                let intValue = Int(valueForSlider * 10)
-                value = String(intValue)
-                value = String(value.prefix(3))
+                value = convertToPercent(value: Double(valueForSlider), max: Double(max), min: Double(min))
                 isOn = audio.tremolo!.isStarted
                 
             default: break
