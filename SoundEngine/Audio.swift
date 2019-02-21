@@ -947,12 +947,13 @@ class audio {
         audio.inputBooster?.connect(to: inputAmplitudeTracker!)
     }
     
-    func updateTrackerUI() -> String {
+    func updateTrackerUI() -> (note: String, direction: Float) {
         var note = ""
+        var direction: Float = 0.0
         if self.frequencyTracker!.amplitude > 0.1 {
             let noteFrequencies = [16.35, 17.32, 18.35, 19.45, 20.6, 21.83, 23.12, 24.5, 25.96, 27.5, 29.14, 30.87]
             let noteNamesWithSharps = ["C", "C♯", "D", "D♯", "E", "F", "F♯", "G", "G♯", "A", "A♯", "B"]
-            let noteNamesWithFlats = ["C", "D♭", "D", "E♭", "E", "F", "G♭", "G", "A♭", "A", "B♭", "B"]
+           // let noteNamesWithFlats = ["C", "D♭", "D", "E♭", "E", "F", "G♭", "G", "A♭", "A", "B♭", "B"]
             var frequency = Float(self.frequencyTracker!.frequency)
             while (frequency > Float(noteFrequencies[noteFrequencies.count-1])) {
                 frequency = frequency / 2.0
@@ -965,19 +966,21 @@ class audio {
             var index = 0
             
             for i in 0..<noteFrequencies.count {
-                let distance = fabsf(Float(noteFrequencies[i]) - frequency)
-                if (distance < minDistance){
+                let absoluteDistance = fabsf(Float(noteFrequencies[i]) - frequency)
+                let distance = Float(noteFrequencies[i]) - frequency
+                if (absoluteDistance < minDistance){
                     index = i
-                    minDistance = distance
+                    minDistance = absoluteDistance
+                    direction = distance
                 }
             }
             let octave = Int(log2f(Float(self.frequencyTracker!.frequency) / frequency))
             note = noteNamesWithSharps[index] + String(octave)
-            print("Sharps \(noteNamesWithSharps[index])\(octave)")
+            //print("\(noteNamesWithSharps[index])\(octave)")
             
             
         }
-        return note
+        return (note, direction)
     }
     
     func ratioToDecibel(ratio: Double) -> Double {

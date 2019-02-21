@@ -1612,8 +1612,20 @@
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lQx-nu-q1p">
                                                         <rect key="frame" x="214.5" y="213" width="240" height="70"/>
                                                         <subviews>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="S" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="njc-4F-IMa">
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="o" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WLl-rU-Yfn">
+                                                                <rect key="frame" x="70.5" y="14.5" width="18.5" height="41"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="34"/>
+                                                                <color key="textColor" red="0.1248634983" green="0.8492149028" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="S" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="njc-4F-IMa">
                                                                 <rect key="frame" x="109.5" y="14.5" width="21" height="41"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="34"/>
+                                                                <color key="textColor" red="0.1248634983" green="0.8492149028" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="o" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Iq0-nd-mds">
+                                                                <rect key="frame" x="150.5" y="14.5" width="18.5" height="41"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="34"/>
                                                                 <color key="textColor" red="0.1248634983" green="0.8492149028" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <nil key="highlightedColor"/>
@@ -1621,9 +1633,13 @@
                                                         </subviews>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
-                                                            <constraint firstItem="njc-4F-IMa" firstAttribute="centerY" secondItem="lQx-nu-q1p" secondAttribute="centerY" id="TFV-Nq-Azu"/>
-                                                            <constraint firstItem="njc-4F-IMa" firstAttribute="centerX" secondItem="lQx-nu-q1p" secondAttribute="centerX" id="UEd-GZ-0Xe"/>
+                                                            <constraint firstItem="WLl-rU-Yfn" firstAttribute="centerX" secondItem="lQx-nu-q1p" secondAttribute="centerX" constant="-40" id="3f5-vR-DXc"/>
+                                                            <constraint firstItem="WLl-rU-Yfn" firstAttribute="centerY" secondItem="lQx-nu-q1p" secondAttribute="centerY" id="6ht-Zz-1FJ"/>
+                                                            <constraint firstItem="Iq0-nd-mds" firstAttribute="centerY" secondItem="lQx-nu-q1p" secondAttribute="centerY" id="Ntm-LR-6X6"/>
+                                                            <constraint firstItem="njc-4F-IMa" firstAttribute="centerY" secondItem="lQx-nu-q1p" secondAttribute="centerY" id="QPb-Pb-GL3"/>
+                                                            <constraint firstItem="njc-4F-IMa" firstAttribute="centerX" secondItem="lQx-nu-q1p" secondAttribute="centerX" id="VG3-sE-re8"/>
                                                             <constraint firstAttribute="width" constant="240" id="ZxX-ls-hOc"/>
+                                                            <constraint firstItem="Iq0-nd-mds" firstAttribute="centerX" secondItem="lQx-nu-q1p" secondAttribute="centerX" constant="40" id="wWi-AS-DN9"/>
                                                         </constraints>
                                                     </view>
                                                 </subviews>
@@ -1656,8 +1672,8 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rr3-Lg-J2y">
                                         <rect key="frame" x="685.5" y="628" width="180" height="40"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Settings" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PVX-Yz-jhE">
-                                                <rect key="frame" x="68.5" y="9" width="64" height="21"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Settings" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PVX-Yz-jhE">
+                                                <rect key="frame" x="58.5" y="10" width="63.5" height="20.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -1721,6 +1737,7 @@
                         <outlet property="effectsTitle" destination="yVl-Iw-6Qq" id="LGs-Qv-I9J"/>
                         <outlet property="eqTableView" destination="4UE-UB-M6x" id="oHQ-2d-gyQ"/>
                         <outlet property="eqView" destination="ync-kL-bEh" id="mO6-n9-y1p"/>
+                        <outlet property="flat" destination="WLl-rU-Yfn" id="tJO-vA-DAC"/>
                         <outlet property="hamburgerView" destination="Rr3-Lg-J2y" id="x7f-NN-tff"/>
                         <outlet property="inputLevel" destination="Xkl-Dh-Vaf" id="bjV-K2-axK"/>
                         <outlet property="inputLevelView" destination="mLP-tV-6MC" id="goF-Lx-xZi"/>
@@ -1733,6 +1750,7 @@
                         <outlet property="settingsEmptyAreaView" destination="JFH-yb-yOl" id="UFs-Hh-j0r"/>
                         <outlet property="settingsTitle" destination="PVX-Yz-jhE" id="GwZ-39-SJk"/>
                         <outlet property="settingsView" destination="MvW-18-d2g" id="qN9-KL-QPA"/>
+                        <outlet property="sharp" destination="Iq0-nd-mds" id="7l3-Pq-OjY"/>
                         <outlet property="soundEngine" destination="kJc-vz-H87" id="SKf-wF-7BW"/>
                         <outlet property="soundEngineHeight" destination="tWP-IP-qdj" id="7AS-nN-kcV"/>
                         <outlet property="soundTitle" destination="Foh-SW-ajp" id="2zL-qw-2dl"/>

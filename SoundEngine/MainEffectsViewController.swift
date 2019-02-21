@@ -73,16 +73,52 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
         @IBOutlet weak var soundsLibraryTitle: UILabel!
     
         @IBOutlet weak var tunerNoteLabel: UILabel!
+        @IBOutlet weak var sharp: UILabel!
+        @IBOutlet weak var flat: UILabel!
     
     
     func startAmplitudeMonitors() {
         
-        let timer = Timer.scheduledTimer(withTimeInterval: 0.01, repeats: true) { timer in
-            let note = audio.shared.updateTrackerUI()
+        let timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { timer in
+            
+            let tuner = audio.shared.updateTrackerUI()
           
-            if self.tunerNoteLabel.text != note {
-                self.tunerNoteLabel.text = note
+            if tuner.note == "" {
+                self.tunerNoteLabel.isEnabled = false
+                self.sharp.isEnabled = false
+                self.flat.isEnabled = false
             }
+            else {
+                self.tunerNoteLabel.isEnabled = true
+                if self.tunerNoteLabel.text != tuner.note {
+                    self.tunerNoteLabel.text = tuner.note
+                }
+                
+                let absolute = fabsf(tuner.direction)
+                
+                if absolute > 0.02 {
+                    if tuner.direction < 0 {
+                        // sharp
+                        self.sharp.isEnabled = true
+                        self.flat.isEnabled = false
+                    }
+                    else {
+                        // flat
+                        self.sharp.isEnabled = false
+                        self.flat.isEnabled = true
+                        
+                    }
+                }
+                else {
+                    self.sharp.isEnabled = true
+                    self.flat.isEnabled = true
+                }
+                
+            }
+            
+      
+            
+            
         }
         timer.fire()
     }
