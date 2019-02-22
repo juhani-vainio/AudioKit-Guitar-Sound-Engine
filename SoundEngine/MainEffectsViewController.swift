@@ -81,8 +81,10 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
         
         let timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { timer in
             
+            
             let tuner = audio.shared.updateTrackerUI()
-          
+            print("TUNER : \(tuner)")
+            
             if tuner.note == "" {
                 self.tunerNoteLabel.isEnabled = false
                 self.sharp.isEnabled = false

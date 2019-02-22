@@ -950,6 +950,7 @@ class audio {
     func updateTrackerUI() -> (note: String, direction: Float) {
         var note = ""
         var direction: Float = 0.0
+        var directionWithRatio: Float = 0.0
         if self.frequencyTracker!.amplitude > 0.1 {
             let noteFrequencies = [16.35, 17.32, 18.35, 19.45, 20.6, 21.83, 23.12, 24.5, 25.96, 27.5, 29.14, 30.87]
             let noteNamesWithSharps = ["C", "C♯", "D", "D♯", "E", "F", "F♯", "G", "G♯", "A", "A♯", "B"]
@@ -965,6 +966,7 @@ class audio {
             var minDistance: Float = 10000.0
             var index = 0
             
+            // closest note
             for i in 0..<noteFrequencies.count {
                 let absoluteDistance = fabsf(Float(noteFrequencies[i]) - frequency)
                 let distance = Float(noteFrequencies[i]) - frequency
@@ -974,13 +976,40 @@ class audio {
                     direction = distance
                 }
             }
+            
+            // distace ratio to next note
+            if direction < 0 {
+                // sharp
+                let nextFrequency = noteFrequencies[index] * pow(pow(2,(1/12)), 1)
+                let distanceBetweenNotes = nextFrequency - noteFrequencies[index]
+                let percent = fabsf(direction) * 100 / distanceBetweenNotes
+                directionWithRatio = Float(-percent)
+            }
+            else {
+                // flat
+                let previousFrequency = noteFrequencies[index] * pow((pow(2,(1/12))), -1)
+                let distanceBetweenNotes = noteFrequencies[index] - previousFrequency
+                let percent = fabsf(direction) * 100 / distanceBetweenNotes
+                directionWithRatio = Float(percent)
+            }
+            
             let octave = Int(log2f(Float(self.frequencyTracker!.frequency) / frequency))
-            note = noteNamesWithSharps[index] + String(octave)
-            //print("\(noteNamesWithSharps[index])\(octave)")
             
+            // B sharp exception
+            if index == noteFrequencies.count - 1 {
+                if directionWithRatio < -50 {
+                    directionWithRatio = directionWithRatio + 100
+                    note = "C" + String(octave)
+                } else {
+                    note = noteNamesWithSharps[index] + String(octave)
+                }
+            } else {
+                note = noteNamesWithSharps[index] + String(octave)
+            }
             
+ 
         }
-        return (note, direction)
+        return (note, directionWithRatio)
     }
     
     func ratioToDecibel(ratio: Double) -> Double {
