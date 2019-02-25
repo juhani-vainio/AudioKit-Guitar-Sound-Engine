@@ -19,7 +19,8 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
         var nameCheck = Bool()
         var effectChainNeedsReset = Bool(false)
         
-        @IBOutlet weak var soundEngineHeight: NSLayoutConstraint!
+    @IBOutlet weak var eqLeadingToCenterXConstraint: NSLayoutConstraint!
+    @IBOutlet weak var soundEngineHeight: NSLayoutConstraint!
         @IBOutlet weak var soundsViewHeight: NSLayoutConstraint!
     
         @IBOutlet weak var availableEffectsHeight: NSLayoutConstraint!
@@ -28,11 +29,10 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
         @IBOutlet weak var outputLevel: UISlider!
         @IBOutlet weak var bufferLengthSegment: UISegmentedControl!
         
-        
-        @IBOutlet weak var eqView: UIView!
+    
         @IBOutlet weak var eqTableView: UITableView!
     
-      
+    
         @IBOutlet weak var topView: UIView!
         
         @IBOutlet weak var bottomView: UIView!
@@ -186,7 +186,17 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
         timer.fire()
     }
     
-        
+    
+    func moveEqToPosition(value: Int) {
+        if value == 0 {
+            self.eqLeadingToCenterXConstraint.constant = eqTableView.bounds.width / 2 - eqTableView.bounds.width
+            self.eqTableView.layoutIfNeeded()
+            
+        } else {
+            self.eqLeadingToCenterXConstraint.constant = 0
+        }
+    }
+    
         func setSoundsViewHeight() {
             let newHeight = CGFloat(Collections.savedSounds.count * 44 + 78)
             let maxHeight = CGFloat(self.soundEngineHeight.constant - 52)
@@ -354,7 +364,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
             eqTableView.backgroundColor = UIColor.clear
             
             soundEngine.backgroundColor = UIColor.clear
-            eqView.backgroundColor = UIColor.clear
+           
             soundTitle.textColor = interface.textAlt
             effectsTitle.textColor = interface.text
             settingsTitle.textColor = interface.text
@@ -626,6 +636,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
             else if tableView == selectedEffects {
                 // unitsAfter List
                 value = audio.selectedEffectsData.count
+                self.moveEqToPosition(value: value)
             }
             
             else if tableView == eqTableView {
