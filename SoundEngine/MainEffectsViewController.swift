@@ -32,7 +32,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
         @IBOutlet weak var eqView: UIView!
         @IBOutlet weak var eqTableView: UITableView!
     
-        @IBOutlet weak var toolBar: UIView!
+      
         @IBOutlet weak var topView: UIView!
         
         @IBOutlet weak var bottomView: UIView!
@@ -334,7 +334,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
             bottomView.backgroundColor = interface.bottomView
             waveformView.backgroundColor = UIColor.clear
             
-            toolBar.backgroundColor = interface.topView
+           
             top.backgroundColor = interface.topView
             soundsTab.backgroundColor = interface.heading
             effectsTab.backgroundColor = interface.heading
