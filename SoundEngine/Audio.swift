@@ -947,8 +947,10 @@ class audio {
         audio.inputBooster?.connect(to: inputAmplitudeTracker!)
     }
     
-    func updateTrackerUI() -> (note: String, direction: Float) {
+    func updateTrackerUI() -> (note: String, octave: String, sharp: String, direction: Float) {
         var note = ""
+        var octave = ""
+        var sharp = ""
         var direction: Float = 0.0
         var directionWithRatio: Float = 0.0
         if self.frequencyTracker!.amplitude > 0.1 {
@@ -993,24 +995,34 @@ class audio {
                 directionWithRatio = Float(percent)
             }
             
-            let octave = Int(log2f(Float(self.frequencyTracker!.frequency) / frequency))
+            octave = String(Int(log2f(Float(self.frequencyTracker!.frequency) / frequency)))
             
-            // B sharp exception
+            
             if index == noteFrequencies.count - 1 {
+                // B sharp exception
                 if directionWithRatio < -50 {
                     directionWithRatio = directionWithRatio + 100
-                    note = "C" + String(octave)
+                    note = "C"
                 } else {
-                    note = noteNamesWithSharps[index] + String(octave)
+                    // Normal
+                    note = noteNamesWithSharps[index]
                 }
             } else {
-                note = noteNamesWithSharps[index] + String(octave)
+                // Normal
+                note = noteNamesWithSharps[index]
             }
             
- 
+            if index ==  1 || index ==  3 || index ==  6 || index ==  8 || index ==  10 {
+                sharp = "#"
+                note = String(note.dropLast())
+            }
         }
-        return (note, directionWithRatio)
+        
+      
+        
+        return (note, octave, sharp, directionWithRatio)
     }
+    
     
     func ratioToDecibel(ratio: Double) -> Double {
         let dB = 20 * log10(ratio)

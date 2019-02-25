@@ -74,46 +74,107 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
     
         @IBOutlet weak var tunerNoteLabel: UILabel!
         @IBOutlet weak var sharp: UILabel!
-        @IBOutlet weak var flat: UILabel!
+    @IBOutlet weak var octave: UILabel!
     
+    
+    @IBOutlet weak var flat5: UILabel!
+    @IBOutlet weak var flat4: UILabel!
+    @IBOutlet weak var flat3: UILabel!
+    @IBOutlet weak var flat2: UILabel!
+    @IBOutlet weak var flat1: UILabel!
+    @IBOutlet weak var inTune: UILabel!
+    @IBOutlet weak var sharp1: UILabel!
+    @IBOutlet weak var sharp2: UILabel!
+    @IBOutlet weak var sharp3: UILabel!
+    @IBOutlet weak var sharp4: UILabel!
+    @IBOutlet weak var sharp5: UILabel!
+    
+    func disableAllTunerLabels() {
+        
+        self.flat1.isEnabled = false
+        self.flat2.isEnabled = false
+        self.flat3.isEnabled = false
+        self.flat4.isEnabled = false
+        self.flat5.isEnabled = false
+        self.inTune.isEnabled = false
+        self.sharp1.isEnabled = false
+        self.sharp2.isEnabled = false
+        self.sharp3.isEnabled = false
+        self.sharp4.isEnabled = false
+        self.sharp5.isEnabled = false
+    }
     
     func startAmplitudeMonitors() {
         
         let timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { timer in
-            
-            
+          
             let tuner = audio.shared.updateTrackerUI()
             print("TUNER : \(tuner)")
             
             if tuner.note == "" {
+                self.sharp.isHidden = true
+                self.octave.isHidden = true
                 self.tunerNoteLabel.isEnabled = false
-                self.sharp.isEnabled = false
-                self.flat.isEnabled = false
+                self.disableAllTunerLabels()
+     
             }
             else {
+                self.sharp.isHidden = false
+                self.octave.isHidden = false
                 self.tunerNoteLabel.isEnabled = true
                 if self.tunerNoteLabel.text != tuner.note {
                     self.tunerNoteLabel.text = tuner.note
                 }
+                if self.octave.text != tuner.octave {
+                    if tuner.octave != "0" {
+                        self.octave.text = tuner.octave
+                    }
+                }
+                if self.sharp.text != tuner.sharp {
+                    self.sharp.text = tuner.sharp
+                }
                 
                 let absolute = fabsf(tuner.direction)
                 
-                if absolute > 0.02 {
-                    if tuner.direction < 0 {
-                        // sharp
-                        self.sharp.isEnabled = true
-                        self.flat.isEnabled = false
-                    }
-                    else {
-                        // flat
-                        self.sharp.isEnabled = false
-                        self.flat.isEnabled = true
-                        
-                    }
+                if absolute < 3 {
+                    self.disableAllTunerLabels()
+                    self.inTune.isEnabled = true
                 }
                 else {
-                    self.sharp.isEnabled = true
-                    self.flat.isEnabled = true
+                    self.disableAllTunerLabels()
+                    if tuner.direction > 0 && tuner.direction < 5 {
+                        self.inTune.isEnabled = true
+                        self.flat1.isEnabled = true
+                    }
+                    else if tuner.direction < 0 && tuner.direction > -5 {
+                        self.inTune.isEnabled = true
+                        self.sharp1.isEnabled = true
+                    }
+                    else if tuner.direction > 5 && tuner.direction < 10 {
+                        self.flat1.isEnabled = true
+                    }
+                    else if tuner.direction < -5 && tuner.direction > -10 {
+                        self.sharp1.isEnabled = true
+                    }
+                    else if tuner.direction > 10 && tuner.direction < 20 {
+                        self.flat2.isEnabled = true
+                    }
+                    else if tuner.direction < -10 && tuner.direction > -20 {
+                        self.sharp2.isEnabled = true
+                    }
+                    else if tuner.direction > 20 && tuner.direction < 30 {
+                        self.flat3.isEnabled = true
+                    }
+                    else if tuner.direction < -20 && tuner.direction > -30 {
+                        self.sharp3.isEnabled = true
+                    }
+                    else if tuner.direction > 40 && tuner.direction < 50 {
+                        self.flat4.isEnabled = true
+                    }
+                    else if tuner.direction < -40 && tuner.direction > -50 {
+                        self.sharp4.isEnabled = true
+                    }
+                    
                 }
                 
             }
