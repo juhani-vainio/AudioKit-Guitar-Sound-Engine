@@ -12,71 +12,26 @@ import UIKit
 fileprivate var longPressGesture: UILongPressGestureRecognizer!
 
 class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource  {
-   
-        fileprivate var sourceIndexPath: IndexPath?
-        fileprivate var snapshot: UIView?
-        
-        var nameCheck = Bool()
-        var effectChainNeedsReset = Bool(false)
-        
-    @IBOutlet weak var eqLeadingToCenterXConstraint: NSLayoutConstraint!
-    @IBOutlet weak var soundEngineHeight: NSLayoutConstraint!
-        @IBOutlet weak var soundsViewHeight: NSLayoutConstraint!
     
-        @IBOutlet weak var availableEffectsHeight: NSLayoutConstraint!
-        
-        @IBOutlet weak var inputLevel: UISlider!
-        @IBOutlet weak var outputLevel: UISlider!
-        @IBOutlet weak var bufferLengthSegment: UISegmentedControl!
-        
+    // "BUTTONS"
+    @IBOutlet weak var saveSoundsButton: UIButton!
+    @IBOutlet weak var soundsTab: UIView!
+    @IBOutlet weak var effectsTab: UIView!
+    @IBOutlet weak var hamburgerView: UIView!
     
-        @IBOutlet weak var eqTableView: UITableView!
+    // "CONTROLS"
+    @IBOutlet weak var inputLevel: UISlider!
+    @IBOutlet weak var outputLevel: UISlider!
+    @IBOutlet weak var bufferLengthSegment: UISegmentedControl!
     
-    
-        @IBOutlet weak var topView: UIView!
-        
-        @IBOutlet weak var bottomView: UIView!
-        @IBOutlet weak var waveformView: UIView!
-        @IBOutlet weak var soundsView: UIView!
-    
-    
-        @IBOutlet weak var savedSoundsTableView: UITableView!
-        @IBOutlet weak var soundEngine: UIView!
-        @IBOutlet weak var soundsTab: UIView!
-        @IBOutlet weak var effectsTab: UIView!
-    
-        @IBOutlet weak var hamburgerView: UIView!
-        @IBOutlet weak var settingsView: UIView!
-        @IBOutlet weak var settingControlsView: UIView!
-        @IBOutlet weak var settingsEmptyAreaView: UIView!
-        
-        @IBOutlet weak var availableEffectsView: UIView!
-        @IBOutlet weak var availableEffects: UITableView!
-         @IBOutlet weak var selectedEffects: UITableView!
-    
-        @IBOutlet weak var inputLevelView: UIView!
-        @IBOutlet weak var outputLevelView: UIView!
-        
-        
-        
-        @IBOutlet weak var saveSoundsButton: UIButton!
-        
-        var viewForSoundGraphic = UIView()
-        var stack = UIStackView()
-        
-        @IBOutlet weak var soundTitle: UILabel!
-        @IBOutlet weak var effectsTitle: UILabel!
-
-        @IBOutlet weak var settingsTitle: UILabel!
-    
-        
-        @IBOutlet weak var soundsLibraryTitle: UILabel!
-    
-        @IBOutlet weak var tunerNoteLabel: UILabel!
-        @IBOutlet weak var sharp: UILabel!
+    // TEXT LABELS
+    @IBOutlet weak var soundTitle: UILabel!
+    @IBOutlet weak var effectsTitle: UILabel!
+    @IBOutlet weak var settingsTitle: UILabel!
+    @IBOutlet weak var soundsLibraryTitle: UILabel!
+    @IBOutlet weak var tunerNoteLabel: UILabel!
+    @IBOutlet weak var sharp: UILabel!
     @IBOutlet weak var octave: UILabel!
-    
-    
     @IBOutlet weak var flat5: UILabel!
     @IBOutlet weak var flat4: UILabel!
     @IBOutlet weak var flat3: UILabel!
@@ -88,6 +43,47 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
     @IBOutlet weak var sharp3: UILabel!
     @IBOutlet weak var sharp4: UILabel!
     @IBOutlet weak var sharp5: UILabel!
+   
+    
+    // VIEWS
+    @IBOutlet weak var mainFrame: UIView!
+    @IBOutlet weak var top: UIView!
+    @IBOutlet weak var topControls: UIView!
+    @IBOutlet weak var bottom: UIView!
+    @IBOutlet weak var waveformView: UIView! // inside bottom
+    @IBOutlet weak var soundsView: UIView!
+    @IBOutlet weak var soundEngine: UIView!
+
+    @IBOutlet weak var settingsView: UIView!
+    @IBOutlet weak var settingControlsView: UIView!
+    @IBOutlet weak var settingsEmptyAreaView: UIView!
+    @IBOutlet weak var availableEffectsView: UIView!
+    @IBOutlet weak var inputLevelView: UIView!
+    @IBOutlet weak var outputLevelView: UIView!
+    
+    @IBOutlet weak var eqTableView: UITableView!
+    @IBOutlet weak var savedSoundsTableView: UITableView!
+    @IBOutlet weak var availableEffects: UITableView!
+    @IBOutlet weak var selectedEffects: UITableView!
+    
+    // CONSTRAINTS
+    @IBOutlet weak var eqLeadingToCenterXConstraint: NSLayoutConstraint!
+    @IBOutlet weak var soundEngineHeight: NSLayoutConstraint!
+    @IBOutlet weak var soundsViewHeight: NSLayoutConstraint!
+    @IBOutlet weak var availableEffectsHeight: NSLayoutConstraint!
+    
+    
+    // MISC STUFF
+    fileprivate var sourceIndexPath: IndexPath?
+    fileprivate var snapshot: UIView?
+        
+    var nameCheck = Bool()
+    var effectChainNeedsReset = Bool(false)
+    var viewForSoundGraphic = UIView()
+    var stack = UIStackView()
+        
+    
+    
     
     func disableAllTunerLabels() {
         
@@ -109,7 +105,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
         let timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { timer in
           
             let tuner = audio.shared.updateTrackerUI()
-            print("TUNER : \(tuner)")
+           // print("TUNER : \(tuner)")
             
             if tuner.note == "" {
                 self.sharp.isHidden = true
@@ -189,6 +185,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
     
     func moveEqToPosition(value: Int) {
         if value == 0 {
+            
             self.eqLeadingToCenterXConstraint.constant = eqTableView.bounds.width / 2 - eqTableView.bounds.width
             self.eqTableView.layoutIfNeeded()
             
@@ -226,6 +223,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
         override func viewDidLoad() {
             super.viewDidLoad()
             
+ 
             
             self.soundsTapGesture = UITapGestureRecognizer(target: self, action: #selector(handleSoundsTap))
             self.soundsTab.addGestureRecognizer(soundsTapGesture)
@@ -246,7 +244,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
             
             
             // Set up Interface Colors
-            Colors.palette.setInterfaceColorScheme(name: "spotify")
+            Colors.palette.setInterfaceColorScheme(name: "grabient")
             
             
             
@@ -329,47 +327,66 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
             setColors()
             
         }
-        
-        @IBOutlet weak var top: UIView!
+    
         func setColors() {
-            bufferLengthSegment.tintColor = interface.button
-            bufferLengthSegment.backgroundColor = interface.buttonBackground
+            // "BUTTONS"
+            saveSoundsButton.backgroundColor = interface.transparent
+            saveSoundsButton.tintColor = interface.text
+            soundsTab.backgroundColor = interface.tab
+            effectsTab.backgroundColor = interface.tab
+            hamburgerView.backgroundColor = interface.tab
             
+            // CONTROLS
             inputLevel.minimumTrackTintColor = interface.sliderMin
             inputLevel.maximumTrackTintColor = interface.sliderMax
+            inputLevel.thumbTintColor = interface.sliderThumb
             outputLevel.minimumTrackTintColor = interface.sliderMin
             outputLevel.maximumTrackTintColor = interface.sliderMax
+            outputLevel.thumbTintColor = interface.sliderThumb
+            bufferLengthSegment.tintColor = interface.button
+            bufferLengthSegment.backgroundColor = interface.buttonAlt
             
-            topView.backgroundColor = interface.topView
-            bottomView.backgroundColor = interface.bottomView
-            waveformView.backgroundColor = UIColor.clear
-            
-           
-            top.backgroundColor = interface.topView
-            soundsTab.backgroundColor = interface.heading
-            effectsTab.backgroundColor = interface.heading
-        
-            hamburgerView.backgroundColor = interface.heading
-            settingControlsView.backgroundColor = interface.topView
-            
-            soundsView.backgroundColor = interface.altBackground
-            savedSoundsTableView.backgroundColor = interface.tableBackground
-            
-            availableEffectsView.backgroundColor = interface.altBackground
-        
-            availableEffects.backgroundColor = interface.tableBackground
-         
-            
-            selectedEffects.backgroundColor = UIColor.clear
-            eqTableView.backgroundColor = UIColor.clear
-            
-            soundEngine.backgroundColor = UIColor.clear
-           
-            soundTitle.textColor = interface.textAlt
+            // TEXT LABELS
+            soundTitle.textColor = interface.text
             effectsTitle.textColor = interface.text
             settingsTitle.textColor = interface.text
-            
             soundsLibraryTitle.textColor = interface.text
+            tunerNoteLabel.textColor = interface.text
+            sharp.textColor = interface.text
+            octave.textColor = interface.text
+            flat5.textColor = interface.text
+            flat4.textColor = interface.text
+            flat3.textColor = interface.text
+            flat2.textColor = interface.text
+            flat1.textColor = interface.highlight
+            inTune.textColor = interface.positive
+            sharp1.textColor = interface.highlight
+            sharp2.textColor = interface.text
+            sharp3.textColor = interface.text
+            sharp4.textColor = interface.text
+            sharp5.textColor = interface.text
+            
+            //VIEWS
+            mainFrame.backgroundColor = interface.main
+            soundsView.backgroundColor = interface.mainAlt
+            top.backgroundColor = interface.top
+            settingControlsView.backgroundColor = interface.top
+            bottom.backgroundColor = interface.bottom
+            savedSoundsTableView.backgroundColor = interface.tableBackground
+            availableEffects.backgroundColor = interface.tableBackground
+            availableEffectsView.backgroundColor = interface.tableAlt
+            
+            // TRANSPARENT
+            topControls.backgroundColor = interface.transparent
+            waveformView.backgroundColor = interface.transparent
+            soundEngine.backgroundColor = interface.transparent
+            settingsView.backgroundColor = interface.transparent
+            settingsEmptyAreaView.backgroundColor = interface.transparent
+            inputLevelView.backgroundColor = interface.transparent
+            outputLevelView.backgroundColor = interface.transparent
+            eqTableView.backgroundColor = interface.transparent
+            selectedEffects.backgroundColor = interface.transparent
+        
         }
         
         func buildWaveforStackView() {
@@ -2014,11 +2031,11 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
                 // hide other tabs
                 self.availableEffects.isHidden = true
                 self.availableEffectsView.isHidden = true
-                self.effectsTab.backgroundColor = interface.heading
+                self.effectsTab.backgroundColor = interface.tab
             }
             else {
                 self.soundsView.isHidden = true
-                self.soundsTab.backgroundColor = interface.heading
+                self.soundsTab.backgroundColor = interface.tab
             }
         }
         @objc func handleEffectsTap(){
@@ -2031,12 +2048,12 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
                 
                 // hide other tabs
                 self.soundsView.isHidden = true
-                self.soundsTab.backgroundColor = interface.heading
+                self.soundsTab.backgroundColor = interface.tab
          
             } else {
                 self.availableEffects.isHidden = true
                 self.availableEffectsView.isHidden = true
-                self.effectsTab.backgroundColor = interface.heading
+                self.effectsTab.backgroundColor = interface.tab
             }
             
         }
@@ -2049,14 +2066,14 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
             }
             else {
                 self.settingsView.isHidden = true
-                self.hamburgerView.backgroundColor = interface.heading
+                self.hamburgerView.backgroundColor = interface.tab
             }
         }
         
         
         @objc func handleCancelTap() {
             self.settingsView.isHidden = true
-            self.hamburgerView.backgroundColor = interface.heading
+            self.hamburgerView.backgroundColor = interface.tab
         }
     
 

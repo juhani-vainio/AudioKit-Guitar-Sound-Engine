@@ -72,7 +72,7 @@ class OctaTableViewCell: UITableViewCell {
         self.slider7Value.textColor = interface.text
         self.slider8Title.textColor = interface.text
         self.slider8Value.textColor = interface.text
-        self.controllersView.backgroundColor = interface.heading
+        self.controllersView.backgroundColor = interface.tab
         controllersView.layer.cornerRadius = 8
         self.onOffButton.backgroundColor = UIColor.clear
         
@@ -87,7 +87,7 @@ class OctaTableViewCell: UITableViewCell {
         slider8.addTarget(self, action: #selector(valueChanged), for: .valueChanged)
         onOffButton.addTarget(self, action: #selector(toggleOnOff), for: .touchDown)
         
-        specialViewArea.backgroundColor = interface.heading
+        specialViewArea.backgroundColor = interface.tab
         specialViewArea.layer.cornerRadius = 8
         specialSwitch.onTintColor = interface.positive
         specialSwitch.transform = CGAffineTransform(scaleX: 0.7, y: 0.7)

@@ -25,10 +25,46 @@ class EqualizerTableViewCell: UITableViewCell {
         for label in labels {
             label.textColor = interface.text
         }
-        segmentControl.tintColor = interface.text
-        
-        controllersView.backgroundColor = interface.heading
+        segmentControl.tintColor = interface.button
+        segmentControl.backgroundColor = interface.buttonAlt
+        controllersView.backgroundColor = interface.tableBackground
         controllersView.layer.cornerRadius = 8
+        
+        threeBandHighSlider.thumbTintColor = interface.sliderThumb
+        threeBandMidSlider.thumbTintColor = interface.sliderThumb
+        threeBandLowSlider.thumbTintColor = interface.sliderThumb
+        
+        sevenBandBrillianceSlider.thumbTintColor = interface.sliderThumb
+        sevenBandPrecenceSlider.thumbTintColor = interface.sliderThumb
+        sevenBandUpperMidSlider.thumbTintColor = interface.sliderThumb
+        sevenBandMidSlider.thumbTintColor = interface.sliderThumb
+        sevenBandLowMidSlider.thumbTintColor = interface.sliderThumb
+        sevenBandBassSlider.thumbTintColor = interface.sliderThumb
+        sevenBandSubBassSlider.thumbTintColor = interface.sliderThumb
+        
+        threeBandHighSlider.maximumTrackTintColor = interface.sliderMax
+        threeBandMidSlider.maximumTrackTintColor = interface.sliderMax
+        threeBandLowSlider.maximumTrackTintColor = interface.sliderMax
+        
+        sevenBandBrillianceSlider.maximumTrackTintColor = interface.sliderMax
+        sevenBandPrecenceSlider.maximumTrackTintColor = interface.sliderMax
+        sevenBandUpperMidSlider.maximumTrackTintColor = interface.sliderMax
+        sevenBandMidSlider.maximumTrackTintColor = interface.sliderMax
+        sevenBandLowMidSlider.maximumTrackTintColor = interface.sliderMax
+        sevenBandBassSlider.maximumTrackTintColor = interface.sliderMax
+        sevenBandSubBassSlider.maximumTrackTintColor = interface.sliderMax
+        
+        threeBandHighSlider.minimumTrackTintColor = interface.sliderMin
+        threeBandMidSlider.minimumTrackTintColor = interface.sliderMin
+        threeBandLowSlider.minimumTrackTintColor = interface.sliderMin
+        
+        sevenBandBrillianceSlider.minimumTrackTintColor = interface.sliderMin
+        sevenBandPrecenceSlider.minimumTrackTintColor = interface.sliderMin
+        sevenBandUpperMidSlider.minimumTrackTintColor = interface.sliderMin
+        sevenBandMidSlider.minimumTrackTintColor = interface.sliderMin
+        sevenBandLowMidSlider.minimumTrackTintColor = interface.sliderMin
+        sevenBandBassSlider.minimumTrackTintColor = interface.sliderMin
+        sevenBandSubBassSlider.minimumTrackTintColor = interface.sliderMin
         
         threeBandHighSlider.addTarget(self, action: #selector(valueChanged), for: .valueChanged)
         threeBandMidSlider.addTarget(self, action: #selector(valueChanged), for: .valueChanged)

@@ -40,14 +40,14 @@ class TableViewCell: UITableViewCell {
         title.textColor = interface.text
         sliderTitle.textColor = interface.text
         sliderValue.textColor = interface.text
-        controllersView.backgroundColor = interface.heading
+        controllersView.backgroundColor = interface.tab
         controllersView.layer.cornerRadius = 8
     
         onOffButton.backgroundColor = UIColor.clear
         slider.addTarget(self, action: #selector(valueChanged), for: .valueChanged)
         onOffButton.addTarget(self, action: #selector(toggleOnOff), for: .touchDown)
         
-        specialViewArea.backgroundColor = interface.heading
+        specialViewArea.backgroundColor = interface.tab
         specialViewArea.layer.cornerRadius = 8
         specialSwitch.onTintColor = interface.positive
         specialSwitch.transform = CGAffineTransform(scaleX: 0.7, y: 0.7);

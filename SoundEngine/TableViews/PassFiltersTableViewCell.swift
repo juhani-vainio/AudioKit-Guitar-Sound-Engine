@@ -46,7 +46,7 @@ class PassFiltersTableViewCell: UITableViewCell {
         lowPassOnOffButton.layer.borderColor = interface.text.cgColor
         lowPassOnOffButton.layer.cornerRadius = lowPassOnOffButton.bounds.height / 2
         
-        controllersView.backgroundColor = interface.heading
+        controllersView.backgroundColor = interface.tab
         controllersView.layer.cornerRadius = 8
         
         for label in labels {

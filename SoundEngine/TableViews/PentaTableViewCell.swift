@@ -62,7 +62,7 @@ class PentaTableViewCell: UITableViewCell {
 
         
         
-        self.controllersView.backgroundColor = interface.heading
+        self.controllersView.backgroundColor = interface.tab
         controllersView.layer.cornerRadius = 8
         self.onOffButton.backgroundColor = UIColor.clear
         
@@ -76,7 +76,7 @@ class PentaTableViewCell: UITableViewCell {
         
         onOffButton.addTarget(self, action: #selector(toggleOnOff), for: .touchDown)
         
-        specialViewArea.backgroundColor = interface.heading
+        specialViewArea.backgroundColor = interface.tab
         specialViewArea.layer.cornerRadius = 8
         specialSwitch.onTintColor = interface.positive
         specialSwitch.transform = CGAffineTransform(scaleX: 0.7, y: 0.7);
