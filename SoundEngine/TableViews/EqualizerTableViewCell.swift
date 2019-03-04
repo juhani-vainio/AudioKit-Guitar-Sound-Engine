@@ -22,6 +22,22 @@ class EqualizerTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        
+        threeBandHighSlider.addTarget(self, action: #selector(valueChanged), for: .valueChanged)
+        threeBandMidSlider.addTarget(self, action: #selector(valueChanged), for: .valueChanged)
+        threeBandLowSlider.addTarget(self, action: #selector(valueChanged), for: .valueChanged)
+        
+        sevenBandBrillianceSlider.addTarget(self, action: #selector(valueChanged), for: .valueChanged)
+        sevenBandPrecenceSlider.addTarget(self, action: #selector(valueChanged), for: .valueChanged)
+        sevenBandUpperMidSlider.addTarget(self, action: #selector(valueChanged), for: .valueChanged)
+        sevenBandMidSlider.addTarget(self, action: #selector(valueChanged), for: .valueChanged)
+        sevenBandLowMidSlider.addTarget(self, action: #selector(valueChanged), for: .valueChanged)
+        sevenBandBassSlider.addTarget(self, action: #selector(valueChanged), for: .valueChanged)
+        sevenBandSubBassSlider.addTarget(self, action: #selector(valueChanged), for: .valueChanged)
+        
+    }
+    
+    func setColors() {
         for label in labels {
             label.textColor = interface.text
         }
@@ -65,21 +81,7 @@ class EqualizerTableViewCell: UITableViewCell {
         sevenBandLowMidSlider.minimumTrackTintColor = interface.sliderMin
         sevenBandBassSlider.minimumTrackTintColor = interface.sliderMin
         sevenBandSubBassSlider.minimumTrackTintColor = interface.sliderMin
-        
-        threeBandHighSlider.addTarget(self, action: #selector(valueChanged), for: .valueChanged)
-        threeBandMidSlider.addTarget(self, action: #selector(valueChanged), for: .valueChanged)
-        threeBandLowSlider.addTarget(self, action: #selector(valueChanged), for: .valueChanged)
-        
-        sevenBandBrillianceSlider.addTarget(self, action: #selector(valueChanged), for: .valueChanged)
-        sevenBandPrecenceSlider.addTarget(self, action: #selector(valueChanged), for: .valueChanged)
-        sevenBandUpperMidSlider.addTarget(self, action: #selector(valueChanged), for: .valueChanged)
-        sevenBandMidSlider.addTarget(self, action: #selector(valueChanged), for: .valueChanged)
-        sevenBandLowMidSlider.addTarget(self, action: #selector(valueChanged), for: .valueChanged)
-        sevenBandBassSlider.addTarget(self, action: #selector(valueChanged), for: .valueChanged)
-        sevenBandSubBassSlider.addTarget(self, action: #selector(valueChanged), for: .valueChanged)
-        
     }
-    
     
     @objc func valueChanged(slider: UISlider) {
         switch slider {

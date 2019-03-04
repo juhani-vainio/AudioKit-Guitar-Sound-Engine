@@ -1952,7 +1952,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         if self.soundsView.isHidden {
             self.setSoundsViewHeight()
             self.soundsView.isHidden = false
-            self.soundsTab.backgroundColor = interface.highlight
+            self.soundsTab.backgroundColor = interface.theme1
             
             // hide other tabs
             self.availableEffects.isHidden = true
@@ -1973,7 +1973,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
             self.setAvailableEffectsHeight()
             self.availableEffects.isHidden = false
             self.availableEffectsView.isHidden = false
-            self.effectsTab.backgroundColor = interface.highlight
+            self.effectsTab.backgroundColor = interface.theme1
             
             // hide other tabs
             self.soundsView.isHidden = true
@@ -1994,7 +1994,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
             self.setAvailableFiltersHeight()
             self.availableFilters.isHidden = false
             self.availableFiltersView.isHidden = false
-            self.filtersTab.backgroundColor = interface.highlight
+            self.filtersTab.backgroundColor = interface.theme1
             
             // hide other tabs
             self.availableEffects.isHidden = true
@@ -2013,7 +2013,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     @objc func handleHamburgerTap() {
         if settingsView.isHidden {
             self.settingsView.isHidden = false
-            self.hamburgerView.backgroundColor = interface.highlight
+            self.hamburgerView.backgroundColor = interface.theme1
         }
         else {
             self.settingsView.isHidden = true

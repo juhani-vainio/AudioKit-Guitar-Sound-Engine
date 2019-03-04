@@ -35,28 +35,40 @@ class TableViewCell: UITableViewCell {
         
         
         // Initialization code
-        contentView.backgroundColor = UIColor.clear
-        backgroundColor = UIColor.clear
-        title.textColor = interface.text
-        sliderTitle.textColor = interface.text
-        sliderValue.textColor = interface.text
-        controllersView.backgroundColor = interface.tab
+       
         controllersView.layer.cornerRadius = 8
     
         onOffButton.backgroundColor = UIColor.clear
         slider.addTarget(self, action: #selector(valueChanged), for: .valueChanged)
         onOffButton.addTarget(self, action: #selector(toggleOnOff), for: .touchDown)
         
-        specialViewArea.backgroundColor = interface.tab
+       
         specialViewArea.layer.cornerRadius = 8
-        specialSwitch.onTintColor = interface.positive
+        specialSwitch.onTintColor = interface.theme2
         specialSwitch.transform = CGAffineTransform(scaleX: 0.7, y: 0.7);
-        // specialSwitch.tintColor = interface.negative
-        specialTitle.textColor = interface.text
+        
         specialSwitch.addTarget(self, action: #selector(switchValueChanged), for: .valueChanged)
         onOffButton.layer.borderWidth = 2
-        onOffButton.layer.borderColor = interface.text.cgColor
+      
         onOffButton.layer.cornerRadius = onOffButton.bounds.height / 2
+    }
+    
+    func setColors() {
+         specialViewArea.backgroundColor = interface.tab
+        contentView.backgroundColor = UIColor.clear
+        backgroundColor = UIColor.clear
+        title.textColor = interface.text
+        sliderTitle.textColor = interface.text
+        sliderValue.textColor = interface.text
+        controllersView.backgroundColor = interface.tab
+        // specialSwitch.tintColor = interface.negative
+        specialTitle.textColor = interface.text
+        onOffButton.layer.borderColor = interface.text.cgColor
+        controllersView.backgroundColor = interface.tableBackground
+        slider.minimumTrackTintColor = interface.sliderMin
+        slider.maximumTrackTintColor = interface.sliderMax
+        slider.thumbTintColor = interface.sliderThumb
+        
     }
     
     @objc func switchValueChanged(toggle: UISwitch) {

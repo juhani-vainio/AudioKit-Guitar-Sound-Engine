@@ -290,22 +290,7 @@
 				577F61CF21DF7B6400853F29 /* EqualizerTableViewCell.xib */,
 				57CF7DD721DE46260016CD67 /* PassFiltersTableViewCell.swift */,
 				57CF7DD821DE46260016CD67 /* PassFiltersTableViewCell.xib */,
-				579368D0219EF91400227AF8 /* TableViewCell.swift */,
-				579368D1219EF91400227AF8 /* TableViewCell.xib */,
-				57A631E821A965B5000069FA /* DoubleTableViewCell.swift */,
-				57A631E921A965B5000069FA /* DoubleTableViewCell.xib */,
-				57E397A621A96F8500F2871A /* TripleTableViewCell.swift */,
-				57E397A721A96F8500F2871A /* TripleTableViewCell.xib */,
-				57E397AA21A96FCF00F2871A /* QuatroTableViewCell.swift */,
-				57E397AB21A96FCF00F2871A /* QuatroTableViewCell.xib */,
-				578B32CB21BE9522002A7EEE /* PentaTableViewCell.swift */,
-				578B32CC21BE9522002A7EEE /* PentaTableViewCell.xib */,
-				578B32CF21BE9537002A7EEE /* HexaTableViewCell.swift */,
-				578B32D021BE9537002A7EEE /* HexaTableViewCell.xib */,
-				578B32D321BE9548002A7EEE /* HeptaTableViewCell.swift */,
-				578B32D421BE9548002A7EEE /* HeptaTableViewCell.xib */,
-				578B32D721BE9558002A7EEE /* OctaTableViewCell.swift */,
-				578B32D821BE9558002A7EEE /* OctaTableViewCell.xib */,
+				57F9ED27222D2FE600617CCE /* effects */,
 			);
 			path = TableViews;
 			sourceTree = "<group>";
@@ -325,6 +310,29 @@
 				57E397B221AC15BA00F2871A /* LastCollectionViewCell.xib */,
 			);
 			path = CollectionViews;
+			sourceTree = "<group>";
+		};
+		57F9ED27222D2FE600617CCE /* effects */ = {
+			isa = PBXGroup;
+			children = (
+				579368D0219EF91400227AF8 /* TableViewCell.swift */,
+				579368D1219EF91400227AF8 /* TableViewCell.xib */,
+				57A631E821A965B5000069FA /* DoubleTableViewCell.swift */,
+				57A631E921A965B5000069FA /* DoubleTableViewCell.xib */,
+				57E397A621A96F8500F2871A /* TripleTableViewCell.swift */,
+				57E397A721A96F8500F2871A /* TripleTableViewCell.xib */,
+				57E397AA21A96FCF00F2871A /* QuatroTableViewCell.swift */,
+				57E397AB21A96FCF00F2871A /* QuatroTableViewCell.xib */,
+				578B32CB21BE9522002A7EEE /* PentaTableViewCell.swift */,
+				578B32CC21BE9522002A7EEE /* PentaTableViewCell.xib */,
+				578B32CF21BE9537002A7EEE /* HexaTableViewCell.swift */,
+				578B32D021BE9537002A7EEE /* HexaTableViewCell.xib */,
+				578B32D321BE9548002A7EEE /* HeptaTableViewCell.swift */,
+				578B32D421BE9548002A7EEE /* HeptaTableViewCell.xib */,
+				578B32D721BE9558002A7EEE /* OctaTableViewCell.swift */,
+				578B32D821BE9558002A7EEE /* OctaTableViewCell.xib */,
+			);
+			path = effects;
 			sourceTree = "<group>";
 		};
 		B4DECC06B5999D0FBC1FE8CC /* Pods */ = {

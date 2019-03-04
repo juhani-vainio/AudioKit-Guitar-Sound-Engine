@@ -23,6 +23,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
     @IBOutlet weak var inputLevel: UISlider!
     @IBOutlet weak var outputLevel: UISlider!
     @IBOutlet weak var bufferLengthSegment: UISegmentedControl!
+    @IBOutlet weak var colorSegment: UISegmentedControl!
     
     // TEXT LABELS
     @IBOutlet weak var soundTitle: UILabel!
@@ -244,7 +245,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
             
             
             // Set up Interface Colors
-            Colors.palette.setInterfaceColorScheme(name: "grabient")
+            Colors.palette.setInterfaceColorScheme(name: "gradientDark1")
             
             
             
@@ -311,6 +312,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
             hamburgerView.layer.cornerRadius = 8
             settingControlsView.layer.cornerRadius = 8
             
+            mainFrame.layer.cornerRadius = 8
             
             stack.translatesAutoresizingMaskIntoConstraints = false
             stack.distribution = .fillEqually
@@ -345,6 +347,8 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
             outputLevel.thumbTintColor = interface.sliderThumb
             bufferLengthSegment.tintColor = interface.button
             bufferLengthSegment.backgroundColor = interface.buttonAlt
+            colorSegment.tintColor = interface.button
+            colorSegment.backgroundColor = interface.transparent
             
             // TEXT LABELS
             soundTitle.textColor = interface.text
@@ -358,9 +362,9 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
             flat4.textColor = interface.text
             flat3.textColor = interface.text
             flat2.textColor = interface.text
-            flat1.textColor = interface.highlight
-            inTune.textColor = interface.positive
-            sharp1.textColor = interface.highlight
+            flat1.textColor = interface.theme1
+            inTune.textColor = interface.theme2
+            sharp1.textColor = interface.theme1
             sharp2.textColor = interface.text
             sharp3.textColor = interface.text
             sharp4.textColor = interface.text
@@ -370,7 +374,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
             mainFrame.backgroundColor = interface.main
             soundsView.backgroundColor = interface.mainAlt
             top.backgroundColor = interface.top
-            settingControlsView.backgroundColor = interface.top
+            settingControlsView.backgroundColor = interface.bottom
             bottom.backgroundColor = interface.bottom
             savedSoundsTableView.backgroundColor = interface.tableBackground
             availableEffects.backgroundColor = interface.tableBackground
@@ -404,7 +408,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
                         inputUnit.plotType = .buffer
                         inputUnit.shouldFill = false
                         inputUnit.shouldMirror = false
-                        inputUnit.color = interface.highlight
+                        inputUnit.color = interface.theme1
                         inputUnit.backgroundColor = UIColor.clear
                         stack.addArrangedSubview(inputUnit)
             
@@ -414,7 +418,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
             outputUnit.plotType = .buffer
             outputUnit.shouldFill = false
             outputUnit.shouldMirror = false
-            outputUnit.color = interface.highlight
+            outputUnit.color = interface.theme1
             outputUnit.backgroundColor = UIColor.clear
             stack.addArrangedSubview(outputUnit)
         
@@ -749,6 +753,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
                 case "PassFilters":
                     let cell = tableView.dequeueReusableCell(withIdentifier: "PassFiltersTableViewCell", for: indexPath) as! PassFiltersTableViewCell
                     cell.selectedBackgroundView = backgroundView
+                    
                     let high = audio.shared.getPassFilterValues(slider: 1)
                     cell.highPassSlider.minimumValue = high.min
                     cell.highPassSlider.maximumValue = high.max
@@ -795,7 +800,6 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
                     let cell = tableView.dequeueReusableCell(withIdentifier: "EqualizerTableViewCell", for: indexPath) as! EqualizerTableViewCell
                     cell.selectedBackgroundView = backgroundView
                     cell.segmentControl.selectedSegmentIndex = audio.eqSelection
-                    
                     cell.segmentControl.addTarget(self, action: #selector(toggleEQ), for: .valueChanged)
                     
                     if cell.segmentControl.selectedSegmentIndex == 1 {
@@ -894,7 +898,8 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
                             cell.controllersView.isHidden = false
                         }
                         
-                   
+                   // set colors
+                    cell.setColors()
                     
                     returnCell = cell
                     
@@ -960,6 +965,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
                         cell.specialViewHeight.constant = CGFloat(0)
                         cell.specialView.isHidden = true
                     }
+                    cell.setColors()
                     
                     returnCell = cell
                     
@@ -1035,6 +1041,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
                         cell.specialViewHeight.constant = CGFloat(0)
                         cell.specialView.isHidden = true
                     }
+                    cell.setColors()
                     
                     returnCell = cell
                     
@@ -1122,6 +1129,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
                         cell.specialViewHeight.constant = CGFloat(0)
                         cell.specialView.isHidden = true
                     }
+                    cell.setColors()
                     
                     returnCell = cell
                     
@@ -1218,6 +1226,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
                         cell.specialViewHeight.constant = CGFloat(0)
                         cell.specialView.isHidden = true
                     }
+                    cell.setColors()
                     
                     returnCell = cell
                     
@@ -1322,6 +1331,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
                         cell.specialViewHeight.constant = CGFloat(0)
                         cell.specialView.isHidden = true
                     }
+                    cell.setColors()
                     
                     returnCell = cell
                     
@@ -1436,6 +1446,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
                         cell.specialViewHeight.constant = CGFloat(0)
                         cell.specialView.isHidden = true
                     }
+                    cell.setColors()
                     
                     returnCell = cell
                     
@@ -1561,6 +1572,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
                         cell.specialViewHeight.constant = CGFloat(0)
                         cell.specialView.isHidden = true
                     }
+                    cell.setColors()
                     
                     returnCell = cell
                     
@@ -1695,6 +1707,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
                         cell.specialViewHeight.constant = CGFloat(0)
                         cell.specialView.isHidden = true
                     }
+                    cell.setColors()
                     
                     returnCell = cell
                     
@@ -1743,6 +1756,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
                     cell.specialViewHeight.constant = CGFloat(0)
                     cell.specialView.isHidden = true
                     
+                    cell.setColors()
                     
                     returnCell = cell
                 }
@@ -1910,7 +1924,21 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
             
         }
         
-        
+
+    @IBAction func colorAction(_ sender: UISegmentedControl) {
+        switch sender.selectedSegmentIndex
+        {
+        case 0: Colors.palette.setInterfaceColorScheme(name: "gradientDark1")
+        case 1 : Colors.palette.setInterfaceColorScheme(name: "JEM777DY")
+        case 2 : Colors.palette.setInterfaceColorScheme(name: "JEM777LG")
+        case 3 : Colors.palette.setInterfaceColorScheme(name: "JEM777SK")
+        default: Colors.palette.setInterfaceColorScheme(name: "spotify")
+        }
+        setColors()
+        eqTableView.reloadData()
+        selectedEffects.reloadData()
+    }
+    
         @IBAction func bufferLengthSegmentAction(_ sender: UISegmentedControl) {
             let segment = sender.selectedSegmentIndex + 1
             audio.shared.setBufferLength(segment: segment)
@@ -2026,7 +2054,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
             if self.soundsView.isHidden {
                 self.setSoundsViewHeight()
                 self.soundsView.isHidden = false
-                self.soundsTab.backgroundColor = interface.highlight
+                self.soundsTab.backgroundColor = interface.theme1
                 
                 // hide other tabs
                 self.availableEffects.isHidden = true
@@ -2044,7 +2072,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
                 self.setAvailableEffectsHeight()
                 self.availableEffects.isHidden = false
                 self.availableEffectsView.isHidden = false
-                self.effectsTab.backgroundColor = interface.highlight
+                self.effectsTab.backgroundColor = interface.theme1
                 
                 // hide other tabs
                 self.soundsView.isHidden = true
@@ -2062,7 +2090,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
         @objc func handleHamburgerTap() {
             if settingsView.isHidden {
                 self.settingsView.isHidden = false
-                self.hamburgerView.backgroundColor = interface.highlight
+                self.hamburgerView.backgroundColor = interface.theme1
             }
             else {
                 self.settingsView.isHidden = true

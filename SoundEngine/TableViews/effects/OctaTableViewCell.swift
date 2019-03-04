@@ -1,5 +1,5 @@
 //
-//  HeptaTableViewCell.swift
+//  OctaTableViewCell.swift
 //  SoundEngine
 //
 //  Created by Juhani Vainio on 10/12/2018.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class HeptaTableViewCell: UITableViewCell {
+class OctaTableViewCell: UITableViewCell {
     
     var id = String()
     @IBOutlet weak var coloringView: UIView!
@@ -20,7 +20,9 @@ class HeptaTableViewCell: UITableViewCell {
     
     @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
     var sliders = [String]()
-    
+    @IBOutlet weak var slider8Value: UILabel!
+    @IBOutlet weak var slider8Title: UILabel!
+    @IBOutlet weak var slider8: UISlider!
     @IBOutlet weak var slider7Value: UILabel!
     @IBOutlet weak var slider7Title: UILabel!
     @IBOutlet weak var slider7: UISlider!
@@ -50,9 +52,38 @@ class HeptaTableViewCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
         coloringView.layer.cornerRadius = coloringView.bounds.width / 2
+        controllersView.layer.cornerRadius = 8
         
+        
+        slider1.addTarget(self, action: #selector(valueChanged), for: .valueChanged)
+        slider2.addTarget(self, action: #selector(valueChanged), for: .valueChanged)
+        slider3.addTarget(self, action: #selector(valueChanged), for: .valueChanged)
+        slider4.addTarget(self, action: #selector(valueChanged), for: .valueChanged)
+        slider5.addTarget(self, action: #selector(valueChanged), for: .valueChanged)
+        slider6.addTarget(self, action: #selector(valueChanged), for: .valueChanged)
+        slider7.addTarget(self, action: #selector(valueChanged), for: .valueChanged)
+        slider8.addTarget(self, action: #selector(valueChanged), for: .valueChanged)
+        onOffButton.addTarget(self, action: #selector(toggleOnOff), for: .touchDown)
+        
+        
+        specialViewArea.layer.cornerRadius = 8
+        
+        specialSwitch.transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
+        
+        specialSwitch.addTarget(self, action: #selector(switchValueChanged), for: .valueChanged)
+        onOffButton.layer.borderWidth = 2
+        
+        onOffButton.layer.cornerRadius = onOffButton.bounds.height / 2
+    }
+    
+    func setColors() {
+        // specialSwitch.tintColor = interface.negative
+        onOffButton.layer.borderColor = interface.text.cgColor
+        specialTitle.textColor = interface.text
+        specialSwitch.onTintColor = interface.theme2
+        specialViewArea.backgroundColor = interface.tab
         self.contentView.backgroundColor = UIColor.clear
-       self.backgroundColor = UIColor.clear
+        self.backgroundColor = UIColor.clear
         self.title.textColor = interface.text
         self.slider1Value.textColor = interface.text
         self.slider1Title.textColor = interface.text
@@ -68,32 +99,37 @@ class HeptaTableViewCell: UITableViewCell {
         self.slider6Value.textColor = interface.text
         self.slider7Title.textColor = interface.text
         self.slider7Value.textColor = interface.text
-      
+        self.slider8Title.textColor = interface.text
+        self.slider8Value.textColor = interface.text
         self.controllersView.backgroundColor = interface.tab
-        controllersView.layer.cornerRadius = 8
+     
         self.onOffButton.backgroundColor = UIColor.clear
         
-        
-        slider1.addTarget(self, action: #selector(valueChanged), for: .valueChanged)
-        slider2.addTarget(self, action: #selector(valueChanged), for: .valueChanged)
-        slider3.addTarget(self, action: #selector(valueChanged), for: .valueChanged)
-        slider4.addTarget(self, action: #selector(valueChanged), for: .valueChanged)
-        slider5.addTarget(self, action: #selector(valueChanged), for: .valueChanged)
-        slider6.addTarget(self, action: #selector(valueChanged), for: .valueChanged)
-        slider7.addTarget(self, action: #selector(valueChanged), for: .valueChanged)
-        
-        onOffButton.addTarget(self, action: #selector(toggleOnOff), for: .touchDown)
-        
-        specialViewArea.backgroundColor = interface.tab
-        specialViewArea.layer.cornerRadius = 8
-        specialSwitch.onTintColor = interface.positive
-        specialSwitch.transform = CGAffineTransform(scaleX: 0.7, y: 0.7);
-        // specialSwitch.tintColor = interface.negative
-        specialTitle.textColor = interface.text
-        specialSwitch.addTarget(self, action: #selector(switchValueChanged), for: .valueChanged)
-        onOffButton.layer.borderWidth = 2
-        onOffButton.layer.borderColor = interface.text.cgColor
-        onOffButton.layer.cornerRadius = onOffButton.bounds.height / 2
+        controllersView.backgroundColor = interface.tableBackground
+        slider1.minimumTrackTintColor = interface.sliderMin
+        slider1.maximumTrackTintColor = interface.sliderMax
+        slider1.thumbTintColor = interface.sliderThumb
+        slider2.minimumTrackTintColor = interface.sliderMin
+        slider2.maximumTrackTintColor = interface.sliderMax
+        slider2.thumbTintColor = interface.sliderThumb
+        slider3.minimumTrackTintColor = interface.sliderMin
+        slider3.maximumTrackTintColor = interface.sliderMax
+        slider3.thumbTintColor = interface.sliderThumb
+        slider4.minimumTrackTintColor = interface.sliderMin
+        slider4.maximumTrackTintColor = interface.sliderMax
+        slider4.thumbTintColor = interface.sliderThumb
+        slider5.minimumTrackTintColor = interface.sliderMin
+        slider5.maximumTrackTintColor = interface.sliderMax
+        slider5.thumbTintColor = interface.sliderThumb
+        slider6.minimumTrackTintColor = interface.sliderMin
+        slider6.maximumTrackTintColor = interface.sliderMax
+        slider6.thumbTintColor = interface.sliderThumb
+        slider7.minimumTrackTintColor = interface.sliderMin
+        slider7.maximumTrackTintColor = interface.sliderMax
+        slider7.thumbTintColor = interface.sliderThumb
+        slider8.minimumTrackTintColor = interface.sliderMin
+        slider8.maximumTrackTintColor = interface.sliderMax
+        slider8.thumbTintColor = interface.sliderThumb
     }
     
     @objc func switchValueChanged(toggle: UISwitch) {
@@ -110,7 +146,7 @@ class HeptaTableViewCell: UITableViewCell {
             slider5.isEnabled = true
             slider6.isEnabled = true
             slider7.isEnabled = true
-   
+            slider8.isEnabled = true
         } else {
             onOffButton.setTitleColor(interface.textIdle, for: .normal)
             if (slider1Title.text?.contains("ix"))! {
@@ -131,10 +167,12 @@ class HeptaTableViewCell: UITableViewCell {
             if (slider6Title.text?.contains("ix"))! {
                 slider6.isEnabled = false
             }
-            if (slider7Title.text?.contains("ix"))!  || (slider7Title.text?.contains("Volume"))! {
+            if (slider7Title.text?.contains("ix"))! {
                 slider7.isEnabled = false
             }
-           
+            if (slider8Title.text?.contains("ix"))!  || (slider8Title.text?.contains("Volume"))! {
+                slider8.isEnabled = false
+            }
         }
         
     }
@@ -155,7 +193,7 @@ class HeptaTableViewCell: UITableViewCell {
         case slider5: slider5Value.text = audio.shared.changeValues(id:self.id, slider: 5, value: Double(slider.value))
         case slider6: slider6Value.text = audio.shared.changeValues(id:self.id, slider: 6, value: Double(slider.value))
         case slider7: slider7Value.text = audio.shared.changeValues(id:self.id, slider: 7, value: Double(slider.value))
-     
+        case slider8: slider8Value.text = audio.shared.changeValues(id:self.id, slider: 8, value: Double(slider.value))
         default: break
         }
         

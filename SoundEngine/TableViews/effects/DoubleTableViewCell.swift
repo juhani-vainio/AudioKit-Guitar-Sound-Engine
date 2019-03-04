@@ -1,5 +1,5 @@
 //
-//  TripleTableViewCell.swift
+//  DoubleTableViewCell.swift
 //  SoundEngine
 //
 //  Created by Juhani Vainio on 24/11/2018.
@@ -8,9 +8,10 @@
 
 import UIKit
 
-class TripleTableViewCell: UITableViewCell {
+class DoubleTableViewCell: UITableViewCell {
     
     var id = String()
+    
     @IBOutlet weak var coloringView: UIView!
     @IBOutlet weak var specialSwitch: UISwitch!
     @IBOutlet weak var specialTitle: UILabel!
@@ -20,9 +21,6 @@ class TripleTableViewCell: UITableViewCell {
     
     @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
     var sliders = [String]()
-    @IBOutlet weak var slider3Value: UILabel!
-    @IBOutlet weak var slider3Title: UILabel!
-    @IBOutlet weak var slider3: UISlider!
     @IBOutlet weak var slider2Value: UILabel!
     @IBOutlet weak var slider2Title: UILabel!
     @IBOutlet weak var slider2: UISlider!
@@ -35,9 +33,27 @@ class TripleTableViewCell: UITableViewCell {
     @IBOutlet weak var title: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
         coloringView.layer.cornerRadius = coloringView.bounds.width / 2
+        // Initialization code
+    
         
+        slider1.addTarget(self, action: #selector(valueChanged), for: .valueChanged)
+        slider2.addTarget(self, action: #selector(valueChanged), for: .valueChanged)
+        
+        onOffButton.addTarget(self, action: #selector(toggleOnOff), for: .touchDown)
+     
+           controllersView.layer.cornerRadius = 8
+        specialViewArea.layer.cornerRadius = 8
+       
+        specialSwitch.transform = CGAffineTransform(scaleX: 0.7, y: 0.7);
+      
+        specialSwitch.addTarget(self, action: #selector(switchValueChanged), for: .valueChanged)
+        onOffButton.layer.borderWidth = 2
+      
+        onOffButton.layer.cornerRadius = onOffButton.bounds.height / 2
+    }
+    
+    func setColors() {
         self.contentView.backgroundColor = UIColor.clear
         self.backgroundColor = UIColor.clear
         self.title.textColor = interface.text
@@ -45,29 +61,23 @@ class TripleTableViewCell: UITableViewCell {
         self.slider1Title.textColor = interface.text
         self.slider2Title.textColor = interface.text
         self.slider2Value.textColor = interface.text
-        self.slider3Title.textColor = interface.text
-        self.slider3Value.textColor = interface.text
         self.controllersView.backgroundColor = interface.tab
-        controllersView.layer.cornerRadius = 8
+     
         self.onOffButton.backgroundColor = UIColor.clear
-        
-        
-        slider1.addTarget(self, action: #selector(valueChanged), for: .valueChanged)
-        slider2.addTarget(self, action: #selector(valueChanged), for: .valueChanged)
-        slider3.addTarget(self, action: #selector(valueChanged), for: .valueChanged)
-        
-        onOffButton.addTarget(self, action: #selector(toggleOnOff), for: .touchDown)
-      
         specialViewArea.backgroundColor = interface.tab
-        specialViewArea.layer.cornerRadius = 8
-        specialSwitch.onTintColor = interface.positive
-        specialSwitch.transform = CGAffineTransform(scaleX: 0.7, y: 0.7);
+        specialSwitch.onTintColor = interface.theme2
         // specialSwitch.tintColor = interface.negative
         specialTitle.textColor = interface.text
-        specialSwitch.addTarget(self, action: #selector(switchValueChanged), for: .valueChanged)
-        onOffButton.layer.borderWidth = 2
-        onOffButton.layer.borderColor = interface.text.cgColor
-        onOffButton.layer.cornerRadius = onOffButton.bounds.height / 2
+        
+          onOffButton.layer.borderColor = interface.text.cgColor
+        
+        controllersView.backgroundColor = interface.tableBackground
+        slider1.minimumTrackTintColor = interface.sliderMin
+        slider1.maximumTrackTintColor = interface.sliderMax
+        slider1.thumbTintColor = interface.sliderThumb
+        slider2.minimumTrackTintColor = interface.sliderMin
+        slider2.maximumTrackTintColor = interface.sliderMax
+        slider2.thumbTintColor = interface.sliderThumb
     }
     
     @objc func switchValueChanged(toggle: UISwitch) {
@@ -79,20 +89,16 @@ class TripleTableViewCell: UITableViewCell {
             onOffButton.setTitleColor(interface.text, for: .normal)
             slider1.isEnabled = true
             slider2.isEnabled = true
-            slider3.isEnabled = true
+
         } else {
             onOffButton.setTitleColor(interface.textIdle, for: .normal)
             if (slider1Title.text?.contains("ix"))! {
                 slider1.isEnabled = false
             }
-            if (slider2Title.text?.contains("ix"))! {
+            if (slider2Title.text?.contains("ix"))!  || (slider2Title.text?.contains("Volume"))! {
                 slider2.isEnabled = false
             }
-            if (slider3Title.text?.contains("ix"))! || (slider3Title.text?.contains("Volume"))! {
-                slider3.isEnabled = false
-            }
-            
-         
+
         }
         
     }
@@ -104,15 +110,17 @@ class TripleTableViewCell: UITableViewCell {
         setOnOff()
     }
     
+    
     @objc func valueChanged(slider: UISlider) {
         switch slider {
         case slider1: slider1Value.text = audio.shared.changeValues(id:self.id, slider: 1, value: Double(slider.value))
         case slider2: slider2Value.text = audio.shared.changeValues(id:self.id, slider: 2, value: Double(slider.value))
-        case slider3: slider3Value.text = audio.shared.changeValues(id:self.id, slider: 3, value: Double(slider.value))
         default: break
         }
-        
+
     }
+    
+    
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
