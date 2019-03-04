@@ -166,13 +166,15 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func interfaceSetup() {
+        /*
         let name = UserDefaults.standard.string(forKey: "NameOfSound")
         if name != nil {
             self.soundTitle.text = name
         } else {
             self.soundTitle.text = "Sounds"
         }
-        
+        */
+        self.soundTitle.text = "Sounds"
         
         // inputLevel.transform = CGAffineTransform(rotationAngle: CGFloat(-Double.pi/2))
         inputLevel.setValue(Float((audio.inputBooster?.dB)!), animated: true)

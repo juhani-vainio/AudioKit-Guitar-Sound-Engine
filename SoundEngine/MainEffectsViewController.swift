@@ -25,6 +25,8 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
     @IBOutlet weak var bufferLengthSegment: UISegmentedControl!
     @IBOutlet weak var colorSegment: UISegmentedControl!
     
+    
+    var nameOfCurrentSound = ""
     // TEXT LABELS
     @IBOutlet weak var soundTitle: UILabel!
     @IBOutlet weak var effectsTitle: UILabel!
@@ -245,7 +247,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
             
             
             // Set up Interface Colors
-            Colors.palette.setInterfaceColorScheme(name: "gradientDark1")
+            Colors.palette.setInterfaceColorScheme(name: "Candy")
             
             
             
@@ -276,11 +278,13 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
         func interfaceSetup() {
             let name = UserDefaults.standard.string(forKey: "NameOfSound")
             if name != nil {
-                self.soundTitle.text = name
+                nameOfCurrentSound = name!
+               //self.soundTitle.text = name
             } else {
-                self.soundTitle.text = "Sounds"
+                nameOfCurrentSound = ""
+                //self.soundTitle.text = "Sounds"
             }
-            
+            //self.soundTitle.text = "SOUNDS"
             
             // inputLevel.transform = CGAffineTransform(rotationAngle: CGFloat(-Double.pi/2))
             inputLevel.minimumValue = Float(Effects.booster.dBRange.lowerBound)
@@ -347,7 +351,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
             outputLevel.thumbTintColor = interface.sliderThumb
             bufferLengthSegment.tintColor = interface.button
             bufferLengthSegment.backgroundColor = interface.buttonAlt
-            colorSegment.tintColor = interface.button
+            colorSegment.tintColor = interface.transparent
             colorSegment.backgroundColor = interface.transparent
             
             // TEXT LABELS
@@ -529,11 +533,11 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
             
             
             eqTableView.register(eqNib, forCellReuseIdentifier: "EqualizerTableViewCell")
+            eqTableView.allowsSelection = false
             
             
-            
-            longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(self.handleLongGesture(longPress:)))
-            selectedEffects.addGestureRecognizer(longPressGesture)
+           // longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(self.handleLongGesture(longPress:)))
+          //  selectedEffects.addGestureRecognizer(longPressGesture)
             
             
         }
@@ -801,7 +805,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
                     cell.selectedBackgroundView = backgroundView
                     cell.segmentControl.selectedSegmentIndex = audio.eqSelection
                     cell.segmentControl.addTarget(self, action: #selector(toggleEQ), for: .valueChanged)
-                    
+                    cell.soundTitle.text = nameOfCurrentSound.uppercased()
                     if cell.segmentControl.selectedSegmentIndex == 1 {
                         
                         cell.controllersHeight.constant = CGFloat(350)
@@ -1771,7 +1775,8 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
                 
                 let sound = Collections.savedSounds[indexPath.row]
                 UserDefaults.standard.setValue(sound, forKey: "NameOfSound")
-                self.soundTitle.text = sound
+                nameOfCurrentSound = sound
+                //self.soundTitle.text = sound
                 
                 helper.shared.getSavedChain(name: sound)
                 self.selectedEffects.reloadData()
@@ -1824,6 +1829,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
                 }
                 
             }
+           
 
         }
         
@@ -1879,8 +1885,9 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
                     let row = IndexPath(item: indexPath.row, section: 0)
                     savedSoundsTableView.deleteRows(at: [row], with: .none)
                     if name == self.soundTitle.text {
-                        self.soundTitle.text = "Sounds"
-                        UserDefaults.standard.setValue("Sounds", forKey: "NameOfSound")
+                       // self.soundTitle.text = "Sounds"
+                        nameOfCurrentSound = ""
+                        UserDefaults.standard.setValue("", forKey: "NameOfSound")
                     }
                 }
             }
@@ -1928,11 +1935,11 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
     @IBAction func colorAction(_ sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex
         {
-        case 0: Colors.palette.setInterfaceColorScheme(name: "gradientDark1")
-        case 1 : Colors.palette.setInterfaceColorScheme(name: "JEM777DY")
-        case 2 : Colors.palette.setInterfaceColorScheme(name: "JEM777LG")
-        case 3 : Colors.palette.setInterfaceColorScheme(name: "JEM777SK")
-        default: Colors.palette.setInterfaceColorScheme(name: "spotify")
+        case 0: Colors.palette.setInterfaceColorScheme(name: "Candy")
+        case 1 : Colors.palette.setInterfaceColorScheme(name: "YellowBlue")
+        case 2 : Colors.palette.setInterfaceColorScheme(name: "Polka")
+        case 3 : Colors.palette.setInterfaceColorScheme(name: "PinkBlue")
+        default: Colors.palette.setInterfaceColorScheme(name: "Spotify")
         }
         setColors()
         eqTableView.reloadData()
@@ -1984,9 +1991,11 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
                         helper.shared.saveEffectChain(name: name)
                         self.savedSoundsTableView.reloadData()
                         self.setSoundsViewHeight()
-                        self.soundTitle.text = name
+                       // self.soundTitle.text = name
+                        self.nameOfCurrentSound = name
                         UserDefaults.standard.setValue(name, forKey: "NameOfSound")
                         self.handleSoundsTap()
+                        self.eqTableView.reloadData()
                     }
                     
                 }
@@ -1999,14 +2008,15 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
             // Add a text field to the alert controller
             alert.addTextField { (textField) in
                 textField.enablesReturnKeyAutomatically = true
-                
+                /*
                 if self.soundTitle.text == "Sounds" {
                     textField.placeholder = "Name this sound"
                 }
                 else {
                     textField.text = self.soundTitle.text
                 }
-                
+                */
+                textField.placeholder = "Name this sound"
                 
                 let textCount = textField.text?.trimmingCharacters(in: .whitespacesAndNewlines).characters.count ?? 0
                 let textIsNotEmpty = textCount > 0

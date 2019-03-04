@@ -365,8 +365,12 @@
                             <constraint firstAttribute="trailing" secondItem="2rh-qg-ey6" secondAttribute="trailing" constant="12" id="zOE-BF-chv"/>
                         </constraints>
                     </view>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FRX-q2-fTq">
+                        <rect key="frame" x="12" y="4" width="296" height="52"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </view>
                     <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="wH8-4c-hoO">
-                        <rect key="frame" x="204" y="16" width="100" height="29"/>
+                        <rect key="frame" x="188" y="16" width="100" height="29"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="28" id="GS0-me-9Cr"/>
                             <constraint firstAttribute="width" constant="100" id="SLZ-Cj-0NI"/>
@@ -376,8 +380,8 @@
                             <segment title="7"/>
                         </segments>
                     </segmentedControl>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="EQUALIZER" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ogh-ZC-f7k">
-                        <rect key="frame" x="16" y="16.5" width="180" height="26.5"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="EQUALIZER" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ogh-ZC-f7k">
+                        <rect key="frame" x="32" y="16.5" width="140" height="26.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="22"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -389,11 +393,15 @@
                     <constraint firstAttribute="trailing" secondItem="UdQ-8c-Ebd" secondAttribute="trailing" constant="12" id="HYE-Oi-MQO"/>
                     <constraint firstItem="wH8-4c-hoO" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16" id="LUR-YW-6Lm"/>
                     <constraint firstItem="UdQ-8c-Ebd" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="12" id="Nbh-ul-X0N"/>
-                    <constraint firstItem="ogh-ZC-f7k" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="PQv-Sl-nZh"/>
+                    <constraint firstItem="ogh-ZC-f7k" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="32" id="PQv-Sl-nZh"/>
                     <constraint firstItem="ogh-ZC-f7k" firstAttribute="centerY" secondItem="wH8-4c-hoO" secondAttribute="centerY" id="Q1J-fq-dh2"/>
-                    <constraint firstItem="wH8-4c-hoO" firstAttribute="leading" secondItem="ogh-ZC-f7k" secondAttribute="trailing" constant="8" id="vjb-WF-bZS"/>
+                    <constraint firstItem="FRX-q2-fTq" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="4" id="XrE-GR-9h7"/>
+                    <constraint firstItem="FRX-q2-fTq" firstAttribute="trailing" secondItem="UdQ-8c-Ebd" secondAttribute="trailing" id="eVH-er-2Fj"/>
+                    <constraint firstItem="FRX-q2-fTq" firstAttribute="leading" secondItem="UdQ-8c-Ebd" secondAttribute="leading" id="kRQ-Tx-JMi"/>
+                    <constraint firstItem="wH8-4c-hoO" firstAttribute="leading" secondItem="ogh-ZC-f7k" secondAttribute="trailing" constant="16" id="vjb-WF-bZS"/>
+                    <constraint firstItem="UdQ-8c-Ebd" firstAttribute="top" secondItem="FRX-q2-fTq" secondAttribute="bottom" constant="4" id="wCb-Jn-Z9W"/>
                     <constraint firstAttribute="bottom" secondItem="UdQ-8c-Ebd" secondAttribute="bottom" id="wDA-vJ-6E9"/>
-                    <constraint firstAttribute="trailing" secondItem="wH8-4c-hoO" secondAttribute="trailing" constant="16" id="ylB-np-V0b"/>
+                    <constraint firstAttribute="trailing" secondItem="wH8-4c-hoO" secondAttribute="trailing" constant="32" id="ylB-np-V0b"/>
                 </constraints>
             </tableViewCellContentView>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -417,6 +425,8 @@
                 <outlet property="sevenBandUpperMidSlider" destination="EMt-7N-Q1P" id="pHY-35-0PV"/>
                 <outlet property="sevenBandUpperMidValue" destination="8uZ-yQ-KtC" id="84P-JN-Eq5"/>
                 <outlet property="sevenStack" destination="2rh-qg-ey6" id="yFH-Wt-FHw"/>
+                <outlet property="soundTitle" destination="ogh-ZC-f7k" id="Us5-jV-cub"/>
+                <outlet property="tableHeadingBackground" destination="FRX-q2-fTq" id="hln-uD-9ak"/>
                 <outlet property="threeBandHighSlider" destination="Oy6-jq-SQY" id="Ao1-Hi-kBv"/>
                 <outlet property="threeBandHighValue" destination="WRS-jc-PI2" id="hIX-cD-A94"/>
                 <outlet property="threeBandLowSlider" destination="zo6-xN-enl" id="ZGY-kB-JXP"/>

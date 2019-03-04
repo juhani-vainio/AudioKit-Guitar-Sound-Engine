@@ -13,6 +13,8 @@ class EqualizerTableViewCell: UITableViewCell {
     
     @IBOutlet var labels: [UILabel]!
     
+    @IBOutlet weak var soundTitle: UILabel!
+    @IBOutlet weak var tableHeadingBackground: UIView!
     
     @IBOutlet weak var segmentControl: UISegmentedControl!
     @IBOutlet weak var controllersHeight: NSLayoutConstraint!
@@ -22,6 +24,7 @@ class EqualizerTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        tableHeadingBackground.layer.cornerRadius = 8
         
         threeBandHighSlider.addTarget(self, action: #selector(valueChanged), for: .valueChanged)
         threeBandMidSlider.addTarget(self, action: #selector(valueChanged), for: .valueChanged)
@@ -38,6 +41,7 @@ class EqualizerTableViewCell: UITableViewCell {
     }
     
     func setColors() {
+        tableHeadingBackground.backgroundColor = interface.tableAlt
         for label in labels {
             label.textColor = interface.text
         }
