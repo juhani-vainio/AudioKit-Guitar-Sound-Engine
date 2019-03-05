@@ -110,8 +110,11 @@ class Colors {
     
     let options = ["spotify", "bluePinkGreen", "finder", "joku", "defaultti"]
 
+    static var selected = ""
+    
     func setInterfaceColorScheme(name: String) {
         print("Interface color scheme is:  \(name)")
+        Colors.selected = name
         switch name {
             
         case "Yle":

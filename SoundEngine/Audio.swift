@@ -31,6 +31,8 @@ struct eqData {
 
 class audio {
     
+    static var nameOfCurrentSound = ""
+    
     static var availableEffectsData = [effectData]()
     
     static var selectedEffectsData = [effectData]()

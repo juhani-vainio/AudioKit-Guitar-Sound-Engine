@@ -225,6 +225,22 @@ class helper {
     func checkUserDefaults() {
         
         print("checkUserDefaults")
+        let name = UserDefaults.standard.string(forKey: "NameOfSound")
+        if name != nil {
+            print("NAME IS: \(name)")
+            audio.nameOfCurrentSound = name!
+        } else {
+            print("NO NAME")
+            audio.nameOfCurrentSound = ""
+        }
+        
+        // Set up Interface Colors
+        let color = UserDefaults.standard.string(forKey: "Color")
+        if color != nil {
+            Colors.palette.setInterfaceColorScheme(name: color!)
+        } else {
+            Colors.palette.setInterfaceColorScheme(name: "Candy")
+        }
         
         let savedBufferLength = UserDefaults.standard.integer(forKey: "bufferLength")
         if savedBufferLength != 0 {

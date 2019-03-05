@@ -26,7 +26,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
     @IBOutlet weak var colorSegment: UISegmentedControl!
     
     
-    var nameOfCurrentSound = ""
+    
     // TEXT LABELS
     @IBOutlet weak var soundTitle: UILabel!
     @IBOutlet weak var effectsTitle: UILabel!
@@ -246,13 +246,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
             self.settingsEmptyAreaView.isUserInteractionEnabled = true
             
             
-            // Set up Interface Colors
-            let color = UserDefaults.standard.string(forKey: "Color")
-            if color != nil {
-                Colors.palette.setInterfaceColorScheme(name: color!)
-            } else {
-                Colors.palette.setInterfaceColorScheme(name: "Candy")
-            }
+            
             
             
             
@@ -262,14 +256,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
             
             helper.shared.checkUserDefaults()
             
-            let name = UserDefaults.standard.string(forKey: "NameOfSound")
-            if name != nil {
-                print("NAME IS: \(name)")
-                nameOfCurrentSound = name!
-            } else {
-                print("NO NAME")
-                nameOfCurrentSound = ""
-            }
+            
             
             createTableViews()
             
@@ -309,7 +296,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
             outputLevel.addTarget(self, action: #selector(outputLevelChangeEnded), for: .touchUpInside)
             
             bufferLengthSegment.selectedSegmentIndex = settings.bufferLength - 1
-            
+            colorSegment.selectedSegmentIndex = setColorSegment()
             savedSoundsTableView.layer.cornerRadius = 8
             soundsView.layer.cornerRadius = 8
    
@@ -813,7 +800,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
                     cell.selectedBackgroundView = backgroundView
                     cell.segmentControl.selectedSegmentIndex = audio.eqSelection
                     cell.segmentControl.addTarget(self, action: #selector(toggleEQ), for: .valueChanged)
-                    cell.soundTitle.text = nameOfCurrentSound.uppercased()
+                    cell.soundTitle.text = audio.nameOfCurrentSound.uppercased()
                     if cell.segmentControl.selectedSegmentIndex == 1 {
                         
                         cell.controllersHeight.constant = CGFloat(350)
@@ -1784,7 +1771,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
                 
                 let sound = Collections.savedSounds[indexPath.row]
                 UserDefaults.standard.setValue(sound, forKey: "NameOfSound")
-                nameOfCurrentSound = sound
+                audio.nameOfCurrentSound = sound
                 //self.soundTitle.text = sound
                 
                 helper.shared.getSavedChain(name: sound)
@@ -1893,9 +1880,9 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
                     UserDefaults.standard.set(Collections.savedSounds, forKey: "savedSounds")
                     let row = IndexPath(item: indexPath.row, section: 0)
                     savedSoundsTableView.deleteRows(at: [row], with: .none)
-                    if name == nameOfCurrentSound {
+                    if name == audio.nameOfCurrentSound {
                        // self.soundTitle.text = "Sounds"
-                        nameOfCurrentSound = ""
+                        audio.nameOfCurrentSound = ""
                         UserDefaults.standard.setValue("", forKey: "NameOfSound")
                     }
                 }
@@ -1939,6 +1926,22 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
  
             
         }
+    
+    func setColorSegment() -> Int {
+        var value = 0
+        switch Colors.selected
+        {
+        case "Candy" : value = 0
+        case "YellowBlue" : value = 1
+        case "Polka" : value = 2
+        case "PinkBlue" : value = 3
+        case "Spotify" : value = 4
+        case "Yle" : value = 5
+        case "Chrome" : value = 6
+        default : value = 0
+        }
+        return value
+    }
         
 
     @IBAction func colorAction(_ sender: UISegmentedControl) {
@@ -2007,7 +2010,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
                         self.savedSoundsTableView.reloadData()
                         self.setSoundsViewHeight()
                        // self.soundTitle.text = name
-                        self.nameOfCurrentSound = name
+                        audio.nameOfCurrentSound = name
                         UserDefaults.standard.setValue(name, forKey: "NameOfSound")
                         self.handleSoundsTap()
                         self.eqTableView.reloadData()
