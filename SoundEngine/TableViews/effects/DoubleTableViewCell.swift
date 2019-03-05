@@ -33,7 +33,8 @@ class DoubleTableViewCell: UITableViewCell {
     @IBOutlet weak var title: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
-        coloringView.layer.cornerRadius = coloringView.bounds.width / 2
+        coloringView.layer.cornerRadius = 8
+        coloringView.layer.borderWidth = 3
         // Initialization code
     
         
@@ -65,7 +66,7 @@ class DoubleTableViewCell: UITableViewCell {
      
         self.onOffButton.backgroundColor = UIColor.clear
         specialViewArea.backgroundColor = interface.tab
-        specialSwitch.onTintColor = interface.theme2
+        specialSwitch.onTintColor = interface.wave
         // specialSwitch.tintColor = interface.negative
         specialTitle.textColor = interface.text
         

@@ -31,7 +31,8 @@ class TableViewCell: UITableViewCell {
     @IBOutlet weak var title: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
-        coloringView.layer.cornerRadius = coloringView.bounds.width / 2
+        coloringView.layer.cornerRadius = 8
+        coloringView.layer.borderWidth = 3
         
         
         // Initialization code
@@ -44,7 +45,7 @@ class TableViewCell: UITableViewCell {
         
        
         specialViewArea.layer.cornerRadius = 8
-        specialSwitch.onTintColor = interface.theme2
+        specialSwitch.onTintColor = interface.wave
         specialSwitch.transform = CGAffineTransform(scaleX: 0.7, y: 0.7);
         
         specialSwitch.addTarget(self, action: #selector(switchValueChanged), for: .valueChanged)

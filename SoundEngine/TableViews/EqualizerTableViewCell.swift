@@ -41,7 +41,7 @@ class EqualizerTableViewCell: UITableViewCell {
     }
     
     func setColors() {
-        tableHeadingBackground.backgroundColor = interface.tableAlt
+        tableHeadingBackground.backgroundColor = interface.tableHeading
         for label in labels {
             label.textColor = interface.text
         }

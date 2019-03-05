@@ -19,6 +19,10 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="356.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="q2U-4m-ra3">
+                        <rect key="frame" x="12" y="4.5" width="296" height="52"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GBT-W1-3Q1">
                         <rect key="frame" x="12" y="310.5" width="296" height="50"/>
                         <subviews>
@@ -248,29 +252,23 @@
                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                         <state key="normal" title="OFF"/>
                     </button>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="q2U-4m-ra3">
-                        <rect key="frame" x="24" y="44.5" width="200" height="2"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="2" id="MPt-Rd-vTL"/>
-                        </constraints>
-                    </view>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
-                    <constraint firstItem="q2U-4m-ra3" firstAttribute="trailing" secondItem="dJ7-NH-xZi" secondAttribute="trailing" id="0aE-Vu-eMg"/>
                     <constraint firstItem="GBT-W1-3Q1" firstAttribute="trailing" secondItem="k5p-Sw-hdZ" secondAttribute="trailing" id="2KA-hm-0l1"/>
-                    <constraint firstItem="q2U-4m-ra3" firstAttribute="bottom" secondItem="dJ7-NH-xZi" secondAttribute="bottom" id="BFo-hD-DVt"/>
                     <constraint firstItem="k5p-Sw-hdZ" firstAttribute="top" secondItem="dJ7-NH-xZi" secondAttribute="bottom" constant="14" id="CmA-12-psL"/>
                     <constraint firstItem="dJ7-NH-xZi" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="14" id="Ejm-cn-2J1"/>
+                    <constraint firstItem="q2U-4m-ra3" firstAttribute="leading" secondItem="k5p-Sw-hdZ" secondAttribute="leading" id="G0R-bU-xBW"/>
                     <constraint firstAttribute="bottom" secondItem="GBT-W1-3Q1" secondAttribute="bottom" id="I6Z-NK-6X7"/>
                     <constraint firstItem="dJ7-NH-xZi" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="24" id="V34-6b-zzi"/>
                     <constraint firstItem="gRl-B2-XwJ" firstAttribute="centerY" secondItem="dJ7-NH-xZi" secondAttribute="centerY" id="Xvv-C8-LgY"/>
+                    <constraint firstItem="q2U-4m-ra3" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="4" id="YEL-Ld-pYI"/>
                     <constraint firstItem="GBT-W1-3Q1" firstAttribute="leading" secondItem="k5p-Sw-hdZ" secondAttribute="leading" id="YOy-Ed-7xb"/>
-                    <constraint firstItem="q2U-4m-ra3" firstAttribute="leading" secondItem="dJ7-NH-xZi" secondAttribute="leading" id="a1Q-Qw-XKq"/>
                     <constraint firstItem="dJ7-NH-xZi" firstAttribute="trailing" secondItem="gRl-B2-XwJ" secondAttribute="leading" id="amw-1E-fhR"/>
                     <constraint firstItem="k5p-Sw-hdZ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="12" id="dcc-Nn-Jx7"/>
+                    <constraint firstItem="k5p-Sw-hdZ" firstAttribute="top" secondItem="q2U-4m-ra3" secondAttribute="bottom" constant="4" id="fhi-Tr-old"/>
                     <constraint firstAttribute="trailing" secondItem="k5p-Sw-hdZ" secondAttribute="trailing" constant="12" id="fwj-dZ-jkg"/>
+                    <constraint firstItem="q2U-4m-ra3" firstAttribute="trailing" secondItem="k5p-Sw-hdZ" secondAttribute="trailing" id="jcu-ZH-apl"/>
                     <constraint firstAttribute="trailing" secondItem="gRl-B2-XwJ" secondAttribute="trailing" constant="16" id="ocT-ih-lCZ"/>
                     <constraint firstItem="GBT-W1-3Q1" firstAttribute="top" secondItem="k5p-Sw-hdZ" secondAttribute="bottom" id="skH-Q3-FWP"/>
                 </constraints>

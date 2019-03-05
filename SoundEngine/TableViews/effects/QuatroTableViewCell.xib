@@ -19,6 +19,10 @@
                 <rect key="frame" x="0.0" y="0.0" width="325" height="354.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ovg-Id-NGM">
+                        <rect key="frame" x="12" y="4" width="301" height="52"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wPR-a2-sPm">
                         <rect key="frame" x="24" y="14" width="205" height="32"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -216,31 +220,25 @@
                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                         <state key="normal" title="OFF"/>
                     </button>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ovg-Id-NGM">
-                        <rect key="frame" x="24" y="44" width="205" height="2"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="2" id="rWZ-s0-Aip"/>
-                        </constraints>
-                    </view>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
                     <constraint firstItem="n8R-Ri-Y1T" firstAttribute="trailing" secondItem="lXm-bf-atp" secondAttribute="trailing" id="5vq-rm-q5g"/>
-                    <constraint firstItem="ovg-Id-NGM" firstAttribute="bottom" secondItem="wPR-a2-sPm" secondAttribute="bottom" id="94m-H7-Kk0"/>
+                    <constraint firstItem="ovg-Id-NGM" firstAttribute="trailing" secondItem="lXm-bf-atp" secondAttribute="trailing" id="Hyt-ee-WMA"/>
                     <constraint firstAttribute="bottom" secondItem="n8R-Ri-Y1T" secondAttribute="bottom" id="JPo-kH-9k3"/>
                     <constraint firstItem="lXm-bf-atp" firstAttribute="top" secondItem="wPR-a2-sPm" secondAttribute="bottom" constant="14" id="Kp6-tk-Xwe"/>
                     <constraint firstItem="n8R-Ri-Y1T" firstAttribute="top" secondItem="lXm-bf-atp" secondAttribute="bottom" id="LFa-92-nDI"/>
                     <constraint firstItem="1Ia-0f-ZsU" firstAttribute="leading" secondItem="wPR-a2-sPm" secondAttribute="trailing" id="MlB-55-ibc"/>
+                    <constraint firstItem="ovg-Id-NGM" firstAttribute="top" secondItem="gKj-PZ-igb" secondAttribute="top" constant="4" id="N2Z-EB-Hgz"/>
                     <constraint firstAttribute="trailing" secondItem="1Ia-0f-ZsU" secondAttribute="trailing" constant="16" id="OcE-Nd-6w2"/>
-                    <constraint firstItem="ovg-Id-NGM" firstAttribute="trailing" secondItem="wPR-a2-sPm" secondAttribute="trailing" id="Q7e-1B-EIs"/>
+                    <constraint firstItem="ovg-Id-NGM" firstAttribute="leading" secondItem="lXm-bf-atp" secondAttribute="leading" id="Ola-gJ-YM8"/>
                     <constraint firstItem="wPR-a2-sPm" firstAttribute="leading" secondItem="gKj-PZ-igb" secondAttribute="leading" constant="24" id="QnT-z0-YCw"/>
                     <constraint firstItem="wPR-a2-sPm" firstAttribute="top" secondItem="gKj-PZ-igb" secondAttribute="top" constant="14" id="SFD-id-z2j"/>
                     <constraint firstItem="n8R-Ri-Y1T" firstAttribute="leading" secondItem="lXm-bf-atp" secondAttribute="leading" id="ZP5-q2-TRR"/>
                     <constraint firstItem="lXm-bf-atp" firstAttribute="leading" secondItem="gKj-PZ-igb" secondAttribute="leading" constant="12" id="jWX-oE-kPF"/>
+                    <constraint firstItem="lXm-bf-atp" firstAttribute="top" secondItem="ovg-Id-NGM" secondAttribute="bottom" constant="4" id="kM5-KW-cxy"/>
                     <constraint firstAttribute="trailing" secondItem="lXm-bf-atp" secondAttribute="trailing" constant="12" id="lTU-c5-R56"/>
                     <constraint firstItem="1Ia-0f-ZsU" firstAttribute="centerY" secondItem="wPR-a2-sPm" secondAttribute="centerY" id="sPQ-MD-hf6"/>
-                    <constraint firstItem="ovg-Id-NGM" firstAttribute="leading" secondItem="wPR-a2-sPm" secondAttribute="leading" id="zNf-Ec-Rl6"/>
                 </constraints>
             </tableViewCellContentView>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

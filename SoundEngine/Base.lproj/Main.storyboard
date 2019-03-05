@@ -1484,31 +1484,6 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HML-KO-I3b">
                                                 <rect key="frame" x="0.0" y="448" width="984" height="280"/>
                                                 <subviews>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="qXP-Yl-l4R">
-                                                        <rect key="frame" x="256.5" y="156" width="471" height="28"/>
-                                                        <subviews>
-                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lZD-QY-9Ch">
-                                                                <rect key="frame" x="0.0" y="0.0" width="94" height="28"/>
-                                                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                            </view>
-                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5Dt-LV-8lX">
-                                                                <rect key="frame" x="94" y="0.0" width="94.5" height="28"/>
-                                                                <color key="backgroundColor" red="0.99942404029999998" green="0.98555368190000003" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                            </view>
-                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d7n-sy-Fbe">
-                                                                <rect key="frame" x="188.5" y="0.0" width="94" height="28"/>
-                                                                <color key="backgroundColor" red="0.0" green="0.97680455450000003" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                            </view>
-                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="B1X-pb-6Ku">
-                                                                <rect key="frame" x="282.5" y="0.0" width="94.5" height="28"/>
-                                                                <color key="backgroundColor" red="1" green="0.2527923882" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                            </view>
-                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Nu6-S9-LmO">
-                                                                <rect key="frame" x="377" y="0.0" width="94" height="28"/>
-                                                                <color key="backgroundColor" red="0.0" green="0.99143940210000003" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                            </view>
-                                                        </subviews>
-                                                    </stackView>
                                                     <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="GlE-cX-Mu8">
                                                         <rect key="frame" x="256.5" y="156" width="471" height="29"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1517,6 +1492,8 @@
                                                             <constraint firstAttribute="width" constant="471" id="Xw7-bc-fjB"/>
                                                         </constraints>
                                                         <segments>
+                                                            <segment title=""/>
+                                                            <segment title=""/>
                                                             <segment title=""/>
                                                             <segment title=""/>
                                                             <segment title=""/>
@@ -1758,13 +1735,9 @@
                                                     <constraint firstAttribute="trailing" secondItem="Czq-t1-W63" secondAttribute="trailing" constant="38" id="S6e-8S-Qky"/>
                                                     <constraint firstItem="Czq-t1-W63" firstAttribute="top" secondItem="HML-KO-I3b" secondAttribute="top" constant="8" id="WEM-ZK-RQW"/>
                                                     <constraint firstItem="Czq-t1-W63" firstAttribute="leading" secondItem="HML-KO-I3b" secondAttribute="leading" constant="38" id="ZOq-cg-95N"/>
-                                                    <constraint firstItem="qXP-Yl-l4R" firstAttribute="height" secondItem="GlE-cX-Mu8" secondAttribute="height" id="bdd-C2-n8h"/>
-                                                    <constraint firstItem="qXP-Yl-l4R" firstAttribute="width" secondItem="GlE-cX-Mu8" secondAttribute="width" id="dwe-aC-z0d"/>
-                                                    <constraint firstItem="qXP-Yl-l4R" firstAttribute="centerY" secondItem="GlE-cX-Mu8" secondAttribute="centerY" id="hMK-Fb-eRg"/>
                                                     <constraint firstItem="mn6-Mb-RbO" firstAttribute="top" secondItem="LSy-ww-oBB" secondAttribute="bottom" constant="19" id="hYu-NK-HsB"/>
                                                     <constraint firstItem="GlE-cX-Mu8" firstAttribute="bottom" secondItem="LSy-ww-oBB" secondAttribute="top" constant="-8" id="iVk-kq-E3U"/>
                                                     <constraint firstItem="LSy-ww-oBB" firstAttribute="leading" secondItem="GlE-cX-Mu8" secondAttribute="leading" id="lt6-DH-B2d"/>
-                                                    <constraint firstItem="qXP-Yl-l4R" firstAttribute="centerX" secondItem="GlE-cX-Mu8" secondAttribute="centerX" id="m3p-C0-onX"/>
                                                     <constraint firstItem="mn6-Mb-RbO" firstAttribute="centerX" secondItem="HML-KO-I3b" secondAttribute="centerX" id="pol-9i-YHK"/>
                                                 </constraints>
                                             </view>

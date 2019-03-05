@@ -44,8 +44,8 @@ class PentaTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        coloringView.layer.cornerRadius = coloringView.bounds.width / 2
-        
+        coloringView.layer.cornerRadius = 8
+        coloringView.layer.borderWidth = 3
         controllersView.layer.cornerRadius = 8
         
         
@@ -88,7 +88,7 @@ class PentaTableViewCell: UITableViewCell {
         self.onOffButton.backgroundColor = UIColor.clear
         specialViewArea.backgroundColor = interface.tab
        
-        specialSwitch.onTintColor = interface.theme2
+        specialSwitch.onTintColor = interface.wave
          onOffButton.layer.borderColor = interface.text.cgColor
         // specialSwitch.tintColor = interface.negative
         specialTitle.textColor = interface.text

@@ -19,6 +19,10 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="437.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fiu-FX-g3E">
+                        <rect key="frame" x="12" y="4" width="296" height="52"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cz9-kS-cRs">
                         <rect key="frame" x="24" y="14" width="200" height="32"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -280,29 +284,23 @@
                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                         <state key="normal" title="OFF"/>
                     </button>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fiu-FX-g3E">
-                        <rect key="frame" x="24" y="44" width="200" height="2"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="2" id="CuF-y4-gIk"/>
-                        </constraints>
-                    </view>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
                     <constraint firstAttribute="bottom" secondItem="oOA-bZ-9hO" secondAttribute="bottom" id="4Ns-22-rWe"/>
                     <constraint firstItem="cz9-kS-cRs" firstAttribute="leading" secondItem="de5-3y-ghc" secondAttribute="leading" constant="24" id="4ss-6M-l3d"/>
-                    <constraint firstItem="fiu-FX-g3E" firstAttribute="trailing" secondItem="cz9-kS-cRs" secondAttribute="trailing" id="7fy-fQ-4py"/>
+                    <constraint firstItem="fiu-FX-g3E" firstAttribute="top" secondItem="de5-3y-ghc" secondAttribute="top" constant="4" id="8OV-0f-G0Q"/>
                     <constraint firstAttribute="trailing" secondItem="t2j-Yz-1cI" secondAttribute="trailing" constant="16" id="CYs-Tb-zJk"/>
                     <constraint firstItem="Fig-Pc-q7y" firstAttribute="leading" secondItem="de5-3y-ghc" secondAttribute="leading" constant="12" id="G3f-al-D43"/>
                     <constraint firstItem="Fig-Pc-q7y" firstAttribute="top" secondItem="cz9-kS-cRs" secondAttribute="bottom" constant="14" id="H02-fy-2GK"/>
                     <constraint firstItem="cz9-kS-cRs" firstAttribute="trailing" secondItem="t2j-Yz-1cI" secondAttribute="leading" id="RLq-um-092"/>
-                    <constraint firstItem="fiu-FX-g3E" firstAttribute="leading" secondItem="cz9-kS-cRs" secondAttribute="leading" id="VFt-ty-CkA"/>
                     <constraint firstItem="oOA-bZ-9hO" firstAttribute="trailing" secondItem="Fig-Pc-q7y" secondAttribute="trailing" id="YFI-fl-xOY"/>
                     <constraint firstItem="cz9-kS-cRs" firstAttribute="top" secondItem="de5-3y-ghc" secondAttribute="top" constant="14" id="Yqh-br-bzt"/>
+                    <constraint firstItem="fiu-FX-g3E" firstAttribute="leading" secondItem="Fig-Pc-q7y" secondAttribute="leading" id="ZhB-BI-YfT"/>
                     <constraint firstItem="oOA-bZ-9hO" firstAttribute="leading" secondItem="Fig-Pc-q7y" secondAttribute="leading" id="fd9-m5-Brx"/>
                     <constraint firstItem="oOA-bZ-9hO" firstAttribute="top" secondItem="Fig-Pc-q7y" secondAttribute="bottom" id="j3w-ZB-6Qo"/>
-                    <constraint firstItem="fiu-FX-g3E" firstAttribute="bottom" secondItem="cz9-kS-cRs" secondAttribute="bottom" id="sf7-e3-bB3"/>
+                    <constraint firstItem="Fig-Pc-q7y" firstAttribute="top" secondItem="fiu-FX-g3E" secondAttribute="bottom" constant="4" id="rGr-HN-Zkq"/>
+                    <constraint firstItem="fiu-FX-g3E" firstAttribute="trailing" secondItem="Fig-Pc-q7y" secondAttribute="trailing" id="vIz-zx-ncx"/>
                     <constraint firstItem="t2j-Yz-1cI" firstAttribute="centerY" secondItem="cz9-kS-cRs" secondAttribute="centerY" id="vK9-zY-xIA"/>
                     <constraint firstAttribute="trailing" secondItem="Fig-Pc-q7y" secondAttribute="trailing" constant="12" id="xnV-j8-42A"/>
                 </constraints>

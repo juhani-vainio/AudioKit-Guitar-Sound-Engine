@@ -19,6 +19,10 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="485.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4dH-Y0-GGG">
+                        <rect key="frame" x="12" y="4" width="296" height="52.5"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2ee-gG-Kim">
                         <rect key="frame" x="24" y="14.5" width="200" height="32"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -344,31 +348,25 @@
                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                         <state key="normal" title="OFF"/>
                     </button>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4dH-Y0-GGG">
-                        <rect key="frame" x="24" y="44.5" width="200" height="2"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="2" id="Yy9-qR-ftg"/>
-                        </constraints>
-                    </view>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
                     <constraint firstItem="Mfr-Cd-aSN" firstAttribute="top" secondItem="2ee-gG-Kim" secondAttribute="bottom" constant="14" id="0UI-ce-L3l"/>
                     <constraint firstItem="bbS-iT-1bo" firstAttribute="leading" secondItem="Mfr-Cd-aSN" secondAttribute="leading" id="1vp-NP-tql"/>
+                    <constraint firstItem="4dH-Y0-GGG" firstAttribute="trailing" secondItem="Mfr-Cd-aSN" secondAttribute="trailing" id="4vz-pS-NES"/>
                     <constraint firstAttribute="bottom" secondItem="bbS-iT-1bo" secondAttribute="bottom" id="6yo-N4-LuM"/>
-                    <constraint firstItem="4dH-Y0-GGG" firstAttribute="trailing" secondItem="2ee-gG-Kim" secondAttribute="trailing" id="Cff-8X-JBZ"/>
                     <constraint firstAttribute="trailing" secondItem="Mfr-Cd-aSN" secondAttribute="trailing" constant="12" id="F6i-YT-7nH"/>
                     <constraint firstItem="2ee-gG-Kim" firstAttribute="top" secondItem="xmY-Dx-tSa" secondAttribute="top" constant="14" id="Fiq-ws-rcM"/>
                     <constraint firstAttribute="trailing" secondItem="9Pm-lO-PDM" secondAttribute="trailing" constant="16" id="Jrb-6q-zGr"/>
-                    <constraint firstItem="4dH-Y0-GGG" firstAttribute="bottom" secondItem="2ee-gG-Kim" secondAttribute="bottom" id="N16-Ck-UMd"/>
+                    <constraint firstItem="Mfr-Cd-aSN" firstAttribute="top" secondItem="4dH-Y0-GGG" secondAttribute="bottom" constant="4" id="MSX-Pd-QQ3"/>
                     <constraint firstItem="2ee-gG-Kim" firstAttribute="trailing" secondItem="9Pm-lO-PDM" secondAttribute="leading" id="OYR-B3-QjF"/>
                     <constraint firstItem="2ee-gG-Kim" firstAttribute="leading" secondItem="xmY-Dx-tSa" secondAttribute="leading" constant="24" id="W1O-TR-2AX"/>
                     <constraint firstItem="Mfr-Cd-aSN" firstAttribute="leading" secondItem="xmY-Dx-tSa" secondAttribute="leading" constant="12" id="X3X-95-2Nf"/>
                     <constraint firstItem="9Pm-lO-PDM" firstAttribute="centerY" secondItem="2ee-gG-Kim" secondAttribute="centerY" id="Xgm-49-Eak"/>
+                    <constraint firstItem="4dH-Y0-GGG" firstAttribute="leading" secondItem="Mfr-Cd-aSN" secondAttribute="leading" id="XnR-T2-PDT"/>
                     <constraint firstItem="Mfr-Cd-aSN" firstAttribute="bottom" secondItem="bbS-iT-1bo" secondAttribute="top" id="nES-JT-iwr"/>
-                    <constraint firstItem="4dH-Y0-GGG" firstAttribute="leading" secondItem="2ee-gG-Kim" secondAttribute="leading" id="rUB-Ks-lMn"/>
                     <constraint firstItem="bbS-iT-1bo" firstAttribute="trailing" secondItem="Mfr-Cd-aSN" secondAttribute="trailing" id="s00-HO-HfP"/>
+                    <constraint firstItem="4dH-Y0-GGG" firstAttribute="top" secondItem="xmY-Dx-tSa" secondAttribute="top" constant="4" id="uTu-5c-oUt"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="Dm7-WF-JdX"/>

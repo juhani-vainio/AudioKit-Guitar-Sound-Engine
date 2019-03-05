@@ -51,7 +51,8 @@ class OctaTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        coloringView.layer.cornerRadius = coloringView.bounds.width / 2
+        coloringView.layer.cornerRadius = 8
+        coloringView.layer.borderWidth = 3
         controllersView.layer.cornerRadius = 8
         
         
@@ -80,7 +81,7 @@ class OctaTableViewCell: UITableViewCell {
         // specialSwitch.tintColor = interface.negative
         onOffButton.layer.borderColor = interface.text.cgColor
         specialTitle.textColor = interface.text
-        specialSwitch.onTintColor = interface.theme2
+        specialSwitch.onTintColor = interface.wave
         specialViewArea.backgroundColor = interface.tab
         self.contentView.backgroundColor = UIColor.clear
         self.backgroundColor = UIColor.clear

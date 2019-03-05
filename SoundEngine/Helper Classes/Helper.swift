@@ -83,7 +83,7 @@ class helper {
     func getSavedChain(name: String) {
         
         if name == "activeSound" {
-            UserDefaults.standard.setValue("", forKey: "NameOfSound")
+           // UserDefaults.standard.setValue("", forKey: "NameOfSound")
             print("Get values for \(name)")
             let chainArray = UserDefaults.standard.array(forKey: name) ?? [[String:String]]()
             if chainArray.isNotEmpty{

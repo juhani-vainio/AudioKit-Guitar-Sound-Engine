@@ -247,13 +247,29 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
             
             
             // Set up Interface Colors
-            Colors.palette.setInterfaceColorScheme(name: "Candy")
+            let color = UserDefaults.standard.string(forKey: "Color")
+            if color != nil {
+                Colors.palette.setInterfaceColorScheme(name: color!)
+            } else {
+                Colors.palette.setInterfaceColorScheme(name: "Candy")
+            }
+            
+            
             
             
             
             audio.shared.createEffects()
             
             helper.shared.checkUserDefaults()
+            
+            let name = UserDefaults.standard.string(forKey: "NameOfSound")
+            if name != nil {
+                print("NAME IS: \(name)")
+                nameOfCurrentSound = name!
+            } else {
+                print("NO NAME")
+                nameOfCurrentSound = ""
+            }
             
             createTableViews()
             
@@ -276,15 +292,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
         }
         
         func interfaceSetup() {
-            let name = UserDefaults.standard.string(forKey: "NameOfSound")
-            if name != nil {
-                nameOfCurrentSound = name!
-               //self.soundTitle.text = name
-            } else {
-                nameOfCurrentSound = ""
-                //self.soundTitle.text = "Sounds"
-            }
-            //self.soundTitle.text = "SOUNDS"
+            
             
             // inputLevel.transform = CGAffineTransform(rotationAngle: CGFloat(-Double.pi/2))
             inputLevel.minimumValue = Float(Effects.booster.dBRange.lowerBound)
@@ -351,7 +359,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
             outputLevel.thumbTintColor = interface.sliderThumb
             bufferLengthSegment.tintColor = interface.button
             bufferLengthSegment.backgroundColor = interface.buttonAlt
-            colorSegment.tintColor = interface.transparent
+            colorSegment.tintColor = interface.button
             colorSegment.backgroundColor = interface.transparent
             
             // TEXT LABELS
@@ -366,9 +374,9 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
             flat4.textColor = interface.text
             flat3.textColor = interface.text
             flat2.textColor = interface.text
-            flat1.textColor = interface.theme1
-            inTune.textColor = interface.theme2
-            sharp1.textColor = interface.theme1
+            flat1.textColor = interface.active
+            inTune.textColor = interface.wave
+            sharp1.textColor = interface.active
             sharp2.textColor = interface.text
             sharp3.textColor = interface.text
             sharp4.textColor = interface.text
@@ -382,7 +390,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
             bottom.backgroundColor = interface.bottom
             savedSoundsTableView.backgroundColor = interface.tableBackground
             availableEffects.backgroundColor = interface.tableBackground
-            availableEffectsView.backgroundColor = interface.tableAlt
+            availableEffectsView.backgroundColor = interface.tableHeading
             
             // TRANSPARENT
             topControls.backgroundColor = interface.transparent
@@ -412,7 +420,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
                         inputUnit.plotType = .buffer
                         inputUnit.shouldFill = false
                         inputUnit.shouldMirror = false
-                        inputUnit.color = interface.theme1
+                        inputUnit.color = interface.active
                         inputUnit.backgroundColor = UIColor.clear
                         stack.addArrangedSubview(inputUnit)
             
@@ -422,7 +430,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
             outputUnit.plotType = .buffer
             outputUnit.shouldFill = false
             outputUnit.shouldMirror = false
-            outputUnit.color = interface.theme1
+            outputUnit.color = interface.active
             outputUnit.backgroundColor = UIColor.clear
             stack.addArrangedSubview(outputUnit)
         
@@ -911,7 +919,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
                 case "1":
                     // One slider
                     let cell = tableView.dequeueReusableCell(withIdentifier: "TableViewCell", for: indexPath) as! TableViewCell
-                    cell.coloringView.backgroundColor = cellColorCoding
+                    cell.coloringView.layer.borderColor = cellColorCoding.cgColor
                     
                     let slider = audio.shared.getValues(id: cellId, slider: 1)
                     cell.sliderTitle.text = slider.name
@@ -976,7 +984,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
                 case "2":
                     // Has two sliders
                     let cell = tableView.dequeueReusableCell(withIdentifier: "DoubleTableViewCell", for: indexPath) as! DoubleTableViewCell
-                    cell.coloringView.backgroundColor = cellColorCoding
+                    cell.coloringView.layer.borderColor = cellColorCoding.cgColor
                     
                     let slider1 = audio.shared.getValues(id: cellId, slider: 1)
                     cell.slider1Title.text = slider1.name
@@ -1052,7 +1060,8 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
                 case "3":
                     
                     let cell = tableView.dequeueReusableCell(withIdentifier: "TripleTableViewCell", for: indexPath) as! TripleTableViewCell
-                    cell.coloringView.backgroundColor = cellColorCoding
+                    cell.coloringView.layer.borderColor = cellColorCoding.cgColor
+                    
                     let slider1 = audio.shared.getValues(id: cellId, slider: 1)
                     cell.slider1Title.text = slider1.name
                     cell.slider1Value.text = slider1.value
@@ -1140,7 +1149,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
                 case "4":
                     
                     let cell = tableView.dequeueReusableCell(withIdentifier: "QuatroTableViewCell", for: indexPath) as! QuatroTableViewCell
-                    cell.coloringView.backgroundColor = cellColorCoding
+                    cell.coloringView.layer.borderColor = cellColorCoding.cgColor
                     
                     let slider1 = audio.shared.getValues(id: cellId, slider: 1)
                     cell.slider1Title.text = slider1.name
@@ -1237,7 +1246,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
                 case "5":
                     // Has two sliders
                     let cell = tableView.dequeueReusableCell(withIdentifier: "PentaTableViewCell", for: indexPath) as! PentaTableViewCell
-                    cell.coloringView.backgroundColor = cellColorCoding
+                    cell.coloringView.layer.borderColor = cellColorCoding.cgColor
                     
                     let slider1 = audio.shared.getValues(id: cellId, slider: 1)
                     cell.slider1Title.text = slider1.name
@@ -1342,7 +1351,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
                 case "6":
                     // Has two sliders
                     let cell = tableView.dequeueReusableCell(withIdentifier: "HexaTableViewCell", for: indexPath) as! HexaTableViewCell
-                    cell.coloringView.backgroundColor = cellColorCoding
+                    cell.coloringView.layer.borderColor = cellColorCoding.cgColor
                     
                     let slider1 = audio.shared.getValues(id: cellId, slider: 1)
                     cell.slider1Title.text = slider1.name
@@ -1457,7 +1466,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
                 case "7":
                     // Has two sliders
                     let cell = tableView.dequeueReusableCell(withIdentifier: "HeptaTableViewCell", for: indexPath) as! HeptaTableViewCell
-                    cell.coloringView.backgroundColor = cellColorCoding
+                    cell.coloringView.layer.borderColor = cellColorCoding.cgColor
                     
                     let slider1 = audio.shared.getValues(id: cellId, slider: 1)
                     cell.slider1Title.text = slider1.name
@@ -1583,7 +1592,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
                 case "8":
                     // Has two sliders
                     let cell = tableView.dequeueReusableCell(withIdentifier: "OctaTableViewCell", for: indexPath) as! OctaTableViewCell
-                    cell.coloringView.backgroundColor = cellColorCoding
+                    cell.coloringView.layer.borderColor = cellColorCoding.cgColor
                     
                     let slider1 = audio.shared.getValues(id: cellId, slider: 1)
                     cell.slider1Title.text = slider1.name
@@ -1718,7 +1727,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
                 default:
                     // One slider
                     let cell = tableView.dequeueReusableCell(withIdentifier: "TableViewCell", for: indexPath) as! TableViewCell
-                    cell.coloringView.backgroundColor = cellColorCoding
+                    cell.coloringView.layer.borderColor = cellColorCoding.cgColor
                     
                     let slider = audio.shared.getValues(id: cellId, slider: 1)
                     cell.sliderTitle.text = slider.name
@@ -1884,7 +1893,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
                     UserDefaults.standard.set(Collections.savedSounds, forKey: "savedSounds")
                     let row = IndexPath(item: indexPath.row, section: 0)
                     savedSoundsTableView.deleteRows(at: [row], with: .none)
-                    if name == self.soundTitle.text {
+                    if name == nameOfCurrentSound {
                        // self.soundTitle.text = "Sounds"
                         nameOfCurrentSound = ""
                         UserDefaults.standard.setValue("", forKey: "NameOfSound")
@@ -1933,17 +1942,23 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
         
 
     @IBAction func colorAction(_ sender: UISegmentedControl) {
+        var colorCode = ""
         switch sender.selectedSegmentIndex
         {
-        case 0: Colors.palette.setInterfaceColorScheme(name: "Candy")
-        case 1 : Colors.palette.setInterfaceColorScheme(name: "YellowBlue")
-        case 2 : Colors.palette.setInterfaceColorScheme(name: "Polka")
-        case 3 : Colors.palette.setInterfaceColorScheme(name: "PinkBlue")
-        default: Colors.palette.setInterfaceColorScheme(name: "Spotify")
+        case 0: colorCode = "Candy"
+        case 1 : colorCode = "YellowBlue"
+        case 2 : colorCode = "Polka"
+        case 3 : colorCode = "PinkBlue"
+        case 4 : colorCode = "Spotify"
+        case 5 : colorCode = "Yle"
+        case 6 : colorCode = "Chrome"
+        default: colorCode = "Spotify"
         }
+        Colors.palette.setInterfaceColorScheme(name: colorCode)
         setColors()
         eqTableView.reloadData()
         selectedEffects.reloadData()
+        UserDefaults.standard.setValue(colorCode, forKey: "Color")
     }
     
         @IBAction func bufferLengthSegmentAction(_ sender: UISegmentedControl) {
@@ -2064,7 +2079,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
             if self.soundsView.isHidden {
                 self.setSoundsViewHeight()
                 self.soundsView.isHidden = false
-                self.soundsTab.backgroundColor = interface.theme1
+                self.soundsTab.backgroundColor = interface.active
                 
                 // hide other tabs
                 self.availableEffects.isHidden = true
@@ -2082,7 +2097,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
                 self.setAvailableEffectsHeight()
                 self.availableEffects.isHidden = false
                 self.availableEffectsView.isHidden = false
-                self.effectsTab.backgroundColor = interface.theme1
+                self.effectsTab.backgroundColor = interface.active
                 
                 // hide other tabs
                 self.soundsView.isHidden = true
@@ -2100,7 +2115,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
         @objc func handleHamburgerTap() {
             if settingsView.isHidden {
                 self.settingsView.isHidden = false
-                self.hamburgerView.backgroundColor = interface.theme1
+                self.hamburgerView.backgroundColor = interface.active
             }
             else {
                 self.settingsView.isHidden = true
