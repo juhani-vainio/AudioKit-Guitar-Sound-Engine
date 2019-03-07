@@ -45,7 +45,7 @@ class TableViewCell: UITableViewCell {
         
        
         specialViewArea.layer.cornerRadius = 8
-        specialSwitch.onTintColor = interface.wave
+        specialSwitch.onTintColor = interface.highlight
         specialSwitch.transform = CGAffineTransform(scaleX: 0.7, y: 0.7);
         
         specialSwitch.addTarget(self, action: #selector(switchValueChanged), for: .valueChanged)
@@ -55,13 +55,13 @@ class TableViewCell: UITableViewCell {
     }
     
     func setColors() {
-         specialViewArea.backgroundColor = interface.tab
+         specialViewArea.backgroundColor = interface.tabs
         contentView.backgroundColor = UIColor.clear
         backgroundColor = UIColor.clear
         title.textColor = interface.text
         sliderTitle.textColor = interface.text
         sliderValue.textColor = interface.text
-        controllersView.backgroundColor = interface.tab
+        controllersView.backgroundColor = interface.tabs
         // specialSwitch.tintColor = interface.negative
         specialTitle.textColor = interface.text
         onOffButton.layer.borderColor = interface.text.cgColor

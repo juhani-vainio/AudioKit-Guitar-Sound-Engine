@@ -65,13 +65,13 @@ class TripleTableViewCell: UITableViewCell {
         self.slider2Value.textColor = interface.text
         self.slider3Title.textColor = interface.text
         self.slider3Value.textColor = interface.text
-        self.controllersView.backgroundColor = interface.tab
+        self.controllersView.backgroundColor = interface.tabs
        
         self.onOffButton.backgroundColor = UIColor.clear
         
-        specialViewArea.backgroundColor = interface.tab
+        specialViewArea.backgroundColor = interface.tabs
       
-        specialSwitch.onTintColor = interface.wave
+        specialSwitch.onTintColor = interface.highlight
         // specialSwitch.tintColor = interface.negative
         specialTitle.textColor = interface.text
          onOffButton.layer.borderColor = interface.text.cgColor

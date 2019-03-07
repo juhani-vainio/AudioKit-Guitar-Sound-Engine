@@ -74,11 +74,11 @@ class QuatroTableViewCell: UITableViewCell {
         self.slider3Value.textColor = interface.text
         self.slider4Title.textColor = interface.text
         self.slider4Value.textColor = interface.text
-        self.controllersView.backgroundColor = interface.tab
+        self.controllersView.backgroundColor = interface.tabs
       
         self.onOffButton.backgroundColor = UIColor.clear
-        specialViewArea.backgroundColor = interface.tab
-         specialSwitch.onTintColor = interface.wave
+        specialViewArea.backgroundColor = interface.tabs
+         specialSwitch.onTintColor = interface.highlight
         // specialSwitch.tintColor = interface.negative
         specialTitle.textColor = interface.text
          onOffButton.layer.borderColor = interface.text.cgColor

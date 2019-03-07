@@ -26,6 +26,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
     @IBOutlet weak var colorSegment: UISegmentedControl!
     
     
+    @IBOutlet weak var backgroundImage: UIImageView!
     
     // TEXT LABELS
     @IBOutlet weak var soundTitle: UILabel!
@@ -58,7 +59,8 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
     @IBOutlet weak var soundEngine: UIView!
 
     @IBOutlet weak var settingsView: UIView!
-    @IBOutlet weak var settingControlsView: UIView!
+    @IBOutlet weak var settingControlsFrame: UIView!
+    @IBOutlet weak var settingControls: UIView!
     @IBOutlet weak var settingsEmptyAreaView: UIView!
     @IBOutlet weak var availableEffectsView: UIView!
     @IBOutlet weak var inputLevelView: UIView!
@@ -284,7 +286,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
             // inputLevel.transform = CGAffineTransform(rotationAngle: CGFloat(-Double.pi/2))
             inputLevel.minimumValue = Float(Effects.booster.dBRange.lowerBound)
             inputLevel.maximumValue = Float(Effects.booster.dBRange.upperBound)
-            inputLevel.setValue(Float((audio.inputBooster?.dB)!), animated: true)
+            inputLevel.setValue(Float((audio.inputBooster?.dB)!), animated: false)
             inputLevel.addTarget(self, action: #selector(inputLevelChanged), for: .valueChanged)
             inputLevel.addTarget(self, action: #selector(inputLevelChangeEnded), for: .touchUpInside)
             
@@ -309,9 +311,10 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
             effectsTab.layer.cornerRadius = 8
          
             hamburgerView.layer.cornerRadius = 8
-            settingControlsView.layer.cornerRadius = 8
+            settingControlsFrame.layer.cornerRadius = 8
+            settingControls.layer.cornerRadius = 8
             
-            mainFrame.layer.cornerRadius = 8
+           // mainFrame.layer.cornerRadius = 8
             
             stack.translatesAutoresizingMaskIntoConstraints = false
             stack.distribution = .fillEqually
@@ -333,9 +336,9 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
             // "BUTTONS"
             saveSoundsButton.backgroundColor = interface.transparent
             saveSoundsButton.tintColor = interface.text
-            soundsTab.backgroundColor = interface.tab
-            effectsTab.backgroundColor = interface.tab
-            hamburgerView.backgroundColor = interface.tab
+            soundsTab.backgroundColor = interface.tabs
+            effectsTab.backgroundColor = interface.tabs
+            hamburgerView.backgroundColor = interface.tabs
             
             // CONTROLS
             inputLevel.minimumTrackTintColor = interface.sliderMin
@@ -344,15 +347,15 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
             outputLevel.minimumTrackTintColor = interface.sliderMin
             outputLevel.maximumTrackTintColor = interface.sliderMax
             outputLevel.thumbTintColor = interface.sliderThumb
-            bufferLengthSegment.tintColor = interface.button
-            bufferLengthSegment.backgroundColor = interface.buttonAlt
-            colorSegment.tintColor = interface.button
+            bufferLengthSegment.tintColor = interface.segmentTint
+            bufferLengthSegment.backgroundColor = interface.segmentBackground
+            colorSegment.tintColor = interface.segmentTint
             colorSegment.backgroundColor = interface.transparent
             
             // TEXT LABELS
-            soundTitle.textColor = interface.text
-            effectsTitle.textColor = interface.text
-            settingsTitle.textColor = interface.text
+            soundTitle.textColor = interface.textAlt
+            effectsTitle.textColor = interface.textAlt
+            settingsTitle.textColor = interface.textAlt
             soundsLibraryTitle.textColor = interface.text
             tunerNoteLabel.textColor = interface.text
             sharp.textColor = interface.text
@@ -361,9 +364,9 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
             flat4.textColor = interface.text
             flat3.textColor = interface.text
             flat2.textColor = interface.text
-            flat1.textColor = interface.active
-            inTune.textColor = interface.wave
-            sharp1.textColor = interface.active
+            flat1.textColor = interface.extra
+            inTune.textColor = interface.highlight
+            sharp1.textColor = interface.extra
             sharp2.textColor = interface.text
             sharp3.textColor = interface.text
             sharp4.textColor = interface.text
@@ -371,13 +374,15 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
             
             //VIEWS
             mainFrame.backgroundColor = interface.main
-            soundsView.backgroundColor = interface.mainAlt
+            soundsView.backgroundColor = interface.tableFrame
             top.backgroundColor = interface.top
-            settingControlsView.backgroundColor = interface.bottom
-            bottom.backgroundColor = interface.bottom
+          
+            bottom.backgroundColor = interface.tableBackground
             savedSoundsTableView.backgroundColor = interface.tableBackground
             availableEffects.backgroundColor = interface.tableBackground
-            availableEffectsView.backgroundColor = interface.tableHeading
+            availableEffectsView.backgroundColor = interface.tableFrame
+            settingControlsFrame.backgroundColor = interface.tableFrame
+            settingControls.backgroundColor = interface.tableBackground
             
             // TRANSPARENT
             topControls.backgroundColor = interface.transparent
@@ -407,7 +412,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
                         inputUnit.plotType = .buffer
                         inputUnit.shouldFill = false
                         inputUnit.shouldMirror = false
-                        inputUnit.color = interface.active
+                        inputUnit.color = interface.highlight
                         inputUnit.backgroundColor = UIColor.clear
                         stack.addArrangedSubview(inputUnit)
             
@@ -417,7 +422,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
             outputUnit.plotType = .buffer
             outputUnit.shouldFill = false
             outputUnit.shouldMirror = false
-            outputUnit.color = interface.active
+            outputUnit.color = interface.highlight
             outputUnit.backgroundColor = UIColor.clear
             stack.addArrangedSubview(outputUnit)
         
@@ -1938,8 +1943,10 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
         case "Spotify" : value = 4
         case "Yle" : value = 5
         case "Chrome" : value = 6
+        case "Chess" : value = 7
         default : value = 0
         }
+        setImage(color: Colors.selected)
         return value
     }
         
@@ -1955,13 +1962,34 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
         case 4 : colorCode = "Spotify"
         case 5 : colorCode = "Yle"
         case 6 : colorCode = "Chrome"
+        case 7 : colorCode = "Chess"
         default: colorCode = "Spotify"
         }
+        setImage(color: colorCode)
         Colors.palette.setInterfaceColorScheme(name: colorCode)
         setColors()
         eqTableView.reloadData()
         selectedEffects.reloadData()
+        availableEffects.reloadData()
+        savedSoundsTableView.reloadData()
         UserDefaults.standard.setValue(colorCode, forKey: "Color")
+    }
+    
+    func setImage(color: String) {
+        var image = ""
+        switch color {
+        case "Candy" : image = "kaija"
+        case "YellowBlue" :image = "kaija"
+        case "Polka" : image = "nallekarkit"
+        case "PinkBlue" : image = "nallekarkit"
+        case "Spotify" : image = "axiom"
+        case "Yle" : image = "kisuli"
+        case "Chrome" : image = "kotka"
+        case "Chess" : image = "kisuli"
+        default : image = "axiom"
+            
+        }
+        self.backgroundImage.image = UIImage(named: image)
     }
     
         @IBAction func bufferLengthSegmentAction(_ sender: UISegmentedControl) {
@@ -2082,16 +2110,16 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
             if self.soundsView.isHidden {
                 self.setSoundsViewHeight()
                 self.soundsView.isHidden = false
-                self.soundsTab.backgroundColor = interface.active
+                self.soundsTab.backgroundColor = interface.highlight
                 
                 // hide other tabs
                 self.availableEffects.isHidden = true
                 self.availableEffectsView.isHidden = true
-                self.effectsTab.backgroundColor = interface.tab
+                self.effectsTab.backgroundColor = interface.tabs
             }
             else {
                 self.soundsView.isHidden = true
-                self.soundsTab.backgroundColor = interface.tab
+                self.soundsTab.backgroundColor = interface.tabs
             }
         }
         @objc func handleEffectsTap(){
@@ -2100,16 +2128,16 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
                 self.setAvailableEffectsHeight()
                 self.availableEffects.isHidden = false
                 self.availableEffectsView.isHidden = false
-                self.effectsTab.backgroundColor = interface.active
+                self.effectsTab.backgroundColor = interface.highlight
                 
                 // hide other tabs
                 self.soundsView.isHidden = true
-                self.soundsTab.backgroundColor = interface.tab
+                self.soundsTab.backgroundColor = interface.tabs
          
             } else {
                 self.availableEffects.isHidden = true
                 self.availableEffectsView.isHidden = true
-                self.effectsTab.backgroundColor = interface.tab
+                self.effectsTab.backgroundColor = interface.tabs
             }
             
         }
@@ -2118,18 +2146,25 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
         @objc func handleHamburgerTap() {
             if settingsView.isHidden {
                 self.settingsView.isHidden = false
-                self.hamburgerView.backgroundColor = interface.active
+                self.hamburgerView.backgroundColor = interface.highlight
+                
+                // hide other tabs
+                self.availableEffects.isHidden = true
+                self.availableEffectsView.isHidden = true
+                self.effectsTab.backgroundColor = interface.tabs
+                self.soundsView.isHidden = true
+                self.soundsTab.backgroundColor = interface.tabs
             }
             else {
                 self.settingsView.isHidden = true
-                self.hamburgerView.backgroundColor = interface.tab
+                self.hamburgerView.backgroundColor = interface.tabs
             }
         }
         
         
         @objc func handleCancelTap() {
             self.settingsView.isHidden = true
-            self.hamburgerView.backgroundColor = interface.tab
+            self.hamburgerView.backgroundColor = interface.tabs
         }
     
 

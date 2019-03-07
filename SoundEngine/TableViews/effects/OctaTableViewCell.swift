@@ -81,8 +81,8 @@ class OctaTableViewCell: UITableViewCell {
         // specialSwitch.tintColor = interface.negative
         onOffButton.layer.borderColor = interface.text.cgColor
         specialTitle.textColor = interface.text
-        specialSwitch.onTintColor = interface.wave
-        specialViewArea.backgroundColor = interface.tab
+        specialSwitch.onTintColor = interface.highlight
+        specialViewArea.backgroundColor = interface.tabs
         self.contentView.backgroundColor = UIColor.clear
         self.backgroundColor = UIColor.clear
         self.title.textColor = interface.text
@@ -102,7 +102,7 @@ class OctaTableViewCell: UITableViewCell {
         self.slider7Value.textColor = interface.text
         self.slider8Title.textColor = interface.text
         self.slider8Value.textColor = interface.text
-        self.controllersView.backgroundColor = interface.tab
+        self.controllersView.backgroundColor = interface.tabs
      
         self.onOffButton.backgroundColor = UIColor.clear
         

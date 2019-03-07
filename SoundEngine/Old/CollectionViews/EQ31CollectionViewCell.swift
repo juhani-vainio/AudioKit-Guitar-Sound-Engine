@@ -195,7 +195,7 @@ class EQ31CollectionViewCell: UICollectionViewCell {
         self.slider30Value.textColor = interface.text
         self.slider31Title.textColor = interface.text
         self.slider31Value.textColor = interface.text
-        self.controllers.backgroundColor = interface.tab
+        self.controllers.backgroundColor = interface.tabs
         controllers.layer.cornerRadius = 8
         
         slider1.addTarget(self, action: #selector(valueChanged), for: .valueChanged)

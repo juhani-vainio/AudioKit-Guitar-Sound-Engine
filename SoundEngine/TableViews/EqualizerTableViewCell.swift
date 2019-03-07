@@ -45,8 +45,8 @@ class EqualizerTableViewCell: UITableViewCell {
         for label in labels {
             label.textColor = interface.text
         }
-        segmentControl.tintColor = interface.button
-        segmentControl.backgroundColor = interface.buttonAlt
+        segmentControl.tintColor = interface.segmentTint
+        segmentControl.backgroundColor = interface.segmentBackground
         controllersView.backgroundColor = interface.tableBackground
         controllersView.layer.cornerRadius = 8
         

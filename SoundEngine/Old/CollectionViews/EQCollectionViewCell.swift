@@ -90,7 +90,7 @@ class EQCollectionViewCell: UICollectionViewCell {
         self.slider9Value.textColor = interface.text
         self.slider10Title.textColor = interface.text
         self.slider10Value.textColor = interface.text
-        self.controllers.backgroundColor = interface.tab
+        self.controllers.backgroundColor = interface.tabs
         controllers.layer.cornerRadius = 8
         
         slider1.addTarget(self, action: #selector(valueChanged), for: .valueChanged)

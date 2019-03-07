@@ -97,9 +97,9 @@ class HeptaTableViewCell: UITableViewCell {
         self.slider7Title.textColor = interface.text
         self.slider7Value.textColor = interface.text
         
-        self.controllersView.backgroundColor = interface.tab
-         specialViewArea.backgroundColor = interface.tab
-        specialSwitch.onTintColor = interface.wave
+        self.controllersView.backgroundColor = interface.tabs
+         specialViewArea.backgroundColor = interface.tabs
+        specialSwitch.onTintColor = interface.highlight
         // specialSwitch.tintColor = interface.negative
         specialTitle.textColor = interface.text
         onOffButton.layer.borderColor = interface.text.cgColor

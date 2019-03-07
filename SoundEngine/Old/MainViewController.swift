@@ -221,8 +221,8 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     @IBOutlet weak var top: UIView!
     func setColors() {
-        bufferLengthSegment.tintColor = interface.button
-        bufferLengthSegment.backgroundColor = interface.buttonAlt
+        bufferLengthSegment.tintColor = interface.segmentTint
+        bufferLengthSegment.backgroundColor = interface.segmentBackground
         
         inputLevel.minimumTrackTintColor = interface.sliderMin
         inputLevel.maximumTrackTintColor = interface.sliderMax
@@ -235,17 +235,17 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         toolBar.backgroundColor = interface.top
         top.backgroundColor = interface.top
-        soundsTab.backgroundColor = interface.tab
-        effectsTab.backgroundColor = interface.tab
-        filtersTab.backgroundColor = interface.tab
-        hamburgerView.backgroundColor = interface.tab
+        soundsTab.backgroundColor = interface.tabs
+        effectsTab.backgroundColor = interface.tabs
+        filtersTab.backgroundColor = interface.tabs
+        hamburgerView.backgroundColor = interface.tabs
         settingControlsView.backgroundColor = interface.top
         
-        soundsView.backgroundColor = interface.mainAlt
+        soundsView.backgroundColor = interface.tableFrame
         savedSoundsTableView.backgroundColor = interface.tableBackground
         
-        availableEffectsView.backgroundColor = interface.mainAlt
-        availableFiltersView.backgroundColor = interface.mainAlt
+        availableEffectsView.backgroundColor = interface.tableFrame
+        availableFiltersView.backgroundColor = interface.tableFrame
         availableEffects.backgroundColor = interface.tableBackground
         availableFilters.backgroundColor = interface.tableBackground
         
@@ -1954,19 +1954,19 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         if self.soundsView.isHidden {
             self.setSoundsViewHeight()
             self.soundsView.isHidden = false
-            self.soundsTab.backgroundColor = interface.active
+            self.soundsTab.backgroundColor = interface.highlight
             
             // hide other tabs
             self.availableEffects.isHidden = true
             self.availableEffectsView.isHidden = true
-            self.effectsTab.backgroundColor = interface.tab
+            self.effectsTab.backgroundColor = interface.tabs
             self.availableFilters.isHidden = true
             self.availableFiltersView.isHidden = true
-            self.filtersTab.backgroundColor = interface.tab
+            self.filtersTab.backgroundColor = interface.tabs
         }
         else {
             self.soundsView.isHidden = true
-            self.soundsTab.backgroundColor = interface.tab
+            self.soundsTab.backgroundColor = interface.tabs
         }
     }
     @objc func handleEffectsTap(){
@@ -1975,18 +1975,18 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
             self.setAvailableEffectsHeight()
             self.availableEffects.isHidden = false
             self.availableEffectsView.isHidden = false
-            self.effectsTab.backgroundColor = interface.active
+            self.effectsTab.backgroundColor = interface.highlight
             
             // hide other tabs
             self.soundsView.isHidden = true
-            self.soundsTab.backgroundColor = interface.tab
+            self.soundsTab.backgroundColor = interface.tabs
             self.availableFilters.isHidden = true
             self.availableFiltersView.isHidden = true
-            self.filtersTab.backgroundColor = interface.tab
+            self.filtersTab.backgroundColor = interface.tabs
         } else {
             self.availableEffects.isHidden = true
             self.availableEffectsView.isHidden = true
-            self.effectsTab.backgroundColor = interface.tab
+            self.effectsTab.backgroundColor = interface.tabs
         }
         
     }
@@ -1996,18 +1996,18 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
             self.setAvailableFiltersHeight()
             self.availableFilters.isHidden = false
             self.availableFiltersView.isHidden = false
-            self.filtersTab.backgroundColor = interface.active
+            self.filtersTab.backgroundColor = interface.highlight
             
             // hide other tabs
             self.availableEffects.isHidden = true
             self.availableEffectsView.isHidden = true
-            self.effectsTab.backgroundColor = interface.tab
+            self.effectsTab.backgroundColor = interface.tabs
             self.soundsView.isHidden = true
-            self.soundsTab.backgroundColor = interface.tab
+            self.soundsTab.backgroundColor = interface.tabs
         } else {
             self.availableFilters.isHidden = true
             self.availableFiltersView.isHidden = true
-            self.filtersTab.backgroundColor = interface.tab
+            self.filtersTab.backgroundColor = interface.tabs
         }
         
     }
@@ -2015,18 +2015,18 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     @objc func handleHamburgerTap() {
         if settingsView.isHidden {
             self.settingsView.isHidden = false
-            self.hamburgerView.backgroundColor = interface.active
+            self.hamburgerView.backgroundColor = interface.highlight
         }
         else {
             self.settingsView.isHidden = true
-            self.hamburgerView.backgroundColor = interface.tab
+            self.hamburgerView.backgroundColor = interface.tabs
         }
     }
     
     
     @objc func handleCancelTap() {
         self.settingsView.isHidden = true
-        self.hamburgerView.backgroundColor = interface.tab
+        self.hamburgerView.backgroundColor = interface.tabs
     }
 }
 

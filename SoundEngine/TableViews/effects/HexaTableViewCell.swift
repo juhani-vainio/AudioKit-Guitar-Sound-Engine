@@ -95,9 +95,9 @@ class HexaTableViewCell: UITableViewCell {
         self.slider6Title.textColor = interface.text
         self.slider6Value.textColor = interface.text
             self.onOffButton.backgroundColor = UIColor.clear
-        specialViewArea.backgroundColor = interface.tab
-        self.controllersView.backgroundColor = interface.tab
-        specialSwitch.onTintColor = interface.wave
+        specialViewArea.backgroundColor = interface.tabs
+        self.controllersView.backgroundColor = interface.tabs
+        specialSwitch.onTintColor = interface.highlight
         specialTitle.textColor = interface.text
          onOffButton.layer.borderColor = interface.text.cgColor
         // specialSwitch.tintColor = interface.negative
