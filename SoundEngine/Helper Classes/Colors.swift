@@ -132,11 +132,11 @@ class Colors {
             interface.top = UIColor(rgb: 0x272522) // dark grey
             interface.bottom = UIColor(rgb: 0x272522) // dark grey
             
-            interface.tableFrame = UIColor(rgb: 0x365C6C) // blue
+            interface.tableFrame = UIColor.white
             interface.tableHeading = UIColor(rgb: 0x272522) // dark grey
             interface.tableBackground = UIColor(rgb: 0x272522) // dark grey
             
-            interface.segmentTint = UIColor(rgb: 0xE7903A) // yellow
+            interface.segmentTint = UIColor.white
             interface.segmentBackground = UIColor.clear
             interface.tabs = UIColor(rgb: 0x95BD56) // green
             interface.highlight = UIColor(rgb: 0x365C6C) // blue
@@ -161,7 +161,7 @@ class Colors {
             // UIColor(rgb: 0x0D628F) // darkest blue
             // UIColor(rgb: 0x6938B4) // purple
             
-            interface.main = UIColor(rgb: 0x0D628F) // darkest blue
+            interface.main = UIColor.white
             
             interface.tableFrame = UIColor(rgb: 0x0D628F) // darkest blue
             interface.tableHeading = UIColor(rgb: 0x30414C) // grey
@@ -194,9 +194,9 @@ class Colors {
             // blue  UIColor(rgb: 0x4989F1) // blue
             interface.main = UIColor.black
             
-            interface.tableFrame = UIColor.black
+            interface.tableFrame = UIColor(rgb: 0x00A163) // green
             interface.tableHeading = UIColor(rgb: 0x121212)
-            interface.tabs = UIColor(rgb: 0x121212)
+            interface.tabs = UIColor(rgb: 0xFFCF55) // yellow
             
             interface.top = UIColor(rgb: 0x121212)
             interface.bottom = UIColor(rgb: 0x121212)
@@ -206,10 +206,10 @@ class Colors {
             interface.text = UIColor(rgb: 0xDBDBE6)
             
             interface.segmentBackground = UIColor.clear
-            interface.textAlt = UIColor(rgb: 0x8691AB)
+            interface.textAlt = UIColor.black
             interface.textIdle = UIColor(rgb: 0x686F81)
             
-            interface.highlight = UIColor(rgb: 0x4989F1) // blue
+            interface.highlight = UIColor(rgb: 0x00A163) // green
          
             interface.extra = UIColor(rgb: 0xE05248) // red
             
@@ -223,9 +223,9 @@ class Colors {
             // white & pink
             interface.main = UIColor.black
             
-            interface.tableFrame = UIColor.black
+            interface.tableFrame = UIColor(rgb: 0xC95A90) // pink
             interface.tableHeading = UIColor(rgb: 0x121212)
-            interface.tabs = UIColor(rgb: 0x121212)
+            interface.tabs = UIColor.white
             
             interface.top = UIColor(rgb: 0x121212)
             interface.bottom = UIColor(rgb: 0x121212)
@@ -235,10 +235,10 @@ class Colors {
             interface.text = UIColor(rgb: 0xDBDBE6)
             
             interface.segmentBackground = UIColor.clear
-            interface.textAlt = UIColor(rgb: 0x8691AB)
+            interface.textAlt = UIColor.black
             interface.textIdle = UIColor(rgb: 0x686F81)
             
-            interface.highlight = UIColor(rgb: 0x4286D2)
+            interface.highlight = UIColor(rgb: 0xC95A90) // pink
          
             interface.extra = UIColor(rgb: 0x4286D2)
             
@@ -251,9 +251,9 @@ class Colors {
             //pink & blue
             interface.main = UIColor.black
             
-            interface.tableFrame = UIColor.black
+            interface.tableFrame = UIColor(rgb: 0xC95A90) // pink
             interface.tableHeading = UIColor(rgb: 0x121212)
-            interface.tabs = UIColor(rgb: 0x121212)
+            interface.tabs = UIColor(rgb: 0x2B92AD) // blue
             
             interface.top = UIColor(rgb: 0x121212)
             interface.bottom = UIColor(rgb: 0x121212)
@@ -263,10 +263,10 @@ class Colors {
             interface.text = UIColor(rgb: 0xC95A90) // pink
             
             interface.segmentBackground = UIColor.clear
-            interface.textAlt = UIColor(rgb: 0x8691AB)
+            interface.textAlt = UIColor.black
             interface.textIdle = UIColor(rgb: 0x686F81)
             
-            interface.highlight = UIColor(rgb: 0x2B92AD) // blue
+            interface.highlight = UIColor(rgb: 0xC95A90) // pink
           
             interface.extra = UIColor(rgb: 0xC95A90) // pink
             
@@ -279,9 +279,9 @@ class Colors {
             // yellow and blue
             interface.main = UIColor.black
             
-            interface.tableFrame = UIColor.black
+            interface.tableFrame = UIColor.yellow
             interface.tableHeading = UIColor(rgb: 0x121212)
-            interface.tabs = UIColor(rgb: 0x121212)
+            interface.tabs = UIColor(rgb: 0x4286D2)
             
             interface.top = UIColor(rgb: 0x121212)
             interface.bottom = UIColor(rgb: 0x121212)
@@ -291,10 +291,10 @@ class Colors {
             interface.text = UIColor(rgb: 0xDBDBE6)
             
             interface.segmentBackground = UIColor.clear
-            interface.textAlt = UIColor(rgb: 0x8691AB)
+            interface.textAlt = UIColor.black
             interface.textIdle = UIColor(rgb: 0x686F81)
             
-            interface.highlight = UIColor(rgb: 0x4286D2)
+            interface.highlight = UIColor.yellow
          
             interface.extra = UIColor(rgb: 0x4286D2)
             
@@ -308,9 +308,9 @@ class Colors {
             // blue pink yellow
             interface.main = UIColor.black
             
-            interface.tableFrame = UIColor.black
+            interface.tableFrame = UIColor.white
             interface.tableHeading = UIColor(rgb: 0x121212)
-            interface.tabs = UIColor(rgb: 0x121212)
+            interface.tabs = UIColor(rgb: 0xEC708C)
             
             interface.top = UIColor(rgb: 0x121212)
             interface.bottom = UIColor(rgb: 0x121212)
@@ -320,10 +320,10 @@ class Colors {
             interface.text = UIColor(rgb: 0xDBDBE6)
             
             interface.segmentBackground = UIColor.clear
-            interface.textAlt = UIColor(rgb: 0x8691AB)
+            interface.textAlt = UIColor.black
             interface.textIdle = UIColor(rgb: 0x686F81)
             
-            interface.highlight = UIColor(rgb: 0xEC708C)
+            interface.highlight = UIColor.white
          
             interface.extra = UIColor(rgb: 0x433261)
             
@@ -336,9 +336,9 @@ class Colors {
         case "Spotify":
             interface.main = UIColor.black
             
-            interface.tableFrame = UIColor.black
+            interface.tableFrame = UIColor(rgb: 0x4286D2)
             interface.tableHeading = UIColor(rgb: 0x121212)
-            interface.tabs = UIColor(rgb: 0x121212)
+            interface.tabs = UIColor.black
             
             interface.top = UIColor(rgb: 0x121212)
             interface.bottom = UIColor(rgb: 0x121212)
@@ -359,26 +359,7 @@ class Colors {
             interface.sliderThumb = UIColor(rgb: 0xFFFFFF)
             interface.transparent = UIColor.clear
         
-        case "grabient":
-            interface.main = UIColor(rgb: 0x0A0526)
-            interface.tableFrame = UIColor(rgb: 0x941346)
-            interface.top = UIColor(rgb: 0x000000)
-            interface.bottom = UIColor(rgb: 0x000000)
-            interface.segmentTint = UIColor(rgb: 0xD5D5D5)
-            interface.segmentBackground = UIColor.clear
-            interface.tableBackground = UIColor(rgb: 0x121212)
-            interface.tableHeading = UIColor(rgb: 0x121212)
-            interface.tabs = UIColor(rgb: 0x181818)
-            interface.text = UIColor(rgb: 0xD5D5D5)
-            interface.textIdle = UIColor(rgb: 0x888888)
-            interface.textAlt = UIColor(rgb: 0xD5D5D5)
-        
-            interface.extra = UIColor(rgb: 0xFF4A3A)
-            interface.highlight = UIColor(rgb: 0x57CCC3)
-            interface.sliderMin = UIColor(rgb: 0x00B95B)
-            interface.sliderMax = UIColor(rgb: 0x000000)
-            interface.sliderThumb = UIColor(rgb: 0x3DBFB6)
-            interface.transparent = UIColor.clear
+      
             
         default:
             interface.main = UIColor.black

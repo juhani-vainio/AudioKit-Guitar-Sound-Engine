@@ -25,8 +25,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
     @IBOutlet weak var bufferLengthSegment: UISegmentedControl!
     @IBOutlet weak var colorSegment: UISegmentedControl!
     
-    
-    @IBOutlet weak var backgroundImage: UIImageView!
+    var gradient: CAGradientLayer = CAGradientLayer()
     
     // TEXT LABELS
     @IBOutlet weak var soundTitle: UILabel!
@@ -293,7 +292,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
             //  outputLevel.transform = CGAffineTransform(rotationAngle: CGFloat(-Double.pi/2))
             outputLevel.minimumValue = Float(Effects.booster.dBRange.lowerBound)
             outputLevel.maximumValue = Float(Effects.booster.dBRange.upperBound)
-            outputLevel.setValue(Float((audio.outputBooster?.dB)!), animated: true)
+            outputLevel.setValue(Float((audio.outputBooster?.dB)!), animated: false)
             outputLevel.addTarget(self, action: #selector(outputLevelChanged), for: .valueChanged)
             outputLevel.addTarget(self, action: #selector(outputLevelChangeEnded), for: .touchUpInside)
             
@@ -372,6 +371,11 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
             sharp4.textColor = interface.text
             sharp5.textColor = interface.text
             
+            
+      
+            
+            
+            
             //VIEWS
             mainFrame.backgroundColor = interface.main
             soundsView.backgroundColor = interface.tableFrame
@@ -395,7 +399,19 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
             eqTableView.backgroundColor = interface.transparent
             selectedEffects.backgroundColor = interface.transparent
         
+            //gradientBackground()
         }
+    
+    func gradientBackground() {
+      
+        gradient.colors = [UIColor.black.cgColor, interface.highlight.cgColor]
+        gradient.locations = [0.0 , 1.0]
+        gradient.startPoint = CGPoint(x: 0.5, y: 0.0)
+        gradient.endPoint = CGPoint(x: 0.5, y: 1.0)
+        gradient.frame = CGRect(x: 0.0, y: 0.0, width: self.mainFrame.frame.size.width, height: self.mainFrame.frame.size.height)
+    
+        self.mainFrame.layer.insertSublayer(gradient, at: 0)
+    }
         
         func buildWaveforStackView() {
             
@@ -1946,7 +1962,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
         case "Chess" : value = 7
         default : value = 0
         }
-        setImage(color: Colors.selected)
+       
         return value
     }
         
@@ -1965,7 +1981,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
         case 7 : colorCode = "Chess"
         default: colorCode = "Spotify"
         }
-        setImage(color: colorCode)
+       
         Colors.palette.setInterfaceColorScheme(name: colorCode)
         setColors()
         eqTableView.reloadData()
@@ -1975,22 +1991,6 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
         UserDefaults.standard.setValue(colorCode, forKey: "Color")
     }
     
-    func setImage(color: String) {
-        var image = ""
-        switch color {
-        case "Candy" : image = "kaija"
-        case "YellowBlue" :image = "kaija"
-        case "Polka" : image = "nallekarkit"
-        case "PinkBlue" : image = "nallekarkit"
-        case "Spotify" : image = "axiom"
-        case "Yle" : image = "kisuli"
-        case "Chrome" : image = "kotka"
-        case "Chess" : image = "kisuli"
-        default : image = "axiom"
-            
-        }
-        self.backgroundImage.image = UIImage(named: image)
-    }
     
         @IBAction func bufferLengthSegmentAction(_ sender: UISegmentedControl) {
             let segment = sender.selectedSegmentIndex + 1
@@ -2011,10 +2011,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
             
             
         }
-        
-        
-        
-        
+ 
         
         @IBAction func saveSoundButtonAction(_ sender: Any) {
             popUpDialogueForNewSound()
