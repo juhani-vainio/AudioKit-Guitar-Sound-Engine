@@ -21,13 +21,19 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
     
     // "CONTROLS"
     @IBOutlet weak var inputLevel: UISlider!
+    @IBOutlet weak var inputLevelValue: UILabel!
     @IBOutlet weak var outputLevel: UISlider!
+    @IBOutlet weak var outputLevelValue: UILabel!
     @IBOutlet weak var bufferLengthSegment: UISegmentedControl!
     @IBOutlet weak var colorSegment: UISegmentedControl!
     
     var gradient: CAGradientLayer = CAGradientLayer()
     
     // TEXT LABELS
+    
+    @IBOutlet weak var inputLevelValueMain: UILabel!
+    @IBOutlet weak var outputLevelValueMain: UILabel!
+    
     @IBOutlet weak var soundTitle: UILabel!
     @IBOutlet weak var effectsTitle: UILabel!
     @IBOutlet weak var settingsTitle: UILabel!
@@ -293,6 +299,8 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
             inputLevel.minimumValue = Float(Effects.booster.dBRange.lowerBound)
             inputLevel.maximumValue = Float(Effects.booster.dBRange.upperBound)
             inputLevel.setValue(Float((audio.inputBooster?.dB)!), animated: false)
+            inputLevelValue.text = String(audio.inputBooster!.dB).prefix(3) + " dB"
+            inputLevelValueMain.text = "IN: " + inputLevelValue.text!
             inputLevel.addTarget(self, action: #selector(inputLevelChanged), for: .valueChanged)
             inputLevel.addTarget(self, action: #selector(inputLevelChangeEnded), for: .touchUpInside)
             
@@ -300,6 +308,8 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
             outputLevel.minimumValue = Float(Effects.booster.dBRange.lowerBound)
             outputLevel.maximumValue = Float(Effects.booster.dBRange.upperBound)
             outputLevel.setValue(Float((audio.outputBooster?.dB)!), animated: false)
+            outputLevelValue.text = String(audio.outputBooster!.dB).prefix(3) + " dB"
+            outputLevelValueMain.text = "OUT: " + outputLevelValue.text!
             outputLevel.addTarget(self, action: #selector(outputLevelChanged), for: .valueChanged)
             outputLevel.addTarget(self, action: #selector(outputLevelChangeEnded), for: .touchUpInside)
             
@@ -406,7 +416,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
             eqTableView.backgroundColor = interface.transparent
             selectedEffects.backgroundColor = interface.transparent
         
-            //gradientBackground()
+            gradientBackground()
         }
     
     func gradientBackground() {
@@ -492,6 +502,8 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
         
         @objc func inputLevelChanged(slider: UISlider) {
             audio.inputBooster?.dB = Double(slider.value)
+            inputLevelValue.text = String(slider.value).prefix(3) + " dB"
+            inputLevelValueMain.text = "IN: " + inputLevelValue.text!
             //  print("Input --- \(audio.shared.inputBooster?.dB) dB")
         }
         
@@ -502,6 +514,8 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
         
         @objc func outputLevelChanged(slider: UISlider) {
             audio.outputBooster?.dB = Double(slider.value)
+            outputLevelValue.text = String(slider.value).prefix(3) + " dB"
+            outputLevelValueMain.text = "OUT: " + outputLevelValue.text!
             //  print("Output --- \(audio.shared.outputBooster?.dB) dB --- \(audio.shared.outputBooster?.gain)")
         }
         

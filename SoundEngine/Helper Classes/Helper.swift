@@ -243,6 +243,7 @@ class helper {
         }
         
         let savedBufferLength = UserDefaults.standard.integer(forKey: "bufferLength")
+        print("Defaults bufferLength \(savedBufferLength)")
         if savedBufferLength != 0 {
             settings.bufferLength = savedBufferLength
         }
