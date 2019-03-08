@@ -437,7 +437,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
                 subview.isHidden = true
             }
       
-            let stackUnitWidth = waveformView.frame.width / 2
+            let stackUnitWidth = CGFloat(400)
           
             let inputUnit = AKNodeOutputPlot(audio.inputBooster as! AKNode, frame: CGRect(x: 0, y: 0, width: stackUnitWidth, height: 80))
                         inputUnit.heightAnchor.constraint(equalToConstant: 80).isActive = true
@@ -445,19 +445,19 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
                         inputUnit.plotType = .buffer
                         inputUnit.shouldFill = false
                         inputUnit.shouldMirror = false
-                        inputUnit.color = interface.highlight
+                        inputUnit.color = UIColor.cyan
                         inputUnit.backgroundColor = UIColor.clear
                         stack.addArrangedSubview(inputUnit)
             
             let outputUnit = AKNodeOutputPlot(audio.outputBooster as! AKNode, frame: CGRect(x: 0, y: 0, width: stackUnitWidth, height: 80))
-            outputUnit.heightAnchor.constraint(equalToConstant: 80).isActive = true
-            outputUnit.widthAnchor.constraint(equalToConstant: stackUnitWidth).isActive = true
-            outputUnit.plotType = .buffer
-            outputUnit.shouldFill = false
-            outputUnit.shouldMirror = false
-            outputUnit.color = interface.highlight
-            outputUnit.backgroundColor = UIColor.clear
-            stack.addArrangedSubview(outputUnit)
+                        outputUnit.heightAnchor.constraint(equalToConstant: 80).isActive = true
+                        outputUnit.widthAnchor.constraint(equalToConstant: stackUnitWidth).isActive = true
+                        outputUnit.plotType = .buffer
+                        outputUnit.shouldFill = false
+                        outputUnit.shouldMirror = false
+                        outputUnit.color = UIColor.cyan
+                        outputUnit.backgroundColor = UIColor.clear
+                        stack.addArrangedSubview(outputUnit)
         
             
             /*
@@ -2015,9 +2015,9 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
     
     
         @IBAction func bufferLengthSegmentAction(_ sender: UISegmentedControl) {
-            let segment = sender.selectedSegmentIndex + 1
-            audio.shared.setBufferLength(segment: segment)
-            UserDefaults.standard.set(segment, forKey: "bufferLength")
+            let name = sender.selectedSegmentIndex + 1
+            audio.shared.setBufferLength(segment: name)
+            UserDefaults.standard.set(name, forKey: "bufferLength")
             do {
                 try AudioKit.stop()
             } catch {

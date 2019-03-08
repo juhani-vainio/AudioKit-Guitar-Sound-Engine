@@ -1444,15 +1444,15 @@
                                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="dAL-ts-hpf">
                                                         <rect key="frame" x="0.0" y="0.0" width="948" height="80"/>
                                                         <subviews>
-                                                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.69999999999999996" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="IN" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rbf-2j-5XK">
+                                                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.69999999999999996" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="I N" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rbf-2j-5XK">
                                                                 <rect key="frame" x="0.0" y="0.0" width="474" height="80"/>
-                                                                <fontDescription key="fontDescription" type="system" pointSize="32"/>
+                                                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="68"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.69999999999999996" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="OUT" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nwn-DD-1QY">
+                                                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.69999999999999996" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="O U T" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nwn-DD-1QY">
                                                                 <rect key="frame" x="474" y="0.0" width="474" height="80"/>
-                                                                <fontDescription key="fontDescription" type="system" pointSize="32"/>
+                                                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="68"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
@@ -1470,7 +1470,7 @@
                                                 <viewLayoutGuide key="safeArea" id="954-SV-Cr5"/>
                                             </view>
                                         </subviews>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="bottom" secondItem="YkW-F1-W58" secondAttribute="bottom" id="EX9-uN-8MD"/>
                                             <constraint firstItem="YkW-F1-W58" firstAttribute="top" secondItem="N0i-kr-Rug" secondAttribute="top" id="RUJ-8f-nF4"/>
@@ -1583,7 +1583,6 @@
                                                                 </segments>
                                                                 <connections>
                                                                     <action selector="bufferLengthSegmentAction:" destination="1RR-5N-S1x" eventType="valueChanged" id="hZW-qG-z6b"/>
-                                                                    <action selector="bufferLengthSegmentAction:" destination="ibv-Io-IZf" eventType="valueChanged" id="jhJ-l0-owg"/>
                                                                     <action selector="colorAction:" destination="ibv-Io-IZf" eventType="valueChanged" id="CkH-zI-2a8"/>
                                                                 </connections>
                                                             </segmentedControl>
