@@ -305,6 +305,7 @@
                                             <constraint firstItem="YkW-F1-W58" firstAttribute="leading" secondItem="N0i-kr-Rug" secondAttribute="leading" constant="38" id="DTi-m4-5g0"/>
                                             <constraint firstItem="YkW-F1-W58" firstAttribute="centerX" secondItem="N0i-kr-Rug" secondAttribute="centerX" id="Ik5-bp-i7W"/>
                                             <constraint firstItem="YkW-F1-W58" firstAttribute="top" secondItem="N0i-kr-Rug" secondAttribute="top" id="PXh-v8-Nvs"/>
+                                            <constraint firstAttribute="height" constant="80" id="bSi-s5-oa8"/>
                                         </constraints>
                                     </view>
                                     <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ant-Sd-Sso">
@@ -685,7 +686,6 @@
                                 <constraints>
                                     <constraint firstItem="ant-Sd-Sso" firstAttribute="top" secondItem="bzX-k7-5Zl" secondAttribute="bottom" constant="12" id="1Vh-dx-0y5"/>
                                     <constraint firstItem="MvW-18-d2g" firstAttribute="bottom" secondItem="N0i-kr-Rug" secondAttribute="bottom" id="4xD-Tu-JfO"/>
-                                    <constraint firstItem="N0i-kr-Rug" firstAttribute="top" secondItem="IGd-XN-lCb" secondAttribute="top" constant="688" id="M7m-en-lNW"/>
                                     <constraint firstItem="N0i-kr-Rug" firstAttribute="bottom" secondItem="Xll-xO-HUC" secondAttribute="bottom" id="N56-jt-go6"/>
                                     <constraint firstItem="bzX-k7-5Zl" firstAttribute="top" secondItem="Xll-xO-HUC" secondAttribute="top" id="Uo2-u6-AJk"/>
                                     <constraint firstItem="bzX-k7-5Zl" firstAttribute="trailing" secondItem="N0i-kr-Rug" secondAttribute="trailing" id="VA7-fv-mtv"/>

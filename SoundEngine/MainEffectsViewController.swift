@@ -94,7 +94,14 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
     var stack = UIStackView()
         
     
-    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        if UIDevice.current.orientation.isLandscape {
+            print("Landscape")
+            
+        } else {
+            print("Portrait")
+        }
+    }
     
     func disableAllTunerLabels() {
         
