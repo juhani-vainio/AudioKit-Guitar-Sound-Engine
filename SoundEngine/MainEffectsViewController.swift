@@ -554,7 +554,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
             let hexaNib = UINib(nibName: "HexaTableViewCell", bundle: nil)
             let heptaNib = UINib(nibName: "HeptaTableViewCell", bundle: nil)
             let octaNib = UINib(nibName: "OctaTableViewCell", bundle: nil)
-            let passNib = UINib(nibName: "PassFiltersTableViewCell", bundle: nil)
+           
             let eqNib = UINib(nibName: "EqualizerTableViewCell", bundle: nil)
             
             selectedEffects.register(nib, forCellReuseIdentifier: "TableViewCell")
@@ -566,9 +566,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
             selectedEffects.register(heptaNib, forCellReuseIdentifier: "HeptaTableViewCell")
             selectedEffects.register(octaNib, forCellReuseIdentifier: "OctaTableViewCell")
 
-            selectedEffects.register(passNib, forCellReuseIdentifier: "PassFiltersTableViewCell")
-            
-            
+         
             eqTableView.register(eqNib, forCellReuseIdentifier: "EqualizerTableViewCell")
             eqTableView.allowsSelection = false
             
@@ -789,51 +787,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
             else {
                 
                 switch cellType {
-                    
-                case "PassFilters":
-                    let cell = tableView.dequeueReusableCell(withIdentifier: "PassFiltersTableViewCell", for: indexPath) as! PassFiltersTableViewCell
-                    cell.selectedBackgroundView = backgroundView
-                    
-                    let high = audio.shared.getPassFilterValues(slider: 1)
-                    cell.highPassSlider.minimumValue = high.min
-                    cell.highPassSlider.maximumValue = high.max
-                    cell.highPassSlider.value = high.valueForSlider
-                    cell.highPassValueLabel.text = high.value
-                    cell.highPassSegment.selectedSegmentIndex = high.segment
-                    if high.isOn {
-                        cell.highPassOn = true
-                        cell.highPassOnOffButton.setTitle("ON", for: .normal)
-                    } else {
-                        cell.highPassOn = false
-                        cell.highPassOnOffButton.setTitle("OFF", for: .normal)
-                    }
-                    
-                    let low = audio.shared.getPassFilterValues(slider: 2)
-                    cell.lowPassSlider.minimumValue = low.min
-                    cell.lowPassSlider.maximumValue = low.max
-                    cell.lowPassSlider.value = low.valueForSlider
-                    cell.lowPassValueLabel.text = low.value
-                    cell.lowPassSegment.selectedSegmentIndex = low.segment
-                    if low.isOn {
-                        cell.lowPassOn = true
-                        cell.lowPassOnOffButton.setTitle("ON", for: .normal)
-                    } else {
-                        cell.lowPassOn = false
-                        cell.lowPassOnOffButton.setTitle("OFF", for: .normal)
-                    }
-                    
-                    if cellOpened == true {
-                        
-                        cell.controllersHeight.constant = CGFloat(124)
-                        cell.controllersView.isHidden = false
-                        
-                    } else {
-                        cell.controllersHeight.constant = CGFloat(0)
-                        cell.controllersView.isHidden = true
-                        
-                    }
-                    
-                    returnCell = cell
+                
                     
                 case "Equalizer":
                     
