@@ -71,7 +71,8 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
     @IBOutlet weak var selectedEffects: UITableView!
     
     // CONSTRAINTS
-    @IBOutlet weak var eqLeadingToCenterXConstraint: NSLayoutConstraint!
+    @IBOutlet weak var eqLeadingToEngineCenterX: NSLayoutConstraint!
+    @IBOutlet weak var eqTrailingToEngineTrailing: NSLayoutConstraint!
     @IBOutlet weak var soundEngineHeight: NSLayoutConstraint!
     @IBOutlet weak var soundsViewHeight: NSLayoutConstraint!
     @IBOutlet weak var availableEffectsHeight: NSLayoutConstraint!
@@ -188,13 +189,19 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
     
     
     func moveEqToPosition(value: Int) {
+        let width = self.soundEngine.bounds.width / 2
+        let distance = width / 2
         if value == 0 {
-            
-            self.eqLeadingToCenterXConstraint.constant = eqTableView.bounds.width / 2 - eqTableView.bounds.width
-            self.eqTableView.layoutIfNeeded()
-            
+            if self.eqLeadingToEngineCenterX.constant != -distance {
+                self.eqLeadingToEngineCenterX.constant = -distance
+                self.eqTrailingToEngineTrailing.constant = distance
+                self.eqTableView.layoutIfNeeded()
+            }
         } else {
-            self.eqLeadingToCenterXConstraint.constant = 0
+             if self.eqLeadingToEngineCenterX.constant != 0 {
+                self.eqLeadingToEngineCenterX.constant = 0
+                self.eqTrailingToEngineTrailing.constant = 0
+            }
         }
     }
     
@@ -267,7 +274,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
             interfaceSetup()
             startAmplitudeMonitors()
             
-            
+            self.moveEqToPosition(value: audio.selectedEffectsData.count)
             
         }
         
@@ -677,7 +684,6 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
             else if tableView == selectedEffects {
                 // unitsAfter List
                 value = audio.selectedEffectsData.count
-                self.moveEqToPosition(value: value)
             }
             
             else if tableView == eqTableView {
@@ -1806,7 +1812,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
                // buildWaveforStackView()
                 
                 handleSoundsTap()
-                
+                self.moveEqToPosition(value: audio.selectedEffectsData.count)
             }
                 
             else if tableView == availableEffects {
@@ -1819,12 +1825,12 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
                 self.availableEffects.deleteRows(at: [row], with: .none)
                 handleEffectsTap()
                 
-                
+                self.moveEqToPosition(value: audio.selectedEffectsData.count)
             }
                 
            
             else if tableView == selectedEffects {
-                
+                // expand and collapse cells
                 if audio.selectedEffectsData[indexPath.row].opened == false {
                     // close previous cell
                     if let previous = audio.selectedEffectsData.firstIndex(where: {$0.opened == true}) {
@@ -1888,6 +1894,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
                     let row = IndexPath(item: indexPath.row, section: 0)
                     self.selectedEffects.deleteRows(at: [row], with: .none)
                     resetEffectChain()
+                    self.moveEqToPosition(value: audio.selectedEffectsData.count)
                 }
             }
   
@@ -1906,6 +1913,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
                         audio.nameOfCurrentSound = ""
                         UserDefaults.standard.setValue("", forKey: "NameOfSound")
                     }
+                    self.moveEqToPosition(value: audio.selectedEffectsData.count)
                 }
             }
             
