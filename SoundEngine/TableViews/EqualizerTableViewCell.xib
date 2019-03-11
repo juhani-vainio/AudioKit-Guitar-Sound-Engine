@@ -23,7 +23,7 @@
                         <rect key="frame" x="12" y="60" width="296" height="350"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="2rh-qg-ey6">
-                                <rect key="frame" x="12" y="0.0" width="272" height="350"/>
+                                <rect key="frame" x="12" y="0.0" width="272" height="342"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6Ip-lq-c4L">
                                         <rect key="frame" x="0.0" y="0.0" width="272" height="50"/>
@@ -217,7 +217,7 @@
                                         <viewLayoutGuide key="safeArea" id="rVp-92-CaR"/>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xl5-IB-u9r">
-                                        <rect key="frame" x="0.0" y="300" width="272" height="50"/>
+                                        <rect key="frame" x="0.0" y="292" width="272" height="50"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sub Bass     20 to 60 Hz" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NaD-AD-GMy">
                                                 <rect key="frame" x="0.0" y="8" width="146" height="16"/>
@@ -251,7 +251,7 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="WVp-yb-Nwy">
-                                <rect key="frame" x="12" y="0.0" width="272" height="350"/>
+                                <rect key="frame" x="12" y="0.0" width="272" height="342"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8eV-uQ-v5h">
                                         <rect key="frame" x="0.0" y="0.0" width="272" height="50"/>
@@ -317,7 +317,7 @@
                                         <viewLayoutGuide key="safeArea" id="hW5-4j-qXm"/>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vog-nd-HVw">
-                                        <rect key="frame" x="0.0" y="300" width="272" height="50"/>
+                                        <rect key="frame" x="0.0" y="292" width="272" height="50"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bass     100 Hz" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xtn-cz-Cda">
                                                 <rect key="frame" x="0.0" y="8" width="89.5" height="16"/>
@@ -358,10 +358,10 @@
                             <constraint firstItem="2rh-qg-ey6" firstAttribute="leading" secondItem="UdQ-8c-Ebd" secondAttribute="leading" constant="12" id="4Tm-Q1-CmU"/>
                             <constraint firstItem="2rh-qg-ey6" firstAttribute="top" secondItem="UdQ-8c-Ebd" secondAttribute="top" id="DPL-ih-TQa"/>
                             <constraint firstItem="WVp-yb-Nwy" firstAttribute="leading" secondItem="UdQ-8c-Ebd" secondAttribute="leading" constant="12" id="jtL-mU-TpJ"/>
-                            <constraint firstAttribute="bottom" secondItem="WVp-yb-Nwy" secondAttribute="bottom" id="kxg-Qp-hbg"/>
+                            <constraint firstAttribute="bottom" secondItem="WVp-yb-Nwy" secondAttribute="bottom" constant="8" id="kxg-Qp-hbg"/>
                             <constraint firstItem="WVp-yb-Nwy" firstAttribute="top" secondItem="UdQ-8c-Ebd" secondAttribute="top" id="ntG-rd-j8d"/>
                             <constraint firstAttribute="trailing" secondItem="WVp-yb-Nwy" secondAttribute="trailing" constant="12" id="o56-Ir-qna"/>
-                            <constraint firstAttribute="bottom" secondItem="2rh-qg-ey6" secondAttribute="bottom" id="wUE-ed-TSX"/>
+                            <constraint firstAttribute="bottom" secondItem="2rh-qg-ey6" secondAttribute="bottom" constant="8" id="wUE-ed-TSX"/>
                             <constraint firstAttribute="trailing" secondItem="2rh-qg-ey6" secondAttribute="trailing" constant="12" id="zOE-BF-chv"/>
                         </constraints>
                     </view>

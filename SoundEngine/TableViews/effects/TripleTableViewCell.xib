@@ -71,7 +71,7 @@
                         <rect key="frame" x="12" y="60" width="296" height="150"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="pDx-tQ-Ur2">
-                                <rect key="frame" x="12" y="0.0" width="272" height="150"/>
+                                <rect key="frame" x="12" y="0.0" width="272" height="142"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mbD-3B-BVG">
                                         <rect key="frame" x="0.0" y="0.0" width="272" height="50"/>
@@ -137,7 +137,7 @@
                                         <viewLayoutGuide key="safeArea" id="zpU-nH-6fW"/>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="enl-yU-jYG">
-                                        <rect key="frame" x="0.0" y="100" width="272" height="50"/>
+                                        <rect key="frame" x="0.0" y="92" width="272" height="50"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EDb-eM-1DT">
                                                 <rect key="frame" x="0.0" y="8" width="33" height="16"/>
@@ -174,7 +174,7 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="pDx-tQ-Ur2" secondAttribute="trailing" constant="12" id="8Mo-Nv-eiT"/>
-                            <constraint firstAttribute="bottom" secondItem="pDx-tQ-Ur2" secondAttribute="bottom" id="GKe-ZW-Dle"/>
+                            <constraint firstAttribute="bottom" secondItem="pDx-tQ-Ur2" secondAttribute="bottom" constant="8" id="GKe-ZW-Dle"/>
                             <constraint firstItem="pDx-tQ-Ur2" firstAttribute="top" secondItem="zhw-I7-wXU" secondAttribute="top" id="h4y-zS-dvn"/>
                             <constraint firstItem="pDx-tQ-Ur2" firstAttribute="leading" secondItem="zhw-I7-wXU" secondAttribute="leading" constant="12" id="hqM-TP-UeZ"/>
                             <constraint firstAttribute="height" constant="150" id="uVf-sH-dzW"/>

@@ -27,6 +27,8 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
     @IBOutlet weak var bufferLengthSegment: UISegmentedControl!
     @IBOutlet weak var colorSegment: UISegmentedControl!
     
+   
+    
     var gradient: CAGradientLayer = CAGradientLayer()
     
     // TEXT LABELS
@@ -307,7 +309,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
             inputLevel.maximumValue = Float(Effects.booster.dBRange.upperBound)
             inputLevel.setValue(Float((audio.inputBooster?.dB)!), animated: false)
             inputLevelValue.text = String(audio.inputBooster!.dB).prefix(3) + " dB"
-            inputLevelValueMain.text = "IN: " + inputLevelValue.text!
+            inputLevelValueMain.text = "I: " + inputLevelValue.text!
             inputLevel.addTarget(self, action: #selector(inputLevelChanged), for: .valueChanged)
             inputLevel.addTarget(self, action: #selector(inputLevelChangeEnded), for: .touchUpInside)
             
@@ -316,7 +318,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
             outputLevel.maximumValue = Float(Effects.booster.dBRange.upperBound)
             outputLevel.setValue(Float((audio.outputBooster?.dB)!), animated: false)
             outputLevelValue.text = String(audio.outputBooster!.dB).prefix(3) + " dB"
-            outputLevelValueMain.text = "OUT: " + outputLevelValue.text!
+            outputLevelValueMain.text = "O: " + outputLevelValue.text!
             outputLevel.addTarget(self, action: #selector(outputLevelChanged), for: .valueChanged)
             outputLevel.addTarget(self, action: #selector(outputLevelChangeEnded), for: .touchUpInside)
             
@@ -429,7 +431,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
     func gradientBackground() {
       
         gradient.colors = [UIColor.black.cgColor, interface.highlight.cgColor]
-        gradient.locations = [0.0 , 1.0]
+        gradient.locations = [0.2 , 2.0]
         gradient.startPoint = CGPoint(x: 0.5, y: 0.0)
         gradient.endPoint = CGPoint(x: 0.5, y: 1.0)
         gradient.frame = CGRect(x: 0.0, y: 0.0, width: self.mainFrame.frame.size.width, height: self.mainFrame.frame.size.height)
@@ -510,7 +512,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
         @objc func inputLevelChanged(slider: UISlider) {
             audio.inputBooster?.dB = Double(slider.value)
             inputLevelValue.text = String(slider.value).prefix(3) + " dB"
-            inputLevelValueMain.text = "IN: " + inputLevelValue.text!
+            inputLevelValueMain.text = "I: " + inputLevelValue.text!
             //  print("Input --- \(audio.shared.inputBooster?.dB) dB")
         }
         
@@ -522,7 +524,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
         @objc func outputLevelChanged(slider: UISlider) {
             audio.outputBooster?.dB = Double(slider.value)
             outputLevelValue.text = String(slider.value).prefix(3) + " dB"
-            outputLevelValueMain.text = "OUT: " + outputLevelValue.text!
+            outputLevelValueMain.text = "O: " + outputLevelValue.text!
             //  print("Output --- \(audio.shared.outputBooster?.dB) dB --- \(audio.shared.outputBooster?.gain)")
         }
         
@@ -805,7 +807,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
                     cell.soundTitle.text = audio.nameOfCurrentSound.uppercased()
                     if cell.segmentControl.selectedSegmentIndex == 1 {
                         
-                        cell.controllersHeight.constant = CGFloat(350)
+                        cell.controllersHeight.constant = CGFloat(350 + 8)
                         cell.threeStack.isHidden = true
                         cell.sevenStack.isHidden = false
                         cell.segmentControl.selectedSegmentIndex = 1
@@ -863,7 +865,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
                         
                         
                     } else if cell.segmentControl.selectedSegmentIndex == 0 {
-                        cell.controllersHeight.constant = CGFloat(150)
+                        cell.controllersHeight.constant = CGFloat(150 + 8)
                         cell.threeStack.isHidden = false
                         cell.sevenStack.isHidden = true
                         cell.segmentControl.selectedSegmentIndex = 0
@@ -892,10 +894,10 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
                     
                     
                         if cell.segmentControl.selectedSegmentIndex == 1 {
-                            cell.controllersHeight.constant = CGFloat(350)
+                            cell.controllersHeight.constant = CGFloat(350 + 8)
                             cell.controllersView.isHidden = false
                         } else {
-                            cell.controllersHeight.constant = CGFloat(150)
+                            cell.controllersHeight.constant = CGFloat(150 + 8)
                             cell.controllersView.isHidden = false
                         }
                         
@@ -950,7 +952,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
                         } else {
                             cell.bottomConstraint.constant = 0
                         }
-                        cell.controllerHeight.constant = CGFloat(50)
+                        cell.controllerHeight.constant = CGFloat(50 + 8)
                         cell.controllersView.isHidden = false
                         if cellIsSpecial {
                             cell.specialViewHeight.constant = CGFloat(50)
@@ -1026,7 +1028,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
                         } else {
                             cell.bottomConstraint.constant = 0
                         }
-                        cell.controllerHeight.constant = CGFloat(2 * 50)
+                        cell.controllerHeight.constant = CGFloat(2 * 50 + 8)
                         cell.controllersView.isHidden = false
                         if cellIsSpecial {
                             cell.specialViewHeight.constant = CGFloat(50)
@@ -1115,7 +1117,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
                         } else {
                             cell.bottomConstraint.constant = 0
                         }
-                        cell.controllerHeight.constant = CGFloat(3 * 50)
+                        cell.controllerHeight.constant = CGFloat(3 * 50 + 8)
                         cell.controllersView.isHidden = false
                         if cellIsSpecial {
                             cell.specialViewHeight.constant = CGFloat(50)
@@ -1211,7 +1213,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
                         } else {
                             cell.bottomConstraint.constant = 0
                         }
-                        cell.controllerHeight.constant = CGFloat(4 * 50)
+                        cell.controllerHeight.constant = CGFloat(4 * 50 + 8)
                         cell.controllersView.isHidden = false
                         if cellIsSpecial {
                             cell.specialViewHeight.constant = CGFloat(50)
@@ -1317,7 +1319,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
                         } else {
                             cell.bottomConstraint.constant = 0
                         }
-                        cell.controllerHeight.constant = CGFloat(5 * 50)
+                        cell.controllerHeight.constant = CGFloat(5 * 50 + 8)
                         cell.controllersView.isHidden = false
                         if cellIsSpecial {
                             cell.specialViewHeight.constant = CGFloat(50)
@@ -1432,7 +1434,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
                         } else {
                             cell.bottomConstraint.constant = 0
                         }
-                        cell.controllerHeight.constant = CGFloat(6 * 50)
+                        cell.controllerHeight.constant = CGFloat(6 * 50 + 8)
                         cell.controllersView.isHidden = false
                         if cellIsSpecial == true {
                             cell.specialViewHeight.constant = CGFloat(50)
@@ -1558,7 +1560,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
                         } else {
                             cell.bottomConstraint.constant = 0
                         }
-                        cell.controllerHeight.constant = CGFloat(7 * 50)
+                        cell.controllerHeight.constant = CGFloat(7 * 50 + 8)
                         cell.controllersView.isHidden = false
                         if cellIsSpecial {
                             cell.specialViewHeight.constant = CGFloat(50)
@@ -1693,7 +1695,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
                         } else {
                             cell.bottomConstraint.constant = 0
                         }
-                        cell.controllerHeight.constant = CGFloat(8 * 50)
+                        cell.controllerHeight.constant = CGFloat(8 * 50 + 8)
                         cell.controllersView.isHidden = false
                         if cellIsSpecial {
                             cell.specialViewHeight.constant = CGFloat(50)
@@ -1810,22 +1812,22 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
                     // close previous cell
                     if let previous = audio.selectedEffectsData.firstIndex(where: {$0.opened == true}) {
                         audio.selectedEffectsData[previous].opened = false
-                        let row = IndexPath(item: previous, section: 0)
-                        tableView.reloadRows(at: [row], with: .fade)
+                   //     let row = IndexPath(item: previous, section: 0)
+                   //     tableView.reloadRows(at: [row], with: .fade)
                     }
                     // open this cell
                     audio.selectedEffectsData[indexPath.row].opened = true
-                    let row = IndexPath(item: indexPath.row, section: 0)
-                    tableView.reloadRows(at: [row], with: .fade)
-                    tableView.scrollToRow(at: indexPath, at: .top, animated: true)
+                   // let row = IndexPath(item: indexPath.row, section: 0)
+                   // tableView.reloadRows(at: [row], with: .fade)
+                   // tableView.scrollToRow(at: indexPath, at: .top, animated: true)
                 }
                 else {
                     audio.selectedEffectsData[indexPath.row].opened = false
-                    let row = IndexPath(item: indexPath.row, section: 0)
-                    tableView.reloadRows(at: [row], with: .fade)
+                   // let row = IndexPath(item: indexPath.row, section: 0)
+                   // tableView.reloadRows(at: [row], with: .fade)
                     
                 }
-                
+                tableView.reloadData()
             }
            
 

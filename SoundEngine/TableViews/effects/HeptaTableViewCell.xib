@@ -71,7 +71,7 @@
                         <rect key="frame" x="12" y="60" width="296" height="350"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="M1v-SE-h6p">
-                                <rect key="frame" x="12" y="0.0" width="272" height="350"/>
+                                <rect key="frame" x="12" y="0.0" width="272" height="342"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="F2S-3J-NNB">
                                         <rect key="frame" x="0.0" y="0.0" width="272" height="50"/>
@@ -265,7 +265,7 @@
                                         <viewLayoutGuide key="safeArea" id="7oW-49-CGF"/>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jR2-Jk-yo9">
-                                        <rect key="frame" x="0.0" y="300" width="272" height="50"/>
+                                        <rect key="frame" x="0.0" y="292" width="272" height="50"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h83-SR-Db5">
                                                 <rect key="frame" x="0.0" y="8" width="33" height="16"/>
@@ -302,7 +302,7 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="M1v-SE-h6p" firstAttribute="leading" secondItem="okF-q0-HAB" secondAttribute="leading" constant="12" id="6qu-4D-vcr"/>
-                            <constraint firstAttribute="bottom" secondItem="M1v-SE-h6p" secondAttribute="bottom" id="idk-FP-wlT"/>
+                            <constraint firstAttribute="bottom" secondItem="M1v-SE-h6p" secondAttribute="bottom" constant="8" id="idk-FP-wlT"/>
                             <constraint firstAttribute="height" constant="350" id="lL6-X1-Mho"/>
                             <constraint firstItem="M1v-SE-h6p" firstAttribute="top" secondItem="okF-q0-HAB" secondAttribute="top" id="mNW-NV-SfU"/>
                             <constraint firstAttribute="trailing" secondItem="M1v-SE-h6p" secondAttribute="trailing" constant="12" id="xGt-vf-zUA"/>

@@ -71,7 +71,7 @@
                         <rect key="frame" x="12" y="60" width="301" height="200"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="Xfl-4M-kF9">
-                                <rect key="frame" x="12" y="0.0" width="277" height="200"/>
+                                <rect key="frame" x="12" y="0.0" width="277" height="192"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qUD-qu-gX1">
                                         <rect key="frame" x="0.0" y="0.0" width="277" height="50"/>
@@ -169,7 +169,7 @@
                                         <viewLayoutGuide key="safeArea" id="YuH-7Y-Qox"/>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7M6-B5-LSC">
-                                        <rect key="frame" x="0.0" y="150" width="277" height="50"/>
+                                        <rect key="frame" x="0.0" y="142" width="277" height="50"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kSh-SI-12m">
                                                 <rect key="frame" x="0.0" y="8" width="33" height="16"/>
@@ -208,7 +208,7 @@
                             <constraint firstItem="Xfl-4M-kF9" firstAttribute="top" secondItem="lXm-bf-atp" secondAttribute="top" id="28E-OD-5ql"/>
                             <constraint firstItem="Xfl-4M-kF9" firstAttribute="leading" secondItem="lXm-bf-atp" secondAttribute="leading" constant="12" id="B8B-9j-4wH"/>
                             <constraint firstAttribute="height" constant="200" id="Clf-AL-LX8"/>
-                            <constraint firstAttribute="bottom" secondItem="Xfl-4M-kF9" secondAttribute="bottom" id="GrM-bT-nJu"/>
+                            <constraint firstAttribute="bottom" secondItem="Xfl-4M-kF9" secondAttribute="bottom" constant="8" id="GrM-bT-nJu"/>
                             <constraint firstAttribute="trailing" secondItem="Xfl-4M-kF9" secondAttribute="trailing" constant="12" id="pJR-bi-eUk"/>
                         </constraints>
                     </view>
