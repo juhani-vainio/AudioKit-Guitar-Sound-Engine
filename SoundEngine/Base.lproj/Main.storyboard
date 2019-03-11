@@ -341,6 +341,13 @@
                                             <constraint firstAttribute="height" constant="80" id="bSi-s5-oa8"/>
                                         </constraints>
                                     </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NFJ-cT-VSP">
+                                        <rect key="frame" x="524" y="568" width="448" height="120"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="120" id="bE1-pt-1Lr"/>
+                                        </constraints>
+                                    </view>
                                     <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ant-Sd-Sso">
                                         <rect key="frame" x="512" y="91.5" width="492" height="544.5"/>
                                         <subviews>
@@ -710,7 +717,9 @@
                                 <constraints>
                                     <constraint firstItem="ant-Sd-Sso" firstAttribute="top" secondItem="bzX-k7-5Zl" secondAttribute="bottom" constant="12" id="1Vh-dx-0y5"/>
                                     <constraint firstItem="MvW-18-d2g" firstAttribute="bottom" secondItem="N0i-kr-Rug" secondAttribute="bottom" id="4xD-Tu-JfO"/>
+                                    <constraint firstItem="NFJ-cT-VSP" firstAttribute="leading" secondItem="4UE-UB-M6x" secondAttribute="leading" constant="12" id="JF8-ml-1k9"/>
                                     <constraint firstItem="N0i-kr-Rug" firstAttribute="bottom" secondItem="Xll-xO-HUC" secondAttribute="bottom" id="N56-jt-go6"/>
+                                    <constraint firstItem="NFJ-cT-VSP" firstAttribute="trailing" secondItem="4UE-UB-M6x" secondAttribute="trailing" constant="-12" id="OHK-Qc-Kbv"/>
                                     <constraint firstItem="bzX-k7-5Zl" firstAttribute="top" secondItem="Xll-xO-HUC" secondAttribute="top" id="Uo2-u6-AJk"/>
                                     <constraint firstItem="bzX-k7-5Zl" firstAttribute="trailing" secondItem="N0i-kr-Rug" secondAttribute="trailing" id="VA7-fv-mtv"/>
                                     <constraint firstItem="ant-Sd-Sso" firstAttribute="leading" secondItem="kJc-vz-H87" secondAttribute="centerX" id="Y4y-mW-ULh"/>
@@ -721,6 +730,7 @@
                                     <constraint firstItem="MvW-18-d2g" firstAttribute="leading" secondItem="N0i-kr-Rug" secondAttribute="leading" id="lni-mD-gOh"/>
                                     <constraint firstItem="N0i-kr-Rug" firstAttribute="top" secondItem="kJc-vz-H87" secondAttribute="bottom" constant="40" id="phe-9E-Q4y"/>
                                     <constraint firstItem="bzX-k7-5Zl" firstAttribute="leading" secondItem="MvW-18-d2g" secondAttribute="leading" id="qSq-Z0-NE7"/>
+                                    <constraint firstItem="N0i-kr-Rug" firstAttribute="top" secondItem="NFJ-cT-VSP" secondAttribute="bottom" id="rr0-xL-R3D"/>
                                     <constraint firstAttribute="trailing" secondItem="bzX-k7-5Zl" secondAttribute="trailing" id="tgQ-Aw-7RK"/>
                                     <constraint firstItem="bzX-k7-5Zl" firstAttribute="centerX" secondItem="kJc-vz-H87" secondAttribute="centerX" id="uIM-v8-p2Q"/>
                                     <constraint firstItem="kJc-vz-H87" firstAttribute="top" secondItem="IGd-XN-lCb" secondAttribute="top" constant="80" id="vSq-Rb-iu0"/>
