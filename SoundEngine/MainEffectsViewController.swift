@@ -32,6 +32,8 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
     var gradient: CAGradientLayer = CAGradientLayer()
     
     // TEXT LABELS
+    @IBOutlet weak var mainSoundTitleView: UIView!
+    @IBOutlet weak var mainSoundTitle: UILabel!
     
     @IBOutlet weak var inputLevelValueMain: UILabel!
     @IBOutlet weak var outputLevelValueMain: UILabel!
@@ -338,6 +340,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
             hamburgerView.layer.cornerRadius = 8
             settingControlsFrame.layer.cornerRadius = 8
             settingControls.layer.cornerRadius = 8
+            mainSoundTitleView.layer.cornerRadius = 4
             
            // mainFrame.layer.cornerRadius = 8
             
@@ -354,7 +357,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
             
             buildWaveforStackView()
             setColors()
-            
+            mainSoundTitle.text = audio.nameOfCurrentSound
         }
     
         func setColors() {
@@ -378,6 +381,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
             colorSegment.backgroundColor = interface.transparent
             
             // TEXT LABELS
+            mainSoundTitle.textColor = interface.textIdle
             soundTitle.textColor = interface.textAlt
             effectsTitle.textColor = interface.textAlt
             settingsTitle.textColor = interface.textAlt
@@ -406,7 +410,8 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
             mainFrame.backgroundColor = interface.main
             soundsView.backgroundColor = interface.tableFrame
             top.backgroundColor = interface.top
-          
+            mainSoundTitleView.backgroundColor = interface.tableHeading
+            
             bottom.backgroundColor = interface.tableBackground
             savedSoundsTableView.backgroundColor = interface.tableBackground
             availableEffects.backgroundColor = interface.tableBackground
@@ -804,7 +809,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
                     cell.selectedBackgroundView = backgroundView
                     cell.segmentControl.selectedSegmentIndex = audio.eqSelection
                     cell.segmentControl.addTarget(self, action: #selector(toggleEQ), for: .valueChanged)
-                    cell.soundTitle.text = audio.nameOfCurrentSound.uppercased()
+                   // cell.soundTitle.text = audio.nameOfCurrentSound.uppercased()
                     if cell.segmentControl.selectedSegmentIndex == 1 {
                         
                         cell.controllersHeight.constant = CGFloat(350 + 8)
@@ -1776,6 +1781,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
                 let sound = Collections.savedSounds[indexPath.row]
                 UserDefaults.standard.setValue(sound, forKey: "NameOfSound")
                 audio.nameOfCurrentSound = sound
+                self.mainSoundTitle.text = sound
                 //self.soundTitle.text = sound
                 
                 helper.shared.getSavedChain(name: sound)
@@ -1887,6 +1893,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
                     savedSoundsTableView.deleteRows(at: [row], with: .none)
                     if name == audio.nameOfCurrentSound {
                        // self.soundTitle.text = "Sounds"
+                        self.mainSoundTitle.text = ""
                         audio.nameOfCurrentSound = ""
                         UserDefaults.standard.setValue("", forKey: "NameOfSound")
                     }
@@ -2021,6 +2028,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
                         self.setSoundsViewHeight()
                        // self.soundTitle.text = name
                         audio.nameOfCurrentSound = name
+                        self.mainSoundTitle.text = name
                         UserDefaults.standard.setValue(name, forKey: "NameOfSound")
                         self.handleSoundsTap()
                         self.eqTableView.reloadData()
