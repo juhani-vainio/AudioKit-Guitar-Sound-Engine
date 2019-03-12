@@ -71,10 +71,7 @@ class HexaTableViewCell: UITableViewCell {
         
         
         specialSwitch.addTarget(self, action: #selector(switchValueChanged), for: .valueChanged)
-        onOffButton.layer.borderWidth = 2
-       
-        onOffButton.layer.cornerRadius = onOffButton.bounds.height / 2
-        
+    
         
     }
     

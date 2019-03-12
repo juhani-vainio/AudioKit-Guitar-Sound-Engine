@@ -9,7 +9,8 @@
 import UIKit
 
 class TripleTableViewCell: UITableViewCell {
-    
+
+
     var id = String()
     @IBOutlet weak var coloringView: UIView!
     @IBOutlet weak var specialSwitch: UISwitch!
@@ -50,9 +51,7 @@ class TripleTableViewCell: UITableViewCell {
         specialSwitch.transform = CGAffineTransform(scaleX: 0.7, y: 0.7);
        
         specialSwitch.addTarget(self, action: #selector(switchValueChanged), for: .valueChanged)
-        onOffButton.layer.borderWidth = 2
        
-        onOffButton.layer.cornerRadius = onOffButton.bounds.height / 2
     }
     
     func setColors() {

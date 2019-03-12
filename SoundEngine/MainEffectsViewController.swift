@@ -311,7 +311,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
             inputLevel.maximumValue = Float(Effects.booster.dBRange.upperBound)
             inputLevel.setValue(Float((audio.inputBooster?.dB)!), animated: false)
             inputLevelValue.text = String(audio.inputBooster!.dB).prefix(3) + " dB"
-            inputLevelValueMain.text = "I: " + inputLevelValue.text!
+            inputLevelValueMain.text = inputLevelValue.text!
             inputLevel.addTarget(self, action: #selector(inputLevelChanged), for: .valueChanged)
             inputLevel.addTarget(self, action: #selector(inputLevelChangeEnded), for: .touchUpInside)
             
@@ -320,7 +320,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
             outputLevel.maximumValue = Float(Effects.booster.dBRange.upperBound)
             outputLevel.setValue(Float((audio.outputBooster?.dB)!), animated: false)
             outputLevelValue.text = String(audio.outputBooster!.dB).prefix(3) + " dB"
-            outputLevelValueMain.text = "O: " + outputLevelValue.text!
+            outputLevelValueMain.text = outputLevelValue.text!
             outputLevel.addTarget(self, action: #selector(outputLevelChanged), for: .valueChanged)
             outputLevel.addTarget(self, action: #selector(outputLevelChangeEnded), for: .touchUpInside)
             
@@ -517,7 +517,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
         @objc func inputLevelChanged(slider: UISlider) {
             audio.inputBooster?.dB = Double(slider.value)
             inputLevelValue.text = String(slider.value).prefix(3) + " dB"
-            inputLevelValueMain.text = "I: " + inputLevelValue.text!
+            inputLevelValueMain.text = inputLevelValue.text!
             //  print("Input --- \(audio.shared.inputBooster?.dB) dB")
         }
         
@@ -529,7 +529,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
         @objc func outputLevelChanged(slider: UISlider) {
             audio.outputBooster?.dB = Double(slider.value)
             outputLevelValue.text = String(slider.value).prefix(3) + " dB"
-            outputLevelValueMain.text = "O: " + outputLevelValue.text!
+            outputLevelValueMain.text = outputLevelValue.text!
             //  print("Output --- \(audio.shared.outputBooster?.dB) dB --- \(audio.shared.outputBooster?.gain)")
         }
         

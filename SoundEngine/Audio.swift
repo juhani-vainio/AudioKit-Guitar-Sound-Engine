@@ -516,6 +516,7 @@ class audio {
     
     
     static var autoWah: AKAutoWah?
+   
     
     // FILTERS
     
