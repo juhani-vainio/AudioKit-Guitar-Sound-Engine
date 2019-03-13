@@ -1081,15 +1081,13 @@ class audio {
         case 6:
             AKSettings.bufferLength = .veryLong     // 0.02
         // 1024
-        case 7:
-            AKSettings.bufferLength = .huge         // 0.05
+        //case 7: AKSettings.bufferLength = .huge         // 0.05
         // 2048
-        case 8:
-            AKSettings.bufferLength = .longest      // 0.09
+       // case 8:  AKSettings.bufferLength = .longest      // 0.09
         // 4096
         default:
             AKSettings.bufferLength = .short        // 0.002
-            // 512
+            //256
         }
         settings.bufferLength = segment
         

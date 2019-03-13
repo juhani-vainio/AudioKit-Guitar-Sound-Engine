@@ -71,7 +71,7 @@
                         <rect key="frame" x="12" y="60" width="296" height="300"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="M20-bq-pCg">
-                                <rect key="frame" x="12" y="0.0" width="272" height="292"/>
+                                <rect key="frame" x="12" y="0.0" width="272" height="300"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qlp-q5-UX8">
                                         <rect key="frame" x="0.0" y="0.0" width="272" height="50"/>
@@ -238,7 +238,7 @@
                                         <viewLayoutGuide key="safeArea" id="yyP-pF-DwS"/>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PTX-eD-HHl">
-                                        <rect key="frame" x="0.0" y="242" width="272" height="50"/>
+                                        <rect key="frame" x="0.0" y="250" width="272" height="50"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pkk-yW-FDY">
                                                 <rect key="frame" x="0.0" y="0.0" width="33" height="16"/>
@@ -279,7 +279,7 @@
                             <constraint firstItem="M20-bq-pCg" firstAttribute="top" secondItem="Fig-Pc-q7y" secondAttribute="top" id="KNw-0i-1dy"/>
                             <constraint firstItem="M20-bq-pCg" firstAttribute="leading" secondItem="Fig-Pc-q7y" secondAttribute="leading" constant="12" id="iPt-bW-FLK"/>
                             <constraint firstAttribute="height" constant="300" id="lyj-dx-jZv"/>
-                            <constraint firstAttribute="bottom" secondItem="M20-bq-pCg" secondAttribute="bottom" constant="8" id="tE3-C0-cMh"/>
+                            <constraint firstAttribute="bottom" secondItem="M20-bq-pCg" secondAttribute="bottom" id="tE3-C0-cMh"/>
                         </constraints>
                     </view>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t2j-Yz-1cI">

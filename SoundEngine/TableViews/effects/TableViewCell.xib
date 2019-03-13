@@ -34,7 +34,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h8t-AK-OlI">
-                        <rect key="frame" x="12" y="118" width="296" height="50"/>
+                        <rect key="frame" x="12" y="110" width="296" height="50"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XyJ-WA-2T6">
                                 <rect key="frame" x="24" y="8" width="248" height="34"/>
@@ -68,7 +68,7 @@
                         </constraints>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I2A-5h-cPJ">
-                        <rect key="frame" x="12" y="60" width="296" height="58"/>
+                        <rect key="frame" x="12" y="60" width="296" height="50"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0gX-0P-Wjw">
                                 <rect key="frame" x="12" y="0.0" width="272" height="50"/>
@@ -106,9 +106,9 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="0gX-0P-Wjw" firstAttribute="leading" secondItem="I2A-5h-cPJ" secondAttribute="leading" constant="12" id="8YG-kr-hae"/>
-                            <constraint firstAttribute="bottom" secondItem="0gX-0P-Wjw" secondAttribute="bottom" constant="8" id="FUM-eA-Cga"/>
+                            <constraint firstAttribute="bottom" secondItem="0gX-0P-Wjw" secondAttribute="bottom" id="FUM-eA-Cga"/>
                             <constraint firstAttribute="trailing" secondItem="0gX-0P-Wjw" secondAttribute="trailing" constant="12" id="IFC-Xg-oTY"/>
-                            <constraint firstAttribute="height" constant="58" id="neE-xx-d7k"/>
+                            <constraint firstAttribute="height" constant="50" id="neE-xx-d7k"/>
                             <constraint firstItem="0gX-0P-Wjw" firstAttribute="top" secondItem="I2A-5h-cPJ" secondAttribute="top" id="zTI-pI-kaA"/>
                         </constraints>
                     </view>

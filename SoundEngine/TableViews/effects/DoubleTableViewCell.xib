@@ -61,7 +61,7 @@
                         <rect key="frame" x="12" y="60" width="296" height="88"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="woG-Ll-KbB">
-                                <rect key="frame" x="12" y="0.0" width="272" height="80"/>
+                                <rect key="frame" x="12" y="0.0" width="272" height="88"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vMy-74-1A8">
                                         <rect key="frame" x="0.0" y="0.0" width="272" height="50"/>
@@ -96,7 +96,7 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CBB-D9-RXd">
-                                        <rect key="frame" x="0.0" y="30" width="272" height="50"/>
+                                        <rect key="frame" x="0.0" y="38" width="272" height="50"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ihO-8V-Ex5">
                                                 <rect key="frame" x="0.0" y="0.0" width="33" height="16"/>
@@ -133,7 +133,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="woG-Ll-KbB" secondAttribute="bottom" constant="8" id="31C-wF-ODo"/>
+                            <constraint firstAttribute="bottom" secondItem="woG-Ll-KbB" secondAttribute="bottom" id="31C-wF-ODo"/>
                             <constraint firstAttribute="height" constant="88" id="5ys-4i-zPH"/>
                             <constraint firstAttribute="trailing" secondItem="woG-Ll-KbB" secondAttribute="trailing" constant="12" id="7zt-Sw-h2V"/>
                             <constraint firstItem="woG-Ll-KbB" firstAttribute="top" secondItem="U9T-eq-xbr" secondAttribute="top" id="Mil-io-4Sg"/>

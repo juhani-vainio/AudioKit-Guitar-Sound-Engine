@@ -320,7 +320,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
             outputLevel.maximumValue = Float(Effects.booster.dBRange.upperBound)
             outputLevel.setValue(Float((audio.outputBooster?.dB)!), animated: false)
             outputLevelValue.text = String(audio.outputBooster!.dB).prefix(3) + " dB"
-            outputLevelValueMain.text = outputLevelValue.text!
+            outputLevelValueMain.text = "O: " + outputLevelValue.text!
             outputLevel.addTarget(self, action: #selector(outputLevelChanged), for: .valueChanged)
             outputLevel.addTarget(self, action: #selector(outputLevelChangeEnded), for: .touchUpInside)
             
@@ -957,7 +957,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
                         } else {
                             cell.bottomConstraint.constant = 0
                         }
-                        cell.controllerHeight.constant = CGFloat(50 + 8)
+                        cell.controllerHeight.constant = CGFloat(50)
                         cell.controllersView.isHidden = false
                         if cellIsSpecial {
                             cell.specialViewHeight.constant = CGFloat(50)
@@ -1033,7 +1033,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
                         } else {
                             cell.bottomConstraint.constant = 0
                         }
-                        cell.controllerHeight.constant = CGFloat(2 * 50 + 8)
+                        cell.controllerHeight.constant = CGFloat(2 * 50)
                         cell.controllersView.isHidden = false
                         if cellIsSpecial {
                             cell.specialViewHeight.constant = CGFloat(50)
@@ -1122,7 +1122,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
                         } else {
                             cell.bottomConstraint.constant = 0
                         }
-                        cell.controllerHeight.constant = CGFloat(3 * 50 + 8)
+                        cell.controllerHeight.constant = CGFloat(3 * 50)
                         cell.controllersView.isHidden = false
                         if cellIsSpecial {
                             cell.specialViewHeight.constant = CGFloat(50)
@@ -1218,7 +1218,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
                         } else {
                             cell.bottomConstraint.constant = 0
                         }
-                        cell.controllerHeight.constant = CGFloat(4 * 50 + 8)
+                        cell.controllerHeight.constant = CGFloat(4 * 50)
                         cell.controllersView.isHidden = false
                         if cellIsSpecial {
                             cell.specialViewHeight.constant = CGFloat(50)
@@ -1324,7 +1324,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
                         } else {
                             cell.bottomConstraint.constant = 0
                         }
-                        cell.controllerHeight.constant = CGFloat(5 * 50 + 8)
+                        cell.controllerHeight.constant = CGFloat(5 * 50)
                         cell.controllersView.isHidden = false
                         if cellIsSpecial {
                             cell.specialViewHeight.constant = CGFloat(50)
@@ -1439,7 +1439,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
                         } else {
                             cell.bottomConstraint.constant = 0
                         }
-                        cell.controllerHeight.constant = CGFloat(6 * 50 + 8)
+                        cell.controllerHeight.constant = CGFloat(6 * 50)
                         cell.controllersView.isHidden = false
                         if cellIsSpecial == true {
                             cell.specialViewHeight.constant = CGFloat(50)
@@ -1565,7 +1565,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
                         } else {
                             cell.bottomConstraint.constant = 0
                         }
-                        cell.controllerHeight.constant = CGFloat(7 * 50 + 8)
+                        cell.controllerHeight.constant = CGFloat(7 * 50)
                         cell.controllersView.isHidden = false
                         if cellIsSpecial {
                             cell.specialViewHeight.constant = CGFloat(50)
@@ -1700,7 +1700,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
                         } else {
                             cell.bottomConstraint.constant = 0
                         }
-                        cell.controllerHeight.constant = CGFloat(8 * 50 + 8)
+                        cell.controllerHeight.constant = CGFloat(8 * 50)
                         cell.controllersView.isHidden = false
                         if cellIsSpecial {
                             cell.specialViewHeight.constant = CGFloat(50)
@@ -1963,14 +1963,12 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
         var colorCode = ""
         switch sender.selectedSegmentIndex
         {
-        case 0: colorCode = "Candy"
-        case 1 : colorCode = "YellowBlue"
-        case 2 : colorCode = "Polka"
-        case 3 : colorCode = "PinkBlue"
-        case 4 : colorCode = "Spotify"
-        case 5 : colorCode = "Yle"
-        case 6 : colorCode = "Chrome"
-        case 7 : colorCode = "Chess"
+        case 0: colorCode = "Candy" // white colorful pastels
+        case 1 : colorCode = "YellowBlue" // dark colorful
+        case 2 : colorCode = "Polka" // white and pink
+        case 3 : colorCode = "PinkBlue" // steve vai theme
+        case 4 : colorCode = "Spotify"  // white boring grey
+        case 5 : colorCode = "Chrome" // dark boring grey
         default: colorCode = "Spotify"
         }
        

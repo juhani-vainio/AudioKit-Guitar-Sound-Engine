@@ -474,8 +474,6 @@
                                                                     <segment title=""/>
                                                                     <segment title=""/>
                                                                     <segment title=""/>
-                                                                    <segment title=""/>
-                                                                    <segment title=""/>
                                                                 </segments>
                                                                 <connections>
                                                                     <action selector="colorAction:" destination="ibv-Io-IZf" eventType="valueChanged" id="CkH-zI-2a8"/>
@@ -497,8 +495,6 @@
                                                                     <segment title="5 ms"/>
                                                                     <segment title="10 ms"/>
                                                                     <segment title="20 ms"/>
-                                                                    <segment title="50 ms"/>
-                                                                    <segment title="100 ms"/>
                                                                 </segments>
                                                                 <connections>
                                                                     <action selector="bufferLengthSegmentAction:" destination="ibv-Io-IZf" eventType="valueChanged" id="NP8-yd-6L2"/>

@@ -71,7 +71,7 @@
                         <rect key="frame" x="12" y="60.5" width="296" height="250"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="sjz-Xh-KlH">
-                                <rect key="frame" x="12" y="0.0" width="272" height="242"/>
+                                <rect key="frame" x="12" y="0.0" width="272" height="250"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CeD-VW-WNq">
                                         <rect key="frame" x="0.0" y="0.0" width="272" height="50"/>
@@ -205,7 +205,7 @@
                                         <viewLayoutGuide key="safeArea" id="7do-BX-WIt"/>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nct-wj-moo">
-                                        <rect key="frame" x="0.0" y="192" width="272" height="50"/>
+                                        <rect key="frame" x="0.0" y="200" width="272" height="50"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7jk-ek-wmO">
                                                 <rect key="frame" x="0.0" y="0.0" width="33" height="16"/>
@@ -242,7 +242,7 @@
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="sjz-Xh-KlH" secondAttribute="bottom" constant="8" id="1MB-Dq-Rcb"/>
+                            <constraint firstAttribute="bottom" secondItem="sjz-Xh-KlH" secondAttribute="bottom" id="1MB-Dq-Rcb"/>
                             <constraint firstItem="sjz-Xh-KlH" firstAttribute="leading" secondItem="k5p-Sw-hdZ" secondAttribute="leading" constant="12" id="ROO-sa-Zfn"/>
                             <constraint firstAttribute="trailing" secondItem="sjz-Xh-KlH" secondAttribute="trailing" constant="12" id="kCu-KB-xHw"/>
                             <constraint firstAttribute="height" constant="250" id="wT7-W3-5kX"/>
