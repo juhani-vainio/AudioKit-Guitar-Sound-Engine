@@ -28,6 +28,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
     @IBOutlet weak var colorSegment: UISegmentedControl!
     
    
+    @IBOutlet weak var outputVolume: UILabel!
     
     var gradient: CAGradientLayer = CAGradientLayer()
     
@@ -125,7 +126,8 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
     func startAmplitudeMonitors() {
         
         let timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { timer in
-          
+            let volume = audio.outputAmplitudeTracker?.amplitude
+            self.outputVolume.text = String(volume!)
             let tuner = audio.shared.updateTrackerUI()
            // print("TUNER : \(tuner)")
             
@@ -302,6 +304,17 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
             }
        
         }
+    
+    func convertDBValueToText(dB: Double) -> String {
+        var text = ""
+        if dB > 0 {
+            text = "+" + String(dB).prefix(3) + " dB"
+        }
+        else {
+            text = String(dB).prefix(4) + " dB"
+        }
+        return text
+    }
         
         func interfaceSetup() {
             
@@ -310,7 +323,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
             inputLevel.minimumValue = Float(Effects.booster.dBRange.lowerBound)
             inputLevel.maximumValue = Float(Effects.booster.dBRange.upperBound)
             inputLevel.setValue(Float((audio.inputBooster?.dB)!), animated: false)
-            inputLevelValue.text = String(audio.inputBooster!.dB).prefix(3) + " dB"
+            inputLevelValue.text = convertDBValueToText(dB: audio.inputBooster!.dB)
             inputLevelValueMain.text = inputLevelValue.text!
             inputLevel.addTarget(self, action: #selector(inputLevelChanged), for: .valueChanged)
             inputLevel.addTarget(self, action: #selector(inputLevelChangeEnded), for: .touchUpInside)
@@ -319,8 +332,8 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
             outputLevel.minimumValue = Float(Effects.booster.dBRange.lowerBound)
             outputLevel.maximumValue = Float(Effects.booster.dBRange.upperBound)
             outputLevel.setValue(Float((audio.outputBooster?.dB)!), animated: false)
-            outputLevelValue.text = String(audio.outputBooster!.dB).prefix(3) + " dB"
-            outputLevelValueMain.text = "O: " + outputLevelValue.text!
+            outputLevelValue.text = convertDBValueToText(dB: audio.outputBooster!.dB)
+            outputLevelValueMain.text = outputLevelValue.text!
             outputLevel.addTarget(self, action: #selector(outputLevelChanged), for: .valueChanged)
             outputLevel.addTarget(self, action: #selector(outputLevelChangeEnded), for: .touchUpInside)
             
@@ -401,8 +414,8 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
             sharp4.textColor = interface.text
             sharp5.textColor = interface.text
             
-            
-      
+            inputLevelValue.textColor = interface.text
+            outputLevelValue.textColor = interface.text
             
             
             
@@ -516,7 +529,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
         
         @objc func inputLevelChanged(slider: UISlider) {
             audio.inputBooster?.dB = Double(slider.value)
-            inputLevelValue.text = String(slider.value).prefix(3) + " dB"
+            inputLevelValue.text = convertDBValueToText(dB: Double(slider.value))
             inputLevelValueMain.text = inputLevelValue.text!
             //  print("Input --- \(audio.shared.inputBooster?.dB) dB")
         }
@@ -528,7 +541,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
         
         @objc func outputLevelChanged(slider: UISlider) {
             audio.outputBooster?.dB = Double(slider.value)
-            outputLevelValue.text = String(slider.value).prefix(3) + " dB"
+            outputLevelValue.text = convertDBValueToText(dB: Double(slider.value))
             outputLevelValueMain.text = outputLevelValue.text!
             //  print("Output --- \(audio.shared.outputBooster?.dB) dB --- \(audio.shared.outputBooster?.gain)")
         }

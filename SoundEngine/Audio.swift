@@ -149,10 +149,10 @@ class audio {
         }
         outputMixer?.connect(to: audio.outputBooster!)
        
-        audio.outputBooster?.connect(to: outputAmplitudeTracker!)
+        audio.outputBooster?.connect(to: audio.outputAmplitudeTracker!)
         
         // LAST TO OUTPUT
-        AudioKit.output = outputAmplitudeTracker
+        AudioKit.output = audio.outputAmplitudeTracker
         if AudioKit.output == nil {
             AudioKit.output =  audio.inputBooster
             // AudioKit.output = inputMixer
@@ -450,7 +450,7 @@ class audio {
     var micVolume = Double()
     
     // MONITORS
-    var outputAmplitudeTracker : AKAmplitudeTracker?
+    static var outputAmplitudeTracker : AKAmplitudeTracker?
     var inputAmplitudeTracker : AKAmplitudeTracker?
     var micTracker : AKMicrophoneTracker?
     
@@ -570,7 +570,7 @@ class audio {
     func createEffects() {
  
         // MONITORS
-        outputAmplitudeTracker = AKAmplitudeTracker()
+        audio.outputAmplitudeTracker = AKAmplitudeTracker()
         inputAmplitudeTracker = AKAmplitudeTracker()
         micTracker = AKMicrophoneTracker()
         
@@ -730,7 +730,7 @@ class audio {
         
         // start essential units
         
-        outputAmplitudeTracker?.start()
+        audio.outputAmplitudeTracker?.start()
         micTracker?.start()
         
         //Booster
@@ -2483,8 +2483,8 @@ class audio {
                 isOn = audio.rhinoGuitarProcessor!.isStarted
                 
             case 3:
-                min = Float(Effects.booster.dBRange.lowerBound)
-                max = Float(Effects.booster.dBRange.upperBound)
+                min = Float(Effects.rhinoGuitarProcessor.volumeRange.lowerBound)
+                max = Float(Effects.rhinoGuitarProcessor.volumeRange.upperBound)
                 valueForSlider = Float(audio.rhinoBoosterDBValue)
                 name = "Volume"
                 let intValue = Int(valueForSlider)

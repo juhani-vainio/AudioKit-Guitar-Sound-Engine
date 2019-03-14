@@ -47,10 +47,18 @@
                                     <constraint firstItem="pdY-iU-k2I" firstAttribute="centerY" secondItem="iI9-Zm-DEC" secondAttribute="centerY" id="x3c-Am-lss"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zeQ-Dj-3Dw">
+                                <rect key="frame" x="0.0" y="0.0" width="296" height="50"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="zeQ-Dj-3Dw" firstAttribute="top" secondItem="BcT-dE-uLr" secondAttribute="top" id="46v-og-A0V"/>
+                            <constraint firstAttribute="trailing" secondItem="zeQ-Dj-3Dw" secondAttribute="trailing" id="RnH-kK-hlo"/>
                             <constraint firstAttribute="height" constant="50" id="WNp-7M-paA"/>
+                            <constraint firstItem="zeQ-Dj-3Dw" firstAttribute="leading" secondItem="BcT-dE-uLr" secondAttribute="leading" id="aJB-1f-t6F"/>
+                            <constraint firstAttribute="bottom" secondItem="zeQ-Dj-3Dw" secondAttribute="bottom" id="aQS-pN-6GX"/>
                             <constraint firstAttribute="bottom" secondItem="iI9-Zm-DEC" secondAttribute="bottom" constant="8" id="c2j-gF-vi9"/>
                             <constraint firstAttribute="trailing" secondItem="iI9-Zm-DEC" secondAttribute="trailing" constant="24" id="iCA-VI-El3"/>
                             <constraint firstItem="iI9-Zm-DEC" firstAttribute="top" secondItem="BcT-dE-uLr" secondAttribute="top" constant="8" id="vkd-yN-SsI"/>
@@ -373,6 +381,7 @@
                 <outlet property="slider7" destination="80N-Fc-20h" id="bJB-4y-fyP"/>
                 <outlet property="slider7Title" destination="h83-SR-Db5" id="fvA-tX-sP9"/>
                 <outlet property="slider7Value" destination="aG6-K0-SWG" id="H25-kO-TEG"/>
+                <outlet property="specialButton" destination="zeQ-Dj-3Dw" id="W61-qZ-tow"/>
                 <outlet property="specialSwitch" destination="pdY-iU-k2I" id="gI1-hQ-nKB"/>
                 <outlet property="specialTitle" destination="D8B-Ae-Nun" id="Oqn-qt-Tm8"/>
                 <outlet property="specialView" destination="BcT-dE-uLr" id="mWc-WG-lHu"/>

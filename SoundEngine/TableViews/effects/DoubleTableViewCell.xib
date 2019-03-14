@@ -47,13 +47,21 @@
                                     <constraint firstItem="mPf-YO-Wsl" firstAttribute="centerY" secondItem="IaG-3J-sbB" secondAttribute="centerY" id="n4M-C5-eAe"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="47x-fz-MM9">
+                                <rect key="frame" x="0.0" y="0.0" width="296" height="50"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="50" id="9GZ-FZ-SbK"/>
+                            <constraint firstAttribute="bottom" secondItem="47x-fz-MM9" secondAttribute="bottom" id="Hzm-aZ-FQo"/>
                             <constraint firstAttribute="bottom" secondItem="IaG-3J-sbB" secondAttribute="bottom" constant="8" id="IhX-r0-b5h"/>
                             <constraint firstItem="IaG-3J-sbB" firstAttribute="top" secondItem="oKx-Hq-Z4i" secondAttribute="top" constant="8" id="YFe-JJ-DHi"/>
+                            <constraint firstAttribute="trailing" secondItem="47x-fz-MM9" secondAttribute="trailing" id="g7i-Vv-nsu"/>
+                            <constraint firstItem="47x-fz-MM9" firstAttribute="top" secondItem="oKx-Hq-Z4i" secondAttribute="top" id="hbw-qu-ZHI"/>
                             <constraint firstItem="IaG-3J-sbB" firstAttribute="leading" secondItem="oKx-Hq-Z4i" secondAttribute="leading" constant="24" id="kDY-BT-50G"/>
+                            <constraint firstItem="47x-fz-MM9" firstAttribute="leading" secondItem="oKx-Hq-Z4i" secondAttribute="leading" id="p7X-RC-6UH"/>
                             <constraint firstAttribute="trailing" secondItem="IaG-3J-sbB" secondAttribute="trailing" constant="24" id="x48-BM-HR3"/>
                         </constraints>
                     </view>
@@ -194,6 +202,7 @@
                 <outlet property="slider2" destination="qbR-qw-tQE" id="73a-uN-Art"/>
                 <outlet property="slider2Title" destination="ihO-8V-Ex5" id="Xdj-z1-rXQ"/>
                 <outlet property="slider2Value" destination="XOf-hb-9iM" id="MjF-So-A49"/>
+                <outlet property="specialButton" destination="47x-fz-MM9" id="1Of-zn-bRg"/>
                 <outlet property="specialSwitch" destination="q85-Rh-blL" id="ZBi-hl-th5"/>
                 <outlet property="specialTitle" destination="mPf-YO-Wsl" id="zgw-7K-YCK"/>
                 <outlet property="specialView" destination="oKx-Hq-Z4i" id="MT1-gc-cat"/>

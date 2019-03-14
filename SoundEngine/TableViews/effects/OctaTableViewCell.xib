@@ -57,14 +57,22 @@
                                     <constraint firstItem="IIa-kz-xwz" firstAttribute="centerY" secondItem="TTL-jH-hfK" secondAttribute="centerY" id="hT6-H2-H5Y"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DBD-dK-0pZ">
+                                <rect key="frame" x="0.0" y="0.0" width="296" height="50"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="TTL-jH-hfK" secondAttribute="trailing" constant="24" id="Cp7-kt-Pmp"/>
                             <constraint firstItem="TTL-jH-hfK" firstAttribute="leading" secondItem="bbS-iT-1bo" secondAttribute="leading" constant="24" id="G08-zV-KWl"/>
+                            <constraint firstItem="DBD-dK-0pZ" firstAttribute="leading" secondItem="bbS-iT-1bo" secondAttribute="leading" id="JMR-7E-sD8"/>
                             <constraint firstAttribute="height" constant="50" id="KmE-Kb-48g"/>
+                            <constraint firstAttribute="bottom" secondItem="DBD-dK-0pZ" secondAttribute="bottom" id="NJw-jc-MRj"/>
+                            <constraint firstItem="DBD-dK-0pZ" firstAttribute="top" secondItem="bbS-iT-1bo" secondAttribute="top" id="dl1-Us-b79"/>
                             <constraint firstItem="TTL-jH-hfK" firstAttribute="top" secondItem="bbS-iT-1bo" secondAttribute="top" constant="8" id="khI-ab-OLR"/>
                             <constraint firstAttribute="bottom" secondItem="TTL-jH-hfK" secondAttribute="bottom" constant="8" id="m7A-5M-Kg9"/>
+                            <constraint firstAttribute="trailing" secondItem="DBD-dK-0pZ" secondAttribute="trailing" id="zqd-X7-DZU"/>
                         </constraints>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mfr-Cd-aSN">
@@ -409,6 +417,7 @@
                 <outlet property="slider8" destination="wYL-Ie-Dzq" id="U8l-z9-wQP"/>
                 <outlet property="slider8Title" destination="5ji-nB-Lko" id="gNe-5k-YBM"/>
                 <outlet property="slider8Value" destination="Qfb-Ss-QeS" id="qCr-5F-lQM"/>
+                <outlet property="specialButton" destination="DBD-dK-0pZ" id="HGT-w2-URU"/>
                 <outlet property="specialSwitch" destination="MHl-pY-rqK" id="6up-5z-KXe"/>
                 <outlet property="specialTitle" destination="IIa-kz-xwz" id="nnC-kU-klH"/>
                 <outlet property="specialView" destination="bbS-iT-1bo" id="k96-Qa-hMV"/>

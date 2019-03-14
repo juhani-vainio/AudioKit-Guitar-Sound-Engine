@@ -57,14 +57,22 @@
                                     <constraint firstItem="CXU-mx-YYB" firstAttribute="leading" secondItem="CgS-xV-Czs" secondAttribute="centerX" constant="8" id="kVq-E9-PFx"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T53-4b-ics">
+                                <rect key="frame" x="0.0" y="0.0" width="296" height="50"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstAttribute="trailing" secondItem="T53-4b-ics" secondAttribute="trailing" id="3QM-QM-cEZ"/>
+                            <constraint firstItem="T53-4b-ics" firstAttribute="top" secondItem="oOA-bZ-9hO" secondAttribute="top" id="A79-QS-xht"/>
                             <constraint firstAttribute="trailing" secondItem="CgS-xV-Czs" secondAttribute="trailing" constant="24" id="CG7-Xg-hQd"/>
+                            <constraint firstAttribute="bottom" secondItem="T53-4b-ics" secondAttribute="bottom" id="M1h-2L-gAY"/>
                             <constraint firstAttribute="height" constant="50" id="OSh-w0-rCT"/>
                             <constraint firstItem="CgS-xV-Czs" firstAttribute="top" secondItem="oOA-bZ-9hO" secondAttribute="top" constant="8" id="SzT-oT-qOl"/>
                             <constraint firstItem="CgS-xV-Czs" firstAttribute="leading" secondItem="oOA-bZ-9hO" secondAttribute="leading" constant="24" id="c0B-10-Nyo"/>
                             <constraint firstAttribute="bottom" secondItem="CgS-xV-Czs" secondAttribute="bottom" constant="8" id="dPN-q0-Ze9"/>
+                            <constraint firstItem="T53-4b-ics" firstAttribute="leading" secondItem="oOA-bZ-9hO" secondAttribute="leading" id="ubU-q5-mPc"/>
                         </constraints>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fig-Pc-q7y">
@@ -337,6 +345,7 @@
                 <outlet property="slider6" destination="POu-2K-uAa" id="HJH-kT-jUb"/>
                 <outlet property="slider6Title" destination="Pkk-yW-FDY" id="qqz-oQ-3sl"/>
                 <outlet property="slider6Value" destination="Pfp-Pb-Ma3" id="0oT-lk-93R"/>
+                <outlet property="specialButton" destination="T53-4b-ics" id="azo-QR-dCX"/>
                 <outlet property="specialSwitch" destination="CXU-mx-YYB" id="nqR-23-yLv"/>
                 <outlet property="specialTitle" destination="thB-zd-uBy" id="flG-Lc-xIO"/>
                 <outlet property="specialView" destination="oOA-bZ-9hO" id="CsO-t5-v3M"/>

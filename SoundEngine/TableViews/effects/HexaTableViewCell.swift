@@ -17,7 +17,7 @@ class HexaTableViewCell: UITableViewCell {
     @IBOutlet weak var specialViewArea: UIView!
     @IBOutlet weak var specialViewHeight: NSLayoutConstraint!
     @IBOutlet weak var specialView: UIView!
-    
+      @IBOutlet weak var specialButton: UIButton!
     @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
     var sliders = [String]()
     
@@ -72,6 +72,19 @@ class HexaTableViewCell: UITableViewCell {
         
         specialSwitch.addTarget(self, action: #selector(switchValueChanged), for: .valueChanged)
     
+        specialButton.addTarget(self, action: #selector(toggleSwitch), for: .touchUpInside)
+    }
+    
+    @objc func toggleSwitch() {
+        print("button")
+        if specialSwitch.isOn {
+            specialSwitch.setOn(false, animated: true)
+            switchValueChanged(toggle: specialSwitch)
+            
+        } else {
+            specialSwitch.setOn(true, animated: true)
+            switchValueChanged(toggle: specialSwitch)
+        }
         
     }
     

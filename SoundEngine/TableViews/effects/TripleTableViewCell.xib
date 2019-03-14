@@ -43,13 +43,21 @@
                                     <constraint firstItem="OFl-QI-7gI" firstAttribute="leading" secondItem="avh-pO-wuF" secondAttribute="centerX" constant="8" id="yRr-9f-iTu"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kZm-oS-s8f">
+                                <rect key="frame" x="0.0" y="0.0" width="296" height="50"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="avh-pO-wuF" firstAttribute="leading" secondItem="aIj-Ei-0i0" secondAttribute="leading" constant="24" id="BN0-sL-i4K"/>
+                            <constraint firstItem="kZm-oS-s8f" firstAttribute="top" secondItem="aIj-Ei-0i0" secondAttribute="top" id="BOG-On-gLd"/>
                             <constraint firstItem="avh-pO-wuF" firstAttribute="top" secondItem="aIj-Ei-0i0" secondAttribute="top" constant="8" id="DuR-kF-x8z"/>
+                            <constraint firstAttribute="trailing" secondItem="kZm-oS-s8f" secondAttribute="trailing" id="Rd6-Gv-Z3R"/>
                             <constraint firstAttribute="trailing" secondItem="avh-pO-wuF" secondAttribute="trailing" constant="24" id="h3L-S3-Oqb"/>
                             <constraint firstAttribute="height" constant="50" id="nOg-ai-0kC"/>
+                            <constraint firstItem="kZm-oS-s8f" firstAttribute="leading" secondItem="aIj-Ei-0i0" secondAttribute="leading" id="stL-H7-70K"/>
+                            <constraint firstAttribute="bottom" secondItem="kZm-oS-s8f" secondAttribute="bottom" id="t1Z-W8-YK3"/>
                             <constraint firstAttribute="bottom" secondItem="avh-pO-wuF" secondAttribute="bottom" constant="8" id="xWK-Bb-ipa"/>
                         </constraints>
                     </view>
@@ -232,6 +240,7 @@
                 <outlet property="slider3" destination="qG7-a6-eIV" id="YRU-tz-GT3"/>
                 <outlet property="slider3Title" destination="EDb-eM-1DT" id="5ZR-vZ-c3G"/>
                 <outlet property="slider3Value" destination="scU-ZH-djN" id="YPe-pY-CBV"/>
+                <outlet property="specialButton" destination="kZm-oS-s8f" id="RwP-v0-2ti"/>
                 <outlet property="specialSwitch" destination="OFl-QI-7gI" id="HFw-Yl-A1b"/>
                 <outlet property="specialTitle" destination="Pnv-YF-VLT" id="oRk-Wh-9pd"/>
                 <outlet property="specialView" destination="aIj-Ei-0i0" id="pdl-fH-LfZ"/>
