@@ -51,10 +51,11 @@ class audio {
     
     static let allPossibleEffectsData = [
         // DISTORTIONS
-      //  effectData(id: "clipper",opened: false, title: "Clipper", type: "1"),
+         // effectData(id: "tanhDistortion", opened: false, title: "Tanh Distortion", type: "4"),
+        // effectData(id: "clipper",opened: false, title: "Clipper", type: "1"),
        // effectData(id: "bitCrusher", opened: false, title: "Bit CRUSHER", type: "2"),
        // effectData(id: "decimator" ,opened: false, title: "Decimator", type: "3"),
-      //  effectData(id: "tanhDistortion", opened: false, title: "Tanh Distortion", type: "4"),
+       
       //  effectData(id: "ringModulator", opened: false, title: "Ring Modulator", type: "4"),
     //    effectData(id: "distortion", opened: false, title: "Distortion Unit", type: "8"),
         
@@ -76,6 +77,7 @@ class audio {
         
         // GUITAR PROCESSOR
         effectData(id: "rhinoGuitarProcessor", opened: false, title: "DISTORTION", type: "3"),
+        effectData(id: "juhaniGuitarProcessor", opened: false, title: "JUHANI DISTORTION", type: "0"),
        
         // MODULATION
         effectData(id: "chorus" ,opened: false, title: "CHORUS", type: "4"),
@@ -121,8 +123,9 @@ class audio {
         
         createInputListForSound()
         connectMic()
+        
         connectAudioInputs()
-      
+       // synthTracker()
     }
     
     func connectAudioInputs() {
@@ -152,7 +155,7 @@ class audio {
         audio.outputBooster?.connect(to: audio.outputAmplitudeTracker!)
         
         // LAST TO OUTPUT
-        AudioKit.output = audio.outputAmplitudeTracker
+        AudioKit.output = audio.outputAmplitudeTracker!
         if AudioKit.output == nil {
             AudioKit.output =  audio.inputBooster
             // AudioKit.output = inputMixer
@@ -252,6 +255,10 @@ class audio {
         case "moogLadder": audio.selectedAudioInputs.append(audio.moogLadder!)
         case "rhinoGuitarProcessor": audio.selectedAudioInputs.append(audio.rhinoGuitarProcessor!)
             audio.selectedAudioInputs.append(audio.rhinoBooster!)
+            
+        case "juhaniGuitarProcessor" : audio.selectedAudioInputs.append(audio.juhaniTanhDistortion!)
+                                    audio.selectedAudioInputs.append(audio.juhaniClipper!)
+            
         case "highLowPassFilters":  audio.selectedAudioInputs.append(audio.lowPassFilter!)
         audio.selectedAudioInputs.append(audio.lowPassButterworthFilter!)
         audio.selectedAudioInputs.append(audio.highPassFilter!)
@@ -401,6 +408,11 @@ class audio {
            audio.rhinoGuitarProcessor!.start()
             audio.rhinoBooster?.dB = audio.rhinoBoosterDBValue
             
+        case "juhaniGuitarProcessor" :
+            
+            audio.juhaniTanhDistortion!.start()
+            audio.juhaniClipper!.start()
+            
             
         case "resonantFilter" :
             
@@ -435,7 +447,8 @@ class audio {
         
     }
     
-    
+    // synth
+    static var oscillator: AKOscillator?
     
     // BALANCERS
     static var clipperBalancer: AKBalancer?
@@ -511,6 +524,10 @@ class audio {
     static var rhinoBooster: AKBooster?
     static var rhinoBoosterDBValue = Double()
     
+    static var juhaniTanhDistortion: AKTanhDistortion?
+    static var juhaniClipper: AKClipper?
+    
+    
     // tremolo
     static var tremolo: AKTremolo?
     
@@ -568,6 +585,16 @@ class audio {
     static var selectedAudioInputs = [AKInput]()
     
     func createEffects() {
+        
+        // synth
+        let square = AKTable(.square, count: 256)
+        let triangle = AKTable(.triangle, count: 256)
+        let sine = AKTable(.sine, count: 256)
+        let sawtooth = AKTable(.sawtooth, count: 256)
+        
+        audio.oscillator = AKOscillator(waveform: square)
+        audio.oscillator?.rampDuration = 0.001
+        
  
         // MONITORS
         audio.outputAmplitudeTracker = AKAmplitudeTracker()
@@ -632,6 +659,14 @@ class audio {
         // Simulators
         audio.rhinoGuitarProcessor = AKRhinoGuitarProcessor()
         audio.rhinoBooster = AKBooster()
+        
+        audio.juhaniTanhDistortion = AKTanhDistortion()
+        audio.juhaniClipper = AKClipper()
+        
+        audio.juhaniTanhDistortion?.pregain = 20
+        audio.juhaniTanhDistortion?.postgain = 20
+        audio.juhaniClipper?.limit = 0.1
+        
         
         // tremolo
         audio.tremolo = AKTremolo()
@@ -785,6 +820,9 @@ class audio {
         audio.rhinoBoosterDBValue = (audio.rhinoBooster?.dB)!
         audio.rhinoBooster?.dB = 0
         
+        audio.juhaniTanhDistortion?.stop()
+        audio.juhaniClipper?.stop()
+        
         // tremolo
         audio.tremolo?.stop()
         
@@ -862,6 +900,9 @@ class audio {
         audio.rhinoGuitarProcessor?.stop()
         audio.rhinoBoosterDBValue = (audio.rhinoBooster?.dB)!
         audio.rhinoBooster?.dB = 0
+        
+        audio.juhaniClipper?.stop()
+        audio.juhaniTanhDistortion?.stop()
         
         // tremolo
         audio.tremolo?.stop()
@@ -945,9 +986,14 @@ class audio {
     
     
     func connectMic() {
+        
         mic?.connect(to: frequencyTracker!)
-        frequencyTracker?.connect(to: audio.inputBooster!)
+       let mixer = AKMixer(audio.oscillator!, frequencyTracker!)
+        
+        mixer.connect(to: audio.inputBooster!)
         audio.inputBooster?.connect(to: inputAmplitudeTracker!)
+        
+        
     }
     
     func updateTrackerUI() -> (note: String, octave: String, sharp: String, direction: Float) {
@@ -1021,11 +1067,58 @@ class audio {
             }
         }
         
-      
         
         return (note, octave, sharp, directionWithRatio)
     }
     
+    var currentMIDINote: MIDINoteNumber = 0
+    
+    func noteOn(note: MIDINoteNumber) {
+        currentMIDINote = note
+        // start from the correct note if amplitude is zero
+        audio.oscillator!.frequency = note.midiNoteToFrequency()
+
+        audio.oscillator!.amplitude = (self.frequencyTracker?.amplitude)!
+        audio.oscillator!.play()
+    }
+    
+    func noteOff(note: MIDINoteNumber) {
+        if note == currentMIDINote {
+            audio.oscillator!.amplitude = 0
+        }
+    }
+    
+    var previousNote = Int(0)
+    
+    func synthTracker() {
+        let timer = Timer.scheduledTimer(withTimeInterval: 0.01, repeats: true) { timer in
+           
+            if self.frequencyTracker!.amplitude > 0.01 {
+                let note = self.frequencyTracker!.frequency.frequencyToMIDINote()
+                let thisNote = Int(note)
+                if thisNote < 97 && thisNote > 35 {
+                    if thisNote != self.previousNote {
+                        print(thisNote)
+                        audio.oscillator!.frequency = note.midiNoteToFrequency()
+                        audio.oscillator!.amplitude = self.frequencyTracker!.amplitude
+                        audio.oscillator?.play()
+                        print(audio.oscillator!.frequency)
+                        self.previousNote = thisNote
+                    }
+                    
+            }
+   
+            } else {
+                audio.oscillator!.amplitude = 0
+                self.previousNote = 0
+            }
+            
+                
+           
+        
+        }
+        timer.fire()
+    }
     
     func ratioToDecibel(ratio: Double) -> Double {
         let dB = 20 * log10(ratio)
@@ -1431,6 +1524,46 @@ class audio {
                 newValue = String(value)
                 newValue = String(newValue.prefix(3))
                 */
+                
+            default: break
+                
+            }
+            
+        case "juhaniGuitarProcessor" :
+            
+            switch slider {
+                
+            case 0:
+                if  audio.juhaniTanhDistortion!.isStarted == true {
+                    audio.juhaniTanhDistortion?.stop()
+                    audio.juhaniClipper?.stop()
+                    newValue = "OFF"
+                } else {
+                    audio.juhaniTanhDistortion?.start()
+                    audio.juhaniClipper?.start()
+                    newValue = "ON"
+                }
+                  /*
+            case 1:
+                min = Double(Effects.rhinoGuitarProcessor.distortionRange.lowerBound)
+                max = Double(Effects.rhinoGuitarProcessor.distortionRange.upperBound)
+                newValue = convertToPercent(value: value, max: max, min: min)
+                audio.rhinoGuitarProcessor?.distortion = value
+                
+            case 2:
+                min = Double(Effects.rhinoGuitarProcessor.preGainRange.lowerBound)
+                max = Double(Effects.rhinoGuitarProcessor.preGainRange.upperBound)
+                newValue = convertToPercent(value: value, max: max, min: min)
+                audio.rhinoGuitarProcessor?.preGain = value
+                
+            case 3:
+                audio.rhinoBooster?.dB = value
+                audio.rhinoBoosterDBValue = value
+                newValue = String(value)
+                newValue = String(newValue.prefix(3)) + " dB"
+                
+              
+                 */
                 
             default: break
                 
@@ -2535,6 +2668,41 @@ class audio {
             default: break
             }
             
+        case "juhaniGuitarProcessor":
+            switch slider {
+                /*
+                 
+            case 1:
+                min = Float(Effects.rhinoGuitarProcessor.distortionRange.lowerBound)
+                max = Float(Effects.rhinoGuitarProcessor.distortionRange.upperBound)
+                valueForSlider = Float(audio.rhinoGuitarProcessor!.distortion)
+                value = convertToPercent(value: Double(valueForSlider), max: Double(max), min: Double(min))
+                name = "Distortion"
+                isOn = audio.rhinoGuitarProcessor!.isStarted
+                
+                
+            case 2:
+                min = Float(Effects.rhinoGuitarProcessor.preGainRange.lowerBound)
+                max = Float(Effects.rhinoGuitarProcessor.preGainRange.upperBound)
+                valueForSlider = Float(audio.rhinoGuitarProcessor!.preGain)
+                value = convertToPercent(value: Double(valueForSlider), max: Double(max), min: Double(min))
+                name = "Gain"
+                isOn = audio.rhinoGuitarProcessor!.isStarted
+                
+            case 3:
+                min = Float(Effects.rhinoGuitarProcessor.volumeRange.lowerBound)
+                max = Float(Effects.rhinoGuitarProcessor.volumeRange.upperBound)
+                valueForSlider = Float(audio.rhinoBoosterDBValue)
+                name = "Volume"
+                let intValue = Int(valueForSlider)
+                value = String(intValue)
+                value = String(value.prefix(3)) + " dB"
+                isOn = audio.rhinoGuitarProcessor!.isStarted
+                
+               
+                 */
+            default: break
+            }
             
         case "moogLadder":
             switch slider {
