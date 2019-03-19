@@ -120,7 +120,7 @@ struct delay:Codable {
         // gain
        
         static var dBRange = -16...16
-        static var gainRange = 0...3
+        static var gainRange = 0.01...100
         
     }
     
@@ -470,7 +470,7 @@ struct decimator:Codable {
         static var distortionRange = 0...20
         static var preGainRange = 0.01...10
         static var postGainRange = 0.01...3
-        static var volumeRange = 0...24
+        static var volumeRange = 0...16
     }
     
     

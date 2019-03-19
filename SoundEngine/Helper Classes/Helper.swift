@@ -1451,11 +1451,11 @@ class helper {
                 let started = Bool(isStarted)!
                 if started == true {
                     audio.rhinoGuitarProcessor!.start()
-                    audio.rhinoBooster?.dB = Double(dB)!
+                    audio.rhinoBooster?.volume = Double(dB)!
                     
                 } else {
                     audio.rhinoGuitarProcessor!.stop()
-                    audio.rhinoBooster?.dB = 0
+                    audio.rhinoBooster?.volume = 1
                 }
                 
                 

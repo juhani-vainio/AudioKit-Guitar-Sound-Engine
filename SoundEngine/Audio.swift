@@ -52,11 +52,13 @@ class audio {
     static let allPossibleEffectsData = [
         // DISTORTIONS
          // effectData(id: "tanhDistortion", opened: false, title: "Tanh Distortion", type: "4"),
-        // effectData(id: "clipper",opened: false, title: "Clipper", type: "1"),
+         // effectData(id: "booster" ,opened: false, title: "BOOSTER", type: "1"),
+         
        // effectData(id: "bitCrusher", opened: false, title: "Bit CRUSHER", type: "2"),
-       // effectData(id: "decimator" ,opened: false, title: "Decimator", type: "3"),
+    // effectData(id: "decimator" ,opened: false, title: "Decimator", type: "3"),
        
-      //  effectData(id: "ringModulator", opened: false, title: "Ring Modulator", type: "4"),
+       // effectData(id: "ringModulator", opened: false, title: "Ring Modulator", type: "4"),
+       // effectData(id: "clipper",opened: false, title: "Clipper", type: "1"),
     //    effectData(id: "distortion", opened: false, title: "Distortion Unit", type: "8"),
         
 
@@ -73,11 +75,12 @@ class audio {
         effectData(id: "phaser" ,opened: false, title: "PHASER", type: "8"),
         
         // DYNA RAGE PROCESSOR
-        effectData(id: "dynaRageCompressor", opened: false, title: "RAGE", type: "5"),
+       // effectData(id: "dynaRageCompressor", opened: false, title: "RAGE", type: "5"),
         
         // GUITAR PROCESSOR
         effectData(id: "rhinoGuitarProcessor", opened: false, title: "DISTORTION", type: "3"),
-        effectData(id: "juhaniGuitarProcessor", opened: false, title: "JUHANI DISTORTION", type: "0"),
+       // effectData(id: "juhaniGuitarProcessor", opened: false, title: "JUHANI DISTORTION", type: "0"),
+        effectData(id: "vainioGuitarProcessor", opened: false, title: "VAINIO DISTORTION", type: "3"),
        
         // MODULATION
         effectData(id: "chorus" ,opened: false, title: "CHORUS", type: "4"),
@@ -86,7 +89,7 @@ class audio {
 
         // ENVELOPE
         effectData(id: "tremolo" ,opened: false, title: "TREMOLO", type: "2"),
-      //  effectData(id: "booster" ,opened: false, title: "BOOSTER", type: "1"),
+      
         
         
         // DELAY
@@ -125,6 +128,7 @@ class audio {
         connectMic()
         
         connectAudioInputs()
+       //  noiseGate()
        // synthTracker()
     }
     
@@ -152,7 +156,8 @@ class audio {
         }
         outputMixer?.connect(to: audio.outputBooster!)
        
-        audio.outputBooster?.connect(to: audio.outputAmplitudeTracker!)
+        audio.outputBooster?.connect(to: audio.finalBooster!)
+        audio.finalBooster?.connect(to: audio.outputAmplitudeTracker!)
         
         // LAST TO OUTPUT
         AudioKit.output = audio.outputAmplitudeTracker!
@@ -258,6 +263,16 @@ class audio {
             
         case "juhaniGuitarProcessor" : audio.selectedAudioInputs.append(audio.juhaniTanhDistortion!)
                                     audio.selectedAudioInputs.append(audio.juhaniClipper!)
+        case "vainioGuitarProcessor" :
+                                        audio.selectedAudioInputs.append(audio.vainioPreHighBand!)
+                                        audio.selectedAudioInputs.append(audio.vainioPreMidBand!)
+                                        audio.selectedAudioInputs.append(audio.vainioPreLowBand!)
+                                        audio.selectedAudioInputs.append(audio.vainioClipper!)
+                                        audio.selectedAudioInputs.append(audio.vainioTanhDistortion!)
+                                        audio.selectedAudioInputs.append(audio.vainioPostHighBand!)
+                                        audio.selectedAudioInputs.append(audio.vainioPostMidBand!)
+                                        audio.selectedAudioInputs.append(audio.vainioPostLowBand!)
+                                        audio.selectedAudioInputs.append(audio.vainioBooster!)
             
         case "highLowPassFilters":  audio.selectedAudioInputs.append(audio.lowPassFilter!)
         audio.selectedAudioInputs.append(audio.lowPassButterworthFilter!)
@@ -406,12 +421,24 @@ class audio {
         case "rhinoGuitarProcessor" :
             
            audio.rhinoGuitarProcessor!.start()
-            audio.rhinoBooster?.dB = audio.rhinoBoosterDBValue
+            audio.rhinoBooster?.volume = audio.rhinoBoosterDBValue
             
         case "juhaniGuitarProcessor" :
             
             audio.juhaniTanhDistortion!.start()
             audio.juhaniClipper!.start()
+            
+        case "vainioGuitarProcessor" :
+            
+            audio.vainioTanhDistortion!.start()
+            audio.vainioBooster!.volume = audio.vainioBoosterGainValue
+            audio.vainioClipper!.start()
+            audio.vainioPreHighBand!.start()
+            audio.vainioPreMidBand!.start()
+            audio.vainioPreLowBand!.start()
+            audio.vainioPostHighBand!.start()
+            audio.vainioPostMidBand!.start()
+            audio.vainioPostLowBand!.start()
             
             
         case "resonantFilter" :
@@ -481,7 +508,7 @@ class audio {
     var mic: AKMicrophone?
     static var outputBooster : AKBooster?
     static var inputBooster : AKBooster?
-
+    static var finalBooster : AKBooster?
     
     // EFFECTS
     
@@ -521,11 +548,23 @@ class audio {
     
     // Simulators
     static var rhinoGuitarProcessor: AKRhinoGuitarProcessor?
-    static var rhinoBooster: AKBooster?
+    static var rhinoBooster: AKMixer?
     static var rhinoBoosterDBValue = Double()
     
     static var juhaniTanhDistortion: AKTanhDistortion?
     static var juhaniClipper: AKClipper?
+    
+    static var vainioTanhDistortion: AKTanhDistortion?
+     static var vainioBooster: AKMixer?
+    static var vainioBoosterGainValue = Double()
+    static var vainioClipper: AKClipper?
+    
+    static var vainioPreMidBand: AKEqualizerFilter?
+    static var vainioPreHighBand: AKEqualizerFilter?
+    static var vainioPreLowBand: AKEqualizerFilter?
+    static var vainioPostMidBand: AKEqualizerFilter?
+    static var vainioPostHighBand: AKEqualizerFilter?
+    static var vainioPostLowBand: AKEqualizerFilter?
     
     
     // tremolo
@@ -586,6 +625,8 @@ class audio {
     
     func createEffects() {
         
+         let threeRatio = 0.7
+        
         // synth
         let square = AKTable(.square, count: 256)
         let triangle = AKTable(.triangle, count: 256)
@@ -611,7 +652,7 @@ class audio {
         audio.booster = AKBooster()
         audio.outputBooster = AKBooster()
         audio.inputBooster = AKBooster()
-     
+        audio.finalBooster = AKBooster()
         
         
         audio.masterBooster = AKBooster()
@@ -658,7 +699,7 @@ class audio {
         
         // Simulators
         audio.rhinoGuitarProcessor = AKRhinoGuitarProcessor()
-        audio.rhinoBooster = AKBooster()
+        audio.rhinoBooster = AKMixer()
         
         audio.juhaniTanhDistortion = AKTanhDistortion()
         audio.juhaniClipper = AKClipper()
@@ -666,6 +707,51 @@ class audio {
         audio.juhaniTanhDistortion?.pregain = 20
         audio.juhaniTanhDistortion?.postgain = 20
         audio.juhaniClipper?.limit = 0.1
+        
+        
+        
+        audio.vainioTanhDistortion = AKTanhDistortion()
+        audio.vainioBooster = AKMixer()
+        audio.vainioClipper = AKClipper()
+        
+        
+        
+        audio.vainioPreLowBand = AKEqualizerFilter()
+        audio.vainioPreLowBand?.centerFrequency = 100
+        audio.vainioPreLowBand?.bandwidth = 100 * threeRatio
+        audio.vainioPreLowBand?.gain = 0.5
+      
+        audio.vainioPreMidBand = AKEqualizerFilter()
+        audio.vainioPreMidBand?.centerFrequency = 500
+        audio.vainioPreMidBand?.bandwidth = 500 * threeRatio
+        audio.vainioPreMidBand?.gain = 2
+        
+        audio.vainioPreHighBand = AKEqualizerFilter()
+        audio.vainioPreHighBand?.centerFrequency = 2000
+        audio.vainioPreHighBand?.bandwidth = 2000 * threeRatio
+        audio.vainioPreHighBand?.gain = 0.5
+        
+        audio.vainioPostLowBand = AKEqualizerFilter()
+        audio.vainioPostLowBand?.centerFrequency = 100
+        audio.vainioPostLowBand?.bandwidth = 100 * threeRatio
+        audio.vainioPostLowBand?.gain = 2
+        
+        audio.vainioPostMidBand = AKEqualizerFilter()
+        audio.vainioPostMidBand?.centerFrequency = 500
+        audio.vainioPostMidBand?.bandwidth = 500 * threeRatio
+        audio.vainioPostMidBand?.gain = 0.5
+        
+        audio.vainioPostHighBand = AKEqualizerFilter()
+        audio.vainioPostHighBand?.centerFrequency = 2000
+        audio.vainioPostHighBand?.bandwidth = 2000 * threeRatio
+        audio.vainioPostHighBand?.gain = 2
+        
+      
+        
+        audio.vainioTanhDistortion?.pregain = 20
+        audio.vainioTanhDistortion?.postgain = 0.5
+    
+        audio.vainioClipper?.limit = 0.05
         
         
         // tremolo
@@ -676,7 +762,7 @@ class audio {
         // FILTERS
         
         // 3 - BAND
-        let threeRatio = 0.7
+       
         audio.threeBandFilterHigh = AKEqualizerFilter()
         audio.threeBandFilterHigh?.centerFrequency = 2000
         audio.threeBandFilterHigh?.bandwidth = 2000 * threeRatio
@@ -772,6 +858,7 @@ class audio {
        // audio.booster?.start()
         audio.outputBooster?.start()
         audio.inputBooster?.start()
+        audio.finalBooster?.start()
         
         //inputMixer?.start()
         outputMixer?.start()
@@ -817,11 +904,22 @@ class audio {
         
         // Simulators
         audio.rhinoGuitarProcessor?.stop()
-        audio.rhinoBoosterDBValue = (audio.rhinoBooster?.dB)!
-        audio.rhinoBooster?.dB = 0
+        audio.rhinoBoosterDBValue = (audio.rhinoBooster?.volume)!
+        audio.rhinoBooster?.volume = 1
         
         audio.juhaniTanhDistortion?.stop()
         audio.juhaniClipper?.stop()
+        
+        audio.vainioTanhDistortion?.stop()
+        audio.vainioBoosterGainValue = (audio.vainioBooster?.volume)!
+        audio.vainioClipper?.stop()
+        
+        audio.vainioPreHighBand?.stop()
+        audio.vainioPreMidBand?.stop()
+        audio.vainioPreLowBand?.stop()
+        audio.vainioPostHighBand?.stop()
+        audio.vainioPostMidBand?.stop()
+        audio.vainioPostLowBand?.stop()
         
         // tremolo
         audio.tremolo?.stop()
@@ -898,11 +996,22 @@ class audio {
         
         // Simulators
         audio.rhinoGuitarProcessor?.stop()
-        audio.rhinoBoosterDBValue = (audio.rhinoBooster?.dB)!
-        audio.rhinoBooster?.dB = 0
+        audio.rhinoBoosterDBValue = (audio.rhinoBooster?.volume)!
+        audio.rhinoBooster?.volume = 1
         
         audio.juhaniClipper?.stop()
         audio.juhaniTanhDistortion?.stop()
+        
+        audio.vainioTanhDistortion?.stop()
+        audio.vainioBoosterGainValue = (audio.vainioBooster?.volume)!
+        audio.vainioClipper?.stop()
+        
+        audio.vainioPreHighBand?.stop()
+        audio.vainioPreMidBand?.stop()
+        audio.vainioPreLowBand?.stop()
+        audio.vainioPostHighBand?.stop()
+        audio.vainioPostMidBand?.stop()
+        audio.vainioPostLowBand?.stop()
         
         // tremolo
         audio.tremolo?.stop()
@@ -938,6 +1047,8 @@ class audio {
         audio.sevenBandFilterLowMid?.stop()
         audio.sevenBandFilterBass?.stop()
         audio.sevenBandFilterSubBass?.stop()
+        
+        
     }
     
     func createInputListForSound() {
@@ -1089,6 +1200,34 @@ class audio {
     }
     
     var previousNote = Int(0)
+    
+    var gateIsClosed = false
+    
+    func noiseGate() {
+        let timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { timer in
+            
+            
+            if self.frequencyTracker!.amplitude < 0.01 {
+                print("OFF")
+               // silence
+                if self.gateIsClosed == false {
+                    audio.finalBooster?.rampDuration = 0.5
+                    audio.finalBooster?.gain = 0
+                    self.gateIsClosed = true
+                }
+                
+            } else {
+                print("ON")
+                 print(self.frequencyTracker!.frequency)
+                audio.finalBooster?.rampDuration = 0.001
+                audio.finalBooster?.gain = 1
+                self.gateIsClosed = false
+            }
+     
+        }
+        timer.fire()
+    }
+    
     
     func synthTracker() {
         let timer = Timer.scheduledTimer(withTimeInterval: 0.01, repeats: true) { timer in
@@ -1480,12 +1619,12 @@ class audio {
                 if  audio.rhinoGuitarProcessor!.isStarted == true {
                     audio.rhinoGuitarProcessor?.stop()
                    // audio.rhinoBoosterDBValue = (audio.rhinoBooster?.dB)!
-                    audio.rhinoBooster?.dB = 0
+                    audio.rhinoBooster?.volume = 1
                    
                     newValue = "OFF"
                 } else {
                     audio.rhinoGuitarProcessor?.start()
-                    audio.rhinoBooster?.dB = audio.rhinoBoosterDBValue
+                    audio.rhinoBooster?.volume = audio.rhinoBoosterDBValue
                     newValue = "ON"
                 }
  
@@ -1502,7 +1641,7 @@ class audio {
                 audio.rhinoGuitarProcessor?.preGain = value
               
             case 3:
-                audio.rhinoBooster?.dB = value
+                audio.rhinoBooster?.volume = value
                 audio.rhinoBoosterDBValue = value
                 newValue = String(value)
                 newValue = String(newValue.prefix(3)) + " dB"
@@ -1564,6 +1703,54 @@ class audio {
                 
               
                  */
+            default: break
+                
+            }
+                
+            case "vainioGuitarProcessor" :
+                
+                switch slider {
+                    
+                case 0:
+                    if  audio.vainioTanhDistortion!.isStarted == true {
+                        audio.vainioTanhDistortion?.stop()
+                         audio.vainioBooster?.volume = 1
+                        audio.vainioClipper?.stop()
+                        
+                        audio.vainioPreHighBand?.stop()
+                        audio.vainioPreMidBand?.stop()
+                        audio.vainioPreLowBand?.stop()
+                        audio.vainioPostHighBand?.stop()
+                        audio.vainioPostMidBand?.stop()
+                        audio.vainioPostLowBand?.stop()
+                        newValue = "OFF"
+                    } else {
+                        audio.vainioTanhDistortion?.start()
+                         audio.vainioBooster?.volume = audio.vainioBoosterGainValue
+                        audio.vainioClipper?.start()
+                        
+                        audio.vainioPreHighBand?.start()
+                        audio.vainioPreMidBand?.start()
+                        audio.vainioPreLowBand?.start()
+                        audio.vainioPostHighBand?.start()
+                        audio.vainioPostMidBand?.start()
+                        audio.vainioPostLowBand?.start()
+                        
+                        newValue = "ON"
+                    }
+                case 1:
+                    audio.vainioClipper?.limit = value
+                    newValue = String(value)
+                    newValue = String(newValue.prefix(3))
+                case 2:
+                    audio.vainioTanhDistortion?.pregain = value
+                    newValue = String(value)
+                    newValue = String(newValue.prefix(3))
+                case 3:
+                    audio.vainioBooster?.volume = value
+                    audio.vainioBoosterGainValue = value
+                    newValue = String(value)
+                    newValue = String(newValue.prefix(3))
                 
             default: break
                 
@@ -2701,6 +2888,38 @@ class audio {
                 
                
                  */
+            default: break
+            }
+            
+        case "vainioGuitarProcessor":
+            switch slider {
+            case 1:
+                min = Float(0.005)
+                max = Float(0.05)
+                valueForSlider = Float((audio.vainioClipper?.limit)!)
+                name = "Distortion"
+                let intValue = Int(valueForSlider)
+                value = String(intValue)
+                value = String(value.prefix(3))
+                isOn = audio.vainioTanhDistortion!.isStarted
+            case 2:
+                min = Float(0.1)
+                max = Float(5)
+                valueForSlider = Float((audio.vainioTanhDistortion?.pregain)!)
+                name = "Gain"
+                let intValue = Int(valueForSlider)
+                value = String(intValue)
+                value = String(value.prefix(3))
+                isOn = audio.vainioTanhDistortion!.isStarted
+                case 3:
+                min = Float(0.1)
+                max = Float(10)
+                valueForSlider = Float(audio.vainioBoosterGainValue)
+                name = "Volume"
+                let intValue = Int(valueForSlider)
+                value = String(intValue)
+                value = String(value.prefix(3))
+                isOn = audio.vainioTanhDistortion!.isStarted
             default: break
             }
             
