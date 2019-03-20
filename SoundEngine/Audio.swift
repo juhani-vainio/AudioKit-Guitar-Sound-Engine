@@ -50,6 +50,8 @@ class audio {
     ]
     
     static let allPossibleEffectsData = [
+        
+         effectData(id: "stringResonator", opened: false, title: "String Resonator", type: "2"),
         // DISTORTIONS
          // effectData(id: "tanhDistortion", opened: false, title: "Tanh Distortion", type: "4"),
          // effectData(id: "booster" ,opened: false, title: "BOOSTER", type: "1"),
@@ -96,9 +98,9 @@ class audio {
         effectData(id: "delay", opened: false, title: "DELAY", type: "3"),
         
         // REVERB
-        //effectData(id: "costelloReverb" ,opened: false, title: "REVERB ", type: "2"),
+        effectData(id: "costelloReverb" ,opened: false, title: "REVERB ", type: "2"),
         // effectData(id: "reverb" ,opened: false, title: "REVERB", type: "1"),
-          effectData(id: "reverb2" ,opened: false, title: "Reverb 2", type: "7"),
+         // effectData(id: "reverb2" ,opened: false, title: "Reverb 2", type: "7"),
         //  effectData(id: "chowningReverb" ,opened: false, title: "Reverb Chowning", type: "0"),
         //  effectData(id: "flatFrequencyResponseReverb" ,opened: false, title: "Flat Freq Response Reverb", type: "1"),
         
@@ -106,7 +108,7 @@ class audio {
         // BONUS
         //  effectData(id: "moogLadder", opened: false, title: "Moog Ladder", type: "2"),
         // effectData(id: "resonantFilter", opened: false, title: "Resonant Filter", type: "2"),
-        // effectData(id: "stringResonator", opened: false, title: "String Resonator", type: "2"),
+        
         //   effectData(id: "modalResonanceFilter", opened: false, title: "Modal Resonance", type: "2"),
         //   effectData(id: "highLowPassFilters", opened: false, title: "High & Low Pass Filters", type: "PassFilters"), // add switch for FLAT as in butterworth for the pass filters
     ]
@@ -259,7 +261,7 @@ class audio {
         audio.selectedAudioInputs.append(audio.toneComplementFilter!)
         case "moogLadder": audio.selectedAudioInputs.append(audio.moogLadder!)
         case "rhinoGuitarProcessor": audio.selectedAudioInputs.append(audio.rhinoGuitarProcessor!)
-            audio.selectedAudioInputs.append(audio.rhinoBooster!)
+            audio.selectedAudioInputs.append(audio.rhinoVolume!)
             
         case "juhaniGuitarProcessor" : audio.selectedAudioInputs.append(audio.juhaniTanhDistortion!)
                                     audio.selectedAudioInputs.append(audio.juhaniClipper!)
@@ -421,7 +423,7 @@ class audio {
         case "rhinoGuitarProcessor" :
             
            audio.rhinoGuitarProcessor!.start()
-            audio.rhinoBooster?.volume = audio.rhinoBoosterDBValue
+            audio.rhinoVolume?.volume = audio.rhinoBoosterDBValue
             
         case "juhaniGuitarProcessor" :
             
@@ -551,7 +553,7 @@ class audio {
     
     // Simulators
     static var rhinoGuitarProcessor: AKRhinoGuitarProcessor?
-    static var rhinoBooster: AKMixer?
+    static var rhinoVolume: AKMixer?
     static var rhinoBoosterDBValue = Double()
     
     static var juhaniTanhDistortion: AKTanhDistortion?
@@ -700,7 +702,7 @@ class audio {
         
         // Simulators
         audio.rhinoGuitarProcessor = AKRhinoGuitarProcessor()
-        audio.rhinoBooster = AKMixer()
+        audio.rhinoVolume = AKMixer()
         
         audio.juhaniTanhDistortion = AKTanhDistortion()
         audio.juhaniClipper = AKClipper()
@@ -905,8 +907,8 @@ class audio {
         
         // Simulators
         audio.rhinoGuitarProcessor?.stop()
-        audio.rhinoBoosterDBValue = (audio.rhinoBooster?.volume)!
-        audio.rhinoBooster?.volume = 1
+        audio.rhinoBoosterDBValue = (audio.rhinoVolume?.volume)!
+        audio.rhinoVolume?.volume = 1
         
         audio.juhaniTanhDistortion?.stop()
         audio.juhaniClipper?.stop()
@@ -997,8 +999,8 @@ class audio {
         
         // Simulators
         audio.rhinoGuitarProcessor?.stop()
-        audio.rhinoBoosterDBValue = (audio.rhinoBooster?.volume)!
-        audio.rhinoBooster?.volume = 1
+        audio.rhinoBoosterDBValue = (audio.rhinoVolume?.volume)!
+        audio.rhinoVolume?.volume = 1
         
         audio.juhaniClipper?.stop()
         audio.juhaniTanhDistortion?.stop()
@@ -1620,12 +1622,12 @@ class audio {
                 if  audio.rhinoGuitarProcessor!.isStarted == true {
                     audio.rhinoGuitarProcessor?.stop()
                    // audio.rhinoBoosterDBValue = (audio.rhinoBooster?.dB)!
-                    audio.rhinoBooster?.volume = 1
+                    audio.rhinoVolume?.volume = 1
                    
                     newValue = "OFF"
                 } else {
                     audio.rhinoGuitarProcessor?.start()
-                    audio.rhinoBooster?.volume = audio.rhinoBoosterDBValue
+                    audio.rhinoVolume?.volume = audio.rhinoBoosterDBValue
                     newValue = "ON"
                 }
  
@@ -1642,7 +1644,7 @@ class audio {
                 audio.rhinoGuitarProcessor?.preGain = value
               
             case 3:
-                audio.rhinoBooster?.volume = value
+                audio.rhinoVolume?.volume = value
                 audio.rhinoBoosterDBValue = value
                 newValue = String(value)
                 newValue = String(newValue.prefix(3)) + " dB"

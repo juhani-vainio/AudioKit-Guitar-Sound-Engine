@@ -138,8 +138,8 @@ class Filters: Codable {
     }
     
     struct stringResonator: Codable {
-        static var fundamentalFrequencyRange = 12...10000
-        static var feedbackRange = 0...1
+        static var fundamentalFrequencyRange = 5000...10000
+        static var feedbackRange = 0.6...0.9
         static var isStarted = Bool(false)
     }
    
