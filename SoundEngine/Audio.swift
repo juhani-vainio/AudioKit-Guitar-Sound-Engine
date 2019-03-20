@@ -849,8 +849,11 @@ class audio {
         audio.threePoleLowpassFilter = AKThreePoleLowpassFilter()
         audio.moogLadder = AKMoogLadder()
         audio.dcBlock = AKDCBlock()
-        audio.stringResonator = AKStringResonator()
         
+        
+        audio.stringResonator = AKStringResonator()
+        audio.stringResonator?.fundamentalFrequency = 7500
+        audio.stringResonator?.feedback = 0.75
         
         // start essential units
         
@@ -1477,7 +1480,7 @@ class audio {
     func changeEQValues(slider: String, value: Double) -> String {
         var newValue = String()
         let min = Double(0)
-        let max = Double(3)
+        let max = Double(10)
         switch slider {
             
         case "threeBandHighSlider":
@@ -1522,7 +1525,7 @@ class audio {
     
     func getEQ(id: String, slider: Int) -> (min: Float, max: Float, valueForSlider: Float, value: String) {
         let min = Double(0)
-        let max = Double(3)
+        let max = Double(10)
         var valueForSlider = Float(0.69)
         var value = ""
         switch id {

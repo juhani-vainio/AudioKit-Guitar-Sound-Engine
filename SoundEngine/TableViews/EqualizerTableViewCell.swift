@@ -106,7 +106,30 @@ class EqualizerTableViewCell: UITableViewCell {
         
     }
     
-
+    @IBAction func resetAction(_ sender: Any) {
+        threeBandHighSlider.setValue(5, animated: true)
+        threeBandHighSlider.sendActions(for: .valueChanged)
+        threeBandMidSlider.setValue(5, animated: true)
+        threeBandMidSlider.sendActions(for: .valueChanged)
+        threeBandLowSlider.setValue(5, animated: true)
+        threeBandLowSlider.sendActions(for: .valueChanged)
+        
+        sevenBandBrillianceSlider.setValue(5, animated: true)
+        sevenBandBrillianceSlider.sendActions(for: .valueChanged)
+        sevenBandPrecenceSlider.setValue(5, animated: true)
+        sevenBandPrecenceSlider.sendActions(for: .valueChanged)
+        sevenBandUpperMidSlider.setValue(5, animated: true)
+        sevenBandUpperMidSlider.sendActions(for: .valueChanged)
+        sevenBandMidSlider.setValue(5, animated: true)
+        sevenBandMidSlider.sendActions(for: .valueChanged)
+        sevenBandLowMidSlider.setValue(5, animated: true)
+        sevenBandLowMidSlider.sendActions(for: .valueChanged)
+        sevenBandBassSlider.setValue(5, animated: true)
+        sevenBandBassSlider.sendActions(for: .valueChanged)
+        sevenBandSubBassSlider.setValue(5, animated: true)
+        sevenBandSubBassSlider.sendActions(for: .valueChanged)
+    }
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
