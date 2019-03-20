@@ -468,8 +468,8 @@ struct decimator:Codable {
         // distortion
         static var eqGainRange = 0...3
         static var distortionRange = 0...20
-        static var preGainRange = 0.01...10
-        static var postGainRange = 0.01...3
+        static var preGainRange = 1...20
+        static var postGainRange = 1...20
         static var volumeRange = 0...16
     }
     

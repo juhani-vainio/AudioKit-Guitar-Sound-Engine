@@ -80,7 +80,7 @@ class audio {
         // GUITAR PROCESSOR
         effectData(id: "rhinoGuitarProcessor", opened: false, title: "DISTORTION", type: "3"),
        // effectData(id: "juhaniGuitarProcessor", opened: false, title: "JUHANI DISTORTION", type: "0"),
-        effectData(id: "vainioGuitarProcessor", opened: false, title: "VAINIO DISTORTION", type: "3"),
+        effectData(id: "screamer", opened: false, title: "SCREAMER", type: "3"),
        
         // MODULATION
         effectData(id: "chorus" ,opened: false, title: "CHORUS", type: "4"),
@@ -263,16 +263,16 @@ class audio {
             
         case "juhaniGuitarProcessor" : audio.selectedAudioInputs.append(audio.juhaniTanhDistortion!)
                                     audio.selectedAudioInputs.append(audio.juhaniClipper!)
-        case "vainioGuitarProcessor" :
-                                        audio.selectedAudioInputs.append(audio.vainioPreHighBand!)
-                                        audio.selectedAudioInputs.append(audio.vainioPreMidBand!)
-                                        audio.selectedAudioInputs.append(audio.vainioPreLowBand!)
-                                        audio.selectedAudioInputs.append(audio.vainioClipper!)
-                                        audio.selectedAudioInputs.append(audio.vainioTanhDistortion!)
-                                        audio.selectedAudioInputs.append(audio.vainioPostHighBand!)
-                                        audio.selectedAudioInputs.append(audio.vainioPostMidBand!)
-                                        audio.selectedAudioInputs.append(audio.vainioPostLowBand!)
-                                        audio.selectedAudioInputs.append(audio.vainioBooster!)
+        case "screamer" :
+                                        audio.selectedAudioInputs.append(audio.screamerPreHighBand!)
+                                        audio.selectedAudioInputs.append(audio.screamerPreMidBand!)
+                                        audio.selectedAudioInputs.append(audio.screamerPreLowBand!)
+                                        audio.selectedAudioInputs.append(audio.screamerClipper!)
+                                        audio.selectedAudioInputs.append(audio.screamerDistortion!)
+                                        audio.selectedAudioInputs.append(audio.screamerPostHighBand!)
+                                        audio.selectedAudioInputs.append(audio.screamerPostMidBand!)
+                                        audio.selectedAudioInputs.append(audio.screamerPostLowBand!)
+                                        audio.selectedAudioInputs.append(audio.screamerVolume!)
             
         case "highLowPassFilters":  audio.selectedAudioInputs.append(audio.lowPassFilter!)
         audio.selectedAudioInputs.append(audio.lowPassButterworthFilter!)
@@ -428,17 +428,17 @@ class audio {
             audio.juhaniTanhDistortion!.start()
             audio.juhaniClipper!.start()
             
-        case "vainioGuitarProcessor" :
+        case "screamer" :
             
-            audio.vainioTanhDistortion!.start()
-            audio.vainioBooster!.volume = audio.vainioBoosterGainValue
-            audio.vainioClipper!.start()
-            audio.vainioPreHighBand!.start()
-            audio.vainioPreMidBand!.start()
-            audio.vainioPreLowBand!.start()
-            audio.vainioPostHighBand!.start()
-            audio.vainioPostMidBand!.start()
-            audio.vainioPostLowBand!.start()
+            audio.screamerDistortion!.start()
+            audio.screamerVolume!.volume = audio.screamerVolumeValue
+            audio.screamerClipper!.start()
+            audio.screamerPreHighBand!.start()
+            audio.screamerPreMidBand!.start()
+            audio.screamerPreLowBand!.start()
+            audio.screamerPostHighBand!.start()
+            audio.screamerPostMidBand!.start()
+            audio.screamerPostLowBand!.start()
             
             
         case "resonantFilter" :
@@ -473,6 +473,9 @@ class audio {
 
         
     }
+    
+    let eq3BandwidthRatio = 0.7
+    let eq7BandwidthRatio = (0.5)
     
     // synth
     static var oscillator: AKOscillator?
@@ -554,17 +557,17 @@ class audio {
     static var juhaniTanhDistortion: AKTanhDistortion?
     static var juhaniClipper: AKClipper?
     
-    static var vainioTanhDistortion: AKTanhDistortion?
-     static var vainioBooster: AKMixer?
-    static var vainioBoosterGainValue = Double()
-    static var vainioClipper: AKClipper?
+    static var screamerDistortion: AKTanhDistortion?
+    static var screamerVolume: AKMixer?
+    static var screamerVolumeValue = Double()
+    static var screamerClipper: AKClipper?
     
-    static var vainioPreMidBand: AKEqualizerFilter?
-    static var vainioPreHighBand: AKEqualizerFilter?
-    static var vainioPreLowBand: AKEqualizerFilter?
-    static var vainioPostMidBand: AKEqualizerFilter?
-    static var vainioPostHighBand: AKEqualizerFilter?
-    static var vainioPostLowBand: AKEqualizerFilter?
+    static var screamerPreMidBand: AKEqualizerFilter?
+    static var screamerPreHighBand: AKEqualizerFilter?
+    static var screamerPreLowBand: AKEqualizerFilter?
+    static var screamerPostMidBand: AKEqualizerFilter?
+    static var screamerPostHighBand: AKEqualizerFilter?
+    static var screamerPostLowBand: AKEqualizerFilter?
     
     
     // tremolo
@@ -624,8 +627,6 @@ class audio {
     static var selectedAudioInputs = [AKInput]()
     
     func createEffects() {
-        
-         let threeRatio = 0.7
         
         // synth
         let square = AKTable(.square, count: 256)
@@ -710,48 +711,48 @@ class audio {
         
         
         
-        audio.vainioTanhDistortion = AKTanhDistortion()
-        audio.vainioBooster = AKMixer()
-        audio.vainioClipper = AKClipper()
+        audio.screamerDistortion = AKTanhDistortion()
+        audio.screamerVolume = AKMixer()
+        audio.screamerClipper = AKClipper()
         
         
         
-        audio.vainioPreLowBand = AKEqualizerFilter()
-        audio.vainioPreLowBand?.centerFrequency = 100
-        audio.vainioPreLowBand?.bandwidth = 100 * threeRatio
-        audio.vainioPreLowBand?.gain = 0.5
+        audio.screamerPreLowBand = AKEqualizerFilter()
+        audio.screamerPreLowBand?.centerFrequency = 100
+        audio.screamerPreLowBand?.bandwidth = 100 * eq3BandwidthRatio
+        audio.screamerPreLowBand?.gain = 0.5
       
-        audio.vainioPreMidBand = AKEqualizerFilter()
-        audio.vainioPreMidBand?.centerFrequency = 500
-        audio.vainioPreMidBand?.bandwidth = 500 * threeRatio
-        audio.vainioPreMidBand?.gain = 2
+        audio.screamerPreMidBand = AKEqualizerFilter()
+        audio.screamerPreMidBand?.centerFrequency = 500
+        audio.screamerPreMidBand?.bandwidth = 500 * eq3BandwidthRatio
+        audio.screamerPreMidBand?.gain = 3
         
-        audio.vainioPreHighBand = AKEqualizerFilter()
-        audio.vainioPreHighBand?.centerFrequency = 2000
-        audio.vainioPreHighBand?.bandwidth = 2000 * threeRatio
-        audio.vainioPreHighBand?.gain = 0.5
+        audio.screamerPreHighBand = AKEqualizerFilter()
+        audio.screamerPreHighBand?.centerFrequency = 2000
+        audio.screamerPreHighBand?.bandwidth = 2000 * eq3BandwidthRatio
+        audio.screamerPreHighBand?.gain = 0.5
         
-        audio.vainioPostLowBand = AKEqualizerFilter()
-        audio.vainioPostLowBand?.centerFrequency = 100
-        audio.vainioPostLowBand?.bandwidth = 100 * threeRatio
-        audio.vainioPostLowBand?.gain = 2
+        audio.screamerPostLowBand = AKEqualizerFilter()
+        audio.screamerPostLowBand?.centerFrequency = 100
+        audio.screamerPostLowBand?.bandwidth = 100 * eq3BandwidthRatio
+        audio.screamerPostLowBand?.gain = 1
         
-        audio.vainioPostMidBand = AKEqualizerFilter()
-        audio.vainioPostMidBand?.centerFrequency = 500
-        audio.vainioPostMidBand?.bandwidth = 500 * threeRatio
-        audio.vainioPostMidBand?.gain = 0.5
+        audio.screamerPostMidBand = AKEqualizerFilter()
+        audio.screamerPostMidBand?.centerFrequency = 500
+        audio.screamerPostMidBand?.bandwidth = 500 * eq3BandwidthRatio
+        audio.screamerPostMidBand?.gain = 0.5
         
-        audio.vainioPostHighBand = AKEqualizerFilter()
-        audio.vainioPostHighBand?.centerFrequency = 2000
-        audio.vainioPostHighBand?.bandwidth = 2000 * threeRatio
-        audio.vainioPostHighBand?.gain = 2
+        audio.screamerPostHighBand = AKEqualizerFilter()
+        audio.screamerPostHighBand?.centerFrequency = 2000
+        audio.screamerPostHighBand?.bandwidth = 2000 * eq3BandwidthRatio
+        audio.screamerPostHighBand?.gain = 1
         
       
         
-        audio.vainioTanhDistortion?.pregain = 20
-        audio.vainioTanhDistortion?.postgain = 0.5
+        audio.screamerDistortion?.pregain = 100
+        audio.screamerDistortion?.postgain = 0.5
     
-        audio.vainioClipper?.limit = 0.05
+        audio.screamerClipper?.limit = 0.005
         
         
         // tremolo
@@ -765,57 +766,57 @@ class audio {
        
         audio.threeBandFilterHigh = AKEqualizerFilter()
         audio.threeBandFilterHigh?.centerFrequency = 2000
-        audio.threeBandFilterHigh?.bandwidth = 2000 * threeRatio
+        audio.threeBandFilterHigh?.bandwidth = 2000 * eq3BandwidthRatio
         audio.threeBandFilterHigh?.gain = 1
         
         audio.threeBandFilterMid = AKEqualizerFilter()
         audio.threeBandFilterMid?.centerFrequency = 500
-        audio.threeBandFilterMid?.bandwidth = 500 * threeRatio
+        audio.threeBandFilterMid?.bandwidth = 500 * eq3BandwidthRatio
         audio.threeBandFilterMid?.gain = 1
         
         audio.threeBandFilterLow = AKEqualizerFilter()
         audio.threeBandFilterLow?.centerFrequency = 100
-        audio.threeBandFilterLow?.bandwidth = 100 * threeRatio
+        audio.threeBandFilterLow?.bandwidth = 100 * eq3BandwidthRatio
         audio.threeBandFilterLow?.gain = 1
         
         
         // 7 - BAND
-        let sevenRatio = (0.5)
+        
         //https://www.teachmeaudio.com/mixing/techniques/audio-spectrum/
         audio.sevenBandFilterBrilliance = AKEqualizerFilter()   // 6 kHz to 20 kHz
         audio.sevenBandFilterBrilliance?.centerFrequency = 6400
-        audio.sevenBandFilterBrilliance?.bandwidth = 6400 * sevenRatio
+        audio.sevenBandFilterBrilliance?.bandwidth = 6400 * eq7BandwidthRatio
         audio.sevenBandFilterBrilliance?.gain = 1
         
         
         audio.sevenBandFilterPrecence = AKEqualizerFilter()     // 4 kHz to 6 kHz
         audio.sevenBandFilterPrecence?.centerFrequency = 4200
-        audio.sevenBandFilterPrecence?.bandwidth = 4200 * sevenRatio
+        audio.sevenBandFilterPrecence?.bandwidth = 4200 * eq7BandwidthRatio
         audio.sevenBandFilterPrecence?.gain = 1
         
         audio.sevenBandFilterUpperMid = AKEqualizerFilter()     // 2 to 4 kHz
         audio.sevenBandFilterUpperMid?.centerFrequency = 2000
-        audio.sevenBandFilterUpperMid?.bandwidth = 2000 * sevenRatio
+        audio.sevenBandFilterUpperMid?.bandwidth = 2000 * eq7BandwidthRatio
         audio.sevenBandFilterUpperMid?.gain = 1
         
         audio.sevenBandFilterMid = AKEqualizerFilter()          // 500 Hz to 2 kHz
         audio.sevenBandFilterMid?.centerFrequency = 500
-        audio.sevenBandFilterMid?.bandwidth = 500 * sevenRatio
+        audio.sevenBandFilterMid?.bandwidth = 500 * eq7BandwidthRatio
         audio.sevenBandFilterMid?.gain = 1
         
         audio.sevenBandFilterLowMid = AKEqualizerFilter()       // 250 to 500 Hz
         audio.sevenBandFilterLowMid?.centerFrequency = 250
-        audio.sevenBandFilterLowMid?.bandwidth = 250 * sevenRatio
+        audio.sevenBandFilterLowMid?.bandwidth = 250 * eq7BandwidthRatio
         audio.sevenBandFilterLowMid?.gain = 1
         
         audio.sevenBandFilterBass = AKEqualizerFilter()    // 60 to 250 Hz
         audio.sevenBandFilterBass?.centerFrequency = 70
-        audio.sevenBandFilterBass?.bandwidth = 70 * sevenRatio
+        audio.sevenBandFilterBass?.bandwidth = 70 * eq7BandwidthRatio
         audio.sevenBandFilterBass?.gain = 1
         
         audio.sevenBandFilterSubBass = AKEqualizerFilter() // 20 to 60 Hz
         audio.sevenBandFilterSubBass?.centerFrequency = 30
-        audio.sevenBandFilterSubBass?.bandwidth = 30 * sevenRatio
+        audio.sevenBandFilterSubBass?.bandwidth = 30 * eq7BandwidthRatio
         audio.sevenBandFilterSubBass?.gain = 1
         
         
@@ -910,16 +911,16 @@ class audio {
         audio.juhaniTanhDistortion?.stop()
         audio.juhaniClipper?.stop()
         
-        audio.vainioTanhDistortion?.stop()
-        audio.vainioBoosterGainValue = (audio.vainioBooster?.volume)!
-        audio.vainioClipper?.stop()
+        audio.screamerDistortion?.stop()
+        audio.screamerVolumeValue = (audio.screamerVolume?.volume)!
+        audio.screamerClipper?.stop()
         
-        audio.vainioPreHighBand?.stop()
-        audio.vainioPreMidBand?.stop()
-        audio.vainioPreLowBand?.stop()
-        audio.vainioPostHighBand?.stop()
-        audio.vainioPostMidBand?.stop()
-        audio.vainioPostLowBand?.stop()
+        audio.screamerPreHighBand?.stop()
+        audio.screamerPreMidBand?.stop()
+        audio.screamerPreLowBand?.stop()
+        audio.screamerPostHighBand?.stop()
+        audio.screamerPostMidBand?.stop()
+        audio.screamerPostLowBand?.stop()
         
         // tremolo
         audio.tremolo?.stop()
@@ -1002,16 +1003,16 @@ class audio {
         audio.juhaniClipper?.stop()
         audio.juhaniTanhDistortion?.stop()
         
-        audio.vainioTanhDistortion?.stop()
-        audio.vainioBoosterGainValue = (audio.vainioBooster?.volume)!
-        audio.vainioClipper?.stop()
+        audio.screamerDistortion?.stop()
+        audio.screamerVolumeValue = (audio.screamerVolume?.volume)!
+        audio.screamerClipper?.stop()
         
-        audio.vainioPreHighBand?.stop()
-        audio.vainioPreMidBand?.stop()
-        audio.vainioPreLowBand?.stop()
-        audio.vainioPostHighBand?.stop()
-        audio.vainioPostMidBand?.stop()
-        audio.vainioPostLowBand?.stop()
+        audio.screamerPreHighBand?.stop()
+        audio.screamerPreMidBand?.stop()
+        audio.screamerPreLowBand?.stop()
+        audio.screamerPostHighBand?.stop()
+        audio.screamerPostMidBand?.stop()
+        audio.screamerPostLowBand?.stop()
         
         // tremolo
         audio.tremolo?.stop()
@@ -1707,48 +1708,52 @@ class audio {
                 
             }
                 
-            case "vainioGuitarProcessor" :
+            case "screamer" :
                 
                 switch slider {
                     
                 case 0:
-                    if  audio.vainioTanhDistortion!.isStarted == true {
-                        audio.vainioTanhDistortion?.stop()
-                         audio.vainioBooster?.volume = 1
-                        audio.vainioClipper?.stop()
+                    if  audio.screamerDistortion!.isStarted == true {
+                        audio.screamerDistortion?.stop()
+                         audio.screamerVolume?.volume = 1
+                        audio.screamerClipper?.stop()
                         
-                        audio.vainioPreHighBand?.stop()
-                        audio.vainioPreMidBand?.stop()
-                        audio.vainioPreLowBand?.stop()
-                        audio.vainioPostHighBand?.stop()
-                        audio.vainioPostMidBand?.stop()
-                        audio.vainioPostLowBand?.stop()
+                        audio.screamerPreHighBand?.stop()
+                        audio.screamerPreMidBand?.stop()
+                        audio.screamerPreLowBand?.stop()
+                        audio.screamerPostHighBand?.stop()
+                        audio.screamerPostMidBand?.stop()
+                        audio.screamerPostLowBand?.stop()
                         newValue = "OFF"
                     } else {
-                        audio.vainioTanhDistortion?.start()
-                         audio.vainioBooster?.volume = audio.vainioBoosterGainValue
-                        audio.vainioClipper?.start()
+                        audio.screamerDistortion?.start()
+                         audio.screamerVolume?.volume = audio.screamerVolumeValue
+                        audio.screamerClipper?.start()
                         
-                        audio.vainioPreHighBand?.start()
-                        audio.vainioPreMidBand?.start()
-                        audio.vainioPreLowBand?.start()
-                        audio.vainioPostHighBand?.start()
-                        audio.vainioPostMidBand?.start()
-                        audio.vainioPostLowBand?.start()
+                        audio.screamerPreHighBand?.start()
+                        audio.screamerPreMidBand?.start()
+                        audio.screamerPreLowBand?.start()
+                        audio.screamerPostHighBand?.start()
+                        audio.screamerPostMidBand?.start()
+                        audio.screamerPostLowBand?.start()
                         
                         newValue = "ON"
                     }
+                
                 case 1:
-                    audio.vainioClipper?.limit = value
+                    audio.screamerDistortion?.postgain = value
                     newValue = String(value)
                     newValue = String(newValue.prefix(3))
                 case 2:
-                    audio.vainioTanhDistortion?.pregain = value
+                    audio.screamerVolume?.volume = value
+                    audio.screamerVolumeValue = value
                     newValue = String(value)
                     newValue = String(newValue.prefix(3))
                 case 3:
-                    audio.vainioBooster?.volume = value
-                    audio.vainioBoosterGainValue = value
+                    audio.screamerPreMidBand?.centerFrequency = value
+                    audio.screamerPostMidBand?.centerFrequency = value
+                   // audio.vainioPreMidBand?.bandwidth = value * eq7BandwidthRatio
+                   // audio.vainioPostMidBand?.bandwidth = value * eq7BandwidthRatio
                     newValue = String(value)
                     newValue = String(newValue.prefix(3))
                 
@@ -2891,35 +2896,37 @@ class audio {
             default: break
             }
             
-        case "vainioGuitarProcessor":
+        case "screamer":
             switch slider {
+     
             case 1:
-                min = Float(0.005)
-                max = Float(0.05)
-                valueForSlider = Float((audio.vainioClipper?.limit)!)
-                name = "Distortion"
-                let intValue = Int(valueForSlider)
-                value = String(intValue)
-                value = String(value.prefix(3))
-                isOn = audio.vainioTanhDistortion!.isStarted
-            case 2:
                 min = Float(0.1)
-                max = Float(5)
-                valueForSlider = Float((audio.vainioTanhDistortion?.pregain)!)
+                max = Float(1)
+                valueForSlider = Float((audio.screamerDistortion?.pregain)!)
                 name = "Gain"
                 let intValue = Int(valueForSlider)
                 value = String(intValue)
                 value = String(value.prefix(3))
-                isOn = audio.vainioTanhDistortion!.isStarted
-                case 3:
+                isOn = audio.screamerDistortion!.isStarted
+            
+            case 2:
                 min = Float(0.1)
                 max = Float(10)
-                valueForSlider = Float(audio.vainioBoosterGainValue)
+                valueForSlider = Float(audio.screamerVolumeValue)
                 name = "Volume"
                 let intValue = Int(valueForSlider)
                 value = String(intValue)
                 value = String(value.prefix(3))
-                isOn = audio.vainioTanhDistortion!.isStarted
+                isOn = audio.screamerDistortion!.isStarted
+            case 3:
+                min = Float(100)
+                max = Float(1000)
+                valueForSlider = Float((audio.screamerPreMidBand?.centerFrequency)!)
+                name = "Mid Freq"
+                let intValue = Int(valueForSlider)
+                value = String(intValue)
+                value = String(value.prefix(3))
+                isOn = audio.screamerDistortion!.isStarted
             default: break
             }
             
