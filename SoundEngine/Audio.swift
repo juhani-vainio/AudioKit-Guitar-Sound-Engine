@@ -514,6 +514,7 @@ class audio {
     static var outputBooster : AKBooster?
     static var inputBooster : AKBooster?
     static var finalBooster : AKBooster?
+    static var wave : AKMixer?
     
     // EFFECTS
     
@@ -656,7 +657,7 @@ class audio {
         audio.outputBooster = AKBooster()
         audio.inputBooster = AKBooster()
         audio.finalBooster = AKBooster()
-        
+        audio.wave = AKMixer()
         
         audio.masterBooster = AKBooster()
         //audio.masterBooster?.start()
@@ -1105,9 +1106,8 @@ class audio {
     func connectMic() {
         
         mic?.connect(to: frequencyTracker!)
-       let mixer = AKMixer(audio.oscillator!, frequencyTracker!)
-        
-        mixer.connect(to: audio.inputBooster!)
+        frequencyTracker?.connect(to: audio.wave!)
+        audio.wave?.connect(to: audio.inputBooster!)
         audio.inputBooster?.connect(to: inputAmplitudeTracker!)
         
         

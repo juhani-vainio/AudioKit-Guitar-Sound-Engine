@@ -466,7 +466,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
       
             let stackUnitWidth = CGFloat(400)
           
-            let inputUnit = AKNodeOutputPlot(audio.inputBooster as! AKNode, frame: CGRect(x: 0, y: 0, width: stackUnitWidth, height: 80))
+            let inputUnit = AKNodeOutputPlot(audio.wave as! AKNode, frame: CGRect(x: 0, y: 0, width: stackUnitWidth, height: 80))
                         inputUnit.heightAnchor.constraint(equalToConstant: 80).isActive = true
                         inputUnit.widthAnchor.constraint(equalToConstant: stackUnitWidth).isActive = true
                         inputUnit.plotType = .buffer
