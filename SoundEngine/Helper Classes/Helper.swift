@@ -1280,7 +1280,6 @@ class helper {
                 
             case "Equalizer" :
                 
-                
                 guard let eqSelection = (effect as AnyObject).value(forKey: "eqSelection")! as? String else {
                     return
                 }

@@ -52,23 +52,23 @@ class audio {
     static let allPossibleEffectsData = [
         
          effectData(id: "stringResonator", opened: false, title: "String Resonator", type: "2"),
-        // DISTORTIONS
+         // DISTORTIONS
          // effectData(id: "tanhDistortion", opened: false, title: "Tanh Distortion", type: "4"),
          // effectData(id: "booster" ,opened: false, title: "BOOSTER", type: "1"),
          
-       // effectData(id: "bitCrusher", opened: false, title: "Bit CRUSHER", type: "2"),
-    // effectData(id: "decimator" ,opened: false, title: "Decimator", type: "3"),
+        // effectData(id: "bitCrusher", opened: false, title: "Bit CRUSHER", type: "2"),
+        // effectData(id: "decimator" ,opened: false, title: "Decimator", type: "3"),
        
-       // effectData(id: "ringModulator", opened: false, title: "Ring Modulator", type: "4"),
-       // effectData(id: "clipper",opened: false, title: "Clipper", type: "1"),
-    //    effectData(id: "distortion", opened: false, title: "Distortion Unit", type: "8"),
+        // effectData(id: "ringModulator", opened: false, title: "Ring Modulator", type: "4"),
+        // effectData(id: "clipper",opened: false, title: "Clipper", type: "1"),
+        //    effectData(id: "distortion", opened: false, title: "Distortion Unit", type: "8"),
         
 
         
         // DYNAMICS
-    //    effectData(id: "dynamicRangeCompressor" ,opened: false, title: "Dynamic Range Compressor", type: "4"),
-     //   effectData(id: "compressor", opened: false, title: "Compressor", type: "6"), // TODO: SOme weird bug when disconnecting :     SoundEngine[6362:1672408] AUBase.cpp:1445:DoRender:  ca_require: IsInitialized() Uninitialized
-       // effectData(id: "dynamicsProcessor" ,opened: false, title: "Dynamics Processor", type: "8"),
+        //    effectData(id: "dynamicRangeCompressor" ,opened: false, title: "Dynamic Range Compressor", type: "4"),
+        //   effectData(id: "compressor", opened: false, title: "Compressor", type: "6"), // TODO: SOme weird bug when disconnecting :     SoundEngine[6362:1672408] AUBase.cpp:1445:DoRender:  ca_require: IsInitialized() Uninitialized
+        // effectData(id: "dynamicsProcessor" ,opened: false, title: "Dynamics Processor", type: "8"),
         // missing dynamics: TODO
         // AKExpander
         // AKPeakLimiter
@@ -77,12 +77,12 @@ class audio {
         effectData(id: "phaser" ,opened: false, title: "PHASER", type: "8"),
         
         // DYNA RAGE PROCESSOR
-       // effectData(id: "dynaRageCompressor", opened: false, title: "RAGE", type: "5"),
+        // effectData(id: "dynaRageCompressor", opened: false, title: "RAGE", type: "5"),
         
         // GUITAR PROCESSOR
-        effectData(id: "rhinoGuitarProcessor", opened: false, title: "DISTORTION", type: "3"),
+        effectData(id: "rhinoGuitarProcessor", opened: false, title: "DISTORTION", type: "2"),
        // effectData(id: "juhaniGuitarProcessor", opened: false, title: "JUHANI DISTORTION", type: "0"),
-        effectData(id: "screamer", opened: false, title: "SCREAMER", type: "3"),
+        effectData(id: "screamer", opened: false, title: "SCREAMER", type: "2"),
        
         // MODULATION
         effectData(id: "chorus" ,opened: false, title: "CHORUS", type: "4"),
@@ -98,8 +98,8 @@ class audio {
         effectData(id: "delay", opened: false, title: "DELAY", type: "3"),
         
         // REVERB
-        effectData(id: "costelloReverb" ,opened: false, title: "REVERB ", type: "2"),
-        // effectData(id: "reverb" ,opened: false, title: "REVERB", type: "1"),
+        effectData(id: "costelloReverb" ,opened: false, title: "COSTELLO REVERB ", type: "2"),
+         effectData(id: "reverb" ,opened: false, title: "REVERB", type: "1"),
          // effectData(id: "reverb2" ,opened: false, title: "Reverb 2", type: "7"),
         //  effectData(id: "chowningReverb" ,opened: false, title: "Reverb Chowning", type: "0"),
         //  effectData(id: "flatFrequencyResponseReverb" ,opened: false, title: "Flat Freq Response Reverb", type: "1"),
@@ -596,6 +596,8 @@ class audio {
     static var sevenBandFilterBass: AKEqualizerFilter?
     static var sevenBandFilterSubBass: AKEqualizerFilter?
     
+   
+    
     static var highPassFilter : AKHighPassFilter?
     static var lowPassFilter: AKLowPassFilter?
     static var lowPassButterworthFilter: AKLowPassButterworthFilter?
@@ -752,7 +754,7 @@ class audio {
         
       
         
-        audio.screamerDistortion?.pregain = 100
+        audio.screamerDistortion?.pregain = 10
         audio.screamerDistortion?.postgain = 0.5
     
         audio.screamerClipper?.limit = 0.005
@@ -821,6 +823,9 @@ class audio {
         audio.sevenBandFilterSubBass?.centerFrequency = 30
         audio.sevenBandFilterSubBass?.bandwidth = 30 * eq7BandwidthRatio
         audio.sevenBandFilterSubBass?.gain = 1
+        
+        
+       
         
         
         audio.toneFilter = AKToneFilter()
@@ -1043,17 +1048,10 @@ class audio {
         audio.highPassButterworthFilter?.stop()
         audio.lowPassButterworthFilter?.stop()
         
-        audio.threeBandFilterHigh?.stop()
-        audio.threeBandFilterMid?.stop()
-        audio.threeBandFilterLow?.stop()
         
-        audio.sevenBandFilterBrilliance?.stop()
-        audio.sevenBandFilterPrecence?.stop()
-        audio.sevenBandFilterUpperMid?.stop()
-        audio.sevenBandFilterMid?.stop()
-        audio.sevenBandFilterLowMid?.stop()
-        audio.sevenBandFilterBass?.stop()
-        audio.sevenBandFilterSubBass?.stop()
+        
+        stop3()
+        stop7()
         
         
     }
@@ -1280,6 +1278,7 @@ class audio {
         booster.gain = gain
         return Float(booster.dB)
     }
+
     
     func turnUpVolume() {
         
@@ -1405,47 +1404,53 @@ class audio {
     
     
     
+    func start3() {
+        audio.threeBandFilterHigh?.start()
+        audio.threeBandFilterMid?.start()
+        audio.threeBandFilterLow?.start()
+    }
     
+    func start7() {
+        audio.sevenBandFilterBrilliance?.start()
+        audio.sevenBandFilterPrecence?.start()
+        audio.sevenBandFilterUpperMid?.start()
+        audio.sevenBandFilterMid?.start()
+        audio.sevenBandFilterLowMid?.start()
+        audio.sevenBandFilterBass?.start()
+        audio.sevenBandFilterSubBass?.start()
+    }
     
+    func stop3() {
+        audio.threeBandFilterHigh?.stop()
+        audio.threeBandFilterMid?.stop()
+        audio.threeBandFilterLow?.stop()
+    }
+    
+    func stop7() {
+        audio.sevenBandFilterBrilliance?.stop()
+        audio.sevenBandFilterPrecence?.stop()
+        audio.sevenBandFilterUpperMid?.stop()
+        audio.sevenBandFilterMid?.stop()
+        audio.sevenBandFilterLowMid?.stop()
+        audio.sevenBandFilterBass?.stop()
+        audio.sevenBandFilterSubBass?.stop()
+    }
     
 
-    
     func toggleEQ(id: String) {
         switch id {
         case "threeBandFilter":
-            audio.threeBandFilterHigh?.start()
-            audio.threeBandFilterMid?.start()
-            audio.threeBandFilterLow?.start()
-            audio.sevenBandFilterBrilliance?.stop()
-            audio.sevenBandFilterPrecence?.stop()
-            audio.sevenBandFilterUpperMid?.stop()
-            audio.sevenBandFilterMid?.stop()
-            audio.sevenBandFilterLowMid?.stop()
-            audio.sevenBandFilterBass?.stop()
-            audio.sevenBandFilterSubBass?.stop()
+            start3()
+            stop7()
             
         case "sevenBandFilter":
-            audio.sevenBandFilterBrilliance?.start()
-            audio.sevenBandFilterPrecence?.start()
-            audio.sevenBandFilterUpperMid?.start()
-            audio.sevenBandFilterMid?.start()
-            audio.sevenBandFilterLowMid?.start()
-            audio.sevenBandFilterBass?.start()
-            audio.sevenBandFilterSubBass?.start()
-            audio.threeBandFilterHigh?.stop()
-            audio.threeBandFilterMid?.stop()
-            audio.threeBandFilterLow?.stop()
+            stop3()
+            start7()
+     
         default:
-            audio.threeBandFilterHigh?.start()
-            audio.threeBandFilterMid?.start()
-            audio.threeBandFilterLow?.start()
-            audio.sevenBandFilterBrilliance?.stop()
-            audio.sevenBandFilterPrecence?.stop()
-            audio.sevenBandFilterUpperMid?.stop()
-            audio.sevenBandFilterMid?.stop()
-            audio.sevenBandFilterLowMid?.stop()
-            audio.sevenBandFilterBass?.stop()
-            audio.sevenBandFilterSubBass?.stop()
+            start3()
+            stop7()
+            
         }
     }
     
@@ -1475,6 +1480,13 @@ class audio {
             text = String(percent).dropLast(2) + "%"
      
         return text
+    }
+    
+    func convertToVolume(value: Double, max: Double, min: Double) -> Double {
+        var ratio = value * 100 / (max + abs(min))
+        ratio = ratio / 100
+      
+        return ratio
     }
     
     func changeEQValues(slider: String, value: Double) -> String {
@@ -1639,20 +1651,23 @@ class audio {
                 max = Double(Effects.rhinoGuitarProcessor.distortionRange.upperBound)
                 newValue = convertToPercent(value: value, max: max, min: min)
                 audio.rhinoGuitarProcessor?.distortion = value
-            
+                let volume = convertToVolume(value: value, max: max, min: min)
+                audio.rhinoVolume?.volume = volume
+                audio.rhinoBoosterDBValue = volume
+                
             case 2:
                 min = Double(Effects.rhinoGuitarProcessor.preGainRange.lowerBound)
                 max = Double(Effects.rhinoGuitarProcessor.preGainRange.upperBound)
                 newValue = convertToPercent(value: value, max: max, min: min)
                 audio.rhinoGuitarProcessor?.preGain = value
-              
+             /*
             case 3:
                 audio.rhinoVolume?.volume = value
                 audio.rhinoBoosterDBValue = value
                 newValue = String(value)
                 newValue = String(newValue.prefix(3)) + " dB"
            
-            /*case 2:
+            case 2:
                 audio.rhinoGuitarProcessor?.highGain = value
                 newValue = String(value)
                 newValue = String(newValue.prefix(3))
@@ -1746,15 +1761,21 @@ class audio {
                     }
                 
                 case 1:
-                    audio.screamerDistortion?.postgain = value
+                    audio.screamerDistortion?.pregain = value
                     newValue = String(value)
                     newValue = String(newValue.prefix(3))
+                    
+                    let volume = convertToVolume(value: value, max: 10, min: 0)
+                    audio.screamerVolume?.volume = 2 - volume
+                    audio.screamerVolumeValue = 2 - volume
+                    /*
                 case 2:
                     audio.screamerVolume?.volume = value
                     audio.screamerVolumeValue = value
                     newValue = String(value)
                     newValue = String(newValue.prefix(3))
-                case 3:
+                    */
+                case 2:
                     audio.screamerPreMidBand?.centerFrequency = value
                     audio.screamerPostMidBand?.centerFrequency = value
                    // audio.vainioPreMidBand?.bandwidth = value * eq7BandwidthRatio
@@ -2811,7 +2832,7 @@ class audio {
                 value = convertToPercent(value: Double(valueForSlider), max: Double(max), min: Double(min))
                 name = "Gain"
                 isOn = audio.rhinoGuitarProcessor!.isStarted
-                
+              /*
             case 3:
                 min = Float(Effects.rhinoGuitarProcessor.volumeRange.lowerBound)
                 max = Float(Effects.rhinoGuitarProcessor.volumeRange.upperBound)
@@ -2822,7 +2843,7 @@ class audio {
                 value = String(value.prefix(3)) + " dB"
                 isOn = audio.rhinoGuitarProcessor!.isStarted
                 
-                /*
+                
             case 6:
                 min = Float(Effects.rhinoGuitarProcessor.postGainRange.lowerBound)
                 max = Float(Effects.rhinoGuitarProcessor.postGainRange.upperBound)
@@ -2905,15 +2926,15 @@ class audio {
             switch slider {
      
             case 1:
-                min = Float(0.1)
-                max = Float(1)
+                min = Float(0)
+                max = Float(10)
                 valueForSlider = Float((audio.screamerDistortion?.pregain)!)
                 name = "Gain"
                 let intValue = Int(valueForSlider)
                 value = String(intValue)
                 value = String(value.prefix(3))
                 isOn = audio.screamerDistortion!.isStarted
-            
+            /*
             case 2:
                 min = Float(0.1)
                 max = Float(10)
@@ -2923,7 +2944,8 @@ class audio {
                 value = String(intValue)
                 value = String(value.prefix(3))
                 isOn = audio.screamerDistortion!.isStarted
-            case 3:
+                */
+            case 2:
                 min = Float(100)
                 max = Float(1000)
                 valueForSlider = Float((audio.screamerPreMidBand?.centerFrequency)!)
