@@ -60,6 +60,8 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
    
     
     // VIEWS
+    @IBOutlet weak var fftView: UIView!
+    
     @IBOutlet weak var mainFrame: UIView!
     @IBOutlet weak var top: UIView!
     @IBOutlet weak var topControls: UIView!
@@ -199,7 +201,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
                 
             }
             
-      
+        
             
             
         }
@@ -369,6 +371,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
             stack.centerYAnchor.constraint(equalTo: waveformView.centerYAnchor).isActive = true
             
             buildWaveforStackView()
+          //  buildFFTView()
             setColors()
             mainSoundTitle.text = audio.nameOfCurrentSound
         }
@@ -456,6 +459,22 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
     
         self.mainFrame.layer.insertSublayer(gradient, at: 0)
     }
+    
+    func buildFFTView(){
+        // FFT
+        
+        let plot = AKNodeFFTPlot(audio.outputAmplitudeTracker, frame: CGRect(x: 0, y: 0, width: fftView.frame.width, height: fftView.frame.height))
+        plot.shouldFill = true
+        plot.shouldMirror = false
+        plot.shouldCenterYAxis = false
+        plot.color = AKColor.purple.withAlphaComponent(0.5)
+        plot.backgroundColor = UIColor.clear
+        plot.gain = 100
+        self.fftView.addSubview(plot)
+       
+        
+    }
+    
         
         func buildWaveforStackView() {
             
@@ -486,45 +505,6 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
                         outputUnit.backgroundColor = UIColor.clear
                         stack.addArrangedSubview(outputUnit)
         
-            
-            /*
-             for subview in stack.arrangedSubviews {
-             stack.removeArrangedSubview(subview)
-             subview.isHidden = true
-             }
-             
-             var units = 0 // for width calculation
-             for effect in audio.selectedEffectsData {
-             if helper.shared.isOn(id: effect.id) {
-             units = units + 1
-             }
-             }
-             let stackUnitWidth = waveformView.frame.width / CGFloat(units)
-             var unitCount = 0
-             for unit in audio.selectedAudioInputs {
-             
-             unit.outputNode.removeTap(onBus: 0)
-             if unitCount < audio.selectedEffectsData.count {
-             let name = audio.selectedEffectsData[unitCount].id
-             if helper.shared.isOn(id: name) {
-             let node = unit as! AKNode
-             let stackUnit = AKNodeOutputPlot(node, frame: CGRect(x: 0, y: 0, width: stackUnitWidth, height: 80))
-             stackUnit.heightAnchor.constraint(equalToConstant: 80).isActive = true
-             stackUnit.widthAnchor.constraint(equalToConstant: stackUnitWidth).isActive = true
-             stackUnit.plotType = .buffer
-             stackUnit.shouldFill = false
-             stackUnit.shouldMirror = false
-             let color = Colors.palette.colorForEffect(name: name)
-             stackUnit.color = color
-             stackUnit.backgroundColor = UIColor.clear
-             stack.addArrangedSubview(stackUnit)
-             }
-             
-             }
-             
-             unitCount = unitCount + 1
-             }
-        */
         }
         
         @objc func inputLevelChanged(slider: UISlider) {

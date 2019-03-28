@@ -110,7 +110,9 @@ class audio {
         // effectData(id: "resonantFilter", opened: false, title: "Resonant Filter", type: "2"),
         
         //   effectData(id: "modalResonanceFilter", opened: false, title: "Modal Resonance", type: "2"),
+        
         //   effectData(id: "highLowPassFilters", opened: false, title: "High & Low Pass Filters", type: "PassFilters"), // add switch for FLAT as in butterworth for the pass filters
+           effectData(id: "dcBlock", opened: false, title: "dcBlock", type: "0"), // add switch for FLAT as in butterworth for the pass filters
     ]
     
     
@@ -132,6 +134,19 @@ class audio {
         connectAudioInputs()
        //  noiseGate()
        // synthTracker()
+        //playOscillator()
+    }
+    
+    
+    func playOscillator() {
+        let timer = Timer.scheduledTimer(withTimeInterval: 0.01, repeats: true) { timer in
+ 
+                        audio.oscillator!.frequency = 1760
+                        audio.oscillator!.amplitude = 1
+                        audio.oscillator?.play()
+            
+        }
+        timer.fire()
     }
     
     func connectAudioInputs() {
@@ -159,7 +174,12 @@ class audio {
         outputMixer?.connect(to: audio.outputBooster!)
        
         audio.outputBooster?.connect(to: audio.finalBooster!)
-        audio.finalBooster?.connect(to: audio.outputAmplitudeTracker!)
+        
+        
+        let mixer = AKMixer(audio.oscillator, audio.finalBooster)
+        mixer.connect(to: audio.outputAmplitudeTracker!)
+        //audio.finalBooster?.connect(to: audio.outputAmplitudeTracker!)
+
         
         // LAST TO OUTPUT
         AudioKit.output = audio.outputAmplitudeTracker!
@@ -197,7 +217,6 @@ class audio {
                 print("Could not start AudioKit")
             }
         }
-        
         
        // print(AudioKit.printConnections())
         
@@ -260,8 +279,10 @@ class audio {
         case "toneFilters": audio.selectedAudioInputs.append(audio.toneFilter!)
         audio.selectedAudioInputs.append(audio.toneComplementFilter!)
         case "moogLadder": audio.selectedAudioInputs.append(audio.moogLadder!)
-        case "rhinoGuitarProcessor": audio.selectedAudioInputs.append(audio.rhinoGuitarProcessor!)
+        case "rhinoGuitarProcessor":
+            audio.selectedAudioInputs.append(audio.rhinoGuitarProcessor!)
             audio.selectedAudioInputs.append(audio.rhinoVolume!)
+           // audio.selectedAudioInputs.append(audio.rhinoGuitarProcessor2!)
             
         case "juhaniGuitarProcessor" : audio.selectedAudioInputs.append(audio.juhaniTanhDistortion!)
                                     audio.selectedAudioInputs.append(audio.juhaniClipper!)
@@ -421,9 +442,10 @@ class audio {
             audio.moogLadder!.start()
             
         case "rhinoGuitarProcessor" :
-            
+            audio.rhinoGuitarProcessor2!.start()
            audio.rhinoGuitarProcessor!.start()
             audio.rhinoVolume?.volume = audio.rhinoBoosterDBValue
+            
             
         case "juhaniGuitarProcessor" :
             
@@ -476,6 +498,10 @@ class audio {
         
     }
     
+    // FFT
+    
+  
+    
     let eq3BandwidthRatio = 0.7
     let eq7BandwidthRatio = (0.5)
     
@@ -516,6 +542,7 @@ class audio {
     static var finalBooster : AKBooster?
     static var wave : AKMixer?
     
+    
     // EFFECTS
     
     // Dynamics
@@ -554,6 +581,7 @@ class audio {
     
     // Simulators
     static var rhinoGuitarProcessor: AKRhinoGuitarProcessor?
+    static var rhinoGuitarProcessor2: AKTanhDistortion?
     static var rhinoVolume: AKMixer?
     static var rhinoBoosterDBValue = Double()
     
@@ -633,13 +661,15 @@ class audio {
     
     func createEffects() {
         
+        
+        
         // synth
         let square = AKTable(.square, count: 256)
         let triangle = AKTable(.triangle, count: 256)
         let sine = AKTable(.sine, count: 256)
         let sawtooth = AKTable(.sawtooth, count: 256)
         
-        audio.oscillator = AKOscillator(waveform: square)
+        audio.oscillator = AKOscillator(waveform: sine)
         audio.oscillator?.rampDuration = 0.001
         
  
@@ -705,7 +735,11 @@ class audio {
         
         // Simulators
         audio.rhinoGuitarProcessor = AKRhinoGuitarProcessor()
+        audio.rhinoGuitarProcessor2 = AKTanhDistortion()
         audio.rhinoVolume = AKMixer()
+        
+        audio.rhinoGuitarProcessor2?.postgain = 0.5
+     
         
         audio.juhaniTanhDistortion = AKTanhDistortion()
         audio.juhaniClipper = AKClipper()
@@ -729,7 +763,7 @@ class audio {
       
         audio.screamerPreMidBand = AKEqualizerFilter()
         audio.screamerPreMidBand?.centerFrequency = 500
-        audio.screamerPreMidBand?.bandwidth = 500 * eq3BandwidthRatio
+        audio.screamerPreMidBand?.bandwidth = 300
         audio.screamerPreMidBand?.gain = 3
         
         audio.screamerPreHighBand = AKEqualizerFilter()
@@ -740,17 +774,17 @@ class audio {
         audio.screamerPostLowBand = AKEqualizerFilter()
         audio.screamerPostLowBand?.centerFrequency = 100
         audio.screamerPostLowBand?.bandwidth = 100 * eq3BandwidthRatio
-        audio.screamerPostLowBand?.gain = 1
+        audio.screamerPostLowBand?.gain = 1.2
         
         audio.screamerPostMidBand = AKEqualizerFilter()
         audio.screamerPostMidBand?.centerFrequency = 500
-        audio.screamerPostMidBand?.bandwidth = 500 * eq3BandwidthRatio
-        audio.screamerPostMidBand?.gain = 0.5
+        audio.screamerPostMidBand?.bandwidth = 300
+        audio.screamerPostMidBand?.gain = 0.7
         
         audio.screamerPostHighBand = AKEqualizerFilter()
         audio.screamerPostHighBand?.centerFrequency = 2000
         audio.screamerPostHighBand?.bandwidth = 2000 * eq3BandwidthRatio
-        audio.screamerPostHighBand?.gain = 1
+        audio.screamerPostHighBand?.gain = 1.2
         
       
         
@@ -875,8 +909,8 @@ class audio {
         //inputMixer?.start()
         outputMixer?.start()
         
-        
-        
+       
+      
         
         // stop all effects
         
@@ -915,15 +949,19 @@ class audio {
         audio.reverb2?.stop()
         
         // Simulators
-        audio.rhinoGuitarProcessor?.stop()
-        audio.rhinoBoosterDBValue = (audio.rhinoVolume?.volume)!
+        audio.rhinoBoosterDBValue = audio.rhinoVolume!.volume
         audio.rhinoVolume?.volume = 1
+        audio.rhinoGuitarProcessor2?.stop()
+        audio.rhinoGuitarProcessor?.stop()
+        
         
         audio.juhaniTanhDistortion?.stop()
         audio.juhaniClipper?.stop()
         
+        
+        audio.screamerVolumeValue = audio.screamerVolume!.volume
+        audio.screamerVolume?.volume = 1
         audio.screamerDistortion?.stop()
-        audio.screamerVolumeValue = (audio.screamerVolume?.volume)!
         audio.screamerClipper?.stop()
         
         audio.screamerPreHighBand?.stop()
@@ -1007,15 +1045,19 @@ class audio {
         audio.reverb2?.stop()
         
         // Simulators
-        audio.rhinoGuitarProcessor?.stop()
         audio.rhinoBoosterDBValue = (audio.rhinoVolume?.volume)!
         audio.rhinoVolume?.volume = 1
+        audio.rhinoGuitarProcessor2?.stop()
+        audio.rhinoGuitarProcessor?.stop()
+        
         
         audio.juhaniClipper?.stop()
         audio.juhaniTanhDistortion?.stop()
         
+        
+        audio.screamerVolumeValue = audio.screamerVolume!.volume
+        audio.screamerVolume?.volume = 1
         audio.screamerDistortion?.stop()
-        audio.screamerVolumeValue = (audio.screamerVolume?.volume)!
         audio.screamerClipper?.stop()
         
         audio.screamerPreHighBand?.stop()
@@ -1050,8 +1092,8 @@ class audio {
         
         
         
-        stop3()
-        stop7()
+       // stop3()
+       // stop7()
         
         
     }
@@ -1484,8 +1526,9 @@ class audio {
     
     func convertToVolume(value: Double, max: Double, min: Double) -> Double {
         var ratio = value * 100 / (max + abs(min))
+        print(ratio)
         ratio = ratio / 100
-      
+        print(ratio)
         return ratio
     }
     
@@ -1635,12 +1678,15 @@ class audio {
    
             case 0:
                 if  audio.rhinoGuitarProcessor!.isStarted == true {
-                    audio.rhinoGuitarProcessor?.stop()
-                   // audio.rhinoBoosterDBValue = (audio.rhinoBooster?.dB)!
+                    
+                    audio.rhinoBoosterDBValue = audio.rhinoVolume!.volume
                     audio.rhinoVolume?.volume = 1
+                    audio.rhinoGuitarProcessor2?.stop()
+                    audio.rhinoGuitarProcessor?.stop()
                    
                     newValue = "OFF"
                 } else {
+                    audio.rhinoGuitarProcessor2?.start()
                     audio.rhinoGuitarProcessor?.start()
                     audio.rhinoVolume?.volume = audio.rhinoBoosterDBValue
                     newValue = "ON"
@@ -1652,8 +1698,9 @@ class audio {
                 newValue = convertToPercent(value: value, max: max, min: min)
                 audio.rhinoGuitarProcessor?.distortion = value
                 let volume = convertToVolume(value: value, max: max, min: min)
-                audio.rhinoVolume?.volume = volume
-                audio.rhinoBoosterDBValue = volume
+                print(1 + volume)
+                audio.rhinoVolume?.volume = 1 + volume
+                audio.rhinoBoosterDBValue = 1 + volume
                 
             case 2:
                 min = Double(Effects.rhinoGuitarProcessor.preGainRange.lowerBound)
@@ -1734,8 +1781,10 @@ class audio {
                     
                 case 0:
                     if  audio.screamerDistortion!.isStarted == true {
+                        
+                        audio.screamerVolumeValue = audio.screamerVolume!.volume
+                        audio.screamerVolume?.volume = 1
                         audio.screamerDistortion?.stop()
-                         audio.screamerVolume?.volume = 1
                         audio.screamerClipper?.stop()
                         
                         audio.screamerPreHighBand?.stop()
@@ -1766,6 +1815,7 @@ class audio {
                     newValue = String(newValue.prefix(3))
                     
                     let volume = convertToVolume(value: value, max: 10, min: 0)
+                    print(2 - volume)
                     audio.screamerVolume?.volume = 2 - volume
                     audio.screamerVolumeValue = 2 - volume
                     /*
@@ -2926,7 +2976,7 @@ class audio {
             switch slider {
      
             case 1:
-                min = Float(0)
+                min = Float(1)
                 max = Float(10)
                 valueForSlider = Float((audio.screamerDistortion?.pregain)!)
                 name = "Gain"

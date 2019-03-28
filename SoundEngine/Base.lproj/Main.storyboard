@@ -751,10 +751,10 @@
                                             <constraint firstItem="HML-KO-I3b" firstAttribute="leading" secondItem="MvW-18-d2g" secondAttribute="leading" constant="40" id="7s8-1D-ZNW"/>
                                             <constraint firstAttribute="trailing" secondItem="JFH-yb-yOl" secondAttribute="trailing" id="8ne-4h-3Tq"/>
                                             <constraint firstItem="JFH-yb-yOl" firstAttribute="centerX" secondItem="HML-KO-I3b" secondAttribute="centerX" id="Kbd-un-eml"/>
-                                            <constraint firstItem="HML-KO-I3b" firstAttribute="top" secondItem="JFH-yb-yOl" secondAttribute="bottom" id="Kvu-qg-T6Q"/>
                                             <constraint firstItem="JFH-yb-yOl" firstAttribute="leading" secondItem="MvW-18-d2g" secondAttribute="leading" id="QdI-DA-ABV"/>
                                             <constraint firstAttribute="bottom" secondItem="HML-KO-I3b" secondAttribute="bottom" constant="79" id="Y1W-FX-oHR"/>
                                             <constraint firstItem="JFH-yb-yOl" firstAttribute="top" secondItem="MvW-18-d2g" secondAttribute="top" id="jAu-WE-49X"/>
+                                            <constraint firstItem="HML-KO-I3b" firstAttribute="top" secondItem="JFH-yb-yOl" secondAttribute="bottom" id="tJI-2G-MG4"/>
                                         </constraints>
                                     </view>
                                 </subviews>
