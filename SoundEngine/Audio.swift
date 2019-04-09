@@ -132,9 +132,8 @@ class audio {
         connectMic()
         
         connectAudioInputs()
-       //  noiseGate()
-       // synthTracker()
-        //playOscillator()
+        noiseGate()
+    
     }
     
     
@@ -171,18 +170,21 @@ class audio {
         } else {
             audio.selectedAudioInputs.last?.connect(to: outputMixer!)
         }
-        outputMixer?.connect(to: audio.outputBooster!)
-       
-        audio.outputBooster?.connect(to: audio.finalBooster!)
+        outputMixer?.connect(to: audio.outputAmplitudeTracker!)
+        audio.outputAmplitudeTracker!.connect(to:audio.lowPassFilter!)
         
-        
-        let mixer = AKMixer(audio.oscillator, audio.finalBooster)
-        mixer.connect(to: audio.outputAmplitudeTracker!)
+        audio.lowPassFilter?.connect(to: audio.highPassFilter!)
+        audio.highPassFilter!.connect(to: audio.finalBooster!)
+        audio.finalBooster!.connect(to:  audio.outputBooster!)
+       // audio.outputBooster?.connect(to: audio.finalBooster!)
+        //self.outputFrequencyTracker!.connect(to: audio.finalBooster!)
+        // let mixer = AKMixer(audio.oscillator, audio.finalBooster)
+       // audio.outputAmplitudeTracker!.connect(to: audio.finalBooster!)
         //audio.finalBooster?.connect(to: audio.outputAmplitudeTracker!)
 
         
         // LAST TO OUTPUT
-        AudioKit.output = audio.outputAmplitudeTracker!
+        AudioKit.output =  audio.outputBooster!
         if AudioKit.output == nil {
             AudioKit.output =  audio.inputBooster
             // AudioKit.output = inputMixer
@@ -281,7 +283,9 @@ class audio {
         case "moogLadder": audio.selectedAudioInputs.append(audio.moogLadder!)
         case "rhinoGuitarProcessor":
             audio.selectedAudioInputs.append(audio.rhinoGuitarProcessor!)
+          //  audio.selectedAudioInputs.append(audio.rhinoGate!)
             audio.selectedAudioInputs.append(audio.rhinoVolume!)
+           // audio.selectedAudioInputs.append(self.outputFrequencyTracker!)
            // audio.selectedAudioInputs.append(audio.rhinoGuitarProcessor2!)
             
         case "juhaniGuitarProcessor" : audio.selectedAudioInputs.append(audio.juhaniTanhDistortion!)
@@ -442,6 +446,7 @@ class audio {
             audio.moogLadder!.start()
             
         case "rhinoGuitarProcessor" :
+            audio.rhinoGate!.start()
             audio.rhinoGuitarProcessor2!.start()
            audio.rhinoGuitarProcessor!.start()
             audio.rhinoVolume?.volume = audio.rhinoBoosterDBValue
@@ -525,7 +530,8 @@ class audio {
     var inputAmplitudeTracker : AKAmplitudeTracker?
     var micTracker : AKMicrophoneTracker?
     
-    var frequencyTracker : AKFrequencyTracker?
+    var inputFrequencyTracker : AKFrequencyTracker?
+    var outputFrequencyTracker : AKFrequencyTracker?
     
     var inputMixer: AKMixer?
     var mixerForFirstList: AKMixer?
@@ -580,6 +586,8 @@ class audio {
     
     
     // Simulators
+    static var rhinoGate: AKBooster?
+    
     static var rhinoGuitarProcessor: AKRhinoGuitarProcessor?
     static var rhinoGuitarProcessor2: AKTanhDistortion?
     static var rhinoVolume: AKMixer?
@@ -678,8 +686,10 @@ class audio {
         inputAmplitudeTracker = AKAmplitudeTracker()
         micTracker = AKMicrophoneTracker()
         
-        frequencyTracker = AKFrequencyTracker()
-        frequencyTracker?.start()
+        inputFrequencyTracker = AKFrequencyTracker()
+        inputFrequencyTracker?.start()
+        outputFrequencyTracker = AKFrequencyTracker()
+        outputFrequencyTracker?.start()
         
         // MIC
         mic = AKMicrophone()
@@ -734,11 +744,12 @@ class audio {
         audio.reverb2 = AKReverb2()
         
         // Simulators
+        audio.rhinoGate = AKBooster()
         audio.rhinoGuitarProcessor = AKRhinoGuitarProcessor()
         audio.rhinoGuitarProcessor2 = AKTanhDistortion()
         audio.rhinoVolume = AKMixer()
-        
-        audio.rhinoGuitarProcessor2?.postgain = 0.5
+        audio.rhinoGuitarProcessor?.postGain = 0.1
+        audio.rhinoGuitarProcessor2?.postgain = 0.1
      
         
         audio.juhaniTanhDistortion = AKTanhDistortion()
@@ -748,7 +759,7 @@ class audio {
         audio.juhaniTanhDistortion?.postgain = 20
         audio.juhaniClipper?.limit = 0.1
         
-        
+ 
         
         audio.screamerDistortion = AKTanhDistortion()
         audio.screamerVolume = AKMixer()
@@ -859,17 +870,12 @@ class audio {
         audio.sevenBandFilterSubBass?.gain = 1
         
         
-       
-        
         
         audio.toneFilter = AKToneFilter()
         audio.toneComplementFilter = AKToneComplementFilter()
         
         audio.highPassFilter = AKHighPassFilter()
         audio.lowPassFilter = AKLowPassFilter()
-        
-       
-        
 
         audio.toneComplementFilter = AKToneComplementFilter()
         audio.highShelfFilter = AKHighShelfFilter()
@@ -951,6 +957,7 @@ class audio {
         // Simulators
         audio.rhinoBoosterDBValue = audio.rhinoVolume!.volume
         audio.rhinoVolume?.volume = 1
+        audio.rhinoGate?.stop()
         audio.rhinoGuitarProcessor2?.stop()
         audio.rhinoGuitarProcessor?.stop()
         
@@ -1047,6 +1054,7 @@ class audio {
         // Simulators
         audio.rhinoBoosterDBValue = (audio.rhinoVolume?.volume)!
         audio.rhinoVolume?.volume = 1
+        audio.rhinoGate?.stop()
         audio.rhinoGuitarProcessor2?.stop()
         audio.rhinoGuitarProcessor?.stop()
         
@@ -1145,8 +1153,8 @@ class audio {
     
     func connectMic() {
         
-        mic?.connect(to: frequencyTracker!)
-        frequencyTracker?.connect(to: audio.wave!)
+        mic?.connect(to: inputFrequencyTracker!)
+        inputFrequencyTracker?.connect(to: audio.wave!)
         audio.wave?.connect(to: audio.inputBooster!)
         audio.inputBooster?.connect(to: inputAmplitudeTracker!)
         
@@ -1159,11 +1167,11 @@ class audio {
         var sharp = ""
         var direction: Float = 0.0
         var directionWithRatio: Float = 0.0
-        if self.frequencyTracker!.amplitude > 0.1 {
+        if self.inputFrequencyTracker!.amplitude > 0.1 {
             let noteFrequencies = [16.35, 17.32, 18.35, 19.45, 20.6, 21.83, 23.12, 24.5, 25.96, 27.5, 29.14, 30.87]
             let noteNamesWithSharps = ["C", "C♯", "D", "D♯", "E", "F", "F♯", "G", "G♯", "A", "A♯", "B"]
            // let noteNamesWithFlats = ["C", "D♭", "D", "E♭", "E", "F", "G♭", "G", "A♭", "A", "B♭", "B"]
-            var frequency = Float(self.frequencyTracker!.frequency)
+            var frequency = Float(self.inputFrequencyTracker!.frequency)
             while (frequency > Float(noteFrequencies[noteFrequencies.count-1])) {
                 frequency = frequency / 2.0
             }
@@ -1201,7 +1209,7 @@ class audio {
                 directionWithRatio = Float(percent)
             }
             
-            octave = String(Int(log2f(Float(self.frequencyTracker!.frequency) / frequency)))
+            octave = String(Int(log2f(Float(self.inputFrequencyTracker!.frequency) / frequency)))
             
             
             if index == noteFrequencies.count - 1 {
@@ -1235,7 +1243,7 @@ class audio {
         // start from the correct note if amplitude is zero
         audio.oscillator!.frequency = note.midiNoteToFrequency()
 
-        audio.oscillator!.amplitude = (self.frequencyTracker?.amplitude)!
+        audio.oscillator!.amplitude = (self.inputFrequencyTracker?.amplitude)!
         audio.oscillator!.play()
     }
     
@@ -1248,62 +1256,36 @@ class audio {
     var previousNote = Int(0)
     
     var gateIsClosed = false
+    var previousGate = Int64()
+    var gateMultiplier = Double(5)
+    static var gateIsOn = false
+ 
+    func getCurrentMillis() -> Int64 {
+        return Int64(Date().timeIntervalSince1970 * 1000)
+    }
     
     func noiseGate() {
-        let timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { timer in
-            
-            
-            if self.frequencyTracker!.amplitude < 0.01 {
-                print("OFF")
-               // silence
-                if self.gateIsClosed == false {
-                    audio.finalBooster?.rampDuration = 0.5
-                    audio.finalBooster?.gain = 0
-                    self.gateIsClosed = true
+        audio.finalBooster?.rampDuration = 0
+        let timer = Timer.scheduledTimer(withTimeInterval: 0.001, repeats: true) { timer in
+            if audio.gateIsOn == true {
+                let input = self.inputFrequencyTracker!.amplitude * self.gateMultiplier
+                if input > 1 {
+                    audio.finalBooster!.gain = 1
+                } else {
+                    audio.finalBooster!.gain = input
                 }
                 
-            } else {
-                print("ON")
-                 print(self.frequencyTracker!.frequency)
-                audio.finalBooster?.rampDuration = 0.001
-                audio.finalBooster?.gain = 1
-                self.gateIsClosed = false
             }
-     
-        }
-        timer.fire()
-    }
-    
-    
-    func synthTracker() {
-        let timer = Timer.scheduledTimer(withTimeInterval: 0.01, repeats: true) { timer in
-           
-            if self.frequencyTracker!.amplitude > 0.01 {
-                let note = self.frequencyTracker!.frequency.frequencyToMIDINote()
-                let thisNote = Int(note)
-                if thisNote < 97 && thisNote > 35 {
-                    if thisNote != self.previousNote {
-                        print(thisNote)
-                        audio.oscillator!.frequency = note.midiNoteToFrequency()
-                        audio.oscillator!.amplitude = self.frequencyTracker!.amplitude
-                        audio.oscillator?.play()
-                        print(audio.oscillator!.frequency)
-                        self.previousNote = thisNote
-                    }
-                    
-            }
-   
-            } else {
-                audio.oscillator!.amplitude = 0
-                self.previousNote = 0
+            else {
+                 audio.finalBooster!.gain = 1
             }
             
-                
-           
-        
         }
+        
         timer.fire()
     }
+    
+    
     
     func ratioToDecibel(ratio: Double) -> Double {
         let dB = 20 * log10(ratio)

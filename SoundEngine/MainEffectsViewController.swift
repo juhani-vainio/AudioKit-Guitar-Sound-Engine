@@ -26,6 +26,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
     @IBOutlet weak var outputLevelValue: UILabel!
     @IBOutlet weak var bufferLengthSegment: UISegmentedControl!
     @IBOutlet weak var colorSegment: UISegmentedControl!
+    @IBOutlet weak var noiseGateSwitch: UISwitch!
     
    
     @IBOutlet weak var outputVolume: UILabel!
@@ -81,6 +82,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
     @IBOutlet weak var eqTableView: UITableView!
     @IBOutlet weak var savedSoundsTableView: UITableView!
     @IBOutlet weak var availableEffects: UITableView!
+    @IBOutlet weak var availableEffectsCopy: UITableView!
     @IBOutlet weak var selectedEffects: UITableView!
     
     // CONSTRAINTS
@@ -495,7 +497,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
                         inputUnit.backgroundColor = UIColor.clear
                         stack.addArrangedSubview(inputUnit)
             
-            let outputUnit = AKNodeOutputPlot(audio.outputBooster as! AKNode, frame: CGRect(x: 0, y: 0, width: stackUnitWidth, height: 80))
+            let outputUnit = AKNodeOutputPlot(audio.finalBooster as! AKNode, frame: CGRect(x: 0, y: 0, width: stackUnitWidth, height: 80))
                         outputUnit.heightAnchor.constraint(equalToConstant: 80).isActive = true
                         outputUnit.widthAnchor.constraint(equalToConstant: stackUnitWidth).isActive = true
                         outputUnit.plotType = .buffer
@@ -506,7 +508,16 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
                         stack.addArrangedSubview(outputUnit)
         
         }
-        
+    
+    @IBAction func noiseGateSwitchAction(_ sender: Any) {
+        if noiseGateSwitch.isOn {
+            audio.gateIsOn = true
+        } else {
+             audio.gateIsOn = false
+        }
+    }
+    
+    
         @objc func inputLevelChanged(slider: UISlider) {
             audio.inputBooster?.dB = Double(slider.value)
             inputLevelValue.text = convertDBValueToText(dB: Double(slider.value))
@@ -538,6 +549,9 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
             audio.availableEffectsData = audio.availableEffectsData.sorted{ $0.title < $1.title }
             availableEffects.delegate = self
             availableEffects.dataSource = self
+            
+            availableEffectsCopy.delegate = self
+            availableEffectsCopy.dataSource = self
            
             selectedEffects.delegate = self
             selectedEffects.dataSource = self
@@ -699,6 +713,10 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
                 value = audio.availableEffectsData.count
                 
             }
+            else if tableView == availableEffectsCopy {
+                value = audio.availableEffectsData.count
+                
+            }
        
             else if tableView == selectedEffects {
                 // unitsAfter List
@@ -733,6 +751,12 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
         @objc func toggleOnOff() {
            // buildWaveforStackView()
         }
+    
+    func shortNameFor(name: String) -> String {
+        
+        return "SHORT"
+        
+    }
         
         func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
             let backgroundView = UIView()
@@ -782,6 +806,19 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
             if tableView == availableEffects || tableView == savedSoundsTableView {
                 guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell") else {return UITableViewCell()}
                 cell.textLabel?.text = cellTitle
+                cell.textLabel?.textColor = interface.text
+                cell.backgroundColor = interface.tableBackground
+                cell.selectedBackgroundView = backgroundView
+                
+                returnCell = cell
+                
+            }
+                
+            else if tableView == availableEffectsCopy {
+                guard let cell = tableView.dequeueReusableCell(withIdentifier: "cellCopy") else {return UITableViewCell()}
+                // GET SHORT NAME
+                let shortName = shortNameFor(name: cellTitle)
+                cell.textLabel?.text = shortName
                 cell.textLabel?.textColor = interface.text
                 cell.backgroundColor = interface.tableBackground
                 cell.selectedBackgroundView = backgroundView
@@ -1781,6 +1818,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
                 self.selectedEffects.reloadData()
                
                 self.availableEffects.reloadData()
+                self.availableEffectsCopy.reloadData()
                 self.eqTableView.reloadData()
                 
                 resetEffectChain()
@@ -1799,6 +1837,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
                 audio.availableEffectsData.remove(at: indexPath.row)
                 let row = IndexPath(item: indexPath.row, section: 0)
                 self.availableEffects.deleteRows(at: [row], with: .none)
+                self.availableEffectsCopy.deleteRows(at: [row], with: .none)
                 handleEffectsTap()
                 
                 self.moveEqToPosition(value: audio.selectedEffectsData.count)
@@ -1866,6 +1905,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
                     // Arrange available units list aplhabetically
                     audio.availableEffectsData = audio.availableEffectsData.sorted{ $0.title < $1.title }
                     self.availableEffects.reloadData()
+                    self.availableEffectsCopy.reloadData()
                     audio.selectedEffectsData.remove(at: indexPath.row)
                     let row = IndexPath(item: indexPath.row, section: 0)
                     self.selectedEffects.deleteRows(at: [row], with: .none)
@@ -1970,6 +2010,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
         eqTableView.reloadData()
         selectedEffects.reloadData()
         availableEffects.reloadData()
+        self.availableEffectsCopy.reloadData()
         savedSoundsTableView.reloadData()
         UserDefaults.standard.setValue(colorCode, forKey: "Color")
     }
