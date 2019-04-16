@@ -47,6 +47,7 @@ class audio {
     
     static let persistentUnitsData =  [// EQUALIZER 7 BAND
         effectData(id: "Equalizer", opened: false, title: "EQUALIZER", type: "Equalizer"), // Bass , Mid, High
+        effectData(id: "Filters", opened: false, title: "Filters", type: "Filters"), //
     ]
     
     static let allPossibleEffectsData = [
@@ -111,8 +112,8 @@ class audio {
         
         //   effectData(id: "modalResonanceFilter", opened: false, title: "Modal Resonance", type: "2"),
         
-        //   effectData(id: "highLowPassFilters", opened: false, title: "High & Low Pass Filters", type: "PassFilters"), // add switch for FLAT as in butterworth for the pass filters
-           effectData(id: "dcBlock", opened: false, title: "dcBlock", type: "0"), // add switch for FLAT as in butterworth for the pass filters
+        
+        //   effectData(id: "dcBlock", opened: false, title: "dcBlock", type: "0"), // add switch for FLAT as in butterworth for the pass filters
     ]
     
     
@@ -301,10 +302,12 @@ class audio {
                                         audio.selectedAudioInputs.append(audio.screamerPostLowBand!)
                                         audio.selectedAudioInputs.append(audio.screamerVolume!)
             
+       /*
         case "highLowPassFilters":  audio.selectedAudioInputs.append(audio.lowPassFilter!)
         audio.selectedAudioInputs.append(audio.lowPassButterworthFilter!)
         audio.selectedAudioInputs.append(audio.highPassFilter!)
         audio.selectedAudioInputs.append(audio.highPassButterworthFilter!)
+ */
         case "resonantFilter":      audio.selectedAudioInputs.append(audio.resonantFilter!)
         case "stringResonator":     audio.selectedAudioInputs.append(audio.stringResonator!)
         case "modalResonanceFilter": audio.selectedAudioInputs.append(audio.modalResonanceFilter!)
@@ -875,7 +878,9 @@ class audio {
         audio.toneComplementFilter = AKToneComplementFilter()
         
         audio.highPassFilter = AKHighPassFilter()
+        audio.highPassFilter?.cutoffFrequency = 100
         audio.lowPassFilter = AKLowPassFilter()
+        audio.lowPassFilter?.cutoffFrequency = 6000
 
         audio.toneComplementFilter = AKToneComplementFilter()
         audio.highShelfFilter = AKHighShelfFilter()
@@ -994,18 +999,7 @@ class audio {
         audio.stringResonator?.stop()
         audio.modalResonanceFilter?.stop()
         
-        // PASS FILTERS
-        audio.highPassButterworthFilter?.cutoffFrequency = audio.highPassFilter!.cutoffFrequency
-        audio.lowPassButterworthFilter?.cutoffFrequency = audio.lowPassFilter!.cutoffFrequency
-        audio.highPassFilter?.stop()
-        audio.lowPassFilter?.stop()
-        audio.highPassButterworthFilter?.stop()
-        audio.lowPassButterworthFilter?.stop()
-        audio.highPassSegment = 0
-        audio.highPassIsStarted = false
-        audio.lowPassSegment = 0
-        audio.lowPassIsStarted = false
-        
+
     }
     
     func stopAll() {
@@ -1091,12 +1085,7 @@ class audio {
         audio.stringResonator?.stop()
         audio.modalResonanceFilter?.stop()
         
-        // PASS FILTERS
-        
-        audio.highPassFilter?.stop()
-        audio.lowPassFilter?.stop()
-        audio.highPassButterworthFilter?.stop()
-        audio.lowPassButterworthFilter?.stop()
+    
         
         
         
@@ -1114,15 +1103,16 @@ class audio {
             addToselectedEffects(id:id)
             
         }
-       // addToselectedEffects(id:"Equalizer")
+        addToselectedEffects(id:"Equalizer")
         
         // PERSISTENT UNITS
+        /*
         for effect in 0..<audio.persistentUnitsData.count {
             let id = audio.persistentUnitsData[effect].id
             addToselectedEffects(id:id)
         }
  
-        /*
+        
         // FILTERS
         for effect in 0..<audio.allPossibleFiltersData.count {
             let id = audio.allPossibleFiltersData[effect].id
@@ -1257,8 +1247,8 @@ class audio {
     
     var gateIsClosed = false
     var previousGate = Int64()
-    var gateMultiplier = Double(5)
-    static var gateIsOn = false
+    static var gateMultiplier = Double(15)
+    static var gateIsOn = Bool() 
  
     func getCurrentMillis() -> Int64 {
         return Int64(Date().timeIntervalSince1970 * 1000)
@@ -1268,7 +1258,8 @@ class audio {
         audio.finalBooster?.rampDuration = 0
         let timer = Timer.scheduledTimer(withTimeInterval: 0.001, repeats: true) { timer in
             if audio.gateIsOn == true {
-                let input = self.inputFrequencyTracker!.amplitude * self.gateMultiplier
+                
+                let input = self.inputFrequencyTracker!.amplitude * audio.gateMultiplier
                 if input > 1 {
                     audio.finalBooster!.gain = 1
                 } else {

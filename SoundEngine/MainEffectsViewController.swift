@@ -26,10 +26,13 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
     @IBOutlet weak var outputLevelValue: UILabel!
     @IBOutlet weak var bufferLengthSegment: UISegmentedControl!
     @IBOutlet weak var colorSegment: UISegmentedControl!
+  
     @IBOutlet weak var noiseGateSwitch: UISwitch!
+    @IBOutlet weak var lowCutSwitch: UISwitch!
+    @IBOutlet weak var highCutSwitch: UISwitch!
     
    
-    @IBOutlet weak var outputVolume: UILabel!
+
     
     var gradient: CAGradientLayer = CAGradientLayer()
     
@@ -129,9 +132,9 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
     
     func startAmplitudeMonitors() {
         
-        let timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { timer in
+        let timer = Timer.scheduledTimer(withTimeInterval: 0.01, repeats: true) { timer in
             let volume = audio.outputAmplitudeTracker?.amplitude
-            self.outputVolume.text = String(volume!)
+           
             let tuner = audio.shared.updateTrackerUI()
            // print("TUNER : \(tuner)")
             
@@ -257,7 +260,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
         override func viewDidLoad() {
             super.viewDidLoad()
             
- 
+            
             
             self.soundsTapGesture = UITapGestureRecognizer(target: self, action: #selector(handleSoundsTap))
             self.soundsTab.addGestureRecognizer(soundsTapGesture)
@@ -298,7 +301,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
             startAmplitudeMonitors()
             
             self.moveEqToPosition(value: audio.selectedEffectsData.count)
-            
+            printFilters()
         }
         
         func resetEffectChain() {
@@ -306,7 +309,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
             for effect in audio.selectedEffectsData {
                 audio.shared.turnOn(id: effect.id)
             }
-       
+            resetInterface()
         }
     
     func convertDBValueToText(dB: Double) -> String {
@@ -319,9 +322,18 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
         }
         return text
     }
-        
+    
+    func resetInterface() {
+        noiseGateSwitch.setOn(audio.gateIsOn, animated: true)
+        highCutSwitch.setOn(audio.lowPassIsStarted, animated: true)
+        lowCutSwitch.setOn(audio.highPassIsStarted, animated: true)
+    }
+    
         func interfaceSetup() {
             
+            noiseGateSwitch.setOn(audio.gateIsOn, animated: false)
+            highCutSwitch.setOn(audio.lowPassIsStarted, animated: false)
+            lowCutSwitch.setOn(audio.highPassIsStarted, animated: false)
             
             // inputLevel.transform = CGAffineTransform(rotationAngle: CGFloat(-Double.pi/2))
             inputLevel.minimumValue = Float(Effects.booster.dBRange.lowerBound)
@@ -509,6 +521,22 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
         
         }
     
+    @IBAction func highCutSwitchAction(_ sender: Any) {
+        // 6000
+        if highCutSwitch.isOn {
+            audio.lowPassFilter?.start()
+        } else {
+            audio.lowPassFilter?.stop()
+        }
+    }
+    @IBAction func lowCutSwitchAction(_ sender: Any) {
+        // 100
+        if lowCutSwitch.isOn {
+            audio.highPassFilter?.start()
+        } else {
+            audio.highPassFilter?.stop()
+        }
+    }
     @IBAction func noiseGateSwitchAction(_ sender: Any) {
         if noiseGateSwitch.isOn {
             audio.gateIsOn = true
@@ -517,6 +545,20 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
         }
     }
     
+    @IBAction func checkFiltersAction(_ sender: Any) {
+        printFilters()
+        
+    }
+    
+    func printFilters() {
+        print("HIGH CUT \(String(describing: audio.lowPassFilter?.isStarted))")
+        print("LOW CUT \(String(describing: audio.highPassFilter?.isStarted))")
+        print("GATE \(audio.gateIsOn)")
+        
+ 
+    }
+    
+   
     
         @objc func inputLevelChanged(slider: UISlider) {
             audio.inputBooster?.dB = Double(slider.value)

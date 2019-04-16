@@ -130,6 +130,9 @@ class helper {
     
 
     func saveCurrentSettings() {
+        print("SAVE CURRENT VALUES")
+        print("highPassIsStarted  :  \(audio.highPassFilter!.isStarted)")
+        print("lowPassIsStarted  :  \(audio.lowPassFilter!.isStarted)")
         
         var dictionary = [[String:String]]()
         
@@ -551,7 +554,17 @@ class helper {
                 array.updateValue(String(audio.sevenBandFilterPrecence!.gain), forKey: "sevenBandFilterPrecence")
                 array.updateValue(String(audio.sevenBandFilterBrilliance!.gain), forKey: "sevenBandFilterBrilliance")
             
-        
+        case "Filters" :
+            
+            array.updateValue(location, forKey: "location")
+            array.updateValue(effect.id, forKey: "name")
+            array.updateValue(String(audio.highPassFilter!.isStarted ), forKey: "highPassIsStarted")
+            array.updateValue(String(audio.lowPassFilter!.isStarted), forKey: "lowPassIsStarted")
+            array.updateValue(String(audio.highPassFilter!.cutoffFrequency), forKey: "highPasscutoffFrequency")
+            array.updateValue(String(audio.lowPassFilter!.cutoffFrequency), forKey: "lowPasscutoffFrequency")
+            array.updateValue(String(audio.gateIsOn), forKey: "noiseGateIsOn")
+            array.updateValue(String(audio.gateMultiplier), forKey: "noiseGateMultiplier")
+            
         case "highLowPassFilters" :
             array.updateValue(location, forKey: "location")
             array.updateValue(effect.id, forKey: "name")
@@ -1328,7 +1341,55 @@ class helper {
                     audio.sevenBandFilterPrecence?.gain = Double(sevenBandFilterPrecence)!
                     audio.sevenBandFilterBrilliance?.gain = Double(sevenBandFilterBrilliance)!
                     
+            case "Filters" :
                 
+                guard let highPasscutoffFrequency = (effect as AnyObject).value(forKey: "highPasscutoffFrequency")! as? String else {
+                    return
+                }
+                guard let lowPasscutoffFrequency = (effect as AnyObject).value(forKey: "lowPasscutoffFrequency")! as? String else {
+                    return
+                }
+            
+                guard let highPassIsStarted = (effect as AnyObject).value(forKey: "highPassIsStarted")! as? String else {
+                    return
+                }
+                guard let lowPassIsStarted = (effect as AnyObject).value(forKey: "lowPassIsStarted")! as? String else {
+                    return
+                }
+                
+                guard let noiseGateIsOn = (effect as AnyObject).value(forKey: "noiseGateIsOn")! as? String else {
+                    return
+                }
+                guard let noiseGateMultiplier = (effect as AnyObject).value(forKey: "noiseGateMultiplier")! as? String else {
+                    return
+                }
+                
+                
+                audio.highPassFilter!.cutoffFrequency = Double(highPasscutoffFrequency)!
+                audio.lowPassFilter!.cutoffFrequency = Double(lowPasscutoffFrequency)!
+                
+                let highStart = Bool(highPassIsStarted)!
+                if highStart == true {
+                    audio.highPassIsStarted = true
+                    audio.highPassFilter?.start()
+                    
+                } else {
+                    audio.highPassIsStarted = false
+                    audio.highPassFilter!.stop()
+                
+                }
+                
+                let lowStart = Bool(lowPassIsStarted)!
+                if lowStart == true {
+                    audio.lowPassIsStarted = true
+                    audio.lowPassFilter?.start()
+                } else {
+                    audio.lowPassIsStarted = false
+                    audio.lowPassFilter!.stop()
+                }
+                
+                audio.gateIsOn = Bool(noiseGateIsOn)!
+                audio.gateMultiplier = Double(noiseGateMultiplier)!
                 
             case "highLowPassFilters" :
                 guard let highPasscutoffFrequency = (effect as AnyObject).value(forKey: "highPasscutoffFrequency")! as? String else {
@@ -1691,7 +1752,15 @@ class helper {
             else {
                 yes = false
             }
+
+        case "Filters" :
             
+            if audio.highPassIsStarted || audio.lowPassIsStarted {
+                yes = true
+            }
+            else {
+                yes = false
+            }
             
         case "highLowPassFilters" :
             
