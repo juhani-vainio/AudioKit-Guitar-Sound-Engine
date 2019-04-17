@@ -10,6 +10,7 @@ import UIKit
 
 class EqualizerTableViewCell: UITableViewCell {
     
+    @IBOutlet weak var resetButton: UIButton!
     
     @IBOutlet var labels: [UILabel]!
     
@@ -45,7 +46,12 @@ class EqualizerTableViewCell: UITableViewCell {
         for label in labels {
             label.textColor = interface.text
         }
-        segmentControl.tintColor = interface.segmentTint
+        resetButton.tintColor = interface.text
+        resetButton.layer.borderColor = interface.text.cgColor
+        resetButton.layer.cornerRadius = 4
+        resetButton.layer.borderWidth = 1
+        
+        segmentControl.tintColor = interface.text
         segmentControl.backgroundColor = interface.segmentBackground
         controllersView.backgroundColor = interface.tableBackground
         controllersView.layer.cornerRadius = 8

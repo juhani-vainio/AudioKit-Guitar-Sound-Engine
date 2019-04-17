@@ -9,9 +9,14 @@
 import AudioKit
 import AudioKitUI
 import UIKit
+import MediaPlayer
+
 fileprivate var longPressGesture: UILongPressGestureRecognizer!
 
 class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource  {
+    
+    @IBOutlet weak var deviceVolumeView: UIView!
+    var volumeView = MPVolumeView()
     
     // "BUTTONS"
     @IBOutlet weak var saveSoundsButton: UIButton!
@@ -109,9 +114,10 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         if UIDevice.current.orientation.isLandscape {
             print("Landscape")
-            
+            setVolumeBounds()
         } else {
             print("Portrait")
+            setVolumeBounds()
         }
     }
     
@@ -328,8 +334,21 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
         highCutSwitch.setOn(audio.lowPassIsStarted, animated: true)
         lowCutSwitch.setOn(audio.highPassIsStarted, animated: true)
     }
+    func setVolumeBounds(){
+        volumeView.frame = deviceVolumeView.bounds
+        deviceVolumeView.addSubview(volumeView)
+    }
     
         func interfaceSetup() {
+            
+            setVolumeBounds()
+            
+            noiseGateSwitch.transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
+            highCutSwitch.transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
+            lowCutSwitch.transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
+            noiseGateSwitch.onTintColor = interface.highlight
+            highCutSwitch.onTintColor = interface.highlight
+            lowCutSwitch.onTintColor = interface.highlight
             
             noiseGateSwitch.setOn(audio.gateIsOn, animated: false)
             highCutSwitch.setOn(audio.lowPassIsStarted, animated: false)
@@ -370,6 +389,8 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
             settingControlsFrame.layer.cornerRadius = 8
             settingControls.layer.cornerRadius = 8
             mainSoundTitleView.layer.cornerRadius = 4
+            mainSoundTitleView.layer.borderColor = interface.textIdle.cgColor
+            mainSoundTitleView.layer.borderWidth = 1
             
            // mainFrame.layer.cornerRadius = 8
             
@@ -394,6 +415,9 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
             // "BUTTONS"
             saveSoundsButton.backgroundColor = interface.transparent
             saveSoundsButton.tintColor = interface.text
+            saveSoundsButton.layer.borderWidth = 1
+            saveSoundsButton.layer.cornerRadius = 4
+            saveSoundsButton.layer.borderColor = interface.text.cgColor
             soundsTab.backgroundColor = interface.tabs
             effectsTab.backgroundColor = interface.tabs
             hamburgerView.backgroundColor = interface.tabs

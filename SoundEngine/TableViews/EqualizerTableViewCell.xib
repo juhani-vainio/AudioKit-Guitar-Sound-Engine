@@ -370,10 +370,10 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </view>
                     <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="wH8-4c-hoO">
-                        <rect key="frame" x="188" y="16" width="100" height="29"/>
+                        <rect key="frame" x="208" y="16" width="80" height="29"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="28" id="GS0-me-9Cr"/>
-                            <constraint firstAttribute="width" constant="100" id="SLZ-Cj-0NI"/>
+                            <constraint firstAttribute="width" constant="80" id="SLZ-Cj-0NI"/>
                         </constraints>
                         <segments>
                             <segment title="3"/>
@@ -387,12 +387,13 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y1G-s9-5dV">
-                        <rect key="frame" x="126" y="16.5" width="46" height="27"/>
+                        <rect key="frame" x="120" y="16" width="80" height="28"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="46" id="JjL-bd-rG8"/>
+                            <constraint firstAttribute="width" constant="80" id="JjL-bd-rG8"/>
+                            <constraint firstAttribute="height" constant="28" id="Trz-dj-HYt"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                        <state key="normal" title="RESET"/>
+                        <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="12"/>
+                        <state key="normal" title="CENTER"/>
                         <connections>
                             <action selector="resetAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="mcX-Xf-MFI"/>
                         </connections>
@@ -401,7 +402,7 @@
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
                     <constraint firstItem="UdQ-8c-Ebd" firstAttribute="top" secondItem="wH8-4c-hoO" secondAttribute="bottom" constant="16" id="60C-Lm-3Zn"/>
-                    <constraint firstItem="y1G-s9-5dV" firstAttribute="leading" secondItem="ogh-ZC-f7k" secondAttribute="trailing" constant="16" id="76w-5p-n3Q"/>
+                    <constraint firstItem="y1G-s9-5dV" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="HWI-sj-aLV"/>
                     <constraint firstAttribute="trailing" secondItem="UdQ-8c-Ebd" secondAttribute="trailing" constant="12" id="HYE-Oi-MQO"/>
                     <constraint firstItem="wH8-4c-hoO" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16" id="LUR-YW-6Lm"/>
                     <constraint firstItem="UdQ-8c-Ebd" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="12" id="Nbh-ul-X0N"/>
@@ -410,18 +411,23 @@
                     <constraint firstItem="FRX-q2-fTq" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="4" id="XrE-GR-9h7"/>
                     <constraint firstItem="FRX-q2-fTq" firstAttribute="trailing" secondItem="UdQ-8c-Ebd" secondAttribute="trailing" id="eVH-er-2Fj"/>
                     <constraint firstItem="FRX-q2-fTq" firstAttribute="leading" secondItem="UdQ-8c-Ebd" secondAttribute="leading" id="kRQ-Tx-JMi"/>
-                    <constraint firstItem="wH8-4c-hoO" firstAttribute="leading" secondItem="y1G-s9-5dV" secondAttribute="trailing" constant="16" id="m1L-SB-neO"/>
                     <constraint firstItem="UdQ-8c-Ebd" firstAttribute="top" secondItem="FRX-q2-fTq" secondAttribute="bottom" constant="4" id="wCb-Jn-Z9W"/>
                     <constraint firstAttribute="bottom" secondItem="UdQ-8c-Ebd" secondAttribute="bottom" id="wDA-vJ-6E9"/>
                     <constraint firstItem="y1G-s9-5dV" firstAttribute="centerY" secondItem="wH8-4c-hoO" secondAttribute="centerY" id="yLU-W8-haq"/>
                     <constraint firstAttribute="trailing" secondItem="wH8-4c-hoO" secondAttribute="trailing" constant="32" id="ylB-np-V0b"/>
                 </constraints>
+                <variation key="default">
+                    <mask key="subviews">
+                        <exclude reference="ogh-ZC-f7k"/>
+                    </mask>
+                </variation>
             </tableViewCellContentView>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="controllersHeight" destination="0qd-pa-1cX" id="PDa-QA-9q8"/>
                 <outlet property="controllersView" destination="UdQ-8c-Ebd" id="WyT-nb-nhW"/>
+                <outlet property="resetButton" destination="y1G-s9-5dV" id="oX4-jz-z94"/>
                 <outlet property="segmentControl" destination="wH8-4c-hoO" id="sxf-KU-KzY"/>
                 <outlet property="sevenBandBassSlider" destination="Au4-bg-wKI" id="fct-hy-dlj"/>
                 <outlet property="sevenBandBassValue" destination="iY1-In-Myt" id="TcX-uT-ioD"/>
