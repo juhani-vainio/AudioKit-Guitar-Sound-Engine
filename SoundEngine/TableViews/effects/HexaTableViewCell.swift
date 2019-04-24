@@ -109,7 +109,10 @@ class HexaTableViewCell: UITableViewCell {
         self.controllersView.backgroundColor = interface.tabs
         specialSwitch.onTintColor = interface.highlight
         specialTitle.textColor = interface.text
-         onOffButton.layer.borderColor = interface.text.cgColor
+        self.onOffButton.backgroundColor = UIColor.clear
+        self.onOffButton.layer.borderColor = interface.text.cgColor
+        self.onOffButton.layer.borderWidth = 1
+        self.onOffButton.layer.cornerRadius = 4
         // specialSwitch.tintColor = interface.negative
         
         controllersView.backgroundColor = interface.tableBackground

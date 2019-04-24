@@ -92,7 +92,10 @@ class OctaTableViewCell: UITableViewCell {
     
     func setColors() {
         // specialSwitch.tintColor = interface.negative
-        onOffButton.layer.borderColor = interface.text.cgColor
+        self.onOffButton.backgroundColor = UIColor.clear
+        self.onOffButton.layer.borderColor = interface.text.cgColor
+        self.onOffButton.layer.borderWidth = 1
+        self.onOffButton.layer.cornerRadius = 4
         specialTitle.textColor = interface.text
         specialSwitch.onTintColor = interface.highlight
         specialViewArea.backgroundColor = interface.tabs

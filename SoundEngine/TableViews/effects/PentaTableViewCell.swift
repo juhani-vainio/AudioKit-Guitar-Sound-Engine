@@ -101,7 +101,10 @@ class PentaTableViewCell: UITableViewCell {
         specialViewArea.backgroundColor = interface.tabs
        
         specialSwitch.onTintColor = interface.highlight
-         onOffButton.layer.borderColor = interface.text.cgColor
+        self.onOffButton.backgroundColor = UIColor.clear
+        self.onOffButton.layer.borderColor = interface.text.cgColor
+        self.onOffButton.layer.borderWidth = 1
+        self.onOffButton.layer.cornerRadius = 4
         // specialSwitch.tintColor = interface.negative
         specialTitle.textColor = interface.text
         

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -66,7 +66,7 @@
                         </constraints>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ipy-QF-lkq">
-                        <rect key="frame" x="24" y="14" width="196" height="32"/>
+                        <rect key="frame" x="24" y="14" width="184" height="32"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="32" id="pHk-A3-5ox"/>
@@ -324,18 +324,18 @@
                         </constraints>
                     </view>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EIf-zM-TX4">
-                        <rect key="frame" x="220" y="0.0" width="100" height="60"/>
+                        <rect key="frame" x="208" y="16" width="80" height="28"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="100" id="PgB-az-NdA"/>
+                            <constraint firstAttribute="width" constant="80" id="PgB-az-NdA"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                        <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="17"/>
                         <state key="normal" title="OFF"/>
                     </button>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
-                    <constraint firstItem="EIf-zM-TX4" firstAttribute="top" secondItem="eKy-yZ-KhO" secondAttribute="top" id="FCf-Za-iPP"/>
-                    <constraint firstItem="okF-q0-HAB" firstAttribute="top" secondItem="EIf-zM-TX4" secondAttribute="bottom" id="H54-iE-nX9"/>
+                    <constraint firstItem="EIf-zM-TX4" firstAttribute="top" secondItem="eKy-yZ-KhO" secondAttribute="top" constant="16" id="FCf-Za-iPP"/>
+                    <constraint firstItem="okF-q0-HAB" firstAttribute="top" secondItem="EIf-zM-TX4" secondAttribute="bottom" constant="16" id="H54-iE-nX9"/>
                     <constraint firstItem="aYx-qE-9Do" firstAttribute="trailing" secondItem="okF-q0-HAB" secondAttribute="trailing" id="IKz-uf-zCS"/>
                     <constraint firstItem="BcT-dE-uLr" firstAttribute="trailing" secondItem="okF-q0-HAB" secondAttribute="trailing" id="Jl8-8W-B0o"/>
                     <constraint firstItem="okF-q0-HAB" firstAttribute="top" secondItem="ipy-QF-lkq" secondAttribute="bottom" constant="14" id="LFL-PO-lL0"/>
@@ -346,7 +346,7 @@
                     <constraint firstItem="ipy-QF-lkq" firstAttribute="trailing" secondItem="EIf-zM-TX4" secondAttribute="leading" id="aNZ-tg-kR4"/>
                     <constraint firstItem="BcT-dE-uLr" firstAttribute="leading" secondItem="okF-q0-HAB" secondAttribute="leading" id="itJ-eX-OzD"/>
                     <constraint firstItem="aYx-qE-9Do" firstAttribute="leading" secondItem="okF-q0-HAB" secondAttribute="leading" id="k7C-RS-KYG"/>
-                    <constraint firstAttribute="trailing" secondItem="EIf-zM-TX4" secondAttribute="trailing" id="obj-2j-JRx"/>
+                    <constraint firstAttribute="trailing" secondItem="EIf-zM-TX4" secondAttribute="trailing" constant="32" id="obj-2j-JRx"/>
                     <constraint firstAttribute="trailing" secondItem="okF-q0-HAB" secondAttribute="trailing" constant="12" id="qsM-Pw-e0I"/>
                     <constraint firstAttribute="bottom" secondItem="BcT-dE-uLr" secondAttribute="bottom" id="xCQ-gZ-Po5"/>
                     <constraint firstItem="aYx-qE-9Do" firstAttribute="top" secondItem="eKy-yZ-KhO" secondAttribute="top" constant="4" id="yRN-g0-m1I"/>

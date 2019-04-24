@@ -87,7 +87,10 @@ class TripleTableViewCell: UITableViewCell {
         specialSwitch.onTintColor = interface.highlight
         // specialSwitch.tintColor = interface.negative
         specialTitle.textColor = interface.text
-         onOffButton.layer.borderColor = interface.text.cgColor
+        self.onOffButton.backgroundColor = UIColor.clear
+        self.onOffButton.layer.borderColor = interface.text.cgColor
+        self.onOffButton.layer.borderWidth = 1
+        self.onOffButton.layer.cornerRadius = 4
         
         controllersView.backgroundColor = interface.tableBackground
         slider1.minimumTrackTintColor = interface.sliderMin

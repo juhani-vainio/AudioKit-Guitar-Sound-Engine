@@ -311,6 +311,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
         }
         
         func resetEffectChain() {
+            print("RESETTING EFFECTS")
             audio.shared.stopAll()
             for effect in audio.selectedEffectsData {
                 audio.shared.turnOn(id: effect.id)
@@ -335,6 +336,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
         lowCutSwitch.setOn(audio.highPassIsStarted, animated: true)
     }
     func setVolumeBounds(){
+    
         volumeView.frame = deviceVolumeView.bounds
         deviceVolumeView.addSubview(volumeView)
     }
@@ -382,15 +384,23 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
             eqTableView.layer.cornerRadius = 8
         
             availableEffectsView.layer.cornerRadius = 8
-            soundsTab.layer.cornerRadius = 8
-            effectsTab.layer.cornerRadius = 8
+            
+            soundsTab.layer.cornerRadius = 4
+            effectsTab.layer.cornerRadius = 4
+            deviceVolumeView.layer.cornerRadius = 4
+            
+            soundsTab.layer.borderWidth = 1
+            effectsTab.layer.borderWidth = 1
+            deviceVolumeView.layer.borderWidth = 1
+            
          
-            hamburgerView.layer.cornerRadius = 8
+            hamburgerView.layer.cornerRadius = 4
+            hamburgerView.layer.borderWidth = 1
             settingControlsFrame.layer.cornerRadius = 8
             settingControls.layer.cornerRadius = 8
             mainSoundTitleView.layer.cornerRadius = 4
             mainSoundTitleView.layer.borderColor = interface.textIdle.cgColor
-            mainSoundTitleView.layer.borderWidth = 1
+           // mainSoundTitleView.layer.borderWidth = 1
             
            // mainFrame.layer.cornerRadius = 8
             
@@ -420,7 +430,13 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
             saveSoundsButton.layer.borderColor = interface.text.cgColor
             soundsTab.backgroundColor = interface.tabs
             effectsTab.backgroundColor = interface.tabs
+            deviceVolumeView.backgroundColor = interface.tabs
             hamburgerView.backgroundColor = interface.tabs
+            
+            soundsTab.layer.borderColor = interface.text.cgColor
+            effectsTab.layer.borderColor = interface.text.cgColor
+            deviceVolumeView.layer.borderColor = interface.text.cgColor
+            hamburgerView.layer.borderColor = interface.text.cgColor
             
             // CONTROLS
             inputLevel.minimumTrackTintColor = interface.sliderMin
@@ -1996,6 +2012,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
                         audio.nameOfCurrentSound = ""
                         UserDefaults.standard.setValue("", forKey: "NameOfSound")
                     }
+                    resetEffectChain()
                     self.moveEqToPosition(value: audio.selectedEffectsData.count)
                 }
             }
@@ -2256,5 +2273,20 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
         }
     
 
+    
 }
 
+class SystemVolumeView: MPVolumeView {
+    override func volumeSliderRect(forBounds bounds: CGRect) -> CGRect {
+        var newBounds = super.volumeSliderRect(forBounds: bounds)
+        newBounds.origin.y = bounds.origin.y
+        newBounds.size.height = bounds.size.height
+        return newBounds
+    }
+    override func routeButtonRect(forBounds bounds: CGRect) -> CGRect {
+        var newBounds = super.routeButtonRect(forBounds: bounds)
+        newBounds.origin.y = bounds.origin.y
+        newBounds.size.height = bounds.size.height
+        return newBounds
+    }
+}

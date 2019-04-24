@@ -76,7 +76,10 @@ class TableViewCell: UITableViewCell {
         controllersView.backgroundColor = interface.tabs
         // specialSwitch.tintColor = interface.negative
         specialTitle.textColor = interface.text
-        onOffButton.layer.borderColor = interface.text.cgColor
+        self.onOffButton.backgroundColor = UIColor.clear
+        self.onOffButton.layer.borderColor = interface.text.cgColor
+        self.onOffButton.layer.borderWidth = 1
+        self.onOffButton.layer.cornerRadius = 4
         controllersView.backgroundColor = interface.tableBackground
         slider.minimumTrackTintColor = interface.sliderMin
         slider.maximumTrackTintColor = interface.sliderMax

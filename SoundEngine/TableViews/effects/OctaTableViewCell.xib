@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -24,7 +24,7 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2ee-gG-Kim">
-                        <rect key="frame" x="24" y="14.5" width="196" height="32"/>
+                        <rect key="frame" x="24" y="14.5" width="184" height="32"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="32" id="XzK-nk-YBO"/>
@@ -357,11 +357,11 @@
                         </constraints>
                     </view>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Pm-lO-PDM">
-                        <rect key="frame" x="220" y="0.0" width="100" height="60.5"/>
+                        <rect key="frame" x="208" y="16.5" width="80" height="28"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="100" id="YNE-uH-Nt0"/>
+                            <constraint firstAttribute="width" constant="80" id="YNE-uH-Nt0"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                        <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="17"/>
                         <state key="normal" title="OFF"/>
                     </button>
                 </subviews>
@@ -373,9 +373,9 @@
                     <constraint firstAttribute="bottom" secondItem="bbS-iT-1bo" secondAttribute="bottom" id="6yo-N4-LuM"/>
                     <constraint firstAttribute="trailing" secondItem="Mfr-Cd-aSN" secondAttribute="trailing" constant="12" id="F6i-YT-7nH"/>
                     <constraint firstItem="2ee-gG-Kim" firstAttribute="top" secondItem="xmY-Dx-tSa" secondAttribute="top" constant="14" id="Fiq-ws-rcM"/>
-                    <constraint firstAttribute="trailing" secondItem="9Pm-lO-PDM" secondAttribute="trailing" id="Jrb-6q-zGr"/>
+                    <constraint firstAttribute="trailing" secondItem="9Pm-lO-PDM" secondAttribute="trailing" constant="32" id="Jrb-6q-zGr"/>
                     <constraint firstItem="Mfr-Cd-aSN" firstAttribute="top" secondItem="4dH-Y0-GGG" secondAttribute="bottom" constant="4" id="MSX-Pd-QQ3"/>
-                    <constraint firstItem="Mfr-Cd-aSN" firstAttribute="top" secondItem="9Pm-lO-PDM" secondAttribute="bottom" id="OEc-Q0-Ncj"/>
+                    <constraint firstItem="Mfr-Cd-aSN" firstAttribute="top" secondItem="9Pm-lO-PDM" secondAttribute="bottom" constant="16" id="OEc-Q0-Ncj"/>
                     <constraint firstItem="2ee-gG-Kim" firstAttribute="trailing" secondItem="9Pm-lO-PDM" secondAttribute="leading" id="OYR-B3-QjF"/>
                     <constraint firstItem="2ee-gG-Kim" firstAttribute="leading" secondItem="xmY-Dx-tSa" secondAttribute="leading" constant="24" id="W1O-TR-2AX"/>
                     <constraint firstItem="Mfr-Cd-aSN" firstAttribute="leading" secondItem="xmY-Dx-tSa" secondAttribute="leading" constant="12" id="X3X-95-2Nf"/>
@@ -383,7 +383,7 @@
                     <constraint firstItem="Mfr-Cd-aSN" firstAttribute="bottom" secondItem="bbS-iT-1bo" secondAttribute="top" id="nES-JT-iwr"/>
                     <constraint firstItem="bbS-iT-1bo" firstAttribute="trailing" secondItem="Mfr-Cd-aSN" secondAttribute="trailing" id="s00-HO-HfP"/>
                     <constraint firstItem="4dH-Y0-GGG" firstAttribute="top" secondItem="xmY-Dx-tSa" secondAttribute="top" constant="4" id="uTu-5c-oUt"/>
-                    <constraint firstItem="9Pm-lO-PDM" firstAttribute="top" secondItem="xmY-Dx-tSa" secondAttribute="top" id="wd6-6p-xGp"/>
+                    <constraint firstItem="9Pm-lO-PDM" firstAttribute="top" secondItem="xmY-Dx-tSa" secondAttribute="top" constant="16" id="wd6-6p-xGp"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="Dm7-WF-JdX"/>
