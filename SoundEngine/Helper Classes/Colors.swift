@@ -139,6 +139,7 @@ class Colors {
             interface.segmentTint = UIColor.white
             interface.segmentBackground = UIColor.clear
             interface.tabs = UIColor(rgb: 0x95BD56) // green
+            interface.tabs = UIColor.clear
             interface.highlight = UIColor(rgb: 0x365C6C) // blue
             interface.extra = UIColor(rgb: 0xE7903A) // yellow
             
@@ -165,7 +166,8 @@ class Colors {
             
             interface.tableFrame = UIColor(rgb: 0x0D628F) // darkest blue
             interface.tableHeading = UIColor(rgb: 0x30414C) // grey
-            interface.tabs = UIColor.black
+            //interface.tabs = UIColor.black
+            interface.tabs = UIColor.clear
             
             interface.top = UIColor(rgb: 0x06759E) // darker blue
             interface.bottom = UIColor(rgb: 0x00A1DE) // blue
@@ -196,7 +198,8 @@ class Colors {
             
             interface.tableFrame = UIColor(rgb: 0x00A163) // green
             interface.tableHeading = UIColor(rgb: 0x121212)
-            interface.tabs = UIColor(rgb: 0xFFCF55) // yellow
+            interface.tabs = UIColor.clear
+            //interface.tabs = UIColor(rgb: 0xFFCF55) // yellow
             
             interface.top = UIColor(rgb: 0x121212)
             interface.bottom = UIColor(rgb: 0x121212)
@@ -225,7 +228,8 @@ class Colors {
             
             interface.tableFrame = UIColor(rgb: 0xC95A90) // pink
             interface.tableHeading = UIColor(rgb: 0x121212)
-            interface.tabs = UIColor.white
+            //interface.tabs = UIColor.white
+            interface.tabs = UIColor.clear
             
             interface.top = UIColor(rgb: 0x121212)
             interface.bottom = UIColor(rgb: 0x121212)
@@ -253,7 +257,8 @@ class Colors {
             
             interface.tableFrame = UIColor(rgb: 0xC95A90) // pink
             interface.tableHeading = UIColor(rgb: 0x121212)
-            interface.tabs = UIColor(rgb: 0x2B92AD) // blue
+            interface.tabs = UIColor.clear
+           // interface.tabs = UIColor(rgb: 0x2B92AD) // blue
             
             interface.top = UIColor(rgb: 0x121212)
             interface.bottom = UIColor(rgb: 0x121212)
@@ -281,7 +286,8 @@ class Colors {
             
             interface.tableFrame = UIColor.yellow
             interface.tableHeading = UIColor(rgb: 0x121212)
-            interface.tabs = UIColor(rgb: 0x4286D2)
+            interface.tabs = UIColor.clear
+            //interface.tabs = UIColor(rgb: 0x4286D2)
             
             interface.top = UIColor(rgb: 0x121212)
             interface.bottom = UIColor(rgb: 0x121212)
@@ -310,7 +316,8 @@ class Colors {
             
             interface.tableFrame = UIColor.white
             interface.tableHeading = UIColor(rgb: 0x121212)
-            interface.tabs = UIColor(rgb: 0xEC708C)
+            interface.tabs = UIColor.clear
+            // interface.tabs = UIColor(rgb: 0xEC708C)
             
             interface.top = UIColor(rgb: 0x121212)
             interface.bottom = UIColor(rgb: 0x121212)
@@ -338,7 +345,8 @@ class Colors {
             
             interface.tableFrame = UIColor(rgb: 0x4286D2)
             interface.tableHeading = UIColor(rgb: 0x121212)
-            interface.tabs = UIColor.black
+            interface.tabs = UIColor.clear
+            //interface.tabs = UIColor.black
             
             interface.top = UIColor(rgb: 0x121212)
             interface.bottom = UIColor(rgb: 0x121212)
@@ -366,7 +374,8 @@ class Colors {
             
             interface.tableFrame = UIColor.black
             interface.tableHeading = UIColor(rgb: 0x121212)
-            interface.tabs = UIColor(rgb: 0x121212)
+            interface.tabs = UIColor.clear
+            // interface.tabs = UIColor(rgb: 0x121212)
             
             interface.top = UIColor(rgb: 0x121212)
             interface.bottom = UIColor(rgb: 0x121212)

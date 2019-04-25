@@ -14,6 +14,7 @@ import MediaPlayer
 fileprivate var longPressGesture: UILongPressGestureRecognizer!
 
 class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource  {
+    @IBOutlet weak var switchesFrame: UIView!
     
     @IBOutlet weak var deviceVolumeView: UIView!
     var volumeView = MPVolumeView()
@@ -39,14 +40,15 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
    
 
     
+    
     var gradient: CAGradientLayer = CAGradientLayer()
     
     // TEXT LABELS
     @IBOutlet weak var mainSoundTitleView: UIView!
     @IBOutlet weak var mainSoundTitle: UILabel!
     
-    @IBOutlet weak var inputLevelValueMain: UILabel!
-    @IBOutlet weak var outputLevelValueMain: UILabel!
+
+  
     
     @IBOutlet weak var soundTitle: UILabel!
     @IBOutlet weak var effectsTitle: UILabel!
@@ -115,6 +117,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
         if UIDevice.current.orientation.isLandscape {
             print("Landscape")
             setVolumeBounds()
+            
         } else {
             print("Portrait")
             setVolumeBounds()
@@ -361,7 +364,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
             inputLevel.maximumValue = Float(Effects.booster.dBRange.upperBound)
             inputLevel.setValue(Float((audio.inputBooster?.dB)!), animated: false)
             inputLevelValue.text = convertDBValueToText(dB: audio.inputBooster!.dB)
-            inputLevelValueMain.text = inputLevelValue.text!
+         
             inputLevel.addTarget(self, action: #selector(inputLevelChanged), for: .valueChanged)
             inputLevel.addTarget(self, action: #selector(inputLevelChangeEnded), for: .touchUpInside)
             
@@ -370,7 +373,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
             outputLevel.maximumValue = Float(Effects.booster.dBRange.upperBound)
             outputLevel.setValue(Float((audio.outputBooster?.dB)!), animated: false)
             outputLevelValue.text = convertDBValueToText(dB: audio.outputBooster!.dB)
-            outputLevelValueMain.text = outputLevelValue.text!
+            
             outputLevel.addTarget(self, action: #selector(outputLevelChanged), for: .valueChanged)
             outputLevel.addTarget(self, action: #selector(outputLevelChangeEnded), for: .touchUpInside)
             
@@ -385,14 +388,15 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
         
             availableEffectsView.layer.cornerRadius = 8
             
-            soundsTab.layer.cornerRadius = 4
-            effectsTab.layer.cornerRadius = 4
-            deviceVolumeView.layer.cornerRadius = 4
+            soundTitle.layer.cornerRadius = 4
+            effectsTitle.layer.cornerRadius = 4
+           // deviceVolumeView.layer.cornerRadius = 4
             
-            soundsTab.layer.borderWidth = 1
-            effectsTab.layer.borderWidth = 1
-            deviceVolumeView.layer.borderWidth = 1
+            soundTitle.layer.borderWidth = 1
+            effectsTitle.layer.borderWidth = 1
+           // deviceVolumeView.layer.borderWidth = 1
             
+            switchesFrame.layer.cornerRadius = 8
          
             hamburgerView.layer.cornerRadius = 4
             hamburgerView.layer.borderWidth = 1
@@ -438,6 +442,8 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
             deviceVolumeView.layer.borderColor = interface.text.cgColor
             hamburgerView.layer.borderColor = interface.text.cgColor
             
+            switchesFrame.backgroundColor = interface.tableBackground
+           
             // CONTROLS
             inputLevel.minimumTrackTintColor = interface.sliderMin
             inputLevel.maximumTrackTintColor = interface.sliderMax
@@ -477,7 +483,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
             
             
             //VIEWS
-            mainFrame.backgroundColor = interface.main
+            //mainFrame.backgroundColor = interface.main
             soundsView.backgroundColor = interface.tableFrame
             top.backgroundColor = interface.top
             mainSoundTitleView.backgroundColor = interface.tableHeading
@@ -509,9 +515,16 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
         gradient.locations = [0.2 , 2.0]
         gradient.startPoint = CGPoint(x: 0.5, y: 0.0)
         gradient.endPoint = CGPoint(x: 0.5, y: 1.0)
-        gradient.frame = CGRect(x: 0.0, y: 0.0, width: self.mainFrame.frame.size.width, height: self.mainFrame.frame.size.height)
+        if self.view.frame.size.width > self.view.frame.size.height {
+            gradient.frame = CGRect(x: 0.0, y: 0.0, width: self.view.frame.size.width, height: self.view.frame.size.width)
+        }
+        else {
+             gradient.frame = CGRect(x: 0.0, y: 0.0, width: self.view.frame.size.height, height: self.view.frame.size.height)
+        }
+      
+        
     
-        self.mainFrame.layer.insertSublayer(gradient, at: 0)
+        self.view.layer.insertSublayer(gradient, at: 0)
     }
     
     func buildFFTView(){
@@ -537,7 +550,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
                 subview.isHidden = true
             }
       
-            let stackUnitWidth = CGFloat(400)
+            let stackUnitWidth = CGFloat(600)
           
             let inputUnit = AKNodeOutputPlot(audio.wave as! AKNode, frame: CGRect(x: 0, y: 0, width: stackUnitWidth, height: 80))
                         inputUnit.heightAnchor.constraint(equalToConstant: 80).isActive = true
@@ -603,7 +616,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
         @objc func inputLevelChanged(slider: UISlider) {
             audio.inputBooster?.dB = Double(slider.value)
             inputLevelValue.text = convertDBValueToText(dB: Double(slider.value))
-            inputLevelValueMain.text = inputLevelValue.text!
+       
             //  print("Input --- \(audio.shared.inputBooster?.dB) dB")
         }
         
@@ -615,7 +628,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
         @objc func outputLevelChanged(slider: UISlider) {
             audio.outputBooster?.dB = Double(slider.value)
             outputLevelValue.text = convertDBValueToText(dB: Double(slider.value))
-            outputLevelValueMain.text = outputLevelValue.text!
+        
             //  print("Output --- \(audio.shared.outputBooster?.dB) dB --- \(audio.shared.outputBooster?.gain)")
         }
         
