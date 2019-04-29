@@ -337,6 +337,11 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
         noiseGateSwitch.setOn(audio.gateIsOn, animated: true)
         highCutSwitch.setOn(audio.lowPassIsStarted, animated: true)
         lowCutSwitch.setOn(audio.highPassIsStarted, animated: true)
+        inputLevel.setValue(Float((audio.inputBooster?.dB)!), animated: true)
+        inputLevelValue.text = convertDBValueToText(dB: audio.inputBooster!.dB)
+        outputLevel.setValue(Float((audio.outputBooster?.dB)!), animated: true)
+        outputLevelValue.text = convertDBValueToText(dB: audio.outputBooster!.dB)
+        
     }
     func setVolumeBounds(){
     
@@ -355,27 +360,24 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
             highCutSwitch.onTintColor = interface.highlight
             lowCutSwitch.onTintColor = interface.highlight
             
-            noiseGateSwitch.setOn(audio.gateIsOn, animated: false)
-            highCutSwitch.setOn(audio.lowPassIsStarted, animated: false)
-            lowCutSwitch.setOn(audio.highPassIsStarted, animated: false)
+            resetInterface()
+            
             
             // inputLevel.transform = CGAffineTransform(rotationAngle: CGFloat(-Double.pi/2))
             inputLevel.minimumValue = Float(Effects.booster.dBRange.lowerBound)
             inputLevel.maximumValue = Float(Effects.booster.dBRange.upperBound)
-            inputLevel.setValue(Float((audio.inputBooster?.dB)!), animated: false)
-            inputLevelValue.text = convertDBValueToText(dB: audio.inputBooster!.dB)
+           
          
             inputLevel.addTarget(self, action: #selector(inputLevelChanged), for: .valueChanged)
-            inputLevel.addTarget(self, action: #selector(inputLevelChangeEnded), for: .touchUpInside)
+           // inputLevel.addTarget(self, action: #selector(inputLevelChangeEnded), for: .touchUpInside)
             
             //  outputLevel.transform = CGAffineTransform(rotationAngle: CGFloat(-Double.pi/2))
             outputLevel.minimumValue = Float(Effects.booster.dBRange.lowerBound)
             outputLevel.maximumValue = Float(Effects.booster.dBRange.upperBound)
-            outputLevel.setValue(Float((audio.outputBooster?.dB)!), animated: false)
-            outputLevelValue.text = convertDBValueToText(dB: audio.outputBooster!.dB)
+            
             
             outputLevel.addTarget(self, action: #selector(outputLevelChanged), for: .valueChanged)
-            outputLevel.addTarget(self, action: #selector(outputLevelChangeEnded), for: .touchUpInside)
+           // outputLevel.addTarget(self, action: #selector(outputLevelChangeEnded), for: .touchUpInside)
             
             bufferLengthSegment.selectedSegmentIndex = settings.bufferLength - 1
             colorSegment.selectedSegmentIndex = setColorSegment()

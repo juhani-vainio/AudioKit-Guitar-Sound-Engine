@@ -250,6 +250,7 @@ class helper {
         if savedBufferLength != 0 {
             settings.bufferLength = savedBufferLength
         }
+        /*
         let inputBooster = UserDefaults.standard.double(forKey: "inputBooster")
         if inputBooster != 0 {
             audio.inputBooster?.dB = inputBooster
@@ -258,7 +259,7 @@ class helper {
         if outputBooster != 0 {
             audio.outputBooster?.dB = outputBooster
         }
-        
+        */
         // all saved sounds
         let savedSounds = UserDefaults.standard.stringArray(forKey: "savedSounds")  ?? [String]()
         if savedSounds.isNotEmpty {
@@ -558,6 +559,8 @@ class helper {
             
             array.updateValue(location, forKey: "location")
             array.updateValue(effect.id, forKey: "name")
+            array.updateValue(String(audio.inputBooster!.dB), forKey: "inputBoosterDb")
+            array.updateValue(String(audio.outputBooster!.dB), forKey: "outputBoosterDb")
             array.updateValue(String(audio.highPassFilter!.isStarted ), forKey: "highPassIsStarted")
             array.updateValue(String(audio.lowPassFilter!.isStarted), forKey: "lowPassIsStarted")
             array.updateValue(String(audio.highPassFilter!.cutoffFrequency), forKey: "highPasscutoffFrequency")
@@ -1342,6 +1345,14 @@ class helper {
                     audio.sevenBandFilterBrilliance?.gain = Double(sevenBandFilterBrilliance)!
                     
             case "Filters" :
+           
+                
+                guard let inputBoosterDb = (effect as AnyObject).value(forKey: "inputBoosterDb")! as? String else {
+                    return
+                }
+                guard let outputBoosterDb = (effect as AnyObject).value(forKey: "outputBoosterDb")! as? String else {
+                    return
+                }
                 
                 guard let highPasscutoffFrequency = (effect as AnyObject).value(forKey: "highPasscutoffFrequency")! as? String else {
                     return
@@ -1364,7 +1375,8 @@ class helper {
                     return
                 }
                 
-                
+                audio.inputBooster!.dB = Double(inputBoosterDb)!
+                audio.outputBooster!.dB = Double(outputBoosterDb)!
                 audio.highPassFilter!.cutoffFrequency = Double(highPasscutoffFrequency)!
                 audio.lowPassFilter!.cutoffFrequency = Double(lowPasscutoffFrequency)!
                 
