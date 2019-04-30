@@ -98,7 +98,7 @@ class PentaTableViewCell: UITableViewCell {
         self.controllersView.backgroundColor = interface.tabs
        
         self.onOffButton.backgroundColor = UIColor.clear
-        specialViewArea.backgroundColor = interface.tabs
+        specialViewArea.backgroundColor = interface.extra
        
         specialSwitch.onTintColor = interface.highlight
         self.onOffButton.backgroundColor = UIColor.clear

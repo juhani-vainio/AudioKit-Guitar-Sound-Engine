@@ -598,6 +598,14 @@ class helper {
             array.updateValue(String(audio.rhinoGuitarProcessor!.postGain), forKey: "postGain")
             array.updateValue(String(audio.rhinoBoosterDBValue), forKey: "dB")
             
+        case "screamer" :
+            array.updateValue(location, forKey: "location")
+            array.updateValue(effect.id, forKey: "name")
+            array.updateValue(String(audio.screamerDistortion!.isStarted), forKey: "isStarted")
+            array.updateValue(String(audio.screamerDistortion!.pregain), forKey: "preGain")
+            array.updateValue(String(audio.screamerVolume!.volume), forKey: "volume")
+            array.updateValue(String(audio.screamerPreMidBand!.centerFrequency), forKey: "midBand")
+            
         case "resonantFilter" :
             array.updateValue(location, forKey: "location")
             array.updateValue(effect.id, forKey: "name")
@@ -1530,6 +1538,35 @@ class helper {
                     audio.rhinoVolume?.volume = 1
                 }
                 
+            case "screamer" :
+                
+                guard let isStarted = (effect as AnyObject).value(forKey: "isStarted")! as? String else {
+                    return
+                }
+                guard let preGain = (effect as AnyObject).value(forKey: "preGain")! as? String else {
+                    return
+                }
+                guard let volume = (effect as AnyObject).value(forKey: "volume")! as? String else {
+                    return
+                }
+                guard let midBand = (effect as AnyObject).value(forKey: "midBand")! as? String else {
+                    return
+                }
+                
+                audio.screamerDistortion?.pregain = Double(preGain)!
+                audio.screamerPreMidBand?.centerFrequency = Double(midBand)!
+                audio.screamerVolume?.volume = Double(volume)!
+                audio.screamerVolumeValue = Double(volume)!
+                
+                let started = Bool(isStarted)!
+                if started == true {
+                    audio.screamerDistortion!.start()
+                    audio.screamerVolume?.volume = Double(volume)!
+                    
+                } else {
+                    audio.screamerDistortion!.stop()
+                    audio.screamerVolume?.volume = 1
+                }
                 
             case "resonantFilter" :
                 
@@ -1792,6 +1829,10 @@ class helper {
             
             yes = audio.rhinoGuitarProcessor!.isStarted
             
+        case "screamer" :
+            
+            yes = audio.screamerDistortion!.isStarted
+            
             
         case "resonantFilter" :
             
@@ -1957,6 +1998,10 @@ class helper {
         case "rhinoGuitarProcessor" :
             
             print(audio.rhinoGuitarProcessor!.isStarted)
+            
+        case "screamer" :
+            
+            print(audio.screamerDistortion!.isStarted)
             
             
         case "resonantFilter" :

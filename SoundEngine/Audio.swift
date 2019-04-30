@@ -1057,7 +1057,7 @@ class audio {
         audio.juhaniTanhDistortion?.stop()
         
         
-        audio.screamerVolumeValue = audio.screamerVolume!.volume
+        audio.screamerVolumeValue = (audio.screamerVolume?.volume)!
         audio.screamerVolume?.volume = 1
         audio.screamerDistortion?.stop()
         audio.screamerClipper?.stop()
@@ -1499,9 +1499,9 @@ class audio {
     
     func convertToVolume(value: Double, max: Double, min: Double) -> Double {
         var ratio = value * 100 / (max + abs(min))
-        print(ratio)
+        //print(ratio)
         ratio = ratio / 100
-        print(ratio)
+        //print(ratio)
         return ratio
     }
     
@@ -1671,9 +1671,10 @@ class audio {
                 newValue = convertToPercent(value: value, max: max, min: min)
                 audio.rhinoGuitarProcessor?.distortion = value
                 let volume = convertToVolume(value: value, max: max, min: min)
-                print(1 + volume)
-                audio.rhinoVolume?.volume = 1 + volume
-                audio.rhinoBoosterDBValue = 1 + volume
+                let vol = (1 + volume) * 1.5
+                print(vol)
+                audio.rhinoVolume?.volume = vol
+                audio.rhinoBoosterDBValue = vol
                 
             case 2:
                 min = Double(Effects.rhinoGuitarProcessor.preGainRange.lowerBound)
@@ -1788,9 +1789,10 @@ class audio {
                     newValue = String(newValue.prefix(3))
                     
                     let volume = convertToVolume(value: value, max: 10, min: 0)
-                    print(2 - volume)
-                    audio.screamerVolume?.volume = 2 - volume
-                    audio.screamerVolumeValue = 2 - volume
+                    let vol = (2 - volume) * 1.5
+                    print(vol)
+                    audio.screamerVolume?.volume = vol
+                    audio.screamerVolumeValue = vol
                     /*
                 case 2:
                     audio.screamerVolume?.volume = value

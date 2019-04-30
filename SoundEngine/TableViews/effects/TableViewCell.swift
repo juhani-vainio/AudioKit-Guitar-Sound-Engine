@@ -67,13 +67,13 @@ class TableViewCell: UITableViewCell {
     }
     
     func setColors() {
-         specialViewArea.backgroundColor = interface.tabs
+         specialViewArea.backgroundColor = interface.extra
         contentView.backgroundColor = UIColor.clear
         backgroundColor = UIColor.clear
         title.textColor = interface.text
         sliderTitle.textColor = interface.text
         sliderValue.textColor = interface.text
-        controllersView.backgroundColor = interface.tabs
+       
         // specialSwitch.tintColor = interface.negative
         specialTitle.textColor = interface.text
         self.onOffButton.backgroundColor = UIColor.clear

@@ -81,7 +81,7 @@ class DoubleTableViewCell: UITableViewCell {
         self.onOffButton.layer.borderWidth = 1
         self.onOffButton.layer.cornerRadius = 4
         
-        specialViewArea.backgroundColor = interface.tabs
+        specialViewArea.backgroundColor = interface.extra
         specialSwitch.onTintColor = interface.highlight
         // specialSwitch.tintColor = interface.negative
         specialTitle.textColor = interface.text

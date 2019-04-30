@@ -82,7 +82,7 @@ class TripleTableViewCell: UITableViewCell {
        
         self.onOffButton.backgroundColor = UIColor.clear
         
-        specialViewArea.backgroundColor = interface.tabs
+        specialViewArea.backgroundColor = interface.extra
       
         specialSwitch.onTintColor = interface.highlight
         // specialSwitch.tintColor = interface.negative

@@ -98,7 +98,7 @@ class OctaTableViewCell: UITableViewCell {
         self.onOffButton.layer.cornerRadius = 4
         specialTitle.textColor = interface.text
         specialSwitch.onTintColor = interface.highlight
-        specialViewArea.backgroundColor = interface.tabs
+        specialViewArea.backgroundColor = interface.extra
         self.contentView.backgroundColor = UIColor.clear
         self.backgroundColor = UIColor.clear
         self.title.textColor = interface.text

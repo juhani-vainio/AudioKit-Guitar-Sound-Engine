@@ -82,19 +82,19 @@
                                 <rect key="frame" x="12" y="0.0" width="272" height="50"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8ls-P8-wUN">
-                                        <rect key="frame" x="0.0" y="0.0" width="33" height="16"/>
+                                        <rect key="frame" x="0.0" y="4" width="33" height="16"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pwg-ow-UDf">
-                                        <rect key="frame" x="243.5" y="1" width="28.5" height="13.5"/>
+                                        <rect key="frame" x="243.5" y="5" width="28.5" height="13.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="gb7-Pd-Mq9">
-                                        <rect key="frame" x="-2" y="0.0" width="276" height="51"/>
+                                        <rect key="frame" x="-2" y="12" width="276" height="39"/>
                                     </slider>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -103,8 +103,8 @@
                                     <constraint firstAttribute="height" constant="50" id="6pp-HB-qcF"/>
                                     <constraint firstAttribute="trailing" secondItem="Pwg-ow-UDf" secondAttribute="trailing" id="HSv-eh-g4S"/>
                                     <constraint firstItem="Pwg-ow-UDf" firstAttribute="centerY" secondItem="8ls-P8-wUN" secondAttribute="centerY" id="QMM-Hd-VkX"/>
-                                    <constraint firstItem="gb7-Pd-Mq9" firstAttribute="top" secondItem="0gX-0P-Wjw" secondAttribute="top" id="Tqk-5C-CHJ"/>
-                                    <constraint firstItem="8ls-P8-wUN" firstAttribute="top" secondItem="0gX-0P-Wjw" secondAttribute="top" id="UJr-bS-WHu"/>
+                                    <constraint firstItem="8ls-P8-wUN" firstAttribute="top" secondItem="0gX-0P-Wjw" secondAttribute="top" constant="4" id="UJr-bS-WHu"/>
+                                    <constraint firstItem="gb7-Pd-Mq9" firstAttribute="top" secondItem="0gX-0P-Wjw" secondAttribute="top" constant="12" id="VoT-Jq-ctE"/>
                                     <constraint firstItem="gb7-Pd-Mq9" firstAttribute="leading" secondItem="0gX-0P-Wjw" secondAttribute="leading" id="dVY-Vo-L03"/>
                                     <constraint firstItem="8ls-P8-wUN" firstAttribute="leading" secondItem="0gX-0P-Wjw" secondAttribute="leading" id="scK-2Y-Nrd"/>
                                     <constraint firstAttribute="bottom" secondItem="gb7-Pd-Mq9" secondAttribute="bottom" id="zZE-Q0-rTi"/>

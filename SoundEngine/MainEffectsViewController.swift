@@ -315,10 +315,18 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
         
         func resetEffectChain() {
             print("RESETTING EFFECTS")
-            audio.shared.stopAll()
+            var wasOn = [effectData]()
+            
             for effect in audio.selectedEffectsData {
+                if helper.shared.isOn(id: effect.id) == true {
+                    wasOn.append(effect)
+                }
+            }
+            audio.shared.stopAll()
+            for effect in wasOn {
                 audio.shared.turnOn(id: effect.id)
             }
+            checkConnections()
             resetInterface()
         }
     
@@ -2052,7 +2060,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
             // resetEffectChain()
         }
         
-        @IBAction func checkTapped(_ sender: Any) {
+        func checkConnections() {
             print(AudioKit.printConnections())
             /* print("SELECTED UNITS")
              for effect in audio.selectedEffectsData {
