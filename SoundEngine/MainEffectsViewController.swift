@@ -25,6 +25,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
     @IBOutlet weak var effectsTab: UIView!
     @IBOutlet weak var hamburgerView: UIView!
     
+    
     // "CONTROLS"
     @IBOutlet weak var inputLevel: UISlider!
     @IBOutlet weak var inputLevelValue: UILabel!
@@ -53,7 +54,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
     @IBOutlet weak var soundTitle: UILabel!
     @IBOutlet weak var effectsTitle: UILabel!
     @IBOutlet weak var settingsTitle: UILabel!
-    @IBOutlet weak var soundsLibraryTitle: UILabel!
+ 
     @IBOutlet weak var tunerNoteLabel: UILabel!
     @IBOutlet weak var sharp: UILabel!
     @IBOutlet weak var octave: UILabel!
@@ -82,8 +83,12 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
     @IBOutlet weak var soundEngine: UIView!
 
     @IBOutlet weak var settingsView: UIView!
-    @IBOutlet weak var settingControlsFrame: UIView!
-    @IBOutlet weak var settingControls: UIView!
+  
+    @IBOutlet weak var settingControlsView: UIView!
+    @IBOutlet weak var contactView: UIView!
+    @IBOutlet weak var infoView: UIView!
+    @IBOutlet weak var licence: UITextView!
+    @IBOutlet weak var info: UITextView!
     @IBOutlet weak var settingsEmptyAreaView: UIView!
     @IBOutlet weak var availableEffectsView: UIView!
     @IBOutlet weak var inputLevelView: UIView!
@@ -410,8 +415,12 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
          
             hamburgerView.layer.cornerRadius = 4
             hamburgerView.layer.borderWidth = 1
-            settingControlsFrame.layer.cornerRadius = 8
-            settingControls.layer.cornerRadius = 8
+          
+            settingControlsView.layer.cornerRadius = 8
+            //contactView.layer.cornerRadius = 8
+           // infoView.layer.cornerRadius = 8
+            licence.layer.cornerRadius = 8
+            info.layer.cornerRadius = 8
             mainSoundTitleView.layer.cornerRadius = 4
             mainSoundTitleView.layer.borderColor = interface.textIdle.cgColor
            // mainSoundTitleView.layer.borderWidth = 1
@@ -469,9 +478,11 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
             // TEXT LABELS
             mainSoundTitle.textColor = interface.textIdle
             soundTitle.textColor = interface.textAlt
+            soundTitle.layer.borderColor = interface.textAlt.cgColor
             effectsTitle.textColor = interface.textAlt
+            effectsTitle.layer.borderColor = interface.textAlt.cgColor
             settingsTitle.textColor = interface.textAlt
-            soundsLibraryTitle.textColor = interface.text
+          
             tunerNoteLabel.textColor = interface.text
             sharp.textColor = interface.text
             octave.textColor = interface.text
@@ -502,8 +513,11 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
             savedSoundsTableView.backgroundColor = interface.tableBackground
             availableEffects.backgroundColor = interface.tableBackground
             availableEffectsView.backgroundColor = interface.tableFrame
-            settingControlsFrame.backgroundColor = interface.tableFrame
-            settingControls.backgroundColor = interface.tableBackground
+          
+            settingControlsView.backgroundColor = interface.tableBackground
+            contactView.backgroundColor = interface.tableBackground
+            infoView.backgroundColor = interface.tableBackground
+           // licence.backgroundColor = interface.tableBackground
             
             // TRANSPARENT
             topControls.backgroundColor = interface.transparent
@@ -2238,16 +2252,20 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
             if self.soundsView.isHidden {
                 self.setSoundsViewHeight()
                 self.soundsView.isHidden = false
-                self.soundsTab.backgroundColor = interface.highlight
+                // self.soundsTab.backgroundColor = interface.highlight
+                self.soundTitle.backgroundColor  = interface.highlight
                 
                 // hide other tabs
                 self.availableEffects.isHidden = true
                 self.availableEffectsView.isHidden = true
                 self.effectsTab.backgroundColor = interface.tabs
+                 self.effectsTitle.backgroundColor = interface.tabs
             }
             else {
                 self.soundsView.isHidden = true
-                self.soundsTab.backgroundColor = interface.tabs
+                // self.soundsTab.backgroundColor = interface.tabs
+                self.soundTitle.backgroundColor  = interface.highlight
+                
             }
         }
         @objc func handleEffectsTap(){
@@ -2256,16 +2274,18 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
                 self.setAvailableEffectsHeight()
                 self.availableEffects.isHidden = false
                 self.availableEffectsView.isHidden = false
-                self.effectsTab.backgroundColor = interface.highlight
-                
+               // self.effectsTab.backgroundColor = interface.highlight
+                self.effectsTitle.backgroundColor = interface.highlight
                 // hide other tabs
                 self.soundsView.isHidden = true
                 self.soundsTab.backgroundColor = interface.tabs
+                self.soundTitle.backgroundColor  = interface.tabs
          
             } else {
                 self.availableEffects.isHidden = true
                 self.availableEffectsView.isHidden = true
-                self.effectsTab.backgroundColor = interface.tabs
+                // self.effectsTab.backgroundColor = interface.tabs
+                self.effectsTitle.backgroundColor = interface.tabs
             }
             
         }
@@ -2280,8 +2300,10 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
                 self.availableEffects.isHidden = true
                 self.availableEffectsView.isHidden = true
                 self.effectsTab.backgroundColor = interface.tabs
+                self.effectsTitle.backgroundColor = interface.tabs
                 self.soundsView.isHidden = true
                 self.soundsTab.backgroundColor = interface.tabs
+                self.soundTitle.backgroundColor = interface.tabs
             }
             else {
                 self.settingsView.isHidden = true
