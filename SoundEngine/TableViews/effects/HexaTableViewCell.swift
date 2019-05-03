@@ -153,25 +153,13 @@ class HexaTableViewCell: UITableViewCell {
             
         } else {
             onOffButton.setTitleColor(interface.textIdle, for: .normal)
-            if (slider1Title.text?.contains("ix"))! {
-                slider1.isEnabled = false
-            }
-            if (slider2Title.text?.contains("ix"))! {
-                slider2.isEnabled = false
-            }
-            if (slider3Title.text?.contains("ix"))! {
-                slider3.isEnabled = false
-            }
-            if (slider4Title.text?.contains("ix"))! {
-                slider4.isEnabled = false
-            }
-            if (slider5Title.text?.contains("ix"))! {
-                slider5.isEnabled = false
-            }
-            if (slider6Title.text?.contains("ix"))!  || (slider6Title.text?.contains("Volume"))! {
-                slider6.isEnabled = false
-            }
-    
+            slider1.isEnabled = false
+            slider2.isEnabled = false
+            slider3.isEnabled = false
+            slider4.isEnabled = false
+            slider5.isEnabled = false
+            slider6.isEnabled = false
+            
             
         }
         

@@ -125,18 +125,11 @@ class QuatroTableViewCell: UITableViewCell {
             slider4.isEnabled = true
         } else {
             onOffButton.setTitleColor(interface.textIdle, for: .normal)
-            if (slider1Title.text?.contains("ix"))! {
-                slider1.isEnabled = false
-            }
-            if (slider2Title.text?.contains("ix"))! {
-                slider2.isEnabled = false
-            }
-            if (slider3Title.text?.contains("ix"))! {
-                slider3.isEnabled = false
-            }
-            if (slider4Title.text?.contains("ix"))!  || (slider4Title.text?.contains("Volume"))! {
-                slider4.isEnabled = false
-            }
+            slider1.isEnabled = false
+            slider2.isEnabled = false
+            slider3.isEnabled = false
+            slider4.isEnabled = false
+           
         }
         
     }

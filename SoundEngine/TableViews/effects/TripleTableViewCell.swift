@@ -117,16 +117,10 @@ class TripleTableViewCell: UITableViewCell {
             slider3.isEnabled = true
         } else {
             onOffButton.setTitleColor(interface.textIdle, for: .normal)
-            if (slider1Title.text?.contains("ix"))! {
-                slider1.isEnabled = false
-            }
-            if (slider2Title.text?.contains("ix"))! {
-                slider2.isEnabled = false
-            }
-            if (slider3Title.text?.contains("ix"))! || (slider3Title.text?.contains("Volume"))! {
-                slider3.isEnabled = false
-            }
-            
+             slider1.isEnabled = false
+             slider2.isEnabled = false
+             slider3.isEnabled = false
+           
          
         }
         

@@ -887,7 +887,7 @@
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <attributedString key="attributedText">
                                                     <fragment>
-                                                        <mutableString key="content">Thank you to all the developers of the open-source community for their contributions. The following sets forth attribution notices for third party software that are used in portions of this application.
+                                                        <string key="content">Thank you to all the developers of the open-source community for their contributions. The following sets forth attribution notices for third party software that are used in portions of this application.
 
 AudioKit 4.6
 
@@ -911,7 +911,7 @@ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-THE SOFTWARE.</mutableString>
+THE SOFTWARE.</string>
                                                         <attributes>
                                                             <font key="NSFont" size="12" name="Helvetica"/>
                                                         </attributes>

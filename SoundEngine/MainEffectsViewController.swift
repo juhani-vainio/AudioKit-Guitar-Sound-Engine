@@ -1090,13 +1090,13 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
                     
                     if slider.isOn {
                         cell.onOffButton.setTitle("ON", for: .normal)
-                        //cell.onOffButton.setTitleColor(interface.text, for: .normal)
+                        cell.slider.isEnabled = true
+                        cell.onOffButton.setTitleColor(interface.text, for: .normal)
                     } else {
                         cell.onOffButton.setTitle("OFF", for: .normal)
-                        //cell.onOffButton.setTitleColor(interface.textIdle, for: .normal)
-                        if slider.name.contains("ix") || slider.name.contains("Volume")  {
-                            cell.slider.isEnabled = false
-                        }
+                        cell.slider.isEnabled = false
+                        cell.onOffButton.setTitleColor(interface.textIdle, for: .normal)
+                        
                         
                     }
                     cell.onOffButton.addTarget(self, action: #selector(toggleOnOff), for: .touchUpInside)
@@ -1162,15 +1162,14 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
                     if slider1.isOn {
                         cell.onOffButton.setTitle("ON", for: .normal)
                         cell.onOffButton.setTitleColor(interface.text, for: .normal)
+                        cell.slider1.isEnabled = true
+                        cell.slider2.isEnabled = true
                     } else {
                         cell.onOffButton.setTitle("OFF", for: .normal)
                         cell.onOffButton.setTitleColor(interface.textIdle, for: .normal)
-                        if slider1.name.contains("ix") {
-                            cell.slider1.isEnabled = false
-                        }
-                        if slider2.name.contains("ix")  || slider2.name.contains("Volume") {
-                            cell.slider2.isEnabled = false
-                        }
+                        cell.slider1.isEnabled = false
+                        cell.slider2.isEnabled = false
+                        
                         
                     }
                     
@@ -1247,19 +1246,15 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
                     if slider1.isOn {
                         cell.onOffButton.setTitle("ON", for: .normal)
                         cell.onOffButton.setTitleColor(interface.text, for: .normal)
+                        cell.slider1.isEnabled = true
+                        cell.slider2.isEnabled = true
+                        cell.slider3.isEnabled = true
                     } else {
                         cell.onOffButton.setTitle("OFF", for: .normal)
                         cell.onOffButton.setTitleColor(interface.textIdle, for: .normal)
-                        if slider1.name.contains("ix") {
-                            cell.slider1.isEnabled = false
-                        }
-                        if slider2.name.contains("ix") {
-                            cell.slider2.isEnabled = false
-                        }
-                        if slider3.name.contains("ix")  || slider3.name.contains("Volume")  {
-                            cell.slider3.isEnabled = false
-                        }
-                      
+                        cell.slider1.isEnabled = false
+                        cell.slider2.isEnabled = false
+                        cell.slider3.isEnabled = false
                         
                     }
                     
@@ -1341,22 +1336,18 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
                     if slider1.isOn {
                         cell.onOffButton.setTitle("ON", for: .normal)
                         cell.onOffButton.setTitleColor(interface.text, for: .normal)
+                        cell.slider1.isEnabled = true
+                        cell.slider2.isEnabled = true
+                        cell.slider3.isEnabled = true
+                        cell.slider4.isEnabled = true
                     } else {
                         cell.onOffButton.setTitle("OFF", for: .normal)
                         cell.onOffButton.setTitleColor(interface.textIdle, for: .normal)
-                        if slider1.name.contains("ix") {
-                            cell.slider1.isEnabled = false
-                        }
-                        if slider2.name.contains("ix") {
-                            cell.slider2.isEnabled = false
-                        }
-                        if slider3.name.contains("ix") {
-                            cell.slider3.isEnabled = false
-                        }
-                        if slider4.name.contains("ix")  || slider4.name.contains("Volume") {
-                            cell.slider4.isEnabled = false
-                        }
-                        
+                        cell.slider1.isEnabled = false
+                        cell.slider2.isEnabled = false
+                        cell.slider3.isEnabled = false
+                        cell.slider4.isEnabled = false
+                       
                     }
                     
                     cell.onOffButton.addTarget(self, action: #selector(toggleOnOff), for: .touchUpInside)
@@ -1445,24 +1436,20 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
                     if slider1.isOn {
                         cell.onOffButton.setTitle("ON", for: .normal)
                         cell.onOffButton.setTitleColor(interface.text, for: .normal)
+                        cell.slider1.isEnabled = true
+                        cell.slider2.isEnabled = true
+                        cell.slider3.isEnabled = true
+                        cell.slider4.isEnabled = true
+                        cell.slider5.isEnabled = true
                     } else {
                         cell.onOffButton.setTitle("OFF", for: .normal)
                         cell.onOffButton.setTitleColor(interface.textIdle, for: .normal)
-                        if slider1.name.contains("ix") {
-                            cell.slider1.isEnabled = false
-                        }
-                        if slider2.name.contains("ix") {
-                            cell.slider2.isEnabled = false
-                        }
-                        if slider3.name.contains("ix") {
-                            cell.slider3.isEnabled = false
-                        }
-                        if slider4.name.contains("ix") {
-                            cell.slider4.isEnabled = false
-                        }
-                        if slider5.name.contains("ix")  || slider5.name.contains("Volume") {
-                            cell.slider5.isEnabled = false
-                        }
+                        cell.slider1.isEnabled = false
+                        cell.slider2.isEnabled = false
+                        cell.slider3.isEnabled = false
+                        cell.slider4.isEnabled = false
+                        cell.slider5.isEnabled = false
+                        
                     }
                     
                     cell.onOffButton.addTarget(self, action: #selector(toggleOnOff), for: .touchUpInside)
@@ -1557,27 +1544,22 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
                     if slider1.isOn {
                         cell.onOffButton.setTitle("ON", for: .normal)
                         cell.onOffButton.setTitleColor(interface.text, for: .normal)
+                        cell.slider1.isEnabled = true
+                        cell.slider2.isEnabled = true
+                        cell.slider3.isEnabled = true
+                        cell.slider4.isEnabled = true
+                        cell.slider5.isEnabled = true
+                        cell.slider6.isEnabled = true
                     } else {
                         cell.onOffButton.setTitle("OFF", for: .normal)
                         cell.onOffButton.setTitleColor(interface.textIdle, for: .normal)
-                        if slider1.name.contains("ix") {
-                            cell.slider1.isEnabled = false
-                        }
-                        if slider2.name.contains("ix") {
-                            cell.slider2.isEnabled = false
-                        }
-                        if slider3.name.contains("ix") {
-                            cell.slider3.isEnabled = false
-                        }
-                        if slider4.name.contains("ix") {
-                            cell.slider4.isEnabled = false
-                        }
-                        if slider5.name.contains("ix") {
-                            cell.slider5.isEnabled = false
-                        }
-                        if slider6.name.contains("ix")  || slider6.name.contains("Volume") {
-                            cell.slider6.isEnabled = false
-                        }
+                        cell.slider1.isEnabled = false
+                        cell.slider2.isEnabled = false
+                        cell.slider3.isEnabled = false
+                        cell.slider4.isEnabled = false
+                        cell.slider5.isEnabled = false
+                        cell.slider6.isEnabled = false
+                        
                     }
                     
                     cell.onOffButton.addTarget(self, action: #selector(toggleOnOff), for: .touchUpInside)
@@ -1679,30 +1661,24 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
                     if slider1.isOn {
                         cell.onOffButton.setTitle("ON", for: .normal)
                         cell.onOffButton.setTitleColor(interface.text, for: .normal)
+                        cell.slider1.isEnabled = true
+                        cell.slider2.isEnabled = true
+                        cell.slider3.isEnabled = true
+                        cell.slider4.isEnabled = true
+                        cell.slider5.isEnabled = true
+                        cell.slider6.isEnabled = true
+                        cell.slider7.isEnabled = true
                     } else {
                         cell.onOffButton.setTitle("OFF", for: .normal)
                         cell.onOffButton.setTitleColor(interface.textIdle, for: .normal)
-                        if slider1.name.contains("ix") {
-                            cell.slider1.isEnabled = false
-                        }
-                        if slider2.name.contains("ix") {
-                            cell.slider2.isEnabled = false
-                        }
-                        if slider3.name.contains("ix") {
-                            cell.slider3.isEnabled = false
-                        }
-                        if slider4.name.contains("ix") {
-                            cell.slider4.isEnabled = false
-                        }
-                        if slider5.name.contains("ix") {
-                            cell.slider5.isEnabled = false
-                        }
-                        if slider6.name.contains("ix") {
-                            cell.slider6.isEnabled = false
-                        }
-                        if slider7.name.contains("ix")  || slider7.name.contains("Volume") {
-                            cell.slider7.isEnabled = false
-                        }
+                        cell.slider1.isEnabled = false
+                        cell.slider2.isEnabled = false
+                        cell.slider3.isEnabled = false
+                        cell.slider4.isEnabled = false
+                        cell.slider5.isEnabled = false
+                        cell.slider6.isEnabled = false
+                        cell.slider7.isEnabled = false
+                       
                     }
                     
                     
@@ -1812,33 +1788,26 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
                     if slider1.isOn {
                         cell.onOffButton.setTitle("ON", for: .normal)
                         cell.onOffButton.setTitleColor(interface.text, for: .normal)
+                        cell.slider1.isEnabled = true
+                        cell.slider2.isEnabled = true
+                        cell.slider3.isEnabled = true
+                        cell.slider4.isEnabled = true
+                        cell.slider5.isEnabled = true
+                        cell.slider6.isEnabled = true
+                        cell.slider7.isEnabled = true
+                        cell.slider8.isEnabled = true
                     } else {
                         cell.onOffButton.setTitle("OFF", for: .normal)
                         cell.onOffButton.setTitleColor(interface.textIdle, for: .normal)
-                        if slider1.name.contains("ix") {
-                            cell.slider1.isEnabled = false
-                        }
-                        if slider2.name.contains("ix") {
-                            cell.slider2.isEnabled = false
-                        }
-                        if slider3.name.contains("ix") {
-                            cell.slider3.isEnabled = false
-                        }
-                        if slider4.name.contains("ix") {
-                            cell.slider4.isEnabled = false
-                        }
-                        if slider5.name.contains("ix") {
-                            cell.slider5.isEnabled = false
-                        }
-                        if slider6.name.contains("ix") {
-                            cell.slider6.isEnabled = false
-                        }
-                        if slider7.name.contains("ix") {
-                            cell.slider7.isEnabled = false
-                        }
-                        if slider8.name.contains("ix") || slider8.name.contains("Volume")  {
-                            cell.slider8.isEnabled = false
-                        }
+                        cell.slider1.isEnabled = false
+                        cell.slider2.isEnabled = false
+                        cell.slider3.isEnabled = false
+                        cell.slider4.isEnabled = false
+                        cell.slider5.isEnabled = false
+                        cell.slider6.isEnabled = false
+                        cell.slider7.isEnabled = false
+                        cell.slider8.isEnabled = false
+                       
                     }
                     
                     cell.onOffButton.addTarget(self, action: #selector(toggleOnOff), for: .touchUpInside)
@@ -1898,12 +1867,12 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
                     if slider.isOn {
                         cell.onOffButton.setTitle("ON", for: .normal)
                         cell.onOffButton.setTitleColor(interface.text, for: .normal)
+                        cell.slider.isEnabled = true
                     } else {
                         cell.onOffButton.setTitle("OFF", for: .normal)
                         cell.onOffButton.setTitleColor(interface.textIdle, for: .normal)
-                        if slider.name.contains("ix")  || slider.name.contains("Volume") {
-                            cell.slider.isEnabled = false
-                        }
+                        cell.slider.isEnabled = false
+                        
                         
                     }
                     

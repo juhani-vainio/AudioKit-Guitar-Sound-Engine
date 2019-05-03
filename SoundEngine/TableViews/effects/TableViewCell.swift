@@ -45,7 +45,7 @@ class TableViewCell: UITableViewCell {
         
        
         specialViewArea.layer.cornerRadius = 8
-        specialSwitch.onTintColor = interface.highlight
+        
         specialSwitch.transform = CGAffineTransform(scaleX: 0.7, y: 0.7);
         
         specialSwitch.addTarget(self, action: #selector(switchValueChanged), for: .valueChanged)
@@ -74,7 +74,7 @@ class TableViewCell: UITableViewCell {
         sliderTitle.textColor = interface.text
         sliderValue.textColor = interface.text
        
-        // specialSwitch.tintColor = interface.negative
+        specialSwitch.onTintColor = interface.highlight
         specialTitle.textColor = interface.text
         self.onOffButton.backgroundColor = UIColor.clear
         self.onOffButton.layer.borderColor = interface.text.cgColor
@@ -98,10 +98,8 @@ class TableViewCell: UITableViewCell {
    
         } else {
             onOffButton.setTitleColor(interface.textIdle, for: .normal)
+            slider.isEnabled = false
             
-            if (sliderTitle.text?.contains("ix"))!  || (sliderTitle.text?.contains("Volume"))! {
-                slider.isEnabled = false
-            }
 
         }
         
