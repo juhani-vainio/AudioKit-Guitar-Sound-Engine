@@ -1,4 +1,5 @@
 //
+//
 //  MainEffectsViewController.swift
 //  SoundEngine
 //
@@ -150,7 +151,7 @@ class MainEffectsViewController: UIViewController, UITableViewDelegate, UITableV
             let volume = audio.outputAmplitudeTracker?.amplitude
            
             let tuner = audio.shared.updateTrackerUI()
-           // print("TUNER : \(tuner)")
+            print("TUNER : \(tuner)")
             
             if tuner.note == "" {
                 self.sharp.isHidden = true
