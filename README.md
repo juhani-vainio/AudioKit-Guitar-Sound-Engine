@@ -7,60 +7,63 @@ The Galaxy Sound Engine is a multi-effects sound processing app.</br>
 It is developed with the [AudioKit](https://audiokit.io/) framework for what is essentially a "Guitar Multi-Effects Pedal".
 
 ### How is it different?
-The idea is to allow the user (musician) to add and rearrange multiple effects in whatever order they want to explore and to create sounds.</br>
+The idea is to allow the user, the musician, to add multiple effects to explore and to create sounds.</br>
 ### The user can: </br>
 <ol>
-<li>Switch between a 3-band or a 7-band EQ 
-  <ol>
-<li>Adjust the settings</li>
-  </ol>
+<li>Switch between Equalizers 
+  <ul>
+<li>3-band EQ
+    <ul>
+      <li>Treble</li>
+      <li>Middle</li>
+      <li>Bass</li>
+  </ul>
+    </li>
+<li>7-band EQ
+    <ul>
+      <li>Brilliance</li>
+      <li>Precence</li>
+      <li>High</li>
+      <li>Middle</li>
+      <li>Low</li>
+      <li>Bass</li>
+      <li>Sub Bass</li>
+  </ul>
+    </li>
+  </ul>
   </li>
 <li>Add effects
-  <ol>
-  <li>Adjust effect settings</li>
-   <li>Remove effect</li>
-  </ol>
+  <ul>
+<li>Chorus</li>
+<li>Costello Reverb</li>
+<li>Delay</li>
+<li>Distortion</li>
+<li>Flanger</li>
+<li>Phaser</li>
+<li>Reverb</li>
+<li>Screamer</li>
+<li>String Resonator</li>
+<li>Tremolo</li>
+<li>Auto Wah Wah</li>
+</ul>
   </li>
 <li>Save a SOUND consisting of:
-  <ol>
+  <ul>
   <li>The EQ (3or7) settings</li>
    <li>The effects in the order they appear</li>
     <li>The effects settings</li>
-  </ol>
+  </ul>
   </li>
 <li>Flip between saved sounds</li>
 <li>Adjust Volume levels
-  <ol>
+  <ul>
   <li>Master Volume</li>
    <li>Input Level</li>
     <li>Output Level</li>
-  </ol>
+  </ul>
   </li>
 <li>Turn on/off filters</li>
 </ol>
-
-### Sounds
-
-#### Equalizer
-<ul>
-<li>3 band</li>
-<li>7 band</li>
-</ul>
-
-#### Effects
-<ul>
-<li>1</li>
-<li>2</li>
-<li>3</li>
-<li>4</li>
-<li>5</li>
-<li>6</li>
-<li>7</li>
-<li>8</li>
-<li>9</li>
-<li>10</li>
-</ul>
-
 
 
 #### Filters
