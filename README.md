@@ -13,24 +13,12 @@ The idea is to allow the user (the musician) to add multiple effects to a signal
 <ol>
 <li>Switch between Equalizers 
   <ul>
-<li>3-band EQ
-    <ul>
-      <li>Treble</li>
-      <li>Middle</li>
-      <li>Bass</li>
-  </ul>
+    <li>3-band EQ</br>
+    Treble / Middle / Bass
     </li>
-<li>7-band EQ
-    <ul>
-      <li>Brilliance</li>
-      <li>Precence</li>
-      <li>High</li>
-      <li>Middle</li>
-      <li>Low</li>
-      <li>Bass</li>
-      <li>Sub Bass</li>
-  </ul>
-    </li>
+    <li>7-band EQ</br>
+    Brilliance / Precence / High / Middle / Low / Bass / Sub Bass 
+
   </ul>
   </li>
 <li>Add/remove Effects
@@ -86,7 +74,7 @@ The idea is to allow the user (the musician) to add multiple effects to a signal
 </ol>
 
 ### Current working setup
-Electric Guitar -> Cable -> iRig2 -> iPad 2018 -> Headphones</br>
+Electric Guitar -> Audio Cable -> iRig2 -> iPad 2018 -> Headphones or Audio Cable Plugged to an Amp </br></br>
 ![SoundEngine_Setup](https://github.com/juhani-vainio/Galaxy-Sound-Engine/blob/master/Sound_Engine_Setup.jpg)
 
 ### Made with [AudioKit](https://audiokit.io/)
