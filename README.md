@@ -7,17 +7,7 @@ The Galaxy Sound Engine is a multi-effects sound processing app.</br>
 It is developed with the [AudioKit](https://audiokit.io/) framework for what is essentially a "Guitar Multi-Effects Pedal".</br>
 The idea is to allow the user (the musician) to add multiple effects to a signal for exploring and creating new sounds.</br>
 
-### How I'm using it currently?
-<ol>
-<li>Electric Guitar</li>
-<li>Cable</li>
-<li>iRig 2
-  <ul>
-<li>iPad 2018</li>
-<li>Headphones</li>
-  </ul>
-  </li>
-</ol>
+
 
 ### Features include:
 <ol>
@@ -94,6 +84,10 @@ The idea is to allow the user (the musician) to add multiple effects to a signal
   </ul>
   </li>
 </ol>
+
+### Current working setup
+Electric Guitar -> Cable -> iRig2 -> iPad 2018 -> Headphones</br>
+![GalaxySoundEngine](https://github.com/juhani-vainio/Galaxy-Sound-Engine/blob/master/Sound_Engine_Setup.jpg)
 
 ### Made with [AudioKit](https://audiokit.io/)
 
