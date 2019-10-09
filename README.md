@@ -8,6 +8,16 @@ It is developed with the [AudioKit](https://audiokit.io/) framework for what is 
 
 ### How is it different?
 The idea is to allow the user (musician) to add and rearrange multiple effects in whatever order they want to explore and to create sounds.</br>
+### The user can: </br>
+<ol>
+<li>Option between a typical 3-band or a 7-band EQ</li>
+<li>Select an effect from the list</li>
+<li>Remove effects</li>
+<li>Save their combination of effects and eq and their settings as a SOUND</li>
+<li>Flip between saved sounds</li>
+<li>Adjust Volume levels</li>
+<li>Turn on/off filters</li>
+</ol>
 
 ### Sounds
 
