@@ -4,11 +4,10 @@
 
 ### What is it?
 The Galaxy Sound Engine is a multi-effects sound processing app.</br>
-It is developed with the [AudioKit](https://audiokit.io/) framework for what is essentially a "Guitar Multi-Effects Pedal".
+It is developed with the [AudioKit](https://audiokit.io/) framework for what is essentially a "Guitar Multi-Effects Pedal".</br>
+The idea is to allow the user (the musician) to add multiple effects to a signal for exploring and creating new sounds.</br>
 
-### How is it different?
-The idea is to allow the user, the musician, to add multiple effects to explore and to create sounds.</br>
-### The user can: </br>
+### Features include:
 <ol>
 <li>Switch between Equalizers 
   <ul>
@@ -47,14 +46,22 @@ The idea is to allow the user, the musician, to add multiple effects to explore 
 <li>Auto Wah Wah</li>
 </ul>
   </li>
+<li>Switch on/off Filters
+  <ul>
+  <li>Low cut</li>
+   <li>High cut</li>
+    <li>Noise gate</li>
+  </ul>
+  </li>
 <li>Save a SOUND consisting of:
   <ul>
   <li>The EQ (3or7) settings</li>
-   <li>The effects in the order they appear</li>
+   <li>The effects that are ON</li>
     <li>The effects settings</li>
+    <li>Filters</li>
   </ul>
   </li>
-<li>Flip between saved sounds</li>
+<li>Select sounds from the list of saved sounds</li>
 <li>Adjust Volume levels
   <ul>
   <li>Master Volume</li>
@@ -62,24 +69,19 @@ The idea is to allow the user, the musician, to add multiple effects to explore 
     <li>Output Level</li>
   </ul>
   </li>
-<li>Turn on/off filters</li>
+<li>Monitors
+  <ul>
+    <li>Tuner</li>
+    <li>Waveform graph for input & output</li>
+  </ul>
+  </li>
+  <li>Settings
+  <ul>
+    <li>Change buffer lenght</li>
+    <li>Switch UI color theme</li>
+  </ul>
+  </li>
 </ol>
-
-
-#### Filters
-<ul>
-<li>Input Level</li>
-<li>Output Level</li>
-<li>Master Volume</li>
-<li>High cut</li>
-<li>Low cut</li>
-<li>Noise Gate</li>
-</ul>
-
-#### Tuner
-
-#### Waveform graphs
-
 
 ### Made with [AudioKit](https://audiokit.io/)
 
