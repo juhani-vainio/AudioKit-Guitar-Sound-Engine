@@ -10,12 +10,32 @@ It is developed with the [AudioKit](https://audiokit.io/) framework for what is 
 The idea is to allow the user (musician) to add and rearrange multiple effects in whatever order they want to explore and to create sounds.</br>
 ### The user can: </br>
 <ol>
-<li>Option between a typical 3-band or a 7-band EQ</li>
-<li>Select an effect from the list</li>
-<li>Remove effects</li>
-<li>Save their combination of effects and eq and their settings as a SOUND</li>
+<li>Switch between a 3-band or a 7-band EQ 
+  <ol>
+<li>Adjust the settings</li>
+  </ol>
+  </li>
+<li>Add effects
+  <ol>
+  <li>Adjust effect settings</li>
+   <li>Remove effect</li>
+  </ol>
+  </li>
+<li>Save a SOUND consisting of:
+  <ol>
+  <li>The EQ (3or7) settings</li>
+   <li>The effects in the order they appear</li>
+    <li>The effects settings</li>
+  </ol>
+  </li>
 <li>Flip between saved sounds</li>
-<li>Adjust Volume levels</li>
+<li>Adjust Volume levels
+  <ol>
+  <li>Master Volume</li>
+   <li>Input Level</li>
+    <li>Output Level</li>
+  </ol>
+  </li>
 <li>Turn on/off filters</li>
 </ol>
 
