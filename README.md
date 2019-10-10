@@ -99,4 +99,6 @@ I havent figured out yet what kind of color theme to implement in the final desi
   </ol>
   
 # Buid and Test with Caution!
-If you want to build this and test with your own device, remember that this is an audio signal processing app with multiple, multiple ways to increase the VOLUME!!! So start easy and be careful not to cause harm.
+If you want to build this and test with your own device, remember that this is an audio signal processing app with multiple, multiple ways to increase the VOLUME!!! So start easy and be careful not to cause harm.</br>
+### There may be annoying hizz sounds occuring
+### Really annoying feedback sounds if you are not plugged in
