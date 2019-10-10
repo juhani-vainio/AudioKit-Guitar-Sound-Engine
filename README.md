@@ -80,4 +80,17 @@ Electric Guitar -> Audio Cable -> iRig2 -> iPad 2018 -> Headphones or Audio Cabl
 ### Made with [AudioKit](https://audiokit.io/)
 
 
-
+### Development issues
+This is still an ongoing project, and I'm still learning iOS development with XCode and Swift. Starting this project, I had previously made only 2 iOS applications. </br>
+<ol>
+  <li>Rearranging effects</br>
+  This would actually be possible to allow the user to drag and drop effects on the list. This might be interesting for the musician to test how the audio output changes depending on the order of the effects applied to the signal. This was implemented into the app but the feature is currently dropped from the working version.</br>
+  Reason being that it sometimes caused unexpected problems for the design of the audio signal. Also one major drawback was that whenever the effects needed to be rearranged, the Audiokit engine had to be stopped and rebuilt, which takes some time and resulted in a gap in the audio output.
+  </li>
+  <li>Effects tableview design</br>
+  The idea was to make one tableviewcell that could be reused for all effects. Not designed well enoughy, and my hurry to get to testing the effects with my guitar, I eneded up making multiple cells that differ only by the number of sliders in them. This then ofcourse adds repetitive extra lines of code to the tableview controller.
+  </li>
+  <li>Messy Storyboard</br>
+  The frame hierarchy for the app is not that bad actually. The UI elements are organized to frames that can be rearranged on the main screen. However, somehow when you look at the storyboard visually it looks messy. I'm not happy in the way it ended up as this would propably be a nightmare scenario for another developer to have a look at. 
+</li>
+  </ol>
