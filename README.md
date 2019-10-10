@@ -94,3 +94,6 @@ This is still an ongoing project, and I'm still learning iOS development with XC
   The frame hierarchy for the app is not that bad actually. The UI elements are organized to frames that can be rearranged on the main screen. However, somehow when you look at the storyboard visually it looks messy. I'm not happy in the way it ended up as this would propably be a nightmare scenario for another developer to have a look at. 
 </li>
   </ol>
+  
+# Buid and Test with Caution!
+If you want to build this and test with your own device, remember that this is an audio signal processing app with multiple, multiple ways to increase the VOLUME!!! So start easy and be careful not to cause harm.
