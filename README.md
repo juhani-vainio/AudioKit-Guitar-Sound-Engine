@@ -93,6 +93,9 @@ This is still an ongoing project, and I'm still learning iOS development with XC
   <li>Messy Storyboard</br>
   The frame hierarchy for the app is not that bad actually. The UI elements are organized to frames that can be rearranged on the main screen. However, somehow when you look at the storyboard visually it looks messy. I'm not happy in the way it ended up as this would propably be a nightmare scenario for another developer to have a look at. 
 </li>
+<li>Color themes</br>
+I havent figured out yet what kind of color theme to implement in the final design. For this reason and for learning Swift programming purposes, you can change the UI color themes by selecting segments from what looks like an empty Segmented Controller. Note that some of the color themes won't make any sense but are there just for the heck of it.
+  </li>
   </ol>
   
 # Buid and Test with Caution!
