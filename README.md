@@ -82,7 +82,9 @@ Electric Guitar -> Audio Cable -> iRig2 -> iPad 2018 -> Headphones or Audio Cabl
 
 ### Development issues
 This is still an ongoing project, and I'm still learning iOS development with XCode and Swift. Starting this project, I had previously made only 2 iOS applications. </br>
-<ol>
+<ol><li>AudioKit has more</br>
+AudioKit offers way more effects and filters than what is currently available in the working version of this app. I'm not an expert in audio signal processing and not an expert audio engineer to understand everything offered. I did play and try to work with everything offered but had to drop plenty of cool thins just because they didn't make any sense for a regular chap like me.
+</li>
   <li>Rearranging effects</br>
   This would actually be possible to allow the user to drag and drop effects on the list. This might be interesting for the musician to test how the audio output changes depending on the order of the effects applied to the signal. This was implemented into the app but the feature is currently dropped from the working version.</br>
   Reason being that it sometimes caused unexpected problems for the design of the audio signal. Also one major drawback was that whenever the effects needed to be rearranged, the Audiokit engine had to be stopped and rebuilt, which takes some time and resulted in a gap in the audio output.
